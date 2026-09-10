@@ -1,0 +1,99 @@
+/**
+ * Giao diện admin cho trang Ảnh giao diện.
+ *
+ * @package eyecare-child
+ */
+
+.eyecare-visual-admin {
+	max-width: 1180px;
+}
+
+.eyecare-visual-admin__intro {
+	max-width: 78ch;
+	color: #50575e;
+	font-size: 14px;
+	line-height: 1.7;
+}
+
+.eyecare-visual-admin__group {
+	margin-top: 24px;
+}
+
+.eyecare-visual-admin__group h2 {
+	margin: 0 0 12px;
+	color: #06472f;
+	font-size: 20px;
+}
+
+.eyecare-visual-admin__grid {
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	gap: 16px;
+}
+
+.eyecare-visual-slot {
+	display: grid;
+	grid-template-columns: 170px minmax(0, 1fr);
+	gap: 16px;
+	padding: 14px;
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 14px;
+	box-shadow: 0 8px 24px rgba(0, 0, 0, .035);
+}
+
+.eyecare-visual-slot__preview {
+	display: grid;
+	place-items: center;
+	min-height: 124px;
+	overflow: hidden;
+	color: #646970;
+	background: #f4f8f5;
+	border: 1px dashed #b8c9bd;
+	border-radius: 12px;
+	text-align: center;
+}
+
+.eyecare-visual-slot__preview img {
+	display: block;
+	width: 100%;
+	height: 124px;
+	object-fit: cover;
+}
+
+.eyecare-visual-slot__body h3 {
+	margin: 0 0 6px;
+	color: #1d2327;
+	font-size: 15px;
+}
+
+.eyecare-visual-slot__body p {
+	margin: 0 0 14px;
+	color: #646970;
+	line-height: 1.55;
+}
+
+.eyecare-visual-slot__actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.eyecare-visual-slot__actions .is-disabled {
+	color: #a7aaad !important;
+	border-color: #dcdcde !important;
+	cursor: not-allowed;
+	pointer-events: none;
+}
+
+@media (max-width: 1100px) {
+	.eyecare-visual-admin__grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 640px) {
+	.eyecare-visual-slot {
+		grid-template-columns: 1fr;
+	}
+}

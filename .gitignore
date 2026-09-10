@@ -1,0 +1,17 @@
+.env
+.env.*
+!.env.example
+wp-config.php
+*.key
+*.pem
+id_*
+*.sql
+*.sql.gz
+*.wpress
+backups/
+wp-content/ai1wm-backups/
+.tmp/
+tmp/
+node_modules/
+__pycache__/
+*.log

@@ -1,0 +1,20 @@
+{
+    "bac_si_le_nhu_tung": 601,
+    "lien_he_kinh_1": 602,
+    "lien_he_kinh_2": 603,
+    "lien_he_kinh_3": 604,
+    "lien_he_kinh_4": 605,
+    "ve_chung_toi_1": 602,
+    "ve_chung_toi_2": 603,
+    "ve_chung_toi_3": 605,
+    "gioi_thieu_tam_nhin": 978,
+    "chuyen_khoa_nen": 977,
+    "dich_vu_kham_mat_tong_quat": 979,
+    "dich_vu_chan_doan_nhan_khoa": 980,
+    "dich_vu_phau_thuat_phaco": 981,
+    "dich_vu_phau_thuat_khuc_xa": 982,
+    "dich_vu_phau_thuat_mong": 983,
+    "dich_vu_phau_thuat_quem": 984,
+    "dich_vu_mi_mat_le_dao": 985,
+    "dich_vu_xet_nghiem_truoc_phau_thuat": 986
+}

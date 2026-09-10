@@ -1,0 +1,122 @@
+/**
+ * Giao diện trang cài đặt Slider trang chủ (chỉ dùng trong khu quản trị).
+ *
+ * @package eyecare-child
+ */
+
+.eyecare-slider-cai-dat .eyecare-slider-mo-ta {
+	max-width: 70ch;
+	font-size: 13px;
+}
+
+/* Danh sách ảnh đã chọn — lưới thẻ kéo sắp được. */
+.eyecare-slider-ds {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin: 12px 0 4px;
+	padding: 0;
+	list-style: none;
+}
+
+.eyecare-slider-ds:empty::before {
+	content: "Chưa có ảnh nào. Bấm \201CChọn ảnh từ Thư viện\201D để thêm.";
+	display: block;
+	padding: 18px;
+	color: #666;
+	font-style: italic;
+	border: 1px dashed #c3c4c7;
+	border-radius: 4px;
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.eyecare-slider-ds > li {
+	position: relative;
+	width: 150px;
+	padding: 8px;
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-radius: 4px;
+	cursor: grab;
+	box-sizing: border-box;
+}
+
+.eyecare-slider-ds > li:active {
+	cursor: grabbing;
+}
+
+.eyecare-slider-ds > li img {
+	display: block;
+	width: 100%;
+	height: 90px;
+	object-fit: cover;
+	border-radius: 3px;
+	margin-bottom: 6px;
+	pointer-events: none;
+}
+
+.eyecare-slider-ten {
+	display: block;
+	font-size: 12px;
+	line-height: 1.35;
+	color: #1d2327;
+	word-break: break-word;
+	max-height: 3.4em;
+	overflow: hidden;
+}
+
+/* Nhãn cảnh báo thiếu alt — vàng nhạt, không đỏ (không phải lỗi chặn). */
+.eyecare-slider-canh-bao {
+	display: inline-block;
+	margin-top: 4px;
+	margin-right: 4px;
+	padding: 1px 6px;
+	font-size: 11px;
+	color: #6b4a00;
+	background: #fff6e5;
+	border: 1px solid #dba617;
+	border-radius: 3px;
+	cursor: help;
+}
+
+/* Nhãn cảnh báo kích thước — cam đậm hơn một chút để phân biệt với "thiếu alt",
+   nhưng vẫn không phải đỏ chặn: ảnh nhỏ/đứng vẫn dùng được, chỉ là chưa lý
+   tưởng cho ảnh nền hero. */
+.eyecare-slider-canh-bao--co {
+	color: #8a3b00;
+	background: #fff1e6;
+	border-color: #d95e00;
+}
+
+/* Nút bỏ ảnh — góc trên phải mỗi thẻ, vùng bấm đủ lớn. */
+.eyecare-slider-bo {
+	position: absolute;
+	top: 2px;
+	right: 2px;
+	width: 26px;
+	height: 26px;
+	padding: 0;
+	font-size: 18px;
+	line-height: 24px;
+	color: #fff;
+	background: rgba(0, 0, 0, .55);
+	border: 0;
+	border-radius: 0 3px 0 4px;
+	cursor: pointer;
+}
+
+.eyecare-slider-bo:hover,
+.eyecare-slider-bo:focus {
+	background: #b32d2e;
+}
+
+/* Ô giữ chỗ khi đang kéo — khung nét đứt cùng cỡ thẻ. */
+.eyecare-slider-cho-trong {
+	width: 150px;
+	height: 138px;
+	border: 2px dashed #2271b1;
+	border-radius: 4px;
+	background: #f0f6fc;
+	box-sizing: border-box;
+}
