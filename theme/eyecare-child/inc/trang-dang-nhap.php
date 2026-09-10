@@ -2,17 +2,15 @@
 /**
  * Trang đăng nhập — Bệnh viện Mắt Hà Nội – Bắc Ninh
  *
- * Thay logo WordPress bằng tên bệnh viện, nạp assets/dang-nhap.css, và
- * dịch vài chỗ WordPress để nguyên tiếng Anh.
+ * Dùng logo bệnh viện qua assets/dang-nhap.css, thêm nhận diện thương hiệu
+ * và Việt hóa các nhãn chính trên biểu mẫu WordPress.
  *
  * VÌ SAO KHÔNG DÙNG PLUGIN: trang đăng nhập là cửa vào duy nhất của site.
  * Thêm một plugin ở đúng chỗ đó là thêm một thứ phải theo dõi bản vá, mà
  * việc cần làm chỉ là CSS và ba bộ lọc có sẵn của WordPress.
  *
  * 🔴 Tệp này KHÔNG đổi địa chỉ đăng nhập và KHÔNG thêm lớp bảo vệ nào.
- * Site thật đang dùng /mf-login thay cho /wp-admin; đây là bản localhost
- * nên vẫn là wp-login.php. Đổi địa chỉ hay thêm giới hạn đăng nhập là việc
- * riêng, phải quyết trước khi đưa lên máy chủ thật.
+ * Giữ nguyên đường dẫn, biểu mẫu và cơ chế xác thực của WordPress.
  *
  * @package eyecare-child
  */
@@ -78,7 +76,7 @@ function eyecare_dn_dong_phu( $tin ) {
 		return $tin;
 	}
 
-	return '<p class="eyecare-dn__phu">' . esc_html__( 'Trang quản trị nội dung', 'eyecare-child' ) . '</p>' . $tin;
+	return '<div class="eyecare-dn__intro"><h2>Đăng nhập quản trị</h2><p>Chào mừng bạn trở lại.<br>Đăng nhập để quản lý nội dung website.</p></div>' . $tin;
 }
 add_filter( 'login_message', 'eyecare_dn_dong_phu' );
 
@@ -91,6 +89,12 @@ add_filter( 'login_message', 'eyecare_dn_dong_phu' );
  */
 function eyecare_dn_chan_trang() {
 	?>
+	<aside class="eyecare-dn__brand" aria-label="Bệnh viện Mắt Hà Nội – Bắc Ninh">
+		<span class="eyecare-dn__eyebrow">Hà Nội – Bắc Ninh</span>
+		<h2>Nâng niu<br>đôi mắt Việt.</h2>
+		<div class="eyecare-dn__line" aria-hidden="true"></div>
+		<p>Hệ thống quản trị nội dung<br>Bệnh viện Mắt Hà Nội – Bắc Ninh</p>
+	</aside>
 	<div class="eyecare-dn__chan">
 		<p><?php echo esc_html( get_bloginfo( 'name', 'display' ) ); ?></p>
 		<p class="eyecare-dn__chan-noi-bo">
@@ -102,12 +106,7 @@ function eyecare_dn_chan_trang() {
 add_action( 'login_footer', 'eyecare_dn_chan_trang' );
 
 /**
- * Rút ngắn hai nhãn dài của WordPress.
- *
- * WordPress bản tiếng Việt dịch sẵn mọi nhãn ở đây, nên chỗ này KHÔNG phải
- * để dịch — chỉ rút ngắn hai nhãn quá dài cho form rộng 356px:
- *   "Tên người dùng hoặc địa chỉ email" -> "Tên đăng nhập hoặc email"
- *   "Bạn quên mật khẩu?"                -> "Quên mật khẩu?"
+ * Việt hóa và rút gọn các nhãn chính cho nhân sự bệnh viện.
  *
  * 🔴 VÌ SAO GẮN TRONG login_init CHỨ KHÔNG GẮN THẲNG:
  * Bộ lọc `gettext` chạy trên MỌI chuỗi được dịch của toàn site — hàng nghìn
@@ -131,6 +130,12 @@ function eyecare_dn_rut_ngan_nhan( $ban_dich, $goc ) {
 	$bang = array(
 		'Username or Email Address' => 'Tên đăng nhập hoặc email',
 		'Lost your password?'       => 'Quên mật khẩu?',
+		'Password'                 => 'Mật khẩu',
+		'Remember Me'              => 'Ghi nhớ đăng nhập',
+		'Log In'                   => 'Đăng nhập',
+		'Language'                 => 'Ngôn ngữ',
+		'Change'                   => 'Đổi',
+		'&larr; Go to %s'           => '&larr; Về %s',
 	);
 
 	return $bang[ $goc ] ?? $ban_dich;

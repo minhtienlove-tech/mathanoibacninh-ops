@@ -1,453 +1,76 @@
-/*
- * TRANG ĐĂNG NHẬP — Bệnh viện Mắt Hà Nội – Bắc Ninh
- * Nạp bởi inc/trang-dang-nhap.php, chỉ trên wp-login.php.
- *
- * VÌ SAO CÓ TỆP RIÊNG: style.css của theme con chỉ nạp ở giao diện ngoài
- * (hook wp_enqueue_scripts). Trang đăng nhập không chạy hook đó, nên biến
- * màu phải khai lại ở đây thay vì dùng chung.
- *
- * Người dùng trang này là nhân sự bệnh viện, không phải lập trình viên.
- * Ba yêu cầu: nhìn ra ngay đây là site nào, ô nhập đủ lớn để bấm trên điện
- * thoại, và viền tiêu điểm thấy rõ khi dùng phím Tab.
- *
- * Mọi cặp màu chữ/nền dưới đây giữ đúng ngưỡng WCAG 2.1 AA (4.5:1) như
- * style.css của theme con — số đo ghi kèm để lần sau đổi màu còn đối chiếu.
- */
-
-:root {
-	--eyecare-navy: #14314f;        /* 13.27:1 trên trắng */
-	--eyecare-xanh: #1a6fb5;        /*  5.27:1 trên trắng */
-	--eyecare-xanh-dam: #145a94;    /*  6.31:1 trên trắng — nền nút */
-	--eyecare-chu: #46586c;         /*  7.31:1 trên trắng */
-	--eyecare-chu-phu: #5a6b7d;     /*  5.48:1 trên trắng */
-	--eyecare-nen-phu: #f5f8fb;
-	--eyecare-vien: #dfe5ec;
-	--eyecare-vien-dam: #cfd8e3;
-	--eyecare-khan: #b00d1c;        /*  7.19:1 trên trắng — báo lỗi */
-	--eyecare-khan-nen: #fdf2f3;
-	--eyecare-bo-goc: 4px;
-}
-
-
-/* ==========================================================================
-   NỀN TRANG
-   ========================================================================== */
-
+/* Hospital login: isolated from public pages and WordPress administration. */
 body.login {
-	background: var(--eyecare-nen-phu);
-	background-image:
-		radial-gradient(circle at 12% 8%, rgba(26, 111, 181, .10), transparent 55%),
-		radial-gradient(circle at 88% 92%, rgba(20, 49, 79, .09), transparent 55%);
-	background-attachment: fixed;
-	color: var(--eyecare-chu);
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+ --dn-green: #117b43;
+ --dn-ink: #193b30;
+ background: #f3f7f4;
+ color: var(--dn-ink);
+ font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+ min-height: 100vh;
+ height: auto;
+ box-sizing: border-box;
+ padding: 48px 24px 24px calc(44% + 24px);
 }
-
-/* Bề rộng mặc định của WordPress là 320px — hẹp với nhãn tiếng Việt có dấu,
-   chữ "Ghi nhớ đăng nhập" hay vỡ dòng. */
-#login {
-	width: 356px;
-	max-width: 92vw;
-	padding: 6vh 0 4vh;
+body.login::before {
+ content: "";
+ position: fixed;
+ inset: 0 56% 0 0;
+ background: radial-gradient(ellipse at 0 100%, #329466 0, transparent 60%), #0b4934;
+ z-index: -1;
 }
-
-
-/* ==========================================================================
-   TÊN BỆNH VIỆN THAY CHO LOGO WORDPRESS
-   Chưa có tệp logo nào được duyệt nên dùng chữ. Khi có logo thật thì đặt
-   background-image ở đây và trả text-indent về -9999px.
-   ========================================================================== */
-
-.login h1 a,
-.login .wp-login-logo a {
-	display: block;
-	width: auto;
-	height: auto;
-	margin: 0 0 1.6em;
-	padding: 0;
-	overflow: visible;
-	text-indent: 0;
-	background-image: none;
-	color: var(--eyecare-navy);
-	font-size: 1.32em;
-	font-weight: 700;
-	line-height: 1.3;
-	letter-spacing: -.01em;
-	text-align: center;
-	text-decoration: none;
+.eyecare-dn__brand {
+ position: fixed;
+ left: 6%;
+ top: 50%;
+ transform: translateY(-50%);
+ width: 32%;
+ color: #fff;
 }
-
-.login h1 a:hover,
-.login h1 a:focus,
-.login .wp-login-logo a:hover,
-.login .wp-login-logo a:focus {
-	color: var(--eyecare-xanh-dam);
-	box-shadow: none;
+.eyecare-dn__eyebrow {font-size: 12px; font-weight: 600; letter-spacing: 2.5px; text-transform: uppercase; color: #c2dece;}
+.eyecare-dn__brand h2 {font-size: clamp(32px, 3.2vw, 54px); line-height: 1.22; font-weight: 600; letter-spacing: -1.5px; margin: 26px 0; color: #fff;}
+.eyecare-dn__brand p {font-size: 16px; line-height: 1.8; max-width: 350px; color: #d7e8df;}
+.eyecare-dn__line {width: 48px; height: 3px; background: #e8c866; margin: 32px 0;}
+body.login #login {box-sizing: border-box; width: 440px; max-width: 100%; padding: 32px 36px 26px; margin: 0 auto; border: 1px solid #e0e9e3; border-radius: 20px; background: #fff; box-shadow: 0 16px 60px #173f3010;}
+.login h1 a, .login .wp-login-logo a {width: 176px; height: 132px; background: url("logo-benhvien.webp") center / contain no-repeat; margin: 0 auto 26px; padding: 0; text-indent: -9999px; overflow: hidden;}
+.eyecare-dn__intro {text-align: center; margin-bottom: 28px;}
+.eyecare-dn__intro h2 {font-size: 26px; line-height: 1.3; color: var(--dn-ink); margin: 0 0 10px; font-weight: 650; letter-spacing: -.6px;}
+.eyecare-dn__intro p {font-size: 14px; color: #62776c; line-height: 1.6; margin: 0;}
+.login form {background: transparent; border: 0; padding: 0; margin: 24px 0 0; box-shadow: none; overflow: visible;}
+.login label {font-size: 14px; font-weight: 500; color: #284b3c; margin-bottom: 8px; display: inline-block;}
+.login input[type="text"], .login input[type="password"], .login input[type="email"] {box-sizing: border-box; min-height: 50px; border: 1px solid #bdcec3; border-radius: 8px; background: #fbfdfb; padding: 10px 13px; font-size: 16px; color: var(--dn-ink); margin: 0 0 22px; box-shadow: none;}
+.login .wp-pwd input {padding-right: 48px;}
+.login .wp-pwd .button.wp-hide-pw {height: 50px; width: 46px; color: #527262; background: transparent; border: 0;}
+.login input:focus {border-color: var(--dn-green); box-shadow: 0 0 0 3px #117b4320; outline: 2px solid transparent;}
+body.login #login form p.forgetmenot {float: none; margin: 0 0 22px;}
+.login .forgetmenot label {font-weight: 400; margin: 0;}
+.login input[type="checkbox"] {border-color: #94b3a1; border-radius: 4px;}
+.login .button-primary {float: none; width: 100%; min-height: 50px; background: var(--dn-green); border: 1px solid var(--dn-green); border-radius: 8px; font-size: 15px; font-weight: 600; text-shadow: none; box-shadow: 0 4px 10px #117b4315;}
+.login .button-primary:hover, .login .button-primary:focus {background: #095e32; border-color: #095e32;}
+.login a:focus-visible, .login button:focus-visible, .login .button:focus-visible {outline: 2px solid #117b43; outline-offset: 3px;}
+.login #nav, .login #backtoblog {padding: 0; margin: 15px 0 0; text-align: center; font-size: 13px; line-height: 1.6;}
+.login #nav a, .login #backtoblog a {color: #37604b; display: inline-block; padding: 8px 0; text-decoration: none;}
+.login #nav a:hover, .login #backtoblog a:hover {color: #095e32; text-decoration: underline;}
+.login .privacy-policy-page-link {margin: 15px 0 0; font-size: 12px;}
+.login .privacy-policy-link {color: #62776c;}
+.login .message, .login .notice, .login #login_error {margin: 0 0 20px; border-radius: 8px; border-left-color: var(--dn-green); box-shadow: none; background: #f0f7f2; font-size: 14px; line-height: 1.6;}
+.login #login_error, .login .notice-error {border-left-color: #b32d2e; background: #fff3f2;}
+.login .language-switcher {padding: 0; margin: 20px auto 0; max-width: 440px; color: #62776c;}
+.login .language-switcher form {margin: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px;}
+.login .language-switcher select {max-width: 210px; min-height: 36px; border: 1px solid #bdcec3; border-radius: 6px; color: #37604b; font-size: 12px;}
+.login .language-switcher .button {min-height: 36px; border-color: #bdcec3; border-radius: 6px; background: #fff; color: #37604b;}
+.eyecare-dn__chan {max-width: 420px; margin: 22px auto 0; text-align: center; color: #62776c; font-size: 12px; line-height: 1.7;}
+.eyecare-dn__chan p {margin: 0;}
+.eyecare-dn__chan-noi-bo {margin-top: 4px !important;}
+body.login.interim-login {padding: 20px;}
+.interim-login::before, .interim-login .eyecare-dn__brand {display: none;}
+@media (min-width: 1600px) {body.login {padding-top: 7vh;}}
+@media (max-width: 900px) {
+ body.login {padding: 28px 18px; background: #edf5ef;}
+ body.login::before, .eyecare-dn__brand {display: none;}
 }
-
-/* Vạch xanh dưới tên: dấu nhận diện thay cho logo, không cần nạp thêm ảnh. */
-.login h1 a::after,
-.login .wp-login-logo a::after {
-	content: "";
-	display: block;
-	width: 46px;
-	height: 3px;
-	margin: .7em auto 0;
-	background: var(--eyecare-xanh);
-	border-radius: 2px;
-}
-
-/* Dòng phụ dưới tên — do login_message sinh ra. */
-.eyecare-dn__phu {
-	margin: -1.1em 0 1.5em;
-	font-size: .92em;
-	line-height: 1.5;
-	color: var(--eyecare-chu-phu);
-	text-align: center;
-}
-
-
-/* ==========================================================================
-   THẺ CHỨA FORM
-   ========================================================================== */
-
-.login form {
-	margin-top: 0;
-	padding: 1.7em 1.6em 1.5em;
-	background: #fff;
-	border: 1px solid var(--eyecare-vien);
-	border-radius: 6px;
-	box-shadow: 0 1px 2px rgba(20, 49, 79, .05), 0 8px 24px rgba(20, 49, 79, .07);
-}
-
-.login form .forgetmenot {
-	float: none;
-	margin: 0 0 1.2em;
-	line-height: 1.5;
-}
-
-.login form .submit {
-	float: none;
-	margin: 0;
-}
-
-
-/* ==========================================================================
-   NHÃN VÀ Ô NHẬP
-   ========================================================================== */
-
-.login label {
-	display: block;
-	margin-bottom: .35em;
-	color: var(--eyecare-navy);
-	font-size: .95em;
-	font-weight: 600;
-	line-height: 1.5;
-}
-
-.login form .forgetmenot label {
-	display: inline;
-	color: var(--eyecare-chu);
-	font-weight: 400;
-	font-size: .93em;
-}
-
-.login input[type="text"],
-.login input[type="password"],
-.login input[type="email"] {
-	box-sizing: border-box;
-	width: 100%;
-	/* Cao 46px: vùng bấm đủ lớn theo WCAG 2.5.5, và cỡ chữ 16px để iOS
-	   không tự phóng to trang khi bấm vào ô. */
-	min-height: 46px;
-	margin: 0 0 1.2em;
-	padding: .6em .75em;
-	background: #fff;
-	border: 1px solid var(--eyecare-vien-dam);
-	border-radius: var(--eyecare-bo-goc);
-	color: var(--eyecare-chu);
-	font-size: 16px;
-	line-height: 1.5;
-	box-shadow: none;
-	transition: border-color .12s, box-shadow .12s;
-}
-
-.login input[type="text"]:focus,
-.login input[type="password"]:focus,
-.login input[type="email"]:focus {
-	border-color: var(--eyecare-xanh);
-	box-shadow: 0 0 0 3px rgba(26, 111, 181, .22);
-	outline: 2px solid transparent;   /* giữ viền cho chế độ tương phản cao */
-	outline-offset: 0;
-}
-
-/* Ô mật khẩu có nút hiện/ẩn nằm trong — bỏ margin kép của lớp bọc. */
-.login .wp-pwd {
-	margin-bottom: 1.2em;
-}
-
-.login .wp-pwd input[type="text"],
-.login .wp-pwd input[type="password"] {
-	margin-bottom: 0;
-	padding-right: 2.9em;
-}
-
-.login .wp-pwd .button.wp-hide-pw {
-	width: 2.6em;
-	height: 100%;
-	min-height: 46px;
-	color: var(--eyecare-chu-phu);
-	background: transparent;
-	border: 0;
-	box-shadow: none;
-}
-
-.login .wp-pwd .button.wp-hide-pw:hover,
-.login .wp-pwd .button.wp-hide-pw:focus {
-	color: var(--eyecare-xanh-dam);
-	background: transparent;
-}
-
-.login .wp-pwd .button.wp-hide-pw:focus-visible {
-	outline: 2px solid var(--eyecare-xanh);
-	outline-offset: -2px;
-	border-radius: var(--eyecare-bo-goc);
-}
-
-.login input[type="checkbox"] {
-	width: 20px;
-	height: 20px;
-	margin: 0 .45em 0 0;
-	border-color: var(--eyecare-vien-dam);
-	vertical-align: text-bottom;
-}
-
-.login input[type="checkbox"]:checked::before {
-	margin: -.2em 0 0 -.2em;
-	color: var(--eyecare-xanh-dam);
-}
-
-.login input[type="checkbox"]:focus {
-	border-color: var(--eyecare-xanh);
-	box-shadow: 0 0 0 3px rgba(26, 111, 181, .22);
-	outline: 2px solid transparent;
-}
-
-
-/* ==========================================================================
-   NÚT ĐĂNG NHẬP
-   ========================================================================== */
-
-.login .button-primary {
-	display: block;
-	float: none;
-	width: 100%;
-	min-height: 48px;
-	padding: .6em 1em;
-	background: var(--eyecare-xanh-dam);
-	border: 1px solid var(--eyecare-xanh-dam);
-	border-radius: var(--eyecare-bo-goc);
-	color: #fff;               /* 6.31:1 trên nền nút */
-	font-size: 1.02em;
-	font-weight: 600;
-	line-height: 1.5;
-	text-align: center;
-	text-shadow: none;
-	box-shadow: none;
-	transition: background-color .12s;
-}
-
-.login .button-primary:hover,
-.login .button-primary:focus {
-	background: var(--eyecare-navy);
-	border-color: var(--eyecare-navy);
-	color: #fff;
-}
-
-.login .button-primary:focus-visible {
-	outline: 3px solid var(--eyecare-xanh);
-	outline-offset: 2px;
-}
-
-.login .button-primary:active {
-	transform: translateY(1px);
-}
-
-
-/* ==========================================================================
-   THÔNG BÁO VÀ BÁO LỖI
-   Lỗi dùng --eyecare-khan, cùng màu với khối "dấu hiệu phải đi khám ngay" ở
-   giao diện ngoài. Ở đây không có xung đột nghĩa vì trang này không có nội
-   dung y khoa.
-   ========================================================================== */
-
-.login .message,
-.login .notice,
-.login #login_error {
-	margin: 0 0 1.3em;
-	padding: .9em 1.1em;
-	border: 1px solid var(--eyecare-vien);
-	border-left: 4px solid var(--eyecare-xanh);
-	border-radius: var(--eyecare-bo-goc);
-	background: #fff;
-	color: var(--eyecare-chu);
-	font-size: .94em;
-	line-height: 1.6;
-	box-shadow: none;
-}
-
-.login #login_error {
-	border-left-color: var(--eyecare-khan);
-	background: var(--eyecare-khan-nen);
-	color: #7a0a15;            /* 8.1:1 trên nền hồng nhạt */
-}
-
-.login #login_error a,
-.login .message a {
-	color: var(--eyecare-xanh-dam);
-}
-
-
-/* ==========================================================================
-   LIÊN KẾT DƯỚI FORM
-   ========================================================================== */
-
-.login #nav,
-.login #backtoblog {
-	margin: 0;
-	padding: 0;
-	text-align: center;
-	font-size: .93em;
-	line-height: 1.6;
-}
-
-.login #nav {
-	margin-top: 1.3em;
-}
-
-.login #backtoblog {
-	margin-top: .55em;
-}
-
-.login #nav a,
-.login #backtoblog a {
-	display: inline-block;
-	/* Vùng bấm 44px theo WCAG 2.5.5 — nhân sự lớn tuổi và người dùng điện
-	   thoại cần chỗ bấm rộng, không phải một dòng chữ mảnh. */
-	min-height: 44px;
-	padding: .7em .5em;
-	color: var(--eyecare-chu-phu);
-	text-decoration: none;
-	border-bottom: 1px solid transparent;
-}
-
-.login #nav a:hover,
-.login #nav a:focus,
-.login #backtoblog a:hover,
-.login #backtoblog a:focus {
-	color: var(--eyecare-xanh-dam);
-	border-bottom-color: currentColor;
-}
-
-.login #nav a:focus-visible,
-.login #backtoblog a:focus-visible {
-	outline: 2px solid var(--eyecare-xanh);
-	outline-offset: 2px;
-	border-radius: 2px;
-}
-
-/* Dấu tách giữa hai liên kết ở #nav (Đăng ký · Quên mật khẩu). */
-.login #nav a + a::before {
-	content: "·";
-	margin: 0 .55em 0 0;
-	color: var(--eyecare-vien-dam);
-}
-
-.login .privacy-policy-page-link {
-	margin: 1em 0 0;
-}
-
-.login .privacy-policy-page-link a {
-	color: var(--eyecare-chu-phu);
-	font-size: .9em;
-}
-
-
-/* ==========================================================================
-   CHÂN TRANG — do login_footer sinh ra
-   ========================================================================== */
-
-.eyecare-dn__chan {
-	margin: 1.8em auto 0;
-	max-width: 356px;
-	padding: 0 .5em;
-	text-align: center;
-	font-size: .86em;
-	line-height: 1.65;
-	color: var(--eyecare-chu-phu);
-}
-
-.eyecare-dn__chan-noi-bo {
-	margin: .35em 0 0;
-	font-size: .95em;
-}
-
-.login .language-switcher {
-	margin-top: 1.2em;
-}
-
-
-/* ==========================================================================
-   ĐIỆN THOẠI
-   ========================================================================== */
-
 @media (max-width: 480px) {
-
-	#login {
-		padding: 3.5vh 0 3vh;
-	}
-
-	.login form {
-		padding: 1.4em 1.2em 1.2em;
-	}
-
-	.login h1 a,
-	.login .wp-login-logo a {
-		font-size: 1.16em;
-	}
+ body.login {padding: 20px 14px;}
+ body.login #login {padding: 26px 22px 22px; border-radius: 16px;}
+ .login h1 a, .login .wp-login-logo a {width: 148px; height: 111px; margin-bottom: 22px;}
+ .eyecare-dn__intro h2 {font-size: 24px;}
 }
-
-
-/* ==========================================================================
-   TÔN TRỌNG TUỲ CHỌN HỆ THỐNG
-   ========================================================================== */
-
-@media (prefers-reduced-motion: reduce) {
-
-	.login input[type="text"],
-	.login input[type="password"],
-	.login input[type="email"],
-	.login .button-primary {
-		transition: none;
-	}
-
-	.login .button-primary:active {
-		transform: none;
-	}
-}
-
-/* Chế độ tương phản cao: bỏ bóng và làm viền đặc lại, không dựa vào box-shadow
-   vì Windows High Contrast loại bỏ box-shadow. */
-@media (prefers-contrast: more) {
-
-	.login form {
-		border-color: var(--eyecare-navy);
-		box-shadow: none;
-	}
-
-	.login input[type="text"],
-	.login input[type="password"],
-	.login input[type="email"] {
-		border-color: var(--eyecare-navy);
-	}
-}
+@media (forced-colors: active) {.login .button-primary {border: 2px solid ButtonText;} body.login #login {border: 1px solid CanvasText;}}
