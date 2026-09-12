@@ -2,6 +2,8 @@
 
 ## 2026-09-12
 
+- Đã triển khai `f22fdfc`: sao lưu CSS/database, đối chiếu file, flush cache, PHP lint và smoke test 6 URL đạt. Trình duyệt production xác nhận cột mạng xã hội giữa mép phải trên mobile dọc, hàng dưới trên desktop/ngang, popup hoạt động ở 5 kích thước và không lỗi JavaScript.
+
 - Theo ảnh đánh dấu, chuyển mạng xã hội trên điện thoại dọc thành cột sát mép phải, căn giữa màn hình. Hai nút gọi/đặt lịch vẫn ở đáy; desktop và điện thoại ngang giữ hàng dưới để phù hợp chiều cao. Giảm khoảng chừa cuối trang mobile; QA 5 kích thước, vùng bấm, popup và giảm chuyển động đạt. Backup: `/home/jwhxtzru/backups/contact-rail-20260912-142411/`.
 
 - Đã triển khai cụm liên hệ `ec51bf5`: sao lưu database/file và khóa deploy tại `/home/jwhxtzru/backups/contact-dock-20260912-141801/`, đối chiếu file và flush cache. Smoke test 6 URL, PHP lint và kiểm tra trình duyệt production đạt; API vẫn nhận khung giờ cuối 17:00. Không gửi yêu cầu đặt lịch thử hoặc thay đổi cấu hình thông báo.
