@@ -2,6 +2,8 @@
 
 ## 2026-09-12
 
+- Đã triển khai quản lý đặt lịch `5ee5f30`: menu **Đặt lịch khám** và ô truy cập trên **Bảng tin**. Production đã qua kiểm tra native WP admin list, SQL lọc ngày/trạng thái, phân quyền, đối chiếu SHA256, PHP lint và smoke test 6 URL; form public trên desktop/mobile vẫn hoạt động, khung cuối 17:00. Kiểm tra lưu ghi chú/trạng thái bằng dữ liệu trong bộ nhớ; không chỉnh sửa lịch bệnh nhân trên production.
+
 - Nâng cấp quản trị **Đặt lịch khám**: thẻ tổng yêu cầu/chờ xác nhận/lịch hôm nay, lọc ngày và trạng thái, tìm tên/điện thoại, ghi chú nội bộ, trạng thái Đã khám, thời điểm/người xử lý; thêm lối vào trên Bảng tin. Kiểm tra 105 tình huống backend/admin đạt; kiểm tra SQL và render màn hình trong WordPress staging đạt, không sửa lịch bệnh nhân. Backup triển khai: `/home/jwhxtzru/backups/booking-admin-20260912-083019/`.
 
 - Đã triển khai `c4e1962`: giới hạn lịch khám mới đến 17:00 (bỏ 17:30), giữ giờ mở cửa bệnh viện; cập nhật hướng dẫn trong form. 78 kiểm tra backend, PHP lint, API production, trình duyệt desktop/mobile và smoke test đạt. Backup triển khai: `/home/jwhxtzru/backups/booking-cutoff-20260912-075534/`.
