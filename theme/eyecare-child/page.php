@@ -283,7 +283,11 @@ while ( have_posts() ) :
 					<?php if ( $bai_moi_nhat ) : ?>
 						<ol class="eyecare-bai__danh-sach eyecare-bai__danh-sach--moi">
 							<?php foreach ( $bai_moi_nhat as $thu_tu => $id_bai ) : ?>
-								<li><a class="eyecare-bai__bai-ben" href="<?php echo esc_url( get_permalink( $id_bai ) ); ?>"><span class="eyecare-bai__anh-ben"><span class="eyecare-bai__anh-thay" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M6 24s7-10 18-10 18 10 18 10-7 10-18 10S6 24 6 24Z"/><circle cx="24" cy="24" r="5"/></svg></span><span class="eyecare-bai__so-thu-tu" aria-hidden="true"><?php echo esc_html( (string) ( $thu_tu + 1 ) ); ?></span></span><span class="eyecare-bai__copy-ben"><span class="eyecare-bai__muc-ben">Kiến thức nhãn khoa</span><strong><?php echo esc_html( get_the_title( $id_bai ) ); ?></strong><time datetime="<?php echo esc_attr( get_the_date( DATE_W3C, $id_bai ) ); ?>"><?php echo esc_html( get_the_date( 'd/m/Y', $id_bai ) ); ?></time></span></a></li>
+								<li><a class="eyecare-bai__bai-ben" href="<?php echo esc_url( get_permalink( $id_bai ) ); ?>"><span class="eyecare-bai__anh-ben"><?php if ( has_post_thumbnail( $id_bai ) ) : ?>
+<?php echo wp_kses_post( get_the_post_thumbnail( $id_bai, 'medium', array( 'alt' => '', 'loading' => 'lazy', 'decoding' => 'async' ) ) ); ?>
+<?php else : ?>
+<?php echo eyecare_anh_bai_du_phong( $id_bai, 'eyecare-anh-bai-du-phong--mini' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- Markup nội bộ đã escape. ?>
+<?php endif; ?><span class="eyecare-bai__so-thu-tu" aria-hidden="true"><?php echo esc_html( (string) ( $thu_tu + 1 ) ); ?></span></span><span class="eyecare-bai__copy-ben"><span class="eyecare-bai__muc-ben">Kiến thức nhãn khoa</span><strong><?php echo esc_html( get_the_title( $id_bai ) ); ?></strong><time datetime="<?php echo esc_attr( get_the_date( DATE_W3C, $id_bai ) ); ?>"><?php echo esc_html( get_the_date( 'd/m/Y', $id_bai ) ); ?></time></span></a></li>
 							<?php endforeach; ?>
 						</ol>
 					<?php else : ?>
