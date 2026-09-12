@@ -106,7 +106,8 @@ function ec_booking_register() {
 	}
 	$caps['create_posts'] = 'do_not_allow';
 	register_post_type( 'ec_appointment', array(
-		'labels'              => array( 'name' => 'Lịch hẹn khám', 'singular_name' => 'Yêu cầu lịch khám', 'edit_item' => 'Xử lý yêu cầu lịch khám', 'not_found' => 'Chưa có yêu cầu đặt lịch.' ),
+		'labels'              => array( 'name' => 'Đặt lịch khám', 'singular_name' => 'Yêu cầu lịch khám', 'edit_item' => 'Xử lý yêu cầu lịch khám', 'all_items' => 'Danh sách đặt lịch', 'search_items' => 'Tìm lịch hẹn', 'not_found' => 'Chưa có yêu cầu đặt lịch.' ),
+		'menu_position'       => 20,
 		'public'              => false,
 		'publicly_queryable'  => false,
 		'exclude_from_search' => true,
@@ -302,7 +303,7 @@ function ec_booking_admin_columns( $columns ) {
 add_filter( 'manage_ec_appointment_posts_columns', 'ec_booking_admin_columns' );
 
 function ec_booking_statuses() {
-	return array( 'pending' => 'Chờ xác nhận', 'confirmed' => 'Đã xác nhận', 'contacted' => 'Đã liên hệ', 'cancelled' => 'Đã hủy' );
+	return array( 'pending' => 'Chờ xác nhận', 'confirmed' => 'Đã xác nhận', 'contacted' => 'Đã liên hệ', 'completed' => 'Đã khám', 'cancelled' => 'Đã hủy' );
 }
 
 function ec_booking_admin_column( $column, $post_id ) {
@@ -312,13 +313,18 @@ function ec_booking_admin_column( $column, $post_id ) {
 	$data = ec_booking_read( get_post( $post_id ) );
 	if ( 'ec_name' === $column || 'ec_phone' === $column ) {
 		$key = 'ec_name' === $column ? 'name' : 'phone';
-		echo esc_html( isset( $data[ $key ] ) ? $data[ $key ] : '' );
+		if ( 'phone' === $key && ! empty( $data[ $key ] ) ) {
+			echo '<a href="tel:' . esc_attr( preg_replace( '/[^0-9+]/', '', $data[ $key ] ) ) . '">' . esc_html( $data[ $key ] ) . '</a>';
+		} else {
+			echo esc_html( isset( $data[ $key ] ) ? $data[ $key ] : '' );
+		}
 	} elseif ( 'ec_slot' === $column ) {
-		echo esc_html( isset( $data['date'], $data['time'] ) ? $data['date'] . ' · ' . $data['time'] : '' );
+		echo esc_html( isset( $data['date'], $data['time'] ) ? ec_booking_admin_date_label( $data['date'] ) . ' · ' . $data['time'] : '' );
 	} elseif ( 'ec_status' === $column ) {
 		$statuses = ec_booking_statuses();
 		$status   = get_post_meta( $post_id, '_ec_booking_status', true );
-		echo esc_html( isset( $statuses[ $status ] ) ? $statuses[ $status ] : $statuses['pending'] );
+		$status = isset( $statuses[ $status ] ) ? $status : 'pending';
+		echo '<span class="ec-admin-status ec-admin-status--' . esc_attr( $status ) . '">' . esc_html( $statuses[ $status ] ) . '</span>';
 	}
 }
 add_action( 'manage_ec_appointment_posts_custom_column', 'ec_booking_admin_column', 10, 2 );
@@ -337,7 +343,10 @@ function ec_booking_admin_details( $post ) {
 	$fields = array( 'name' => 'Họ tên', 'phone' => 'Số điện thoại', 'date' => 'Ngày mong muốn', 'time' => 'Giờ mong muốn', 'received_at' => 'Tiếp nhận lúc' );
 	echo '<table class="form-table"><tbody>';
 	foreach ( $fields as $key => $label ) {
-		echo '<tr><th scope="row">' . esc_html( $label ) . '</th><td>' . esc_html( isset( $data[ $key ] ) ? $data[ $key ] : '' ) . '</td></tr>';
+		$value = $data[ $key ] ?? '';
+		if ( 'date' === $key ) { $value = ec_booking_admin_date_label( $value ); }
+		if ( 'received_at' === $key && $value ) { $value = wp_date( 'H:i · d/m/Y', strtotime( $value ), new DateTimeZone( 'Asia/Ho_Chi_Minh' ) ); }
+		echo '<tr><th scope="row">' . esc_html( $label ) . '</th><td>' . esc_html( $value ) . '</td></tr>';
 	}
 	echo '<tr><th scope="row">Đồng ý liên hệ</th><td>' . ( ! empty( $data['consent'] ) ? 'Đã đồng ý' : 'Chưa ghi nhận' ) . '</td></tr></tbody></table>';
 	wp_nonce_field( 'ec_booking_admin_status', 'ec_booking_admin_nonce' );
@@ -347,11 +356,18 @@ function ec_booking_admin_details( $post ) {
 		echo '<option value="' . esc_attr( $key ) . '" ' . selected( $status, $key, false ) . '>' . esc_html( $label ) . '</option>';
 	}
 	echo '</select><p>Lịch khám chỉ được xác nhận sau khi nhân viên bệnh viện liên hệ với người đăng ký.</p>';
+	echo '<p><label for="ec-booking-note"><strong>Ghi chú xử lý nội bộ</strong></label></p><textarea class="large-text" id="ec-booking-note" name="ec_booking_note" rows="4" maxlength="2000" placeholder="Ví dụ: Đã gọi xác nhận, người đăng ký sẽ đến đúng giờ…">' . esc_textarea( get_post_meta( $post->ID, '_ec_booking_note', true ) ) . '</textarea>';
+	echo '<p class="description">Ghi chú chỉ hiển thị trong trang quản trị.</p>';
+	$handled_at = get_post_meta( $post->ID, '_ec_booking_handled_at', true );
+	if ( $handled_at ) {
+		echo '<p class="description">Cập nhật gần nhất: ' . esc_html( wp_date( 'H:i · d/m/Y', (int) $handled_at, new DateTimeZone( 'Asia/Ho_Chi_Minh' ) ) ) . '</p>';
+	}
 	submit_button( 'Lưu trạng thái', 'primary', 'save', false );
+	echo ' <a class="button" href="' . esc_url( admin_url( 'edit.php?post_type=ec_appointment' ) ) . '">Về danh sách</a>';
 }
 
 function ec_booking_admin_save( $post_id ) {
-	if ( ! current_user_can( 'manage_options' ) || wp_is_post_autosave( $post_id ) || wp_is_post_revision( $post_id ) ) {
+	if ( ! current_user_can( 'manage_options' ) || 'ec_appointment' !== get_post_type( $post_id ) || wp_is_post_autosave( $post_id ) || wp_is_post_revision( $post_id ) ) {
 		return;
 	}
 	if ( ! isset( $_POST['ec_booking_admin_nonce'], $_POST['ec_booking_status'] ) || ! is_string( $_POST['ec_booking_admin_nonce'] ) || ! is_string( $_POST['ec_booking_status'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['ec_booking_admin_nonce'] ) ), 'ec_booking_admin_status' ) ) {
@@ -359,7 +375,15 @@ function ec_booking_admin_save( $post_id ) {
 	}
 	$status = sanitize_key( wp_unslash( $_POST['ec_booking_status'] ) );
 	if ( array_key_exists( $status, ec_booking_statuses() ) ) {
+		if ( isset( $_POST['ec_booking_note'] ) && ( ! is_string( $_POST['ec_booking_note'] ) || strlen( wp_unslash( $_POST['ec_booking_note'] ) ) > 8000 ) ) {
+			wp_die( 'Ghi chú không hợp lệ hoặc quá dài. Vui lòng quay lại kiểm tra.', '', array( 'response' => 400 ) );
+		}
 		update_post_meta( $post_id, '_ec_booking_status', $status );
+		if ( isset( $_POST['ec_booking_note'] ) ) {
+			update_post_meta( $post_id, '_ec_booking_note', wp_slash( sanitize_textarea_field( wp_unslash( $_POST['ec_booking_note'] ) ) ) );
+		}
+		update_post_meta( $post_id, '_ec_booking_handled_at', time() );
+		update_post_meta( $post_id, '_ec_booking_handled_by', get_current_user_id() );
 	}
 }
 add_action( 'save_post_ec_appointment', 'ec_booking_admin_save' );

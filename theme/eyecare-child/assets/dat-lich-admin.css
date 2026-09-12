@@ -1,0 +1,49 @@
+/* Loaded only on the private appointment administration screens. */
+.post-type-ec_appointment .wrap {max-width: 1500px;}
+.post-type-ec_appointment .wrap h1 {font-weight: 650; color: #193b30;}
+.ec-admin-intro {margin: 20px 20px 16px 0; color: #53645b; font-size: 14px; max-width: 1050px;}
+.ec-admin-summary {display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; margin: 0 20px 24px 0; max-width: 1050px;}
+.ec-admin-summary__card {display: flex; flex-direction: column; gap: 12px; padding: 22px 24px; border: 1px solid #dce7df; border-radius: 12px; text-decoration: none; background: #fff; color: #4c6357; box-shadow: 0 3px 14px #173f3006;}
+.ec-admin-summary__card strong {font-size: 32px; line-height: 1; color: #193b30;}
+.ec-admin-summary__card--pending {background: #fff9ec; border-color: #eeddb4;}
+.ec-admin-summary__card--today {background: #eff8f2;}
+.ec-admin-summary__card:hover {border-color: #117b43; color: #0b5f32;}
+.ec-admin-summary__card:focus-visible {outline: 2px solid #117b43; outline-offset: 3px;}
+.post-type-ec_appointment .wp-list-table {border: 1px solid #dce7df; border-radius: 8px; overflow: hidden;}
+.post-type-ec_appointment .wp-list-table th {padding-top: 14px; padding-bottom: 14px;}
+.post-type-ec_appointment .wp-list-table td {padding-top: 17px; padding-bottom: 17px;}
+.post-type-ec_appointment .column-title {width: 24%;}
+.post-type-ec_appointment .column-ec_name {width: 17%;}
+.post-type-ec_appointment .column-ec_phone {width: 14%;}
+.post-type-ec_appointment .column-ec_slot {width: 17%;}
+.post-type-ec_appointment .column-ec_status {width: 14%;}
+.post-type-ec_appointment .column-date {width: 14%;}
+.post-type-ec_appointment .tablenav.top {height: auto; min-height: 40px; margin-bottom: 12px;}
+.post-type-ec_appointment .tablenav .actions {display: flex; align-items: center; flex-wrap: wrap; gap: 6px;}
+.post-type-ec_appointment .tablenav input[type=date] {min-height: 32px;}
+.post-type-ec_appointment .search-box input[type=search] {min-width: 260px;}
+.ec-admin-status {display: inline-block; padding: 5px 10px; border-radius: 6px; font-size: 12px; line-height: 1.6; font-weight: 600; background: #edf1ef; color: #455e51;}
+.ec-admin-status--pending {background: #fff0ce; color: #795400;}
+.ec-admin-status--confirmed {background: #dcf2e4; color: #116437;}
+.ec-admin-status--contacted {background: #e3eefb; color: #245587;}
+.ec-admin-status--completed {background: #d7eee8; color: #145b49;}
+.ec-admin-status--cancelled {background: #f8e7e7; color: #963737;}
+.post-type-ec_appointment #ec-booking-details {border: 1px solid #dce7df; border-radius: 12px; overflow: hidden;}
+.post-type-ec_appointment #ec-booking-details .inside {padding: 10px 24px 24px;}
+.post-type-ec_appointment #ec-booking-details .form-table td {font-size: 15px; color: #193b30;}
+.post-type-ec_appointment #ec-booking-details .form-table th {width: 180px; font-weight: 500; color: #58695f;}
+.post-type-ec_appointment #ec-booking-details select {min-height: 40px; min-width: 210px;}
+.post-type-ec_appointment #ec-booking-note {margin: 0 0 8px; padding: 12px; border-color: #bacfc1; border-radius: 6px; max-width: 800px;}
+.post-type-ec_appointment #ec-booking-details .button {min-height: 38px; padding: 3px 16px; margin-top: 16px;}
+.post-type-ec_appointment .button-primary {background: #117b43; border-color: #117b43;}
+.post-type-ec_appointment .button-primary:hover {background: #0b5f32; border-color: #0b5f32;}
+@media (max-width: 782px) {
+ .ec-admin-summary {gap: 8px; margin-right: 10px;}
+ .ec-admin-summary__card {padding: 14px 10px; font-size: 12px;}
+ .ec-admin-summary__card strong {font-size: 27px;}
+ .post-type-ec_appointment .wp-list-table td {padding-top: 7px; padding-bottom: 7px;}
+ .post-type-ec_appointment .tablenav .actions {float: none; padding: 5px 0;}
+ .post-type-ec_appointment .tablenav .bulkactions {display: none;}
+ .post-type-ec_appointment .search-box input[type=search] {min-width: 0;}
+ .post-type-ec_appointment #ec-booking-details .inside {padding: 10px 16px 20px;}
+}

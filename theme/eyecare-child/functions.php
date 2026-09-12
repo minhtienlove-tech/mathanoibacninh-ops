@@ -408,4 +408,5 @@ require_once get_stylesheet_directory() . '/inc/quan-ly-anh-ai.php';
 
 /* Liên hệ nổi và yêu cầu đặt lịch khám trong giờ làm việc của bệnh viện. */
 require_once get_stylesheet_directory() . '/inc/dat-lich-kham.php';
+require_once get_stylesheet_directory() . '/inc/quan-ly-dat-lich.php';
 require_once get_stylesheet_directory() . '/inc/lien-he-noi.php';

@@ -2,6 +2,8 @@
 
 ## 2026-09-12
 
+- Nâng cấp quản trị **Đặt lịch khám**: thẻ tổng yêu cầu/chờ xác nhận/lịch hôm nay, lọc ngày và trạng thái, tìm tên/điện thoại, ghi chú nội bộ, trạng thái Đã khám, thời điểm/người xử lý; thêm lối vào trên Bảng tin. Kiểm tra 105 tình huống backend/admin đạt; kiểm tra SQL và render màn hình trong WordPress staging đạt, không sửa lịch bệnh nhân. Backup triển khai: `/home/jwhxtzru/backups/booking-admin-20260912-083019/`.
+
 - Đã triển khai `c4e1962`: giới hạn lịch khám mới đến 17:00 (bỏ 17:30), giữ giờ mở cửa bệnh viện; cập nhật hướng dẫn trong form. 78 kiểm tra backend, PHP lint, API production, trình duyệt desktop/mobile và smoke test đạt. Backup triển khai: `/home/jwhxtzru/backups/booking-cutoff-20260912-075534/`.
 
 - Thêm nút gọi nổi góc trái với hiệu ứng sóng nhẹ, nhóm Zalo/Facebook/TikTok/YouTube thu gọn, tab đặt lịch riêng ở giữa mép phải. Zalo dùng số `0868 899 396` đã được xác nhận.
