@@ -22,7 +22,7 @@ body.ec-booking-open {
 	overflow: hidden;
 }
 
-/* Contact dock: separate call action on the left, social channels at bottom right. */
+/* Bottom call/booking actions and social channels along the right edge. */
 body.ec-contact-dock { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
 .ec-contact {
  position: fixed;
@@ -153,6 +153,24 @@ body.ec-contact-dock { padding-bottom: calc(104px + env(safe-area-inset-bottom))
 }
 .ec-contact .ec-booking-tab:hover { color: #fff; background: var(--ec-green-dark); transform: translateY(-2px); }
 .ec-booking-tab svg { flex: 0 0 auto; width: 22px; height: 22px; }
+@media (min-width: 768px) {
+ .ec-contact .ec-contact__socials {
+  position: fixed;
+  right: max(16px, env(safe-area-inset-right));
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: column;
+  gap: 8px;
+  border-radius: 32px;
+ }
+ .ec-contact__label {
+  right: calc(100% + 16px);
+  bottom: 50%;
+  transform: translateY(50%);
+ }
+ .ec-contact a:hover > .ec-contact__label,
+ .ec-contact a:focus-visible > .ec-contact__label { transform: translateY(50%); }
+}
 @media (max-width: 767px) {
  body.ec-contact-dock { padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
  .ec-contact {
@@ -181,7 +199,7 @@ body.ec-contact-dock { padding-bottom: calc(104px + env(safe-area-inset-bottom))
  .ec-contact .ec-booking-tab { grid-column: 2; grid-row: 2; height: 52px; padding: 0 12px; gap: 8px; border-radius: 16px; font-size: 14px; }
  .ec-contact__label { display: none; }
 }
-@media (max-height: 560px) and (orientation: landscape) {
+@media (max-width: 767px) and (max-height: 560px) and (orientation: landscape) {
  body.ec-contact-dock { padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
  .ec-contact { display: flex; gap: 8px; bottom: calc(10px + env(safe-area-inset-bottom)); }
  .ec-contact .ec-contact__call { width: auto; height: 52px; margin-right: auto; padding: 5px 12px; }
