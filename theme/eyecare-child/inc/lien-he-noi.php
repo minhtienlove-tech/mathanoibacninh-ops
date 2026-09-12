@@ -56,6 +56,10 @@ function eyecare_booking_form( $context = 'modal' ) {
 }
 
 function eyecare_floating_contact() {
+	// Trang đặt lịch đã có form đầy đủ; tránh nút nổi che các trường trên mobile.
+	if ( is_page( 'dat-lich-kham' ) ) {
+		return;
+	}
 	$info = eyecare_du_lieu_thuc_the();
 	$socials = array(
 		'zalo' => array( 'Zalo', 'https://zalo.me/0868899396' ),
