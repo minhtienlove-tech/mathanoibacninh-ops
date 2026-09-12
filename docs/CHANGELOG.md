@@ -2,6 +2,8 @@
 
 ## 2026-09-12
 
+- Thêm **Đặt lịch khám → Cài đặt Gmail**: email gửi, mật khẩu ứng dụng mã hóa, email nhận, gửi kiểm tra và bật/tắt độc lập Zalo. PHPMailer riêng với Gmail STARTTLS, gửi nền sau khi lưu lịch mới, kết quả và gửi lại trong admin. 127 kiểm tra kết hợp booking/Zalo/Gmail và 105 kiểm tra booking/admin đạt; PHP lint, giao diện 1200px/390px và bắt tay SMTP STARTTLS thực tế đạt. Chưa gửi email thật. Backup triển khai: `/home/jwhxtzru/backups/booking-gmail-20260912-140046/`. Hướng dẫn: `docs/GMAIL.md`.
+
 - Đã triển khai Zalo Bot `552a80d`: backup file và database tại `/home/jwhxtzru/backups/booking-zalo-20260912-093819/`; dùng khóa deploy, kiểm tra hash bản cũ và đối chiếu file mới. PHP lint, menu/capability/render admin thực tế, mã hóa token trên server, smoke test 6 URL và kiểm tra trình duyệt desktop/mobile đạt; form đặt lịch vẫn kết thúc ở 17:00, không lỗi JavaScript. Cấu hình đang tắt và chưa lưu token; chưa kiểm tra gửi Zalo thật vì người dùng chưa tạo bot. Không tạo/sửa lịch bệnh nhân để thử.
 
 - Bổ sung **Đặt lịch khám → Cài đặt Zalo**: lưu token mã hóa, chọn Chat ID từ tin `/nhanlich`, gửi kiểm tra, bật/tắt thông báo. Lịch mới gửi nền qua WP Cron, có trạng thái gửi và nút gửi lại trong chi tiết lịch; không gửi tên/điện thoại/ghi chú bệnh nhân. Mặc định tắt vì chưa tạo bot. Kiểm thử Zalo giả lập 102 kiểm tra và admin 105 kiểm tra đạt; giao diện 1200px/390px không tràn ngang. Hướng dẫn: `docs/ZALO-BOT.md`.

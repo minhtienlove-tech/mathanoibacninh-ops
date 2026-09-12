@@ -410,4 +410,5 @@ require_once get_stylesheet_directory() . '/inc/quan-ly-anh-ai.php';
 require_once get_stylesheet_directory() . '/inc/dat-lich-kham.php';
 require_once get_stylesheet_directory() . '/inc/quan-ly-dat-lich.php';
 require_once get_stylesheet_directory() . '/inc/zalo-dat-lich.php';
+require_once get_stylesheet_directory() . '/inc/gmail-dat-lich.php';
 require_once get_stylesheet_directory() . '/inc/lien-he-noi.php';
