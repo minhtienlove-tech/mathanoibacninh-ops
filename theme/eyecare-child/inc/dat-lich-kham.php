@@ -1,7 +1,7 @@
 <?php
 /**
  * Tiếp nhận yêu cầu lịch khám; dữ liệu chỉ hiển thị với quản trị viên.
- * Không gửi thông tin người đăng ký tới email hoặc dịch vụ bên ngoài.
+ * Thông báo Zalo tùy chọn được xử lý riêng sau khi lưu thành công.
  *
  * @package eyecare-child
  */
@@ -248,6 +248,7 @@ function ec_booking_store( $booking ) {
 		if ( is_wp_error( $post_id ) || ! $post_id ) {
 			return new WP_Error( 'storage', 'Chưa lưu được yêu cầu. Vui lòng thử lại hoặc gọi bệnh viện.', array( 'status' => 503 ) );
 		}
+		do_action( 'ec_booking_created', (int) $post_id );
 		return (int) $post_id;
 	} finally {
 		ec_booking_unlock( $lock );
