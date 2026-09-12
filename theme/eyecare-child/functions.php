@@ -405,3 +405,7 @@ require_once get_stylesheet_directory() . '/inc/anh-dai-dien-bai-viet.php';
 
 /* Tạo ảnh đại diện bằng HHTech API, mặc định dùng model Grok 1K tiết kiệm. */
 require_once get_stylesheet_directory() . '/inc/quan-ly-anh-ai.php';
+
+/* Liên hệ nổi và yêu cầu đặt lịch khám trong giờ làm việc của bệnh viện. */
+require_once get_stylesheet_directory() . '/inc/dat-lich-kham.php';
+require_once get_stylesheet_directory() . '/inc/lien-he-noi.php';
