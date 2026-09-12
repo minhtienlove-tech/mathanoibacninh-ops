@@ -5,9 +5,9 @@
 - Thêm nút gọi nổi góc trái với hiệu ứng sóng nhẹ, nhóm Zalo/Facebook/TikTok/YouTube thu gọn, tab đặt lịch riêng ở giữa mép phải. Zalo dùng số `0868 899 396` đã được xác nhận.
 - Bổ sung form popup và trang `/dat-lich-kham/`: tên, điện thoại, ngày, giờ; đọc giờ làm việc từ cấu hình bệnh viện (hiện 07:30–18:00), khung 30 phút với giờ bắt đầu trước giờ đóng cửa, trong 90 ngày. Kiểm tra lại tại server theo múi giờ Việt Nam; lưu yêu cầu riêng tư trong quản trị **Lịch hẹn khám**, chờ nhân viên xác nhận. Không gửi email tự động.
 - Chống gửi trùng khi mất mạng, giới hạn số lần gửi, xác nhận đồng ý liên hệ; dữ liệu lịch hẹn không xuất hiện trên REST API, tìm kiếm hoặc trang công khai.
-- Kiểm tra local: 75 kiểm tra PHP về dữ liệu/lưu trữ/quyền riêng tư/gửi lại đạt; PHP lint và JavaScript syntax đạt; kiểm tra trình duyệt desktop/mobile về popup, thu gọn, bàn phím, khung giờ, gửi lại cùng mã yêu cầu và chế độ giảm chuyển động đạt. Chuẩn bị triển khai với backup tại `/home/jwhxtzru/backups/contact-booking-20260912-074624/`.
+- Kiểm tra local: 75 kiểm tra PHP về dữ liệu/lưu trữ/quyền riêng tư/gửi lại đạt; PHP lint và JavaScript syntax đạt; kiểm tra trình duyệt desktop/mobile về popup, thu gọn, bàn phím, khung giờ, gửi lại cùng mã yêu cầu và chế độ giảm chuyển động đạt. Backup file và database trước triển khai tại `/home/jwhxtzru/backups/contact-booking-20260912-074624/`.
 - Đã triển khai `91ccd1c` lên production; PHP lint, đối chiếu SHA256, flush cache, 6 URL chính và SSH đều đạt. Chromium xác nhận popup hoạt động trên 1440px/390px, khung giờ API 07:30–17:30 theo bước 30 phút, nonce sai bị từ chối; không có lỗi JavaScript. Đường dẫn REST lịch hẹn trả 404, CPT chỉ cấp quyền quản trị. Không tạo lịch bệnh nhân thử trên production.
-- Trang `/dat-lich-kham/` có form riêng, ẩn bộ nút nổi tại trang này để không che các trường nhập trên điện thoại.
+- Đã triển khai bổ sung `df84211`: trang `/dat-lich-kham/` có form riêng, ẩn bộ nút nổi tại trang này để không che các trường nhập trên điện thoại. Backup bổ sung `lien-he-noi-before-mobile-fix.php` và `database-before-mobile-fix.sql` trong cùng thư mục; kiểm tra lại trình duyệt production đạt.
 
 ## 2026-09-10
 
