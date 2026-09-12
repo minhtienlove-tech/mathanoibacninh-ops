@@ -2,6 +2,8 @@
 
 ## 2026-09-12
 
+- Thiết kế lại cụm liên hệ nổi: Zalo/Facebook/TikTok/YouTube hiện sẵn thành hàng ở góc dưới phải, bỏ nút bung/thu gọn. Desktop đặt nút gọi bên trái và đặt lịch cạnh mạng xã hội ở dưới; mobile dùng hai nút gọi/đặt lịch bên dưới hàng biểu tượng, có khoảng an toàn và chừa chỗ cuối trang. Giữ hiệu ứng gọi nhẹ, hỗ trợ giảm chuyển động và form đặt lịch. PHP/JS syntax, QA trình duyệt ở 1440/768/390/320px và 667px ngang đạt: không tràn ngang/chồng nút, vùng bấm tối thiểu 44px, popup/Escape hoạt động. Backup triển khai: `/home/jwhxtzru/backups/contact-dock-20260912-141801/`.
+
 - Đã triển khai Gmail `f66108c` sau backup file/database và khóa deploy tại `/home/jwhxtzru/backups/booking-gmail-20260912-140046/`. Đối chiếu file, PHP lint, render/menu admin và quyền quản trị, hook độc lập Gmail/Zalo, smoke test 6 URL đạt. Mặc định Gmail đang tắt, chưa có tài khoản/mật khẩu ứng dụng; chưa gửi thư thật hoặc thay đổi lịch bệnh nhân.
 
 - Thêm **Đặt lịch khám → Cài đặt Gmail**: email gửi, mật khẩu ứng dụng mã hóa, email nhận, gửi kiểm tra và bật/tắt độc lập Zalo. PHPMailer riêng với Gmail STARTTLS, gửi nền sau khi lưu lịch mới, kết quả và gửi lại trong admin. 127 kiểm tra kết hợp booking/Zalo/Gmail và 105 kiểm tra booking/admin đạt; PHP lint, giao diện 1200px/390px và bắt tay SMTP STARTTLS thực tế đạt. Chưa gửi email thật. Backup triển khai: `/home/jwhxtzru/backups/booking-gmail-20260912-140046/`. Hướng dẫn: `docs/GMAIL.md`.

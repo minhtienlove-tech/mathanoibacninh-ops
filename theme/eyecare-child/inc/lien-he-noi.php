@@ -16,6 +16,12 @@ function eyecare_contact_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'eyecare_contact_assets', 120 );
 
+function eyecare_contact_body_class( $classes ) {
+	if ( ! is_page( 'dat-lich-kham' ) ) { $classes[] = 'ec-contact-dock'; }
+	return $classes;
+}
+add_filter( 'body_class', 'eyecare_contact_body_class' );
+
 /** Fixed icon paths only; callers cannot supply arbitrary SVG markup. */
 function eyecare_contact_icon( $name ) {
 	$paths = array(
@@ -69,7 +75,9 @@ function eyecare_floating_contact() {
 	);
 	?>
 	<div class="ec-contact" aria-label="Liên hệ bệnh viện">
-		<nav class="ec-contact__socials" id="ec-contact-socials" aria-label="Mạng xã hội bệnh viện" hidden>
+		<a class="ec-contact__call" href="tel:<?php echo esc_attr( $info['dien_thoai'] ); ?>" aria-label="<?php echo esc_attr( 'Gọi bệnh viện ' . $info['dien_thoai_hien'] ); ?>"><span class="ec-contact__phone-icon"><?php echo eyecare_contact_icon( 'phone' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span><span class="ec-contact__call-text">Gọi bệnh viện<strong><?php echo esc_html( $info['dien_thoai_hien'] ); ?></strong></span></a>
+		<a class="ec-booking-tab" href="<?php echo esc_url( home_url( '/dat-lich-kham/' ) ); ?>" data-booking-open aria-haspopup="dialog" aria-controls="ec-booking-dialog"><?php echo eyecare_contact_icon( 'calendar' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span>Đặt lịch khám</span></a>
+		<nav class="ec-contact__socials" id="ec-contact-socials" aria-label="Mạng xã hội bệnh viện">
 			<?php foreach ( $socials as $key => $social ) : ?>
 				<a class="ec-contact__social ec-contact__social--<?php echo esc_attr( $key ); ?>" href="<?php echo esc_url( $social[1] ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr( $social[0] . ' bệnh viện (mở tab mới)' ); ?>">
 					<?php echo 'zalo' === $key ? '<span class="ec-contact__zalo" aria-hidden="true">Zalo</span>' : eyecare_contact_icon( $key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
@@ -77,10 +85,7 @@ function eyecare_floating_contact() {
 				</a>
 			<?php endforeach; ?>
 		</nav>
-		<button class="ec-contact__social-toggle" type="button" aria-expanded="false" aria-controls="ec-contact-socials" aria-label="Mở các kênh liên hệ" hidden><?php echo eyecare_contact_icon( 'chat' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></button>
-		<a class="ec-contact__call" href="tel:<?php echo esc_attr( $info['dien_thoai'] ); ?>" aria-label="<?php echo esc_attr( 'Gọi bệnh viện ' . $info['dien_thoai_hien'] ); ?>" title="<?php echo esc_attr( 'Gọi ' . $info['dien_thoai_hien'] ); ?>"><?php echo eyecare_contact_icon( 'phone' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
 	</div>
-	<a class="ec-booking-tab" href="<?php echo esc_url( home_url( '/dat-lich-kham/' ) ); ?>" data-booking-open aria-haspopup="dialog" aria-controls="ec-booking-dialog"><?php echo eyecare_contact_icon( 'calendar' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span>Đặt lịch khám</span></a>
 	<dialog class="ec-booking-dialog" id="ec-booking-dialog" aria-labelledby="ec-booking-title" aria-describedby="ec-booking-intro">
 		<button type="button" class="ec-booking-dialog__close" data-booking-close aria-label="Đóng form đặt lịch"><?php echo eyecare_contact_icon( 'close' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></button>
 		<p class="ec-booking-dialog__eyebrow">Bệnh viện Mắt Hà Nội – Bắc Ninh</p>

@@ -22,246 +22,165 @@ body.ec-booking-open {
 	overflow: hidden;
 }
 
+/* Contact dock: separate call action on the left, social channels at bottom right. */
+body.ec-contact-dock { padding-bottom: calc(104px + env(safe-area-inset-bottom)); }
 .ec-contact {
-	position: fixed;
-	left: max(24px, env(safe-area-inset-left));
-	bottom: max(24px, env(safe-area-inset-bottom));
-	z-index: 99990;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 12px;
-	width: 56px;
+ position: fixed;
+ left: max(24px, env(safe-area-inset-left));
+ right: max(24px, env(safe-area-inset-right));
+ bottom: calc(20px + env(safe-area-inset-bottom));
+ z-index: 99990;
+ display: flex;
+ align-items: center;
+ gap: 12px;
+ pointer-events: none;
 }
-
+.ec-contact > * { pointer-events: auto; }
 .ec-contact .ec-contact__call,
-.ec-contact .ec-contact__social-toggle,
-.ec-contact .ec-contact__social {
-	position: relative;
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	flex: 0 0 auto;
-	min-width: 0;
-	padding: 0;
-	border: 1px solid transparent;
-	border-radius: 50%;
-	text-align: center;
-	text-decoration: none;
-	line-height: 1;
-	cursor: pointer;
-	transition: background-color .2s ease, box-shadow .2s ease, transform .2s ease;
-	-webkit-tap-highlight-color: transparent;
+.ec-contact .ec-contact__social,
+.ec-contact .ec-booking-tab {
+ display: inline-flex;
+ position: relative;
+ align-items: center;
+ justify-content: center;
+ flex: 0 0 auto;
+ min-width: 0;
+ margin: 0;
+ text-decoration: none;
+ cursor: pointer;
+ -webkit-tap-highlight-color: transparent;
+ transition: transform .2s ease, background-color .2s ease, box-shadow .2s ease;
 }
-
 .ec-contact .ec-contact__call {
-	width: 56px;
-	height: 56px;
-	color: #fff;
-	background: var(--ec-green);
-	box-shadow: 0 5px 18px rgb(9 87 43 / 26%);
-	isolation: isolate;
+ gap: 12px;
+ height: 60px;
+ margin-right: auto;
+ padding: 6px 22px 6px 8px;
+ border: 1px solid #d8e8df;
+ border-radius: 999px;
+ color: var(--ec-ink);
+ background: #fff;
+ box-shadow: 0 6px 24px rgb(9 57 32 / 14%);
 }
-
-.ec-contact__call::before,
-.ec-contact__call::after {
-	position: absolute;
-	inset: -1px;
-	z-index: -1;
-	border: 2px solid rgb(17 123 67 / 45%);
-	border-radius: inherit;
-	content: "";
-	pointer-events: none;
-	animation: ec-contact-ring 3s ease-out infinite;
+.ec-contact__phone-icon {
+ position: relative;
+ display: grid;
+ place-items: center;
+ flex: 0 0 44px;
+ width: 44px;
+ height: 44px;
+ border-radius: 50%;
+ color: #fff;
+ background: var(--ec-green);
+ isolation: isolate;
 }
-
-.ec-contact__call::after {
-	animation-delay: 1.5s;
+.ec-contact__phone-icon::before {
+ position: absolute;
+ inset: -3px;
+ border: 1px solid rgb(17 123 67 / 45%);
+ border-radius: inherit;
+ content: '';
+ pointer-events: none;
+ animation: ec-contact-ring 3s ease-out infinite;
 }
-
-.ec-contact .ec-contact__call svg {
-	width: 27px;
-	height: 27px;
-	animation: ec-contact-phone 4s ease-in-out infinite;
-}
-
-.ec-contact .ec-contact__call:hover {
-	color: #fff;
-	background: var(--ec-green-dark);
-	box-shadow: 0 7px 22px rgb(9 87 43 / 32%);
-}
-
-.ec-contact .ec-contact__social-toggle {
-	width: 48px;
-	height: 48px;
-	color: var(--ec-ink);
-	background: #fff;
-	border-color: #dce8df;
-	box-shadow: 0 4px 16px rgb(25 59 48 / 14%);
-}
-
-.ec-contact .ec-contact__social-toggle:hover,
-.ec-contact .ec-contact__social-toggle[aria-expanded="true"] {
-	color: var(--ec-green-dark);
-	background: #eaf5ee;
-	border-color: #aacfb8;
-}
-
-.ec-contact__social-toggle svg {
-	width: 23px;
-	height: 23px;
-}
-
+.ec-contact__phone-icon svg { width: 22px; height: 22px; animation: ec-contact-phone 4s ease-in-out infinite; }
+.ec-contact__call-text { display: flex; flex-direction: column; gap: 3px; font-size: 11px; font-weight: 500; line-height: 1.3; text-align: left; }
+.ec-contact__call-text strong { font-size: 16px; font-weight: 750; letter-spacing: .01em; color: var(--ec-green-dark); }
+.ec-contact .ec-contact__call:hover { color: var(--ec-ink); background: #f2faf5; transform: translateY(-2px); }
 .ec-contact .ec-contact__socials {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: 10px;
-	margin: 0;
-	padding: 0;
-	list-style: none;
+ display: flex;
+ align-items: center;
+ gap: 6px;
+ margin: 0;
+ padding: 7px;
+ border: 1px solid #e0e9e4;
+ border-radius: 999px;
+ background: rgb(255 255 255 / 97%);
+ box-shadow: 0 6px 24px rgb(9 57 32 / 14%);
 }
-
-.ec-contact [hidden] {
-	display: none !important;
-}
-
-.ec-contact__socials > li {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
 .ec-contact .ec-contact__social {
-	width: 46px;
-	height: 46px;
-	color: #fff;
-	background: var(--ec-green);
-	border: 2px solid #fff;
-	box-shadow: 0 3px 12px rgb(25 59 48 / 19%);
-	font-size: 12px;
-	font-weight: 700;
+ width: 44px;
+ height: 44px;
+ padding: 0;
+ border: 0;
+ border-radius: 50%;
+ color: #fff;
+ line-height: 1;
 }
-
-.ec-contact .ec-contact__social:hover {
-	color: #fff;
-	transform: translateY(-2px);
-	box-shadow: 0 5px 17px rgb(25 59 48 / 26%);
-}
-
-.ec-contact__social svg {
-	width: 23px;
-	height: 23px;
-}
-
-.ec-contact .ec-contact__social--zalo {
-	background: #0068ff;
-}
-
-.ec-contact__zalo {
-	font-family: Arial, sans-serif;
-	font-size: 13px;
-	font-weight: 700;
-	letter-spacing: -.6px;
-}
-
-.ec-contact .ec-contact__social--facebook {
-	background: #0866ff;
-}
-
-.ec-contact .ec-contact__social--tiktok {
-	background: #171c20;
-}
-
-.ec-contact .ec-contact__social--youtube {
-	background: #e62117;
-}
-
+.ec-contact .ec-contact__social:hover { color: #fff; transform: translateY(-3px); box-shadow: 0 4px 10px rgb(9 57 32 / 18%); }
+.ec-contact__social svg { width: 22px; height: 22px; }
+.ec-contact .ec-contact__social--zalo { background: #0068ff; }
+.ec-contact .ec-contact__social--facebook { background: #0866ff; }
+.ec-contact .ec-contact__social--tiktok { background: #171c20; }
+.ec-contact .ec-contact__social--youtube { background: #e62117; }
+.ec-contact__zalo { font-family: Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: -.6px; }
 .ec-contact__label {
-	position: absolute;
-	left: calc(100% + 12px);
-	top: 50%;
-	padding: 9px 12px;
-	border: 1px solid #e0e9e3;
-	border-radius: 9px;
-	color: var(--ec-ink);
-	background: #fff;
-	box-shadow: 0 4px 16px rgb(25 59 48 / 10%);
-	font-size: 13px;
-	font-weight: 600;
-	line-height: 1.3;
-	white-space: nowrap;
-	opacity: 0;
-	visibility: hidden;
-	pointer-events: none;
-	transform: translate(-4px, -50%);
-	transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+ position: absolute;
+ right: 0;
+ bottom: calc(100% + 16px);
+ padding: 8px 12px;
+ border: 1px solid #e0e9e3;
+ border-radius: 9px;
+ color: var(--ec-ink);
+ background: #fff;
+ box-shadow: 0 4px 16px rgb(25 59 48 / 10%);
+ font-size: 12px;
+ font-weight: 600;
+ line-height: 1.3;
+ white-space: nowrap;
+ opacity: 0;
+ visibility: hidden;
+ pointer-events: none;
+ transform: translateY(4px);
+ transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
 }
-
 .ec-contact a:hover > .ec-contact__label,
-.ec-contact a:focus-visible > .ec-contact__label,
-.ec-contact button:hover > .ec-contact__label,
-.ec-contact button:focus-visible > .ec-contact__label {
-	opacity: 1;
-	visibility: visible;
-	transform: translate(0, -50%);
+.ec-contact a:focus-visible > .ec-contact__label { opacity: 1; visibility: visible; transform: translateY(0); }
+.ec-contact a:focus-visible { outline: 3px solid #dba92e; outline-offset: 4px; }
+.ec-contact .ec-booking-tab {
+ gap: 10px;
+ height: 60px;
+ padding: 0 24px;
+ border: 1px solid rgb(255 255 255 / 30%);
+ border-radius: 999px;
+ color: #fff;
+ background: var(--ec-green);
+ box-shadow: 0 6px 24px rgb(9 87 43 / 22%);
+ font-size: 15px;
+ font-weight: 700;
+ line-height: 1.3;
+ white-space: nowrap;
 }
-
-.ec-contact a:focus-visible,
-.ec-contact button:focus-visible,
-.ec-booking-tab:focus-visible {
-	outline: 3px solid #dba92e;
-	outline-offset: 4px;
+.ec-contact .ec-booking-tab:hover { color: #fff; background: var(--ec-green-dark); transform: translateY(-2px); }
+.ec-booking-tab svg { flex: 0 0 auto; width: 22px; height: 22px; }
+@media (max-width: 767px) {
+ body.ec-contact-dock { padding-bottom: calc(144px + env(safe-area-inset-bottom)); }
+ .ec-contact {
+  left: max(12px, env(safe-area-inset-left));
+  right: max(12px, env(safe-area-inset-right));
+  bottom: calc(12px + env(safe-area-inset-bottom));
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 8px;
+ }
+ .ec-contact .ec-contact__socials { grid-column: 1 / -1; grid-row: 1; justify-self: end; padding: 5px; gap: 4px; }
+ .ec-contact .ec-contact__call { grid-column: 1; grid-row: 2; width: 100%; height: 52px; padding: 5px 10px; gap: 8px; border-radius: 16px; }
+ .ec-contact__phone-icon { flex-basis: 34px; width: 34px; height: 34px; }
+ .ec-contact__phone-icon svg { width: 18px; height: 18px; }
+ .ec-contact__call-text { font-size: 13px; font-weight: 650; }
+ .ec-contact__call-text strong { display: none; }
+ .ec-contact .ec-booking-tab { grid-column: 2; grid-row: 2; height: 52px; padding: 0 12px; gap: 8px; border-radius: 16px; font-size: 14px; }
+ .ec-contact__label { display: none; }
 }
-
-.ec-booking-tab {
-	position: fixed;
-	right: 0;
-	top: 50%;
-	z-index: 99990;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 11px;
-	width: 50px;
-	min-height: 180px;
-	padding: 18px 12px;
-	border: 1px solid rgb(255 255 255 / 18%);
-	border-right: 0;
-	border-radius: 14px 0 0 14px;
-	color: #fff;
-	background: var(--ec-green);
-	box-shadow: -3px 5px 18px rgb(9 87 43 / 18%);
-	font-size: 15px;
-	font-weight: 700;
-	line-height: 1.35;
-	letter-spacing: .02em;
-	text-decoration: none;
-	transform: translateY(-50%);
-	transition: background-color .2s ease, box-shadow .2s ease;
-	cursor: pointer;
+@media (max-height: 560px) and (orientation: landscape) {
+ body.ec-contact-dock { padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
+ .ec-contact { display: flex; gap: 8px; bottom: calc(10px + env(safe-area-inset-bottom)); }
+ .ec-contact .ec-contact__call { width: auto; height: 52px; margin-right: auto; padding: 5px 12px; }
+ .ec-contact .ec-booking-tab { height: 52px; padding: 0 16px; }
+ .ec-contact .ec-contact__socials { padding: 3px; gap: 4px; }
+ .ec-contact__call-text strong { display: none; }
+ .ec-contact__call-text { font-size: 13px; }
 }
-
-.ec-booking-tab:hover,
-.ec-booking-tab:focus-visible {
-	color: #fff;
-	background: var(--ec-green-dark);
-	text-decoration: none;
-	box-shadow: -5px 6px 22px rgb(9 87 43 / 25%);
-}
-
-.ec-booking-tab svg {
-	flex: 0 0 auto;
-	width: 23px;
-	height: 23px;
-}
-
-.ec-booking-tab span {
-	writing-mode: vertical-rl;
-	text-orientation: mixed;
-}
-
 .ec-booking-dialog {
 	position: fixed;
 	inset: 0;
@@ -614,25 +533,6 @@ body.ec-booking-open {
 }
 
 @media (max-width: 600px) {
-	.ec-contact {
-		left: max(14px, env(safe-area-inset-left));
-		bottom: max(14px, env(safe-area-inset-bottom));
-		gap: 10px;
-	}
-
-	.ec-booking-tab {
-		width: 42px;
-		min-height: 155px;
-		padding: 14px 9px;
-		border-radius: 11px 0 0 11px;
-		font-size: 13px;
-	}
-
-	.ec-booking-tab svg {
-		width: 21px;
-		height: 21px;
-	}
-
 	.ec-booking-dialog {
 		width: calc(100% - 24px);
 		max-height: calc(100vh - 24px);
@@ -672,28 +572,15 @@ body.ec-booking-open {
 	}
 }
 
-@media (max-height: 560px) and (orientation: landscape) {
-	.ec-contact .ec-contact__socials {
-		position: absolute;
-		left: calc(100% + 12px);
-		bottom: 66px;
-		flex-direction: row;
-	}
-
-	.ec-contact__social .ec-contact__label {
-		display: none;
-	}
-}
-
 @media (prefers-reduced-motion: reduce) {
-	.ec-contact__call::before,
-	.ec-contact__call::after,
+	.ec-contact__phone-icon::before,
+	.ec-contact__phone-icon::after,
 	.ec-contact .ec-contact__call svg {
 		animation: none;
 	}
 
-	.ec-contact__call::before,
-	.ec-contact__call::after {
+	.ec-contact__phone-icon::before,
+	.ec-contact__phone-icon::after {
 		display: none;
 	}
 

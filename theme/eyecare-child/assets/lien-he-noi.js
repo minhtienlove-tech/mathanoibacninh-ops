@@ -1,33 +1,5 @@
 (function () {
 	'use strict';
-	const contact = document.querySelector('.ec-contact');
-	const toggle = document.querySelector('.ec-contact__social-toggle');
-	const socials = document.getElementById('ec-contact-socials');
-	function closeSocials(returnFocus) {
-		if (!toggle || !socials) return;
-		const wasOpen = !socials.hidden;
-		socials.hidden = true;
-		toggle.setAttribute('aria-expanded', 'false');
-		toggle.setAttribute('aria-label', 'Mở các kênh liên hệ');
-		if (wasOpen && returnFocus) toggle.focus();
-	}
-	if (toggle && socials) {
-		toggle.hidden = false;
-		toggle.addEventListener('click', function () {
-			const open = socials.hidden;
-			socials.hidden = !open;
-			toggle.setAttribute('aria-expanded', String(open));
-			toggle.setAttribute('aria-label', open ? 'Đóng các kênh liên hệ' : 'Mở các kênh liên hệ');
-			if (open) socials.querySelector('a').focus();
-		});
-		document.addEventListener('click', event => {
-			if (!contact.contains(event.target)) closeSocials(false);
-		});
-		document.addEventListener('keydown', event => {
-			if (event.key === 'Escape') closeSocials(contact.contains(document.activeElement));
-		});
-	}
-
 	const controllers = new Map();
 	const formatter = new Intl.DateTimeFormat('en-CA', {timeZone: 'Asia/Ho_Chi_Minh', year: 'numeric', month: '2-digit', day: '2-digit'});
 	function vietnamDate(ms) {
@@ -209,7 +181,6 @@
 	let opener = null;
 	document.querySelectorAll('[data-booking-open]').forEach(button => button.addEventListener('click', event => {
 		event.preventDefault();
-		closeSocials(false);
 		opener = button;
 		dialog.showModal();
 		document.body.classList.add('ec-booking-open');
