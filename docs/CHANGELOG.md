@@ -2,6 +2,8 @@
 
 ## 2026-09-12
 
+- Đã triển khai cụm liên hệ `ec51bf5`: sao lưu database/file và khóa deploy tại `/home/jwhxtzru/backups/contact-dock-20260912-141801/`, đối chiếu file và flush cache. Smoke test 6 URL, PHP lint và kiểm tra trình duyệt production đạt; API vẫn nhận khung giờ cuối 17:00. Không gửi yêu cầu đặt lịch thử hoặc thay đổi cấu hình thông báo.
+
 - Thiết kế lại cụm liên hệ nổi: Zalo/Facebook/TikTok/YouTube hiện sẵn thành hàng ở góc dưới phải, bỏ nút bung/thu gọn. Desktop đặt nút gọi bên trái và đặt lịch cạnh mạng xã hội ở dưới; mobile dùng hai nút gọi/đặt lịch bên dưới hàng biểu tượng, có khoảng an toàn và chừa chỗ cuối trang. Giữ hiệu ứng gọi nhẹ, hỗ trợ giảm chuyển động và form đặt lịch. PHP/JS syntax, QA trình duyệt ở 1440/768/390/320px và 667px ngang đạt: không tràn ngang/chồng nút, vùng bấm tối thiểu 44px, popup/Escape hoạt động. Backup triển khai: `/home/jwhxtzru/backups/contact-dock-20260912-141801/`.
 
 - Đã triển khai Gmail `f66108c` sau backup file/database và khóa deploy tại `/home/jwhxtzru/backups/booking-gmail-20260912-140046/`. Đối chiếu file, PHP lint, render/menu admin và quyền quản trị, hook độc lập Gmail/Zalo, smoke test 6 URL đạt. Mặc định Gmail đang tắt, chưa có tài khoản/mật khẩu ứng dụng; chưa gửi thư thật hoặc thay đổi lịch bệnh nhân.
