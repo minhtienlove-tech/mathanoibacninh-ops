@@ -2,6 +2,8 @@
 
 ## 2026-09-12
 
+- Đã triển khai `bff7d10`, backup CSS/database tại `/home/jwhxtzru/backups/desktop-social-rail-20260912-144119/`. Khóa deploy, hash, PHP lint, flush cache và 6 URL đạt; QA trình duyệt production 5 kích thước xác nhận cột biểu tượng bên phải trên desktop, không chồng nút và popup vẫn hoạt động.
+
 - Chuyển mạng xã hội trên desktop/tablet từ hàng dưới thành cột dọc giữa mép phải, tooltip hướng vào trong màn hình. Giữ gọi/đặt lịch ở đáy và bố cục điện thoại. QA 5 kích thước, popup, vùng bấm và giảm chuyển động đạt.
 
 - Đã triển khai `d7eda76` sau backup database và `page.php` tại `/home/jwhxtzru/backups/sidebar-thumbnails-20260912-142909/`. File production cũ khác kiểu xuống dòng, đã đối chiếu diff trước khi cập nhật. PHP lint, flush cache, smoke test 6 URL đạt; Chromium 1440px/390px xác nhận đủ 5 ảnh tải thành công trên trang Glôcôm, không tràn ngang.
