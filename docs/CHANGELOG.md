@@ -2,7 +2,9 @@
 
 ## 2026-09-12
 
-- Bổ sung **Đặt lịch khám → Cài đặt Zalo**: lưu token mã hóa, chọn Chat ID từ tin `/nhanlich`, gửi kiểm tra, bật/tắt thông báo. Lịch mới gửi nền qua WP Cron, có trạng thái gửi và nút gửi lại trong chi tiết lịch; không gửi tên/điện thoại/ghi chú bệnh nhân. Mặc định tắt vì chưa tạo bot. Kiểm thử Zalo giả lập 102 kiểm tra và admin 105 kiểm tra đạt; giao diện 1200px/390px không tràn ngang. Hướng dẫn: `docs/ZALO-BOT.md`. Backup triển khai dự kiến: `/home/jwhxtzru/backups/booking-zalo-20260912-093819/`.
+- Đã triển khai Zalo Bot `552a80d`: backup file và database tại `/home/jwhxtzru/backups/booking-zalo-20260912-093819/`; dùng khóa deploy, kiểm tra hash bản cũ và đối chiếu file mới. PHP lint, menu/capability/render admin thực tế, mã hóa token trên server, smoke test 6 URL và kiểm tra trình duyệt desktop/mobile đạt; form đặt lịch vẫn kết thúc ở 17:00, không lỗi JavaScript. Cấu hình đang tắt và chưa lưu token; chưa kiểm tra gửi Zalo thật vì người dùng chưa tạo bot. Không tạo/sửa lịch bệnh nhân để thử.
+
+- Bổ sung **Đặt lịch khám → Cài đặt Zalo**: lưu token mã hóa, chọn Chat ID từ tin `/nhanlich`, gửi kiểm tra, bật/tắt thông báo. Lịch mới gửi nền qua WP Cron, có trạng thái gửi và nút gửi lại trong chi tiết lịch; không gửi tên/điện thoại/ghi chú bệnh nhân. Mặc định tắt vì chưa tạo bot. Kiểm thử Zalo giả lập 102 kiểm tra và admin 105 kiểm tra đạt; giao diện 1200px/390px không tràn ngang. Hướng dẫn: `docs/ZALO-BOT.md`.
 
 - Đã triển khai quản lý đặt lịch `5ee5f30`: menu **Đặt lịch khám** và ô truy cập trên **Bảng tin**. Production đã qua kiểm tra native WP admin list, SQL lọc ngày/trạng thái, phân quyền, đối chiếu SHA256, PHP lint và smoke test 6 URL; form public trên desktop/mobile vẫn hoạt động, khung cuối 17:00. Kiểm tra lưu ghi chú/trạng thái bằng dữ liệu trong bộ nhớ; không chỉnh sửa lịch bệnh nhân trên production.
 
