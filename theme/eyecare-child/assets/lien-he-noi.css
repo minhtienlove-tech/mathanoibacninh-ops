@@ -154,7 +154,7 @@ body.ec-contact-dock { padding-bottom: calc(104px + env(safe-area-inset-bottom))
 .ec-contact .ec-booking-tab:hover { color: #fff; background: var(--ec-green-dark); transform: translateY(-2px); }
 .ec-booking-tab svg { flex: 0 0 auto; width: 22px; height: 22px; }
 @media (max-width: 767px) {
- body.ec-contact-dock { padding-bottom: calc(144px + env(safe-area-inset-bottom)); }
+ body.ec-contact-dock { padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
  .ec-contact {
   left: max(12px, env(safe-area-inset-left));
   right: max(12px, env(safe-area-inset-right));
@@ -163,7 +163,16 @@ body.ec-contact-dock { padding-bottom: calc(104px + env(safe-area-inset-bottom))
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 8px;
  }
- .ec-contact .ec-contact__socials { grid-column: 1 / -1; grid-row: 1; justify-self: end; padding: 5px; gap: 4px; }
+ .ec-contact .ec-contact__socials {
+  position: fixed;
+  right: max(6px, env(safe-area-inset-right));
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: column;
+  padding: 4px;
+  gap: 5px;
+  border-radius: 28px;
+ }
  .ec-contact .ec-contact__call { grid-column: 1; grid-row: 2; width: 100%; height: 52px; padding: 5px 10px; gap: 8px; border-radius: 16px; }
  .ec-contact__phone-icon { flex-basis: 34px; width: 34px; height: 34px; }
  .ec-contact__phone-icon svg { width: 18px; height: 18px; }
@@ -177,7 +186,7 @@ body.ec-contact-dock { padding-bottom: calc(104px + env(safe-area-inset-bottom))
  .ec-contact { display: flex; gap: 8px; bottom: calc(10px + env(safe-area-inset-bottom)); }
  .ec-contact .ec-contact__call { width: auto; height: 52px; margin-right: auto; padding: 5px 12px; }
  .ec-contact .ec-booking-tab { height: 52px; padding: 0 16px; }
- .ec-contact .ec-contact__socials { padding: 3px; gap: 4px; }
+ .ec-contact .ec-contact__socials { position: static; transform: none; flex-direction: row; padding: 3px; gap: 4px; }
  .ec-contact__call-text strong { display: none; }
  .ec-contact__call-text { font-size: 13px; }
 }
