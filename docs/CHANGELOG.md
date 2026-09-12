@@ -2,6 +2,8 @@
 
 ## 2026-09-12
 
+- Đã triển khai `d7eda76` sau backup database và `page.php` tại `/home/jwhxtzru/backups/sidebar-thumbnails-20260912-142909/`. File production cũ khác kiểu xuống dòng, đã đối chiếu diff trước khi cập nhật. PHP lint, flush cache, smoke test 6 URL đạt; Chromium 1440px/390px xác nhận đủ 5 ảnh tải thành công trên trang Glôcôm, không tràn ngang.
+
 - Sửa cột **Bài viết mới nhất** của trang chuyên khoa/trang nội dung trong `page.php`: trước đây hardcode biểu tượng mắt, nay dùng featured image từng bài và ảnh dự phòng khi chưa có. Audit production: 150 bài đã xuất bản đều có thumbnail và file ảnh tồn tại; không cần đổi database/media. PHP lint và render WordPress trang `/chuyen-khoa/glocom/` xác nhận 5 ảnh thật. Backup: `/home/jwhxtzru/backups/sidebar-thumbnails-20260912-142909/`.
 
 - Đã triển khai `f22fdfc`: sao lưu CSS/database, đối chiếu file, flush cache, PHP lint và smoke test 6 URL đạt. Trình duyệt production xác nhận cột mạng xã hội giữa mép phải trên mobile dọc, hàng dưới trên desktop/ngang, popup hoạt động ở 5 kích thước và không lỗi JavaScript.
