@@ -2,6 +2,8 @@
 
 ## 2026-09-14
 
+- Hero lấy cảm hứng kính quang học: nền SeaGreen/GreenYellow, vòng kính có chiều sâu theo con trỏ desktop, ánh sáng nhẹ, chữ xuất hiện theo lớp, CTA DarkGreen. Thêm số ảnh/thanh tiến trình đồng bộ, dừng khi hover/focus/ẩn tab/ra ngoài màn hình; hỗ trợ vuốt ở chế độ mờ và giảm chuyển động. Cấu hình chuyển mờ 6 giây, tắt zoom để giữ đủ banner. Chỉ sửa CSS hero, slider JS và cấu hình slider; khối bác sĩ giữ nguyên. QA 1440/768/390/320px, tự chạy/dừng/vuốt, giảm chuyển động, popup và computed styles bác sĩ đạt. Backup dự kiến `/home/jwhxtzru/backups/hero-glass-20260914/`.
+
 - Đã triển khai trang chủ `7b4a0e5`, PHP lint và 6 URL đạt; khối bác sĩ giữ nguyên. Bổ sung vị trí điều khiển slider trên mobile tránh cột mạng xã hội; QA 390/768/320px đạt thao tác slider, cẩm nang, popup, không tràn ngang và computed styles bác sĩ không đổi. Backup bổ sung trong `/home/jwhxtzru/backups/home-refresh-20260914-103820/`.
 
 - Làm mới giao diện trang chủ bằng `assets/home-refresh.css` chỉ nạp trên front page: hero hai cột, thẻ dẫn nhanh nhẹ, dịch vụ ảnh + nội dung trên nền trắng, tiêu đề dễ đọc, khối kiến thức/đặt lịch gọn. Cẩm nang cuối trang dùng details để người đọc chủ động mở, toàn bộ nội dung vẫn trong HTML. Không sửa hoặc di chuyển khối bác sĩ: giữ ngay sau dịch vụ; QA 1440/768/390/320px đối chiếu nguyên HTML và computed styles/kích thước mọi phần tử khối bác sĩ không đổi, không tràn ngang, cẩm nang mở/đóng đạt. Backup triển khai: `/home/jwhxtzru/backups/home-refresh-20260914-103820/`.

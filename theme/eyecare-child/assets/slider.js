@@ -47,6 +47,16 @@
 	var hienTai = 0;
 	var hen     = null;
 	var dangChay = tuChay;
+	var trongManHinh = true;
+	var giuChuot = false;
+	var giuFocus = false;
+	var tienTrinh = document.createElement( 'div' );
+	tienTrinh.className = 'eyecare-hero__progress';
+	tienTrinh.setAttribute( 'aria-hidden', 'true' );
+	tienTrinh.innerHTML = '<span class="eyecare-hero__count"></span><span class="eyecare-hero__track"><i></i></span>';
+	gtoc.querySelector( '.eyecare-hero__loi' ).appendChild( tienTrinh );
+	var thanh = tienTrinh.querySelector( 'i' );
+	gtoc.style.setProperty( '--hero-duration', nhip + 's' );
 
 	/**
 	 * Chuyển tới ảnh thứ i (vòng lại từ đầu khi hết).
@@ -54,7 +64,7 @@
 	function toi( i ) {
 		hienTai = ( i + anh.length ) % anh.length;
 
-		if ( 'mo' !== hieuUng || giamChuyenDong ) {
+		if ( ! gtoc.classList.contains( 'eyecare-hero--mo' ) ) {
 			// Chế độ trượt dùng scroll-snap sẵn có. Khi người dùng yêu cầu giảm
 			// chuyển động, vẫn chuyển đúng ảnh nhưng bỏ cuộn mượt.
 			bang.scrollTo( {
@@ -79,6 +89,12 @@
 	 * Tô đậm chấm của ảnh đang xem, và khai cho trình đọc màn hình.
 	 */
 	function capNhatCham() {
+		// Prepare the adjacent banner before the next fade; other images stay lazy.
+		[ hienTai, ( hienTai + 1 ) % anh.length, ( hienTai + anh.length - 1 ) % anh.length ].forEach( function ( i ) {
+			var image = anh[ i ].querySelector( 'img' );
+			if ( image ) { image.loading = 'eager'; }
+		} );
+		tienTrinh.querySelector( '.eyecare-hero__count' ).textContent = String( hienTai + 1 ).padStart( 2, '0' ) + ' / ' + String( anh.length ).padStart( 2, '0' );
 		cham.forEach( function ( a, idx ) {
 			var dang = idx === hienTai;
 			a.classList.toggle( 'eyecare-hero__cham--dang', dang );
@@ -94,10 +110,13 @@
 	 * Đặt lịch chuyển ảnh kế tiếp.
 	 */
 	function henTiep() {
-		if ( ! dangChay ) {
+		if ( ! dangChay || ! trongManHinh || giuChuot || giuFocus || document.hidden ) {
 			return;
 		}
 		huyHen();
+		thanh.style.animation = 'none';
+		void thanh.offsetWidth;
+		thanh.style.animation = 'eyecare-hero-progress ' + nhip + 's linear forwards';
 		hen = window.setTimeout( function () {
 			toi( hienTai + 1 );
 			henTiep();
@@ -105,6 +124,7 @@
 	}
 
 	function huyHen() {
+		thanh.style.animationPlayState = 'paused';
 		if ( hen ) {
 			window.clearTimeout( hen );
 			hen = null;
@@ -206,17 +226,18 @@
 	// thái cho công cụ hỗ trợ; title cho chuột. CSS giấu phần <span> chữ đi
 	// bằng .eyecare-hero__tam-dung-chu { font-size: 0 }.
 	var nut = gtoc.querySelector( '.eyecare-hero__tam-dung' );
+	var veNut = function () {};
 	if ( nut ) {
 		var chu      = nut.querySelector( '.eyecare-hero__tam-dung-chu' );
 
-		function veNut() {
+		veNut = function () {
 			nut.setAttribute( 'aria-pressed', dangChay ? 'false' : 'true' );
 			nut.setAttribute( 'aria-label',  dangChay ? 'Tạm dừng' : 'Chạy tiếp' );
 			nut.setAttribute( 'title',       dangChay ? 'Tạm dừng' : 'Chạy tiếp' );
 			if ( chu ) {
 				chu.textContent = dangChay ? '⏸' : '▶';
 			}
-		}
+		};
 
 		nut.addEventListener( 'click', function () {
 			dangChay = ! dangChay;
@@ -233,14 +254,16 @@
 
 	// --- Dừng khi con trỏ ở trên slider hoặc tab mất tiêu điểm -------------
 	// Người đang đọc chữ trên ảnh không muốn nó nhảy giữa chừng.
-	gtoc.addEventListener( 'mouseenter', huyHen );
+	gtoc.addEventListener( 'mouseenter', function () { giuChuot = true; huyHen(); } );
 	gtoc.addEventListener( 'mouseleave', function () {
+		giuChuot = false;
 		if ( dangChay ) {
 			henTiep();
 		}
 	} );
-	gtoc.addEventListener( 'focusin', huyHen );
-	gtoc.addEventListener( 'focusout', function () {
+	gtoc.addEventListener( 'focusin', function () { giuFocus = true; huyHen(); } );
+	gtoc.addEventListener( 'focusout', function ( e ) {
+		giuFocus = gtoc.contains( e.relatedTarget );
 		if ( dangChay ) {
 			henTiep();
 		}
@@ -254,6 +277,49 @@
 		}
 	} );
 
+	// Gentle lens parallax uses transforms only; touch and reduced motion stay still.
+	var motion = window.matchMedia( '(prefers-reduced-motion: reduce)' );
+	var precise = window.matchMedia( '(hover: hover) and (pointer: fine)' );
+	var frame = null;
+	gtoc.addEventListener( 'pointermove', function ( e ) {
+		if ( motion.matches || ! precise.matches || frame ) { return; }
+		frame = requestAnimationFrame( function () {
+			var r = gtoc.getBoundingClientRect();
+			gtoc.style.setProperty( '--lens-x', ( ( e.clientX - r.left ) / r.width - .5 ) * 20 + 'px' );
+			gtoc.style.setProperty( '--lens-y', ( ( e.clientY - r.top ) / r.height - .5 ) * 16 + 'px' );
+			frame = null;
+		} );
+	}, { passive: true } );
+	gtoc.addEventListener( 'pointerleave', function () {
+		gtoc.style.setProperty( '--lens-x', '0px' );
+		gtoc.style.setProperty( '--lens-y', '0px' );
+	} );
+	if ( 'IntersectionObserver' in window ) {
+		new IntersectionObserver( function ( entries ) {
+			trongManHinh = entries[ 0 ].isIntersecting;
+			gtoc.classList.toggle( 'eyecare-hero--offscreen', ! trongManHinh );
+			if ( trongManHinh ) { henTiep(); } else { huyHen(); }
+		}, { threshold: .1 } ).observe( gtoc );
+	}
+	// Fade mode also supports a deliberate horizontal touch swipe.
+	var touchStart = null;
+	if ( 'mo' === hieuUng && ! giamChuyenDong ) {
+		bang.addEventListener( 'touchstart', function ( e ) {
+			if ( e.touches.length === 1 ) { touchStart = [ e.touches[ 0 ].clientX, e.touches[ 0 ].clientY ]; }
+		}, { passive: true } );
+		bang.addEventListener( 'touchend', function ( e ) {
+			if ( ! touchStart ) { return; }
+			var dx = e.changedTouches[ 0 ].clientX - touchStart[ 0 ];
+			var dy = e.changedTouches[ 0 ].clientY - touchStart[ 1 ];
+			if ( Math.abs( dx ) > 45 && Math.abs( dx ) > Math.abs( dy ) * 1.5 ) { chuyenBangTay( dx < 0 ? 1 : -1 ); }
+			touchStart = null;
+		}, { passive: true } );
+		bang.addEventListener( 'touchcancel', function () { touchStart = null; }, { passive: true } );
+	}
+	motion.addEventListener( 'change', function () {
+		giamChuyenDong = motion.matches;
+		if ( giamChuyenDong ) { dangChay = false; huyHen(); if ( nut ) { veNut(); } }
+	} );
 	// --- Khởi động ---------------------------------------------------------
 	henTiep();
 
