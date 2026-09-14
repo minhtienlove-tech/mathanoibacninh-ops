@@ -302,8 +302,9 @@ function eyecare_slider_dau_trang() {
 	echo '<div class="eyecare-hero__loi"><div class="eyecare-chu__khung">';
 	echo '<p class="eyecare-hero__nhan">Nâng niu đôi mắt Việt</p>';
 	echo '<h1 class="eyecare-hero__td">' . esc_html( $tt['ten'] ) . '</h1>';
-	echo '<p class="eyecare-hero__mt">Mở cửa ' . esc_html( $tt['gio_mo'] )
-		. ' – ' . esc_html( $tt['gio_dong'] ) . ', tất cả các ngày trong tuần.</p>';
+	echo '<p class="eyecare-hero__promise">Cho đôi mắt <strong>sáng.</strong><br>Cho cuộc sống <strong>đẹp.</strong></p>';
+	echo '<p class="eyecare-hero__mt"><span class="eyecare-hero__hours-label">ĐÓN TIẾP MỖI NGÀY</span><strong>' . esc_html( $tt['gio_mo'] )
+		. ' – ' . esc_html( $tt['gio_dong'] ) . '</strong><span>Cả tuần, kể cả thứ Bảy &amp; Chủ nhật</span></p>';
 	eyecare_hero_hanh_dong( $tt );
 	echo '</div></div>';
 

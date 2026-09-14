@@ -2,6 +2,8 @@
 
 ## 2026-09-14
 
+- Thiết kế lại cột nội dung hero thành thẻ xanh đậm, tiêu đề trắng, thông điệp nhấn xanh vàng, giờ mở cửa phân tầng và CTA tương phản. Giữ banner lớn và khối bác sĩ. Backup `/home/jwhxtzru/backups/hero-copy-20260914/`.
+
 - Đã triển khai `158627d`, backup database/CSS tại `/home/jwhxtzru/backups/hero-large-20260914/`. PHP lint, 6 URL đạt. Kiểm tra trình duyệt: banner desktop 1920px rộng khoảng 1161px (trước 775px), mobile 390px không tràn ngang; đã tải lại tab người dùng.
 
 - Mở rộng hero desktop từ khung 1280px lên 1600px, tăng tỷ lệ cột ảnh, giảm khoảng trống dọc còn 48px. Banner giữ nguyên tỷ lệ, không cắt ảnh; không sửa khối bác sĩ. Backup `/home/jwhxtzru/backups/hero-large-20260914/`.

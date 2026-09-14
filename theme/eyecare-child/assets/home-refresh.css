@@ -54,7 +54,21 @@
  border: 1px solid #ffffffd9; background: linear-gradient(135deg, #ffffff50, #f5fff9ba 55%, #98fb981a);
  box-shadow: inset 0 0 36px #fff, 0 0 0 22px #ffffff24, 0 0 0 23px #ffffff8c;
 }
-#trang-chu .eyecare-hero__loi { position: relative; z-index: 1; }
+#trang-chu .eyecare-hero__loi { position: relative; z-index: 1; padding: 28px; border-radius: 24px; background: radial-gradient(ellipse at 100% 0%, #2e8b57, transparent 65%), #073e29; box-shadow: 0 18px 45px #073e291c; border: 1px solid #ffffff60; overflow: hidden; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__nhan { color: #dafaad; background: #ffffff0d; border-color: #ffffff26; font-size: 10px; padding: 8px 12px; margin-bottom: 20px; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__td { color: #fff; font-size: clamp(24px, 2vw, 30px); line-height: 1.35; letter-spacing: -.035em; margin-bottom: 22px; }
+#trang-chu .eyecare-hero__promise { color: #d6ebdf; font-size: clamp(21px, 1.65vw, 27px); line-height: 1.6; letter-spacing: -.025em; margin: 0 0 24px; }
+#trang-chu .eyecare-hero__promise strong { color: #d8f573; font-weight: 700; text-decoration: underline; text-decoration-color: #d8f57350; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__mt { display: grid; gap: 5px; margin: 0; padding: 14px 0 14px 16px; border-left: 2px solid #d8f573; color: #d4e7db; font-size: 11px; line-height: 1.6; }
+#trang-chu .eyecare-hero__hours-label { letter-spacing: .12em; font-size: 9px; color: #bfdbc9; }
+#trang-chu .eyecare-hero__mt strong { color: #fff; font-size: 22px; letter-spacing: .025em; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__nut { gap: 8px; margin-top: 22px; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__nut .eyecare-nut--chinh { background: #d8f573; border-color: #d8f573; color: #073e29; box-shadow: 0 4px 18px #d8f57319; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__nut .eyecare-nut--phu { color: #fff; border-color: #ffffff40; background: #ffffff0a; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__nut .eyecare-nut { padding: 11px 12px; font-size: 11px; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__count { color: #c3dbcc; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__track { background: #ffffff26; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__track i { background: #d8f573; }
 #trang-chu .eyecare-hero__nhan { background: #ffffffb8; border: 1px solid #2e8b5730; color: #006400; border-radius: 30px; padding: 9px 15px; }
 #trang-chu .eyecare-hero__nhan::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #2e8b57; box-shadow: 0 0 0 4px #adff2f40; margin-right: 10px; }
 #trang-chu .eyecare-hero__td { color: #12432b; }
@@ -154,6 +168,7 @@
 #trang-chu .eyecare-home-guide .eyecare-chu__seo-bai { padding: 24px 0; background: #fff; }
 
 @media (max-width: 1050px) {
+ #trang-chu .eyecare-hero__loi { padding: 20px; }
  #trang-chu > .eyecare-hero { gap: 24px; padding: 40px 24px; }
  #trang-chu .eyecare-hero__td { font-size: 32px; }
  #trang-chu .eyecare-dai-gap { padding: 0 24px 24px; }
@@ -162,6 +177,8 @@
  #trang-chu .eyecare-linh-vuc-showcase__luoi { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 @media (max-width: 700px) {
+ #trang-chu .eyecare-hero__loi { padding: 24px; }
+ #trang-chu .eyecare-hero__promise { font-size: 23px; margin-bottom: 20px; }
  #trang-chu > .eyecare-hero { grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 28px 20px 32px; }
  #trang-chu .eyecare-hero__td { font-size: 32px; max-width: 16ch; margin-bottom: 14px; }
  #trang-chu .eyecare-hero__mt { font-size: 14px; }
