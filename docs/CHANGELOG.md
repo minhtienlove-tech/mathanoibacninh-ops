@@ -2,6 +2,8 @@
 
 ## 2026-09-14
 
+- Đã triển khai `93ff49e`: backup CSS/database tại `/home/jwhxtzru/backups/home-shortcuts-20260914/`, hash và khóa deploy đạt. PHP lint, 6 URL smoke test đạt; trình duyệt 1440/320px không tràn ngang, đủ 4 thẻ, tiêu đề nằm gọn; khối bác sĩ còn nguyên.
+
 - Làm mới 4 thẻ dẫn nhanh: icon lớn, nền chuyển sắc nhẹ, mũi tên và thẻ đặt lịch xanh đậm; gom 3 thông tin cơ bản thành dải có vạch phân chia. Mobile thẻ 2 cột và thông tin xếp dọc. Chỉ sửa CSS hai vùng, giữ hero và khối bác sĩ. Backup `/home/jwhxtzru/backups/home-shortcuts-20260914/`.
 
 - Đã triển khai `66d7504`: backup database/CSS/PHP, kiểm tra baseline và khóa deploy. PHP lint, 6 URL smoke test đạt; kiểm tra trực tiếp 1920/390/320px không tràn ngang, tiêu đề nằm gọn trong khung; giữ khối bác sĩ và đã tải lại tab trang chủ.
