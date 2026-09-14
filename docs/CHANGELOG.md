@@ -2,6 +2,8 @@
 
 ## 2026-09-14
 
+- Đã triển khai `66d7504`: backup database/CSS/PHP, kiểm tra baseline và khóa deploy. PHP lint, 6 URL smoke test đạt; kiểm tra trực tiếp 1920/390/320px không tràn ngang, tiêu đề nằm gọn trong khung; giữ khối bác sĩ và đã tải lại tab trang chủ.
+
 - Thiết kế lại cột nội dung hero thành thẻ xanh đậm, tiêu đề trắng, thông điệp nhấn xanh vàng, giờ mở cửa phân tầng và CTA tương phản. Giữ banner lớn và khối bác sĩ. Backup `/home/jwhxtzru/backups/hero-copy-20260914/`.
 
 - Đã triển khai `158627d`, backup database/CSS tại `/home/jwhxtzru/backups/hero-large-20260914/`. PHP lint, 6 URL đạt. Kiểm tra trình duyệt: banner desktop 1920px rộng khoảng 1161px (trước 775px), mobile 390px không tràn ngang; đã tải lại tab người dùng.
