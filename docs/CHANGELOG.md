@@ -2,6 +2,8 @@
 
 ## 2026-09-14
 
+- Làm mới giao diện trang chủ bằng `assets/home-refresh.css` chỉ nạp trên front page: hero hai cột, thẻ dẫn nhanh nhẹ, dịch vụ ảnh + nội dung trên nền trắng, tiêu đề dễ đọc, khối kiến thức/đặt lịch gọn. Cẩm nang cuối trang dùng details để người đọc chủ động mở, toàn bộ nội dung vẫn trong HTML. Không sửa hoặc di chuyển khối bác sĩ: giữ ngay sau dịch vụ; QA 1440/768/390/320px đối chiếu nguyên HTML và computed styles/kích thước mọi phần tử khối bác sĩ không đổi, không tràn ngang, cẩm nang mở/đóng đạt. Backup triển khai: `/home/jwhxtzru/backups/home-refresh-20260914-103820/`.
+
 - Đã triển khai `3d835d3`: backup database/footer/style tại `/home/jwhxtzru/backups/footer-social-icons-20260914-082721/`, đối chiếu baseline (khác xuống dòng), khóa deploy, đối chiếu file và flush cache. PHP lint, 6 URL smoke test và trình duyệt production 1440/390/320px đạt, đủ 6 SVG tải thành công.
 
 - Thay chữ f/X/P/YT/IG/TK ở footer bằng 6 SVG Bootstrap Icons v1.13.1 tự host, kèm giấy phép MIT. Nút bo góc 44px, logo trắng 22px, màu từng kênh khi hover, focus rõ; màn hình 320px xếp 3 cột. Giữ nguyên URL và tên truy cập. PHP lint và QA 1440/390/320px đạt: đủ 6 ảnh tải, không tràn ngang. Backup triển khai: `/home/jwhxtzru/backups/footer-social-icons-20260914-082721/`.

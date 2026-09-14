@@ -75,6 +75,14 @@ function eyecare_nap_css_doi_ngu_trang_chu() {
 }
 add_action( 'wp_enqueue_scripts', 'eyecare_nap_css_doi_ngu_trang_chu', 105 );
 
+/** Homepage presentation only; no selectors or inherited changes for the doctor block. */
+function eyecare_home_refresh_assets() {
+	if ( ! is_front_page() ) { return; }
+	$file = '/assets/home-refresh.css';
+	wp_enqueue_style( 'eyecare-home-refresh', get_stylesheet_directory_uri() . $file, array( 'eyecare-child-style' ), filemtime( get_stylesheet_directory() . $file ) );
+}
+add_action( 'wp_enqueue_scripts', 'eyecare_home_refresh_assets', 130 );
+
 
 /**
  * Nạp JS slider — CHỈ trên trang chủ, và chỉ khi slider thực sự có ảnh.

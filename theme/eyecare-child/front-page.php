@@ -459,7 +459,14 @@ $tt = eyecare_du_lieu_thuc_the();
 
 	<?php
 	if ( function_exists( 'eyecare_noi_dung_seo_trang_chu_in' ) ) {
+		?>
+		<details class="eyecare-home-guide">
+			<summary><span><small>Chuẩn bị trước khi đến khám</small><strong>Cẩm nang khám và chăm sóc mắt</strong><span>Thông tin về bệnh mắt, giấy tờ và những điều cần lưu ý.</span></span><span class="eyecare-home-guide__more">Xem cẩm nang <span aria-hidden="true">＋</span></span></summary>
+		<?php
 		eyecare_noi_dung_seo_trang_chu_in( $tt );
+		?>
+		</details>
+		<?php
 	}
 	?>
 
