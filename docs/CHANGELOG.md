@@ -2,6 +2,8 @@
 
 ## 2026-09-14
 
+- Đã triển khai `158627d`, backup database/CSS tại `/home/jwhxtzru/backups/hero-large-20260914/`. PHP lint, 6 URL đạt. Kiểm tra trình duyệt: banner desktop 1920px rộng khoảng 1161px (trước 775px), mobile 390px không tràn ngang; đã tải lại tab người dùng.
+
 - Mở rộng hero desktop từ khung 1280px lên 1600px, tăng tỷ lệ cột ảnh, giảm khoảng trống dọc còn 48px. Banner giữ nguyên tỷ lệ, không cắt ảnh; không sửa khối bác sĩ. Backup `/home/jwhxtzru/backups/hero-large-20260914/`.
 
 - Đã triển khai hero `c67d9fb`, backup database/3 file tại `/home/jwhxtzru/backups/hero-glass-20260914/`, khóa deploy và kiểm tra hash trước/sau. PHP lint, 6 URL smoke test và QA production slider/progress/vuốt/giảm chuyển động/ngoài màn hình đạt; 320/390/768px không tràn ngang, popup hoạt động, khối bác sĩ không đổi; không gửi lịch thử.
