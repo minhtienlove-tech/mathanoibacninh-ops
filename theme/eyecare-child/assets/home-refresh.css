@@ -1,7 +1,7 @@
 /* Deliberately scoped: the home-team component and all its ancestors are untouched. */
 #trang-chu > .eyecare-hero {
- display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.5fr);
- align-items: center; gap: 40px; padding: 64px max(32px, calc((100% - 1280px) / 2));
+ display: grid; grid-template-columns: minmax(280px, .7fr) minmax(0, 2fr);
+ align-items: center; gap: 32px; padding: 48px max(32px, calc((100% - 1600px) / 2));
  min-height: 0; background: linear-gradient(135deg, #f4faf6, #fff 65%); isolation: isolate;
 }
 #trang-chu > .eyecare-hero::before,
@@ -34,7 +34,7 @@
 
 /* Optical glass hero: decorative layers never cover content or receive input. */
 #trang-chu > .eyecare-hero {
- position: relative; overflow: hidden; padding-top: 84px; padding-bottom: 76px;
+ position: relative; overflow: hidden; padding-top: 48px; padding-bottom: 48px;
  background: radial-gradient(ellipse at 85% 20%, #98fb9840, transparent 55%), linear-gradient(120deg, #fff 15%, #f0f8f2 62%, #dcefe2);
 }
 #trang-chu > .eyecare-hero::before,
