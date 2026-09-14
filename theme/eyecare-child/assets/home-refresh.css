@@ -207,3 +207,48 @@
  #trang-chu .eyecare-home-guide > summary { align-items: flex-start; flex-direction: column; padding: 24px; gap: 20px; }
  #trang-chu .eyecare-home-guide summary strong { font-size: 21px; }
 }
+
+/* Quick access: roomy editorial cards and a shared information strip. */
+#trang-chu .eyecare-dai-gap { padding: 28px 32px 0; background: linear-gradient(#f0f7f2, #fff); }
+#trang-chu .eyecare-dai-gap__khung { gap: 18px; }
+#trang-chu .eyecare-dai-gap__o { position: relative; display: flex; flex-direction: column; align-items: flex-start; min-height: 188px; padding: 24px; gap: 9px; overflow: hidden; border-radius: 20px; border: 1px solid #dbe9df; background: linear-gradient(140deg, #fff 45%, #e8f4ec); box-shadow: 0 10px 28px #103e2a09; transition: transform .2s, box-shadow .2s; }
+#trang-chu .eyecare-dai-gap__o:nth-child(2) { background: linear-gradient(140deg, #fff 45%, #e6eef8); }
+#trang-chu .eyecare-dai-gap__o:nth-child(4) { background: linear-gradient(140deg, #fff 45%, #faf1d4); }
+#trang-chu .eyecare-dai-gap__o::after { content: '↗'; display: grid; place-items: center; position: absolute; right: 20px; top: 24px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid #b9cebf; color: #17633d; font-size: 21px; background: #ffffffa0; clip-path: none; transform: none; }
+#trang-chu .eyecare-dai-gap__icon { width: 56px; height: 56px; border-radius: 16px; margin: 0 0 8px; background: #deeee3; }
+#trang-chu .eyecare-dai-gap__icon svg { width: 30px; height: 30px; }
+#trang-chu .eyecare-dai-gap__ten { font-size: 18px; letter-spacing: -.025em; }
+#trang-chu .eyecare-dai-gap__phu { font-size: 12px; margin: 0; color: #52685c; }
+#trang-chu .eyecare-dai-gap__o:nth-child(3) { background: radial-gradient(ellipse at top right, #328e59, transparent 80%), #084c30; border-color: #166a42; color: #fff; }
+#trang-chu .eyecare-dai-gap__o:nth-child(3) .eyecare-dai-gap__icon { background: #d8f573; }
+#trang-chu .eyecare-dai-gap__o:nth-child(3) .eyecare-dai-gap__phu { color: #d9ecdf; }
+#trang-chu .eyecare-dai-gap__o:nth-child(3)::after { background: #d8f573; border-color: #d8f573; color: #084c30; }
+#trang-chu .eyecare-dai-gap__o:hover { transform: translateY(-4px); box-shadow: 0 16px 30px #103e2a18; }
+#trang-chu .eyecare-dai-gap__o:focus-visible { outline: 3px solid #2e8b57; outline-offset: 4px; }
+#trang-chu .eyecare-chu__diem { padding: 24px 32px 48px; }
+#trang-chu .eyecare-chu__diem > .eyecare-chu__khung { width: 100%; max-width: 1280px; padding: 0; }
+#trang-chu .eyecare-chu__diem-ds { gap: 0; background: #f4f8f5; border: 1px solid #e0e9e2; border-radius: 18px; padding: 10px 0; overflow: hidden; }
+#trang-chu .eyecare-chu__diem-muc { padding: 18px 24px; }
+#trang-chu .eyecare-chu__diem-muc + .eyecare-chu__diem-muc { border-left: 1px solid #dbe6df; }
+#trang-chu .eyecare-chu__diem-icon { background: #fff; box-shadow: none; border: 1px solid #d5e6db; border-radius: 50%; }
+#trang-chu .eyecare-chu__diem-icon::after { display: none; }
+#trang-chu .eyecare-chu__diem-td { font-size: 15px; margin-bottom: 6px; }
+#trang-chu .eyecare-chu__diem-mt { font-size: 12px; }
+@media (max-width: 700px) {
+ #trang-chu .eyecare-dai-gap { padding: 20px 20px 0; }
+ #trang-chu .eyecare-dai-gap__khung { gap: 12px; }
+ #trang-chu .eyecare-dai-gap__o { padding: 16px; min-height: 176px; gap: 8px; border-radius: 16px; }
+ #trang-chu .eyecare-dai-gap__o::after { top: 16px; right: 12px; width: 25px; height: 25px; font-size: 17px; }
+ #trang-chu .eyecare-dai-gap__icon { width: 44px; height: 44px; border-radius: 12px; }
+ #trang-chu .eyecare-dai-gap__icon svg { width: 25px; height: 25px; }
+ #trang-chu .eyecare-dai-gap__ten { font-size: 14px; }
+ #trang-chu .eyecare-dai-gap__phu { font-size: 11px; }
+ #trang-chu .eyecare-chu__diem { padding: 18px 20px 32px; }
+ #trang-chu .eyecare-chu__diem-ds { display: grid; grid-template-columns: 1fr; padding: 0; }
+ #trang-chu .eyecare-chu__diem-muc { padding: 18px; }
+ #trang-chu .eyecare-chu__diem-muc + .eyecare-chu__diem-muc { border-left: 0; border-top: 1px solid #dbe6df; }
+}
+@media (prefers-reduced-motion: reduce) {
+ #trang-chu .eyecare-dai-gap__o { transition: none; }
+ #trang-chu .eyecare-dai-gap__o:hover { transform: none; }
+}
