@@ -1,5 +1,9 @@
 # Production changelog
 
+## 2026-09-14
+
+- Thay chữ f/X/P/YT/IG/TK ở footer bằng 6 SVG Bootstrap Icons v1.13.1 tự host, kèm giấy phép MIT. Nút bo góc 44px, logo trắng 22px, màu từng kênh khi hover, focus rõ; màn hình 320px xếp 3 cột. Giữ nguyên URL và tên truy cập. PHP lint và QA 1440/390/320px đạt: đủ 6 ảnh tải, không tràn ngang. Backup triển khai: `/home/jwhxtzru/backups/footer-social-icons-20260914-082721/`.
+
 ## 2026-09-12
 
 - Đã triển khai `bff7d10`, backup CSS/database tại `/home/jwhxtzru/backups/desktop-social-rail-20260912-144119/`. Khóa deploy, hash, PHP lint, flush cache và 6 URL đạt; QA trình duyệt production 5 kích thước xác nhận cột biểu tượng bên phải trên desktop, không chồng nút và popup vẫn hoạt động.

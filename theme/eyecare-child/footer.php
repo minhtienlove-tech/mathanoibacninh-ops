@@ -24,37 +24,37 @@ $eyecare_mang_xa_hoi       = array(
 	array(
 		'ten'    => 'Facebook',
 		'url'    => $eyecare_facebook_url,
-		'ky_tu'  => 'f',
+		'icon'   => 'facebook',
 		'lop'    => 'facebook',
 	),
 	array(
 		'ten'    => 'X',
 		'url'    => 'https://x.com/BenhVienMatHNBN',
-		'ky_tu'  => 'X',
+		'icon'   => 'twitter-x',
 		'lop'    => 'x',
 	),
 	array(
 		'ten'    => 'Pinterest',
 		'url'    => 'https://www.pinterest.com/mathanoibacninh/',
-		'ky_tu'  => 'P',
+		'icon'   => 'pinterest',
 		'lop'    => 'pinterest',
 	),
 	array(
 		'ten'    => 'YouTube',
 		'url'    => 'https://www.youtube.com/@BenhVienMatHNBN',
-		'ky_tu'  => 'YT',
+		'icon'   => 'youtube',
 		'lop'    => 'youtube',
 	),
 	array(
 		'ten'    => 'Instagram',
 		'url'    => 'https://www.instagram.com/mathanoibacninh/',
-		'ky_tu'  => 'IG',
+		'icon'   => 'instagram',
 		'lop'    => 'instagram',
 	),
 	array(
 		'ten'    => 'TikTok',
 		'url'    => 'https://www.tiktok.com/@bnh.vin.mt.h.ni.b',
-		'ky_tu'  => 'TK',
+		'icon'   => 'tiktok',
 		'lop'    => 'tiktok',
 	),
 );
@@ -166,7 +166,7 @@ $eyecare_anh_bac_si_tung   = function_exists( 'eyecare_bac_si_anh_tac_gia' ) ? e
 						<?php foreach ( $eyecare_mang_xa_hoi as $eyecare_mang ) : ?>
 							<?php if ( empty( $eyecare_mang['url'] ) ) : continue; endif; ?>
 							<a class="eyecare-chan__mang-xa-hoi eyecare-chan__mang-xa-hoi--<?php echo esc_attr( $eyecare_mang['lop'] ); ?>" href="<?php echo esc_url( $eyecare_mang['url'] ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr( $eyecare_mang['ten'] . ' của bệnh viện' ); ?>" title="<?php echo esc_attr( $eyecare_mang['ten'] ); ?>">
-								<span aria-hidden="true"><?php echo esc_html( $eyecare_mang['ky_tu'] ); ?></span>
+								<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/social-icons/' . $eyecare_mang['icon'] . '.svg' ); ?>" width="22" height="22" alt="" aria-hidden="true" loading="lazy" decoding="async">
 							</a>
 						<?php endforeach; ?>
 					</div>

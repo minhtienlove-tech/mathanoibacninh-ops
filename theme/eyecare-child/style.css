@@ -4078,19 +4078,20 @@ ul, ol {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
-	gap: .45rem;
+	gap: 8px;
 }
 
 .eyecare-chan__mang-xa-hoi {
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
-	width: 2.5rem;
-	height: 2.5rem;
-	background: rgba(255, 255, 255, .08);
-	border: 1px solid rgba(255, 255, 255, .14);
-	border-radius: 50%;
-	box-shadow: 0 8px 20px rgba(0, 0, 0, .12);
+	width: 44px;
+	height: 44px;
+	flex: 0 0 44px;
+	background: rgba(255, 255, 255, .09);
+	border: 1px solid rgba(255, 255, 255, .22);
+	border-radius: 13px;
+	box-shadow: 0 3px 10px rgba(0, 0, 0, .08);
 	color: #fff;
 	font-family: Arial, sans-serif;
 	font-size: .82rem;
@@ -4099,26 +4100,33 @@ ul, ol {
 	transition: transform .24s ease, background-color .24s ease, border-color .24s ease, color .24s ease;
 }
 
-.eyecare-chan__mang-xa-hoi--facebook {
-	font-size: 1.15rem;
+.eyecare-chan__mang-xa-hoi img {
+	display: block;
+	width: 22px;
+	height: 22px;
+	max-width: none;
+	object-fit: contain;
+	filter: brightness(0) invert(1);
 }
 
-.eyecare-chan__mang-xa-hoi--x {
-	font-size: 1rem;
-}
-
-.eyecare-chan__mang-xa-hoi--youtube,
-.eyecare-chan__mang-xa-hoi--instagram,
-.eyecare-chan__mang-xa-hoi--tiktok {
-	letter-spacing: .02em;
-}
+.eyecare-chan__mang-xa-hoi--facebook { --social-hover: #0866ff; }
+.eyecare-chan__mang-xa-hoi--x { --social-hover: #171c20; }
+.eyecare-chan__mang-xa-hoi--pinterest { --social-hover: #bd081c; }
+.eyecare-chan__mang-xa-hoi--youtube { --social-hover: #d91915; }
+.eyecare-chan__mang-xa-hoi--instagram { --social-hover: #b72a76; }
+.eyecare-chan__mang-xa-hoi--tiktok { --social-hover: #171c20; }
 
 .eyecare-chan__mang-xa-hoi:hover,
 .eyecare-chan__mang-xa-hoi:focus-visible {
-	background: #f0c010;
-	border-color: #f0c010;
-	color: #0a4d26;
-	transform: translateY(-3px) rotate(-4deg);
+	background: var(--social-hover, #117b43);
+	border-color: rgba(255, 255, 255, .55);
+	color: #fff;
+	transform: translateY(-3px);
+}
+
+.eyecare-chan__mang-xa-hoi:focus-visible { outline: 2px solid #f7d747; outline-offset: 4px; }
+@media (max-width: 360px) {
+	.eyecare-chan__mang-xa-hoi-list { display: grid; grid-template-columns: repeat(3, 44px); }
 }
 
 .eyecare-chan__td {
