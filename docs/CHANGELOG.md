@@ -2,6 +2,8 @@
 
 ## 2026-09-14
 
+- Đã triển khai trang chủ `7b4a0e5`, PHP lint và 6 URL đạt; khối bác sĩ giữ nguyên. Bổ sung vị trí điều khiển slider trên mobile tránh cột mạng xã hội; QA 390/768/320px đạt thao tác slider, cẩm nang, popup, không tràn ngang và computed styles bác sĩ không đổi. Backup bổ sung trong `/home/jwhxtzru/backups/home-refresh-20260914-103820/`.
+
 - Làm mới giao diện trang chủ bằng `assets/home-refresh.css` chỉ nạp trên front page: hero hai cột, thẻ dẫn nhanh nhẹ, dịch vụ ảnh + nội dung trên nền trắng, tiêu đề dễ đọc, khối kiến thức/đặt lịch gọn. Cẩm nang cuối trang dùng details để người đọc chủ động mở, toàn bộ nội dung vẫn trong HTML. Không sửa hoặc di chuyển khối bác sĩ: giữ ngay sau dịch vụ; QA 1440/768/390/320px đối chiếu nguyên HTML và computed styles/kích thước mọi phần tử khối bác sĩ không đổi, không tràn ngang, cẩm nang mở/đóng đạt. Backup triển khai: `/home/jwhxtzru/backups/home-refresh-20260914-103820/`.
 
 - Đã triển khai `3d835d3`: backup database/footer/style tại `/home/jwhxtzru/backups/footer-social-icons-20260914-082721/`, đối chiếu baseline (khác xuống dòng), khóa deploy, đối chiếu file và flush cache. PHP lint, 6 URL smoke test và trình duyệt production 1440/390/320px đạt, đủ 6 SVG tải thành công.

@@ -116,6 +116,8 @@
  #trang-chu .eyecare-hero__loi .eyecare-hero__nut { gap: 8px; margin-top: 20px; }
  #trang-chu .eyecare-hero__loi .eyecare-nut { padding: 10px 12px; font-size: 12px; }
  #trang-chu .eyecare-hero__media { border-radius: 12px; }
+ #trang-chu .eyecare-hero__dieu-khien { right: auto; left: 12px; }
+ #trang-chu .eyecare-hero__mui-ten { padding-right: 68px; }
  #trang-chu .eyecare-dai-gap { padding: 0 20px 24px; }
  #trang-chu .eyecare-dai-gap__khung { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
  #trang-chu .eyecare-dai-gap__o { display: flex; align-items: flex-start; flex-direction: column; gap: 8px; padding: 16px; min-height: 148px; }
