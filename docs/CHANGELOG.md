@@ -1,5 +1,9 @@
 # Production changelog
 
+## 2026-09-15
+
+- Thay 8 ảnh thẻ dịch vụ trang chủ theo đúng thứ tự ảnh người dùng gửi, từ trái sang phải và từ trên xuống dưới (post ID 665–672). Nhập ảnh mới vào thư viện, tối ưu WebP, cập nhật featured image; giữ tên, liên kết, thứ tự, hero và bác sĩ. Ảnh gốc/cấu hình cũ/database được sao lưu tại `/home/jwhxtzru/backups/service-images-20260915/`; media không đưa vào Git.
+
 ## 2026-09-14
 
 - Đã triển khai `93ff49e`: backup CSS/database tại `/home/jwhxtzru/backups/home-shortcuts-20260914/`, hash và khóa deploy đạt. PHP lint, 6 URL smoke test đạt; trình duyệt 1440/320px không tràn ngang, đủ 4 thẻ, tiêu đề nằm gọn; khối bác sĩ còn nguyên.
