@@ -2,6 +2,8 @@
 
 ## 2026-09-15
 
+- Hoàn tất thay 8 featured image (attachment 1223–1230, post 665–672), mỗi bản WebP 1200px khoảng 64–86KB. Kiểm tra dữ liệu xác nhận chỉ thumbnail đổi, toàn bộ nội dung/thứ tự/liên kết giữ nguyên; file bác sĩ không đổi. PHP lint và 6 URL đạt. Đã purge LiteSpeed toàn bộ sau khi purge riêng URL chưa loại hết HTML cũ, tải lại tab và xác nhận đủ 8 ảnh mới tải thành công theo thứ tự 1–8. Backup có `before.json`, `imports.json`, `complete.json` để đối chiếu/khôi phục.
+
 - Thay 8 ảnh thẻ dịch vụ trang chủ theo đúng thứ tự ảnh người dùng gửi, từ trái sang phải và từ trên xuống dưới (post ID 665–672). Nhập ảnh mới vào thư viện, tối ưu WebP, cập nhật featured image; giữ tên, liên kết, thứ tự, hero và bác sĩ. Ảnh gốc/cấu hình cũ/database được sao lưu tại `/home/jwhxtzru/backups/service-images-20260915/`; media không đưa vào Git.
 
 ## 2026-09-14
