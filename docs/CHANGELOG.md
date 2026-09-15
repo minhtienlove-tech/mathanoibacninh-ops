@@ -2,6 +2,8 @@
 
 ## 2026-09-15
 
+- Đã hoàn tất ánh xạ 3 ảnh theo `1a730be`: backup database/file, cập nhật thumbnail, purge LiteSpeed; PHP lint và 6 URL đạt. Trình duyệt xác nhận đúng 3 tệp ảnh mới tải thành công trên các thẻ trẻ em/người cao tuổi/tăng nhãn áp; các thẻ khác không đổi.
+
 - Theo chỉ định ảnh mới: mắt trẻ em (669) dùng attachment 1230, mắt người cao tuổi (670) dùng 1227, tăng nhãn áp (671) dùng 1228. Đã đối chiếu SHA256 ba tệp người dùng gửi khớp ảnh đã nhập, tái sử dụng media. Chỉ đổi 3 thumbnail; backup `/home/jwhxtzru/backups/service-image-mapping-20260915/`.
 
 - Hoàn tất thay 8 featured image (attachment 1223–1230, post 665–672), mỗi bản WebP 1200px khoảng 64–86KB. Kiểm tra dữ liệu xác nhận chỉ thumbnail đổi, toàn bộ nội dung/thứ tự/liên kết giữ nguyên; file bác sĩ không đổi. PHP lint và 6 URL đạt. Đã purge LiteSpeed toàn bộ sau khi purge riêng URL chưa loại hết HTML cũ, tải lại tab và xác nhận đủ 8 ảnh mới tải thành công theo thứ tự 1–8. Backup có `before.json`, `imports.json`, `complete.json` để đối chiếu/khôi phục.
