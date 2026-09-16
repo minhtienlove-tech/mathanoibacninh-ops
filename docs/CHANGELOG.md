@@ -96,3 +96,5 @@
 - Tăng tương phản breadcrumb trên hero trang chuyên mục.
 - Xóa dải “Website mới đang được hoàn thiện” trên trang Liên hệ.
 - Backup liên quan nằm trong `/home/jwhxtzru/backups/` trên server.
+
+- Người dùng đã duyệt đưa bản hình ảnh mới lên hosting. Bổ sung version theo filemtime cho URL iframe và liên kết mở riêng để tránh HTML mô hình cũ bị cache. Backup trước deploy: /home/jwhxtzru/backups/eye-realism-20260916-155209/ (4 file cũ, module PHP và database).

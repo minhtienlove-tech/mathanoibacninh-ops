@@ -18,7 +18,8 @@ function eyecare_eye_model_assets() {
 add_action( 'wp_enqueue_scripts', 'eyecare_eye_model_assets', 120 );
 
 function eyecare_eye_model_render() {
-	$url = get_stylesheet_directory_uri() . '/assets/eye-anatomy/index.html';
+	$file = '/assets/eye-anatomy/index.html';
+	$url = add_query_arg( 'v', filemtime( get_stylesheet_directory() . $file ), get_stylesheet_directory_uri() . $file );
 	?>
 	<section class="eyecare-eye" id="cau-tao-mat-3d" aria-labelledby="eyecare-eye-title">
 		<div class="eyecare-eye__inner">
