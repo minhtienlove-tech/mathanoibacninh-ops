@@ -90,6 +90,8 @@ while ( have_posts() ) :
 		</div>
 	</section>
 
+	<?php eyecare_eye_model_render(); ?>
+
 	<?php if ( $thu_muc ) : ?>
 	<section class="eyecare-kien-thuc__thu-muc" aria-labelledby="thu-muc-kien-thuc-tieu-de">
 		<div class="eyecare-noi-dung__khung">

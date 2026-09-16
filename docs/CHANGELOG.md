@@ -1,5 +1,10 @@
 # Production changelog
 
+## 2026-09-16 — PREVIEW ONLY, chưa triển khai
+
+- Thêm bản xem thử mô hình mắt 3D từ HTML người dùng vào `/kien-thuc/`, sau hero và trước thư mục; toàn bộ nội dung cũ/SEO giữ nguyên. Tách tài nguyên trong child theme, iframe tự đổi chiều cao, đủ 12 bộ phận, fallback, màu #06A1B9. Chỉnh thanh xã hội mobile riêng trang này xuống dưới để tránh che mô hình.
+- PHP lint, kiểm tra nguyên văn dữ liệu/hình học, kiểm tra giao diện và chức năng Chromium desktop/mobile, WebGL fallback và 6 URL live đã thực hiện. Chi tiết giới hạn kiểm tra, lỗi console chưa xác định nguồn, preview và rollback: `docs/EYE-3D-PREVIEW.md`. Chờ người dùng/bác sĩ duyệt; chưa upload hoặc sửa database production.
+
 ## 2026-09-15
 
 - Đã hoàn tất ánh xạ 3 ảnh theo `1a730be`: backup database/file, cập nhật thumbnail, purge LiteSpeed; PHP lint và 6 URL đạt. Trình duyệt xác nhận đúng 3 tệp ảnh mới tải thành công trên các thẻ trẻ em/người cao tuổi/tăng nhãn áp; các thẻ khác không đổi.
