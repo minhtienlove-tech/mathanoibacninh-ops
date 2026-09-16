@@ -1,5 +1,20 @@
 # Mô hình mắt 3D — bản xem thử, 16/09/2026
 
+## Phiên bản hình ảnh mới — CHƯA TRIỂN KHAI
+
+Theo phản hồi “đẹp hơn, nhìn thật hơn”, đã chuẩn bị bản mới tại http://127.0.0.1:8783/kien-thuc/#cau-tao-mat-3d (chỉ trên máy đang chạy preview). Phần bên dưới ghi lịch sử triển khai bản đầu; không có nghĩa bản hình ảnh mới đã lên hosting.
+
+- Thêm `appearance.js`: chất liệu vật lý, texture mô sinh bằng Canvas có tính xác định, mống mắt nâu với sợi hướng tâm, vòng rìa và vùng vân không đều; lòng trắng hơi hồng, mô võng mạc/hắc mạc. Không tải ảnh, font hoặc thư viện từ bên ngoài.
+- Giác mạc truyền sáng và phản chiếu các đèn studio bằng môi trường PMREM; thủy tinh thể trong hơn. Màu hắc mạc tối hơn, hoàng điểm/đĩa thị có mép mềm. Mạch máu thuôn nhỏ dần và có nhánh nhỏ; các mạch ở nửa vỏ đã cắt không còn hiển thị lơ lửng.
+- Tăng độ mịn lưới, đổi góc camera để thấy mống mắt rõ; mặc định nguyên vẹn, giữ tự chuyển mặt cắt khi chọn phần bên trong. Giữ xoay, zoom, tự xoay, reset, chú thích và đường sáng.
+- So sánh tự động toàn bộ 12 mục dữ liệu với commit production trước sửa: giống nguyên văn. Không thay bố cục giải phẫu lớn hoặc tuyến đường ánh sáng. Những chi tiết hình ảnh cần bác sĩ duyệt: màu/vân mô, phân nhánh và độ dày mạch minh họa, độ trong, cách thể hiện hoàng điểm/đĩa thị. Đây vẫn là mô hình giáo dục được đơn giản hóa, không phải bản quét mắt thật.
+- Kiểm tra Chromium: mô hình tải, đủ 12 lựa chọn và nội dung khớp qua công cụ chọn của chính trang; chọn chú thích Võng mạc trên mobile khớp. Đã thử nguyên vẹn/mặt cắt, zoom +/−, tự xoay, reset, phím xoay, chú thích và đường sáng. Không có lỗi JavaScript ở mô hình chạy bình thường; còn cảnh báo Three.js UMD cũ. Đã sửa cảnh báo PMREM blur trong quá trình thử.
+- Desktop 1440px, trang nhúng mobile 390px và 320px: không tràn ngang; 390px trang 375px, iframe 343px, cao 1849px đủ nội dung 1848px; 320px trang 305px, iframe 273px. Đã quan sát mô hình ở mobile và các phần cũ vẫn có trong trang preview. Chưa thử cảm ứng hai ngón trên điện thoại thật, Safari/iOS, hoặc đo FPS/pin trên máy yếu.
+- Fixture WebGL thất bại: hiện thông báo dự phòng, nút 3D bị vô hiệu, vẫn chọn và đọc được Dây thần kinh thị giác. Node syntax check hai file JS, kiểm tra diff và smoke 6 URL đạt. PHP không thay đổi; lint hai file tối thiểu footer/page-lien-he trên server đạt (không có PHP CLI tại máy local).
+- Khôi phục bản hình ảnh trước: lấy `index.html`, `model.js`, `model.css` trong `assets/eye-anatomy/` từ commit `bbce33b`; `appearance.js` có thể giữ trên ổ đĩa vì bản HTML cũ không tải nó. Chỉ thực hiện rollback khi được yêu cầu; chưa có thay đổi production trong lần này nên chưa cần backup/deploy server mới.
+
+## Lịch sử bản đầu
+
 Trạng thái: **ĐÃ TRIỂN KHAI PRODUCTION ngày 2026-09-16 theo duyệt của người dùng.**
 
 URL production: https://mathanoibacninh.com/kien-thuc/#cau-tao-mat-3d

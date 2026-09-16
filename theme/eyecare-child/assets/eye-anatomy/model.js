@@ -1,6 +1,7 @@
 /* Procedural educational eye anatomy. Units are illustrative, not millimetres. */
 function createEyeModel(T) {
   const eye = new T.Group();
+  const appearance=createEyeAppearance(T);
   const parts = Object.create(null), pickables = [], modeObjects = [];
   const anchors = {
     cornea: [-2.12,.18,-.20], sclera: [.40,1.955,-.12], iris: [-1.62,.73,-.22],
@@ -12,7 +13,10 @@ function createEyeModel(T) {
     const g=new T.Group(); g.name=id; g.userData.id=id; eye.add(g); parts[id]=g; return g;
   }
   Object.keys(anchors).forEach(part);
-  const mat=(color,extras={})=>new T.MeshPhongMaterial({color,shininess:28,side:T.DoubleSide,...extras});
+  const mat=(color,extras={})=>{
+    const {shininess=28,specular,...rest}=extras;
+    return new T.MeshPhysicalMaterial({color,roughness:Math.max(.18,1-shininess/145),metalness:0,clearcoat:.18,side:T.DoubleSide,...rest});
+  };
   function mesh(geo,material,id,mode='both',pick=true) {
     const m=new T.Mesh(geo,material); m.userData.id=id; m.userData.mode=mode;
     m.userData.originalOpacity=material.opacity; m.userData.originalColor=material.color.clone();
@@ -25,35 +29,38 @@ function createEyeModel(T) {
     const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(pos,3));g.setAttribute('uv',new T.Float32BufferAttribute(uv,2));g.setIndex(indices);g.computeVertexNormals();return g;
   }
   function spherePatch(r,frontAngle,phiStart,phiLen,center=[0,0,0],scale=[1,1,1]) {
-    return parametric((u,v)=>{const t=frontAngle+(Math.PI-frontAngle)*u,p=phiStart+phiLen*v;return [center[0]-r*Math.cos(t)*scale[0],center[1]+r*Math.sin(t)*Math.cos(p)*scale[1],center[2]+r*Math.sin(t)*Math.sin(p)*scale[2]];});
+    const geometry=parametric((u,v)=>{const t=frontAngle+(Math.PI-frontAngle)*u,p=phiStart+phiLen*v;return [center[0]-r*Math.cos(t)*scale[0],center[1]+r*Math.sin(t)*Math.cos(p)*scale[1],center[2]+r*Math.sin(t)*Math.sin(p)*scale[2]];},96,72);
+    const uv=geometry.getAttribute('uv');
+    for(let i=0;i<uv.count;i++)uv.setY(i,(phiStart+phiLen*uv.getY(i))/(Math.PI*2));
+    return geometry;
   }
   function cutRim(r0,r1,angle,sign=1) {
     return parametric((u,v)=>{const r=r0+(r1-r0)*v,t=angle+(Math.PI-angle)*u;return [-r*Math.cos(t),sign*r*Math.sin(t),.002];},90,2);
   }
   function tube(points,radius,color,id,mode='both',pick=true) {
     const curve=new T.CatmullRomCurve3(points.map(p=>new T.Vector3(...p)));
-    return mesh(new T.TubeGeometry(curve,Math.max(18,points.length*7),radius,8,false),mat(color,{shininess:25}),id,mode,pick);
+    return mesh(new T.TubeGeometry(curve,Math.max(18,points.length*7),radius,8,false),(id==='nerve'?appearance.tissue('nerve'):mat(color,{shininess:25})),id,mode,pick);
   }
   function shell(id,rOut,rIn,color,edge,frontAngle) {
-    mesh(spherePatch(rOut,frontAngle,0,Math.PI*2),mat(color),id,'whole');
-    mesh(spherePatch(rOut,frontAngle,Math.PI,Math.PI),mat(color),id,'cut');
-    mesh(spherePatch(rIn,frontAngle,Math.PI,Math.PI),mat(color),id,'cut');
+    mesh(spherePatch(rOut,frontAngle,0,Math.PI*2),appearance.tissue(id),id,'whole');
+    mesh(spherePatch(rOut,frontAngle,Math.PI,Math.PI),appearance.tissue(id),id,'cut');
+    mesh(spherePatch(rIn,frontAngle,Math.PI,Math.PI),appearance.tissue(id),id,'cut');
     for(const sign of [-1,1])mesh(cutRim(rIn,rOut,frontAngle,sign),mat(edge,{shininess:5}),id,'cut');
     // Lip at the anterior opening.
     mesh(parametric((u,v)=>{const r=rIn+(rOut-rIn)*u,p=Math.PI+v*Math.PI;return [-r*Math.cos(frontAngle),r*Math.sin(frontAngle)*Math.cos(p),r*Math.sin(frontAngle)*Math.sin(p)];},3,80),mat(edge),id,'cut');
   }
   // Three concentric coats, with exaggerated thickness for patient education.
   shell('sclera',2.00,1.93,'#ede9df','#fbf9ee',.60);
-  shell('choroid',1.923,1.846,'#943e47','#ad5260',.77);
-  shell('retina',1.839,1.800,'#e69a77','#ffbb81',.82);
+  shell('choroid',1.923,1.846,'#943e47','#703c3a',.77);
+  shell('retina',1.839,1.800,'#e69a77','#e2ad8c',.82);
 
   // Corneal dome joins the anterior scleral opening. It is clear, not iris tissue.
   function corneaGeo(cut){return parametric((u,v)=>{const t=u*Math.PI/2,p=(cut?Math.PI:0)+v*(cut?Math.PI:Math.PI*2);return [-1.65-.56*Math.cos(t),1.127*Math.sin(t)*Math.cos(p),1.127*Math.sin(t)*Math.sin(p)];},36,72);}
-  mesh(corneaGeo(false),mat('#a2e8f3',{transparent:true,opacity:.20,depthWrite:false,shininess:120,specular:'#ffffff'}),'cornea','whole');
-  mesh(corneaGeo(true),mat('#a2e8f3',{transparent:true,opacity:.24,depthWrite:false,shininess:120,specular:'#ffffff'}),'cornea','cut');
+  mesh(corneaGeo(false),appearance.glass('cornea'),'cornea','whole');
+  mesh(corneaGeo(true),appearance.glass('cornea'),'cornea','cut');
   for(const sign of [-1,1]){
     const pts=[];for(let i=0;i<=28;i++){let a=i/28*Math.PI/2;pts.push([-1.65-.56*Math.cos(a),sign*1.127*Math.sin(a),.004]);}
-    tube(pts,.021,'#b4eff6','cornea','cut');
+    tube(pts,.012,'#bed9de','cornea','cut');
   }
   // Anterior chamber: a faint clear volume between cornea and iris.
   function aqGeo(cut){return parametric((u,v)=>{const r=1.02*u,p=(cut?Math.PI:0)+v*(cut?Math.PI:Math.PI*2);return [-1.675-.39*Math.sqrt(Math.max(0,1-u*u)),r*Math.cos(p),r*Math.sin(p)];},30,52);}
@@ -61,33 +68,32 @@ function createEyeModel(T) {
   mesh(aqGeo(true),mat('#89d9ec',{opacity:.095,transparent:true,depthWrite:false}),'aqueous','cut',false);
 
   // Annular iris, with an actual open pupil at its centre.
-  function irisGeo(cut){return parametric((u,v)=>{const p=(cut?Math.PI:0)+v*(cut?Math.PI:2*Math.PI),r=.32+.77*u;return [-1.625+.027*Math.sin(u*Math.PI),r*Math.cos(p),r*Math.sin(p)];},14,180);}
-  function irisMaterial(){return mat('#796043',{shininess:38});}
+  function irisGeo(cut){
+    const geometry=parametric((u,v)=>{const p=(cut?Math.PI:0)+v*(cut?Math.PI:2*Math.PI),r=.32+.77*u;
+      const relief=.007*Math.sin(p*153+u*12)*Math.sin(u*Math.PI);
+      return [-1.625+.027*Math.sin(u*Math.PI)+relief,r*Math.cos(p),r*Math.sin(p)];},64,256);
+    if(cut){const uv=geometry.getAttribute('uv');for(let i=0;i<uv.count;i++)uv.setY(i,.5+uv.getY(i)*.5);}
+    return geometry;
+  }
   for(const cut of [false,true]){
-    const mode=cut?'cut':'whole';const ig=irisGeo(cut),colors=[];const p=ig.getAttribute('position');
-    for(let i=0;i<p.count;i++){
-      const y=p.getY(i),z=p.getZ(i),r=Math.hypot(y,z),a=Math.atan2(z,y);
-      const striation=.62+.20*Math.sin(a*131+Math.sin(a*37)*2)+.10*Math.cos(a*251),rim=1-.55*Math.pow((r-.32)/.77,10);
-      const c=new T.Color('#a08455').multiplyScalar(striation*rim+.13);colors.push(c.r,c.g,c.b);
-    }
-    ig.setAttribute('color',new T.Float32BufferAttribute(colors,3));const im=irisMaterial();im.color.set('#ffffff');im.vertexColors=true;mesh(ig,im,'iris',mode);
+    const mode=cut?'cut':'whole';mesh(irisGeo(cut),appearance.tissue('iris'),'iris',mode);
     // The pupil's dark appearance in the intact view. No solid pupil in the section.
     if(!cut){const pg=new T.CircleGeometry(.321,64);pg.rotateY(Math.PI/2);pg.translate(-1.613,0,0);mesh(pg,new T.MeshBasicMaterial({color:'#061116',side:T.DoubleSide}),'pupil','whole');}
     const rim=[];const start=cut?Math.PI:0;for(let j=0;j<=100;j++){const a=start+j/100*(cut?Math.PI:Math.PI*2);rim.push([-1.628,.323*Math.cos(a),.323*Math.sin(a)]);}tube(rim,.016,'#382918','pupil',mode);
   }
   // Biconvex crystalline lens, behind iris, suspended by zonular fibres.
   for(const cut of [false,true]){
-    mesh(spherePatch(1,0,cut?Math.PI:0,cut?Math.PI:Math.PI*2,[-1.17,0,0],[.31,.76,.76]),mat('#ffe6a0',{shininess:100,transparent:true,opacity:cut?.73:.58,depthWrite:false,specular:'#ffffff'}),'lens',cut?'cut':'whole');
+    mesh(spherePatch(1,0,cut?Math.PI:0,cut?Math.PI:Math.PI*2,[-1.17,0,0],[.31,.76,.76]),appearance.glass('lens'),'lens',cut?'cut':'whole');
   }
   const lensFace=parametric((u,v)=>{let a=v*Math.PI*2;return [-1.17+.31*u*Math.cos(a),.76*u*Math.sin(a),.004];},22,80);
-  mesh(lensFace,mat('#f9e5ac',{shininess:65,transparent:true,opacity:.86}),'lens','cut');
+  mesh(lensFace,mat('#eee5cc',{shininess:100,transparent:true,opacity:.24,depthWrite:false,clearcoat:1}),'lens','cut');
   for(const s of [.84,.65,.42]){
-    const pts=[];for(let i=0;i<=72;i++){let a=i/72*Math.PI*2;pts.push([-1.17+.31*s*Math.cos(a),.76*s*Math.sin(a),.012]);}tube(pts,.004,'#dbc990','lens','cut',false);
+    const pts=[];for(let i=0;i<=72;i++){let a=i/72*Math.PI*2;pts.push([-1.17+.31*s*Math.cos(a),.76*s*Math.sin(a),.012]);}tube(pts,.002,'#c9c4b3','lens','cut',false);
   }
 
   function ciliaryGeo(cut){return parametric((u,v)=>{let a=(cut?Math.PI:0)+v*(cut?Math.PI:Math.PI*2),r=1.09+u*.30;return [-1.31+.11*Math.sin(u*Math.PI)+.027*Math.cos(56*a)*(1-u),r*Math.cos(a),r*Math.sin(a)];},12,168);}
   for(const cut of [false,true]){
-    const mode=cut?'cut':'whole';mesh(ciliaryGeo(cut),mat('#b86469',{shininess:15}),'ciliary',mode);
+    const mode=cut?'cut':'whole';mesh(ciliaryGeo(cut),mat('#8f4444',{shininess:38}),'ciliary',mode);
     const start=cut?28:0,end=56;
     for(let i=start;i<end;i++){
       const a=i/56*Math.PI*2,ca=Math.cos(a),sa=Math.sin(a);
@@ -101,10 +107,10 @@ function createEyeModel(T) {
   // Posterior macula and separate optic disc, both on the inner retinal surface.
   function patchOnRetina(center,r,color,id){
     const c=new T.Vector3(...center).normalize().multiplyScalar(1.783),g=new T.CircleGeometry(r,48);
-    const m=mesh(g,mat(color,{shininess:8}),id);m.position.copy(c);m.quaternion.setFromUnitVectors(new T.Vector3(0,0,1),c.clone().normalize().negate());return m;
+    const m=mesh(g,appearance.retinalSpot(color),id);m.position.copy(c);m.quaternion.setFromUnitVectors(new T.Vector3(0,0,1),c.clone().normalize().negate());return m;
   }
-  patchOnRetina([1.70,.09,-.55],.19,'#c68437','macula');
-  const fovea=patchOnRetina([1.70,.09,-.55],.065,'#986141','macula');fovea.position.multiplyScalar(.996);
+  patchOnRetina([1.70,.09,-.55],.22,'#ae703b','macula');
+  const fovea=patchOnRetina([1.70,.09,-.55],.075,'#75472e','macula');fovea.position.multiplyScalar(.996);
   const disc=[1.65,-.38,-.59];
   patchOnRetina(disc,.14,'#f3dab0','nerve');
   const nervePts=[[1.67,-.38,-.61],[2.00,-.46,-.72],[2.45,-.57,-.85],[3.02,-.68,-.96]];
@@ -126,16 +132,44 @@ function createEyeModel(T) {
     [[1.38,-.70,-.83],[1.3,-1.15,-.33],[.85,-1.52,-.23]],
     [[.48,.03,-1.69],[.22,-.3,-1.75],[-.65,-.38,-1.58]]
   ];
-  vascular.forEach((p,i)=>tube(p.map(norm),i<3?.013:.008,'#ae4e48','retina','both',false));
+  // Tapered branching vessels follow the same retinal surface and optic disc.
+  function vessel(points,radius,color,id,mode='both'){
+    const curve=new T.CatmullRomCurve3(points.map(p=>new T.Vector3(...p))),segments=60;
+    const frames=curve.computeFrenetFrames(segments,false),positions=[],indices=[];
+    for(let i=0;i<=segments;i++){
+      const c=curve.getPointAt(i/segments),r=radius*(1-.88*Math.pow(i/segments,.8));
+      if(id==='sclera')c.normalize().multiplyScalar(2.009);
+      if(id==='retina')c.normalize().multiplyScalar(1.779);
+      for(let j=0;j<=6;j++){
+        const a=j/6*Math.PI*2,p=c.clone().addScaledVector(frames.normals[i],Math.cos(a)*r).addScaledVector(frames.binormals[i],Math.sin(a)*r);
+        positions.push(p.x,p.y,p.z);
+        if(i<segments&&j<6){const k=i*7+j;indices.push(k,k+7,k+1,k+1,k+7,k+8);}
+      }
+    }
+    const g=new T.BufferGeometry();g.setAttribute('position',new T.Float32BufferAttribute(positions,3));g.setIndex(indices);g.computeVertexNormals();
+    mesh(g,mat(color,{shininess:18,clearcoat:0,envMapIntensity:.25}),id,mode,false);
+  }
+  vascular.forEach((p,i)=>{
+    vessel(p.map(norm),i<3?.023:.013,i%2?'#953f3b':'#aa4537','retina');
+    for(let j=1;j<p.length-1;j++){
+      const q=p[j],next=p[j+1],sign=(j+i)%2?1:-1;
+      const twig=[q,[(q[0]+next[0])*.5,q[1]+sign*.13,q[2]-.05],[next[0]-.10,next[1]+sign*.28,next[2]-.12]];
+      vessel(twig.map(norm),.009,'#ad5044','retina');
+    }
+  });
 
   // Surface vessels: sparse, thin vessels in the anterior white coat.
-  const scleralPaths=[];
-  for(let n=0;n<7;n++){
-    const pts=[],a=Math.PI+n*.43;
-    for(let j=0;j<7;j++){let t=.66+j*.058,phi=a+.035*Math.sin(j*1.8+n);pts.push([-2.005*Math.cos(t),2.005*Math.sin(t)*Math.cos(phi),2.005*Math.sin(t)*Math.sin(phi)]);}
-    scleralPaths.push(pts);
+  for(let n=0;n<22;n++){
+    const a=n/22*Math.PI*2+.10*Math.sin(n*7),pts=[];
+    const surface=(t,p)=>[-2.007*Math.cos(t),2.007*Math.sin(t)*Math.cos(p),2.007*Math.sin(t)*Math.sin(p)];
+    for(let j=0;j<=10;j++){const t=1.36-j*.061,p=a+.035*Math.sin(j*.9+n);pts.push(surface(t,p));}
+    vessel(pts,.008,n%2?'#c79490':'#ba8480','sclera','whole');
+    if(pts.every(p=>p[2]<0))vessel(pts,.008,'#c79490','sclera','cut');
+    for(let j=3;j<=6;j+=3){const t=1.36-j*.061,p=a+.035*Math.sin(j*.9+n),sign=n%2?1:-1;
+      const branch=[surface(t,p),surface(t-.07,p+sign*.03),surface(t-.15,p+sign*.08),surface(t-.24,p+sign*.10)];
+      vessel(branch,.0045,'#cda09b','sclera','whole');
+      if(branch.every(p=>p[2]<0))vessel(branch,.0045,'#cda09b','sclera','cut');}
   }
-  scleralPaths.forEach(p=>tube(p,.006,'#ca9492','sclera','both',false));
 
   // Illustrative optical rays stop at retina; no light continues along optic nerve.
   const rays=new T.Group();rays.name='light-path';eye.add(rays);
@@ -149,17 +183,17 @@ function createEyeModel(T) {
   const sparks=[];
   for(let i=0;i<6;i++){const dot=new T.Mesh(new T.SphereGeometry(.026,8,6),new T.MeshBasicMaterial({color:'#ffe894'}));rays.add(dot);sparks.push(dot);}
   rays.visible=false;
-  let active='cornea',mode='cut';
+  let active='cornea',mode='whole';
   function setMode(next){mode=next;for(const m of modeObjects)m.visible=m.userData.mode===mode;}
   function highlight(id){
     active=id;
     for(const [key,g] of Object.entries(parts))g.traverse(obj=>{
       if(!obj.isMesh)return;const m=obj.material;
-      if(m.emissive){m.emissive.set(key===id?'#22bad0':'#000000');m.emissiveIntensity=key===id?.16:0;}
+      if(m.emissive){m.emissive.set(key===id?'#22bad0':'#000000');m.emissiveIntensity=key===id&&key!=='cornea'?.045:0;}
     });
   }
   function animateLight(t){sparks.forEach((dot,i)=>{const pts=lightTracks[i%3],progress=((t*.22+i/6)%1)*(pts.length-1),seg=Math.floor(progress);dot.position.copy(pts[seg]).lerp(pts[Math.min(seg+1,pts.length-1)],progress-seg);});}
-  setMode('cut');highlight(active);
+  setMode('whole');highlight(active);
   return {eye,parts,anchors,pickables,setMode,highlight,rays,animateLight,get mode(){return mode;}};
 }
 if(typeof module!=='undefined' && module.exports)module.exports=createEyeModel;
@@ -181,7 +215,7 @@ if(typeof module!=='undefined' && module.exports)module.exports=createEyeModel;
     {id:'nerve',name:'Dây thần kinh thị giác',en:'Optic nerve',color:'#d3ba85',summary:'Bó sợi thần kinh truyền tín hiệu từ võng mạc về não, góp phần tạo nên hình ảnh mà bạn nhìn thấy.',location:'Đi ra ở phía sau nhãn cầu, bắt đầu tại đĩa thị trên võng mạc.',fact:'Dây thần kinh thị giác truyền tín hiệu điện đến não. Ánh sáng không chạy dọc trong dây thần kinh này.'}
   ];
   const $=id=>document.getElementById(id);
-  let selected=0,mode='cut',labelsOn=true,rotating=false,lightOn=false,model=null,renderer=null,camera=null,scene=null;
+  let selected=0,mode='whole',labelsOn=true,rotating=false,lightOn=false,model=null,renderer=null,camera=null,scene=null;
   let zoom=1,dirty=true,interacting=false,lastTime=0,canRender=false,animationId=0,hostVisible=true;
   window.addEventListener('eyecare-eye-visibility',event=>{
     hostVisible=event.detail.visible!==false;
@@ -235,8 +269,8 @@ if(typeof module!=='undefined' && module.exports)module.exports=createEyeModel;
   function setCamera(){
     if(!camera)return;
     const w=viewer.clientWidth,h=viewer.clientHeight,aspect=w/h;
-    const distance=(aspect<1?11.3:(aspect<1.35?10.1:9.25))/zoom;
-    camera.aspect=aspect;camera.position.set(mode==='cut'?-3.8:-6.5,mode==='cut'?2.2:1.8,8.5).normalize().multiplyScalar(distance);
+    const distance=(aspect<1?10.8:(aspect<1.35?9.8:8.9))/zoom;
+    camera.aspect=aspect;camera.position.set(mode==='cut'?-5.4:-10,mode==='cut'?2.3:1.3,mode==='cut'?8.5:4.0).normalize().multiplyScalar(distance);
     camera.lookAt(.05,0,0);camera.updateProjectionMatrix();dirty=true;
     $('zoom-in').disabled=zoom>=1.64;$('zoom-out').disabled=zoom<=.70;
   }
@@ -265,12 +299,13 @@ if(typeof module!=='undefined' && module.exports)module.exports=createEyeModel;
     const T=THREE;
     renderer=new T.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'low-power'});
     renderer.setPixelRatio(Math.min(window.devicePixelRatio||1,1.75));renderer.setClearColor(0x000000,0);renderer.outputColorSpace=T.SRGBColorSpace;
-    renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.24;
+    renderer.toneMapping=T.ACESFilmicToneMapping;renderer.toneMappingExposure=1.05;
     scene=new T.Scene();camera=new T.PerspectiveCamera(36,1,.1,80);
-    scene.add(new T.AmbientLight(0xd4ebef,1.05));
-    const main=new T.DirectionalLight(0xfff1dc,2.15);main.position.set(-4,6,7);scene.add(main);
-    const fill=new T.DirectionalLight(0x9eddea,1.2);fill.position.set(4,1,5);scene.add(fill);
-    const rim=new T.DirectionalLight(0xc5e8ee,1.35);rim.position.set(-1,-3,-5);scene.add(rim);
+    scene.environment=createEyeStudio(T,renderer).texture;
+    scene.add(new T.HemisphereLight(0xe5f2ff,0x4d4240,.7));
+    const main=new T.DirectionalLight(0xfff5e9,2.7);main.position.set(-4,6,7);scene.add(main);
+    const fill=new T.DirectionalLight(0xc7e1ff,.65);fill.position.set(4,1,5);scene.add(fill);
+    const rim=new T.DirectionalLight(0xe2f8ff,1.8);rim.position.set(-1,-3,-5);scene.add(rim);
     model=createEyeModel(T);scene.add(model.eye);model.highlight(data[selected].id);
     const raycaster=new T.Raycaster(),pointer=new T.Vector2(),projected=new T.Vector3();
     const pointers=new Map();let down=null,pinchDistance=0;
@@ -294,7 +329,7 @@ if(typeof module!=='undefined' && module.exports)module.exports=createEyeModel;
     function pick(clientX,clientY){
       const rect=canvas.getBoundingClientRect();pointer.set((clientX-rect.left)/rect.width*2-1,-(clientY-rect.top)/rect.height*2+1);
       raycaster.setFromCamera(pointer,camera);const hits=raycaster.intersectObjects(model.pickables.filter(o=>o.visible),false);
-      if(hits.length){const hit=hits.find(h=>h.object.material.opacity>.35)||hits[0];const id=hit.object.userData.id,i=data.findIndex(d=>d.id===id);if(i>=0)selectPart(i,false);}
+      if(hits.length){const hit=hits.find(h=>h.object.material.opacity>.35&&!(h.object.material.transmission>.5))||hits[0];const id=hit.object.userData.id,i=data.findIndex(d=>d.id===id);if(i>=0)selectPart(i,false);}
     }
     const distance=()=>{const p=Array.from(pointers.values());return p.length<2?0:Math.hypot(p[0].x-p[1].x,p[0].y-p[1].y);};
     canvas.addEventListener('pointerdown',e=>{

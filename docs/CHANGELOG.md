@@ -2,6 +2,8 @@
 
 ## 2026-09-16
 
+- **BẢN XEM THỬ, CHƯA DEPLOY:** nâng cấp hình ảnh mô hình mắt theo phản hồi: vật liệu PBR, vân mống mắt theo bán kính, mô củng mạc/võng mạc, giác mạc truyền sáng và phản chiếu đèn studio; mạch máu phân nhánh thuôn dần, hoàng điểm có biên mềm, thủy tinh thể trong hơn. Mở đầu bằng nguyên vẹn; chọn phần bên trong tự mở mặt cắt. Giữ nguyên 12 giải thích y khoa, vị trí giải phẫu và đường sáng. Tài nguyên tự sinh trong trình duyệt, không có yêu cầu mạng mới. Preview `http://127.0.0.1:8783/kien-thuc/#cau-tao-mat-3d`; chờ duyệt hình ảnh trước khi thay phiên bản production. QA/giới hạn/rollback tại `docs/EYE-3D-PREVIEW.md`.
+
 - Đã triển khai mô hình mắt 3D vào `/kien-thuc/`, sau hero và trước thư mục; toàn bộ nội dung cũ/SEO giữ nguyên. Tách tài nguyên trong child theme, iframe tự đổi chiều cao, đủ 12 bộ phận, fallback, màu #06A1B9. Chỉnh thanh xã hội mobile riêng trang này xuống dưới để tránh che mô hình.
 - Backup production trước triển khai tại `/home/jwhxtzru/backups/eye-model-20260916-140351/`; không sửa database ngoài thao tác export backup. PHP lint, purge LiteSpeed, smoke test 6 URL, kiểm tra production desktop/mobile và iframe 3D đạt. Trình duyệt chỉ ghi cảnh báo Three.js UMD deprecated từ thư viện tự host, không có lỗi JavaScript.
 - Chi tiết giới hạn kiểm tra và cách khôi phục: `docs/EYE-3D-PREVIEW.md`.
