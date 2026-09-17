@@ -260,6 +260,14 @@ function ec_zalo_webhook_event_type( $event ) {
 	return ec_zalo_inbound_message_event( $event ) ? 'message' : 'unknown';
 }
 
+/** Accept the Bot Platform event envelope whether or not it includes a top-level ok flag. */
+function ec_zalo_webhook_event( $payload ) {
+	if ( ! is_array( $payload ) ) { return null; }
+	$result = $payload['result'] ?? null;
+	if ( is_array( $result ) && is_string( $result['event_name'] ?? null ) ) { return $result; }
+	return is_string( $payload['event_name'] ?? null ) ? $payload : null;
+}
+
 function ec_zalo_webhook_authorized( $request ) {
 	$secret = ec_zalo_webhook_secret();
 	$provided = $request->get_header( 'x-bot-api-secret-token' );
@@ -278,19 +286,20 @@ function ec_zalo_webhook_receive( $request ) {
 			$payload = is_array( $decoded ) ? $decoded : $payload;
 		}
 		// Zalo sends an authenticated empty POST while verifying a newly saved URL.
-		if ( ! is_array( $payload ) || true !== ( $payload['ok'] ?? null ) || ! is_array( $payload['result'] ?? null ) ) {
+		$event = ec_zalo_webhook_event( $payload );
+		if ( ! is_array( $event ) ) {
 			ec_zalo_record_webhook_activity( 'verification', 'never' );
 			return rest_ensure_response( array( 'ok' => true ) );
 		}
-		$event_key = hash( 'sha256', wp_json_encode( $payload['result'] ) );
-		$event_type = ec_zalo_webhook_event_type( $payload['result'] );
-		$command = ec_zalo_inbound_command( $payload['result'] );
+		$event_key = hash( 'sha256', wp_json_encode( $event ) );
+		$event_type = ec_zalo_webhook_event_type( $event );
+		$command = ec_zalo_inbound_command( $event );
 		if ( get_transient( 'ec_zalo_event_' . $event_key ) ) {
 			ec_zalo_record_webhook_activity( $event_type, 'duplicate', $command );
 			return rest_ensure_response( array( 'ok' => true ) );
 		}
 		set_transient( 'ec_zalo_event_' . $event_key, 1, DAY_IN_SECONDS );
-		$candidates = ec_zalo_candidates( $payload['result'] );
+		$candidates = ec_zalo_candidates( $event );
 		ec_zalo_store_candidates( $candidates );
 		ec_zalo_record_webhook_activity( $event_type, $candidates ? 'recipient_found' : ( 'message' === $event_type ? 'not_command' : 'unsupported' ), $command );
 		return rest_ensure_response( array( 'ok' => true ) );
