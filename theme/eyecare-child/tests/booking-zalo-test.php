@@ -90,11 +90,14 @@ ec_expect($failed_diagnostic['webhook']==='mismatch' && $failed_diagnostic['endp
 $activity=ec_zalo_webhook_receive(new EcZaloWebhookRequest(array('ok'=>true,'result'=>array('event_name'=>'message.text.received','message'=>array('text'=>'/nhanlich','from'=>array('display_name'=>'Nhân viên','is_bot'=>false),'chat'=>array('id'=>'abc.xyz','chat_type'=>'PRIVATE'))))));
 $recorded=ec_zalo_settings();
 ec_expect($activity===array('ok'=>true) && $recorded['webhook_last_event']==='message' && $recorded['webhook_last_command']==='nhanlich','Verified webhook records only safe event progress, not message text');
-// Zalo may deliver the documented result envelope without a top-level ok field.
+// Tolerate alternate provider envelopes without weakening header authentication.
 $unwrapped_event=array('result'=>array('event_name'=>'message.text.received','message'=>array('text'=>'/nhanlich','from'=>array('display_name'=>'Điều phối viên','is_bot'=>false),'chat'=>array('id'=>'private.hash-2','chat_type'=>'PRIVATE'))));
 $unwrapped_activity=ec_zalo_webhook_receive(new EcZaloWebhookRequest($unwrapped_event));
 $unwrapped_recorded=ec_zalo_settings();
 ec_expect($unwrapped_activity===array('ok'=>true) && $unwrapped_recorded['webhook_last_event']==='message' && ec_zalo_private_candidate('private.hash-2',$unwrapped_recorded),'Webhook message without a top-level ok field records the private Chat ID');
+$malformed_activity=ec_zalo_webhook_receive(new EcZaloWebhookRequest(array('result'=>array('message'=>array('chat'=>array())))));
+$malformed_recorded=ec_zalo_settings();
+ec_expect($malformed_activity===array('ok'=>true) && $malformed_recorded['webhook_last_event']==='unknown' && $malformed_recorded['webhook_last_outcome']==='unsupported','Malformed authenticated payload is reported as unsupported rather than a webhook probe');
 ec_expect(ec_zalo_private_candidate('abc.xyz',$recorded),'Private inbound command marks a recipient as safe for notification delivery');
 ec_expect(ec_zalo_can_enable('abc.xyz',$recorded),'A verified private Chat ID can enable automatic notifications');
 ec_expect(!ec_zalo_can_enable('',$recorded),'An empty Chat ID cannot enable automatic notifications');

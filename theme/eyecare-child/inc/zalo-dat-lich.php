@@ -260,7 +260,7 @@ function ec_zalo_webhook_event_type( $event ) {
 	return ec_zalo_inbound_message_event( $event ) ? 'message' : 'unknown';
 }
 
-/** Accept the Bot Platform event envelope whether or not it includes a top-level ok flag. */
+/** Defensively accept either supported Bot Platform event envelope. */
 function ec_zalo_webhook_event( $payload ) {
 	if ( ! is_array( $payload ) ) { return null; }
 	$result = $payload['result'] ?? null;
@@ -287,8 +287,12 @@ function ec_zalo_webhook_receive( $request ) {
 		}
 		// Zalo sends an authenticated empty POST while verifying a newly saved URL.
 		$event = ec_zalo_webhook_event( $payload );
-		if ( ! is_array( $event ) ) {
+		if ( ! is_array( $payload ) || array() === $payload ) {
 			ec_zalo_record_webhook_activity( 'verification', 'never' );
+			return rest_ensure_response( array( 'ok' => true ) );
+		}
+		if ( ! is_array( $event ) ) {
+			ec_zalo_record_webhook_activity( 'unknown', 'unsupported' );
 			return rest_ensure_response( array( 'ok' => true ) );
 		}
 		$event_key = hash( 'sha256', wp_json_encode( $event ) );
