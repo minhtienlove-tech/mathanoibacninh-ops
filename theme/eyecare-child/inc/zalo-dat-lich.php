@@ -110,9 +110,8 @@ function ec_zalo_webhook_authorized( $request ) {
 function ec_zalo_webhook_receive( $request ) {
 	try {
 		$payload = $request->get_json_params();
-		if ( ! is_array( $payload ) || true !== ( $payload['ok'] ?? null ) || ! is_array( $payload['result'] ?? null ) ) {
-			return new WP_Error( 'ec_zalo_invalid_event', 'Invalid event.', array( 'status' => 400 ) );
-		}
+		// Zalo sends an authenticated empty POST while verifying a newly saved URL.
+		if ( ! is_array( $payload ) || true !== ( $payload['ok'] ?? null ) || ! is_array( $payload['result'] ?? null ) ) { return rest_ensure_response( array( 'ok' => true ) ); }
 		$event_key = hash( 'sha256', wp_json_encode( $payload['result'] ) );
 		if ( get_transient( 'ec_zalo_event_' . $event_key ) ) { return rest_ensure_response( array( 'ok' => true ) ); }
 		set_transient( 'ec_zalo_event_' . $event_key, 1, DAY_IN_SECONDS );
