@@ -2,6 +2,8 @@
 
 ## 2026-09-17
 
+- Đã triển khai `17e4a0a` để chỉ cho phép người nhận Zalo từ event `/nhanlich` trong chat riêng, chặn candidate cũ/nhóm chưa được xác nhận và thay lỗi gửi chung bằng hướng dẫn an toàn theo trạng thái. Backup file/database tại `/home/jwhxtzru/backups/zalo-private-recipient-20260917-140900/`. Production xác nhận Bot, URL Webhook và endpoint đều đạt; Chat ID đã chọn chưa được xác nhận chat riêng nên thông báo tự động vẫn tắt. PHP lint, hash đối chiếu, endpoint không secret trả 403 và 6 URL smoke test đạt.
+
 - Đã triển khai chẩn đoán Zalo Webhook `866a7d8` và điều chỉnh tiến độ chọn người nhận `846e1e0`. Sao lưu file/database tại `/home/jwhxtzru/backups/zalo-diagnostics-20260917-113747/` và `/home/jwhxtzru/backups/zalo-diagnostics-selection-20260917-114239/`. Trang Cài đặt Zalo có nút kiểm tra Bot, URL Webhook và endpoint riêng, bảng trạng thái an toàn, event Webhook gần nhất và bước cần làm tiếp theo; không hiển thị token, secret hay nội dung tin nhắn. Không dùng `getUpdates` khi Webhook đang hoạt động. Production xác nhận Bot, URL và endpoint đều đạt; có 4 người nhận nhưng chưa chọn Chat ID, thông báo tự động đang tắt. PHP lint, đối chiếu hash, endpoint không có secret trả 403, 6 URL smoke test đều 200.
 
 - Sửa kết nối thông báo Zalo Bot: mã `408 Request timeout` của `getUpdates` nay được hiểu là chưa có tin nhắn mới, không còn báo nhầm lỗi token/Chat ID. Bổ sung Webhook HTTPS có xác thực `X-Bot-Api-Secret-Token`, chống nhận trùng và ghi nhận người đã nhắn `/nhanlich` để quản trị viên chọn Chat ID. Bổ sung tạo secret mã hóa và kích hoạt Webhook từ trang Cài đặt Zalo; thông báo tự động vẫn tắt cho tới khi quản trị viên chọn người nhận và tự bật.
