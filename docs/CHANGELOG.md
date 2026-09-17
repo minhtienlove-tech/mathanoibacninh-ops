@@ -2,6 +2,8 @@
 
 ## 2026-09-17
 
+- Sửa chọn người nhận Zalo: mọi tin nhắn đến từ chat riêng đã xác thực đều được lưu Chat ID, hiển thị rõ trong danh sách quản trị để chọn và bật thông báo. Bỏ yêu cầu bắt buộc `/nhanlich`; chat nhóm vẫn bị chặn. Khi chưa chọn Chat ID, thao tác bật thông báo hiển thị lý do thay vì tự tắt âm thầm. Backup triển khai: `/home/jwhxtzru/backups/zalo-chat-id-selection-20260917-150315/`.
+
 - Đã triển khai `17e4a0a` để chỉ cho phép người nhận Zalo từ event `/nhanlich` trong chat riêng, chặn candidate cũ/nhóm chưa được xác nhận và thay lỗi gửi chung bằng hướng dẫn an toàn theo trạng thái. Backup file/database tại `/home/jwhxtzru/backups/zalo-private-recipient-20260917-140900/`. Production xác nhận Bot, URL Webhook và endpoint đều đạt; Chat ID đã chọn chưa được xác nhận chat riêng nên thông báo tự động vẫn tắt. PHP lint, hash đối chiếu, endpoint không secret trả 403 và 6 URL smoke test đạt.
 
 - Đã triển khai chẩn đoán Zalo Webhook `866a7d8` và điều chỉnh tiến độ chọn người nhận `846e1e0`. Sao lưu file/database tại `/home/jwhxtzru/backups/zalo-diagnostics-20260917-113747/` và `/home/jwhxtzru/backups/zalo-diagnostics-selection-20260917-114239/`. Trang Cài đặt Zalo có nút kiểm tra Bot, URL Webhook và endpoint riêng, bảng trạng thái an toàn, event Webhook gần nhất và bước cần làm tiếp theo; không hiển thị token, secret hay nội dung tin nhắn. Không dùng `getUpdates` khi Webhook đang hoạt động. Production xác nhận Bot, URL và endpoint đều đạt; có 4 người nhận nhưng chưa chọn Chat ID, thông báo tự động đang tắt. PHP lint, đối chiếu hash, endpoint không có secret trả 403, 6 URL smoke test đều 200.

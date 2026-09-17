@@ -47,8 +47,8 @@ function ec_zalo_api_rejection( $method, $http_code, $data ) {
 	if ( 401 === $http_code || str_contains( $description, 'token' ) || str_contains( $description, 'unauthorized' ) ) { return new WP_Error( 'api', 'Bot Token bị Zalo từ chối. Hãy lưu lại Bot Token rồi kiểm tra Webhook.' ); }
 	if ( 'sendMessage' === $method ) {
 		if ( 429 === $http_code || str_contains( $description, 'rate' ) || str_contains( $description, 'quota' ) ) { return new WP_Error( 'api', 'Zalo đang giới hạn lượt gửi. Hãy thử lại sau ít phút.' ); }
-		if ( 403 === $http_code || str_contains( $description, 'chat' ) || str_contains( $description, 'recipient' ) || str_contains( $description, 'user' ) || str_contains( $description, 'block' ) ) { return new WP_Error( 'api', 'Zalo từ chối người nhận này. Hãy nhắn /nhanlich mới trong chat riêng với bot, tải lại trang, chọn lại Chat ID rồi gửi thử.' ); }
-		return new WP_Error( 'api', 'Zalo từ chối tin nhắn kiểm tra. Hãy nhắn /nhanlich mới trong chat riêng với bot rồi chọn lại Chat ID.' );
+		if ( 403 === $http_code || str_contains( $description, 'chat' ) || str_contains( $description, 'recipient' ) || str_contains( $description, 'user' ) || str_contains( $description, 'block' ) ) { return new WP_Error( 'api', 'Zalo từ chối người nhận này. Hãy nhắn một tin mới trong chat riêng với bot, tải lại trang, chọn lại Chat ID rồi gửi thử.' ); }
+		return new WP_Error( 'api', 'Zalo từ chối tin nhắn kiểm tra. Hãy nhắn một tin mới trong chat riêng với bot rồi chọn lại Chat ID.' );
 	}
 	return new WP_Error( 'api', 'Zalo chưa chấp nhận yêu cầu. Kiểm tra Bot Token và cấu hình Webhook.' );
 }
@@ -72,7 +72,7 @@ function ec_zalo_api( $method, $body = array(), $token = null ) {
 	return ec_zalo_api_rejection( $method, $code, is_array( $data ) ? $data : array() );
 }
 
-/** Only /nhanlich opt-in messages are offered as recipient candidates. */
+/** Any authenticated private inbound message can be selected as a notification recipient. */
 function ec_zalo_candidates( $result ) {
 	if ( isset( $result['result'] ) && is_array( $result['result'] ) ) { $result = $result['result']; }
 	$events = isset( $result['message'] ) ? array( $result ) : $result;
@@ -80,15 +80,26 @@ function ec_zalo_candidates( $result ) {
 	foreach ( $events as $event ) {
 		if ( ! is_array( $event ) ) { continue; }
 		$msg = $event['message'] ?? array();
-		if ( ! is_array( $msg ) ) { continue; }
+		if ( ! is_array( $msg ) || ! is_array( $msg['chat'] ?? null ) ) { continue; }
 		$id = $msg['chat']['id'] ?? '';
 		$chat_type = strtoupper( is_string( $msg['chat']['chat_type'] ?? null ) ? $msg['chat']['chat_type'] : '' );
-		if ( ! is_array( $msg ) || ! is_string( $msg['text'] ?? null ) || '/nhanlich' !== trim( $msg['text'] ) || ! ec_zalo_valid_chat( $id ) || 'PRIVATE' !== $chat_type || ! empty( $msg['from']['is_bot'] ) ) { continue; }
+		if ( ! ec_zalo_valid_chat( $id ) || 'PRIVATE' !== $chat_type || ! empty( $msg['from']['is_bot'] ) ) { continue; }
 		$name = $msg['from']['display_name'] ?? $id;
 		$found[ $id ] = is_string( $name ) ? sanitize_text_field( $name ) : $id;
 		if ( count( $found ) >= 20 ) { break; }
 	}
 	return $found;
+}
+
+/** Records safe-only progress without retaining the message text. */
+function ec_zalo_inbound_command( $event ) {
+	if ( ! is_array( $event ) ) { return 'none'; }
+	$msg = $event['message'] ?? array();
+	$chat = is_array( $msg ) ? ( $msg['chat'] ?? array() ) : array();
+	$id = is_array( $chat ) ? ( $chat['id'] ?? '' ) : '';
+	$type = strtoupper( is_string( $chat['chat_type'] ?? null ) ? $chat['chat_type'] : '' );
+	if ( ! is_array( $msg ) || ! ec_zalo_valid_chat( $id ) || 'PRIVATE' !== $type || ! empty( $msg['from']['is_bot'] ) ) { return 'none'; }
+	return is_string( $msg['text'] ?? null ) && '/nhanlich' === trim( $msg['text'] ) ? 'nhanlich' : 'message';
 }
 
 function ec_zalo_candidate_list( $settings = null ) {
@@ -115,6 +126,11 @@ function ec_zalo_candidate_chat_types( $settings = null ) {
 function ec_zalo_private_candidate( $chat, $settings = null ) {
 	$chat = (string) $chat;
 	return ec_zalo_valid_chat( $chat ) && 'PRIVATE' === ( ec_zalo_candidate_chat_types( $settings )[ $chat ] ?? '' );
+}
+
+function ec_zalo_can_enable( $chat, $settings = null ) {
+	$settings = $settings ?? ec_zalo_settings();
+	return (bool) ec_zalo_token( $settings ) && ec_zalo_private_candidate( $chat, $settings );
 }
 
 function ec_zalo_store_candidates( $found ) {
@@ -174,7 +190,7 @@ function ec_zalo_diagnose_webhook( $settings = null ) {
 function ec_zalo_record_webhook_activity( $event, $outcome, $command = 'none' ) {
 	$events = array( 'never', 'verification', 'message', 'unknown' );
 	$outcomes = array( 'never', 'recipient_found', 'not_command', 'unsupported', 'duplicate' );
-	$commands = array( 'none', 'nhanlich' );
+	$commands = array( 'none', 'nhanlich', 'message' );
 	$event = in_array( $event, $events, true ) ? $event : 'unknown';
 	$outcome = in_array( $outcome, $outcomes, true ) ? $outcome : 'unsupported';
 	$command = in_array( $command, $commands, true ) ? $command : 'none';
@@ -220,14 +236,15 @@ function ec_zalo_webhook_receive( $request ) {
 		}
 		$event_key = hash( 'sha256', wp_json_encode( $payload['result'] ) );
 		$event_type = ec_zalo_webhook_event_type( $payload['result'] );
+		$command = ec_zalo_inbound_command( $payload['result'] );
 		if ( get_transient( 'ec_zalo_event_' . $event_key ) ) {
-			ec_zalo_record_webhook_activity( $event_type, 'duplicate', ec_zalo_candidates( $payload['result'] ) ? 'nhanlich' : 'none' );
+			ec_zalo_record_webhook_activity( $event_type, 'duplicate', $command );
 			return rest_ensure_response( array( 'ok' => true ) );
 		}
 		set_transient( 'ec_zalo_event_' . $event_key, 1, DAY_IN_SECONDS );
 		$candidates = ec_zalo_candidates( $payload['result'] );
 		ec_zalo_store_candidates( $candidates );
-		ec_zalo_record_webhook_activity( $event_type, $candidates ? 'recipient_found' : ( 'message' === $event_type ? 'not_command' : 'unsupported' ), $candidates ? 'nhanlich' : 'none' );
+		ec_zalo_record_webhook_activity( $event_type, $candidates ? 'recipient_found' : ( 'message' === $event_type ? 'not_command' : 'unsupported' ), $command );
 		return rest_ensure_response( array( 'ok' => true ) );
 	} catch ( Throwable $error ) {
 		error_log( 'EC_ZALO_EXCEPTION [webhook]: ' . $error->getMessage() );
@@ -262,8 +279,8 @@ function ec_zalo_status_label( $group, $value ) {
 		'webhook' => array( 'matched' => 'Đúng URL website', 'missing' => 'Zalo chưa có URL', 'mismatch' => 'URL không khớp', 'unknown' => 'Chưa đọc được', 'uncertain' => 'Chưa xác định' ),
 		'endpoint' => array( 'ok' => 'Zalo gọi website thành công', 'failed' => 'Zalo chưa gọi được website', 'tls' => 'Lỗi bảo mật HTTPS', 'unreachable' => 'Zalo chưa kết nối được website', 'unknown' => 'Chưa xác nhận', 'uncertain' => 'Chưa xác định' ),
 		'event' => array( 'never' => 'Chưa có', 'verification' => 'Kiểm tra endpoint', 'message' => 'Tin nhắn', 'unknown' => 'Sự kiện khác' ),
-		'outcome' => array( 'never' => 'Chưa có', 'recipient_found' => 'Đã lưu người nhận', 'not_command' => 'Không phải lệnh /nhanlich', 'unsupported' => 'Sự kiện chưa hỗ trợ', 'duplicate' => 'Sự kiện lặp, không ghi trùng' ),
-		'command' => array( 'none' => 'Chưa nhận /nhanlich', 'nhanlich' => 'Đã nhận /nhanlich' ),
+		'outcome' => array( 'never' => 'Chưa có', 'recipient_found' => 'Đã lưu người nhận', 'not_command' => 'Không phải tin nhắn chat riêng', 'unsupported' => 'Sự kiện chưa hỗ trợ', 'duplicate' => 'Sự kiện lặp, không ghi trùng' ),
+		'command' => array( 'none' => 'Chưa nhận tin nhắn chat riêng', 'nhanlich' => 'Đã nhận /nhanlich', 'message' => 'Đã nhận tin nhắn chat riêng' ),
 	);
 	return $labels[ $group ][ $value ] ?? 'Chưa xác định';
 }
@@ -272,7 +289,7 @@ function ec_zalo_activity( $settings = null ) {
 	$settings = $settings ?? ec_zalo_settings();
 	$event = in_array( $settings['webhook_last_event'] ?? '', array( 'never', 'verification', 'message', 'unknown' ), true ) ? $settings['webhook_last_event'] : 'never';
 	$outcome = in_array( $settings['webhook_last_outcome'] ?? '', array( 'never', 'recipient_found', 'not_command', 'unsupported', 'duplicate' ), true ) ? $settings['webhook_last_outcome'] : 'never';
-	$command = in_array( $settings['webhook_last_command'] ?? '', array( 'none', 'nhanlich' ), true ) ? $settings['webhook_last_command'] : 'none';
+	$command = in_array( $settings['webhook_last_command'] ?? '', array( 'none', 'nhanlich', 'message' ), true ) ? $settings['webhook_last_command'] : 'none';
 	return array( 'last_at' => absint( $settings['webhook_last_at'] ?? 0 ), 'last_probe_at' => absint( $settings['webhook_last_probe_at'] ?? 0 ), 'event' => $event, 'outcome' => $outcome, 'command' => $command, 'candidate_count' => count( ec_zalo_candidate_list( $settings ) ) );
 }
 
@@ -287,11 +304,11 @@ function ec_zalo_progress_label( $settings, $diagnostic, $activity ) {
 	if ( 'ok' !== ( $diagnostic['bot'] ?? '' ) ) { return 'Bot chưa được Zalo xác minh.'; }
 	if ( 'matched' !== ( $diagnostic['webhook'] ?? '' ) ) { return 'Webhook chưa được cấu hình đúng URL website.'; }
 	if ( 'ok' !== ( $diagnostic['endpoint'] ?? '' ) ) { return 'Zalo chưa xác nhận gọi được endpoint của website.'; }
-	if ( ec_zalo_valid_chat( $settings['chat_id'] ) && ! ec_zalo_private_candidate( $settings['chat_id'], $settings ) ) { return 'Chat ID đang chọn chưa được xác nhận từ chat riêng. Nhắn /nhanlich mới trong chat riêng với bot, rồi chọn lại Chat ID.'; }
-	if ( $activity['candidate_count'] > 0 && ! ec_zalo_valid_chat( $settings['chat_id'] ) ) { return 'Đã tìm thấy người nhận. Chọn Chat ID, lưu cấu hình rồi gửi tin kiểm tra.'; }
-	if ( 'never' === $activity['event'] ) { return 'Kết nối đã sẵn sàng. Đang chờ Zalo gửi lệnh /nhanlich.'; }
-	if ( 'nhanlich' !== $activity['command'] ) { return 'Website đã nhận sự kiện nhưng chưa phải lệnh /nhanlich.'; }
-	if ( ! ec_zalo_valid_chat( $settings['chat_id'] ) ) { return 'Đã nhận /nhanlich. Chọn Chat ID, lưu cấu hình rồi gửi tin kiểm tra.'; }
+	if ( ec_zalo_valid_chat( $settings['chat_id'] ) && ! ec_zalo_private_candidate( $settings['chat_id'], $settings ) ) { return 'Chat ID đang chọn chưa được xác nhận từ chat riêng. Hãy nhắn một tin mới cho bot, rồi chọn lại Chat ID.'; }
+	if ( $activity['candidate_count'] > 0 && ! ec_zalo_valid_chat( $settings['chat_id'] ) ) { return 'Đã nhận tin nhắn chat riêng. Chọn Chat ID, lưu cấu hình rồi gửi tin kiểm tra.'; }
+	if ( 'never' === $activity['event'] ) { return 'Kết nối đã sẵn sàng. Đang chờ tin nhắn chat riêng gửi tới bot.'; }
+	if ( ! in_array( $activity['command'], array( 'nhanlich', 'message' ), true ) ) { return 'Website đã nhận sự kiện nhưng chưa có tin nhắn chat riêng hợp lệ.'; }
+	if ( ! ec_zalo_valid_chat( $settings['chat_id'] ) ) { return 'Đã nhận tin nhắn chat riêng. Chọn Chat ID, lưu cấu hình rồi gửi tin kiểm tra.'; }
 	if ( ! $settings['enabled'] ) { return 'Đã có người nhận. Gửi tin kiểm tra, sau đó bật thông báo tự động.'; }
 	return 'Sẵn sàng gửi thông báo lịch hẹn mới.';
 }
@@ -333,12 +350,14 @@ function ec_zalo_admin_action() {
 			$settings['webhook_cipher'] = $cipher;
 		}
 		$enabled = isset( $_POST['enabled'] ) && '1' === $_POST['enabled'];
-		if ( $enabled && ( ! $chat || ! ec_zalo_token( $settings ) ) ) { $enabled = false; }
+		$enable_error = $enabled && ! ec_zalo_can_enable( $chat, $settings );
+		if ( $enable_error ) { $enabled = false; }
 		$settings['enabled'] = $enabled;
 		$settings['chat_id'] = $chat;
 		$settings['version'] = hash( 'sha256', ec_zalo_token( $settings ) . '|' . $chat );
 		update_option( 'ec_booking_zalo', $settings, false );
 		if ( ec_zalo_settings() !== $settings ) { ec_zalo_flash( 'Chưa lưu được cấu hình. Vui lòng thử lại.', true ); }
+		if ( $enable_error ) { ec_zalo_flash( 'Đã lưu cấu hình nhưng chưa bật thông báo tự động. Hãy chọn Chat ID từ danh sách tin nhắn chat riêng, lưu lại rồi bật thông báo.', true ); }
 		ec_zalo_flash( $enabled ? 'Đã bật thông báo cho các lịch đăng ký mới.' : 'Đã lưu cấu hình. Thông báo tự động đang tắt; chọn người nhận, gửi thử rồi bật khi sẵn sàng.' );
 	}
 	if ( 'generate_webhook_secret' === $mode ) {
@@ -355,20 +374,20 @@ function ec_zalo_admin_action() {
 		$result = ec_zalo_api( 'setWebhook', array( 'url' => ec_zalo_webhook_url(), 'secret_token' => $secret ) );
 		if ( is_wp_error( $result ) ) { ec_zalo_flash( $result->get_error_message(), true ); }
 		if ( is_array( $result['verification'] ?? null ) && empty( $result['verification']['ok'] ) ) { ec_zalo_flash( 'Zalo đã lưu Webhook nhưng chưa kiểm tra được endpoint. Hãy thử lại sau ít phút.', true ); }
-		ec_zalo_flash( 'Webhook đã được Zalo xác nhận. Hãy nhắn /nhanlich cho bot rồi tải lại trang này để chọn người nhận.' );
+		ec_zalo_flash( 'Webhook đã được Zalo xác nhận. Hãy nhắn một tin cho bot rồi tải lại trang này để chọn Chat ID.' );
 	}
 	if ( 'discover' === $mode ) {
-		if ( ec_zalo_valid_webhook_secret( ec_zalo_webhook_secret( $settings ) ) ) { ec_zalo_flash( 'Webhook đang được dùng. Zalo không cho lấy getUpdates song song; hãy nhắn /nhanlich rồi xem trạng thái Webhook ở đầu trang.', true ); }
+		if ( ec_zalo_valid_webhook_secret( ec_zalo_webhook_secret( $settings ) ) ) { ec_zalo_flash( 'Webhook đang được dùng. Zalo không cho lấy getUpdates song song; hãy nhắn một tin cho bot rồi xem trạng thái Webhook ở đầu trang.', true ); }
 		$result = ec_zalo_api( 'getUpdates', array( 'timeout' => 2 ) );
 		if ( is_wp_error( $result ) ) { ec_zalo_flash( $result->get_error_message(), true ); }
 		$found = ec_zalo_candidates( $result );
 		ec_zalo_store_candidates( $found );
 		set_transient( 'ec_zalo_candidates_' . get_current_user_id(), $found, 600 );
-		ec_zalo_flash( $found ? 'Đã tìm được người nhận. Chọn người nhận ở phần Chat ID rồi lưu cấu hình.' : 'Chưa thấy tin nhắn /nhanlich. Nếu đã bật Webhook, hãy nhắn lại lệnh rồi tải lại trang này.', ! $found );
+		ec_zalo_flash( $found ? 'Đã tìm được Chat ID. Chọn người nhận ở phần Chat ID rồi lưu cấu hình.' : 'Chưa thấy tin nhắn chat riêng. Nếu đã bật Webhook, hãy nhắn một tin cho bot rồi tải lại trang này.', ! $found );
 	}
 	if ( 'test' === $mode ) {
 		if ( ! ec_zalo_valid_chat( $settings['chat_id'] ) ) { ec_zalo_flash( 'Vui lòng chọn và lưu Chat ID trước khi gửi thử.', true ); }
-		if ( ! ec_zalo_private_candidate( $settings['chat_id'], $settings ) ) { ec_zalo_flash( 'Chat ID đang chọn chưa được xác nhận từ chat riêng. Hãy nhắn /nhanlich mới trong chat riêng với bot, tải lại trang rồi chọn lại Chat ID.', true ); }
+		if ( ! ec_zalo_private_candidate( $settings['chat_id'], $settings ) ) { ec_zalo_flash( 'Chat ID đang chọn chưa được xác nhận từ chat riêng. Hãy nhắn một tin mới cho bot, tải lại trang rồi chọn lại Chat ID.', true ); }
 		$result = ec_zalo_api( 'sendMessage', array( 'chat_id' => $settings['chat_id'], 'text' => "Kết nối Zalo thành công.\nBệnh viện Mắt Hà Nội – Bắc Ninh\nĐây là tin nhắn kiểm tra thông báo đặt lịch." ) );
 		ec_zalo_flash( is_wp_error( $result ) ? $result->get_error_message() : 'Zalo đã nhận tin nhắn kiểm tra. Hãy kiểm tra đúng tài khoản nhận trước khi bật tự động.', is_wp_error( $result ) );
 	}
@@ -395,7 +414,7 @@ function ec_zalo_page() {
 	<tr><th scope="row">URL Webhook</th><td><?php echo esc_html( is_array( $diagnostic ) ? ec_zalo_status_label( 'webhook', $diagnostic['webhook'] ?? '' ) : 'Chưa kiểm tra' ); ?></td></tr>
 	<tr><th scope="row">Zalo gọi endpoint</th><td><?php echo esc_html( is_array( $diagnostic ) ? ec_zalo_status_label( 'endpoint', $diagnostic['endpoint'] ?? '' ) : 'Chưa kiểm tra' ); ?></td></tr>
 	<tr><th scope="row">Sự kiện Webhook gần nhất</th><td><?php if ( 'never' === $activity['event'] ) : ?><?php echo esc_html( $activity['last_probe_at'] ? 'Zalo đã kiểm tra endpoint: ' . ec_zalo_timestamp_label( $activity['last_probe_at'] ) : 'Chưa nhận được sự kiện đã xác thực từ Zalo.' ); ?><?php else : ?><?php echo esc_html( ec_zalo_status_label( 'event', $activity['event'] ) . ' - ' . ec_zalo_status_label( 'outcome', $activity['outcome'] ) . ' - ' . ec_zalo_timestamp_label( $activity['last_at'] ) ); ?><?php endif; ?></td></tr>
-	<tr><th scope="row">Lệnh /nhanlich</th><td><?php echo esc_html( ec_zalo_status_label( 'command', $activity['command'] ) ); ?></td></tr>
+	<tr><th scope="row">Tin nhắn chat riêng</th><td><?php echo esc_html( ec_zalo_status_label( 'command', $activity['command'] ) ); ?></td></tr>
 	<tr><th scope="row">Người nhận tìm được</th><td><?php echo esc_html( (string) $activity['candidate_count'] ); ?></td></tr>
 	<tr><th scope="row">Chat ID đã chọn</th><td><?php echo esc_html( ! ec_zalo_valid_chat( $s['chat_id'] ) ? 'Chưa chọn' : ( ec_zalo_private_candidate( $s['chat_id'], $s ) ? 'Đã chọn - chat riêng đã xác nhận' : 'Đã chọn - cần xác nhận lại từ chat riêng' ) ); ?></td></tr>
 	<tr><th scope="row">Thông báo tự động</th><td><?php echo esc_html( $s['enabled'] ? 'Đang bật' : 'Đang tắt' ); ?></td></tr>
@@ -403,17 +422,17 @@ function ec_zalo_page() {
 	<form style="margin-top:16px" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><input type="hidden" name="action" value="ec_zalo_settings"><input type="hidden" name="ec_zalo_mode" value="diagnose_webhook"><?php wp_nonce_field( 'ec_zalo_settings', 'ec_zalo_nonce' ); ?><button class="button button-primary">Kiểm tra Webhook ngay</button></form>
 	<p class="description">Nút này không gửi tin nhắn, không cần Chat ID và chỉ hiển thị trạng thái an toàn. Kết quả được giới hạn một lần mỗi phút để tránh vượt hạn mức của Zalo.</p></div>
 	<div class="card" style="max-width:none;padding:20px 28px"><h2>1. Tạo và kết nối bot</h2>
-	<ol><li>Trong Zalo, tìm OA <strong>Zalo Bot Manager</strong>, chọn <strong>Tạo bot</strong>. Đặt tên bắt đầu bằng “Bot”, ví dụ “Bot Lịch khám HN–BN”.</li><li>Dán Bot Token Zalo gửi cho bạn vào ô bên dưới rồi lưu.</li><li>Tạo Secret Webhook, sau đó bấm <strong>Kích hoạt Webhook</strong>. Website sẽ nhận tin <code>/nhanlich</code> ổn định mà không cần long polling.</li><li>Dùng tài khoản nhận thông báo nhắn <code>/nhanlich</code> cho bot, tải lại trang, chọn Chat ID rồi gửi tin kiểm tra.</li></ol>
-	<p><a href="https://docs.zaloplatforms.com/docs/BOT/create_bot" target="_blank" rel="noopener noreferrer">Hướng dẫn chính thức của Zalo</a></p>
+	<ol><li>Trong Zalo, tìm OA <strong>Zalo Bot Manager</strong>, chọn <strong>Tạo bot</strong>. Đặt tên bắt đầu bằng “Bot”, ví dụ “Bot Lịch khám HN–BN”.</li><li>Dán Bot Token Zalo gửi cho bạn vào ô bên dưới rồi lưu.</li><li>Tạo Secret Webhook, sau đó bấm <strong>Kích hoạt Webhook</strong>. Website sẽ nhận tin nhắn ổn định mà không cần long polling.</li><li>Dùng tài khoản nhận thông báo nhắn một tin cho bot, tải lại trang, chọn Chat ID rồi gửi tin kiểm tra.</li></ol>
+	<p><a href="https://bot.zapps.me/docs/create-bot/" target="_blank" rel="noopener noreferrer">Hướng dẫn chính thức của Zalo</a></p>
 	<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><input type="hidden" name="action" value="ec_zalo_settings"><input type="hidden" name="ec_zalo_mode" value="save"><?php wp_nonce_field( 'ec_zalo_settings', 'ec_zalo_nonce' ); ?>
 	<table class="form-table"><tr><th scope="row"><label for="ec-zalo-token">Bot Token</label></th><td><input id="ec-zalo-token" name="bot_token" type="password" class="regular-text" autocomplete="new-password" maxlength="256" value="" placeholder="<?php echo ec_zalo_token( $s ) ? 'Đã lưu — để trống để giữ token hiện tại' : 'Dán Bot Token'; ?>"><p class="description">Token được mã hóa khi lưu, không hiển thị lại. Khi đổi bot, cần chọn lại người nhận.</p><?php if ( $s['bot_name'] ) : ?><p>Bot: <strong><?php echo esc_html( $s['bot_name'] ); ?></strong></p><?php endif; ?></td></tr>
 	<tr><th scope="row"><label for="ec-zalo-webhook-secret">Secret Webhook</label></th><td><input id="ec-zalo-webhook-secret" name="webhook_secret" type="password" class="regular-text" autocomplete="new-password" maxlength="256" value="" placeholder="<?php echo ec_zalo_webhook_secret( $s ) ? 'Đã lưu — để trống để giữ secret hiện tại' : 'Tạo secret bằng nút bên dưới'; ?>"><p class="description">Secret được mã hóa khi lưu. Bấm Tạo Secret Webhook rồi Kích hoạt Webhook để website tự gửi cấu hình an toàn cho Zalo.</p></td></tr>
-	<tr><th scope="row"><label for="ec-zalo-chat">Chat ID người nhận</label></th><td><input id="ec-zalo-chat" name="chat_id" type="text" class="regular-text" list="ec-zalo-recipients" maxlength="128" value="<?php echo esc_attr( $s['chat_id'] ); ?>" autocomplete="off"><datalist id="ec-zalo-recipients"><?php if ( is_array( $candidates ) ) : foreach ( $candidates as $id => $name ) : if ( ec_zalo_private_candidate( $id, $s ) ) : ?><option value="<?php echo esc_attr( $id ); ?>"><?php echo esc_html( $name ); ?></option><?php endif; endforeach; endif; ?></datalist><p class="description">Chỉ chọn Chat ID đã được xác nhận sau khi nhắn <code>/nhanlich</code> trong chat riêng với bot. Chat ID không phải số điện thoại Zalo.</p><?php if ( is_array( $candidates ) && $candidates ) : ?><ul><?php foreach ( $candidates as $id => $name ) : ?><li><?php echo esc_html( $name ); ?>: <?php echo esc_html( ec_zalo_private_candidate( $id, $s ) ? 'Chat riêng đã xác nhận' : 'Cần nhắn lại /nhanlich trong chat riêng' ); ?></li><?php endforeach; ?></ul><?php endif; ?></td></tr>
+	<tr><th scope="row"><label for="ec-zalo-chat">Chat ID người nhận</label></th><td><select id="ec-zalo-chat" name="chat_id" class="regular-text"><option value="">Chọn Chat ID từ danh sách</option><?php if ( is_array( $candidates ) ) : foreach ( $candidates as $id => $name ) : if ( ec_zalo_private_candidate( $id, $s ) ) : ?><option value="<?php echo esc_attr( $id ); ?>" <?php selected( $s['chat_id'], $id ); ?>><?php echo esc_html( $name . ' - ' . $id ); ?></option><?php endif; endforeach; endif; ?></select><p class="description">Danh sách chỉ hiển thị các Chat ID đã nhắn tin trong chat riêng với bot. Chat ID không phải số điện thoại Zalo.</p><?php if ( is_array( $candidates ) && $candidates ) : ?><table class="widefat striped" style="max-width:640px;margin-top:12px"><thead><tr><th>Tài khoản</th><th>Chat ID</th><th>Trạng thái</th></tr></thead><tbody><?php foreach ( $candidates as $id => $name ) : ?><tr><td><?php echo esc_html( $name ); ?></td><td><code><?php echo esc_html( $id ); ?></code></td><td><?php echo esc_html( ec_zalo_private_candidate( $id, $s ) ? 'Có thể chọn' : 'Cần nhắn một tin mới trong chat riêng' ); ?></td></tr><?php endforeach; ?></tbody></table><?php endif; ?></td></tr>
 	<tr><th scope="row">Thông báo tự động</th><td><label><input type="checkbox" name="enabled" value="1" <?php checked( $s['enabled'] ); ?>> Bật thông báo cho các lịch đăng ký mới</label><p class="description">Lịch đã có trước khi bật sẽ không được gửi hàng loạt. Lịch vẫn được lưu nếu Zalo tạm thời không gửi được.</p></td></tr></table>
 	<?php submit_button( 'Lưu cấu hình Zalo' ); ?></form>
 	<?php foreach ( array( 'generate_webhook_secret' => 'Tạo Secret Webhook', 'activate_webhook' => 'Kích hoạt Webhook' ) as $mode => $label ) : ?><form style="display:inline-block;margin-right:12px" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><input type="hidden" name="action" value="ec_zalo_settings"><input type="hidden" name="ec_zalo_mode" value="<?php echo esc_attr( $mode ); ?>"><?php wp_nonce_field( 'ec_zalo_settings', 'ec_zalo_nonce' ); ?><button class="button" <?php disabled( 'activate_webhook' === $mode && ( ! ec_zalo_token( $s ) || ! ec_zalo_webhook_secret( $s ) ) ); ?>><?php echo esc_html( $label ); ?></button></form><?php endforeach; ?>
 	<p class="description">Webhook URL: <code><?php echo esc_html( ec_zalo_webhook_url() ); ?></code></p></div>
-	<div class="card" style="max-width:none;padding:20px 28px"><h2>2. Kiểm tra người nhận</h2><p>Sau khi Webhook đã kích hoạt, nhắn <code>/nhanlich</code> cho bot rồi tải lại trang này. Tài khoản đó sẽ xuất hiện trong danh sách Chat ID. Xem dòng “Sự kiện Webhook gần nhất” ở đầu trang để biết lệnh đã tới website hay chưa.</p>
+	<div class="card" style="max-width:none;padding:20px 28px"><h2>2. Kiểm tra người nhận</h2><p>Sau khi Webhook đã kích hoạt, nhắn một tin cho bot rồi tải lại trang này. Chat ID của tài khoản đó sẽ xuất hiện trong danh sách để chọn. Xem dòng “Sự kiện Webhook gần nhất” ở đầu trang để biết tin nhắn đã tới website hay chưa.</p>
 	<?php if ( ! ec_zalo_valid_webhook_secret( ec_zalo_webhook_secret( $s ) ) ) : ?><form style="display:inline-block;margin-right:12px" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><input type="hidden" name="action" value="ec_zalo_settings"><input type="hidden" name="ec_zalo_mode" value="discover"><?php wp_nonce_field( 'ec_zalo_settings', 'ec_zalo_nonce' ); ?><button class="button" <?php disabled( ! ec_zalo_token( $s ) ); ?>>Tìm người nhận khi chưa dùng Webhook</button></form><?php endif; ?>
 	<form style="display:inline-block;margin-right:12px" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><input type="hidden" name="action" value="ec_zalo_settings"><input type="hidden" name="ec_zalo_mode" value="test"><?php wp_nonce_field( 'ec_zalo_settings', 'ec_zalo_nonce' ); ?><button class="button" <?php disabled( ! ec_zalo_token( $s ) ); ?>>Gửi tin kiểm tra đến Chat ID đã lưu</button></form>
 	<p class="description">Thông báo được xử lý nền qua WordPress Cron, có thể chậm tùy lượt truy cập. Có thể xem kết quả gửi trong chi tiết từng lịch hẹn.</p></div></div>

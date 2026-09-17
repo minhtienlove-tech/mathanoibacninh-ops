@@ -8,16 +8,16 @@ https://mathanoibacninh.com/wp-admin/edit.php?post_type=ec_appointment&page=ec-z
 1. Trong Zalo, tìm OA **Zalo Bot Manager**, chọn **Tạo bot** và đặt tên bắt đầu bằng “Bot”. Xem [hướng dẫn chính thức](https://docs.zaloplatforms.com/docs/BOT/create_bot).
 2. Dán Bot Token được cấp vào trang cài đặt rồi lưu. Không gửi token qua chat hoặc đưa vào Git. Token đã lưu không được hiển thị lại; để trống ô token khi cập nhật các mục khác. Nếu token đã xuất hiện trong ảnh hoặc cuộc trò chuyện, tạo token mới trong Zalo Bot Manager trước khi lưu.
 3. Bấm **Tạo Secret Webhook**, rồi bấm **Kích hoạt Webhook**. Website gửi URL HTTPS và secret trực tiếp cho Zalo; không cần tự nhập lại trong Bot Manager. Secret chỉ được lưu dạng mã hóa. Webhook xác thực header `X-Bot-Api-Secret-Token` trước khi đọc dữ liệu.
-4. Dùng tài khoản nhận thông báo nhắn `/nhanlich` **trong chat riêng với bot**, sau đó tải lại trang cài đặt. Chọn Chat ID có nhãn **Chat riêng đã xác nhận** rồi lưu cấu hình. Chat ID không phải số điện thoại.
+4. Dùng tài khoản nhận thông báo nhắn một tin **trong chat riêng với bot**, sau đó tải lại trang cài đặt. Chọn Chat ID trong danh sách hiện rõ ID và trạng thái **Có thể chọn**, rồi lưu cấu hình. Chat ID không phải số điện thoại.
 5. Bấm **Gửi tin kiểm tra đến Chat ID đã lưu**, kiểm tra đúng người nhận rồi bật **Thông báo tự động** và lưu.
 
 ## Xem tiến độ và kiểm tra lỗi
 
 - Bấm **Kiểm tra Webhook ngay**. Nút này không gửi tin nhắn và không cần Chat ID; nó kiểm tra riêng Bot Token, URL Webhook đang lưu tại Zalo và việc Zalo gọi được endpoint HTTPS của website.
-- Bảng **Trạng thái kết nối** chỉ hiện trạng thái an toàn, không hiện Bot Token, Secret, Chat ID hay nội dung tin nhắn. Dòng **Sự kiện Webhook gần nhất** cho biết website đã nhận request xác thực từ Zalo chưa; dòng **Lệnh /nhanlich** cho biết event gần nhất có đúng lệnh chọn người nhận hay không.
-- Nếu Bot, URL Webhook và endpoint đều đạt nhưng chưa có sự kiện, kết nối đã đúng và website đang chờ Zalo chuyển tin `/nhanlich`. Nhắn đúng lệnh cho bot rồi tải lại trang cài đặt để xem kết quả.
+- Bảng **Trạng thái kết nối** không hiện Bot Token, Secret hay nội dung tin nhắn. Chat ID chỉ hiện trong danh sách người nhận dành cho quản trị viên. Dòng **Sự kiện Webhook gần nhất** và **Tin nhắn chat riêng** cho biết website đã nhận tin từ Zalo chưa.
+- Nếu Bot, URL Webhook và endpoint đều đạt nhưng chưa có sự kiện, kết nối đã đúng và website đang chờ một tin nhắn chat riêng. Nhắn một tin cho bot rồi tải lại trang cài đặt để xem kết quả.
 - Kết quả kiểm tra được dùng lại trong một phút để không vượt giới hạn kiểm tra của Zalo. Bấm lại sau một phút khi cần kiểm tra mới.
-- Nếu Zalo từ chối gửi tin kiểm tra, không bấm gửi lặp lại. Nhắn `/nhanlich` mới trong **chat riêng** với bot, tải lại trang, chọn lại Chat ID có nhãn đã xác nhận rồi mới gửi thử. Candidate cũ hoặc từ nhóm không được dùng để nhận thông báo.
+- Nếu Zalo từ chối gửi tin kiểm tra, không bấm gửi lặp lại. Nhắn một tin mới trong **chat riêng** với bot, tải lại trang, chọn lại Chat ID có trạng thái **Có thể chọn** rồi mới gửi thử. Candidate cũ hoặc từ nhóm không được dùng để nhận thông báo.
 
 ## Hoạt động
 
@@ -32,4 +32,4 @@ https://mathanoibacninh.com/wp-admin/edit.php?post_type=ec_appointment&page=ec-z
 
 ## Kiểm tra kỹ thuật
 
-`theme/eyecare-child/tests/booking-zalo-test.php` kiểm tra bằng HTTP giả lập, không gửi tin thật. Tài liệu API: [getMe](https://docs.zaloplatforms.com/docs/BOT/apis/getMe), [getWebhookInfo](https://docs.zaloplatforms.com/docs/BOT/apis/getWebhookInfo), [testWebhook](https://docs.zaloplatforms.com/docs/BOT/apis/testWebhook) và [sendMessage](https://docs.zaloplatforms.com/docs/BOT/apis/sendMessage).
+`theme/eyecare-child/tests/booking-zalo-test.php` kiểm tra bằng HTTP giả lập, không gửi tin thật. Tài liệu API: [getMe](https://bot.zapps.me/docs/apis/getMe/), [getWebhookInfo](https://bot.zapps.me/docs/apis/getWebhookInfo/), [testWebhook](https://bot.zapps.me/docs/apis/testWebhook/) và [sendMessage](https://bot.zapps.me/docs/apis/sendMessage/).

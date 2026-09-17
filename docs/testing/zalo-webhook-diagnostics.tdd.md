@@ -5,8 +5,8 @@ Date: 2026-09-17
 ## User journeys
 
 1. A site administrator can test the Zalo Bot, configured Webhook URL, and endpoint without a Chat ID or a message being sent.
-2. A site administrator can see whether the most recent authenticated request was an endpoint probe, a `/nhanlich` opt-in, an unrelated message, or a duplicate.
-3. Diagnostic state must not expose a Bot Token, Webhook Secret, Chat ID, sender name, or message body.
+2. A site administrator can select a private-chat Chat ID after the sender has sent any message to the bot, while group chats remain unavailable for appointment notifications.
+3. Diagnostic state must not expose a Bot Token, Webhook Secret, or message body; Chat ID is visible only in the administrator recipient list.
 
 ## RED then GREEN
 
@@ -28,7 +28,8 @@ initially stopped with `Call to undefined function ec_zalo_diagnose_webhook()`, 
 | A Zalo recipient refusal is mapped to a safe, actionable private-chat re-opt-in message | Same command | PASS |
 | Group chats and legacy candidates without a private-chat confirmation cannot receive notifications | Same command | PASS |
 | Existing recipient candidates prompt for Chat ID even when there is no new event yet | Same command | PASS |
-| Authenticated probes, opt-ins, duplicates, and unrelated messages produce safe progress metadata | Same command | PASS |
+| Authenticated probes, private inbound messages, and duplicates produce safe progress metadata | Same command | PASS |
+| Any authenticated private inbound message saves its Chat ID without retaining its content | Same command | PASS |
 | Raw message content is absent from progress metadata | Same command | PASS |
 | PHP source and test files parse | `php -l` for the three changed PHP files | PASS |
 
