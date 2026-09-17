@@ -1,8 +1,8 @@
 # Mô hình mắt 3D — bản xem thử, 16/09/2026
 
-## Phiên bản hình ảnh mới — CHƯA TRIỂN KHAI
+## Phiên bản hình ảnh mới — ĐÃ TRIỂN KHAI
 
-Theo phản hồi “đẹp hơn, nhìn thật hơn”, đã chuẩn bị bản mới tại http://127.0.0.1:8783/kien-thuc/#cau-tao-mat-3d (chỉ trên máy đang chạy preview). Phần bên dưới ghi lịch sử triển khai bản đầu; không có nghĩa bản hình ảnh mới đã lên hosting.
+Theo phản hồi “đẹp hơn, nhìn thật hơn”, người dùng đã duyệt bản mới và yêu cầu lên hosting. Đã triển khai ngày 16/09/2026, hoàn tất kiểm tra trình duyệt ngày 17/09/2026. URL: https://mathanoibacninh.com/kien-thuc/#cau-tao-mat-3d. Mã nguồn: 1025101 + c5cd0fa.
 
 - Thêm `appearance.js`: chất liệu vật lý, texture mô sinh bằng Canvas có tính xác định, mống mắt nâu với sợi hướng tâm, vòng rìa và vùng vân không đều; lòng trắng hơi hồng, mô võng mạc/hắc mạc. Không tải ảnh, font hoặc thư viện từ bên ngoài.
 - Giác mạc truyền sáng và phản chiếu các đèn studio bằng môi trường PMREM; thủy tinh thể trong hơn. Màu hắc mạc tối hơn, hoàng điểm/đĩa thị có mép mềm. Mạch máu thuôn nhỏ dần và có nhánh nhỏ; các mạch ở nửa vỏ đã cắt không còn hiển thị lơ lửng.
@@ -11,7 +11,13 @@ Theo phản hồi “đẹp hơn, nhìn thật hơn”, đã chuẩn bị bản 
 - Kiểm tra Chromium: mô hình tải, đủ 12 lựa chọn và nội dung khớp qua công cụ chọn của chính trang; chọn chú thích Võng mạc trên mobile khớp. Đã thử nguyên vẹn/mặt cắt, zoom +/−, tự xoay, reset, phím xoay, chú thích và đường sáng. Không có lỗi JavaScript ở mô hình chạy bình thường; còn cảnh báo Three.js UMD cũ. Đã sửa cảnh báo PMREM blur trong quá trình thử.
 - Desktop 1440px, trang nhúng mobile 390px và 320px: không tràn ngang; 390px trang 375px, iframe 343px, cao 1849px đủ nội dung 1848px; 320px trang 305px, iframe 273px. Đã quan sát mô hình ở mobile và các phần cũ vẫn có trong trang preview. Chưa thử cảm ứng hai ngón trên điện thoại thật, Safari/iOS, hoặc đo FPS/pin trên máy yếu.
 - Fixture WebGL thất bại: hiện thông báo dự phòng, nút 3D bị vô hiệu, vẫn chọn và đọc được Dây thần kinh thị giác. Node syntax check hai file JS, kiểm tra diff và smoke 6 URL đạt. PHP không thay đổi; lint hai file tối thiểu footer/page-lien-he trên server đạt (không có PHP CLI tại máy local).
-- Khôi phục bản hình ảnh trước: lấy `index.html`, `model.js`, `model.css` trong `assets/eye-anatomy/` từ commit `bbce33b`; `appearance.js` có thể giữ trên ổ đĩa vì bản HTML cũ không tải nó. Chỉ thực hiện rollback khi được yêu cầu; chưa có thay đổi production trong lần này nên chưa cần backup/deploy server mới.
+- Khôi phục bản hình ảnh trước: lấy `index.html`, `model.js`, `model.css` trong `assets/eye-anatomy/` từ commit `bbce33b`; `appearance.js` có thể giữ trên ổ đĩa vì bản HTML cũ không tải nó. Backup server `/home/jwhxtzru/backups/eye-realism-20260916-155209/files/` có 3 file này và `mo-hinh-mat.php`; restore đúng từng file tương ứng nếu cần, rồi purge cache. Không restore database vì lần này không sửa dữ liệu.
+
+### Kiểm tra sau triển khai bản mới
+
+- Bổ sung version theo filemtime cho iframe và link mở riêng trong `inc/mo-hinh-mat.php`; PHP lint module/footer/page-lien-he đạt trước/sau triển khai. Backup database 11MB và đối chiếu 4 file cũ với baseline Git trước ghi. SHA256 5 file staged khớp local.
+- Đã purge WordPress/LiteSpeed, 6 URL smoke test trả 200. Browser trên production thấy iframe version `1789549081`, mắt nguyên vẹn với vân/chất liệu mới; thử mặt cắt, đường sáng, phóng to và chọn Võng mạc khớp mô tả. Không có lỗi JS; chỉ cảnh báo Three.js UMD cũ.
+- Mobile 390px: trang 375px/scrollWidth 375px, iframe 343px/scrollWidth 343px; khi bật đường sáng chiều cao iframe và nội dung đều 2120px. Các phần thư mục/bài viết/phân trang bên dưới còn nguyên. Giới hạn kiểm tra thiết bị thật như ghi ở trên.
 
 ## Lịch sử bản đầu
 
