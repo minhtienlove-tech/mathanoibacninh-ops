@@ -110,6 +110,11 @@ function ec_zalo_webhook_authorized( $request ) {
 function ec_zalo_webhook_receive( $request ) {
 	try {
 		$payload = $request->get_json_params();
+		// Some Zalo delivery requests omit the JSON content-type header.
+		if ( ! is_array( $payload ) ) {
+			$decoded = json_decode( $request->get_body(), true );
+			$payload = is_array( $decoded ) ? $decoded : $payload;
+		}
 		// Zalo sends an authenticated empty POST while verifying a newly saved URL.
 		if ( ! is_array( $payload ) || true !== ( $payload['ok'] ?? null ) || ! is_array( $payload['result'] ?? null ) ) { return rest_ensure_response( array( 'ok' => true ) ); }
 		$event_key = hash( 'sha256', wp_json_encode( $payload['result'] ) );
