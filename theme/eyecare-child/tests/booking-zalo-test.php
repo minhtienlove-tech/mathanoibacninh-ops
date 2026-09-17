@@ -86,6 +86,14 @@ ec_expect($failed_diagnostic['webhook']==='mismatch' && $failed_diagnostic['endp
 $activity=ec_zalo_webhook_receive(new EcZaloWebhookRequest(array('ok'=>true,'result'=>array('message'=>array('text'=>'/nhanlich','from'=>array('display_name'=>'Nhân viên','is_bot'=>false),'chat'=>array('id'=>'abc.xyz'))))));
 $recorded=ec_zalo_settings();
 ec_expect($activity===array('ok'=>true) && $recorded['webhook_last_event']==='message' && $recorded['webhook_last_command']==='nhanlich','Verified webhook records only safe event progress, not message text');
+$needs_selection=$recorded;
+$needs_selection['chat_id']='';
+$needs_selection['webhook_cipher']=ec_zalo_encrypt('Webhook_secret.123');
+$needs_selection['webhook_last_event']='never';
+$needs_selection['webhook_last_command']='none';
+$needs_selection_activity=ec_zalo_activity($needs_selection);
+$needs_selection_progress=ec_zalo_progress_label($needs_selection,$diagnostic,$needs_selection_activity);
+ec_expect(strpos($needs_selection_progress,'Chọn Chat ID')!==false,'Existing recipient candidates take priority over an empty new activity log');
 $duplicate=ec_zalo_webhook_receive(new EcZaloWebhookRequest(array('ok'=>true,'result'=>array('message'=>array('text'=>'/nhanlich','from'=>array('display_name'=>'Nhân viên','is_bot'=>false),'chat'=>array('id'=>'abc.xyz'))))));
 $recorded=ec_zalo_settings();
 ec_expect($duplicate===array('ok'=>true) && $recorded['webhook_last_outcome']==='duplicate' && $recorded['webhook_last_command']==='nhanlich','Duplicate command is visible without losing opt-in progress');

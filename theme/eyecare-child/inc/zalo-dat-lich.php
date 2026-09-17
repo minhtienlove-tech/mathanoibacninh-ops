@@ -251,6 +251,7 @@ function ec_zalo_progress_label( $settings, $diagnostic, $activity ) {
 	if ( 'ok' !== ( $diagnostic['bot'] ?? '' ) ) { return 'Bot chưa được Zalo xác minh.'; }
 	if ( 'matched' !== ( $diagnostic['webhook'] ?? '' ) ) { return 'Webhook chưa được cấu hình đúng URL website.'; }
 	if ( 'ok' !== ( $diagnostic['endpoint'] ?? '' ) ) { return 'Zalo chưa xác nhận gọi được endpoint của website.'; }
+	if ( $activity['candidate_count'] > 0 && ! ec_zalo_valid_chat( $settings['chat_id'] ) ) { return 'Đã tìm thấy người nhận. Chọn Chat ID, lưu cấu hình rồi gửi tin kiểm tra.'; }
 	if ( 'never' === $activity['event'] ) { return 'Kết nối đã sẵn sàng. Đang chờ Zalo gửi lệnh /nhanlich.'; }
 	if ( 'nhanlich' !== $activity['command'] ) { return 'Website đã nhận sự kiện nhưng chưa phải lệnh /nhanlich.'; }
 	if ( ! ec_zalo_valid_chat( $settings['chat_id'] ) ) { return 'Đã nhận /nhanlich. Chọn Chat ID, lưu cấu hình rồi gửi tin kiểm tra.'; }

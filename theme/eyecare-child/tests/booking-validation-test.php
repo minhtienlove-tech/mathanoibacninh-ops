@@ -26,6 +26,7 @@ function do_action( ...$args ) {}
 function add_filter( ...$args ) {}
 function wp_salt( $scheme ) { return 'standalone-test-salt'; }
 function current_time( $type, $gmt = false ) { return 'timestamp' === $type ? 1777777777 : '2026-05-03 01:02:03'; }
+function absint( $value ) { return abs( (int) $value ); }
 function wp_json_encode( $value, $flags = 0 ) { return json_encode( $value, $flags ); }
 function wp_slash( $value ) { return is_array( $value ) ? array_map( 'wp_slash', $value ) : ( is_string( $value ) ? addslashes( $value ) : $value ); }
 function wp_unslash( $value ) { return is_array( $value ) ? array_map( 'wp_unslash', $value ) : ( is_string( $value ) ? stripslashes( $value ) : $value ); }
