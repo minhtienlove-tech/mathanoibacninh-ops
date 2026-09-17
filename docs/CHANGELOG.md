@@ -109,4 +109,4 @@
 
 ## 2026-09-17
 
-- Zalo booking notifications now include the requester name and callback phone for selected, verified private staff recipients; the booking consent text now describes this internal scheduling use.
+- Thông báo đặt lịch Zalo gồm họ tên và số điện thoại liên hệ cho các tài khoản nhân viên chat riêng đã xác thực và được chọn; biểu mẫu đặt lịch nêu rõ việc dùng nội bộ này. Đã sao lưu file/database tại `/home/jwhxtzru/backups/mathanoibacninh-zalo-contact-20260917-165120/`.
