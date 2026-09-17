@@ -143,7 +143,9 @@ ec_expect( ec_zalo_candidates(array($other,array('message'=>'bad')) )===array('a
 $unverified_settings=array('candidates'=>array('legacy.abc'=>'Webhook diagnostic'),'candidate_chat_types'=>array());
 ec_expect( ec_zalo_candidate_list($unverified_settings)===array(), 'Unverified legacy and diagnostic Chat IDs are hidden from recipient selection' );
 $text=ec_zalo_message(get_post(1));$booking_data=ec_booking_read(get_post(1));
-ec_expect( strpos($text,$booking_data['name'])===false && strpos($text,$booking_data['phone'])===false && strpos($text,'post=1&action=edit')!==false, 'Notifications contain admin link, not patient name or phone' );
+ec_expect( strpos($text,'Họ tên: '.$booking_data['name'])!==false && strpos($text,'Điện thoại: '.$booking_data['phone'])!==false && strpos($text,'post=1&action=edit')!==false && strpos($text,$booking_data['fingerprint'] ?? '')===false && strpos($text,$booking_data['received_at'] ?? '')===false, 'Notifications contain the minimum contact data and no booking internals' );
+$legacy_post=clone get_post(1);$legacy_post->post_content=wp_json_encode(array('name'=>"Tên\nđã sửa",'phone'=>"090\n123"));$legacy_text=ec_zalo_message($legacy_post);
+ec_expect(strpos($legacy_text,'Họ tên: Tên đã sửa')!==false && strpos($legacy_text,"Tên\nđã sửa")===false && strpos($legacy_text,"090\n123")===false && substr_count($legacy_text,'Chưa cung cấp')===1,'Malformed legacy contact data cannot inject message lines');
 $legacy_settings=$recorded;$legacy_settings['enabled']=true;$legacy_settings['candidate_chat_types']=array();$GLOBALS['zalo_events']=array();update_option('ec_booking_zalo',$legacy_settings,false);ec_zalo_queue(1);
 ec_expect(empty($GLOBALS['zalo_events']),'Legacy or group candidates without a private-chat confirmation never queue a notification');
 $settings=$recorded;
@@ -155,6 +157,8 @@ ec_expect( count($GLOBALS['zalo_events'])===1 && get_post_meta(1,'_ec_zalo_state
 ec_test_zalo_response(200,array('ok'=>true,'result'=>array('message_id'=>'message-2')));
 $before=count($GLOBALS['zalo_http_calls']);ec_zalo_deliver(1);ec_zalo_deliver(1);
 ec_expect( get_post_meta(1,'_ec_zalo_state')==='sent' && count($GLOBALS['zalo_http_calls'])===$before+1, 'Repeated worker execution does not duplicate sent notification' );
+$sent_body=json_decode($GLOBALS['zalo_http_calls'][$before][1]['body'],true);
+ec_expect(($sent_body['chat_id'] ?? '')==='abc.xyz' && ($sent_body['text'] ?? '')===ec_zalo_message(get_post(1)),'Zalo delivery sends only the reviewed booking message to the selected recipient');
 ec_zalo_queue(2);$settings['version']='new-recipient';update_option('ec_booking_zalo',$settings,false);ec_zalo_deliver(2);
 ec_expect( get_post_meta(2,'_ec_zalo_state')==='skipped' && count($GLOBALS['zalo_http_calls'])===$before+1, 'Queued notification never silently switches recipient' );
 update_post_meta(2,'_ec_zalo_state','retry');ec_zalo_queue(2);

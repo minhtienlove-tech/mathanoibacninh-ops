@@ -23,7 +23,7 @@ https://mathanoibacninh.com/wp-admin/edit.php?post_type=ec_appointment&page=ec-z
 ## Hoạt động
 
 - Mặc định tắt. Chỉ xếp hàng thông báo cho yêu cầu mới được lưu thành công sau khi bật; không gửi hàng loạt lịch cũ.
-- Nội dung gồm mã lịch, ngày, giờ và liên kết admin. Không gửi tên, số điện thoại hoặc ghi chú bệnh nhân.
+- Nội dung gồm mã lịch, họ tên, số điện thoại, ngày, giờ và liên kết admin để nhân viên đã được chọn có thể xác nhận lịch. Không gửi ghi chú, lý do khám hoặc dữ liệu khám chữa bệnh khác; không ghi thông tin người đặt vào nhật ký, trạng thái gửi hoặc Git.
 - WordPress Cron xử lý nền; thời gian gửi phụ thuộc hoạt động Cron/lượt truy cập. Lưu lịch vẫn thành công khi Zalo gặp lỗi.
 - Trong chi tiết lịch hẹn có ô **Thông báo Zalo** ghi kết quả. Nếu một số tài khoản không nhận được, trạng thái là **Đã gửi đến một phần tài khoản Zalo**; lần gửi lại chỉ gửi cho tài khoản chưa được xác nhận. Nếu kết quả chưa xác định, kiểm tra Zalo trước khi bấm gửi lại; hệ thống không tự gửi lại khi có nguy cơ trùng tin.
 - Đổi token sẽ bỏ lựa chọn người nhận; cần chọn lại và kiểm tra kết nối. Thay đổi bot/người nhận sẽ bỏ qua thông báo đang chờ theo cấu hình cũ.

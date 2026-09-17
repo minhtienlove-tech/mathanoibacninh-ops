@@ -106,3 +106,7 @@
 - Tăng tương phản breadcrumb trên hero trang chuyên mục.
 - Xóa dải “Website mới đang được hoàn thiện” trên trang Liên hệ.
 - Backup liên quan nằm trong `/home/jwhxtzru/backups/` trên server.
+
+## 2026-09-17
+
+- Zalo booking notifications now include the requester name and callback phone for selected, verified private staff recipients; the booking consent text now describes this internal scheduling use.

@@ -532,9 +532,21 @@ function ec_zalo_queue( $id ) {
 }
 add_action( 'ec_booking_created', 'ec_zalo_queue' );
 
+/** Validate contact data again at the outbound boundary; legacy records can be altered. */
+function ec_zalo_booking_contact( $data ) {
+	$data = is_array( $data ) ? $data : array();
+	$name = is_string( $data['name'] ?? null ) ? trim( preg_replace( '/\s+/u', ' ', preg_replace( '/[\x00-\x1F\x7F]+/', ' ', $data['name'] ) ?? '' ) ?? '' ) : '';
+	$phone = is_string( $data['phone'] ?? null ) ? $data['phone'] : '';
+	return array(
+		'name'  => preg_match( '/^[\p{L}\p{M}][\p{L}\p{M} .\x{2019}\x{0027}-]{1,99}$/uD', $name ) ? $name : 'Chưa cung cấp',
+		'phone' => preg_match( '/^[0-9]{9,15}$/D', $phone ) ? $phone : 'Chưa cung cấp',
+	);
+}
+
 function ec_zalo_message( $post ) {
 	$data = ec_booking_read( $post );
-	return "CÓ YÊU CẦU ĐẶT LỊCH MỚI\nBệnh viện Mắt Hà Nội – Bắc Ninh\nMã lịch: #" . $post->ID . "\nNgày khám: " . ec_booking_admin_date_label( $data['date'] ?? '' ) . "\nGiờ khám: " . ( $data['time'] ?? '' ) . "\nTrạng thái: Chờ xác nhận\nXem chi tiết: " . admin_url( 'post.php?post=' . (int) $post->ID . '&action=edit' );
+	$contact = ec_zalo_booking_contact( $data );
+	return "CÓ YÊU CẦU ĐẶT LỊCH MỚI\nBệnh viện Mắt Hà Nội – Bắc Ninh\nMã lịch: #" . $post->ID . "\nHọ tên: " . $contact['name'] . "\nĐiện thoại: " . $contact['phone'] . "\nNgày khám: " . ec_booking_admin_date_label( $data['date'] ?? '' ) . "\nGiờ khám: " . ( $data['time'] ?? '' ) . "\nTrạng thái: Chờ xác nhận\nXem chi tiết: " . admin_url( 'post.php?post=' . (int) $post->ID . '&action=edit' );
 }
 
 /** Recipient identifiers are not retained in appointment metadata. */
