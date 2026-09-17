@@ -45,6 +45,7 @@ $token = '123456789:dummy_test_token';
 $cipher = ec_zalo_encrypt( $token );
 ec_expect( is_string( $cipher ) && strpos( $cipher, $token ) === false, 'Token encrypted at rest' );
 ec_expect( ec_zalo_token( array( 'cipher' => $cipher ) ) === $token, 'Encrypted token round trip' );
+ec_expect( ec_zalo_mask_webhook_secret( 'Webhook_secret.123' ) === 'Webh***' && ec_zalo_mask_webhook_secret( 'bad' ) === '', 'Webhook secret is only shown as a short masked prefix' );
 ec_expect( ec_zalo_token( array( 'cipher' => 'malformed' ) ) === '', 'Malformed ciphertext fails closed' );
 $raw=base64_decode($cipher);$raw[strlen($raw)-1]=chr(ord($raw[strlen($raw)-1])^1);
 ec_expect( ec_zalo_token( array( 'cipher' => base64_encode($raw) ) ) === '', 'Tampered ciphertext rejected' );
