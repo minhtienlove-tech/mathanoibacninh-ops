@@ -25,6 +25,8 @@ initially stopped with `Call to undefined function ec_zalo_diagnose_webhook()`, 
 | Bot, URL, and endpoint checks report success independently | `php theme\eyecare-child\tests\booking-zalo-test.php` | PASS |
 | Missing token makes no Zalo API request | Same command | PASS |
 | URL mismatch and endpoint refusal are distinguishable | Same command | PASS |
+| A Zalo recipient refusal is mapped to a safe, actionable private-chat re-opt-in message | Same command | PASS |
+| Group chats and legacy candidates without a private-chat confirmation cannot receive notifications | Same command | PASS |
 | Existing recipient candidates prompt for Chat ID even when there is no new event yet | Same command | PASS |
 | Authenticated probes, opt-ins, duplicates, and unrelated messages produce safe progress metadata | Same command | PASS |
 | Raw message content is absent from progress metadata | Same command | PASS |
