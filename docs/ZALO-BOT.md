@@ -7,7 +7,7 @@ https://mathanoibacninh.com/wp-admin/edit.php?post_type=ec_appointment&page=ec-z
 
 1. Trong Zalo, tìm OA **Zalo Bot Manager**, chọn **Tạo bot** và đặt tên bắt đầu bằng “Bot”. Xem [hướng dẫn chính thức](https://docs.zaloplatforms.com/docs/BOT/create_bot).
 2. Dán Bot Token được cấp vào trang cài đặt rồi lưu. Không gửi token qua chat hoặc đưa vào Git. Token đã lưu không được hiển thị lại; để trống ô token khi cập nhật các mục khác. Nếu token đã xuất hiện trong ảnh hoặc cuộc trò chuyện, tạo token mới trong Zalo Bot Manager trước khi lưu.
-3. Bấm **Tạo Secret Webhook**, sao chép secret chỉ hiện một lần, rồi bấm **Kích hoạt Webhook**. Website gửi URL HTTPS và secret trực tiếp cho Zalo; không cần tự nhập lại trong Bot Manager. Webhook xác thực header `X-Bot-Api-Secret-Token` trước khi đọc dữ liệu.
+3. Bấm **Tạo Secret Webhook**, rồi bấm **Kích hoạt Webhook**. Website gửi URL HTTPS và secret trực tiếp cho Zalo; không cần tự nhập lại trong Bot Manager. Secret chỉ được lưu dạng mã hóa. Webhook xác thực header `X-Bot-Api-Secret-Token` trước khi đọc dữ liệu.
 4. Dùng tài khoản nhận thông báo nhắn `/nhanlich` cho bot, sau đó tải lại trang cài đặt. Chọn Chat ID xuất hiện trong danh sách rồi lưu cấu hình. Chat ID không phải số điện thoại.
 5. Bấm **Gửi tin kiểm tra đến Chat ID đã lưu**, kiểm tra đúng người nhận rồi bật **Thông báo tự động** và lưu.
 

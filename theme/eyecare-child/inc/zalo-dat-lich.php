@@ -183,8 +183,7 @@ function ec_zalo_admin_action() {
 		if ( is_wp_error( $cipher ) ) { ec_zalo_flash( $cipher->get_error_message(), true ); }
 		$settings['webhook_cipher'] = $cipher;
 		update_option( 'ec_booking_zalo', $settings, false );
-		set_transient( 'ec_zalo_new_webhook_secret_' . get_current_user_id(), $secret, 300 );
-		ec_zalo_flash( 'Đã tạo Secret Webhook. Sao chép ngay vào Zalo Bot Manager; secret chỉ hiện một lần.', false );
+		ec_zalo_flash( 'Đã tạo Secret Webhook an toàn. Bấm Kích hoạt Webhook để website gửi cấu hình cho Zalo.', false );
 	}
 	if ( 'activate_webhook' === $mode ) {
 		$secret = ec_zalo_webhook_secret( $settings );
@@ -216,7 +215,6 @@ function ec_zalo_page() {
 	$s = ec_zalo_settings();
 	$notice = get_transient( 'ec_zalo_notice_' . get_current_user_id() );
 	$candidates = array_merge( ec_zalo_candidate_list( $s ), is_array( get_transient( 'ec_zalo_candidates_' . get_current_user_id() ) ) ? get_transient( 'ec_zalo_candidates_' . get_current_user_id() ) : array() );
-	$new_webhook_secret = get_transient( 'ec_zalo_new_webhook_secret_' . get_current_user_id() );
 	?>
 	<div class="wrap" style="max-width:960px"><h1>Cài đặt thông báo Zalo</h1>
 	<p>Nhận thông báo khi website lưu thành công một yêu cầu đặt lịch mới. Tin nhắn gồm mã lịch, ngày giờ và liên kết xem chi tiết trong admin.</p>
@@ -226,7 +224,7 @@ function ec_zalo_page() {
 	<p><a href="https://docs.zaloplatforms.com/docs/BOT/create_bot" target="_blank" rel="noopener noreferrer">Hướng dẫn chính thức của Zalo</a></p>
 	<form method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><input type="hidden" name="action" value="ec_zalo_settings"><input type="hidden" name="ec_zalo_mode" value="save"><?php wp_nonce_field( 'ec_zalo_settings', 'ec_zalo_nonce' ); ?>
 	<table class="form-table"><tr><th scope="row"><label for="ec-zalo-token">Bot Token</label></th><td><input id="ec-zalo-token" name="bot_token" type="password" class="regular-text" autocomplete="new-password" maxlength="256" value="" placeholder="<?php echo ec_zalo_token( $s ) ? 'Đã lưu — để trống để giữ token hiện tại' : 'Dán Bot Token'; ?>"><p class="description">Token được mã hóa khi lưu, không hiển thị lại. Khi đổi bot, cần chọn lại người nhận.</p><?php if ( $s['bot_name'] ) : ?><p>Bot: <strong><?php echo esc_html( $s['bot_name'] ); ?></strong></p><?php endif; ?></td></tr>
-	<tr><th scope="row"><label for="ec-zalo-webhook-secret">Secret Webhook</label></th><td><input id="ec-zalo-webhook-secret" name="webhook_secret" type="password" class="regular-text" autocomplete="new-password" maxlength="256" value="" placeholder="<?php echo ec_zalo_webhook_secret( $s ) ? 'Đã lưu — để trống để giữ secret hiện tại' : 'Tạo secret bằng nút bên dưới'; ?>"><p class="description">Dùng cùng secret này với Zalo Bot Manager. Secret được mã hóa khi lưu.</p><?php if ( $new_webhook_secret ) : ?><p><strong>Sao chép secret này ngay:</strong> <code><?php echo esc_html( $new_webhook_secret ); ?></code></p><?php endif; ?></td></tr>
+	<tr><th scope="row"><label for="ec-zalo-webhook-secret">Secret Webhook</label></th><td><input id="ec-zalo-webhook-secret" name="webhook_secret" type="password" class="regular-text" autocomplete="new-password" maxlength="256" value="" placeholder="<?php echo ec_zalo_webhook_secret( $s ) ? 'Đã lưu — để trống để giữ secret hiện tại' : 'Tạo secret bằng nút bên dưới'; ?>"><p class="description">Secret được mã hóa khi lưu. Bấm Tạo Secret Webhook rồi Kích hoạt Webhook để website tự gửi cấu hình an toàn cho Zalo.</p></td></tr>
 	<tr><th scope="row"><label for="ec-zalo-chat">Chat ID người nhận</label></th><td><input id="ec-zalo-chat" name="chat_id" type="text" class="regular-text" list="ec-zalo-recipients" maxlength="128" value="<?php echo esc_attr( $s['chat_id'] ); ?>" autocomplete="off"><datalist id="ec-zalo-recipients"><?php if ( is_array( $candidates ) ) : foreach ( $candidates as $id => $name ) : ?><option value="<?php echo esc_attr( $id ); ?>"><?php echo esc_html( $name ); ?></option><?php endforeach; endif; ?></datalist><p class="description">Chat ID là mã cuộc trò chuyện của bot, không phải số điện thoại Zalo.</p><?php if ( is_array( $candidates ) && $candidates ) : ?><ul><?php foreach ( $candidates as $id => $name ) : ?><li><?php echo esc_html( $name ); ?>: <code><?php echo esc_html( $id ); ?></code></li><?php endforeach; ?></ul><?php endif; ?></td></tr>
 	<tr><th scope="row">Thông báo tự động</th><td><label><input type="checkbox" name="enabled" value="1" <?php checked( $s['enabled'] ); ?>> Bật thông báo cho các lịch đăng ký mới</label><p class="description">Lịch đã có trước khi bật sẽ không được gửi hàng loạt. Lịch vẫn được lưu nếu Zalo tạm thời không gửi được.</p></td></tr></table>
 	<?php submit_button( 'Lưu cấu hình Zalo' ); ?></form>
