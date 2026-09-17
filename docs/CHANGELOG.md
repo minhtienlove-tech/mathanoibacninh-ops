@@ -2,6 +2,10 @@
 
 ## 2026-09-17
 
+- Cho phép chọn tối đa 10 tài khoản Zalo đã nhắn riêng cho bot để cùng nhận thông báo lịch hẹn. Trang quản trị hiển thị tên Zalo, có nút cập nhật Chat ID từ Webhook và gửi kiểm tra đến toàn bộ tài khoản đã chọn. Khi gửi một phần thất bại, lịch hẹn chỉ gửi lại cho tài khoản chưa xác nhận; metadata lịch chỉ lưu mã băm người nhận đã gửi thành công. Backup triển khai: `/home/jwhxtzru/backups/zalo-multi-recipient-20260917-154612/`.
+
+- Chặn event chẩn đoán Webhook bị nhận nhầm là người nhận Zalo. Danh sách chỉ hiển thị Chat ID có event tin nhắn chính thức của Zalo và đã xác nhận chat riêng; ID cũ/chẩn đoán không còn xuất hiện hoặc chọn được. Backup triển khai: `/home/jwhxtzru/backups/zalo-webhook-diagnostic-filter-20260917-152500/`.
+
 - Sửa chọn người nhận Zalo: mọi tin nhắn đến từ chat riêng đã xác thực đều được lưu Chat ID, hiển thị rõ trong danh sách quản trị để chọn và bật thông báo. Bỏ yêu cầu bắt buộc `/nhanlich`; chat nhóm vẫn bị chặn. Khi chưa chọn Chat ID, thao tác bật thông báo hiển thị lý do thay vì tự tắt âm thầm. Backup triển khai: `/home/jwhxtzru/backups/zalo-chat-id-selection-20260917-150315/`.
 
 - Đã triển khai `17e4a0a` để chỉ cho phép người nhận Zalo từ event `/nhanlich` trong chat riêng, chặn candidate cũ/nhóm chưa được xác nhận và thay lỗi gửi chung bằng hướng dẫn an toàn theo trạng thái. Backup file/database tại `/home/jwhxtzru/backups/zalo-private-recipient-20260917-140900/`. Production xác nhận Bot, URL Webhook và endpoint đều đạt; Chat ID đã chọn chưa được xác nhận chat riêng nên thông báo tự động vẫn tắt. PHP lint, hash đối chiếu, endpoint không secret trả 403 và 6 URL smoke test đạt.
