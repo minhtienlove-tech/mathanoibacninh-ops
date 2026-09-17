@@ -4,7 +4,7 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
 
 function ec_zalo_settings() {
 	$raw = get_option( 'ec_booking_zalo', array() );
-	return wp_parse_args( is_array( $raw ) ? $raw : array(), array( 'enabled' => false, 'cipher' => '', 'webhook_cipher' => '', 'chat_id' => '', 'bot_name' => '', 'candidates' => array(), 'version' => '' ) );
+	return wp_parse_args( is_array( $raw ) ? $raw : array(), array( 'enabled' => false, 'cipher' => '', 'webhook_cipher' => '', 'chat_id' => '', 'bot_name' => '', 'candidates' => array(), 'version' => '', 'webhook_last_at' => 0, 'webhook_last_probe_at' => 0, 'webhook_last_event' => 'never', 'webhook_last_outcome' => 'never', 'webhook_last_command' => 'none', 'webhook_last_candidate_count' => 0 ) );
 }
 
 /** Token is encrypted in the database; never returned to a browser or written to Git. */
@@ -98,6 +98,68 @@ function ec_zalo_store_candidates( $found ) {
 	update_option( 'ec_booking_zalo', $settings, false );
 }
 
+/** Safe-only diagnostic result. It never contains API descriptions, tokens, secrets or chat data. */
+function ec_zalo_diagnose_webhook( $settings = null ) {
+	$settings = $settings ?? ec_zalo_settings();
+	$result = array( 'checked_at' => (int) current_time( 'timestamp', true ), 'bot' => 'missing', 'secret' => ec_zalo_valid_webhook_secret( ec_zalo_webhook_secret( $settings ) ) ? 'saved' : 'missing', 'webhook' => 'unknown', 'endpoint' => 'unknown' );
+	$token = ec_zalo_token( $settings );
+	if ( ! ec_zalo_valid_token( $token ) ) { return $result; }
+	$bot = ec_zalo_api( 'getMe', array(), $token );
+	$result['bot'] = is_wp_error( $bot ) ? ( 'uncertain' === $bot->get_error_code() ? 'uncertain' : 'rejected' ) : 'ok';
+	if ( 'ok' !== $result['bot'] ) { return $result; }
+	$webhook = ec_zalo_api( 'getWebhookInfo', array(), $token );
+	if ( is_wp_error( $webhook ) ) {
+		$result['webhook'] = 'uncertain' === $webhook->get_error_code() ? 'uncertain' : 'unknown';
+	} else {
+		$remote_url = is_string( $webhook['url'] ?? null ) ? $webhook['url'] : ( is_string( $webhook['webhook_url'] ?? null ) ? $webhook['webhook_url'] : ( is_string( $webhook['webhook']['url'] ?? null ) ? $webhook['webhook']['url'] : '' ) );
+		$result['webhook'] = '' === $remote_url ? 'missing' : ( hash_equals( rtrim( ec_zalo_webhook_url(), '/' ), rtrim( $remote_url, '/' ) ) ? 'matched' : 'mismatch' );
+	}
+	$endpoint = ec_zalo_api( 'testWebhook', array(), $token );
+	if ( is_wp_error( $endpoint ) ) {
+		$result['endpoint'] = 'uncertain' === $endpoint->get_error_code() ? 'uncertain' : 'failed';
+		return $result;
+	}
+	$webhook_result = is_array( $endpoint['webhook'] ?? null ) ? $endpoint['webhook'] : $endpoint;
+	$outcome = is_string( $webhook_result['outcome'] ?? null ) ? strtolower( $webhook_result['outcome'] ) : ( is_string( $webhook_result['status'] ?? null ) ? strtolower( $webhook_result['status'] ) : ( is_string( $webhook_result['code'] ?? null ) ? strtolower( $webhook_result['code'] ) : '' ) );
+	if ( true === ( $webhook_result['ok'] ?? null ) || 'webhook.ok' === $outcome ) {
+		$result['endpoint'] = 'ok';
+	} elseif ( str_contains( $outcome, 'tls' ) ) {
+		$result['endpoint'] = 'tls';
+	} elseif ( str_contains( $outcome, 'unreachable' ) ) {
+		$result['endpoint'] = 'unreachable';
+	} elseif ( '' !== $outcome ) {
+		$result['endpoint'] = 'failed';
+	} else {
+		$result['endpoint'] = 'unknown';
+	}
+	return $result;
+}
+
+function ec_zalo_record_webhook_activity( $event, $outcome, $command = 'none' ) {
+	$events = array( 'never', 'verification', 'message', 'unknown' );
+	$outcomes = array( 'never', 'recipient_found', 'not_command', 'unsupported', 'duplicate' );
+	$commands = array( 'none', 'nhanlich' );
+	$event = in_array( $event, $events, true ) ? $event : 'unknown';
+	$outcome = in_array( $outcome, $outcomes, true ) ? $outcome : 'unsupported';
+	$command = in_array( $command, $commands, true ) ? $command : 'none';
+	$settings = ec_zalo_settings();
+	$now = (int) current_time( 'timestamp', true );
+	if ( 'verification' === $event ) {
+		$settings['webhook_last_probe_at'] = $now;
+	} else {
+		$settings['webhook_last_at'] = $now;
+		$settings['webhook_last_event'] = $event;
+		$settings['webhook_last_outcome'] = $outcome;
+		$settings['webhook_last_command'] = $command;
+		$settings['webhook_last_candidate_count'] = count( ec_zalo_candidate_list( $settings ) );
+	}
+	update_option( 'ec_booking_zalo', $settings, false );
+}
+
+function ec_zalo_webhook_event_type( $event ) {
+	return is_array( $event ) && is_array( $event['message'] ?? null ) ? 'message' : 'unknown';
+}
+
 function ec_zalo_webhook_authorized( $request ) {
 	$secret = ec_zalo_webhook_secret();
 	$provided = $request->get_header( 'x-bot-api-secret-token' );
@@ -116,11 +178,20 @@ function ec_zalo_webhook_receive( $request ) {
 			$payload = is_array( $decoded ) ? $decoded : $payload;
 		}
 		// Zalo sends an authenticated empty POST while verifying a newly saved URL.
-		if ( ! is_array( $payload ) || true !== ( $payload['ok'] ?? null ) || ! is_array( $payload['result'] ?? null ) ) { return rest_ensure_response( array( 'ok' => true ) ); }
+		if ( ! is_array( $payload ) || true !== ( $payload['ok'] ?? null ) || ! is_array( $payload['result'] ?? null ) ) {
+			ec_zalo_record_webhook_activity( 'verification', 'never' );
+			return rest_ensure_response( array( 'ok' => true ) );
+		}
 		$event_key = hash( 'sha256', wp_json_encode( $payload['result'] ) );
-		if ( get_transient( 'ec_zalo_event_' . $event_key ) ) { return rest_ensure_response( array( 'ok' => true ) ); }
+		$event_type = ec_zalo_webhook_event_type( $payload['result'] );
+		if ( get_transient( 'ec_zalo_event_' . $event_key ) ) {
+			ec_zalo_record_webhook_activity( $event_type, 'duplicate', ec_zalo_candidates( $payload['result'] ) ? 'nhanlich' : 'none' );
+			return rest_ensure_response( array( 'ok' => true ) );
+		}
 		set_transient( 'ec_zalo_event_' . $event_key, 1, DAY_IN_SECONDS );
-		ec_zalo_store_candidates( ec_zalo_candidates( $payload['result'] ) );
+		$candidates = ec_zalo_candidates( $payload['result'] );
+		ec_zalo_store_candidates( $candidates );
+		ec_zalo_record_webhook_activity( $event_type, $candidates ? 'recipient_found' : ( 'message' === $event_type ? 'not_command' : 'unsupported' ), $candidates ? 'nhanlich' : 'none' );
 		return rest_ensure_response( array( 'ok' => true ) );
 	} catch ( Throwable $error ) {
 		error_log( 'EC_ZALO_EXCEPTION [webhook]: ' . $error->getMessage() );
@@ -146,11 +217,62 @@ function ec_zalo_flash( $message, $error = false ) {
 	exit;
 }
 
+function ec_zalo_diagnostic_key() { return 'ec_zalo_diagnostic_' . get_current_user_id(); }
+
+function ec_zalo_status_label( $group, $value ) {
+	$labels = array(
+		'bot' => array( 'missing' => 'Chưa lưu', 'ok' => 'Đã xác minh', 'rejected' => 'Zalo từ chối', 'uncertain' => 'Chưa xác định' ),
+		'secret' => array( 'saved' => 'Đã lưu', 'missing' => 'Chưa lưu' ),
+		'webhook' => array( 'matched' => 'Đúng URL website', 'missing' => 'Zalo chưa có URL', 'mismatch' => 'URL không khớp', 'unknown' => 'Chưa đọc được', 'uncertain' => 'Chưa xác định' ),
+		'endpoint' => array( 'ok' => 'Zalo gọi website thành công', 'failed' => 'Zalo chưa gọi được website', 'tls' => 'Lỗi bảo mật HTTPS', 'unreachable' => 'Zalo chưa kết nối được website', 'unknown' => 'Chưa xác nhận', 'uncertain' => 'Chưa xác định' ),
+		'event' => array( 'never' => 'Chưa có', 'verification' => 'Kiểm tra endpoint', 'message' => 'Tin nhắn', 'unknown' => 'Sự kiện khác' ),
+		'outcome' => array( 'never' => 'Chưa có', 'recipient_found' => 'Đã lưu người nhận', 'not_command' => 'Không phải lệnh /nhanlich', 'unsupported' => 'Sự kiện chưa hỗ trợ', 'duplicate' => 'Sự kiện lặp, không ghi trùng' ),
+		'command' => array( 'none' => 'Chưa nhận /nhanlich', 'nhanlich' => 'Đã nhận /nhanlich' ),
+	);
+	return $labels[ $group ][ $value ] ?? 'Chưa xác định';
+}
+
+function ec_zalo_activity( $settings = null ) {
+	$settings = $settings ?? ec_zalo_settings();
+	$event = in_array( $settings['webhook_last_event'] ?? '', array( 'never', 'verification', 'message', 'unknown' ), true ) ? $settings['webhook_last_event'] : 'never';
+	$outcome = in_array( $settings['webhook_last_outcome'] ?? '', array( 'never', 'recipient_found', 'not_command', 'unsupported', 'duplicate' ), true ) ? $settings['webhook_last_outcome'] : 'never';
+	$command = in_array( $settings['webhook_last_command'] ?? '', array( 'none', 'nhanlich' ), true ) ? $settings['webhook_last_command'] : 'none';
+	return array( 'last_at' => absint( $settings['webhook_last_at'] ?? 0 ), 'last_probe_at' => absint( $settings['webhook_last_probe_at'] ?? 0 ), 'event' => $event, 'outcome' => $outcome, 'command' => $command, 'candidate_count' => count( ec_zalo_candidate_list( $settings ) ) );
+}
+
+function ec_zalo_timestamp_label( $timestamp ) {
+	return $timestamp > 0 ? wp_date( 'd/m/Y H:i:s', $timestamp, wp_timezone() ) : 'Chưa có';
+}
+
+function ec_zalo_progress_label( $settings, $diagnostic, $activity ) {
+	if ( ! ec_zalo_valid_token( ec_zalo_token( $settings ) ) ) { return 'Đang dừng ở bước lưu Bot Token.'; }
+	if ( ! ec_zalo_valid_webhook_secret( ec_zalo_webhook_secret( $settings ) ) ) { return 'Đang dừng ở bước tạo Secret Webhook.'; }
+	if ( ! is_array( $diagnostic ) ) { return 'Chưa chạy kiểm tra Webhook.'; }
+	if ( 'ok' !== ( $diagnostic['bot'] ?? '' ) ) { return 'Bot chưa được Zalo xác minh.'; }
+	if ( 'matched' !== ( $diagnostic['webhook'] ?? '' ) ) { return 'Webhook chưa được cấu hình đúng URL website.'; }
+	if ( 'ok' !== ( $diagnostic['endpoint'] ?? '' ) ) { return 'Zalo chưa xác nhận gọi được endpoint của website.'; }
+	if ( 'never' === $activity['event'] ) { return 'Kết nối đã sẵn sàng. Đang chờ Zalo gửi lệnh /nhanlich.'; }
+	if ( 'nhanlich' !== $activity['command'] ) { return 'Website đã nhận sự kiện nhưng chưa phải lệnh /nhanlich.'; }
+	if ( ! ec_zalo_valid_chat( $settings['chat_id'] ) ) { return 'Đã nhận /nhanlich. Chọn Chat ID, lưu cấu hình rồi gửi tin kiểm tra.'; }
+	if ( ! $settings['enabled'] ) { return 'Đã có người nhận. Gửi tin kiểm tra, sau đó bật thông báo tự động.'; }
+	return 'Sẵn sàng gửi thông báo lịch hẹn mới.';
+}
+
 function ec_zalo_admin_action() {
 	if ( ! current_user_can( 'manage_options' ) ) { wp_die( 'Bạn không có quyền cấu hình Zalo.', '', array( 'response' => 403 ) ); }
 	check_admin_referer( 'ec_zalo_settings', 'ec_zalo_nonce' );
 	$settings = ec_zalo_settings();
 	$mode = isset( $_POST['ec_zalo_mode'] ) && is_string( $_POST['ec_zalo_mode'] ) ? sanitize_key( $_POST['ec_zalo_mode'] ) : '';
+	if ( 'diagnose_webhook' === $mode ) {
+		$key = ec_zalo_diagnostic_key();
+		$diagnostic = get_transient( $key );
+		if ( ! is_array( $diagnostic ) || absint( $diagnostic['checked_at'] ?? 0 ) < time() - 60 ) {
+			$diagnostic = ec_zalo_diagnose_webhook( $settings );
+			set_transient( $key, $diagnostic, 10 * MINUTE_IN_SECONDS );
+			ec_zalo_flash( 'Đã kiểm tra Bot, URL Webhook và endpoint từ Zalo. Xem bảng trạng thái bên dưới.', 'ok' !== $diagnostic['endpoint'] );
+		}
+		ec_zalo_flash( 'Đang hiển thị kết quả kiểm tra gần nhất để tránh vượt giới hạn kiểm tra của Zalo.', false );
+	}
 	if ( 'save' === $mode ) {
 		foreach ( array( 'bot_token', 'chat_id', 'webhook_secret' ) as $key ) { if ( ! isset( $_POST[ $key ] ) || ! is_string( $_POST[ $key ] ) ) { ec_zalo_flash( 'Thông tin cấu hình không hợp lệ.', true ); } }
 		$token = trim( wp_unslash( $_POST['bot_token'] ) );
@@ -198,6 +320,7 @@ function ec_zalo_admin_action() {
 		ec_zalo_flash( 'Webhook đã được Zalo xác nhận. Hãy nhắn /nhanlich cho bot rồi tải lại trang này để chọn người nhận.' );
 	}
 	if ( 'discover' === $mode ) {
+		if ( ec_zalo_valid_webhook_secret( ec_zalo_webhook_secret( $settings ) ) ) { ec_zalo_flash( 'Webhook đang được dùng. Zalo không cho lấy getUpdates song song; hãy nhắn /nhanlich rồi xem trạng thái Webhook ở đầu trang.', true ); }
 		$result = ec_zalo_api( 'getUpdates', array( 'timeout' => 2 ) );
 		if ( is_wp_error( $result ) ) { ec_zalo_flash( $result->get_error_message(), true ); }
 		$found = ec_zalo_candidates( $result );
@@ -218,11 +341,28 @@ function ec_zalo_page() {
 	if ( ! current_user_can( 'manage_options' ) ) { wp_die( 'Bạn không có quyền truy cập.' ); }
 	$s = ec_zalo_settings();
 	$notice = get_transient( 'ec_zalo_notice_' . get_current_user_id() );
+	$diagnostic = get_transient( ec_zalo_diagnostic_key() );
+	$activity = ec_zalo_activity( $s );
 	$candidates = array_merge( ec_zalo_candidate_list( $s ), is_array( get_transient( 'ec_zalo_candidates_' . get_current_user_id() ) ) ? get_transient( 'ec_zalo_candidates_' . get_current_user_id() ) : array() );
 	?>
 	<div class="wrap" style="max-width:960px"><h1>Cài đặt thông báo Zalo</h1>
 	<p>Nhận thông báo khi website lưu thành công một yêu cầu đặt lịch mới. Tin nhắn gồm mã lịch, ngày giờ và liên kết xem chi tiết trong admin.</p>
 	<?php if ( is_array( $notice ) ) : ?><div class="notice <?php echo $notice['error'] ? 'notice-error' : 'notice-success'; ?>"><p><?php echo esc_html( $notice['message'] ); ?></p></div><?php endif; ?>
+	<div class="card" style="max-width:none;padding:20px 28px"><h2>Trạng thái kết nối</h2>
+	<p><strong><?php echo esc_html( ec_zalo_progress_label( $s, $diagnostic, $activity ) ); ?></strong></p>
+	<table class="widefat striped" style="max-width:760px"><tbody>
+	<tr><th scope="row">Bot Token</th><td><?php echo esc_html( is_array( $diagnostic ) ? ec_zalo_status_label( 'bot', $diagnostic['bot'] ?? '' ) : ( ec_zalo_valid_token( ec_zalo_token( $s ) ) ? 'Đã lưu, chưa kiểm tra' : 'Chưa lưu' ) ); ?></td></tr>
+	<tr><th scope="row">Secret Webhook</th><td><?php echo esc_html( ec_zalo_status_label( 'secret', ec_zalo_valid_webhook_secret( ec_zalo_webhook_secret( $s ) ) ? 'saved' : 'missing' ) ); ?></td></tr>
+	<tr><th scope="row">URL Webhook</th><td><?php echo esc_html( is_array( $diagnostic ) ? ec_zalo_status_label( 'webhook', $diagnostic['webhook'] ?? '' ) : 'Chưa kiểm tra' ); ?></td></tr>
+	<tr><th scope="row">Zalo gọi endpoint</th><td><?php echo esc_html( is_array( $diagnostic ) ? ec_zalo_status_label( 'endpoint', $diagnostic['endpoint'] ?? '' ) : 'Chưa kiểm tra' ); ?></td></tr>
+	<tr><th scope="row">Sự kiện Webhook gần nhất</th><td><?php if ( 'never' === $activity['event'] ) : ?><?php echo esc_html( $activity['last_probe_at'] ? 'Zalo đã kiểm tra endpoint: ' . ec_zalo_timestamp_label( $activity['last_probe_at'] ) : 'Chưa nhận được sự kiện đã xác thực từ Zalo.' ); ?><?php else : ?><?php echo esc_html( ec_zalo_status_label( 'event', $activity['event'] ) . ' - ' . ec_zalo_status_label( 'outcome', $activity['outcome'] ) . ' - ' . ec_zalo_timestamp_label( $activity['last_at'] ) ); ?><?php endif; ?></td></tr>
+	<tr><th scope="row">Lệnh /nhanlich</th><td><?php echo esc_html( ec_zalo_status_label( 'command', $activity['command'] ) ); ?></td></tr>
+	<tr><th scope="row">Người nhận tìm được</th><td><?php echo esc_html( (string) $activity['candidate_count'] ); ?></td></tr>
+	<tr><th scope="row">Chat ID đã chọn</th><td><?php echo esc_html( ec_zalo_valid_chat( $s['chat_id'] ) ? 'Đã chọn' : 'Chưa chọn' ); ?></td></tr>
+	<tr><th scope="row">Thông báo tự động</th><td><?php echo esc_html( $s['enabled'] ? 'Đang bật' : 'Đang tắt' ); ?></td></tr>
+	</tbody></table>
+	<form style="margin-top:16px" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><input type="hidden" name="action" value="ec_zalo_settings"><input type="hidden" name="ec_zalo_mode" value="diagnose_webhook"><?php wp_nonce_field( 'ec_zalo_settings', 'ec_zalo_nonce' ); ?><button class="button button-primary">Kiểm tra Webhook ngay</button></form>
+	<p class="description">Nút này không gửi tin nhắn, không cần Chat ID và chỉ hiển thị trạng thái an toàn. Kết quả được giới hạn một lần mỗi phút để tránh vượt hạn mức của Zalo.</p></div>
 	<div class="card" style="max-width:none;padding:20px 28px"><h2>1. Tạo và kết nối bot</h2>
 	<ol><li>Trong Zalo, tìm OA <strong>Zalo Bot Manager</strong>, chọn <strong>Tạo bot</strong>. Đặt tên bắt đầu bằng “Bot”, ví dụ “Bot Lịch khám HN–BN”.</li><li>Dán Bot Token Zalo gửi cho bạn vào ô bên dưới rồi lưu.</li><li>Tạo Secret Webhook, sau đó bấm <strong>Kích hoạt Webhook</strong>. Website sẽ nhận tin <code>/nhanlich</code> ổn định mà không cần long polling.</li><li>Dùng tài khoản nhận thông báo nhắn <code>/nhanlich</code> cho bot, tải lại trang, chọn Chat ID rồi gửi tin kiểm tra.</li></ol>
 	<p><a href="https://docs.zaloplatforms.com/docs/BOT/create_bot" target="_blank" rel="noopener noreferrer">Hướng dẫn chính thức của Zalo</a></p>
@@ -234,8 +374,9 @@ function ec_zalo_page() {
 	<?php submit_button( 'Lưu cấu hình Zalo' ); ?></form>
 	<?php foreach ( array( 'generate_webhook_secret' => 'Tạo Secret Webhook', 'activate_webhook' => 'Kích hoạt Webhook' ) as $mode => $label ) : ?><form style="display:inline-block;margin-right:12px" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><input type="hidden" name="action" value="ec_zalo_settings"><input type="hidden" name="ec_zalo_mode" value="<?php echo esc_attr( $mode ); ?>"><?php wp_nonce_field( 'ec_zalo_settings', 'ec_zalo_nonce' ); ?><button class="button" <?php disabled( 'activate_webhook' === $mode && ( ! ec_zalo_token( $s ) || ! ec_zalo_webhook_secret( $s ) ) ); ?>><?php echo esc_html( $label ); ?></button></form><?php endforeach; ?>
 	<p class="description">Webhook URL: <code><?php echo esc_html( ec_zalo_webhook_url() ); ?></code></p></div>
-	<div class="card" style="max-width:none;padding:20px 28px"><h2>2. Kiểm tra người nhận</h2><p>Sau khi Webhook đã kích hoạt, nhắn <code>/nhanlich</code> cho bot rồi tải lại trang này. Tài khoản đó sẽ xuất hiện trong danh sách Chat ID. Nút tìm chỉ là phương án dự phòng khi chưa bật Webhook.</p>
-	<?php foreach ( array( 'discover' => 'Tìm người nhận', 'test' => 'Gửi tin kiểm tra đến Chat ID đã lưu' ) as $mode => $label ) : ?><form style="display:inline-block;margin-right:12px" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><input type="hidden" name="action" value="ec_zalo_settings"><input type="hidden" name="ec_zalo_mode" value="<?php echo esc_attr( $mode ); ?>"><?php wp_nonce_field( 'ec_zalo_settings', 'ec_zalo_nonce' ); ?><button class="button" <?php disabled( ! ec_zalo_token( $s ) ); ?>><?php echo esc_html( $label ); ?></button></form><?php endforeach; ?>
+	<div class="card" style="max-width:none;padding:20px 28px"><h2>2. Kiểm tra người nhận</h2><p>Sau khi Webhook đã kích hoạt, nhắn <code>/nhanlich</code> cho bot rồi tải lại trang này. Tài khoản đó sẽ xuất hiện trong danh sách Chat ID. Xem dòng “Sự kiện Webhook gần nhất” ở đầu trang để biết lệnh đã tới website hay chưa.</p>
+	<?php if ( ! ec_zalo_valid_webhook_secret( ec_zalo_webhook_secret( $s ) ) ) : ?><form style="display:inline-block;margin-right:12px" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><input type="hidden" name="action" value="ec_zalo_settings"><input type="hidden" name="ec_zalo_mode" value="discover"><?php wp_nonce_field( 'ec_zalo_settings', 'ec_zalo_nonce' ); ?><button class="button" <?php disabled( ! ec_zalo_token( $s ) ); ?>>Tìm người nhận khi chưa dùng Webhook</button></form><?php endif; ?>
+	<form style="display:inline-block;margin-right:12px" method="post" action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>"><input type="hidden" name="action" value="ec_zalo_settings"><input type="hidden" name="ec_zalo_mode" value="test"><?php wp_nonce_field( 'ec_zalo_settings', 'ec_zalo_nonce' ); ?><button class="button" <?php disabled( ! ec_zalo_token( $s ) ); ?>>Gửi tin kiểm tra đến Chat ID đã lưu</button></form>
 	<p class="description">Thông báo được xử lý nền qua WordPress Cron, có thể chậm tùy lượt truy cập. Có thể xem kết quả gửi trong chi tiết từng lịch hẹn.</p></div></div>
 	<?php
 }

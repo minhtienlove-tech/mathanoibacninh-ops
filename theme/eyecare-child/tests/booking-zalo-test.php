@@ -1,6 +1,17 @@
 <?php
 /** In-memory tests: no real credentials, network calls or Zalo messages. */
 require __DIR__ . '/booking-validation-test.php';
+if ( ! function_exists( 'openssl_encrypt' ) ) {
+	if ( ! defined( 'OPENSSL_RAW_DATA' ) ) { define( 'OPENSSL_RAW_DATA', 1 ); }
+	function openssl_encrypt( $data, $cipher, $key, $options, $iv, &$tag ) {
+		$tag = substr( hash_hmac( 'sha256', $iv . $data, $key, true ), 0, 16 );
+		return $data;
+	}
+	function openssl_decrypt( $data, $cipher, $key, $options, $iv, $tag ) {
+		$expected = substr( hash_hmac( 'sha256', $iv . $data, $key, true ), 0, 16 );
+		return hash_equals( $expected, $tag ) ? $data : false;
+	}
+}
 require dirname( __DIR__ ) . '/inc/quan-ly-dat-lich.php';
 require dirname( __DIR__ ) . '/inc/zalo-dat-lich.php';
 function wp_parse_args( $args, $defaults ) { return array_merge( $defaults, $args ); }
@@ -11,11 +22,21 @@ function update_post_meta( $id, $key, $value ) { $GLOBALS['zalo_meta'][$id][$key
 function wp_next_scheduled( $hook, $args ) { return $GLOBALS['zalo_events'][$args[0]] ?? false; }
 function wp_schedule_single_event( $time, $hook, $args, $error = false ) { if ( ! empty( $GLOBALS['zalo_schedule_fail'] ) ) { return false; } $GLOBALS['zalo_events'][$args[0]] = $time; return true; }
 function admin_url( $path ) { return 'https://example.test/wp-admin/' . $path; }
-function wp_remote_post( $url, $args ) { $GLOBALS['zalo_http_calls'][] = array( $url, $args ); return $GLOBALS['zalo_response']; }
+function rest_url( $path ) { return 'https://example.test/wp-json/' . ltrim( $path, '/' ); }
+function wp_remote_post( $url, $args ) { $GLOBALS['zalo_http_calls'][] = array( $url, $args ); return ! empty( $GLOBALS['zalo_response_queue'] ) ? array_shift( $GLOBALS['zalo_response_queue'] ) : $GLOBALS['zalo_response']; }
 function wp_remote_retrieve_response_code( $response ) { return $response['response']['code']; }
 function wp_remote_retrieve_body( $response ) { return $response['body']; }
 function ec_test_zalo_response( $code, $body ) { $GLOBALS['zalo_response'] = array( 'response' => array( 'code' => $code ), 'body' => json_encode( $body ) ); }
+function ec_test_zalo_queue( $responses ) { $GLOBALS['zalo_response_queue'] = array_map( function ( $response ) { return array( 'response' => array( 'code' => $response[0] ), 'body' => json_encode( $response[1] ) ); }, $responses ); }
+function rest_ensure_response( $value ) { return $value; }
+class EcZaloWebhookRequest {
+	private $payload;
+	public function __construct( $payload ) { $this->payload = $payload; }
+	public function get_json_params() { return $this->payload; }
+	public function get_body() { return is_array( $this->payload ) ? json_encode( $this->payload ) : ''; }
+}
 $GLOBALS['zalo_http_calls'] = array();
+$GLOBALS['zalo_response_queue'] = array();
 $GLOBALS['zalo_meta'] = array();
 $GLOBALS['zalo_events'] = array();
 ec_expect( ec_zalo_settings()['enabled'] === false, 'Notifications disabled without configuration' );
@@ -45,6 +66,37 @@ ec_test_zalo_response(401,array('ok'=>false,'description'=>'secret '.$token));
 ec_expect_error(ec_zalo_api('getMe'),'api','API refusal handled without raw secret-bearing description');
 ec_test_zalo_response(200,array('ok'=>false,'error_code'=>408,'description'=>'Request timeout'));
 ec_expect(ec_zalo_api('getUpdates',array('timeout'=>2))===array(),'Long-poll timeout is an empty update set, not a credential error');
+ec_test_zalo_queue(array(
+	array(200,array('ok'=>true,'result'=>array('account_name'=>'Bot thử nghiệm'))),
+	array(200,array('ok'=>true,'result'=>array('url'=>ec_zalo_webhook_url()))),
+	array(200,array('ok'=>true,'result'=>array('webhook'=>array('status'=>'webhook.ok')))),
+));
+$diagnostic=ec_zalo_diagnose_webhook();
+ec_expect($diagnostic['bot']==='ok' && $diagnostic['webhook']==='matched' && $diagnostic['endpoint']==='ok','Webhook diagnostic reports a verified Bot, configured URL and reachable endpoint');
+$calls_before_missing_diagnostic=count($GLOBALS['zalo_http_calls']);
+$missing_diagnostic=ec_zalo_diagnose_webhook(array('cipher'=>'','webhook_cipher'=>''));
+ec_expect($missing_diagnostic['bot']==='missing' && count($GLOBALS['zalo_http_calls'])===$calls_before_missing_diagnostic,'Missing token is reported without a network request');
+ec_test_zalo_queue(array(
+	array(200,array('ok'=>true,'result'=>array('account_name'=>'Bot thử nghiệm'))),
+	array(200,array('ok'=>true,'result'=>array('url'=>'https://other.example/webhook'))),
+	array(200,array('ok'=>true,'result'=>array('webhook'=>array('outcome'=>'webhook.http.403')))),
+));
+$failed_diagnostic=ec_zalo_diagnose_webhook();
+ec_expect($failed_diagnostic['webhook']==='mismatch' && $failed_diagnostic['endpoint']==='failed','Webhook diagnostic distinguishes URL mismatch and an endpoint refusal');
+$activity=ec_zalo_webhook_receive(new EcZaloWebhookRequest(array('ok'=>true,'result'=>array('message'=>array('text'=>'/nhanlich','from'=>array('display_name'=>'Nhân viên','is_bot'=>false),'chat'=>array('id'=>'abc.xyz'))))));
+$recorded=ec_zalo_settings();
+ec_expect($activity===array('ok'=>true) && $recorded['webhook_last_event']==='message' && $recorded['webhook_last_command']==='nhanlich','Verified webhook records only safe event progress, not message text');
+$duplicate=ec_zalo_webhook_receive(new EcZaloWebhookRequest(array('ok'=>true,'result'=>array('message'=>array('text'=>'/nhanlich','from'=>array('display_name'=>'Nhân viên','is_bot'=>false),'chat'=>array('id'=>'abc.xyz'))))));
+$recorded=ec_zalo_settings();
+ec_expect($duplicate===array('ok'=>true) && $recorded['webhook_last_outcome']==='duplicate' && $recorded['webhook_last_command']==='nhanlich','Duplicate command is visible without losing opt-in progress');
+$probe=ec_zalo_webhook_receive(new EcZaloWebhookRequest(array()));
+$recorded=ec_zalo_settings();
+ec_expect($probe===array('ok'=>true) && $recorded['webhook_last_probe_at']>0 && $recorded['webhook_last_command']==='nhanlich','Verified endpoint probes are separate from the latest inbound command');
+$private_text='Nội dung không được ghi lại';
+ec_zalo_webhook_receive(new EcZaloWebhookRequest(array('ok'=>true,'result'=>array('message'=>array('text'=>$private_text,'from'=>array('display_name'=>'Nhân viên','is_bot'=>false),'chat'=>array('id'=>'abc.xyz'))))));
+$recorded=ec_zalo_settings();
+$safe_metadata=wp_json_encode(array('event'=>$recorded['webhook_last_event'],'outcome'=>$recorded['webhook_last_outcome'],'command'=>$recorded['webhook_last_command'],'count'=>$recorded['webhook_last_candidate_count']));
+ec_expect($recorded['webhook_last_outcome']==='not_command' && strpos($safe_metadata,$private_text)===false,'Webhook progress metadata never stores raw message content');
 $event=array('message'=>array('text'=>'/nhanlich','from'=>array('display_name'=>'Nhân viên','is_bot'=>false),'chat'=>array('id'=>'abc.xyz')));
 ec_expect( ec_zalo_candidates($event)===array('abc.xyz'=>'Nhân viên'), 'Extract recipient from documented event format' );
 ec_expect( ec_zalo_candidates(array('result'=>$event))===array('abc.xyz'=>'Nhân viên'), 'Webhook envelope extracts recipient candidate' );
