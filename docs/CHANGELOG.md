@@ -1,5 +1,9 @@
 # Production changelog
 
+## 2026-09-17
+
+- Sửa kết nối thông báo Zalo Bot: mã `408 Request timeout` của `getUpdates` nay được hiểu là chưa có tin nhắn mới, không còn báo nhầm lỗi token/Chat ID. Bổ sung Webhook HTTPS có xác thực `X-Bot-Api-Secret-Token`, chống nhận trùng và ghi nhận người đã nhắn `/nhanlich` để quản trị viên chọn Chat ID. Bổ sung tạo secret một lần và kích hoạt Webhook từ trang Cài đặt Zalo; thông báo tự động vẫn tắt cho tới khi quản trị viên chọn người nhận và tự bật.
+
 ## 2026-09-15
 
 - Đã hoàn tất ánh xạ 3 ảnh theo `1a730be`: backup database/file, cập nhật thumbnail, purge LiteSpeed; PHP lint và 6 URL đạt. Trình duyệt xác nhận đúng 3 tệp ảnh mới tải thành công trên các thẻ trẻ em/người cao tuổi/tăng nhãn áp; các thẻ khác không đổi.
