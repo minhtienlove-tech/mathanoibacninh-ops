@@ -441,3 +441,6 @@ require_once get_stylesheet_directory() . '/inc/quan-ly-dat-lich.php';
 require_once get_stylesheet_directory() . '/inc/zalo-dat-lich.php';
 require_once get_stylesheet_directory() . '/inc/gmail-dat-lich.php';
 require_once get_stylesheet_directory() . '/inc/lien-he-noi.php';
+
+/* Mô hình mắt 3D giáo dục — chỉ nạp asset khi trang kiến thức gọi tới. */
+require_once get_stylesheet_directory() . '/inc/mo-hinh-mat.php';

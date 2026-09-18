@@ -3,6 +3,7 @@
 ## 2026-09-18
 
 - Thêm khối **Máy móc hiện đại** vào trang chủ trước phần Dịch vụ của chúng tôi, gồm 6 ảnh thiết bị JPG đã tối ưu và slider tự chuyển. Có nút trước/sau, chấm chọn, tạm dừng/tiếp tục, vuốt trên điện thoại, bàn phím, fallback scroll-snap và hỗ trợ `prefers-reduced-motion`.
+- Khôi phục include `inc/mo-hinh-mat.php` trong `functions.php` để trang `/kien-thuc/` đăng ký lại hàm mô hình mắt 3D và không phát sinh lỗi 500.
 
 ## 2026-09-17
 
