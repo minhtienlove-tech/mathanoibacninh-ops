@@ -1,5 +1,9 @@
 # Production changelog
 
+## 2026-09-18
+
+- Thêm khối **Máy móc hiện đại** vào trang chủ trước phần Dịch vụ của chúng tôi, gồm 6 ảnh thiết bị JPG đã tối ưu và slider tự chuyển. Có nút trước/sau, chấm chọn, tạm dừng/tiếp tục, vuốt trên điện thoại, bàn phím, fallback scroll-snap và hỗ trợ `prefers-reduced-motion`.
+
 ## 2026-09-17
 
 - Cho phép chọn tối đa 10 tài khoản Zalo đã nhắn riêng cho bot để cùng nhận thông báo lịch hẹn. Trang quản trị hiển thị tên Zalo, có nút cập nhật Chat ID từ Webhook và gửi kiểm tra đến toàn bộ tài khoản đã chọn. Khi gửi một phần thất bại, lịch hẹn chỉ gửi lại cho tài khoản chưa xác nhận; metadata lịch chỉ lưu mã băm người nhận đã gửi thành công. Backup triển khai: `/home/jwhxtzru/backups/zalo-multi-recipient-20260917-154612/`.
