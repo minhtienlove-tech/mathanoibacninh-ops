@@ -129,7 +129,7 @@ function eyecare_secure_local_font_urls( $theme_json ) {
 	unset( $group );
 
 	if ( $changed ) {
-		$theme_json->update_with( array( 'settings' => array( 'typography' => array( 'fontFamilies' => $families ) ) ) );
+		$theme_json->update_with( array( 'version' => WP_Theme_JSON::LATEST_SCHEMA, 'settings' => array( 'typography' => array( 'fontFamilies' => $families ) ) ) );
 	}
 	return $theme_json;
 }
