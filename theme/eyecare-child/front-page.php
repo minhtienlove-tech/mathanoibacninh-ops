@@ -251,7 +251,7 @@ $tt = eyecare_du_lieu_thuc_the();
 							<li class="eyecare-equipment__slide<?php echo 0 === $i ? ' is-active' : ''; ?>" data-equipment-slide data-equipment-index="<?php echo (int) $i; ?>" aria-hidden="false">
 								<article class="eyecare-equipment__the">
 									<div class="eyecare-equipment__anh-wrap">
-										<img src="<?php echo esc_url( $thiet_bi_url . $tb['anh'] ); ?>" alt="<?php echo esc_attr( $tb['ten'] ); ?>" width="1122" height="1402" <?php echo 0 === $i ? 'fetchpriority="high"' : 'loading="lazy"'; ?> decoding="async">
+										<img src="<?php echo esc_url( $thiet_bi_url . $tb['anh'] ); ?>" alt="<?php echo esc_attr( $tb['ten'] ); ?>" width="1122" height="1402" loading="lazy" decoding="async">
 									</div>
 									<div class="eyecare-equipment__noi-dung">
 										<p class="eyecare-equipment__so"><?php echo esc_html( sprintf( '%02d / %02d', $i + 1, count( $thiet_bi ) ) ); ?></p>

@@ -83,6 +83,20 @@ function eyecare_home_refresh_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'eyecare_home_refresh_assets', 130 );
 
+/** Let the browser fetch the first visible hero image while CSS is still loading. */
+function eyecare_preload_first_hero_image() {
+	if ( ! is_front_page() || ! function_exists( 'eyecare_anh_slider' ) ) { return; }
+	$slides = eyecare_anh_slider();
+	if ( empty( $slides[0]['src'] ) ) { return; }
+	$first = $slides[0];
+	echo '<link rel="preload" as="image" href="' . esc_url( $first['src'] ) . '"';
+	if ( ! empty( $first['srcset'] ) ) {
+		echo ' imagesrcset="' . esc_attr( $first['srcset'] ) . '" imagesizes="(min-width: 1440px) 1360px, 94vw"';
+	}
+	echo ' fetchpriority="high">' . "\n";
+}
+add_action( 'wp_head', 'eyecare_preload_first_hero_image', 2 );
+
 /** Nạp slider máy móc hiện đại chỉ ở trang chủ. */
 function eyecare_nap_js_thiet_bi() {
 	if ( ! is_front_page() ) {

@@ -2,6 +2,8 @@
 
 ## 2026-09-23 — tối ưu hàng loạt theo yêu cầu
 
+- Đã tối ưu 171 attachment có một nội dung liên quan rõ ràng và file chính từ 100 KB trở lên; không có lỗi. Tổng file đang dùng + crop của nhóm này từ khoảng 93 MiB xuống 11 MiB; 5 slide trang chủ từ khoảng 32 MiB xuống 2,7 MiB. Ảnh <100 KB đã đủ nhẹ; ảnh chưa rõ bài liên quan hoặc dùng chung được giữ để tránh đặt tên sai. File và metadata gốc giữ nguyên để khôi phục từng ảnh. Backup đầy đủ database, uploads và file module tại `/home/jwhxtzru/backups/media-batch-20260923/`.
+- Ưu tiên tải ảnh slider đầu trong `<head>` với `imagesrcset` responsive; bỏ `fetchpriority="high"` khỏi ảnh thiết bị ở dưới vùng nhìn đầu để ảnh LCP được ưu tiên. Bố cục, nội dung và khối bác sĩ không thay đổi.
 - Bổ sung nhận diện ảnh slider trang chủ theo cấu hình 5 attachment để đặt tên `trang-chu-slider-anh-ID.webp`; nhận diện ảnh gắn hồ sơ bác sĩ và đánh giá từ post cha. Kiểm thử 20 assertion PHP; chuẩn bị chạy tối ưu thư viện theo từng lượt, giữ metadata/file gốc để khôi phục. Thống kê triển khai và backup sẽ ghi sau khi kiểm tra production.
 
 ## 2026-09-23
