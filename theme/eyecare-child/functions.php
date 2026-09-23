@@ -97,6 +97,52 @@ function eyecare_preload_first_hero_image() {
 }
 add_action( 'wp_head', 'eyecare_preload_first_hero_image', 2 );
 
+/** Correct old HTTP font URLs saved in the site's Global Styles without changing WordPress data. */
+function eyecare_secure_local_font_urls( $theme_json ) {
+	if ( ! $theme_json instanceof WP_Theme_JSON_Data ) {
+		return $theme_json;
+	}
+
+	$data = $theme_json->get_data();
+	$families = $data['settings']['typography']['fontFamilies'] ?? array();
+	if ( ! is_array( $families ) || ! $families ) {
+		return $theme_json;
+	}
+
+	$secure_prefix = content_url( '/uploads/fonts/' );
+	$insecure_prefix = set_url_scheme( $secure_prefix, 'http' );
+	$secure_prefix = set_url_scheme( $secure_prefix, 'https' );
+	$changed = false;
+	foreach ( $families as &$group ) {
+		if ( ! is_array( $group ) ) { continue; }
+		foreach ( $group as &$family ) {
+			if ( empty( $family['fontFace'] ) || ! is_array( $family['fontFace'] ) ) { continue; }
+			foreach ( $family['fontFace'] as &$face ) {
+				if ( empty( $face['src'] ) || ! is_string( $face['src'] ) || ! str_starts_with( $face['src'], $insecure_prefix ) ) { continue; }
+				$face['src'] = $secure_prefix . substr( $face['src'], strlen( $insecure_prefix ) );
+				$changed = true;
+			}
+			unset( $face );
+		}
+		unset( $family );
+	}
+	unset( $group );
+
+	if ( $changed ) {
+		$theme_json->update_with( array( 'settings' => array( 'typography' => array( 'fontFamilies' => $families ) ) ) );
+	}
+	return $theme_json;
+}
+add_filter( 'wp_theme_json_data_user', 'eyecare_secure_local_font_urls' );
+
+/** Give the homepage a concise search-result description. */
+function eyecare_home_meta_description() {
+	if ( ! is_front_page() ) { return; }
+	$description = 'Bệnh viện Mắt Hà Nội – Bắc Ninh khám, tư vấn và điều trị các bệnh về mắt cho mọi lứa tuổi. Tìm hiểu chuyên khoa, đội ngũ bác sĩ và đặt lịch khám.';
+	echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
+}
+add_action( 'wp_head', 'eyecare_home_meta_description', 3 );
+
 /** Nạp slider máy móc hiện đại chỉ ở trang chủ. */
 function eyecare_nap_js_thiet_bi() {
 	if ( ! is_front_page() ) {

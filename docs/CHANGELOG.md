@@ -1,5 +1,10 @@
 # Production changelog
 
+## 2026-09-23 — sửa font HTTPS và mô tả trang chủ
+
+- Sửa hai URL font ABeeZee lưu từ trước bằng HTTP khi WordPress kết xuất Global Styles: chỉ đổi sang HTTPS với font cùng tên miền trong `/wp-content/uploads/fonts/`, không sửa dữ liệu WordPress hay font gốc. Hai file font đã xác nhận tải được qua HTTPS. Backup file và database: `/home/jwhxtzru/backups/font-https-seo-20260923/`.
+- Thêm một thẻ meta description cho trang chủ để trình tìm kiếm có phần mô tả rõ ràng. Không thay đổi nội dung hiển thị hay khối bác sĩ.
+
 ## 2026-09-23 — tối ưu hàng loạt theo yêu cầu
 
 - Đã tối ưu 171 attachment có một nội dung liên quan rõ ràng và file chính từ 100 KB trở lên; không có lỗi. Tổng file đang dùng + crop của nhóm này từ khoảng 93 MiB xuống 11 MiB; 5 slide trang chủ từ khoảng 32 MiB xuống 2,7 MiB. Ảnh <100 KB đã đủ nhẹ; ảnh chưa rõ bài liên quan hoặc dùng chung được giữ để tránh đặt tên sai. File và metadata gốc giữ nguyên để khôi phục từng ảnh. Backup đầy đủ database, uploads và file module tại `/home/jwhxtzru/backups/media-batch-20260923/`.
