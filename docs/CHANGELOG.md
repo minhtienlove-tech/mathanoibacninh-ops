@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-09-23 — giảm tài nguyên chặn hiển thị và tăng cache theme
+
+- Trang chủ bỏ CSS/JS của mục lục OBS vì không có thành phần `.obs-toc`; giữ plugin trên các trang bài viết có mục lục. CSS khối bác sĩ ở dưới vùng nhìn đầu được tải không chặn hiển thị, có bản dự phòng khi JavaScript tắt; HTML và nội dung khối không thay đổi.
+- Slider giữ ảnh đầu tải trước; đợi trang tải xong rồi mới nạp ảnh kề và bắt đầu tự chuyển, để ảnh sau không cạnh tranh với ảnh LCP. Đổi thao tác đọc `offsetWidth` bắt buộc thành hai khung `requestAnimationFrame` để khởi động lại thanh tiến trình.
+- Thêm chính sách cache 30 ngày cho các file tĩnh thuộc child theme bằng `.htaccess`; file uploads và plugin vẫn theo cấu hình hosting. Backup file và database tại `/home/jwhxtzru/backups/performance-20260923/`.
+
 ## 2026-09-23 — sửa font HTTPS và mô tả trang chủ
 
 - Sửa hai URL font ABeeZee lưu từ trước bằng HTTP khi WordPress kết xuất Global Styles: chỉ đổi sang HTTPS với font cùng tên miền trong `/wp-content/uploads/fonts/`, không sửa dữ liệu WordPress hay font gốc. Hai file font đã xác nhận tải được qua HTTPS. Backup file và database: `/home/jwhxtzru/backups/font-https-seo-20260923/`.

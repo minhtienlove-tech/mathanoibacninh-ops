@@ -46,6 +46,8 @@
 
 	var hienTai = 0;
 	var hen     = null;
+	var progressFrame = null;
+	var autoReady = false;
 	var dangChay = tuChay;
 	var trongManHinh = true;
 	var giuChuot = false;
@@ -90,7 +92,7 @@
 	 */
 	function capNhatCham() {
 		// Prepare the adjacent banner before the next fade; other images stay lazy.
-		[ hienTai, ( hienTai + 1 ) % anh.length, ( hienTai + anh.length - 1 ) % anh.length ].forEach( function ( i ) {
+		( autoReady ? [ hienTai, ( hienTai + 1 ) % anh.length, ( hienTai + anh.length - 1 ) % anh.length ] : [ hienTai ] ).forEach( function ( i ) {
 			var image = anh[ i ].querySelector( 'img' );
 			if ( image ) { image.loading = 'eager'; }
 		} );
@@ -110,13 +112,18 @@
 	 * Đặt lịch chuyển ảnh kế tiếp.
 	 */
 	function henTiep() {
-		if ( ! dangChay || ! trongManHinh || giuChuot || giuFocus || document.hidden ) {
+		if ( ! autoReady || ! dangChay || ! trongManHinh || giuChuot || giuFocus || document.hidden ) {
 			return;
 		}
 		huyHen();
 		thanh.style.animation = 'none';
-		void thanh.offsetWidth;
-		thanh.style.animation = 'eyecare-hero-progress ' + nhip + 's linear forwards';
+		progressFrame = window.requestAnimationFrame( function () {
+			progressFrame = window.requestAnimationFrame( function () {
+				thanh.style.animation = 'eyecare-hero-progress ' + nhip + 's linear forwards';
+				thanh.style.animationPlayState = 'running';
+				progressFrame = null;
+			} );
+		} );
 		hen = window.setTimeout( function () {
 			toi( hienTai + 1 );
 			henTiep();
@@ -125,6 +132,10 @@
 
 	function huyHen() {
 		thanh.style.animationPlayState = 'paused';
+		if ( progressFrame ) {
+			window.cancelAnimationFrame( progressFrame );
+			progressFrame = null;
+		}
 		if ( hen ) {
 			window.clearTimeout( hen );
 			hen = null;
@@ -149,6 +160,7 @@
 			// JS đã hoạt động thì tự điều khiển để không đổi hash URL; khi JS bị
 			// chặn, liên kết neo gốc vẫn là phương án dự phòng đầy đủ.
 			e.preventDefault();
+			autoReady = true;
 			toi( idx );
 			henTiep(); // đặt lại đồng hồ sau tương tác của người dùng
 		} );
@@ -161,6 +173,7 @@
 	var nutSau   = gtoc.querySelector( '.eyecare-hero__sau' );
 
 	function chuyenBangTay( buoc ) {
+		autoReady = true;
 		toi( hienTai + buoc );
 		henTiep();
 	}
@@ -242,6 +255,7 @@
 		nut.addEventListener( 'click', function () {
 			dangChay = ! dangChay;
 			if ( dangChay ) {
+				autoReady = true;
 				henTiep();
 			} else {
 				huyHen();
@@ -320,7 +334,19 @@
 		giamChuyenDong = motion.matches;
 		if ( giamChuyenDong ) { dangChay = false; huyHen(); if ( nut ) { veNut(); } }
 	} );
-	// --- Khởi động ---------------------------------------------------------
-	henTiep();
+	// Let the first visible image settle before fetching adjacent slides or auto-advancing.
+	function startAfterLoad() {
+		window.setTimeout( function () {
+			if ( autoReady ) { return; }
+			autoReady = true;
+			capNhatCham();
+			henTiep();
+		}, 3000 );
+	}
+	if ( document.readyState === 'complete' ) {
+		startAfterLoad();
+	} else {
+		window.addEventListener( 'load', startAfterLoad, { once: true } );
+	}
 
 } )();

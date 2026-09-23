@@ -83,6 +83,24 @@ function eyecare_home_refresh_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'eyecare_home_refresh_assets', 130 );
 
+/** The homepage has no table of contents; omit the plugin's unused frontend assets there. */
+function eyecare_skip_unused_home_toc_assets() {
+	if ( ! is_front_page() ) { return; }
+	wp_dequeue_style( 'obs-seo-frontend' );
+	wp_dequeue_script( 'obs-seo-toc' );
+}
+add_action( 'wp_enqueue_scripts', 'eyecare_skip_unused_home_toc_assets', 999 );
+
+/** The doctor cards are below the first viewport; keep their CSS out of the render path. */
+function eyecare_defer_home_team_css( $html, $handle ) {
+	if ( ! is_front_page() || 'eyecare-home-team' !== $handle || ! str_contains( $html, " media='all'" ) ) {
+		return $html;
+	}
+	return str_replace( " media='all'", " media='print' onload=\"this.media='all'\"", $html )
+		. '<noscript>' . $html . '</noscript>';
+}
+add_filter( 'style_loader_tag', 'eyecare_defer_home_team_css', 10, 2 );
+
 /** Let the browser fetch the first visible hero image while CSS is still loading. */
 function eyecare_preload_first_hero_image() {
 	if ( ! is_front_page() || ! function_exists( 'eyecare_anh_slider' ) ) { return; }
