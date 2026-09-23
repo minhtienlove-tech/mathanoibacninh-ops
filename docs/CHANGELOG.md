@@ -1,5 +1,9 @@
 # Production changelog
 
+## 2026-09-23 — tối ưu hàng loạt theo yêu cầu
+
+- Bổ sung nhận diện ảnh slider trang chủ theo cấu hình 5 attachment để đặt tên `trang-chu-slider-anh-ID.webp`; nhận diện ảnh gắn hồ sơ bác sĩ và đánh giá từ post cha. Kiểm thử 20 assertion PHP; chuẩn bị chạy tối ưu thư viện theo từng lượt, giữ metadata/file gốc để khôi phục. Thống kê triển khai và backup sẽ ghi sau khi kiểm tra production.
+
 ## 2026-09-23
 
 - Đã triển khai `9cd3ae6` (3 file runtime) lên hosting. Backup file/database: `/home/jwhxtzru/backups/media-optimizer-20260923/`. Baseline `functions.php` khớp production trước thay đổi; SHA256 staged/live khớp; PHP lint functions/module/footer/liên hệ và smoke 6 URL + SSH đạt. WordPress xác nhận module/AJAX hook hoạt động và render 25 ảnh; AJAX chưa đăng nhập bị từ chối HTTP 400. Chưa có ảnh production được chuyển đổi (`_ec_media_original` = 0); người quản trị tự chọn ảnh và thao tác trong Media.

@@ -4,7 +4,7 @@ Vào **Media / Thư viện → Tối ưu ảnh & tên file**:
 `https://mathanoibacninh.com/wp-admin/upload.php?page=ec-media-optimize`.
 
 1. Chọn ảnh trong trang (25 ảnh/lượt). Xem dung lượng, kích thước và ảnh thu nhỏ.
-2. Chọn bài viết/trang dùng để đặt tên. Công cụ tìm bài đính kèm, ảnh đại diện và tham chiếu trong nội dung. Với ảnh dùng chung, chọn một bài làm tên chính. Nếu chưa nhận diện được, nhập ID bài viết rồi bấm **Xem tên**.
+2. Chọn bài viết/trang dùng để đặt tên. Công cụ tìm bài đính kèm, ảnh đại diện và tham chiếu trong nội dung, bao gồm hồ sơ bác sĩ và đánh giá đang hiển thị. Ảnh thuộc slider trang chủ được đặt tên theo “Trang chủ slider”. Với ảnh dùng chung, chọn một bài làm tên chính. Nếu chưa nhận diện được, nhập ID bài viết rồi bấm **Xem tên**.
 3. **Tối ưu & đổi tên** tạo WebP, cạnh dài tối đa 1600/1920/2560 px, chất lượng 65–90 (mặc định 82). Chỉ kích hoạt khi tổng dung lượng ảnh và các crop nhẹ hơn.
 4. **Chỉ đổi tên, giữ chất lượng** sao chép chính xác byte ảnh, giữ định dạng và kích thước; phù hợp ảnh đã nhẹ hoặc cần giữ chi tiết.
 5. Theo dõi từng ảnh; có thể dừng sau ảnh đang xử lý. Tải lại danh sách để thấy trạng thái mới và nút **Khôi phục ảnh gốc**.

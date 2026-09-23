@@ -18,7 +18,13 @@ function ec_media_slug( $title, $id ) {
 function ec_media_valid_owner( $post ) {
 	if ( ! $post || in_array( $post->post_type, array( 'attachment', 'revision' ), true ) || in_array( $post->post_status, array( 'trash', 'auto-draft' ), true ) ) { return false; }
 	$type = get_post_type_object( $post->post_type );
-	return $type && $type->public;
+	return $type && ( $type->public || in_array( $post->post_type, array( 'eyecare_bac_si', 'eyecare_danh_gia' ), true ) );
+}
+
+function ec_media_is_home_slide( $id ) {
+	if ( ! function_exists( 'eyecare_slider_doc_cau_hinh' ) ) { return false; }
+	$config = eyecare_slider_doc_cau_hinh();
+	return in_array( absint( $id ), array_map( 'absint', $config['anh'] ?? array() ), true );
 }
 
 /** Parent, featured image, block/class reference or exact upload URL; no guessed title. */
@@ -37,6 +43,7 @@ function ec_media_owners( $id ) {
 		$p = get_post( $post_id );
 		if ( ec_media_valid_owner( $p ) && current_user_can( 'edit_post', $post_id ) ) { $out[ $post_id ] = get_the_title( $p ); }
 	}
+	if ( ec_media_is_home_slide( $id ) ) { $out[0] = 'Trang chủ – slider'; }
 	return $out;
 }
 
@@ -72,9 +79,9 @@ function ec_media_copy( $source, $target ) {
 }
 
 function ec_media_optimize( $id, $post_id, $width = 1920, $quality = 82, $rename_only = false ) {
-	$attachment = get_post( $id ); $owner = get_post( $post_id );
-	if ( ! $attachment || 'attachment' !== $attachment->post_type || ! ec_media_valid_owner( $owner ) ) { return new WP_Error( 'invalid', 'Chọn ảnh và bài viết/trang thuộc loại nội dung công khai.' ); }
-	if ( ! current_user_can( 'manage_options' ) || ! current_user_can( 'edit_post', $id ) || ! current_user_can( 'edit_post', $post_id ) ) { return new WP_Error( 'permission', 'Không có quyền tối ưu ảnh này.' ); }
+	$attachment = get_post( $id ); $home_slide = 0 === (int) $post_id && ec_media_is_home_slide( $id ); $owner = $home_slide ? null : get_post( $post_id );
+	if ( ! $attachment || 'attachment' !== $attachment->post_type || ( ! $home_slide && ! ec_media_valid_owner( $owner ) ) ) { return new WP_Error( 'invalid', 'Chọn ảnh và bài viết/trang liên quan hợp lệ.' ); }
+	if ( ! current_user_can( 'manage_options' ) || ! current_user_can( 'edit_post', $id ) || ( ! $home_slide && ! current_user_can( 'edit_post', $post_id ) ) ) { return new WP_Error( 'permission', 'Không có quyền tối ưu ảnh này.' ); }
 	if ( get_post_meta( $id, '_ec_media_original', true ) ) { return new WP_Error( 'already', 'Ảnh đã tối ưu. Khôi phục trước nếu muốn đổi thiết lập.' ); }
 	if ( ! $rename_only && ! wp_image_editor_supports( array( 'mime_type' => 'image/webp' ) ) ) { return new WP_Error( 'webp', 'Hosting chưa hỗ trợ WebP.' ); }
 	$width = max( 800, min( 2560, (int) $width ) ); $quality = max( 65, min( 90, (int) $quality ) );
@@ -90,7 +97,7 @@ function ec_media_optimize( $id, $post_id, $width = 1920, $quality = 82, $rename
 	$relative = 'ec-optimized/' . $id . '/' . wp_generate_uuid4();
 	$folder = trailingslashit( $uploads['basedir'] ) . $relative;
 	if ( ! wp_mkdir_p( $folder ) || 0 !== strpos( wp_normalize_path( realpath( $folder ) ), trailingslashit( wp_normalize_path( realpath( $uploads['basedir'] ) ) ) ) ) { return new WP_Error( 'folder', 'Không tạo được thư mục ảnh tối ưu.' ); }
-	$stem = ec_media_slug( get_the_title( $owner ), $id );
+	$stem = ec_media_slug( $home_slide ? 'Trang chủ slider' : get_the_title( $owner ), $id );
 	$full = $rename_only ? ec_media_copy( $source, "$folder/$stem.$extension" ) : ec_media_encode( $source, "$folder/$stem.$extension", $width, $quality );
 	if ( is_wp_error( $full ) ) { return $full; }
 	$baseurl = trailingslashit( $uploads['baseurl'] );
@@ -198,9 +205,10 @@ function ec_media_ajax() {
 	if ( ! in_array( $mode, array( 'preview', 'optimize', 'rename', 'restore' ), true ) ) { wp_send_json_error( array( 'message' => 'Thao tác không hợp lệ.' ), 400 ); }
 	$id = absint( $_POST['id'] ?? 0 ); $lock = 'ec_media_lock_' . $id;
 	if ( 'preview' === $mode ) {
-		$p = get_post( absint( $_POST['post_id'] ?? 0 ) );
-		if ( ! ec_media_valid_owner( $p ) || ! current_user_can( 'edit_post', $p->ID ) || ! current_user_can( 'edit_post', $id ) ) { wp_send_json_error( array( 'message' => 'Không tìm thấy bài viết/trang hợp lệ hoặc không có quyền.' ) ); }
-		wp_send_json_success( array( 'title' => get_the_title( $p ), 'filename' => ec_media_slug( get_the_title( $p ), $id ) . '.webp', 'post_id' => $p->ID ) );
+		$post_id = absint( $_POST['post_id'] ?? 0 ); $p = get_post( $post_id ); $home_slide = 0 === $post_id && ec_media_is_home_slide( $id );
+		if ( ( ! $home_slide && ( ! ec_media_valid_owner( $p ) || ! current_user_can( 'edit_post', $p->ID ) ) ) || ! current_user_can( 'edit_post', $id ) ) { wp_send_json_error( array( 'message' => 'Không tìm thấy bài viết/trang hợp lệ hoặc không có quyền.' ) ); }
+		$title = $home_slide ? 'Trang chủ slider' : get_the_title( $p );
+		wp_send_json_success( array( 'title' => $title, 'filename' => ec_media_slug( $title, $id ) . '.webp', 'post_id' => $post_id ) );
 	}
 	if ( ! add_option( $lock, time(), '', false ) ) { wp_send_json_error( array( 'message' => 'Ảnh đang được xử lý. Nếu lượt trước bị ngắt, hãy thử lại sau 5 phút.' ), 409 ); }
 	wp_schedule_single_event( time() + 300, 'ec_media_release_lock', array( $lock ) );
@@ -241,10 +249,10 @@ function ec_media_page() {
 		?>
 		<tr data-media-id="<?php echo (int) $id; ?>"><td><input type="checkbox" class="ec-media-select" aria-label="Chọn ảnh <?php echo (int) $id; ?>" <?php disabled( (bool) $old || ! $file ); ?>></td>
 		<td><?php echo wp_get_attachment_image( $id, array( 90, 70 ), false, array( 'style' => 'max-width:90px;max-height:70px;object-fit:contain' ) ); ?><br><a href="<?php echo esc_url( get_edit_post_link( $id ) ); ?>">#<?php echo (int) $id; ?></a> <?php echo esc_html( basename( $file ?: '' ) ); ?><br><?php echo esc_html( $file ? size_format( filesize( $file ) ) . ' · ' . ( $meta['width'] ?? '?' ) . ' × ' . ( $meta['height'] ?? '?' ) . ' px' : 'Không tìm thấy file' ); ?></td>
-		<td><select class="ec-media-owner" style="max-width:300px" <?php disabled( (bool) $old ); ?>><option value="">Chọn bài viết…</option><?php foreach ( $owners as $post_id => $title ) : ?><option value="<?php echo (int) $post_id; ?>" data-filename="<?php echo esc_attr( ec_media_slug( $title, $id ) . '.webp' ); ?>" <?php selected( $chosen, $post_id ); ?>><?php echo esc_html( $title ); ?></option><?php endforeach; ?></select>
+		<td><select class="ec-media-owner" style="max-width:300px" <?php disabled( (bool) $old ); ?>><option value="">Chọn bài viết…</option><?php foreach ( $owners as $post_id => $title ) : ?><option value="<?php echo (int) $post_id; ?>" data-filename="<?php echo esc_attr( ec_media_slug( 0 === (int) $post_id ? 'Trang chủ slider' : $title, $id ) . '.webp' ); ?>" <?php selected( $chosen, $post_id ); ?>><?php echo esc_html( $title ); ?></option><?php endforeach; ?></select>
 		<?php if ( ! $old ) : ?><p>Hoặc nhập ID bài viết: <input type="number" min="1" class="ec-media-owner-id" style="width:90px" aria-label="ID bài viết cho ảnh <?php echo (int) $id; ?>"> <button class="button ec-media-preview">Xem tên</button></p><?php endif; ?>
 		<?php if ( count( $owners ) > 1 ) : ?><p>Ảnh dùng chung: chọn bài làm tên chính.</p><?php elseif ( ! $owners ) : ?><p>Chưa xác định bài sử dụng. Cần chọn ID bài trước khi tối ưu.</p><?php endif; ?></td>
-		<td><code class="ec-media-filename"><?php echo esc_html( $chosen ? ec_media_slug( $owners[ $chosen ], $id ) . '.webp' : 'Chưa chọn bài viết' ); ?></code><p class="ec-media-result" role="status"><?php echo $old ? esc_html( 'Đã tối ưu: ' . size_format( $old['before'] ) . ' → ' . size_format( $old['after'] ) ) : ''; ?></p><?php if ( $old ) : ?><button class="button ec-media-restore">Khôi phục ảnh gốc</button><?php endif; ?></td></tr>
+		<td><code class="ec-media-filename"><?php echo esc_html( isset( $owners[ $chosen ] ) ? ec_media_slug( 0 === (int) $chosen ? 'Trang chủ slider' : $owners[ $chosen ], $id ) . '.webp' : 'Chưa chọn bài viết' ); ?></code><p class="ec-media-result" role="status"><?php echo $old ? esc_html( 'Đã tối ưu: ' . size_format( $old['before'] ) . ' → ' . size_format( $old['after'] ) ) : ''; ?></p><?php if ( $old ) : ?><button class="button ec-media-restore">Khôi phục ảnh gốc</button><?php endif; ?></td></tr>
 	<?php endforeach; ?></tbody></table></div>
 	<div class="tablenav"><div class="tablenav-pages"><?php echo wp_kses_post( paginate_links( array( 'base' => add_query_arg( 'paged', '%#%' ), 'total' => $query->max_num_pages, 'current' => $page ) ) ); ?></div></div></div>
 	<?php

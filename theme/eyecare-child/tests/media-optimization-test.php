@@ -3,6 +3,8 @@
 define( 'ABSPATH', __DIR__ ); define( 'MB_IN_BYTES', 1048576 ); define( 'HOUR_IN_SECONDS', 3600 );
 $root = sys_get_temp_dir() . '/ec-media-test-' . bin2hex( random_bytes( 6 ) ); mkdir( $root );
 $meta = array(); $posts = array(); $allow = true; $fail_update = false; $large = false;
+$home_slides = array();
+function eyecare_slider_doc_cau_hinh() { global $home_slides; return array( 'anh' => $home_slides ); }
 class WP_Error { function __construct( public $code, public $message ) {} function get_error_message() { return $this->message; } }
 function is_wp_error( $x ) { return $x instanceof WP_Error; }
 function add_action( ...$x ) {} function add_filter( ...$x ) {}
@@ -10,7 +12,7 @@ function wp_upload_dir() { global $root; return array( 'basedir' => $root, 'base
 function wp_normalize_path( $s ) { return str_replace( '\\', '/', $s ); }
 function trailingslashit( $s ) { return rtrim( $s, '/' ) . '/'; }
 function absint( $s ) { return abs( (int) $s ); }
-function remove_accents( $s ) { return strtr( $s, array( 'ắ'=>'a', 'đ'=>'d', 'ề'=>'e', 'ị'=>'i', 'ệ'=>'e', 'ý'=>'y', 'Đ'=>'D' ) ); }
+function remove_accents( $s ) { return strtr( $s, array( 'ắ'=>'a', 'đ'=>'d', 'ề'=>'e', 'ị'=>'i', 'ệ'=>'e', 'ý'=>'y', 'ủ'=>'u', 'Đ'=>'D' ) ); }
 function sanitize_title( $s ) { return trim( preg_replace( '/[^a-z0-9]+/', '-', strtolower( $s ) ), '-' ); }
 function sanitize_key( $s ) { return preg_replace( '/[^a-z0-9_-]/', '', strtolower( $s ) ); }
 function current_user_can( ...$x ) { global $allow; return $allow; }
@@ -54,6 +56,8 @@ $allow = false;
 check( ec_media_optimize(7,8)->code === 'permission', 'permission denied before changes' ); $allow = true;
 check( ec_media_optimize(7,7)->code === 'invalid', 'attachment cannot be article owner' );
 check( !ec_media_valid_owner((object)array('post_type'=>'private_tool','post_status'=>'publish')), 'internal post type not eligible for public filenames' );
+check( ec_media_valid_owner((object)array('post_type'=>'eyecare_bac_si','post_status'=>'publish')), 'doctor profile may own its photo' );
+check( ec_media_valid_owner((object)array('post_type'=>'eyecare_danh_gia','post_status'=>'publish')), 'patient review may own its photo' );
 $large = true;
 check( ec_media_optimize(7,8)->code === 'not_smaller' && $meta[7] === $original, 'larger result does not activate' ); $large = false;
 $result = ec_media_optimize(7,8,1600,82);
@@ -67,6 +71,12 @@ check( ec_media_optimize(7,8)->code === 'save' && $meta[7] === $original, 'activ
 $result = ec_media_optimize(7,8,800,65,true);
 check( !is_wp_error($result) && $result['before'] === $result['after'] && hash_file('sha256',get_attached_file(7))===hash_file('sha256',"$root/source.png"), 'rename-only preserves exact bytes and original format' );
 check( !is_wp_error(ec_media_restore(7)) && $meta[7] === $original, 'rename-only is reversible' );
+$home_slides = array( 7 );
+check( ec_media_is_home_slide(7) && !ec_media_is_home_slide(8), 'only configured homepage slide eligible for homepage owner' );
+$result = ec_media_optimize(7,0,1600,82);
+check( !is_wp_error($result) && str_contains(get_post_meta(7,'_wp_attached_file'),'trang-chu-slider-anh-7.webp'), 'home slider gets homepage filename' );
+check( !is_wp_error(ec_media_restore(7)), 'home slider optimization restores' );
+$home_slides = array();
 $meta[7]['_wp_attachment_metadata']['sizes']['missing'] = array('file'=>'absent.png');
 check( ec_media_optimize(7,8)->code === 'crop' && $meta[7]['_wp_attached_file'] === 'source.png', 'missing crop aborts before activation' );
 echo "$count assertions passed; isolated fixture directory: $root\n";
