@@ -251,7 +251,8 @@ $tt = eyecare_du_lieu_thuc_the();
 							<li class="eyecare-equipment__slide<?php echo 0 === $i ? ' is-active' : ''; ?>" data-equipment-slide data-equipment-index="<?php echo (int) $i; ?>" aria-hidden="false">
 								<article class="eyecare-equipment__the">
 									<div class="eyecare-equipment__anh-wrap">
-										<img src="<?php echo esc_url( $thiet_bi_url . $tb['anh'] ); ?>" alt="<?php echo esc_attr( $tb['ten'] ); ?>" width="1122" height="1402" loading="lazy" decoding="async">
+										<?php $equipment_image_base = pathinfo( $tb['anh'], PATHINFO_FILENAME ); ?>
+										<img src="<?php echo esc_url( $thiet_bi_url . $equipment_image_base . '-600.webp' ); ?>" srcset="<?php echo esc_url( $thiet_bi_url . $equipment_image_base . '-600.webp' ); ?> 600w, <?php echo esc_url( $thiet_bi_url . $equipment_image_base . '-960.webp' ); ?> 960w" sizes="(min-width: 1000px) 481px, (min-width: 600px) 45vw, 90vw" alt="<?php echo esc_attr( $tb['ten'] ); ?>" width="600" height="750" loading="lazy" decoding="async">
 									</div>
 									<div class="eyecare-equipment__noi-dung">
 										<p class="eyecare-equipment__so"><?php echo esc_html( sprintf( '%02d / %02d', $i + 1, count( $thiet_bi ) ) ); ?></p>

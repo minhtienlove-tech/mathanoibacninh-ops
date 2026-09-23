@@ -4,7 +4,8 @@
 
 - Đã tối ưu 171 attachment có một nội dung liên quan rõ ràng và file chính từ 100 KB trở lên; không có lỗi. Tổng file đang dùng + crop của nhóm này từ khoảng 93 MiB xuống 11 MiB; 5 slide trang chủ từ khoảng 32 MiB xuống 2,7 MiB. Ảnh <100 KB đã đủ nhẹ; ảnh chưa rõ bài liên quan hoặc dùng chung được giữ để tránh đặt tên sai. File và metadata gốc giữ nguyên để khôi phục từng ảnh. Backup đầy đủ database, uploads và file module tại `/home/jwhxtzru/backups/media-batch-20260923/`.
 - Ưu tiên tải ảnh slider đầu trong `<head>` với `imagesrcset` responsive; bỏ `fetchpriority="high"` khỏi ảnh thiết bị ở dưới vùng nhìn đầu để ảnh LCP được ưu tiên. Bố cục, nội dung và khối bác sĩ không thay đổi.
-- Bổ sung nhận diện ảnh slider trang chủ theo cấu hình 5 attachment để đặt tên `trang-chu-slider-anh-ID.webp`; nhận diện ảnh gắn hồ sơ bác sĩ và đánh giá từ post cha. Kiểm thử 20 assertion PHP; chuẩn bị chạy tối ưu thư viện theo từng lượt, giữ metadata/file gốc để khôi phục. Thống kê triển khai và backup sẽ ghi sau khi kiểm tra production.
+- Thêm ảnh WebP 600/960 px cho 6 thẻ thiết bị và `srcset` theo kích thước hiển thị; ảnh JPG gốc vẫn được giữ. Tổng dung lượng 6 ảnh 600 px là 334 KB so với khoảng 1,4 MB của 6 JPG. Bổ sung nhận diện ảnh slider trang chủ theo cấu hình 5 attachment để đặt tên `trang-chu-slider-anh-ID.webp`; nhận diện ảnh gắn hồ sơ bác sĩ và đánh giá từ post cha. Kiểm thử 20 assertion PHP.
+- PageSpeed Insights máy tính sau tối ưu ảnh slider và ưu tiên tải: hiệu suất 96, LCP 1,3 giây trong một lần đo ngày 23/09 (trước đó ảnh người dùng gửi là 74 và 5,9 giây). Số đo có thể dao động giữa các lần chạy.
 
 ## 2026-09-23
 
