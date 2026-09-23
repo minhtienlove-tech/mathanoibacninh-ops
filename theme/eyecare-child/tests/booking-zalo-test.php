@@ -1,6 +1,17 @@
 <?php
 /** In-memory tests: no real credentials, network calls or Zalo messages. */
 require __DIR__ . '/booking-validation-test.php';
+if ( ! function_exists( 'openssl_encrypt' ) ) {
+	if ( ! defined( 'OPENSSL_RAW_DATA' ) ) { define( 'OPENSSL_RAW_DATA', 1 ); }
+	function openssl_encrypt( $data, $cipher, $key, $options, $iv, &$tag ) {
+		$tag = substr( hash_hmac( 'sha256', $iv . $data, $key, true ), 0, 16 );
+		return $data;
+	}
+	function openssl_decrypt( $data, $cipher, $key, $options, $iv, $tag ) {
+		$expected = substr( hash_hmac( 'sha256', $iv . $data, $key, true ), 0, 16 );
+		return hash_equals( $expected, $tag ) ? $data : false;
+	}
+}
 require dirname( __DIR__ ) . '/inc/quan-ly-dat-lich.php';
 require dirname( __DIR__ ) . '/inc/zalo-dat-lich.php';
 function wp_parse_args( $args, $defaults ) { return array_merge( $defaults, $args ); }
@@ -11,11 +22,22 @@ function update_post_meta( $id, $key, $value ) { $GLOBALS['zalo_meta'][$id][$key
 function wp_next_scheduled( $hook, $args ) { return $GLOBALS['zalo_events'][$args[0]] ?? false; }
 function wp_schedule_single_event( $time, $hook, $args, $error = false ) { if ( ! empty( $GLOBALS['zalo_schedule_fail'] ) ) { return false; } $GLOBALS['zalo_events'][$args[0]] = $time; return true; }
 function admin_url( $path ) { return 'https://example.test/wp-admin/' . $path; }
-function wp_remote_post( $url, $args ) { $GLOBALS['zalo_http_calls'][] = array( $url, $args ); return $GLOBALS['zalo_response']; }
+function rest_url( $path ) { return 'https://example.test/wp-json/' . ltrim( $path, '/' ); }
+function wp_remote_post( $url, $args ) { $GLOBALS['zalo_http_calls'][] = array( $url, $args ); $GLOBALS['zalo_meta_at_http'][] = $GLOBALS['zalo_meta']; return ! empty( $GLOBALS['zalo_response_queue'] ) ? array_shift( $GLOBALS['zalo_response_queue'] ) : $GLOBALS['zalo_response']; }
 function wp_remote_retrieve_response_code( $response ) { return $response['response']['code']; }
 function wp_remote_retrieve_body( $response ) { return $response['body']; }
 function ec_test_zalo_response( $code, $body ) { $GLOBALS['zalo_response'] = array( 'response' => array( 'code' => $code ), 'body' => json_encode( $body ) ); }
+function ec_test_zalo_queue( $responses ) { $GLOBALS['zalo_response_queue'] = array_map( function ( $response ) { return array( 'response' => array( 'code' => $response[0] ), 'body' => json_encode( $response[1] ) ); }, $responses ); }
+function rest_ensure_response( $value ) { return $value; }
+class EcZaloWebhookRequest {
+	private $payload;
+	public function __construct( $payload ) { $this->payload = $payload; }
+	public function get_json_params() { return $this->payload; }
+	public function get_body() { return is_array( $this->payload ) ? json_encode( $this->payload ) : ''; }
+}
 $GLOBALS['zalo_http_calls'] = array();
+$GLOBALS['zalo_meta_at_http'] = array();
+$GLOBALS['zalo_response_queue'] = array();
 $GLOBALS['zalo_meta'] = array();
 $GLOBALS['zalo_events'] = array();
 ec_expect( ec_zalo_settings()['enabled'] === false, 'Notifications disabled without configuration' );
@@ -23,6 +45,7 @@ $token = '123456789:dummy_test_token';
 $cipher = ec_zalo_encrypt( $token );
 ec_expect( is_string( $cipher ) && strpos( $cipher, $token ) === false, 'Token encrypted at rest' );
 ec_expect( ec_zalo_token( array( 'cipher' => $cipher ) ) === $token, 'Encrypted token round trip' );
+ec_expect( ec_zalo_mask_webhook_secret( 'Webhook_secret.123' ) === 'Webh***' && ec_zalo_mask_webhook_secret( 'bad' ) === '', 'Webhook secret is only shown as a short masked prefix' );
 ec_expect( ec_zalo_token( array( 'cipher' => 'malformed' ) ) === '', 'Malformed ciphertext fails closed' );
 $raw=base64_decode($cipher);$raw[strlen($raw)-1]=chr(ord($raw[strlen($raw)-1])^1);
 ec_expect( ec_zalo_token( array( 'cipher' => base64_encode($raw) ) ) === '', 'Tampered ciphertext rejected' );
@@ -43,12 +66,89 @@ ec_test_zalo_response(200,array('ok'=>true,'result'=>array()));
 ec_expect_error(ec_zalo_api('sendMessage'),'uncertain','Missing message acknowledgement not reported as sent');
 ec_test_zalo_response(401,array('ok'=>false,'description'=>'secret '.$token));
 ec_expect_error(ec_zalo_api('getMe'),'api','API refusal handled without raw secret-bearing description');
-$event=array('message'=>array('text'=>'/nhanlich','from'=>array('display_name'=>'Nhân viên','is_bot'=>false),'chat'=>array('id'=>'abc.xyz')));
+ec_test_zalo_response(403,array('ok'=>false,'description'=>'Chat recipient is unavailable'));
+$recipient_error=ec_zalo_api('sendMessage',array('chat_id'=>'abc.xyz','text'=>'Test'));
+ec_expect(is_wp_error($recipient_error) && strpos($recipient_error->get_error_message(),'chat riêng')!==false && strpos($recipient_error->get_error_message(),'unavailable')===false,'Recipient rejection identifies a fresh private opt-in without exposing provider detail');
+ec_test_zalo_response(200,array('ok'=>false,'error_code'=>408,'description'=>'Request timeout'));
+ec_expect(ec_zalo_api('getUpdates',array('timeout'=>2))===array(),'Long-poll timeout is an empty update set, not a credential error');
+ec_test_zalo_queue(array(
+	array(200,array('ok'=>true,'result'=>array('account_name'=>'Bot thử nghiệm'))),
+	array(200,array('ok'=>true,'result'=>array('url'=>ec_zalo_webhook_url()))),
+	array(200,array('ok'=>true,'result'=>array('webhook'=>array('status'=>'webhook.ok')))),
+));
+$diagnostic=ec_zalo_diagnose_webhook();
+ec_expect($diagnostic['bot']==='ok' && $diagnostic['webhook']==='matched' && $diagnostic['endpoint']==='ok','Webhook diagnostic reports a verified Bot, configured URL and reachable endpoint');
+$calls_before_missing_diagnostic=count($GLOBALS['zalo_http_calls']);
+$missing_diagnostic=ec_zalo_diagnose_webhook(array('cipher'=>'','webhook_cipher'=>''));
+ec_expect($missing_diagnostic['bot']==='missing' && count($GLOBALS['zalo_http_calls'])===$calls_before_missing_diagnostic,'Missing token is reported without a network request');
+ec_test_zalo_queue(array(
+	array(200,array('ok'=>true,'result'=>array('account_name'=>'Bot thử nghiệm'))),
+	array(200,array('ok'=>true,'result'=>array('url'=>'https://other.example/webhook'))),
+	array(200,array('ok'=>true,'result'=>array('webhook'=>array('outcome'=>'webhook.http.403')))),
+));
+$failed_diagnostic=ec_zalo_diagnose_webhook();
+ec_expect($failed_diagnostic['webhook']==='mismatch' && $failed_diagnostic['endpoint']==='failed','Webhook diagnostic distinguishes URL mismatch and an endpoint refusal');
+$activity=ec_zalo_webhook_receive(new EcZaloWebhookRequest(array('ok'=>true,'result'=>array('event_name'=>'message.text.received','message'=>array('text'=>'/nhanlich','from'=>array('display_name'=>'Nhân viên','is_bot'=>false),'chat'=>array('id'=>'abc.xyz','chat_type'=>'PRIVATE'))))));
+$recorded=ec_zalo_settings();
+ec_expect($activity===array('ok'=>true) && $recorded['webhook_last_event']==='message' && $recorded['webhook_last_command']==='nhanlich','Verified webhook records only safe event progress, not message text');
+// Tolerate alternate provider envelopes without weakening header authentication.
+$unwrapped_event=array('result'=>array('event_name'=>'message.text.received','message'=>array('text'=>'/nhanlich','from'=>array('display_name'=>'Điều phối viên','is_bot'=>false),'chat'=>array('id'=>'private.hash-2','chat_type'=>'PRIVATE'))));
+$unwrapped_activity=ec_zalo_webhook_receive(new EcZaloWebhookRequest($unwrapped_event));
+$unwrapped_recorded=ec_zalo_settings();
+ec_expect($unwrapped_activity===array('ok'=>true) && $unwrapped_recorded['webhook_last_event']==='message' && ec_zalo_private_candidate('private.hash-2',$unwrapped_recorded),'Webhook message without a top-level ok field records the private Chat ID');
+$malformed_activity=ec_zalo_webhook_receive(new EcZaloWebhookRequest(array('result'=>array('message'=>array('chat'=>array())))));
+$malformed_recorded=ec_zalo_settings();
+ec_expect($malformed_activity===array('ok'=>true) && $malformed_recorded['webhook_last_event']==='unknown' && $malformed_recorded['webhook_last_outcome']==='unsupported','Malformed authenticated payload is reported as unsupported rather than a webhook probe');
+ec_expect(ec_zalo_private_candidate('abc.xyz',$recorded),'Private inbound command marks a recipient as safe for notification delivery');
+ec_expect(ec_zalo_can_enable('abc.xyz',$recorded),'A verified private Chat ID can enable automatic notifications');
+ec_expect(!ec_zalo_can_enable('',$recorded),'An empty Chat ID cannot enable automatic notifications');
+ec_expect(strpos(ec_zalo_recipient_refresh_message($recorded),'1 Chat ID')!==false,'Recipient refresh reports the latest verified private Chat ID');
+ec_expect(strpos(ec_zalo_recipient_refresh_message(array('candidates'=>array(),'candidate_chat_types'=>array())),'Chưa nhận')!==false,'Recipient refresh explains when no private Chat ID has arrived');
+$multi_candidates=$recorded;
+$multi_candidates['candidates']['manager.2']='Quản lý trực';
+$multi_candidates['candidate_chat_types']['manager.2']='PRIVATE';
+$multi_candidates['chat_ids']=array('abc.xyz','manager.2','legacy.abc','abc.xyz');
+ec_expect(ec_zalo_selected_recipient_ids($multi_candidates)===array('abc.xyz','manager.2'),'Only unique verified private Chat IDs can be selected together');
+ec_expect(ec_zalo_can_enable($multi_candidates['chat_ids'],$multi_candidates),'Multiple verified private Chat IDs can enable notifications');
+$legacy_candidate=$recorded;$legacy_candidate['candidate_chat_types']=array();
+ec_expect(!ec_zalo_private_candidate('abc.xyz',$legacy_candidate),'Old candidates without a verified private chat type cannot receive notifications');
+$needs_selection=$recorded;
+$needs_selection['chat_id']='';
+$needs_selection['webhook_cipher']=ec_zalo_encrypt('Webhook_secret.123');
+$needs_selection['webhook_last_event']='never';
+$needs_selection['webhook_last_command']='none';
+$needs_selection_activity=ec_zalo_activity($needs_selection);
+$needs_selection_progress=ec_zalo_progress_label($needs_selection,$diagnostic,$needs_selection_activity);
+ec_expect(strpos($needs_selection_progress,'Chọn Chat ID')!==false,'Existing recipient candidates take priority over an empty new activity log');
+$duplicate=ec_zalo_webhook_receive(new EcZaloWebhookRequest(array('ok'=>true,'result'=>array('event_name'=>'message.text.received','message'=>array('text'=>'/nhanlich','from'=>array('display_name'=>'Nhân viên','is_bot'=>false),'chat'=>array('id'=>'abc.xyz','chat_type'=>'PRIVATE'))))));
+$recorded=ec_zalo_settings();
+ec_expect($duplicate===array('ok'=>true) && $recorded['webhook_last_outcome']==='duplicate' && $recorded['webhook_last_command']==='nhanlich','Duplicate command is visible without losing opt-in progress');
+$probe=ec_zalo_webhook_receive(new EcZaloWebhookRequest(array()));
+$recorded=ec_zalo_settings();
+ec_expect($probe===array('ok'=>true) && $recorded['webhook_last_probe_at']>0 && $recorded['webhook_last_command']==='nhanlich','Verified endpoint probes are separate from the latest inbound command');
+$private_text='Nội dung không được ghi lại';
+ec_zalo_webhook_receive(new EcZaloWebhookRequest(array('ok'=>true,'result'=>array('event_name'=>'message.text.received','message'=>array('text'=>$private_text,'from'=>array('display_name'=>'Nhân viên','is_bot'=>false),'chat'=>array('id'=>'abc.xyz','chat_type'=>'PRIVATE'))))));
+$recorded=ec_zalo_settings();
+$safe_metadata=wp_json_encode(array('event'=>$recorded['webhook_last_event'],'outcome'=>$recorded['webhook_last_outcome'],'command'=>$recorded['webhook_last_command'],'count'=>$recorded['webhook_last_candidate_count']));
+ec_expect($recorded['webhook_last_outcome']==='recipient_found' && $recorded['webhook_last_command']==='message' && strpos($safe_metadata,$private_text)===false,'Any private inbound message saves its Chat ID without storing its content');
+$event=array('event_name'=>'message.text.received','message'=>array('text'=>'/nhanlich','from'=>array('display_name'=>'Nhân viên','is_bot'=>false),'chat'=>array('id'=>'abc.xyz','chat_type'=>'PRIVATE')));
 ec_expect( ec_zalo_candidates($event)===array('abc.xyz'=>'Nhân viên'), 'Extract recipient from documented event format' );
+ec_expect( ec_zalo_candidates(array('result'=>$event))===array('abc.xyz'=>'Nhân viên'), 'Webhook envelope extracts recipient candidate' );
+$diagnostic_event=$event;$diagnostic_event['event_name']='webhook.diagnostic';$diagnostic_event['message']['from']['display_name']='Webhook diagnostic';
+ec_expect( ec_zalo_candidates($diagnostic_event)===array(), 'Webhook diagnostics are never stored as Chat ID recipients' );
+$group_event=$event;$group_event['message']['chat']['chat_type']='GROUP';
+ec_expect(ec_zalo_candidates($group_event)===array(),'Group chat commands are never stored as booking notification recipients');
 $other=$event;$other['message']['text']='private unrelated message';
-ec_expect( ec_zalo_candidates(array($other,array('message'=>'bad')))===array(), 'Unrelated messages are not stored as recipients' );
+ec_expect( ec_zalo_candidates(array($other,array('message'=>'bad')) )===array('abc.xyz'=>'Nhân viên'), 'Any documented private inbound message is offered as a Chat ID recipient' );
+$unverified_settings=array('candidates'=>array('legacy.abc'=>'Webhook diagnostic'),'candidate_chat_types'=>array());
+ec_expect( ec_zalo_candidate_list($unverified_settings)===array(), 'Unverified legacy and diagnostic Chat IDs are hidden from recipient selection' );
 $text=ec_zalo_message(get_post(1));$booking_data=ec_booking_read(get_post(1));
-ec_expect( strpos($text,$booking_data['name'])===false && strpos($text,$booking_data['phone'])===false && strpos($text,'post=1&action=edit')!==false, 'Notifications contain admin link, not patient name or phone' );
+ec_expect( strpos($text,'Họ tên: '.$booking_data['name'])!==false && strpos($text,'Điện thoại: '.$booking_data['phone'])!==false && strpos($text,'post=1&action=edit')!==false && strpos($text,$booking_data['fingerprint'] ?? '')===false && strpos($text,$booking_data['received_at'] ?? '')===false, 'Notifications contain the minimum contact data and no booking internals' );
+$legacy_post=clone get_post(1);$legacy_post->post_content=wp_json_encode(array('name'=>"Tên\nđã sửa",'phone'=>"090\n123"));$legacy_text=ec_zalo_message($legacy_post);
+ec_expect(strpos($legacy_text,'Họ tên: Tên đã sửa')!==false && strpos($legacy_text,"Tên\nđã sửa")===false && strpos($legacy_text,"090\n123")===false && substr_count($legacy_text,'Chưa cung cấp')===1,'Malformed legacy contact data cannot inject message lines');
+$legacy_settings=$recorded;$legacy_settings['enabled']=true;$legacy_settings['candidate_chat_types']=array();$GLOBALS['zalo_events']=array();update_option('ec_booking_zalo',$legacy_settings,false);ec_zalo_queue(1);
+ec_expect(empty($GLOBALS['zalo_events']),'Legacy or group candidates without a private-chat confirmation never queue a notification');
+$settings=$recorded;
 $settings['enabled']=false;update_option('ec_booking_zalo',$settings,false);ec_zalo_queue(1);
 ec_expect( empty($GLOBALS['zalo_events']), 'Disabled configuration never queues historical or new notifications' );
 $settings['enabled']=true;update_option('ec_booking_zalo',$settings,false);
@@ -57,6 +157,8 @@ ec_expect( count($GLOBALS['zalo_events'])===1 && get_post_meta(1,'_ec_zalo_state
 ec_test_zalo_response(200,array('ok'=>true,'result'=>array('message_id'=>'message-2')));
 $before=count($GLOBALS['zalo_http_calls']);ec_zalo_deliver(1);ec_zalo_deliver(1);
 ec_expect( get_post_meta(1,'_ec_zalo_state')==='sent' && count($GLOBALS['zalo_http_calls'])===$before+1, 'Repeated worker execution does not duplicate sent notification' );
+$sent_body=json_decode($GLOBALS['zalo_http_calls'][$before][1]['body'],true);
+ec_expect(($sent_body['chat_id'] ?? '')==='abc.xyz' && ($sent_body['text'] ?? '')===ec_zalo_message(get_post(1)),'Zalo delivery sends only the reviewed booking message to the selected recipient');
 ec_zalo_queue(2);$settings['version']='new-recipient';update_option('ec_booking_zalo',$settings,false);ec_zalo_deliver(2);
 ec_expect( get_post_meta(2,'_ec_zalo_state')==='skipped' && count($GLOBALS['zalo_http_calls'])===$before+1, 'Queued notification never silently switches recipient' );
 update_post_meta(2,'_ec_zalo_state','retry');ec_zalo_queue(2);
@@ -66,4 +168,41 @@ ec_expect( strpos(get_post_meta(2,'_ec_zalo_error'),$token)===false, 'Saved deli
 $GLOBALS['zalo_events']=array();$GLOBALS['zalo_schedule_fail']=true;update_post_meta(2,'_ec_zalo_state','retry');ec_zalo_queue(2);
 ec_expect( get_post_meta(2,'_ec_zalo_state')==='failed', 'Queue failure visible without losing saved appointment' );
 ec_expect( count($GLOBALS['ec_test_posts'])===2, 'Notification failures do not remove appointments' );
+$multi_settings=$multi_candidates;
+$multi_settings['enabled']=true;
+$multi_settings['cipher']=$cipher;
+$multi_settings['chat_id']='abc.xyz';
+$multi_settings['version']='multi-recipient-v1';
+update_option('ec_booking_zalo',$multi_settings,false);
+$many_candidates=array();
+for($i=0;$i<25;++$i){$many_candidates['new-recipient-'.$i]='Tài khoản '.$i;}
+ec_zalo_store_candidates($many_candidates);
+$multi_settings=ec_zalo_settings();
+ec_expect(ec_zalo_selected_recipient_ids($multi_settings)===array('abc.xyz','manager.2'),'Selected recipients are retained when newer webhook candidates exceed the list limit');
+$GLOBALS['zalo_meta'][2]=array();
+$GLOBALS['zalo_events']=array();
+$GLOBALS['zalo_schedule_fail']=false;
+ec_zalo_queue(2);
+ec_test_zalo_queue(array(
+	array(200,array('ok'=>true,'result'=>array('message_id'=>'message-a'))),
+	array(403,array('ok'=>false,'description'=>'Chat recipient is unavailable')),
+));
+$multi_before=count($GLOBALS['zalo_http_calls']);
+ec_zalo_deliver(2);
+$multi_calls=array_slice($GLOBALS['zalo_http_calls'],$multi_before);
+$multi_snapshots=array_slice($GLOBALS['zalo_meta_at_http'],$multi_before);
+$multi_chat_ids=array_map(function($call){$body=json_decode($call[1]['body'],true);return $body['chat_id'] ?? '';},$multi_calls);
+sort($multi_chat_ids);
+$sent_hashes=get_post_meta(2,'_ec_zalo_sent_recipient_hashes',true);
+ec_expect($multi_chat_ids===array('abc.xyz','manager.2') && get_post_meta(2,'_ec_zalo_state')==='partial','One booking sends to every selected recipient and reports a partial result');
+ec_expect(is_array($sent_hashes) && count($sent_hashes)===1 && !in_array('abc.xyz',$sent_hashes,true),'Delivery metadata stores only a hash for a successful recipient');
+ec_expect(count($multi_snapshots[1][2]['_ec_zalo_sent_recipient_hashes'] ?? array())===1,'A successful recipient is persisted before the next API call can interrupt the worker');
+update_post_meta(2,'_ec_zalo_state','retry');
+ec_zalo_queue(2);
+ec_test_zalo_response(200,array('ok'=>true,'result'=>array('message_id'=>'message-b')));
+$retry_before=count($GLOBALS['zalo_http_calls']);
+ec_zalo_deliver(2);
+$retry_calls=array_slice($GLOBALS['zalo_http_calls'],$retry_before);
+$retry_chat_ids=array_map(function($call){$body=json_decode($call[1]['body'],true);return $body['chat_id'] ?? '';},$retry_calls);
+ec_expect($retry_chat_ids===array('manager.2') && get_post_meta(2,'_ec_zalo_state')==='sent','Retry after a partial delivery only sends to the recipient not already confirmed');
 echo 'PASS: '.$assertions." combined booking/Zalo checks; no network messages sent.\n";

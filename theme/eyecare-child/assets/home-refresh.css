@@ -252,3 +252,71 @@
  #trang-chu .eyecare-dai-gap__o { transition: none; }
  #trang-chu .eyecare-dai-gap__o:hover { transform: none; }
 }
+
+/* Equipment showcase: one focused slide, with an accessible touch-friendly track. */
+#trang-chu .eyecare-equipment { position: relative; overflow: hidden; padding: 78px 0 84px; background: linear-gradient(145deg, #f4f9f6 0%, #ffffff 58%, #eef7f8 100%); }
+#trang-chu .eyecare-equipment::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(115deg, transparent 0 62%, #d8f3f24d 62% 63%, transparent 63%); }
+#trang-chu .eyecare-equipment__khung { position: relative; z-index: 1; width: min(1180px, calc(100% - 64px)); margin: 0 auto; }
+#trang-chu .eyecare-equipment__dau { max-width: 720px; margin: 0 auto 34px; text-align: center; }
+#trang-chu .eyecare-equipment__nhan { display: inline-flex; align-items: center; gap: 8px; margin: 0 0 13px; color: #117b43; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+#trang-chu .eyecare-equipment__nhan span { display: inline-block; width: 22px; height: 2px; background: #43b9c6; }
+#trang-chu .eyecare-equipment__dau h2 { margin: 0; color: #123e2b; font-family: 'Be Vietnam Pro', Arial, sans-serif !important; font-size: clamp(28px, 3vw, 42px); font-weight: 700; letter-spacing: -.04em; line-height: 1.25; text-transform: none; }
+#trang-chu .eyecare-equipment__dau > p:last-child { max-width: 600px; margin: 14px auto 0; color: #536a60; font-size: 15px; line-height: 1.75; }
+#trang-chu .eyecare-equipment__san { display: grid; grid-template-columns: 48px minmax(0, 1fr) 48px; align-items: center; gap: 18px; }
+#trang-chu .eyecare-equipment__khung-truot { min-width: 0; overflow-x: auto; overflow-y: hidden; border-radius: 24px; scroll-snap-type: x mandatory; scrollbar-width: none; touch-action: pan-y; }
+#trang-chu .eyecare-equipment__khung-truot::-webkit-scrollbar { display: none; }
+#trang-chu .eyecare-equipment:not(.has-js) .eyecare-equipment__nut, #trang-chu .eyecare-equipment:not(.has-js) .eyecare-equipment__dieu-khien { display: none; }
+#trang-chu .eyecare-equipment__danh-sach { display: flex; width: 100%; margin: 0; padding: 0; list-style: none; }
+#trang-chu .eyecare-equipment.has-js .eyecare-equipment__khung-truot { overflow: hidden; scroll-snap-type: none; }
+#trang-chu .eyecare-equipment.has-js .eyecare-equipment__danh-sach { transform: translate3d(var(--equipment-offset, 0%), 0, 0); transition: transform .72s cubic-bezier(.22, .61, .36, 1); }
+#trang-chu .eyecare-equipment__slide { flex: 0 0 100%; min-width: 0; scroll-snap-align: start; padding: 0; }
+#trang-chu .eyecare-equipment.has-js .eyecare-equipment__slide { opacity: .56; transform: scale(.97); transition: opacity .45s ease, transform .65s ease; }
+#trang-chu .eyecare-equipment.has-js .eyecare-equipment__slide.is-active { opacity: 1; transform: scale(1); }
+#trang-chu .eyecare-equipment__the { display: grid; grid-template-columns: minmax(0, .92fr) minmax(320px, 1.08fr); min-height: 510px; overflow: hidden; border: 1px solid #d4e7df; border-radius: 24px; background: #fff; box-shadow: 0 20px 58px #123e2b18; }
+#trang-chu .eyecare-equipment__anh-wrap { min-height: 510px; overflow: hidden; background: #eaf5f3; }
+#trang-chu .eyecare-equipment__anh-wrap img { display: block; width: 100%; height: 100%; object-fit: contain; object-position: center; transition: transform 1.1s cubic-bezier(.22, .61, .36, 1); }
+#trang-chu .eyecare-equipment__slide.is-active .eyecare-equipment__anh-wrap img { transform: scale(1.025); }
+#trang-chu .eyecare-equipment__noi-dung { display: flex; flex-direction: column; justify-content: center; padding: 54px clamp(28px, 5vw, 76px); background: radial-gradient(circle at 100% 0, #dff5f255, transparent 40%), #fff; }
+#trang-chu .eyecare-equipment__so { margin: 0 0 28px; color: #2695a4; font-size: 12px; font-weight: 700; letter-spacing: .12em; }
+#trang-chu .eyecare-equipment__loai { margin: 0 0 14px; color: #117b43; font-size: 12px; font-weight: 700; letter-spacing: .08em; line-height: 1.5; text-transform: uppercase; }
+#trang-chu .eyecare-equipment__noi-dung h3 { margin: 0; color: #123e2b; font-family: 'Be Vietnam Pro', Arial, sans-serif !important; font-size: clamp(28px, 3.2vw, 48px); font-weight: 700; letter-spacing: -.045em; line-height: 1.15; text-transform: none; }
+#trang-chu .eyecare-equipment__mo-ta { max-width: 42ch; margin: 22px 0 0; color: #536a60; font-size: 15px; line-height: 1.8; }
+#trang-chu .eyecare-equipment__nut { display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 1px solid #c9ded4; border-radius: 50%; color: #117b43; background: #fff; box-shadow: 0 8px 22px #123e2b12; cursor: pointer; transition: transform .2s ease, background .2s ease, border-color .2s ease; }
+#trang-chu .eyecare-equipment__nut svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
+#trang-chu .eyecare-equipment__nut:hover { border-color: #117b43; background: #eaf5ee; transform: scale(1.06); }
+#trang-chu .eyecare-equipment__nut:focus-visible, #trang-chu .eyecare-equipment__cham:focus-visible { outline: 3px solid #dba92e; outline-offset: 3px; }
+#trang-chu .eyecare-equipment__dieu-khien { display: flex; justify-content: center; align-items: center; gap: 9px; margin-top: 26px; }
+#trang-chu .eyecare-equipment .screen-reader-text { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+#trang-chu .eyecare-equipment__cham { width: 9px; height: 9px; padding: 0; border: 0; border-radius: 50%; background: #b6d7cc; cursor: pointer; transition: width .25s ease, border-radius .25s ease, background .25s ease; }
+#trang-chu .eyecare-equipment__cham.is-active { width: 30px; border-radius: 9px; background: #117b43; }
+#trang-chu .eyecare-equipment__tam-dung { display: grid; place-items: center; width: 32px; height: 32px; margin-left: 8px; padding: 0; border: 1px solid #c9ded4; border-radius: 50%; color: #117b43; background: #fff; cursor: pointer; }
+#trang-chu .eyecare-equipment__tam-dung svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.8; }
+#trang-chu .eyecare-equipment__tam-dung .eyecare-equipment__icon-chay { display: none; fill: currentColor; stroke: none; }
+#trang-chu .eyecare-equipment.is-paused .eyecare-equipment__tam-dung .eyecare-equipment__icon-dung { display: none; }
+#trang-chu .eyecare-equipment.is-paused .eyecare-equipment__tam-dung .eyecare-equipment__icon-chay { display: block; }
+#trang-chu .eyecare-equipment__tam-dung:hover { border-color: #117b43; background: #eaf5ee; }
+#trang-chu .eyecare-equipment__tam-dung:focus-visible { outline: 3px solid #dba92e; outline-offset: 3px; }
+
+@media (max-width: 760px) {
+ #trang-chu .eyecare-equipment { padding: 52px 0 58px; }
+ #trang-chu .eyecare-equipment__khung { width: calc(100% - 40px); }
+ #trang-chu .eyecare-equipment__dau { margin-bottom: 24px; text-align: left; }
+ #trang-chu .eyecare-equipment__dau h2 { font-size: 30px; }
+ #trang-chu .eyecare-equipment__dau > p:last-child { font-size: 14px; line-height: 1.65; }
+ #trang-chu .eyecare-equipment__san { grid-template-columns: 36px minmax(0, 1fr) 36px; gap: 8px; }
+ #trang-chu .eyecare-equipment__nut { width: 36px; height: 36px; }
+ #trang-chu .eyecare-equipment__nut svg { width: 18px; height: 18px; }
+ #trang-chu .eyecare-equipment__the { display: block; min-height: 0; border-radius: 18px; }
+ #trang-chu .eyecare-equipment__anh-wrap { height: auto; min-height: 0; aspect-ratio: 1122 / 1400; }
+ #trang-chu .eyecare-equipment__noi-dung { min-height: 226px; padding: 24px 22px 28px; }
+ #trang-chu .eyecare-equipment__so { margin-bottom: 16px; }
+ #trang-chu .eyecare-equipment__loai { font-size: 10px; }
+ #trang-chu .eyecare-equipment__noi-dung h3 { font-size: 28px; }
+ #trang-chu .eyecare-equipment__mo-ta { margin-top: 14px; font-size: 13px; line-height: 1.65; }
+ #trang-chu .eyecare-equipment__tam-dung { width: 30px; height: 30px; margin-left: 4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+ #trang-chu .eyecare-equipment__danh-sach, #trang-chu .eyecare-equipment__slide, #trang-chu .eyecare-equipment__anh-wrap img, #trang-chu .eyecare-equipment__nut, #trang-chu .eyecare-equipment__cham { transition: none; }
+ #trang-chu .eyecare-equipment__slide.is-active .eyecare-equipment__anh-wrap img { transform: none; }
+}

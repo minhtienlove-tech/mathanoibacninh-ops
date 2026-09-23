@@ -83,6 +83,27 @@ function eyecare_home_refresh_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'eyecare_home_refresh_assets', 130 );
 
+/** Nạp slider máy móc hiện đại chỉ ở trang chủ. */
+function eyecare_nap_js_thiet_bi() {
+	if ( ! is_front_page() ) {
+		return;
+	}
+
+	$tep_js = get_stylesheet_directory() . '/assets/equipment-slider.js';
+	if ( ! file_exists( $tep_js ) ) {
+		return;
+	}
+
+	wp_enqueue_script(
+		'eyecare-equipment-slider',
+		get_stylesheet_directory_uri() . '/assets/equipment-slider.js',
+		array(),
+		filemtime( $tep_js ),
+		true
+	);
+}
+add_action( 'wp_enqueue_scripts', 'eyecare_nap_js_thiet_bi', 131 );
+
 
 /**
  * Nạp JS slider — CHỈ trên trang chủ, và chỉ khi slider thực sự có ảnh.
@@ -421,5 +442,5 @@ require_once get_stylesheet_directory() . '/inc/zalo-dat-lich.php';
 require_once get_stylesheet_directory() . '/inc/gmail-dat-lich.php';
 require_once get_stylesheet_directory() . '/inc/lien-he-noi.php';
 
-/* Educational eye model: assets load only on the knowledge library page. */
+/* Mô hình mắt 3D giáo dục — chỉ nạp asset khi trang kiến thức gọi tới. */
 require_once get_stylesheet_directory() . '/inc/mo-hinh-mat.php';

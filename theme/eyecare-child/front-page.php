@@ -189,6 +189,102 @@ $tt = eyecare_du_lieu_thuc_the();
 
 	<?php
 	/* ==================================================================
+	   MÁY MÓC HIỆN ĐẠI — slider giới thiệu thiết bị đang sử dụng.
+	   Ảnh được tối ưu riêng trong child theme; nội dung mô tả giữ trung tính,
+	   chỉ nêu công dụng hỗ trợ, không đưa ra cam kết kết quả điều trị.
+	   ================================================================== */
+	$thiet_bi = array(
+		array(
+			'ten'  => 'IOLMaster 700',
+			'nhan' => 'Sinh trắc học quang học',
+			'mo_ta' => 'Đo các thông số nhãn cầu, hỗ trợ tính công suất thủy tinh thể nhân tạo theo chỉ định của bác sĩ.',
+			'anh'  => 'iolmaster-700.jpg',
+		),
+		array(
+			'ten'  => 'Revo 80 OCT',
+			'nhan' => 'Chụp cắt lớp võng mạc',
+			'mo_ta' => 'Tạo hình ảnh chi tiết các lớp võng mạc để bác sĩ đánh giá cấu trúc đáy mắt.',
+			'anh'  => 'revo-80-oct.jpg',
+		),
+		array(
+			'ten'  => 'OPMI Lumera 300',
+			'nhan' => 'Kính hiển vi phẫu thuật',
+			'mo_ta' => 'Hỗ trợ quan sát rõ trong các thao tác phẫu thuật nhãn khoa theo quy trình chuyên môn.',
+			'anh'  => 'opmi-lumera-300.jpg',
+		),
+		array(
+			'ten'  => 'Phaco FAROS',
+			'nhan' => 'Hệ thống phẫu thuật đục thủy tinh thể',
+			'mo_ta' => 'Kiểm soát năng lượng và dòng dịch trong phẫu thuật theo chỉ định và quy trình của bác sĩ.',
+			'anh'  => 'phaco-faros.jpg',
+		),
+		array(
+			'ten'  => 'Laser YAG YC-200',
+			'nhan' => 'Laser nhãn khoa',
+			'mo_ta' => 'Thiết bị laser dùng trong một số thủ thuật nhãn khoa khi có chỉ định phù hợp.',
+			'anh'  => 'laser-yag-yc-200.jpg',
+		),
+		array(
+			'ten'  => 'VuPad A/B',
+			'nhan' => 'Siêu âm mắt A-scan & B-scan',
+			'mo_ta' => 'Đo trục nhãn cầu và khảo sát cấu trúc bên trong mắt trong những trường hợp cần thiết.',
+			'anh'  => 'vupad-ab.jpg',
+		),
+	);
+	$thiet_bi_url = get_stylesheet_directory_uri() . '/assets/thiet-bi/';
+	?>
+	<section id="thiet-bi-hien-dai" class="eyecare-equipment" data-equipment-slider aria-labelledby="thiet-bi-hien-dai-tieu-de">
+		<div class="eyecare-equipment__khung">
+			<header class="eyecare-equipment__dau">
+				<p class="eyecare-equipment__nhan"><span aria-hidden="true"></span>Không gian thiết bị</p>
+				<h2 id="thiet-bi-hien-dai-tieu-de">Máy móc hiện đại</h2>
+				<p>Hình ảnh một số thiết bị được sử dụng để hỗ trợ thăm khám, chẩn đoán và điều trị tại bệnh viện.</p>
+			</header>
+
+			<div class="eyecare-equipment__san" role="region" aria-roledescription="carousel" aria-label="Các thiết bị nhãn khoa">
+				<button class="eyecare-equipment__nut eyecare-equipment__nut--truoc" type="button" data-equipment-prev aria-label="Thiết bị trước">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7"></path></svg>
+				</button>
+				<div class="eyecare-equipment__khung-truot" data-equipment-viewport>
+					<ul class="eyecare-equipment__danh-sach" data-equipment-track>
+						<?php foreach ( $thiet_bi as $i => $tb ) : ?>
+							<li class="eyecare-equipment__slide<?php echo 0 === $i ? ' is-active' : ''; ?>" data-equipment-slide data-equipment-index="<?php echo (int) $i; ?>" aria-hidden="false">
+								<article class="eyecare-equipment__the">
+									<div class="eyecare-equipment__anh-wrap">
+										<img src="<?php echo esc_url( $thiet_bi_url . $tb['anh'] ); ?>" alt="<?php echo esc_attr( $tb['ten'] ); ?>" width="1122" height="1402" <?php echo 0 === $i ? 'fetchpriority="high"' : 'loading="lazy"'; ?> decoding="async">
+									</div>
+									<div class="eyecare-equipment__noi-dung">
+										<p class="eyecare-equipment__so"><?php echo esc_html( sprintf( '%02d / %02d', $i + 1, count( $thiet_bi ) ) ); ?></p>
+										<p class="eyecare-equipment__loai"><?php echo esc_html( $tb['nhan'] ); ?></p>
+										<h3><?php echo esc_html( $tb['ten'] ); ?></h3>
+										<p class="eyecare-equipment__mo-ta"><?php echo esc_html( $tb['mo_ta'] ); ?></p>
+									</div>
+								</article>
+							</li>
+						<?php endforeach; ?>
+					</ul>
+				</div>
+				<button class="eyecare-equipment__nut eyecare-equipment__nut--sau" type="button" data-equipment-next aria-label="Thiết bị tiếp theo">
+					<svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7"></path></svg>
+				</button>
+			</div>
+
+			<div class="eyecare-equipment__dieu-khien" role="group" aria-label="Chọn thiết bị">
+				<?php foreach ( $thiet_bi as $i => $tb ) : ?>
+					<button type="button" class="eyecare-equipment__cham<?php echo 0 === $i ? ' is-active' : ''; ?>" data-equipment-dot="<?php echo (int) $i; ?>" aria-label="Xem <?php echo esc_attr( $tb['ten'] ); ?>" aria-pressed="<?php echo 0 === $i ? 'true' : 'false'; ?>"></button>
+				<?php endforeach; ?>
+				<button type="button" class="eyecare-equipment__tam-dung" data-equipment-toggle aria-pressed="false" aria-label="Tạm dừng tự động chuyển">
+					<svg class="eyecare-equipment__icon-dung" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"></path></svg>
+					<svg class="eyecare-equipment__icon-chay" viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"></path></svg>
+					<span class="screen-reader-text">Tạm dừng hoặc tiếp tục tự động chuyển</span>
+				</button>
+			</div>
+			<p class="screen-reader-text" data-equipment-status aria-live="polite">Thiết bị 1 trên <?php echo (int) count( $thiet_bi ); ?>: <?php echo esc_html( $thiet_bi[0]['ten'] ); ?></p>
+		</div>
+	</section>
+
+	<?php
+	/* ==================================================================
 	   DỊCH VỤ CỦA CHÚNG TÔI — dữ liệu lấy từ “Dịch vụ & lĩnh vực khám”
 	   trong WordPress Admin. Người quản trị có thể thêm/sửa/xóa thẻ, đổi
 	   ảnh, mô tả, liên kết, icon, màu và thứ tự mà không sửa template.

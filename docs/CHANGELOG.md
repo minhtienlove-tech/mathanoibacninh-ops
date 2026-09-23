@@ -1,5 +1,28 @@
 # Production changelog
 
+## 2026-09-18
+
+- Thêm khối **Máy móc hiện đại** vào trang chủ trước phần Dịch vụ của chúng tôi, gồm 6 ảnh thiết bị JPG đã tối ưu và slider tự chuyển. Có nút trước/sau, chấm chọn, tạm dừng/tiếp tục, vuốt trên điện thoại, bàn phím, fallback scroll-snap và hỗ trợ `prefers-reduced-motion`.
+- Khôi phục include `inc/mo-hinh-mat.php` trong `functions.php` để trang `/kien-thuc/` đăng ký lại hàm mô hình mắt 3D và không phát sinh lỗi 500.
+
+## 2026-09-17
+
+- Cho phép chọn tối đa 10 tài khoản Zalo đã nhắn riêng cho bot để cùng nhận thông báo lịch hẹn. Trang quản trị hiển thị tên Zalo, có nút cập nhật Chat ID từ Webhook và gửi kiểm tra đến toàn bộ tài khoản đã chọn. Khi gửi một phần thất bại, lịch hẹn chỉ gửi lại cho tài khoản chưa xác nhận; metadata lịch chỉ lưu mã băm người nhận đã gửi thành công. Backup triển khai: `/home/jwhxtzru/backups/zalo-multi-recipient-20260917-154612/`.
+
+- Chặn event chẩn đoán Webhook bị nhận nhầm là người nhận Zalo. Danh sách chỉ hiển thị Chat ID có event tin nhắn chính thức của Zalo và đã xác nhận chat riêng; ID cũ/chẩn đoán không còn xuất hiện hoặc chọn được. Backup triển khai: `/home/jwhxtzru/backups/zalo-webhook-diagnostic-filter-20260917-152500/`.
+
+- Sửa chọn người nhận Zalo: mọi tin nhắn đến từ chat riêng đã xác thực đều được lưu Chat ID, hiển thị rõ trong danh sách quản trị để chọn và bật thông báo. Bỏ yêu cầu bắt buộc `/nhanlich`; chat nhóm vẫn bị chặn. Khi chưa chọn Chat ID, thao tác bật thông báo hiển thị lý do thay vì tự tắt âm thầm. Backup triển khai: `/home/jwhxtzru/backups/zalo-chat-id-selection-20260917-150315/`.
+
+- Đã triển khai `17e4a0a` để chỉ cho phép người nhận Zalo từ event `/nhanlich` trong chat riêng, chặn candidate cũ/nhóm chưa được xác nhận và thay lỗi gửi chung bằng hướng dẫn an toàn theo trạng thái. Backup file/database tại `/home/jwhxtzru/backups/zalo-private-recipient-20260917-140900/`. Production xác nhận Bot, URL Webhook và endpoint đều đạt; Chat ID đã chọn chưa được xác nhận chat riêng nên thông báo tự động vẫn tắt. PHP lint, hash đối chiếu, endpoint không secret trả 403 và 6 URL smoke test đạt.
+
+- Đã triển khai chẩn đoán Zalo Webhook `866a7d8` và điều chỉnh tiến độ chọn người nhận `846e1e0`. Sao lưu file/database tại `/home/jwhxtzru/backups/zalo-diagnostics-20260917-113747/` và `/home/jwhxtzru/backups/zalo-diagnostics-selection-20260917-114239/`. Trang Cài đặt Zalo có nút kiểm tra Bot, URL Webhook và endpoint riêng, bảng trạng thái an toàn, event Webhook gần nhất và bước cần làm tiếp theo; không hiển thị token, secret hay nội dung tin nhắn. Không dùng `getUpdates` khi Webhook đang hoạt động. Production xác nhận Bot, URL và endpoint đều đạt; có 4 người nhận nhưng chưa chọn Chat ID, thông báo tự động đang tắt. PHP lint, đối chiếu hash, endpoint không có secret trả 403, 6 URL smoke test đều 200.
+
+- Sửa kết nối thông báo Zalo Bot: mã `408 Request timeout` của `getUpdates` nay được hiểu là chưa có tin nhắn mới, không còn báo nhầm lỗi token/Chat ID. Bổ sung Webhook HTTPS có xác thực `X-Bot-Api-Secret-Token`, chống nhận trùng và ghi nhận người đã nhắn `/nhanlich` để quản trị viên chọn Chat ID. Bổ sung tạo secret mã hóa và kích hoạt Webhook từ trang Cài đặt Zalo; thông báo tự động vẫn tắt cho tới khi quản trị viên chọn người nhận và tự bật.
+
+- Endpoint Webhook phản hồi `200` cho yêu cầu kiểm tra đã xác thực của Zalo, không ghi nhận hay xử lý dữ liệu khi gói kiểm tra không phải sự kiện tin nhắn.
+
+- Bổ sung đọc JSON thô khi Zalo không gửi `Content-Type: application/json`, giúp WordPress vẫn nhận được event `message.text.received` và lưu Chat ID sau lệnh `/nhanlich`.
+
 ## 2026-09-17
 
 - Hoàn tất kiểm tra bản mô hình mắt chân thực đã lên hosting ngày 16/09 theo duyệt người dùng (1025101 + c5cd0fa). Đã sao lưu database và 4 file hiện hữu tại `/home/jwhxtzru/backups/eye-realism-20260916-155209/`, đối chiếu baseline, kiểm tra SHA256 toàn bộ file staged, lint PHP, xóa cache WordPress/LiteSpeed và smoke 6 URL đạt.
@@ -101,4 +124,8 @@
 - Tăng tương phản breadcrumb trên hero trang chuyên mục.
 - Xóa dải “Website mới đang được hoàn thiện” trên trang Liên hệ.
 - Backup liên quan nằm trong `/home/jwhxtzru/backups/` trên server.
+
+## 2026-09-17
+
+- Thông báo đặt lịch Zalo gồm họ tên và số điện thoại liên hệ cho các tài khoản nhân viên chat riêng đã xác thực và được chọn; biểu mẫu đặt lịch nêu rõ việc dùng nội bộ này. Đã sao lưu file/database tại `/home/jwhxtzru/backups/mathanoibacninh-zalo-contact-20260917-165120/`.
 
