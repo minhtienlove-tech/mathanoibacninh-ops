@@ -2,6 +2,8 @@
 
 ## 2026-09-23
 
+- Đã triển khai `9cd3ae6` (3 file runtime) lên hosting. Backup file/database: `/home/jwhxtzru/backups/media-optimizer-20260923/`. Baseline `functions.php` khớp production trước thay đổi; SHA256 staged/live khớp; PHP lint functions/module/footer/liên hệ và smoke 6 URL + SSH đạt. WordPress xác nhận module/AJAX hook hoạt động và render 25 ảnh; AJAX chưa đăng nhập bị từ chối HTTP 400. Chưa có ảnh production được chuyển đổi (`_ec_media_original` = 0); người quản trị tự chọn ảnh và thao tác trong Media.
+
 - Thêm màn hình Media → **Tối ưu ảnh & tên file**, xem trước tên từ bài viết, lựa chọn ảnh theo trang, xử lý tuần tự, dừng và khôi phục. Có chế độ WebP/resize và chế độ chỉ đổi tên giữ nguyên byte; nguồn/crop gốc được giữ. Không xử lý hàng loạt thư viện khi triển khai. Chỉ cập nhật metadata ảnh đã chọn; URL trong nội dung được ánh xạ lúc render, không search-replace dữ liệu. Hướng dẫn/giới hạn tại `docs/MEDIA-OPTIMIZATION.md`.
 - Kiểm tra trước triển khai: 15 assertion PHP độc lập, 9 kiểm tra WordPress CLI với encoder thật và HTML; PNG mẫu 2.235.985 → 127.212 byte, nguồn không đổi. UI preview desktop/mobile đạt. Chưa kiểm tra AJAX qua admin thật do browser chưa đăng nhập.
 
