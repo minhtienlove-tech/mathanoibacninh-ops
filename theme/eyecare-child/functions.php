@@ -444,3 +444,6 @@ require_once get_stylesheet_directory() . '/inc/lien-he-noi.php';
 
 /* Mô hình mắt 3D giáo dục — chỉ nạp asset khi trang kiến thức gọi tới. */
 require_once get_stylesheet_directory() . '/inc/mo-hinh-mat.php';
+
+/* Tối ưu ảnh và tên file theo bài viết, có khôi phục bản gốc. */
+require_once get_stylesheet_directory() . '/inc/toi-uu-anh.php';

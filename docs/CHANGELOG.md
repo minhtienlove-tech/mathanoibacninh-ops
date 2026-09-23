@@ -1,5 +1,10 @@
 # Production changelog
 
+## 2026-09-23
+
+- Thêm màn hình Media → **Tối ưu ảnh & tên file**, xem trước tên từ bài viết, lựa chọn ảnh theo trang, xử lý tuần tự, dừng và khôi phục. Có chế độ WebP/resize và chế độ chỉ đổi tên giữ nguyên byte; nguồn/crop gốc được giữ. Không xử lý hàng loạt thư viện khi triển khai. Chỉ cập nhật metadata ảnh đã chọn; URL trong nội dung được ánh xạ lúc render, không search-replace dữ liệu. Hướng dẫn/giới hạn tại `docs/MEDIA-OPTIMIZATION.md`.
+- Kiểm tra trước triển khai: 15 assertion PHP độc lập, 9 kiểm tra WordPress CLI với encoder thật và HTML; PNG mẫu 2.235.985 → 127.212 byte, nguồn không đổi. UI preview desktop/mobile đạt. Chưa kiểm tra AJAX qua admin thật do browser chưa đăng nhập.
+
 ## 2026-09-18
 
 - Thêm khối **Máy móc hiện đại** vào trang chủ trước phần Dịch vụ của chúng tôi, gồm 6 ảnh thiết bị JPG đã tối ưu và slider tự chuyển. Có nút trước/sau, chấm chọn, tạm dừng/tiếp tục, vuốt trên điện thoại, bàn phím, fallback scroll-snap và hỗ trợ `prefers-reduced-motion`.
@@ -128,4 +133,3 @@
 ## 2026-09-17
 
 - Thông báo đặt lịch Zalo gồm họ tên và số điện thoại liên hệ cho các tài khoản nhân viên chat riêng đã xác thực và được chọn; biểu mẫu đặt lịch nêu rõ việc dùng nội bộ này. Đã sao lưu file/database tại `/home/jwhxtzru/backups/mathanoibacninh-zalo-contact-20260917-165120/`.
-
