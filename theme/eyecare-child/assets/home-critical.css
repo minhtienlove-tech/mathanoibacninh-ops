@@ -1,0 +1,193 @@
+/* Deliberately scoped: the home-team component and all its ancestors are untouched. */
+#trang-chu > .eyecare-hero {
+ display: grid; grid-template-columns: minmax(280px, .7fr) minmax(0, 2fr);
+ align-items: center; gap: 32px; padding: 48px max(32px, calc((100% - 1600px) / 2));
+ min-height: 0; background: linear-gradient(135deg, #f4faf6, #fff 65%); isolation: isolate;
+}
+#trang-chu > .eyecare-hero::before,
+#trang-chu > .eyecare-hero::after,
+#trang-chu .eyecare-hero__loi::before,
+#trang-chu .eyecare-hero__loi::after { display: none; }
+#trang-chu .eyecare-hero__loi {
+ position: static; order: 0; width: 100%; max-width: none; margin: 0; padding: 0;
+ background: none; color: #173e30; border: 0; border-radius: 0; box-shadow: none; transform: none;
+}
+#trang-chu .eyecare-hero__loi .eyecare-chu__khung { display: block; width: 100%; max-width: none; padding: 0; margin: 0; }
+#trang-chu .eyecare-hero__nhan {
+ display: inline-block; background: #e4f2e9; color: #167144; border: 0; border-radius: 6px;
+ padding: 7px 10px; margin: 0 0 18px; font-size: 11px; letter-spacing: .06em; box-shadow: none;
+}
+#trang-chu .eyecare-hero__td {
+ font-family: 'Be Vietnam Pro', Arial, sans-serif !important; font-size: clamp(30px, 3.1vw, 46px); line-height: 1.22;
+ font-weight: 700; text-transform: none; letter-spacing: -.045em; color: #123e2b; text-shadow: none; margin: 0 0 20px;
+}
+#trang-chu .eyecare-hero__mt { color: #536a60; font-size: 15px; line-height: 1.8; max-width: 40ch; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__nut { display: flex; justify-content: flex-start; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
+#trang-chu .eyecare-hero__loi .eyecare-nut { min-height: 48px; border-radius: 10px; padding: 12px 18px; font-size: 13px; }
+#trang-chu .eyecare-hero__loi .eyecare-nut--chinh { background: #117b43; border-color: #117b43; color: #fff; box-shadow: 0 5px 16px #117b4320; }
+#trang-chu .eyecare-hero__loi .eyecare-nut--phu { background: #fff; border: 1px solid #cadbd1; color: #155738; box-shadow: none; }
+#trang-chu .eyecare-hero__media { order: 1; width: 100%; margin: 0; border-radius: 20px; border: 1px solid #dce9e1; box-shadow: 0 20px 45px #123e2b12; aspect-ratio: 1916 / 821; }
+#trang-chu .eyecare-hero__bang { height: 100%; }
+#trang-chu .eyecare-hero__khung { margin: 0; padding: 0; }
+#trang-chu .eyecare-hero__cham { bottom: 10px; padding: 3px 9px; }
+#trang-chu .eyecare-hero__nut-chuyen { width: 38px; height: 38px; }
+
+/* Optical glass hero: decorative layers never cover content or receive input. */
+#trang-chu > .eyecare-hero {
+ position: relative; overflow: hidden; padding-top: 48px; padding-bottom: 48px;
+ background: radial-gradient(ellipse at 85% 20%, #98fb9840, transparent 55%), linear-gradient(120deg, #fff 15%, #f0f8f2 62%, #dcefe2);
+}
+#trang-chu > .eyecare-hero::before,
+#trang-chu > .eyecare-hero::after {
+ content: ''; display: block; position: absolute; pointer-events: none; z-index: -1;
+ border-radius: 50%; transform: translate3d(var(--lens-x, 0px), var(--lens-y, 0px), 0) rotate(-24deg);
+ transition: transform .7s ease-out;
+}
+#trang-chu > .eyecare-hero::before {
+ width: 640px; height: 640px; top: -190px; right: -110px;
+ border: 1px solid #ffffffde;
+ background: conic-gradient(from 35deg, #ffffff80, #2e8b571a, #adff2f35, #ffffffd9, #2e8b5740, #ffffff80);
+ box-shadow: inset 18px 12px 35px #ffffffb3, inset -12px -18px 40px #2e8b5720, 0 30px 70px #2e8b5715;
+}
+#trang-chu > .eyecare-hero::after {
+ width: 410px; height: 410px; top: -70px; right: 5px;
+ border: 1px solid #ffffffd9; background: linear-gradient(135deg, #ffffff50, #f5fff9ba 55%, #98fb981a);
+ box-shadow: inset 0 0 36px #fff, 0 0 0 22px #ffffff24, 0 0 0 23px #ffffff8c;
+}
+#trang-chu .eyecare-hero__loi { position: relative; z-index: 1; padding: 28px; border-radius: 24px; background: radial-gradient(ellipse at 100% 0%, #2e8b57, transparent 65%), #073e29; box-shadow: 0 18px 45px #073e291c; border: 1px solid #ffffff60; overflow: hidden; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__nhan { color: #dafaad; background: #ffffff0d; border-color: #ffffff26; font-size: 10px; padding: 8px 12px; margin-bottom: 20px; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__td { color: #fff; font-size: clamp(24px, 2vw, 30px); line-height: 1.35; letter-spacing: -.035em; margin-bottom: 22px; }
+#trang-chu .eyecare-hero__promise { color: #d6ebdf; font-size: clamp(21px, 1.65vw, 27px); line-height: 1.6; letter-spacing: -.025em; margin: 0 0 24px; }
+#trang-chu .eyecare-hero__promise strong { color: #d8f573; font-weight: 700; text-decoration: underline; text-decoration-color: #d8f57350; text-decoration-thickness: 2px; text-underline-offset: 6px; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__mt { display: grid; gap: 5px; margin: 0; padding: 14px 0 14px 16px; border-left: 2px solid #d8f573; color: #d4e7db; font-size: 11px; line-height: 1.6; }
+#trang-chu .eyecare-hero__hours-label { letter-spacing: .12em; font-size: 9px; color: #bfdbc9; }
+#trang-chu .eyecare-hero__mt strong { color: #fff; font-size: 22px; letter-spacing: .025em; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__nut { gap: 8px; margin-top: 22px; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__nut .eyecare-nut--chinh { background: #d8f573; border-color: #d8f573; color: #073e29; box-shadow: 0 4px 18px #d8f57319; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__nut .eyecare-nut--phu { color: #fff; border-color: #ffffff40; background: #ffffff0a; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__nut .eyecare-nut { padding: 11px 12px; font-size: 11px; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__count { color: #c3dbcc; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__track { background: #ffffff26; }
+#trang-chu .eyecare-hero__loi .eyecare-hero__track i { background: #d8f573; }
+#trang-chu .eyecare-hero__nhan { background: #ffffffb8; border: 1px solid #2e8b5730; color: #006400; border-radius: 30px; padding: 9px 15px; }
+#trang-chu .eyecare-hero__nhan::before { content: ''; display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: #2e8b57; box-shadow: 0 0 0 4px #adff2f40; margin-right: 10px; }
+#trang-chu .eyecare-hero__td { color: #12432b; }
+#trang-chu .eyecare-hero__loi .eyecare-nut--chinh { background: #006400; border-color: #006400; box-shadow: 0 8px 24px #00640026; }
+#trang-chu .eyecare-hero__loi .eyecare-nut--chinh:hover { background: #084d23; transform: translateY(-2px); }
+#trang-chu .eyecare-hero__media { position: relative; z-index: 1; border: 5px solid #ffffffc9; border-radius: 24px; box-shadow: 0 24px 65px #174d322b, 0 0 0 1px #2e8b5717; }
+#trang-chu .eyecare-hero__media::after { content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 3; border-radius: inherit; box-shadow: inset 0 0 0 1px #ffffff50; }
+#trang-chu .eyecare-hero__progress { display: flex; align-items: center; gap: 16px; max-width: 230px; margin-top: 28px; }
+#trang-chu .eyecare-hero__count { font-size: 12px; letter-spacing: .12em; font-weight: 600; color: #315e42; font-variant-numeric: tabular-nums; }
+#trang-chu .eyecare-hero__track { flex: 1; height: 3px; background: #2e8b5726; overflow: hidden; border-radius: 3px; }
+#trang-chu .eyecare-hero__track i { display: block; height: 100%; background: #2e8b57; transform: scaleX(0); transform-origin: left; }
+#trang-chu .eyecare-hero__nut-chuyen { width: 44px; height: 44px; background: #ffffffed; color: #006400; border: 1px solid #2e8b5729; box-shadow: 0 3px 12px #123e2b18; }
+@keyframes eyecare-hero-progress { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+@keyframes eyecare-hero-reveal { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes eyecare-hero-light { from { opacity: .6; } to { opacity: 1; } }
+@media (prefers-reduced-motion: no-preference) {
+ #trang-chu > .eyecare-hero::before { animation: eyecare-hero-light 7s ease-in-out infinite alternate; }
+ #trang-chu > .eyecare-hero--offscreen::before { animation-play-state: paused; }
+ #trang-chu .eyecare-hero__nhan { animation: eyecare-hero-reveal .7s both; }
+ #trang-chu .eyecare-hero__td { animation: eyecare-hero-reveal .8s .1s both; }
+ #trang-chu .eyecare-hero__mt { animation: eyecare-hero-reveal .8s .2s both; }
+ #trang-chu .eyecare-hero__nut { animation: eyecare-hero-reveal .8s .3s both; }
+ #trang-chu .eyecare-hero--mo .eyecare-hero__khung { transition: opacity .85s ease; }
+}
+@media (prefers-reduced-motion: reduce) {
+ #trang-chu > .eyecare-hero::before, #trang-chu > .eyecare-hero::after { transform: none; transition: none; }
+ #trang-chu .eyecare-hero__track i { animation: none !important; }
+}
+
+#trang-chu .eyecare-dai-gap { background: #fff; padding: 0 32px 32px; margin: 0; }
+#trang-chu .eyecare-dai-gap::before, #trang-chu .eyecare-dai-gap::after,
+#trang-chu .eyecare-dai-gap__o::before, #trang-chu .eyecare-dai-gap__o::after { display: none; }
+#trang-chu .eyecare-dai-gap__khung { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); max-width: 1280px; width: 100%; gap: 14px; margin: auto; padding: 0; background: none; box-shadow: none; }
+#trang-chu .eyecare-dai-gap__o { display: grid; grid-template-columns: 46px 1fr; grid-template-rows: auto auto; align-content: center; text-align: left; column-gap: 14px; padding: 22px; min-height: 106px; color: #173e30; background: #f6faf7; border: 1px solid #e0ebe4; border-radius: 14px; clip-path: none; transform: none; }
+#trang-chu .eyecare-dai-gap__o:hover { background: #eaf5ee; border-color: #b4d3c0; color: #173e30; }
+#trang-chu .eyecare-dai-gap__o { margin: 0; }
+#trang-chu .eyecare-dai-gap__icon { grid-column: 1; grid-row: 1 / 3; width: 46px; height: 46px; margin: 0; border: 0; border-radius: 12px; background: #e4f1e8; color: #117b43; box-shadow: none; }
+#trang-chu .eyecare-dai-gap__icon svg { width: 25px; height: 25px; color: #117b43; }
+#trang-chu .eyecare-dai-gap__ten { font-size: 15px; font-weight: 700; }
+#trang-chu .eyecare-dai-gap__phu { color: #5c7166; font-size: 12px; margin-top: 4px; }
+#trang-chu .eyecare-chu__diem { background: #fff; padding: 12px 0 52px; border: 0; }
+#trang-chu .eyecare-chu__diem::before, #trang-chu .eyecare-chu__diem::after { display: none; }
+#trang-chu .eyecare-chu__diem-muc { background: none; border: 0; border-radius: 0; box-shadow: none; padding: 16px 22px; }
+#trang-chu .eyecare-chu__diem-muc::before, #trang-chu .eyecare-chu__diem-muc::after { display: none; }
+#trang-chu .eyecare-chu__diem-td { font-family: 'Be Vietnam Pro', Arial, sans-serif !important; font-size: 16px; text-transform: none; letter-spacing: -.02em; }
+#trang-chu .eyecare-chu__diem-mt { font-size: 13px; color: #5c7166; line-height: 1.7; }
+
+@media (max-width: 1050px) {
+ #trang-chu .eyecare-hero__loi { padding: 20px; }
+ #trang-chu > .eyecare-hero { gap: 24px; padding: 40px 24px; }
+ #trang-chu .eyecare-hero__td { font-size: 32px; }
+ #trang-chu .eyecare-dai-gap { padding: 0 24px 24px; }
+ #trang-chu .eyecare-dai-gap__o { padding: 16px 12px; gap: 10px; }
+ #trang-chu .eyecare-dai-gap__ten { font-size: 13px; }
+}
+@media (max-width: 700px) {
+ #trang-chu .eyecare-hero__loi { padding: 24px; }
+ #trang-chu .eyecare-hero__promise { font-size: 23px; margin-bottom: 20px; }
+ #trang-chu > .eyecare-hero { grid-template-columns: minmax(0, 1fr); gap: 28px; padding: 28px 20px 32px; }
+ #trang-chu .eyecare-hero__td { font-size: 32px; max-width: 16ch; margin-bottom: 14px; }
+ #trang-chu .eyecare-hero__mt { font-size: 14px; }
+ #trang-chu .eyecare-hero__loi .eyecare-hero__nut { gap: 8px; margin-top: 20px; }
+ #trang-chu .eyecare-hero__loi .eyecare-nut { padding: 10px 12px; font-size: 12px; }
+ #trang-chu .eyecare-hero__media { border-radius: 12px; }
+ #trang-chu > .eyecare-hero::before { width: 380px; height: 380px; top: auto; bottom: -90px; right: -130px; }
+ #trang-chu > .eyecare-hero::after { width: 240px; height: 240px; top: auto; bottom: -20px; right: -60px; }
+ #trang-chu .eyecare-hero__media { border-width: 3px; }
+ #trang-chu .eyecare-hero__progress { margin-top: 18px; max-width: 180px; }
+ #trang-chu .eyecare-hero__dieu-khien { right: auto; left: 12px; }
+ #trang-chu .eyecare-hero__mui-ten { padding-right: 68px; }
+ #trang-chu .eyecare-dai-gap { padding: 0 20px 24px; }
+ #trang-chu .eyecare-dai-gap__khung { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+ #trang-chu .eyecare-dai-gap__o { display: flex; align-items: flex-start; flex-direction: column; gap: 8px; padding: 16px; min-height: 148px; }
+ #trang-chu .eyecare-dai-gap__phu { margin-top: 0; font-size: 11px; }
+ #trang-chu .eyecare-chu__diem { padding-bottom: 28px; }
+ #trang-chu .eyecare-chu__diem-muc { padding: 12px 4px; }
+}
+
+/* Quick access: roomy editorial cards and a shared information strip. */
+#trang-chu .eyecare-dai-gap { padding: 28px 32px 0; background: linear-gradient(#f0f7f2, #fff); }
+#trang-chu .eyecare-dai-gap__khung { gap: 18px; }
+#trang-chu .eyecare-dai-gap__o { position: relative; display: flex; flex-direction: column; align-items: flex-start; min-height: 188px; padding: 24px; gap: 9px; overflow: hidden; border-radius: 20px; border: 1px solid #dbe9df; background: linear-gradient(140deg, #fff 45%, #e8f4ec); box-shadow: 0 10px 28px #103e2a09; transition: transform .2s, box-shadow .2s; }
+#trang-chu .eyecare-dai-gap__o:nth-child(2) { background: linear-gradient(140deg, #fff 45%, #e6eef8); }
+#trang-chu .eyecare-dai-gap__o:nth-child(4) { background: linear-gradient(140deg, #fff 45%, #faf1d4); }
+#trang-chu .eyecare-dai-gap__o::after { content: '↗'; display: grid; place-items: center; position: absolute; right: 20px; top: 24px; width: 34px; height: 34px; border-radius: 50%; border: 1px solid #b9cebf; color: #17633d; font-size: 21px; background: #ffffffa0; clip-path: none; transform: none; }
+#trang-chu .eyecare-dai-gap__icon { width: 56px; height: 56px; border-radius: 16px; margin: 0 0 8px; background: #deeee3; }
+#trang-chu .eyecare-dai-gap__icon svg { width: 30px; height: 30px; }
+#trang-chu .eyecare-dai-gap__ten { font-size: 18px; letter-spacing: -.025em; }
+#trang-chu .eyecare-dai-gap__phu { font-size: 12px; margin: 0; color: #52685c; }
+#trang-chu .eyecare-dai-gap__o:nth-child(3) { background: radial-gradient(ellipse at top right, #328e59, transparent 80%), #084c30; border-color: #166a42; color: #fff; }
+#trang-chu .eyecare-dai-gap__o:nth-child(3) .eyecare-dai-gap__icon { background: #d8f573; }
+#trang-chu .eyecare-dai-gap__o:nth-child(3) .eyecare-dai-gap__phu { color: #d9ecdf; }
+#trang-chu .eyecare-dai-gap__o:nth-child(3)::after { background: #d8f573; border-color: #d8f573; color: #084c30; }
+#trang-chu .eyecare-dai-gap__o:hover { transform: translateY(-4px); box-shadow: 0 16px 30px #103e2a18; }
+#trang-chu .eyecare-dai-gap__o:focus-visible { outline: 3px solid #2e8b57; outline-offset: 4px; }
+#trang-chu .eyecare-chu__diem { padding: 24px 32px 48px; }
+#trang-chu .eyecare-chu__diem > .eyecare-chu__khung { width: 100%; max-width: 1280px; padding: 0; }
+#trang-chu .eyecare-chu__diem-ds { gap: 0; background: #f4f8f5; border: 1px solid #e0e9e2; border-radius: 18px; padding: 10px 0; overflow: hidden; }
+#trang-chu .eyecare-chu__diem-muc { padding: 18px 24px; }
+#trang-chu .eyecare-chu__diem-muc + .eyecare-chu__diem-muc { border-left: 1px solid #dbe6df; }
+#trang-chu .eyecare-chu__diem-icon { background: #fff; box-shadow: none; border: 1px solid #d5e6db; border-radius: 50%; }
+#trang-chu .eyecare-chu__diem-icon::after { display: none; }
+#trang-chu .eyecare-chu__diem-td { font-size: 15px; margin-bottom: 6px; }
+#trang-chu .eyecare-chu__diem-mt { font-size: 12px; }
+@media (max-width: 700px) {
+ #trang-chu .eyecare-dai-gap { padding: 20px 20px 0; }
+ #trang-chu .eyecare-dai-gap__khung { gap: 12px; }
+ #trang-chu .eyecare-dai-gap__o { padding: 16px; min-height: 176px; gap: 8px; border-radius: 16px; }
+ #trang-chu .eyecare-dai-gap__o::after { top: 16px; right: 12px; width: 25px; height: 25px; font-size: 17px; }
+ #trang-chu .eyecare-dai-gap__icon { width: 44px; height: 44px; border-radius: 12px; }
+ #trang-chu .eyecare-dai-gap__icon svg { width: 25px; height: 25px; }
+ #trang-chu .eyecare-dai-gap__ten { font-size: 14px; }
+ #trang-chu .eyecare-dai-gap__phu { font-size: 11px; }
+ #trang-chu .eyecare-chu__diem { padding: 18px 20px 32px; }
+ #trang-chu .eyecare-chu__diem-ds { display: grid; grid-template-columns: 1fr; padding: 0; }
+ #trang-chu .eyecare-chu__diem-muc { padding: 18px; }
+ #trang-chu .eyecare-chu__diem-muc + .eyecare-chu__diem-muc { border-left: 0; border-top: 1px solid #dbe6df; }
+}
+@media (prefers-reduced-motion: reduce) {
+ #trang-chu .eyecare-dai-gap__o { transition: none; }
+ #trang-chu .eyecare-dai-gap__o:hover { transform: none; }
+}

@@ -478,9 +478,9 @@ $tt = eyecare_du_lieu_thuc_the();
 						</article>
 					<?php else : ?>
 						<?php if ( 1 === $thu_tu_bai ) : ?>
-							<div class="eyecare-chu__bai-phu" role="list" aria-label="Các bài viết mới khác">
+							<div class="eyecare-chu__bai-phu" role="group" aria-label="Các bài viết mới khác">
 						<?php endif; ?>
-							<article class="eyecare-chu__bai-muc" role="listitem">
+							<article class="eyecare-chu__bai-muc">
 								<a class="eyecare-chu__bai-anh" href="<?php echo esc_url( get_permalink() ); ?>" tabindex="-1" aria-hidden="true">
 									<?php if ( $co_anh_dai_dien ) : ?>
 										<?php the_post_thumbnail( 'medium', array( 'alt' => esc_attr( $anh_alt ), 'loading' => 'lazy', 'decoding' => 'async' ) ); ?>

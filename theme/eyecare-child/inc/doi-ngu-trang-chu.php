@@ -131,12 +131,12 @@ function eyecare_doi_ngu_trang_chu_in( $heading_level = 2 ) {
 				</figure>
 			</article>
 
-			<div class="eyecare-home-team__grid" role="list" aria-label="Danh sách đội ngũ chuyên môn" tabindex="0">
+			<div class="eyecare-home-team__grid" role="group" aria-label="Danh sách đội ngũ chuyên môn" tabindex="0">
 				<?php foreach ( $members as $member ) : ?>
 					<?php $image_url = eyecare_doi_ngu_trang_chu_anh_url( $member['image'] ); ?>
 					<?php $image_small = eyecare_doi_ngu_trang_chu_anh_url( pathinfo( $member['image'], PATHINFO_FILENAME ) . '-400.webp' ); ?>
 					<?php if ( '' === $image_url ) { continue; } ?>
-					<article class="eyecare-home-team__card" role="listitem">
+					<article class="eyecare-home-team__card">
 						<figure class="eyecare-home-team__card-media">
 							<img src="<?php echo esc_url( $image_small ?: $image_url ); ?>" srcset="<?php echo esc_attr( eyecare_doi_ngu_trang_chu_anh_srcset( $member['image'] ) ); ?>" sizes="(min-width: 1025px) 200px, (min-width: 701px) 30vw, 45vw" width="400" height="600" loading="lazy" decoding="async" alt="Hồ sơ chuyên môn <?php echo esc_attr( $member['name'] ); ?>">
 						</figure>

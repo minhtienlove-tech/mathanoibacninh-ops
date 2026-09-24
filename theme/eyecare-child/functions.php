@@ -21,13 +21,6 @@ if ( ! defined( 'ABSPATH' ) ) {
  * (box-sizing, body, heading, link, nút) nên KHÔNG còn phụ thuộc Flatsome.
  */
 function eyecare_child_enqueue_styles() {
-	wp_enqueue_style(
-		'eyecare-be-vietnam-pro',
-		'https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap',
-		array(),
-		null
-	);
-
 	/* Phiên bản = thời điểm sửa file (filemtime), KHÔNG phải số Version cố định
 	   1.0.0. Version cố định thì mỗi lần sửa style.css trình duyệt vẫn thấy
 	   ?ver=1.0.0 y như cũ nên dùng lại bản CSS trong cache — sửa xong không
@@ -78,8 +71,10 @@ add_action( 'wp_enqueue_scripts', 'eyecare_nap_css_doi_ngu_trang_chu', 105 );
 /** Homepage presentation only; no selectors or inherited changes for the doctor block. */
 function eyecare_home_refresh_assets() {
 	if ( ! is_front_page() ) { return; }
+	$critical = '/assets/home-critical.css';
+	wp_enqueue_style( 'eyecare-home-critical', get_stylesheet_directory_uri() . $critical, array( 'eyecare-child-style' ), filemtime( get_stylesheet_directory() . $critical ) );
 	$file = '/assets/home-refresh.css';
-	wp_enqueue_style( 'eyecare-home-refresh', get_stylesheet_directory_uri() . $file, array( 'eyecare-child-style' ), filemtime( get_stylesheet_directory() . $file ) );
+	wp_enqueue_style( 'eyecare-home-refresh', get_stylesheet_directory_uri() . $file, array( 'eyecare-home-critical' ), filemtime( get_stylesheet_directory() . $file ) );
 }
 add_action( 'wp_enqueue_scripts', 'eyecare_home_refresh_assets', 130 );
 
@@ -91,9 +86,10 @@ function eyecare_skip_unused_home_toc_assets() {
 }
 add_action( 'wp_enqueue_scripts', 'eyecare_skip_unused_home_toc_assets', 999 );
 
-/** The doctor cards are below the first viewport; keep their CSS out of the render path. */
+/** Below-the-fold homepage sections do not need to block the first paint. */
 function eyecare_defer_home_team_css( $html, $handle ) {
-	if ( ! is_front_page() || 'eyecare-home-team' !== $handle || ! str_contains( $html, " media='all'" ) ) {
+	$deferred_handles = array( 'eyecare-home-refresh', 'eyecare-home-team', 'eyecare-contact-float' );
+	if ( ! is_front_page() || ! in_array( $handle, $deferred_handles, true ) || ! str_contains( $html, " media='all'" ) ) {
 		return $html;
 	}
 	return str_replace( " media='all'", " media='print' onload=\"this.media='all'\"", $html )

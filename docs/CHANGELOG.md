@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-09-24 — CSS, font và nhãn truy cập trang chủ
+
+- Chuyển Be Vietnam Pro sang WOFF2 cùng tên miền, giữ các mức đậm đang dùng và giấy phép OFL; bỏ stylesheet Google Fonts trên trang chủ và các trang khác.
+- Tách CSS vùng hero/thẻ truy cập đầu trang sang `home-critical.css`; tải CSS các phần bên dưới và thanh liên hệ trang chủ không chặn hiển thị, vẫn có bản dự phòng khi JavaScript tắt. Không thay đổi nội dung hoặc bố cục mong muốn.
+- Bỏ vai trò ARIA `listitem` không phù hợp trên thẻ `article` của khối bác sĩ và bài viết mới; vùng chứa được gắn nhãn nhóm.
+
 ## 2026-09-24 — ảnh responsive trang chủ
 
 - Sửa `sizes` ảnh và preload slider theo cột hiển thị thực tế để trình duyệt chọn bản WebP 768/1024 px thay vì 1536 px trên màn hình desktop thông thường. Không thay nội dung hoặc thứ tự slider.
