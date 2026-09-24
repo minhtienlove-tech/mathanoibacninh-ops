@@ -4,7 +4,7 @@
 
 - Sửa `sizes` ảnh và preload slider theo cột hiển thị thực tế để trình duyệt chọn bản WebP 768/1024 px thay vì 1536 px trên màn hình desktop thông thường. Không thay nội dung hoặc thứ tự slider.
 - Thêm ảnh WebP 160/320 px cho logo, 400/800 px cho poster bác sĩ, 500 px cho ảnh thiết bị; giữ ảnh gốc và ảnh lớn làm nguồn cho màn hình mật độ cao. Chỉ thay nguồn ảnh trong khối bác sĩ, không đổi bố cục hoặc nội dung.
-- Dùng `srcset` sẵn có của WordPress cho ảnh thẻ dịch vụ, gồm bản 300 px; ảnh và bài viết vẫn lấy từ cấu hình hiện tại. Backup, kết quả triển khai và kiểm tra sẽ bổ sung sau khi hoàn tất.
+- Dùng `srcset` sẵn có của WordPress cho ảnh thẻ dịch vụ, gồm bản 300 px; ảnh và bài viết vẫn lấy từ cấu hình hiện tại. Đã triển khai commit `96e6618`. Backup database và 7 file PHP cũ tại `/home/jwhxtzru/backups/home-images-20260924/`; ảnh gốc vẫn giữ nguyên. PHP lint 7/7, đối chiếu file staged/live, 6 URL smoke và SSH đạt. Trình duyệt desktop/mobile 390 px không tràn ngang, logo/thiết bị chọn ảnh nhỏ, không có lỗi JavaScript. Chưa chạy lại PageSpeed Insights sau deploy; điểm 94/LCP 1,3 giây là số đo người dùng gửi trước thay đổi.
 
 ## 2026-09-23 — giảm tài nguyên chặn hiển thị và tăng cache theme
 
