@@ -252,7 +252,7 @@ $tt = eyecare_du_lieu_thuc_the();
 								<article class="eyecare-equipment__the">
 									<div class="eyecare-equipment__anh-wrap">
 										<?php $equipment_image_base = pathinfo( $tb['anh'], PATHINFO_FILENAME ); ?>
-										<img src="<?php echo esc_url( $thiet_bi_url . $equipment_image_base . '-600.webp' ); ?>" srcset="<?php echo esc_url( $thiet_bi_url . $equipment_image_base . '-600.webp' ); ?> 600w, <?php echo esc_url( $thiet_bi_url . $equipment_image_base . '-960.webp' ); ?> 960w" sizes="(min-width: 1000px) 481px, (min-width: 600px) 45vw, 90vw" alt="<?php echo esc_attr( $tb['ten'] ); ?>" width="600" height="750" loading="lazy" decoding="async">
+										<img src="<?php echo esc_url( $thiet_bi_url . $equipment_image_base . '-500.webp' ); ?>" srcset="<?php echo esc_url( $thiet_bi_url . $equipment_image_base . '-500.webp' ); ?> 500w, <?php echo esc_url( $thiet_bi_url . $equipment_image_base . '-600.webp' ); ?> 600w, <?php echo esc_url( $thiet_bi_url . $equipment_image_base . '-960.webp' ); ?> 960w" sizes="(min-width: 1000px) 481px, (min-width: 600px) 45vw, 90vw" alt="<?php echo esc_attr( $tb['ten'] ); ?>" width="500" height="625" loading="lazy" decoding="async">
 									</div>
 									<div class="eyecare-equipment__noi-dung">
 										<p class="eyecare-equipment__so"><?php echo esc_html( sprintf( '%02d / %02d', $i + 1, count( $thiet_bi ) ) ); ?></p>
@@ -313,7 +313,8 @@ $tt = eyecare_du_lieu_thuc_the();
 						<a href="<?php echo esc_url( $lv['link'] ); ?>" aria-label="<?php echo esc_attr( 'Xem chi tiết ' . $lv['ten'] ); ?>">
 							<span class="eyecare-linh-vuc-card__anh">
 								<?php if ( ! empty( $lv['image'] ) ) : ?>
-									<img src="<?php echo esc_url( $lv['image'] ); ?>" alt="<?php echo esc_attr( $lv['ten'] ); ?>" loading="lazy" decoding="async">
+									<?php $lv_srcset = ! empty( $lv['image_id'] ) ? wp_get_attachment_image_srcset( (int) $lv['image_id'], 'large' ) : false; ?>
+									<img src="<?php echo esc_url( $lv['image'] ); ?>"<?php if ( $lv_srcset ) : ?> srcset="<?php echo esc_attr( $lv_srcset ); ?>" sizes="(min-width: 1100px) 300px, (min-width: 701px) 45vw, calc(100vw - 40px)"<?php endif; ?> alt="<?php echo esc_attr( $lv['ten'] ); ?>" loading="lazy" decoding="async">
 								<?php else : ?>
 									<span class="eyecare-linh-vuc-card__anh-thay" aria-hidden="true">
 										<?php echo function_exists( 'eyecare_bieu_tuong' ) ? eyecare_bieu_tuong( $lv['icon'] ) : ''; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG nội bộ. ?>

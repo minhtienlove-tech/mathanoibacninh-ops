@@ -146,7 +146,7 @@ $eyecare_anh_bac_si_tung   = function_exists( 'eyecare_bac_si_anh_tac_gia' ) ? e
 			<div class="eyecare-chan__cot eyecare-chan__cot--thuong-hieu">
 				<div class="eyecare-chan__thuong-hieu">
 					<div class="eyecare-chan__logo-wrap">
-						<img class="eyecare-chan__logo" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/logo-benhvien.webp' ); ?>" width="1024" height="765" alt="<?php echo esc_attr( $eyecare_tt['ten'] ); ?>">
+						<img class="eyecare-chan__logo" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/logo-benhvien-160.webp' ); ?>" srcset="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/logo-benhvien-160.webp' ); ?> 160w, <?php echo esc_url( get_stylesheet_directory_uri() . '/assets/logo-benhvien-320.webp' ); ?> 320w" sizes="82px" width="160" height="120" loading="lazy" decoding="async" alt="<?php echo esc_attr( $eyecare_tt['ten'] ); ?>">
 					</div>
 					<div>
 						<p class="eyecare-chan__ten"><?php echo esc_html( $eyecare_tt['ten'] ); ?></p>

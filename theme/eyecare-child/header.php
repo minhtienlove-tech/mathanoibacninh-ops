@@ -95,8 +95,10 @@ $eyecare_tt = eyecare_du_lieu_thuc_the();
 			aria-label="<?php echo esc_attr( $eyecare_tt['ten'] ) ; ?> — về trang chủ"
 			rel="home">
 			<img class="eyecare-hieu__anh"
-				src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/logo-benhvien.webp' ); ?>"
-				width="1024" height="765" alt=""
+				src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/logo-benhvien-160.webp' ); ?>"
+				srcset="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/logo-benhvien-160.webp' ); ?> 160w, <?php echo esc_url( get_stylesheet_directory_uri() . '/assets/logo-benhvien-320.webp' ); ?> 320w"
+				sizes="(max-width: 979px) 78px, 102px"
+				width="160" height="120" alt=""
 				decoding="async" fetchpriority="high">
 		</a>
 

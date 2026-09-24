@@ -455,7 +455,8 @@ function eyecare_linh_vuc_lay_ds( $limit = 12 ) {
 
 	$items = array();
 	foreach ( $posts as $post ) {
-		$image = get_post_thumbnail_id( $post->ID ) ? wp_get_attachment_image_url( get_post_thumbnail_id( $post->ID ), 'large' ) : get_post_meta( $post->ID, '_eyecare_linh_vuc_anh_url', true );
+		$image_id = get_post_thumbnail_id( $post->ID );
+		$image = $image_id ? wp_get_attachment_image_url( $image_id, 'large' ) : get_post_meta( $post->ID, '_eyecare_linh_vuc_anh_url', true );
 		$icon  = get_post_meta( $post->ID, '_eyecare_linh_vuc_icon', true );
 		$mau   = get_post_meta( $post->ID, '_eyecare_linh_vuc_mau', true );
 		$link  = get_post_meta( $post->ID, '_eyecare_linh_vuc_link', true );
@@ -482,6 +483,7 @@ function eyecare_linh_vuc_lay_ds( $limit = 12 ) {
 			'mo_ta' => $mo_ta,
 			'link'  => $link,
 			'image' => $image,
+			'image_id' => $image_id,
 			'icon'  => $icon,
 			'mau'   => $mau,
 		);

@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-09-24 — ảnh responsive trang chủ
+
+- Sửa `sizes` ảnh và preload slider theo cột hiển thị thực tế để trình duyệt chọn bản WebP 768/1024 px thay vì 1536 px trên màn hình desktop thông thường. Không thay nội dung hoặc thứ tự slider.
+- Thêm ảnh WebP 160/320 px cho logo, 400/800 px cho poster bác sĩ, 500 px cho ảnh thiết bị; giữ ảnh gốc và ảnh lớn làm nguồn cho màn hình mật độ cao. Chỉ thay nguồn ảnh trong khối bác sĩ, không đổi bố cục hoặc nội dung.
+- Dùng `srcset` sẵn có của WordPress cho ảnh thẻ dịch vụ, gồm bản 300 px; ảnh và bài viết vẫn lấy từ cấu hình hiện tại. Backup, kết quả triển khai và kiểm tra sẽ bổ sung sau khi hoàn tất.
+
 ## 2026-09-23 — giảm tài nguyên chặn hiển thị và tăng cache theme
 
 - Trang chủ bỏ CSS/JS của mục lục OBS vì không có thành phần `.obs-toc`; giữ plugin trên các trang bài viết có mục lục. CSS khối bác sĩ ở dưới vùng nhìn đầu được tải không chặn hiển thị, có bản dự phòng khi JavaScript tắt; HTML và nội dung khối không thay đổi.

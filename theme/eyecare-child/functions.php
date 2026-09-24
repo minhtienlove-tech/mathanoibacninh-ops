@@ -109,7 +109,7 @@ function eyecare_preload_first_hero_image() {
 	$first = $slides[0];
 	echo '<link rel="preload" as="image" href="' . esc_url( $first['src'] ) . '"';
 	if ( ! empty( $first['srcset'] ) ) {
-		echo ' imagesrcset="' . esc_attr( $first['srcset'] ) . '" imagesizes="(min-width: 1440px) 1360px, 94vw"';
+		echo ' imagesrcset="' . esc_attr( $first['srcset'] ) . '" imagesizes="(min-width: 1664px) 1162px, (min-width: 1051px) calc(74.074vw - 71px), (min-width: 701px) calc(74.074vw - 53px), calc(100vw - 40px)"';
 	}
 	echo ' fetchpriority="high">' . "\n";
 }

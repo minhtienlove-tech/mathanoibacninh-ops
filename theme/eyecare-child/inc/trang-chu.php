@@ -328,7 +328,7 @@ function eyecare_slider_dau_trang() {
 		   wp_get_attachment_image_srcset() trả về false — in ra srcset=""
 		   là HTML sai, một số trình duyệt hiểu thành "không có ảnh nào". */
 		$srcset = $a['srcset']
-			? sprintf( ' srcset="%s" sizes="(min-width: 1440px) 1360px, 94vw"', esc_attr( $a['srcset'] ) )
+			? sprintf( ' srcset="%s" sizes="(min-width: 1664px) 1162px, (min-width: 1051px) calc(74.074vw - 71px), (min-width: 701px) calc(74.074vw - 53px), calc(100vw - 40px)"', esc_attr( $a['srcset'] ) )
 			: '';
 
 		printf(
