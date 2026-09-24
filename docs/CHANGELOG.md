@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-09-24 — 99 bài xã/phường riêng, chuẩn bị xuất bản
+
+- Theo yêu cầu xuất bản toàn bộ 102 trang và không lặp nội dung, thay mẫu xã/phường dùng chung bằng 99 tệp HTML riêng. Mỗi trang con có khoảng 603–750 từ, hai FAQ, địa danh theo Nghị quyết 1658 và chủ đề nhãn khoa riêng. Kiểm tra không có đoạn văn dài trùng nguyên văn; mức giao nhau cụm năm từ cao nhất 0,158.
+- Ba trang trụ cột giữ nguyên URL, khoảng 3.500 từ mỗi trang. Sửa mức khẩn của cơn mất thị lực thoáng qua theo nguồn American Stroke Association; bỏ câu biên tập nội bộ khỏi nội dung công khai. Trên nhánh khu vực, ẩn thẻ chân trang ghi tên bác sĩ chưa xác nhận duyệt riêng các bài này. Ở điện thoại, ẩn hàng mạng xã hội nổi để không che bài; liên kết vẫn ở chân trang.
+- Script WP-CLI kiểm tra đủ tệp riêng, tạo 99 draft rồi mới xuất bản bằng cờ riêng. Bản xem thử cục bộ dựng lại đủ 102 URL, 99/99 tệp nội dung và 41 đường dẫn nội bộ đang hoạt động; kiểm tra 320 px không tràn ngang, FAQ và menu hiện. Đang chuẩn bị backup và kiểm tra production trước deploy; chưa ghi DB production ở thời điểm này. Không gắn `reviewedBy` khi chưa có tên/ngày bác sĩ duyệt được xác minh.
+
 ## 2026-09-24 — bản thảo khu vực khám mắt, CHƯA TRIỂN KHAI
 
 - Viết ba trang trụ cột hiện có, mỗi trang khoảng 3.500 từ sau khi hiển thị mục lục/FAQ; giữ URL và các phần cũ. Tạo danh mục 99 xã/phường hiện hành theo Nghị quyết 1658/NQ-UBTVQH15 và khung nội dung cho 99 trang con, phân nhóm địa bàn Bắc Ninh cũ (42) và Bắc Giang cũ (57).

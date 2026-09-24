@@ -11,5 +11,5 @@
 .eyecare-trang__than .eyecare-faq{margin:2rem 0;padding:1rem;border-radius:14px;background:#f3fbfc}
 @media(max-width:580px){.eyecare-trang__than .kv-directory__group ul{grid-template-columns:repeat(2,minmax(0,1fr))}.eyecare-trang__than .kv-directory__group{padding:.75rem}.eyecare-trang__than .kv-intro{font-size:1rem}}
 @media(max-width:380px){.eyecare-trang__than .kv-directory__group ul{grid-template-columns:1fr}}
-/* Đặt hàng liên hệ ở chân màn hình nhỏ để không che phần đọc giữa bài. */
-@media(max-width:767px){body.ec-contact-dock{padding-bottom:calc(160px + env(safe-area-inset-bottom))}body .ec-contact .ec-contact__socials{top:auto;bottom:calc(76px + env(safe-area-inset-bottom));right:max(12px,env(safe-area-inset-right));transform:none;flex-direction:row}}
+/* Trên điện thoại giữ nút gọi/đặt lịch; liên kết mạng xã hội vẫn có ở chân trang. */
+@media(max-width:767px){body.ec-contact-dock{padding-bottom:calc(90px + env(safe-area-inset-bottom))}body .ec-contact .ec-contact__socials{display:none}}

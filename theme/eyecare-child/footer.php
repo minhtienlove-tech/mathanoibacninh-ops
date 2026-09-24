@@ -19,6 +19,7 @@ $eyecare_maps_query        = rawurlencode( $eyecare_tt['ten'] . ' ' . $eyecare_d
 $eyecare_maps_search       = 'https://www.google.com/maps/search/?api=1&query=' . $eyecare_maps_query;
 $eyecare_maps_directions   = 'https://www.google.com/maps/dir/?api=1&destination=' . $eyecare_maps_query;
 $eyecare_privacy_url       = function_exists( 'get_privacy_policy_url' ) ? get_privacy_policy_url() : '';
+$eyecare_la_trang_khu_vuc  = is_page() && function_exists( 'eyecare_khu_vuc_nguon' ) && eyecare_khu_vuc_nguon( get_queried_object() );
 $eyecare_facebook_url      = ! empty( $eyecare_tt['same_as'][0] ) ? $eyecare_tt['same_as'][0] : '';
 $eyecare_mang_xa_hoi       = array(
 	array(
@@ -185,6 +186,7 @@ $eyecare_anh_bac_si_tung   = function_exists( 'eyecare_bac_si_anh_tac_gia' ) ? e
 			<div class="eyecare-chan__cot eyecare-chan__cot--noi-dung">
 				<h2 class="eyecare-chan__td">Thông tin trên trang</h2>
 				<p class="eyecare-chan__mo-ta">Nội dung y khoa được biên soạn để người đọc chuẩn bị tốt hơn trước khi đi khám mắt.</p>
+				<?php if ( ! $eyecare_la_trang_khu_vuc ) : ?>
 				<div class="eyecare-chan__tac-gia">
 					<div class="eyecare-chan__tac-gia-avatar" aria-hidden="true">
 						<?php if ( $eyecare_anh_bac_si_tung ) : ?>
@@ -196,6 +198,7 @@ $eyecare_anh_bac_si_tung   = function_exists( 'eyecare_bac_si_anh_tac_gia' ) ? e
 					</div>
 					<div><strong><?php echo esc_html( eyecare_bac_si_ten_day_du() ); ?></strong><small>Người đứng tên nội dung y khoa</small><em>Đã xác thực chuyên môn</em></div>
 				</div>
+				<?php endif; ?>
 				<div class="eyecare-chan__luu-y">
 					<svg aria-hidden="true" viewBox="0 0 24 24" focusable="false"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h16.9a2 2 0 0 0 1.7-3l-8.5-14.1a2 2 0 0 0-3.4 0Z"></path><path d="M12 9v4M12 17h.01"></path></svg>
 					<p>Thông tin chỉ mang tính tham khảo, không thay thế chẩn đoán và chỉ định trực tiếp của bác sĩ.</p>
@@ -203,7 +206,7 @@ $eyecare_anh_bac_si_tung   = function_exists( 'eyecare_bac_si_anh_tac_gia' ) ? e
 			</div>
 		</div>
 
-		<p class="eyecare-chan__khan">Nếu bạn <strong>đột ngột mất thị lực, đau mắt dữ dội, thấy chớp sáng hoặc màn đen che một phần tầm nhìn</strong>, hãy đến cơ sở khám mắt gần nhất ngay hôm nay, không chờ đặt lịch.</p>
+		<p class="eyecare-chan__khan">Nếu bạn <strong>đột ngột mất thị lực, đau mắt dữ dội, thấy chớp sáng hoặc màn đen che một phần tầm nhìn</strong>, <?php echo $eyecare_la_trang_khu_vuc ? 'hãy đến cơ sở cấp cứu phù hợp gần nhất ngay, không chờ đặt lịch.' : 'hãy đến cơ sở khám mắt gần nhất ngay hôm nay, không chờ đặt lịch.'; ?></p>
 
 		<div class="eyecare-chan__day">
 			<p><?php printf( esc_html__( '© %1$s %2$s', 'eyecare-child' ), esc_html( gmdate( 'Y' ) ), esc_html( $eyecare_tt['phap_nhan'] ) ); ?> · Mã số thuế <?php echo esc_html( $eyecare_tt['mst'] ); ?></p>
