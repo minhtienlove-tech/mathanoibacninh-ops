@@ -322,6 +322,14 @@ function eyecare_in_schema() {
 		$do_thi[] = $dd;
 	}
 
+	// Trang địa bàn: nguồn công khai theo xã/phường, không gắn bác sĩ duyệt khi chưa duyệt.
+	if ( function_exists( 'eyecare_schema_khu_vuc' ) ) {
+		$trang_khu_vuc = eyecare_schema_khu_vuc();
+		if ( $trang_khu_vuc ) {
+			$do_thi[] = $trang_khu_vuc;
+		}
+	}
+
 	// Page nội dung y khoa dài: MedicalWebPage và bác sĩ đứng tên nội dung.
 	// Chỉ các page đã được đánh dấu _bvmat_noi_dung_y_khoa mới đi vào nhánh
 	// này; page thông thường không bị gắn schema y khoa ngoài ý muốn.

@@ -89,8 +89,8 @@ function eyecare_menu_url( $duong_dan ) {
 /**
  * Danh sách mục menu chính. Mỗi mục: đường dẫn tương đối + nhãn.
  *
- * Chỉ gồm 6 đích đã kiểm là publish và có nội dung/vai trò rõ ràng:
- * giới thiệu, chuyên khoa, kiến thức, đội ngũ, hỏi đáp, liên hệ.
+ * Các đích chính đã publish; nhánh Khu vực hiển thị ba trang trụ cột,
+ * còn 99 trang xã/phường được điều hướng trong chính nội dung nhánh.
  *
  * 🔴 KHÔNG có "Đặt lịch khám": bệnh viện chưa có Giấy phép hoạt động (B-03),
  * chưa được quảng cáo dịch vụ khám chữa bệnh. Cùng một cửa đã giữ nút đặt lịch
@@ -109,6 +109,15 @@ function eyecare_menu_muc() {
 			'con'       => eyecare_menu_dich_vu_con(),
 		),
 		array( 'duong_dan' => '/kien-thuc/',      'nhan' => 'Kiến thức nhãn khoa' ),
+		array(
+			'duong_dan' => '/khu-vuc/',
+			'nhan'      => 'Khu vực khám mắt',
+			'con'       => array(
+				array( 'duong_dan' => '/khu-vuc/', 'nhan' => 'Tất cả khu vực' ),
+				array( 'duong_dan' => '/khu-vuc/kham-mat-bac-giang/', 'nhan' => 'Địa bàn Bắc Giang' ),
+				array( 'duong_dan' => '/khu-vuc/kham-mat-bac-ninh/', 'nhan' => 'Địa bàn Bắc Ninh' ),
+			),
+		),
 		array( 'duong_dan' => '/doi-ngu-bac-si/', 'nhan' => 'Đội ngũ bác sĩ' ),
 		array( 'duong_dan' => '/hoi-dap/',        'nhan' => 'Hỏi đáp' ),
 		array( 'duong_dan' => '/lien-he/',        'nhan' => 'Liên hệ' ),

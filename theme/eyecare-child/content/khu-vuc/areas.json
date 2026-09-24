@@ -1,0 +1,798 @@
+{
+  "nguon": "https://xaydungchinhsach.chinhphu.vn/toan-van-nghi-quyet-so-1658-nq-ubtvqh15-sap-xep-cac-dvhc-cap-xa-cua-tinh-bac-ninh-nam-2025-119250616193651987.htm",
+  "cap_nhat": "2026-09-24",
+  "don_vi": [
+    {
+      "stt_nghi_quyet": 1,
+      "loai": "xã",
+      "ten": "Chi Lăng",
+      "slug": "xa-chi-lang",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã Yên Giả và xã Chi Lăng"
+    },
+    {
+      "stt_nghi_quyet": 2,
+      "loai": "xã",
+      "ten": "Phù Lãng",
+      "slug": "xa-phu-lang",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã Châu Phong, Đức Long và Phù Lãng"
+    },
+    {
+      "stt_nghi_quyet": 3,
+      "loai": "xã",
+      "ten": "Yên Phong",
+      "slug": "xa-yen-phong",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "thị trấn Chờ và các xã Trung Nghĩa, Long Châu, Đông Tiến"
+    },
+    {
+      "stt_nghi_quyet": 4,
+      "loai": "xã",
+      "ten": "Văn Môn",
+      "slug": "xa-van-mon",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã Yên Phụ, Đông Thọ và Văn Môn"
+    },
+    {
+      "stt_nghi_quyet": 5,
+      "loai": "xã",
+      "ten": "Tam Giang",
+      "slug": "xa-tam-giang",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã Hòa Tiến và xã Tam Giang"
+    },
+    {
+      "stt_nghi_quyet": 6,
+      "loai": "xã",
+      "ten": "Yên Trung",
+      "slug": "xa-yen-trung",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã Dũng Liệt và xã Yên Trung"
+    },
+    {
+      "stt_nghi_quyet": 7,
+      "loai": "xã",
+      "ten": "Tam Đa",
+      "slug": "xa-tam-da",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã Thụy Hòa, Đông Phong và Tam Đa"
+    },
+    {
+      "stt_nghi_quyet": 8,
+      "loai": "xã",
+      "ten": "Tiên Du",
+      "slug": "xa-tien-du",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "thị trấn Lim, xã Nội Duệ và xã Phú Lâm"
+    },
+    {
+      "stt_nghi_quyet": 9,
+      "loai": "xã",
+      "ten": "Liên Bão",
+      "slug": "xa-lien-bao",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã Hiên Vân, Việt Đoàn và Liên Bão"
+    },
+    {
+      "stt_nghi_quyet": 10,
+      "loai": "xã",
+      "ten": "Tân Chi",
+      "slug": "xa-tan-chi",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã Lạc Vệ và xã Tân Chi"
+    },
+    {
+      "stt_nghi_quyet": 11,
+      "loai": "xã",
+      "ten": "Đại Đồng",
+      "slug": "xa-dai-dong",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã Tri Phương, Hoàn Sơn và Đại Đồng"
+    },
+    {
+      "stt_nghi_quyet": 12,
+      "loai": "xã",
+      "ten": "Phật Tích",
+      "slug": "xa-phat-tich",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã Minh Đạo, Cảnh Hưng và Phật Tích"
+    },
+    {
+      "stt_nghi_quyet": 13,
+      "loai": "xã",
+      "ten": "Gia Bình",
+      "slug": "xa-gia-binh",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "thị trấn Gia Bình và các xã Xuân Lai, Quỳnh Phú, Đại Bái"
+    },
+    {
+      "stt_nghi_quyet": 14,
+      "loai": "xã",
+      "ten": "Nhân Thắng",
+      "slug": "xa-nhan-thang",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "thị trấn Nhân Thắng, xã Thái Bảo và xã Bình Dương"
+    },
+    {
+      "stt_nghi_quyet": 15,
+      "loai": "xã",
+      "ten": "Đại Lai",
+      "slug": "xa-dai-lai",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã Song Giang và xã Đại Lai"
+    },
+    {
+      "stt_nghi_quyet": 16,
+      "loai": "xã",
+      "ten": "Cao Đức",
+      "slug": "xa-cao-duc",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã Vạn Ninh và xã Cao Đức"
+    },
+    {
+      "stt_nghi_quyet": 17,
+      "loai": "xã",
+      "ten": "Đông Cứu",
+      "slug": "xa-dong-cuu",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã Giang Sơn, Lãng Ngâm và Đông Cứu"
+    },
+    {
+      "stt_nghi_quyet": 18,
+      "loai": "xã",
+      "ten": "Lương Tài",
+      "slug": "xa-luong-tai",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "thị trấn Thứa, xã Phú Hòa và xã Tân Lãng"
+    },
+    {
+      "stt_nghi_quyet": 19,
+      "loai": "xã",
+      "ten": "Lâm Thao",
+      "slug": "xa-lam-thao",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã Bình Định, Quảng Phú và Lâm Thao"
+    },
+    {
+      "stt_nghi_quyet": 20,
+      "loai": "xã",
+      "ten": "Trung Chính",
+      "slug": "xa-trung-chinh",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã Phú Lương, Quang Minh và Trung Chính"
+    },
+    {
+      "stt_nghi_quyet": 21,
+      "loai": "xã",
+      "ten": "Trung Kênh",
+      "slug": "xa-trung-kenh",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã An Thịnh, An Tập và Trung Kênh"
+    },
+    {
+      "stt_nghi_quyet": 22,
+      "loai": "xã",
+      "ten": "Đại Sơn",
+      "slug": "xa-dai-son",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "xã Giáo Liêm, Phúc Sơn và Đại Sơn"
+    },
+    {
+      "stt_nghi_quyet": 23,
+      "loai": "xã",
+      "ten": "Sơn Động",
+      "slug": "xa-son-dong",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "thị trấn An Châu, xã An Bá và xã Vĩnh An"
+    },
+    {
+      "stt_nghi_quyet": 24,
+      "loai": "xã",
+      "ten": "Tây Yên Tử",
+      "slug": "xa-tay-yen-tu",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "thị trấn Tây Yên Tử và xã Thanh Luận"
+    },
+    {
+      "stt_nghi_quyet": 25,
+      "loai": "xã",
+      "ten": "Dương Hưu",
+      "slug": "xa-duong-huu",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Long Sơn và xã Dương Hưu"
+    },
+    {
+      "stt_nghi_quyet": 26,
+      "loai": "xã",
+      "ten": "Yên Định",
+      "slug": "xa-yen-dinh",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Cẩm Đàn và xã Yên Định"
+    },
+    {
+      "stt_nghi_quyet": 27,
+      "loai": "xã",
+      "ten": "An Lạc",
+      "slug": "xa-an-lac",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Lệ Viễn và xã An Lạc"
+    },
+    {
+      "stt_nghi_quyet": 28,
+      "loai": "xã",
+      "ten": "Vân Sơn",
+      "slug": "xa-van-son",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Hữu Sản và xã Vân Sơn"
+    },
+    {
+      "stt_nghi_quyet": 29,
+      "loai": "xã",
+      "ten": "Biển Động",
+      "slug": "xa-bien-dong",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "thị trấn Biển Động, xã Kim Sơn và xã Phú Nhuận"
+    },
+    {
+      "stt_nghi_quyet": 30,
+      "loai": "xã",
+      "ten": "Lục Ngạn",
+      "slug": "xa-luc-ngan",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "thị trấn Phì Điền và các xã Giáp Sơn, Đồng Cốc, Tân Hoa, Tân Quang"
+    },
+    {
+      "stt_nghi_quyet": 31,
+      "loai": "xã",
+      "ten": "Đèo Gia",
+      "slug": "xa-deo-gia",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Tân Lập và xã Đèo Gia"
+    },
+    {
+      "stt_nghi_quyet": 32,
+      "loai": "xã",
+      "ten": "Sơn Hải",
+      "slug": "xa-son-hai",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Hộ Đáp và xã Sơn Hải"
+    },
+    {
+      "stt_nghi_quyet": 33,
+      "loai": "xã",
+      "ten": "Tân Sơn",
+      "slug": "xa-tan-son",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Cấm Sơn và xã Tân Sơn"
+    },
+    {
+      "stt_nghi_quyet": 34,
+      "loai": "xã",
+      "ten": "Biên Sơn",
+      "slug": "xa-bien-son",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Phong Vân, xã Biên Sơn và toàn bộ diện tích tự nhiên của Trường bắn TB1"
+    },
+    {
+      "stt_nghi_quyet": 35,
+      "loai": "xã",
+      "ten": "Sa Lý",
+      "slug": "xa-sa-ly",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Phong Minh và xã Sa Lý"
+    },
+    {
+      "stt_nghi_quyet": 36,
+      "loai": "xã",
+      "ten": "Nam Dương",
+      "slug": "xa-nam-duong",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Tân Mộc và xã Nam Dương"
+    },
+    {
+      "stt_nghi_quyet": 37,
+      "loai": "xã",
+      "ten": "Kiên Lao",
+      "slug": "xa-kien-lao",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Kiên Thành và xã Kiên Lao"
+    },
+    {
+      "stt_nghi_quyet": 38,
+      "loai": "xã",
+      "ten": "Lục Sơn",
+      "slug": "xa-luc-son",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Bình Sơn và xã Lục Sơn"
+    },
+    {
+      "stt_nghi_quyet": 39,
+      "loai": "xã",
+      "ten": "Trường Sơn",
+      "slug": "xa-truong-son",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Vô Tranh và xã Trường Sơn"
+    },
+    {
+      "stt_nghi_quyet": 40,
+      "loai": "xã",
+      "ten": "Cẩm Lý",
+      "slug": "xa-cam-ly",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Đan Hội và xã Cẩm Lý"
+    },
+    {
+      "stt_nghi_quyet": 41,
+      "loai": "xã",
+      "ten": "Đông Phú",
+      "slug": "xa-dong-phu",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Đông Hưng và xã Đông Phú"
+    },
+    {
+      "stt_nghi_quyet": 42,
+      "loai": "xã",
+      "ten": "Nghĩa Phương",
+      "slug": "xa-nghia-phuong",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Trường Giang, Huyền Sơn và Nghĩa Phương"
+    },
+    {
+      "stt_nghi_quyet": 43,
+      "loai": "xã",
+      "ten": "Lục Nam",
+      "slug": "xa-luc-nam",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "thị trấn Phương Sơn, thị trấn Đồi Ngô và các xã Cương Sơn, Tiên Nha, Chu Điện"
+    },
+    {
+      "stt_nghi_quyet": 44,
+      "loai": "xã",
+      "ten": "Bắc Lũng",
+      "slug": "xa-bac-lung",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Yên Sơn, Lan Mẫu, Khám Lạng và Bắc Lũng"
+    },
+    {
+      "stt_nghi_quyet": 45,
+      "loai": "xã",
+      "ten": "Bảo Đài",
+      "slug": "xa-bao-dai",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Bảo Sơn, Thanh Lâm, Tam Dị và Bảo Đài"
+    },
+    {
+      "stt_nghi_quyet": 46,
+      "loai": "xã",
+      "ten": "Lạng Giang",
+      "slug": "xa-lang-giang",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "thị trấn Vôi và các xã Xương Lâm, Hương Lạc, Tân Hưng"
+    },
+    {
+      "stt_nghi_quyet": 47,
+      "loai": "xã",
+      "ten": "Mỹ Thái",
+      "slug": "xa-my-thai",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Xuân Hương, Dương Đức, Tân Thanh và Mỹ Thái"
+    },
+    {
+      "stt_nghi_quyet": 48,
+      "loai": "xã",
+      "ten": "Kép",
+      "slug": "xa-kep",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "thị trấn Kép, xã Quang Thịnh và xã Hương Sơn"
+    },
+    {
+      "stt_nghi_quyet": 49,
+      "loai": "xã",
+      "ten": "Tân Dĩnh",
+      "slug": "xa-tan-dinh",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Tân Dĩnh, Thái Đào và Đại Lâm"
+    },
+    {
+      "stt_nghi_quyet": 50,
+      "loai": "xã",
+      "ten": "Tiên Lục",
+      "slug": "xa-tien-luc",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Đào Mỹ, Nghĩa Hòa, An Hà, Nghĩa Hưng và Tiên Lục"
+    },
+    {
+      "stt_nghi_quyet": 51,
+      "loai": "xã",
+      "ten": "Yên Thế",
+      "slug": "xa-yen-the",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "thị trấn Phồn Xương và các xã Đồng Lạc, Đồng Tâm, Tân Hiệp, Tân Sỏi"
+    },
+    {
+      "stt_nghi_quyet": 52,
+      "loai": "xã",
+      "ten": "Bố Hạ",
+      "slug": "xa-bo-ha",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "thị trấn Bố Hạ, xã Đông Sơn và xã Hương Vĩ"
+    },
+    {
+      "stt_nghi_quyet": 53,
+      "loai": "xã",
+      "ten": "Đồng Kỳ",
+      "slug": "xa-dong-ky",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Đồng Hưu, Đồng Vương và Đồng Kỳ"
+    },
+    {
+      "stt_nghi_quyet": 54,
+      "loai": "xã",
+      "ten": "Xuân Lương",
+      "slug": "xa-xuan-luong",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Đồng Tiến (huyện Yên Thế), Canh Nậu và Xuân Lương"
+    },
+    {
+      "stt_nghi_quyet": 55,
+      "loai": "xã",
+      "ten": "Tam Tiến",
+      "slug": "xa-tam-tien",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Tiến Thắng, An Thượng và Tam Tiến"
+    },
+    {
+      "stt_nghi_quyet": 56,
+      "loai": "xã",
+      "ten": "Tân Yên",
+      "slug": "xa-tan-yen",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "thị trấn Cao Thượng và các xã Cao Xá, Việt Lập, Ngọc Lý"
+    },
+    {
+      "stt_nghi_quyet": 57,
+      "loai": "xã",
+      "ten": "Ngọc Thiện",
+      "slug": "xa-ngoc-thien",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Song Vân, Ngọc Châu, Ngọc Vân, Việt Ngọc và Ngọc Thiện"
+    },
+    {
+      "stt_nghi_quyet": 58,
+      "loai": "xã",
+      "ten": "Nhã Nam",
+      "slug": "xa-nha-nam",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "thị trấn Nhã Nam và các xã Tân Trung, Liên Sơn, An Dương"
+    },
+    {
+      "stt_nghi_quyet": 59,
+      "loai": "xã",
+      "ten": "Phúc Hoà",
+      "slug": "xa-phuc-hoa",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Hợp Đức, Liên Chung và Phúc Hòa"
+    },
+    {
+      "stt_nghi_quyet": 60,
+      "loai": "xã",
+      "ten": "Quang Trung",
+      "slug": "xa-quang-trung",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Lam Sơn và xã Quang Trung"
+    },
+    {
+      "stt_nghi_quyet": 61,
+      "loai": "xã",
+      "ten": "Hợp Thịnh",
+      "slug": "xa-hop-thinh",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Thường Thắng, Mai Trung, Hùng Thái, Sơn Thịnh và Hợp Thịnh"
+    },
+    {
+      "stt_nghi_quyet": 62,
+      "loai": "xã",
+      "ten": "Hiệp Hòa",
+      "slug": "xa-hiep-hoa",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "thị trấn Thắng và các xã Đông Lỗ, Đoan Bái, Danh Thắng, Lương Phong"
+    },
+    {
+      "stt_nghi_quyet": 63,
+      "loai": "xã",
+      "ten": "Hoàng Vân",
+      "slug": "xa-hoang-van",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Đồng Tiến (huyện Hiệp Hòa), Toàn Thắng, Ngọc Sơn và Hoàng Vân"
+    },
+    {
+      "stt_nghi_quyet": 64,
+      "loai": "xã",
+      "ten": "Đồng Việt",
+      "slug": "xa-dong-viet",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "xã Đức Giang, Đồng Phúc và Đồng Việt"
+    },
+    {
+      "stt_nghi_quyet": 65,
+      "loai": "xã",
+      "ten": "Xuân Cẩm",
+      "slug": "xa-xuan-cam",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "thị trấn Bắc Lý và các xã Hương Lâm, Mai Đình, Châu Minh, Xuân Cẩm"
+    },
+    {
+      "stt_nghi_quyet": 66,
+      "loai": "phường",
+      "ten": "Kinh Bắc",
+      "slug": "phuong-kinh-bac",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Suối Hoa, Tiền Ninh Vệ, Vạn An, Hòa Long, Khúc Xuyên và Kinh Bắc"
+    },
+    {
+      "stt_nghi_quyet": 67,
+      "loai": "phường",
+      "ten": "Võ Cường",
+      "slug": "phuong-vo-cuong",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Đại Phúc, Phong Khê và Võ Cường"
+    },
+    {
+      "stt_nghi_quyet": 68,
+      "loai": "phường",
+      "ten": "Vũ Ninh",
+      "slug": "phuong-vu-ninh",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Kim Chân, Đáp Cầu, Thị Cầu và Vũ Ninh"
+    },
+    {
+      "stt_nghi_quyet": 69,
+      "loai": "phường",
+      "ten": "Hạp Lĩnh",
+      "slug": "phuong-hap-linh",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Khắc Niệm và phường Hạp Lĩnh"
+    },
+    {
+      "stt_nghi_quyet": 70,
+      "loai": "phường",
+      "ten": "Nam Sơn",
+      "slug": "phuong-nam-son",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Vân Dương và phường Nam Sơn"
+    },
+    {
+      "stt_nghi_quyet": 71,
+      "loai": "phường",
+      "ten": "Từ Sơn",
+      "slug": "phuong-tu-son",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Đông Ngàn, Tân Hồng, Phù Chẩn và Đình Bảng"
+    },
+    {
+      "stt_nghi_quyet": 72,
+      "loai": "phường",
+      "ten": "Tam Sơn",
+      "slug": "phuong-tam-son",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Tương Giang và phường Tam Sơn"
+    },
+    {
+      "stt_nghi_quyet": 73,
+      "loai": "phường",
+      "ten": "Đồng Nguyên",
+      "slug": "phuong-dong-nguyen",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Trang Hạ, Đồng Kỵ và Đồng Nguyên"
+    },
+    {
+      "stt_nghi_quyet": 74,
+      "loai": "phường",
+      "ten": "Phù Khê",
+      "slug": "phuong-phu-khe",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Châu Khê, Hương Mạc và Phù Khê"
+    },
+    {
+      "stt_nghi_quyet": 75,
+      "loai": "phường",
+      "ten": "Thuận Thành",
+      "slug": "phuong-thuan-thanh",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Hồ, Song Hồ, Gia Đông và xã Đại Đồng Thành"
+    },
+    {
+      "stt_nghi_quyet": 76,
+      "loai": "phường",
+      "ten": "Mão Điền",
+      "slug": "phuong-mao-dien",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường An Bình, xã Hoài Thượng và xã Mão Điền"
+    },
+    {
+      "stt_nghi_quyet": 77,
+      "loai": "phường",
+      "ten": "Trạm Lộ",
+      "slug": "phuong-tram-lo",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Trạm Lộ và xã Nghĩa Đạo"
+    },
+    {
+      "stt_nghi_quyet": 78,
+      "loai": "phường",
+      "ten": "Trí Quả",
+      "slug": "phuong-tri-qua",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Thanh Khương, phường Trí Quả và xã Đình Tổ"
+    },
+    {
+      "stt_nghi_quyet": 79,
+      "loai": "phường",
+      "ten": "Song Liễu",
+      "slug": "phuong-song-lieu",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Xuân Lâm, phường Hà Mãn, xã Ngũ Thái và xã Song Liễu"
+    },
+    {
+      "stt_nghi_quyet": 80,
+      "loai": "phường",
+      "ten": "Ninh Xá",
+      "slug": "phuong-ninh-xa",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Ninh Xá và xã Nguyệt Đức"
+    },
+    {
+      "stt_nghi_quyet": 81,
+      "loai": "phường",
+      "ten": "Quế Võ",
+      "slug": "phuong-que-vo",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Phố Mới, Bằng An, Việt Hùng và Quế Tân"
+    },
+    {
+      "stt_nghi_quyet": 82,
+      "loai": "phường",
+      "ten": "Phương Liễu",
+      "slug": "phuong-phuong-lieu",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Phượng Mao và phường Phương Liễu"
+    },
+    {
+      "stt_nghi_quyet": 83,
+      "loai": "phường",
+      "ten": "Nhân Hòa",
+      "slug": "phuong-nhan-hoa",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Đại Xuân, phường Nhân Hòa và xã Việt Thống"
+    },
+    {
+      "stt_nghi_quyet": 84,
+      "loai": "phường",
+      "ten": "Đào Viên",
+      "slug": "phuong-dao-vien",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Phù Lương, xã Ngọc Xá và xã Đào Viên"
+    },
+    {
+      "stt_nghi_quyet": 85,
+      "loai": "phường",
+      "ten": "Bồng Lai",
+      "slug": "phuong-bong-lai",
+      "vung_lich_su": "bac-ninh",
+      "nguon_goc": "phường Cách Bi, phường Bồng Lai và xã Mộ Đạo"
+    },
+    {
+      "stt_nghi_quyet": 86,
+      "loai": "phường",
+      "ten": "Chũ",
+      "slug": "phuong-chu",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "phường Thanh Hải, Hồng Giang, Trù Hựu và Chũ"
+    },
+    {
+      "stt_nghi_quyet": 87,
+      "loai": "phường",
+      "ten": "Phượng Sơn",
+      "slug": "phuong-phuong-son",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "phường Phượng Sơn, xã Quý Sơn và xã Mỹ An"
+    },
+    {
+      "stt_nghi_quyet": 88,
+      "loai": "phường",
+      "ten": "Tự Lạn",
+      "slug": "phuong-tu-lan",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "phường Tự Lạn và các xã Việt Tiến, Thượng Lan, Hương Mai"
+    },
+    {
+      "stt_nghi_quyet": 89,
+      "loai": "phường",
+      "ten": "Việt Yên",
+      "slug": "phuong-viet-yen",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "phường Bích Động, phường Hồng Thái, xã Minh Đức và xã Nghĩa Trung"
+    },
+    {
+      "stt_nghi_quyet": 90,
+      "loai": "phường",
+      "ten": "Nếnh",
+      "slug": "phuong-nenh",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "phường Quang Châu, Vân Trung, Tăng Tiến và Nếnh"
+    },
+    {
+      "stt_nghi_quyet": 91,
+      "loai": "phường",
+      "ten": "Vân Hà",
+      "slug": "phuong-van-ha",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "phường Ninh Sơn, phường Quảng Minh và các xã Tiên Sơn,Trung Sơn, Vân Hà"
+    },
+    {
+      "stt_nghi_quyet": 92,
+      "loai": "phường",
+      "ten": "Bắc Giang",
+      "slug": "phuong-bac-giang",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "phường Thọ Xương, Ngô Quyền, Xương Giang, Hoàng Văn Thụ, Trần Phú, Dĩnh Kế và Dĩnh Trì"
+    },
+    {
+      "stt_nghi_quyet": 93,
+      "loai": "phường",
+      "ten": "Đa Mai",
+      "slug": "phuong-da-mai",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "phường Tân Mỹ, Mỹ Độ, Song Mai, Đa Mai và xã Quế Nham"
+    },
+    {
+      "stt_nghi_quyet": 94,
+      "loai": "phường",
+      "ten": "Tiền Phong",
+      "slug": "phuong-tien-phong",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "phường Nội Hoàng, Song Khê, Đồng Sơn và Tiền Phong"
+    },
+    {
+      "stt_nghi_quyet": 95,
+      "loai": "phường",
+      "ten": "Tân An",
+      "slug": "phuong-tan-an",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "phường Tân An và các xã Quỳnh Sơn, Trí Yên, Lãng Sơn"
+    },
+    {
+      "stt_nghi_quyet": 96,
+      "loai": "phường",
+      "ten": "Yên Dũng",
+      "slug": "phuong-yen-dung",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "phường Tân Liễu, phường Nham Biền và xã Yên Lư"
+    },
+    {
+      "stt_nghi_quyet": 97,
+      "loai": "phường",
+      "ten": "Tân Tiến",
+      "slug": "phuong-tan-tien",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "phường Hương Gián, phường Tân Tiến và xã Xuân Phú"
+    },
+    {
+      "stt_nghi_quyet": 98,
+      "loai": "phường",
+      "ten": "Cảnh Thụy",
+      "slug": "phuong-canh-thuy",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "phường Cảnh Thụy, xã Tiến Dũng và xã Tư Mại"
+    },
+    {
+      "stt_nghi_quyet": 0,
+      "loai": "xã",
+      "ten": "Tuấn Đạo",
+      "slug": "xa-tuan-dao",
+      "vung_lich_su": "bac-giang",
+      "nguon_goc": "không thực hiện sắp xếp theo Nghị quyết 1658/NQ-UBTVQH15"
+    }
+  ]
+}

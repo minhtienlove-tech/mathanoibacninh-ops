@@ -42,7 +42,8 @@ while ( have_posts() ) :
 	the_post();
 
 	$noi_dung = trim( get_the_content() );
-	$co_chu   = '' !== trim( wp_strip_all_tags( strip_shortcodes( $noi_dung ) ) );
+	$co_chu   = '' !== trim( wp_strip_all_tags( strip_shortcodes( $noi_dung ) ) )
+		|| ( function_exists( 'eyecare_khu_vuc_co_noi_dung' ) && eyecare_khu_vuc_co_noi_dung( get_post() ) );
 	$trang_cha = get_post_parent();
 	$la_dich_vu_con = $trang_cha instanceof WP_Post && 'dich-vu' === $trang_cha->post_name;
 	$la_trang_co_sidebar = $co_chu && ! $la_dich_vu_con;
@@ -127,7 +128,7 @@ while ( have_posts() ) :
 			echo '</div>';
 		}
 		?>
-		<h1 class="eyecare-trang__tieu-de"><?php the_title(); ?></h1>
+		<h1 class="eyecare-trang__tieu-de"><?php echo esc_html( function_exists( 'eyecare_khu_vuc_h1' ) ? eyecare_khu_vuc_h1( get_post() ) : get_the_title() ); ?></h1>
 	</header>
 
 	<?php if ( $co_chu ) : ?>

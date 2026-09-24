@@ -1,0 +1,15 @@
+/* Chỉ tải trên các trang /khu-vuc/; không ảnh hưởng trang khác. */
+.eyecare-trang__than .kv-intro{font-size:1.08rem;line-height:1.8;color:#163a48;border-left:4px solid #06a1b9;padding:.75rem 1rem;background:#edf9fb;border-radius:0 12px 12px 0}
+.eyecare-trang__than .kv-directory{display:grid;gap:1rem;margin:1.5rem 0 2rem}
+.eyecare-trang__than .kv-directory__group{min-width:0;border:1px solid #d7e7e9;border-radius:14px;padding:1rem;background:#f9fcfc}
+.eyecare-trang__than .kv-directory__group h3{margin:0 0 .75rem;color:#07536a;font-size:1.15rem}
+.eyecare-trang__than .kv-directory__group ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:.45rem .8rem;margin:0;padding:0;list-style:none}
+.eyecare-trang__than .kv-directory__group li{min-width:0;padding:.45rem .55rem;background:#fff;border:1px solid #e3eeee;border-radius:8px;line-height:1.4;overflow-wrap:anywhere}
+.eyecare-trang__than .kv-directory__group a{color:#08647b;text-decoration:underline;text-underline-offset:2px}
+.eyecare-trang__than .kv-directory__group a:hover,.eyecare-trang__than .kv-directory__group a:focus-visible{color:#064258}
+.eyecare-trang__than .kv-directory__group span{color:#435b65}
+.eyecare-trang__than .eyecare-faq{margin:2rem 0;padding:1rem;border-radius:14px;background:#f3fbfc}
+@media(max-width:580px){.eyecare-trang__than .kv-directory__group ul{grid-template-columns:repeat(2,minmax(0,1fr))}.eyecare-trang__than .kv-directory__group{padding:.75rem}.eyecare-trang__than .kv-intro{font-size:1rem}}
+@media(max-width:380px){.eyecare-trang__than .kv-directory__group ul{grid-template-columns:1fr}}
+/* Đặt hàng liên hệ ở chân màn hình nhỏ để không che phần đọc giữa bài. */
+@media(max-width:767px){body.ec-contact-dock{padding-bottom:calc(160px + env(safe-area-inset-bottom))}body .ec-contact .ec-contact__socials{top:auto;bottom:calc(76px + env(safe-area-inset-bottom));right:max(12px,env(safe-area-inset-right));transform:none;flex-direction:row}}

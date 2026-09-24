@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-09-24 — bản thảo khu vực khám mắt, CHƯA TRIỂN KHAI
+
+- Viết ba trang trụ cột hiện có, mỗi trang khoảng 3.500 từ sau khi hiển thị mục lục/FAQ; giữ URL và các phần cũ. Tạo danh mục 99 xã/phường hiện hành theo Nghị quyết 1658/NQ-UBTVQH15 và khung nội dung cho 99 trang con, phân nhóm địa bàn Bắc Ninh cũ (42) và Bắc Giang cũ (57).
+- Chuẩn bị tích hợp child theme: nguồn HTML/JSON, menu “Khu vực khám mắt”, mục lục, SEO title/meta description, WebPage/CollectionPage + FAQ schema, CSS chỉ tải trên trang đích và script WP-CLI chỉ tạo draft khi bật rõ biến môi trường. Chưa gắn tên bác sĩ hoặc ngày duyệt chưa được xác nhận.
+- Bản xem thử cục bộ `http://127.0.0.1:8784/khu-vuc/` có đủ 102 đường dẫn, header `X-Robots-Tag: noindex`; không upload file vào production theme, không sửa database live. Đã lint PHP trong thư mục backup tách biệt trên server và kiểm tra danh mục 99, 38 liên kết bài viết, nội dung dài cùng bố cục. Chờ bác sĩ và người dùng duyệt trước khi triển khai; các trang con cần thêm chi tiết địa phương độc đáo trước khi index. Xem `theme/eyecare-child/content/khu-vuc/BIEN-TAP.md`.
+
 ## 2026-09-24 — CSS, font và nhãn truy cập trang chủ
 
 - Chuyển Be Vietnam Pro sang WOFF2 cùng tên miền, giữ các mức đậm đang dùng và giấy phép OFL; bỏ stylesheet Google Fonts trên trang chủ và các trang khác.
