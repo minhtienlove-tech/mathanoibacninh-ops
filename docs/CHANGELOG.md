@@ -1,10 +1,11 @@
 # Production changelog
 
-## 2026-09-24 — 99 bài xã/phường riêng, chuẩn bị xuất bản
+## 2026-09-24 — đã xuất bản 102 trang khu vực, 99 bài xã/phường riêng
 
 - Theo yêu cầu xuất bản toàn bộ 102 trang và không lặp nội dung, thay mẫu xã/phường dùng chung bằng 99 tệp HTML riêng. Mỗi trang con có khoảng 603–750 từ, hai FAQ, địa danh theo Nghị quyết 1658 và chủ đề nhãn khoa riêng. Kiểm tra không có đoạn văn dài trùng nguyên văn; mức giao nhau cụm năm từ cao nhất 0,158.
 - Ba trang trụ cột giữ nguyên URL, khoảng 3.500 từ mỗi trang. Sửa mức khẩn của cơn mất thị lực thoáng qua theo nguồn American Stroke Association; bỏ câu biên tập nội bộ khỏi nội dung công khai. Trên nhánh khu vực, ẩn thẻ chân trang ghi tên bác sĩ chưa xác nhận duyệt riêng các bài này. Ở điện thoại, ẩn hàng mạng xã hội nổi để không che bài; liên kết vẫn ở chân trang.
-- Script WP-CLI kiểm tra đủ tệp riêng, tạo 99 draft rồi mới xuất bản bằng cờ riêng. Bản xem thử cục bộ dựng lại đủ 102 URL, 99/99 tệp nội dung và 41 đường dẫn nội bộ đang hoạt động; kiểm tra 320 px không tràn ngang, FAQ và menu hiện. Đang chuẩn bị backup và kiểm tra production trước deploy; chưa ghi DB production ở thời điểm này. Không gắn `reviewedBy` khi chưa có tên/ngày bác sĩ duyệt được xác minh.
+- Đã triển khai commit `6d1dc5d` lên child theme; tạo rồi xuất bản đúng 99 trang con (57 địa bàn Bắc Giang cũ, 42 địa bàn Bắc Ninh cũ). Backup trước khi thay đổi: `/home/jwhxtzru/backups/khu-vuc-20260924-193032/` gồm toàn bộ child theme, database, gói release, danh sách ID và log xuất bản. Không gắn `reviewedBy` khi chưa có tên/ngày bác sĩ duyệt được xác minh.
+- Kiểm tra: SHA256 gói release staged khớp local; PHP lint 7/7; 102/102 URL công khai HTTP 200, có nội dung riêng, FAQ + schema, một meta description, không `noindex`; trang hub liên kết đủ 99/99 trang con. Browser thật: desktop và mobile 390/320 px, không tràn ngang trên các trang mẫu, không có lỗi JavaScript; smoke test 6 URL chính + SSH đạt. Đã xóa object cache và LiteSpeed cache. Chặn truy cập HTTP trực tiếp tới tệp nguồn HTML/JSON/MD/PHP trong thư mục nội dung để tránh URL bản sao; WordPress vẫn đọc tệp nội bộ. Hướng dẫn khôi phục tại `docs/KHU-VUC-ROLLBACK.md`.
 
 ## 2026-09-24 — bản thảo khu vực khám mắt, CHƯA TRIỂN KHAI
 
