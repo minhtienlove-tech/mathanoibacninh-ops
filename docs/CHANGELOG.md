@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-09-25 — sửa thẻ bác sĩ trang Chuyên khoa
+
+- Sửa CSS riêng cho thẻ thông tin bác sĩ ở cuối `/chuyen-khoa/`: đặt ảnh cạnh tên, bỏ khoảng cách tiêu đề của bài viết, tăng tương phản nhãn/tên/ghi chú, thu gọn số liệu và ngày cập nhật. Không đổi nội dung y khoa hoặc HTML.
+- Ở màn hình dưới 768 px, ẩn dải mạng xã hội cố định riêng trên trang này vì che chữ; liên kết mạng xã hội vẫn có ở chân trang, nút gọi và đặt lịch giữ nguyên.
+- Bản xem thử dùng HTML production và CSS mới đã kiểm tra trực quan 1440/375/320 px: thẻ không tràn ngang, màu chữ dễ đọc, chiều cao desktop giảm từ khoảng 740 px còn 345 px. Chờ ghi kết quả triển khai production bên dưới.
+
 ## 2026-09-24 — đã xuất bản 102 trang khu vực, 99 bài xã/phường riêng
 
 - Theo yêu cầu xuất bản toàn bộ 102 trang và không lặp nội dung, thay mẫu xã/phường dùng chung bằng 99 tệp HTML riêng. Mỗi trang con có khoảng 603–750 từ, hai FAQ, địa danh theo Nghị quyết 1658 và chủ đề nhãn khoa riêng. Kiểm tra không có đoạn văn dài trùng nguyên văn; mức giao nhau cụm năm từ cao nhất 0,158.
