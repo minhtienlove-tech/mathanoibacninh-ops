@@ -4,7 +4,8 @@
 
 - Sửa CSS riêng cho thẻ thông tin bác sĩ ở cuối `/chuyen-khoa/`: đặt ảnh cạnh tên, bỏ khoảng cách tiêu đề của bài viết, tăng tương phản nhãn/tên/ghi chú, thu gọn số liệu và ngày cập nhật. Không đổi nội dung y khoa hoặc HTML.
 - Ở màn hình dưới 768 px, ẩn dải mạng xã hội cố định riêng trên trang này vì che chữ; liên kết mạng xã hội vẫn có ở chân trang, nút gọi và đặt lịch giữ nguyên.
-- Bản xem thử dùng HTML production và CSS mới đã kiểm tra trực quan 1440/375/320 px: thẻ không tràn ngang, màu chữ dễ đọc, chiều cao desktop giảm từ khoảng 740 px còn 345 px. Chờ ghi kết quả triển khai production bên dưới.
+- Bản xem thử dùng HTML production và CSS mới đã kiểm tra trực quan ở desktop và 375/320 px: thẻ không tràn ngang, màu chữ dễ đọc, chiều cao desktop giảm từ khoảng 740 px còn 345 px.
+- Đã triển khai commit `e089ea0` lên production sau khi sao lưu CSS và database tại `/home/jwhxtzru/backups/chuyen-khoa-eeat-20260925-082005/`. SHA256 CSS staged/live khớp; PHP lint 3/3, purge object cache/LiteSpeed, smoke 6 URL + SSH đạt. Trình duyệt production xác nhận CSS version mới, thẻ gọn và dễ đọc ở desktop/375/320 px, không tràn ngang hay lỗi JavaScript. Khôi phục bằng cách chép lại `style.css` trong thư mục backup lên child theme rồi purge cache.
 
 ## 2026-09-24 — đã xuất bản 102 trang khu vực, 99 bài xã/phường riêng
 
