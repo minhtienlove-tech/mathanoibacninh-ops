@@ -1,0 +1,1539 @@
+{
+  "pages": [
+    {
+      "requested_url": "https://mathanoibacninh.com/",
+      "final_url": "https://mathanoibacninh.com/",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "x_robots_tag": [],
+      "link_header": [
+        "<https://mathanoibacninh.com/wp-json/>; rel=\"https://api.w.org/\""
+      ],
+      "html_sha256": "778f63e5b2b2f21018e8c1bedf6e61d0832e5ba4a7a5d3e958bd61992b678e5b",
+      "title": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+      "canonical_html": [
+        "https://mathanoibacninh.com/"
+      ],
+      "robots_meta": [
+        "max-image-preview:large"
+      ],
+      "microdata": [],
+      "rdfa": [],
+      "jsonld_script_count": 2,
+      "jsonld_nodes": [
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[0]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#to-chuc",
+            "@type": [
+              "Hospital",
+              "MedicalOrganization"
+            ],
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "telephone": "+84868899396",
+            "legalName": "CÔNG TY CỔ PHẦN BỆNH VIỆN MẮT HÀ NỘI – BẮC NINH",
+            "sameAs": [
+              "https://www.facebook.com/benhvienmathanoibacninh"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Lô 4, đường Hùng Vương",
+              "addressLocality": "Phường Bắc Giang",
+              "addressRegion": "Thành phố Bắc Ninh",
+              "addressCountry": "VN"
+            },
+            "medicalSpecialty": "https://schema.org/Ophthalmology",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "07:30",
+                "closes": "18:00"
+              }
+            ]
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[1]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#website",
+            "@type": "WebSite",
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            }
+          }
+        },
+        {
+          "script_index": 1,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#website",
+            "@type": "WebSite",
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/"
+          }
+        }
+      ],
+      "jsonld_parse_errors": []
+    },
+    {
+      "requested_url": "https://mathanoibacninh.com/gioi-thieu/",
+      "final_url": "https://mathanoibacninh.com/gioi-thieu/",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "x_robots_tag": [],
+      "link_header": [
+        "<https://mathanoibacninh.com/wp-json/>; rel=\"https://api.w.org/\"",
+        "<https://mathanoibacninh.com/wp-json/wp/v2/pages/6>; rel=\"alternate\"; title=\"JSON\"; type=\"application/json\"",
+        "<https://mathanoibacninh.com/?p=6>; rel=shortlink"
+      ],
+      "html_sha256": "01caa122340a15591815c5a3318a82080e2f98642e2419070c09144333db5efb",
+      "title": "Giới thiệu – Bệnh viện Mắt Hà Nội – Bắc Ninh",
+      "canonical_html": [
+        "https://mathanoibacninh.com/gioi-thieu/"
+      ],
+      "robots_meta": [
+        "max-image-preview:large"
+      ],
+      "microdata": [],
+      "rdfa": [],
+      "jsonld_script_count": 3,
+      "jsonld_nodes": [
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[0]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#to-chuc",
+            "@type": [
+              "Hospital",
+              "MedicalOrganization"
+            ],
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "telephone": "+84868899396",
+            "legalName": "CÔNG TY CỔ PHẦN BỆNH VIỆN MẮT HÀ NỘI – BẮC NINH",
+            "sameAs": [
+              "https://www.facebook.com/benhvienmathanoibacninh"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Lô 4, đường Hùng Vương",
+              "addressLocality": "Phường Bắc Giang",
+              "addressRegion": "Thành phố Bắc Ninh",
+              "addressCountry": "VN"
+            },
+            "medicalSpecialty": "https://schema.org/Ophthalmology",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "07:30",
+                "closes": "18:00"
+              }
+            ]
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[1]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#website",
+            "@type": "WebSite",
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[2]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/gioi-thieu/#duong-dan",
+            "@type": "BreadcrumbList"
+          }
+        },
+        {
+          "script_index": 1,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "Article",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mathanoibacninh.com/wp-content/uploads/2026/09/favicon-benhvien-512.png"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://mathanoibacninh.com/gioi-thieu/"
+            }
+          }
+        },
+        {
+          "script_index": 2,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "BreadcrumbList"
+          }
+        }
+      ],
+      "jsonld_parse_errors": []
+    },
+    {
+      "requested_url": "https://mathanoibacninh.com/doi-ngu-bac-si/",
+      "final_url": "https://mathanoibacninh.com/doi-ngu-bac-si/",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "x_robots_tag": [],
+      "link_header": [
+        "<https://mathanoibacninh.com/wp-json/>; rel=\"https://api.w.org/\"",
+        "<https://mathanoibacninh.com/wp-json/wp/v2/pages/11>; rel=\"alternate\"; title=\"JSON\"; type=\"application/json\"",
+        "<https://mathanoibacninh.com/?p=11>; rel=shortlink"
+      ],
+      "html_sha256": "cc2ceeafabd80ef094e254ac4e3efe2853d730a4b436de3ffac96779f41500c9",
+      "title": "Đội ngũ bác sĩ mắt | Bệnh viện Mắt Hà Nội – Bắc Ninh",
+      "canonical_html": [
+        "https://mathanoibacninh.com/doi-ngu-bac-si/"
+      ],
+      "robots_meta": [
+        "max-image-preview:large"
+      ],
+      "microdata": [],
+      "rdfa": [],
+      "jsonld_script_count": 3,
+      "jsonld_nodes": [
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[0]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#to-chuc",
+            "@type": [
+              "Hospital",
+              "MedicalOrganization"
+            ],
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "telephone": "+84868899396",
+            "legalName": "CÔNG TY CỔ PHẦN BỆNH VIỆN MẮT HÀ NỘI – BẮC NINH",
+            "sameAs": [
+              "https://www.facebook.com/benhvienmathanoibacninh"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Lô 4, đường Hùng Vương",
+              "addressLocality": "Phường Bắc Giang",
+              "addressRegion": "Thành phố Bắc Ninh",
+              "addressCountry": "VN"
+            },
+            "medicalSpecialty": "https://schema.org/Ophthalmology",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "07:30",
+                "closes": "18:00"
+              }
+            ]
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[1]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#website",
+            "@type": "WebSite",
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[2]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/doi-ngu-bac-si/#duong-dan",
+            "@type": "BreadcrumbList"
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[3]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/doi-ngu-bac-si/#noi-dung-y-khoa",
+            "@type": "MedicalWebPage",
+            "name": "Đội ngũ bác sĩ",
+            "url": "https://mathanoibacninh.com/doi-ngu-bac-si/",
+            "medicalAudience": {
+              "@type": "Patient"
+            },
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            },
+            "isPartOf": {
+              "@id": "https://mathanoibacninh.com/#website"
+            },
+            "mainEntityOfPage": {
+              "@id": "https://mathanoibacninh.com/doi-ngu-bac-si/"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[4]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#bac-si-le-nhu-tung",
+            "@type": "Physician",
+            "name": "Ths.BS Lê Như Tùng",
+            "url": "https://mathanoibacninh.com/doi-ngu-bac-si/",
+            "medicalSpecialty": "https://schema.org/Ophthalmology"
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[5]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/doi-ngu-bac-si/#hoi-dap",
+            "@type": "FAQPage"
+          }
+        },
+        {
+          "script_index": 1,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "Article",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mathanoibacninh.com/wp-content/uploads/2026/09/favicon-benhvien-512.png"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://mathanoibacninh.com/doi-ngu-bac-si/"
+            }
+          }
+        },
+        {
+          "script_index": 2,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "BreadcrumbList"
+          }
+        }
+      ],
+      "jsonld_parse_errors": []
+    },
+    {
+      "requested_url": "https://mathanoibacninh.com/lien-he/",
+      "final_url": "https://mathanoibacninh.com/lien-he/",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "x_robots_tag": [],
+      "link_header": [
+        "<https://mathanoibacninh.com/wp-json/>; rel=\"https://api.w.org/\"",
+        "<https://mathanoibacninh.com/wp-json/wp/v2/pages/58>; rel=\"alternate\"; title=\"JSON\"; type=\"application/json\"",
+        "<https://mathanoibacninh.com/?p=58>; rel=shortlink"
+      ],
+      "html_sha256": "71cf89b41438c55c1a17a910fc08492d73523028be368fafcc426fde65926e6c",
+      "title": "Liên hệ – Bệnh viện Mắt Hà Nội – Bắc Ninh",
+      "canonical_html": [
+        "https://mathanoibacninh.com/lien-he/"
+      ],
+      "robots_meta": [
+        "max-image-preview:large"
+      ],
+      "microdata": [],
+      "rdfa": [],
+      "jsonld_script_count": 3,
+      "jsonld_nodes": [
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[0]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#to-chuc",
+            "@type": [
+              "Hospital",
+              "MedicalOrganization"
+            ],
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "telephone": "+84868899396",
+            "legalName": "CÔNG TY CỔ PHẦN BỆNH VIỆN MẮT HÀ NỘI – BẮC NINH",
+            "sameAs": [
+              "https://www.facebook.com/benhvienmathanoibacninh"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Lô 4, đường Hùng Vương",
+              "addressLocality": "Phường Bắc Giang",
+              "addressRegion": "Thành phố Bắc Ninh",
+              "addressCountry": "VN"
+            },
+            "medicalSpecialty": "https://schema.org/Ophthalmology",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "07:30",
+                "closes": "18:00"
+              }
+            ]
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[1]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#website",
+            "@type": "WebSite",
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[2]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/lien-he/#duong-dan",
+            "@type": "BreadcrumbList"
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[3]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/lien-he/#noi-dung-lien-he-seo",
+            "@type": [
+              "MedicalWebPage",
+              "Article"
+            ],
+            "name": "Hướng dẫn liên hệ và khám mắt tại Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/lien-he/",
+            "medicalAudience": {
+              "@type": "Patient"
+            },
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            },
+            "isPartOf": {
+              "@id": "https://mathanoibacninh.com/#website"
+            },
+            "mainEntityOfPage": {
+              "@id": "https://mathanoibacninh.com/lien-he/"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[4]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/lien-he/#faq-lien-he",
+            "@type": "FAQPage",
+            "url": "https://mathanoibacninh.com/lien-he/#cau-hoi-thuong-gap"
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[5]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#bac-si-le-nhu-tung",
+            "@type": "Physician",
+            "name": "Ths.BS Lê Như Tùng",
+            "url": "https://mathanoibacninh.com/doi-ngu-bac-si/",
+            "medicalSpecialty": "https://schema.org/Ophthalmology"
+          }
+        },
+        {
+          "script_index": 1,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "Article",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mathanoibacninh.com/wp-content/uploads/2026/09/favicon-benhvien-512.png"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://mathanoibacninh.com/lien-he/"
+            }
+          }
+        },
+        {
+          "script_index": 2,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "BreadcrumbList"
+          }
+        }
+      ],
+      "jsonld_parse_errors": []
+    },
+    {
+      "requested_url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/",
+      "final_url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "x_robots_tag": [],
+      "link_header": [
+        "<https://mathanoibacninh.com/wp-json/>; rel=\"https://api.w.org/\"",
+        "<https://mathanoibacninh.com/wp-json/wp/v2/pages/56>; rel=\"alternate\"; title=\"JSON\"; type=\"application/json\"",
+        "<https://mathanoibacninh.com/?p=56>; rel=shortlink"
+      ],
+      "html_sha256": "88d7a07bbb17b41624d14e012723e6f8e2784e311d01a4629300d62385e6ea5f",
+      "title": "Khám mắt Bắc Ninh – Hướng dẫn và danh sách xã, phường | Bệnh viện Mắt Hà Nội – Bắc Ninh",
+      "canonical_html": [
+        "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/"
+      ],
+      "robots_meta": [
+        "max-image-preview:large"
+      ],
+      "microdata": [],
+      "rdfa": [],
+      "jsonld_script_count": 3,
+      "jsonld_nodes": [
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[0]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#to-chuc",
+            "@type": [
+              "Hospital",
+              "MedicalOrganization"
+            ],
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "telephone": "+84868899396",
+            "legalName": "CÔNG TY CỔ PHẦN BỆNH VIỆN MẮT HÀ NỘI – BẮC NINH",
+            "sameAs": [
+              "https://www.facebook.com/benhvienmathanoibacninh"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Lô 4, đường Hùng Vương",
+              "addressLocality": "Phường Bắc Giang",
+              "addressRegion": "Thành phố Bắc Ninh",
+              "addressCountry": "VN"
+            },
+            "medicalSpecialty": "https://schema.org/Ophthalmology",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "07:30",
+                "closes": "18:00"
+              }
+            ]
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[1]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#website",
+            "@type": "WebSite",
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[2]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/#duong-dan",
+            "@type": "BreadcrumbList"
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[3]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/#khu-vuc",
+            "@type": "WebPage",
+            "name": "Khám mắt tại Bắc Ninh",
+            "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/",
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            },
+            "isPartOf": {
+              "@id": "https://mathanoibacninh.com/#website"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[4]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/#hoi-dap",
+            "@type": "FAQPage"
+          }
+        },
+        {
+          "script_index": 1,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "Article",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mathanoibacninh.com/wp-content/uploads/2026/09/favicon-benhvien-512.png"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/"
+            }
+          }
+        },
+        {
+          "script_index": 2,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "BreadcrumbList"
+          }
+        }
+      ],
+      "jsonld_parse_errors": []
+    },
+    {
+      "requested_url": "https://mathanoibacninh.com/bang-gia/",
+      "final_url": "https://mathanoibacninh.com/bang-gia/",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "x_robots_tag": [],
+      "link_header": [
+        "<https://mathanoibacninh.com/wp-json/>; rel=\"https://api.w.org/\"",
+        "<https://mathanoibacninh.com/wp-json/wp/v2/pages/42>; rel=\"alternate\"; title=\"JSON\"; type=\"application/json\"",
+        "<https://mathanoibacninh.com/?p=42>; rel=shortlink"
+      ],
+      "html_sha256": "b5027742236bb9f509319e87e9c4f12834505367c0ecc56b2317921f1a5c084b",
+      "title": "Bảng giá dịch vụ – Bệnh viện Mắt Hà Nội – Bắc Ninh",
+      "canonical_html": [
+        "https://mathanoibacninh.com/bang-gia/"
+      ],
+      "robots_meta": [
+        "max-image-preview:large"
+      ],
+      "microdata": [],
+      "rdfa": [],
+      "jsonld_script_count": 3,
+      "jsonld_nodes": [
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[0]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#to-chuc",
+            "@type": [
+              "Hospital",
+              "MedicalOrganization"
+            ],
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "telephone": "+84868899396",
+            "legalName": "CÔNG TY CỔ PHẦN BỆNH VIỆN MẮT HÀ NỘI – BẮC NINH",
+            "sameAs": [
+              "https://www.facebook.com/benhvienmathanoibacninh"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Lô 4, đường Hùng Vương",
+              "addressLocality": "Phường Bắc Giang",
+              "addressRegion": "Thành phố Bắc Ninh",
+              "addressCountry": "VN"
+            },
+            "medicalSpecialty": "https://schema.org/Ophthalmology",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "07:30",
+                "closes": "18:00"
+              }
+            ]
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[1]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#website",
+            "@type": "WebSite",
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[2]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/bang-gia/#duong-dan",
+            "@type": "BreadcrumbList"
+          }
+        },
+        {
+          "script_index": 1,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "Article",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mathanoibacninh.com/wp-content/uploads/2026/09/favicon-benhvien-512.png"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://mathanoibacninh.com/bang-gia/"
+            }
+          }
+        },
+        {
+          "script_index": 2,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "BreadcrumbList"
+          }
+        }
+      ],
+      "jsonld_parse_errors": []
+    },
+    {
+      "requested_url": "https://mathanoibacninh.com/dich-vu/",
+      "final_url": "https://mathanoibacninh.com/dich-vu/",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "x_robots_tag": [],
+      "link_header": [
+        "<https://mathanoibacninh.com/wp-json/>; rel=\"https://api.w.org/\"",
+        "<https://mathanoibacninh.com/wp-json/wp/v2/pages/25>; rel=\"alternate\"; title=\"JSON\"; type=\"application/json\"",
+        "<https://mathanoibacninh.com/?p=25>; rel=shortlink"
+      ],
+      "html_sha256": "749018ff83ca18a3db012142db69a0fe6b1d310fb21acda4bf24e59e0486e97b",
+      "title": "Dịch vụ – Bệnh viện Mắt Hà Nội – Bắc Ninh",
+      "canonical_html": [
+        "https://mathanoibacninh.com/dich-vu/"
+      ],
+      "robots_meta": [
+        "max-image-preview:large"
+      ],
+      "microdata": [],
+      "rdfa": [],
+      "jsonld_script_count": 3,
+      "jsonld_nodes": [
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[0]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#to-chuc",
+            "@type": [
+              "Hospital",
+              "MedicalOrganization"
+            ],
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "telephone": "+84868899396",
+            "legalName": "CÔNG TY CỔ PHẦN BỆNH VIỆN MẮT HÀ NỘI – BẮC NINH",
+            "sameAs": [
+              "https://www.facebook.com/benhvienmathanoibacninh"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Lô 4, đường Hùng Vương",
+              "addressLocality": "Phường Bắc Giang",
+              "addressRegion": "Thành phố Bắc Ninh",
+              "addressCountry": "VN"
+            },
+            "medicalSpecialty": "https://schema.org/Ophthalmology",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "07:30",
+                "closes": "18:00"
+              }
+            ]
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[1]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#website",
+            "@type": "WebSite",
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[2]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/dich-vu/#duong-dan",
+            "@type": "BreadcrumbList"
+          }
+        },
+        {
+          "script_index": 1,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "Article",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mathanoibacninh.com/wp-content/uploads/2026/09/favicon-benhvien-512.png"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://mathanoibacninh.com/dich-vu/"
+            }
+          }
+        },
+        {
+          "script_index": 2,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "BreadcrumbList"
+          }
+        }
+      ],
+      "jsonld_parse_errors": []
+    },
+    {
+      "requested_url": "https://mathanoibacninh.com/kien-thuc/mat-mo-dot-ngot-trong-vai-phut/",
+      "final_url": "https://mathanoibacninh.com/kien-thuc/mat-mo-dot-ngot-trong-vai-phut/",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "x_robots_tag": [],
+      "link_header": [
+        "<https://mathanoibacninh.com/wp-json/>; rel=\"https://api.w.org/\"",
+        "<https://mathanoibacninh.com/wp-json/wp/v2/posts/257>; rel=\"alternate\"; title=\"JSON\"; type=\"application/json\"",
+        "<https://mathanoibacninh.com/?p=257>; rel=shortlink"
+      ],
+      "html_sha256": "06481d059be213ff01e0f373d743b3b30c8453d7591b1e2b477c50262331a4a2",
+      "title": "Mắt mờ đột ngột trong vài phút rồi trở lại: có nên bỏ qua – Bệnh viện Mắt Hà Nội – Bắc Ninh",
+      "canonical_html": [
+        "https://mathanoibacninh.com/kien-thuc/mat-mo-dot-ngot-trong-vai-phut/"
+      ],
+      "robots_meta": [
+        "max-image-preview:large"
+      ],
+      "microdata": [
+        {
+          "itemtype": "https://schema.org/Physician"
+        }
+      ],
+      "rdfa": [],
+      "jsonld_script_count": 3,
+      "jsonld_nodes": [
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[0]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#to-chuc",
+            "@type": [
+              "Hospital",
+              "MedicalOrganization"
+            ],
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "telephone": "+84868899396",
+            "legalName": "CÔNG TY CỔ PHẦN BỆNH VIỆN MẮT HÀ NỘI – BẮC NINH",
+            "sameAs": [
+              "https://www.facebook.com/benhvienmathanoibacninh"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Lô 4, đường Hùng Vương",
+              "addressLocality": "Phường Bắc Giang",
+              "addressRegion": "Thành phố Bắc Ninh",
+              "addressCountry": "VN"
+            },
+            "medicalSpecialty": "https://schema.org/Ophthalmology",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "07:30",
+                "closes": "18:00"
+              }
+            ]
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[1]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#website",
+            "@type": "WebSite",
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[2]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/kien-thuc/mat-mo-dot-ngot-trong-vai-phut/#bai-viet",
+            "@type": [
+              "MedicalWebPage",
+              "Article"
+            ],
+            "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-dot-ngot-trong-vai-phut/",
+            "medicalAudience": {
+              "@type": "Patient"
+            },
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            },
+            "isPartOf": {
+              "@id": "https://mathanoibacninh.com/#website"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[3]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#bac-si-le-nhu-tung",
+            "@type": "Physician",
+            "name": "Ths.BS Lê Như Tùng",
+            "url": "https://mathanoibacninh.com/doi-ngu-bac-si/",
+            "medicalSpecialty": "https://schema.org/Ophthalmology"
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[4]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/kien-thuc/mat-mo-dot-ngot-trong-vai-phut/#duong-dan",
+            "@type": "BreadcrumbList"
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[5]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/kien-thuc/mat-mo-dot-ngot-trong-vai-phut/#hoi-dap",
+            "@type": "FAQPage"
+          }
+        },
+        {
+          "script_index": 1,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "Article",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mathanoibacninh.com/wp-content/uploads/2026/09/favicon-benhvien-512.png"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://mathanoibacninh.com/kien-thuc/mat-mo-dot-ngot-trong-vai-phut/"
+            }
+          }
+        },
+        {
+          "script_index": 2,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "BreadcrumbList"
+          }
+        }
+      ],
+      "jsonld_parse_errors": []
+    },
+    {
+      "requested_url": "https://mathanoibacninh.com/khu-vuc/",
+      "final_url": "https://mathanoibacninh.com/khu-vuc/",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "x_robots_tag": [],
+      "link_header": [
+        "<https://mathanoibacninh.com/wp-json/>; rel=\"https://api.w.org/\"",
+        "<https://mathanoibacninh.com/wp-json/wp/v2/pages/54>; rel=\"alternate\"; title=\"JSON\"; type=\"application/json\"",
+        "<https://mathanoibacninh.com/?p=54>; rel=shortlink"
+      ],
+      "html_sha256": "bf02057b07f5ee9b91ee9b0068da510caa89ca77c0b327833c4b4b25681b58a2",
+      "title": "Khu vực khám mắt tại 99 xã, phường Bắc Ninh | Bệnh viện Mắt Hà Nội – Bắc Ninh",
+      "canonical_html": [
+        "https://mathanoibacninh.com/khu-vuc/"
+      ],
+      "robots_meta": [
+        "max-image-preview:large"
+      ],
+      "microdata": [],
+      "rdfa": [],
+      "jsonld_script_count": 3,
+      "jsonld_nodes": [
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[0]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#to-chuc",
+            "@type": [
+              "Hospital",
+              "MedicalOrganization"
+            ],
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "telephone": "+84868899396",
+            "legalName": "CÔNG TY CỔ PHẦN BỆNH VIỆN MẮT HÀ NỘI – BẮC NINH",
+            "sameAs": [
+              "https://www.facebook.com/benhvienmathanoibacninh"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Lô 4, đường Hùng Vương",
+              "addressLocality": "Phường Bắc Giang",
+              "addressRegion": "Thành phố Bắc Ninh",
+              "addressCountry": "VN"
+            },
+            "medicalSpecialty": "https://schema.org/Ophthalmology",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "07:30",
+                "closes": "18:00"
+              }
+            ]
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[1]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#website",
+            "@type": "WebSite",
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[2]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/khu-vuc/#duong-dan",
+            "@type": "BreadcrumbList"
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[3]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/khu-vuc/#khu-vuc",
+            "@type": "CollectionPage",
+            "name": "Khu vực khám mắt",
+            "url": "https://mathanoibacninh.com/khu-vuc/",
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            },
+            "isPartOf": {
+              "@id": "https://mathanoibacninh.com/#website"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[4]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/khu-vuc/#hoi-dap",
+            "@type": "FAQPage"
+          }
+        },
+        {
+          "script_index": 1,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "Article",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mathanoibacninh.com/wp-content/uploads/2026/09/favicon-benhvien-512.png"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://mathanoibacninh.com/khu-vuc/"
+            }
+          }
+        },
+        {
+          "script_index": 2,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "BreadcrumbList"
+          }
+        }
+      ],
+      "jsonld_parse_errors": []
+    },
+    {
+      "requested_url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/",
+      "final_url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "x_robots_tag": [],
+      "link_header": [
+        "<https://mathanoibacninh.com/wp-json/>; rel=\"https://api.w.org/\"",
+        "<https://mathanoibacninh.com/wp-json/wp/v2/pages/55>; rel=\"alternate\"; title=\"JSON\"; type=\"application/json\"",
+        "<https://mathanoibacninh.com/?p=55>; rel=shortlink"
+      ],
+      "html_sha256": "a5b3cf6c7b23e869b74b82a69661a3f0fc7c6d1f6345ac62aa7c40e3b234ee1f",
+      "title": "Khám mắt địa bàn Bắc Giang – Hướng dẫn và danh sách xã, phường | Bệnh viện Mắt Hà Nội – Bắc Ninh",
+      "canonical_html": [
+        "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/"
+      ],
+      "robots_meta": [
+        "max-image-preview:large"
+      ],
+      "microdata": [],
+      "rdfa": [],
+      "jsonld_script_count": 3,
+      "jsonld_nodes": [
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[0]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#to-chuc",
+            "@type": [
+              "Hospital",
+              "MedicalOrganization"
+            ],
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "telephone": "+84868899396",
+            "legalName": "CÔNG TY CỔ PHẦN BỆNH VIỆN MẮT HÀ NỘI – BẮC NINH",
+            "sameAs": [
+              "https://www.facebook.com/benhvienmathanoibacninh"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Lô 4, đường Hùng Vương",
+              "addressLocality": "Phường Bắc Giang",
+              "addressRegion": "Thành phố Bắc Ninh",
+              "addressCountry": "VN"
+            },
+            "medicalSpecialty": "https://schema.org/Ophthalmology",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "07:30",
+                "closes": "18:00"
+              }
+            ]
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[1]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#website",
+            "@type": "WebSite",
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[2]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/#duong-dan",
+            "@type": "BreadcrumbList"
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[3]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/#khu-vuc",
+            "@type": "WebPage",
+            "name": "Khám mắt tại Bắc Giang",
+            "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/",
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            },
+            "isPartOf": {
+              "@id": "https://mathanoibacninh.com/#website"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[4]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/#hoi-dap",
+            "@type": "FAQPage"
+          }
+        },
+        {
+          "script_index": 1,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "Article",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mathanoibacninh.com/wp-content/uploads/2026/09/favicon-benhvien-512.png"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/"
+            }
+          }
+        },
+        {
+          "script_index": 2,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "BreadcrumbList"
+          }
+        }
+      ],
+      "jsonld_parse_errors": []
+    },
+    {
+      "requested_url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-dong-cuu/",
+      "final_url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-dong-cuu/",
+      "status": 200,
+      "content_type": "text/html; charset=UTF-8",
+      "x_robots_tag": [],
+      "link_header": [
+        "<https://mathanoibacninh.com/wp-json/>; rel=\"https://api.w.org/\"",
+        "<https://mathanoibacninh.com/wp-json/wp/v2/pages/1259>; rel=\"alternate\"; title=\"JSON\"; type=\"application/json\"",
+        "<https://mathanoibacninh.com/?p=1259>; rel=shortlink"
+      ],
+      "html_sha256": "494db18ba982714d0595e60ba2accdc6fa39d823c6b2daddb0bcb4fdad3b615c",
+      "title": "Khám mắt tại xã Đông Cứu | Bệnh viện Mắt Hà Nội – Bắc Ninh",
+      "canonical_html": [
+        "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-dong-cuu/"
+      ],
+      "robots_meta": [
+        "max-image-preview:large"
+      ],
+      "microdata": [],
+      "rdfa": [],
+      "jsonld_script_count": 3,
+      "jsonld_nodes": [
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[0]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#to-chuc",
+            "@type": [
+              "Hospital",
+              "MedicalOrganization"
+            ],
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "telephone": "+84868899396",
+            "legalName": "CÔNG TY CỔ PHẦN BỆNH VIỆN MẮT HÀ NỘI – BẮC NINH",
+            "sameAs": [
+              "https://www.facebook.com/benhvienmathanoibacninh"
+            ],
+            "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Lô 4, đường Hùng Vương",
+              "addressLocality": "Phường Bắc Giang",
+              "addressRegion": "Thành phố Bắc Ninh",
+              "addressCountry": "VN"
+            },
+            "medicalSpecialty": "https://schema.org/Ophthalmology",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": [
+                  "Monday",
+                  "Tuesday",
+                  "Wednesday",
+                  "Thursday",
+                  "Friday",
+                  "Saturday",
+                  "Sunday"
+                ],
+                "opens": "07:30",
+                "closes": "18:00"
+              }
+            ]
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[1]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/#website",
+            "@type": "WebSite",
+            "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+            "url": "https://mathanoibacninh.com/",
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[2]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-dong-cuu/#duong-dan",
+            "@type": "BreadcrumbList"
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[3]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-dong-cuu/#khu-vuc",
+            "@type": "WebPage",
+            "name": "Khám mắt tại xã Đông Cứu",
+            "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-dong-cuu/",
+            "publisher": {
+              "@id": "https://mathanoibacninh.com/#to-chuc"
+            },
+            "isPartOf": {
+              "@id": "https://mathanoibacninh.com/#website"
+            }
+          }
+        },
+        {
+          "script_index": 0,
+          "script_attrs": {},
+          "path": "$.@graph[4]",
+          "fields": {
+            "@id": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-dong-cuu/#hoi-dap",
+            "@type": "FAQPage"
+          }
+        },
+        {
+          "script_index": 1,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "Article",
+            "publisher": {
+              "@type": "Organization",
+              "name": "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://mathanoibacninh.com/wp-content/uploads/2026/09/favicon-benhvien-512.png"
+              }
+            },
+            "mainEntityOfPage": {
+              "@type": "WebPage",
+              "@id": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-dong-cuu/"
+            }
+          }
+        },
+        {
+          "script_index": 2,
+          "script_attrs": {},
+          "path": "$",
+          "fields": {
+            "@type": "BreadcrumbList"
+          }
+        }
+      ],
+      "jsonld_parse_errors": []
+    }
+  ]
+}

@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-09-30 — fanpage xác nhận và sửa thêm giá trị schema y tế
+
+- Người quản trị chọn `https://www.facebook.com/benhvienmathanoibacninh`. Triển khai commit `74bf209`: dùng URL này cho link giao diện và `Hospital.sameAs`; đổi `medicalSpecialty` sai `Ophthalmologic` sang enum `https://schema.org/Ophthalmology` cho Hospital/Physician.
+- Schema Markup Validator còn phát hiện `medicalAudience` dạng chuỗi và `worksFor` trên Physician sai kiểu. Triển khai commit `f5e7cee`: dùng object `Patient`, bỏ quan hệ `worksFor` không hợp lệ; chỉ xuất `reviewedBy` khi có meta ngày duyệt thật (hiện 0 post có meta đó). Không đổi nội dung y khoa hiển thị.
+- Đã sao lưu file/database riêng từng đợt tại `/home/jwhxtzru/backups/seo-entity-followup-20260930/` và `/home/jwhxtzru/backups/seo-validator-followup-20260930/`. PHP lint, SHA-256 file live, purge cache, smoke test đều đạt. Validator công khai trang chủ, bác sĩ, bài kiến thức và liên hệ sau sửa: mỗi trang 0 lỗi/0 cảnh báo. Báo cáo và rollback: `docs/seo-ai-fix/README.md`.
+
 ## 2026-09-30 — đã triển khai sửa schema thực thể và canonical
 
 - Triển khai commit `206bcf8`: tám tệp child theme được upload đúng bản Git, SHA-256 local/live khớp; ba option OBS SEO Suite chỉ tắt emitter `AutoDealer`, GMB schema và LocalBusiness trùng (`enable_dealer=0`, `enable_schema=0`, `schema_enable=0`). Không sửa mã plugin/core.

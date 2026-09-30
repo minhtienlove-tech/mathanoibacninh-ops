@@ -74,7 +74,7 @@ def graph_nodes(value, path="$", seen=None):
 def summarize_node(path, node, script_index, attrs):
     fields = (
         "@id", "@type", "name", "url", "telephone", "legalName", "sameAs",
-        "address", "aggregateRating", "review", "publisher", "provider", "worksFor",
+        "address", "aggregateRating", "review", "reviewedBy", "medicalSpecialty", "medicalAudience", "publisher", "provider", "worksFor",
         "isPartOf", "mainEntityOfPage", "logo", "geo", "openingHoursSpecification",
     )
     return {
