@@ -1,0 +1,569 @@
+[
+  {
+    "index": 96,
+    "id": 1293,
+    "title": "Khám mắt tại xã Yên Thế",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-yen-the/",
+    "word_count": 625,
+    "status": "clarity",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Địa danh xã Yên Thế được dùng ở đây để giúp người dân tra cứu, không chỉ cơ sở y tế.",
+        "reason": "Cụm “không chỉ cơ sở y tế” không rõ đối tượng được so sánh; phần mở đầu khó hiểu dù phần sau đã nói đúng vị trí bệnh viện.",
+        "proposed_edit": "Viết rõ: “Trang dùng tên xã Yên Thế để người dân tra cứu thông tin mắt; bệnh viện không đặt cơ sở tại xã.”",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 97,
+    "id": 1294,
+    "title": "Khám mắt tại xã Bố Hạ",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-bo-ha/",
+    "word_count": 657,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 98,
+    "id": 1295,
+    "title": "Khám mắt tại xã Đồng Kỳ",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-dong-ky/",
+    "word_count": 615,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 99,
+    "id": 1296,
+    "title": "Khám mắt tại xã Xuân Lương",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-xuan-luong/",
+    "word_count": 641,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 100,
+    "id": 1297,
+    "title": "Khám mắt tại xã Tam Tiến",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-tam-tien/",
+    "word_count": 632,
+    "status": "clarity",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "nhìn kém ban đêm tại",
+        "reason": "Liên kết sau cụm này dẫn tới trang NEI về thị lực thấp nói chung, chưa trực tiếp dẫn chứng các nguyên nhân của khó nhìn ban đêm được nêu trong bài.",
+        "proposed_edit": "Đổi nhãn liên kết thành “thị lực thấp” hoặc bổ sung nguồn trực tiếp về khó nhìn ban đêm, chẳng hạn trang NEI về viêm võng mạc sắc tố cùng trang NEI về đục thủy tinh thể.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/low-vision",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinitis-pigmentosa",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/cataracts"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 101,
+    "id": 1298,
+    "title": "Khám mắt tại xã Tân Yên",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-tan-yen/",
+    "word_count": 670,
+    "status": "clarity",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Ghi chép trước khi khám khám mắt cho trẻ học đường",
+        "reason": "Tiêu đề lặp từ “khám”, khiến câu vụng và kém tin cậy.",
+        "proposed_edit": "Đổi thành “Ghi chép trước buổi khám mắt cho trẻ học đường”.",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 102,
+    "id": 1299,
+    "title": "Khám mắt tại xã Ngọc Thiện",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-ngoc-thien/",
+    "word_count": 629,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 103,
+    "id": 1300,
+    "title": "Khám mắt tại xã Nhã Nam",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-nha-nam/",
+    "word_count": 635,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 104,
+    "id": 1301,
+    "title": "Khám mắt tại xã Phúc Hoà",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-phuc-hoa/",
+    "word_count": 662,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 105,
+    "id": 1302,
+    "title": "Khám mắt tại xã Quang Trung",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-quang-trung/",
+    "word_count": 611,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 106,
+    "id": 1303,
+    "title": "Khám mắt tại xã Hợp Thịnh",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-hop-thinh/",
+    "word_count": 652,
+    "status": "clarity",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "bảo hộ mắt khi làm việc tại",
+        "reason": "Nguồn NEI được liên kết là trang kính bảo hộ dành cho trẻ; bài này nói về vật bắn, tia hàn và hóa chất tại nơi làm việc. Nguồn CDC/NIOSH phù hợp trực tiếp hơn.",
+        "proposed_edit": "Thay hoặc bổ sung liên kết CDC/NIOSH “Eye Safety for Workers” cho phần bảo hộ lao động.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/healthy-vision/nei-for-kids/protective-eyewear",
+          "https://www.cdc.gov/niosh/ppe/eye-safety/index.html"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 107,
+    "id": 1304,
+    "title": "Khám mắt tại xã Hiệp Hòa",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-hiep-hoa/",
+    "word_count": 616,
+    "status": "clarity",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Địa danh xã Hiệp Hòa được dùng ở đây để giúp người dân tra cứu, không chỉ cơ sở y tế.",
+        "reason": "Cụm “không chỉ cơ sở y tế” tối nghĩa và lặp cách diễn đạt ở trang Yên Thế.",
+        "proposed_edit": "Viết rõ: “Trang dùng tên xã Hiệp Hòa để người dân tra cứu thông tin mắt; bệnh viện không đặt cơ sở tại xã.”",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 108,
+    "id": 1305,
+    "title": "Khám mắt tại xã Hoàng Vân",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-hoang-van/",
+    "word_count": 643,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 109,
+    "id": 1306,
+    "title": "Khám mắt tại xã Đồng Việt",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-dong-viet/",
+    "word_count": 630,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 110,
+    "id": 1307,
+    "title": "Khám mắt tại xã Xuân Cẩm",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-xuan-cam/",
+    "word_count": 638,
+    "status": "clarity",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "ngày chụp đáy mắt trước, các kết quả đường huyết và triệu chứng mới và mắt nào bị ảnh hưởng",
+        "reason": "Hai chữ “và” liên tiếp trong chuỗi liệt kê làm hướng dẫn chuẩn bị khó đọc.",
+        "proposed_edit": "Viết lại: “ngày chụp đáy mắt trước, kết quả đường huyết, triệu chứng mới và mắt bị ảnh hưởng”.",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 111,
+    "id": 1308,
+    "title": "Khám mắt tại phường Kinh Bắc",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-kinh-bac/",
+    "word_count": 649,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "ảnh có phản xạ đồng tử bất thường, nên hỏi bác sĩ sớm",
+        "reason": "Cảnh báo phản xạ đồng tử bất thường ở trẻ quá mơ hồ. Phản xạ trắng trong ảnh có thể là dấu hiệu của u nguyên bào võng mạc; NEI khuyên liên hệ bác sĩ ngay.",
+        "proposed_edit": "Nêu rõ: “Nếu đồng tử trẻ có ánh trắng trong ảnh hoặc dưới ánh đèn, liên hệ bác sĩ nhi hoặc bác sĩ mắt ngay để được đánh giá khẩn.” Bổ sung nguồn NEI về u nguyên bào võng mạc.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinoblastoma",
+          "https://www.nhs.uk/conditions/retinoblastoma/symptoms/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 112,
+    "id": 1309,
+    "title": "Khám mắt tại phường Võ Cường",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-vo-cuong/",
+    "word_count": 643,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 113,
+    "id": 1310,
+    "title": "Khám mắt tại phường Vũ Ninh",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-vu-ninh/",
+    "word_count": 618,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 114,
+    "id": 1311,
+    "title": "Khám mắt tại phường Hạp Lĩnh",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-hap-linh/",
+    "word_count": 631,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 115,
+    "id": 1312,
+    "title": "Khám mắt tại phường Nam Sơn",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-nam-son/",
+    "word_count": 620,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 116,
+    "id": 1313,
+    "title": "Khám mắt tại phường Từ Sơn",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-tu-son/",
+    "word_count": 635,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 117,
+    "id": 1314,
+    "title": "Khám mắt tại phường Tam Sơn",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-tam-son/",
+    "word_count": 609,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 118,
+    "id": 1315,
+    "title": "Khám mắt tại phường Đồng Nguyên",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-dong-nguyen/",
+    "word_count": 631,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 119,
+    "id": 1316,
+    "title": "Khám mắt tại phường Phù Khê",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-phu-khe/",
+    "word_count": 607,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 120,
+    "id": 1317,
+    "title": "Khám mắt tại phường Thuận Thành",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-thuan-thanh/",
+    "word_count": 626,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 121,
+    "id": 1318,
+    "title": "Khám mắt tại phường Mão Điền",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-mao-dien/",
+    "word_count": 614,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 122,
+    "id": 1319,
+    "title": "Khám mắt tại phường Trạm Lộ",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-tram-lo/",
+    "word_count": 607,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 123,
+    "id": 1320,
+    "title": "Khám mắt tại phường Trí Quả",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-tri-qua/",
+    "word_count": 636,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 124,
+    "id": 1321,
+    "title": "Khám mắt tại phường Song Liễu",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-song-lieu/",
+    "word_count": 626,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 125,
+    "id": 1322,
+    "title": "Khám mắt tại phường Ninh Xá",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-ninh-xa/",
+    "word_count": 622,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 126,
+    "id": 1323,
+    "title": "Khám mắt tại phường Quế Võ",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-que-vo/",
+    "word_count": 640,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 127,
+    "id": 1324,
+    "title": "Khám mắt tại phường Phương Liễu",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-phuong-lieu/",
+    "word_count": 653,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 128,
+    "id": 1325,
+    "title": "Khám mắt tại phường Nhân Hòa",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-nhan-hoa/",
+    "word_count": 703,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 129,
+    "id": 1326,
+    "title": "Khám mắt tại phường Đào Viên",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-dao-vien/",
+    "word_count": 670,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 130,
+    "id": 1327,
+    "title": "Khám mắt tại phường Bồng Lai",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/phuong-bong-lai/",
+    "word_count": 662,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 131,
+    "id": 1328,
+    "title": "Khám mắt tại phường Chũ",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/phuong-chu/",
+    "word_count": 702,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 132,
+    "id": 1329,
+    "title": "Khám mắt tại phường Phượng Sơn",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/phuong-phuong-son/",
+    "word_count": 677,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 133,
+    "id": 1330,
+    "title": "Khám mắt tại phường Tự Lạn",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/phuong-tu-lan/",
+    "word_count": 667,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 134,
+    "id": 1331,
+    "title": "Khám mắt tại phường Việt Yên",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/phuong-viet-yen/",
+    "word_count": 667,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 135,
+    "id": 1332,
+    "title": "Khám mắt tại phường Nếnh",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/phuong-nenh/",
+    "word_count": 661,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 136,
+    "id": 1333,
+    "title": "Khám mắt tại phường Vân Hà",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/phuong-van-ha/",
+    "word_count": 676,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 137,
+    "id": 1334,
+    "title": "Khám mắt tại phường Bắc Giang",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/phuong-bac-giang/",
+    "word_count": 731,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 138,
+    "id": 1335,
+    "title": "Khám mắt tại phường Đa Mai",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/phuong-da-mai/",
+    "word_count": 634,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 139,
+    "id": 1336,
+    "title": "Khám mắt tại phường Tiền Phong",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/phuong-tien-phong/",
+    "word_count": 697,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 140,
+    "id": 1337,
+    "title": "Khám mắt tại phường Tân An",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/phuong-tan-an/",
+    "word_count": 681,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Ánh đồng tử trắng trong ảnh của trẻ nhỏ cũng là lý do đi khám sớm.",
+        "reason": "“Đi khám sớm” chưa thể hiện đầy đủ mức khẩn của đồng tử trắng ở trẻ. Đây có thể là dấu hiệu của u nguyên bào võng mạc; nguồn NEI khuyên gọi bác sĩ ngay.",
+        "proposed_edit": "Đổi thành: “Nếu thấy đồng tử trắng trong ảnh hoặc dưới ánh đèn, liên hệ bác sĩ nhi hoặc bác sĩ mắt ngay để được đánh giá khẩn; không chờ đợt khám học đường.” Thêm nguồn NEI về dấu hiệu này.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinoblastoma",
+          "https://www.nhs.uk/conditions/retinoblastoma/symptoms/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 141,
+    "id": 1338,
+    "title": "Khám mắt tại phường Yên Dũng",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/phuong-yen-dung/",
+    "word_count": 649,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 142,
+    "id": 1339,
+    "title": "Khám mắt tại phường Tân Tiến",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/phuong-tan-tien/",
+    "word_count": 630,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 143,
+    "id": 1340,
+    "title": "Khám mắt tại phường Cảnh Thụy",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/phuong-canh-thuy/",
+    "word_count": 708,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 144,
+    "id": 1341,
+    "title": "Khám mắt tại xã Tuấn Đạo",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-tuan-dao/",
+    "word_count": 719,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  }
+]

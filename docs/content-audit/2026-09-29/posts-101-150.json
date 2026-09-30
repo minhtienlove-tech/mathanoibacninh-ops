@@ -1,0 +1,896 @@
+[
+  {
+    "index": 101,
+    "id": 569,
+    "title": "Mắt mờ buổi tối, ban ngày thì rõ: nguyên nhân và khi nào cần khám",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-buoi-toi-ban-ngay-thi-ro/",
+    "word_count": 2570,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "phần lớn do lão thị, khô mắt hoặc tật khúc xạ chưa chỉnh đủ",
+        "reason": "Lão thị chủ yếu gây mờ nhìn gần; nêu là nguyên nhân thường gặp của mờ nhìn ban đêm dễ làm độc giả hiểu sai và bỏ qua đục thủy tinh thể hoặc bệnh võng mạc.",
+        "proposed_edit": "Tách mờ khi nhìn gần trong tối do thiếu sáng/lão thị khỏi giảm nhìn xa ban đêm; nêu tật khúc xạ, khô mắt, đục thủy tinh thể và các bệnh mắt khác cần khám để phân biệt.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/presbyopia"
+        ]
+      },
+      {
+        "quote": "Glôcôm góc mở làm nhãn áp tăng từ từ",
+        "reason": "Glôcôm góc mở có thể xảy ra khi nhãn áp đo được bình thường; mô tả này biến nhãn áp cao thành điều kiện bắt buộc.",
+        "proposed_edit": "Viết rằng nhãn áp cao là yếu tố nguy cơ lớn, nhưng vẫn có glôcôm góc mở nhãn áp bình thường.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/glaucoma/glaucoma-and-eye-pressure"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 102,
+    "id": 570,
+    "title": "Mắt mờ dần ở người trưởng thành: lão thị hay bệnh lý",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-dan-theo-thoi-gian-o-nguoi-truong-thanh/",
+    "word_count": 2641,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Mờ kèm thấy màn che hoặc mất một mảng tầm nhìn.",
+        "reason": "Dấu hiệu được đặt trong nhóm khám trong tuần, trong khi màn che hoặc mất vùng nhìn mới xuất hiện có thể là bong võng mạc hoặc đột quỵ mắt cần đánh giá khẩn.",
+        "proposed_edit": "Chuyển dấu hiệu này sang mục cấp cứu/khám mắt ngay trong ngày, kể cả khi không đau.",
+        "severity": "critical",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment",
+          "https://www.stroke.org/en/be-fast-experience/eye-changes"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 103,
+    "id": 571,
+    "title": "Nhìn méo, đường thẳng thành cong: tổn thương hoàng điểm",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-kem-nhin-meo-duong-thang-thanh-cong/",
+    "word_count": 2359,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Cần đi khám trong tuần nếu mới xuất hiện",
+        "reason": "Đường thẳng mới nhìn thành cong có thể là bệnh hoàng điểm tiến triển nhanh, nhất là thoái hóa hoàng điểm thể ướt; chờ một tuần có thể trì hoãn điều trị.",
+        "proposed_edit": "Khuyên liên hệ bác sĩ mắt ngay và khám sớm trong ngày hoặc theo phân luồng khẩn của cơ sở khi biến dạng hình mới xuất hiện.",
+        "severity": "high",
+        "source_urls": [
+          "https://aao.org/eye-health/diseases/amd-macular-degeneration"
+        ]
+      },
+      {
+        "quote": "bổ sung vitamin và khoáng chất chuyên dụng có thể giúp làm chậm tiến triển",
+        "reason": "AREDS2 chỉ có lợi ở một số giai đoạn thoái hóa hoàng điểm do tuổi, không áp dụng chung cho mọi nguyên nhân nhìn méo.",
+        "proposed_edit": "Nêu rõ chỉ bác sĩ mới quyết định dùng AREDS2 khi xác định đúng giai đoạn AMD; không tự uống để điều trị triệu chứng mới.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/age-related-macular-degeneration/nutritional-supplements-age-related-macular-degeneration"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 104,
+    "id": 572,
+    "title": "Mắt mờ kèm thấy màn che hoặc mất mảng tầm nhìn: cảnh báo võng mạc",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-kem-thay-man-che-hoac-mat-mang-tam-nhin/",
+    "word_count": 2636,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Đã thấy một vùng lung linh lan rộng rồi tự hết trong dưới một giờ, và đây là lần đầu.",
+      "reason": "Vùng sáng lung linh lan dần có thể là aura migraine, khác với mất vùng nhìn đột ngột. Tuy nhiên lần đầu xuất hiện không nên tự chẩn đoán qua bài viết; cần tách rõ cơn aura dương tính với mất thị lực/mất vùng nhìn đột ngột hoặc đơn nhãn có thể do mạch máu.",
+      "proposed_edit": "Khuyên liên hệ y tế khẩn để đánh giá cơn rối loạn thị giác lần đầu. Nếu mất thị lực đột ngột, chỉ ở một mắt, hoặc kèm yếu liệt/nói khó thì đến cấp cứu ngay; chỉ giải thích migraine sau khi đã phân biệt nguyên nhân nguy hiểm.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.stroke.org/en/be-fast-experience/eye-changes",
+        "https://eyewiki.aao.org/On_Call_Ophthalmology",
+        "https://www.nhs.uk/conditions/retinal-ocular-migraine/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 105,
+    "id": 573,
+    "title": "Mắt mờ khi nhìn gần, nhìn xa vẫn rõ: lão thị hay vấn đề khác",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-khi-nhin-gan-nhin-xa-thi-ro/",
+    "word_count": 2689,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 106,
+    "id": 574,
+    "title": "Mắt mờ khi nhìn xa, nhìn gần thì rõ: cận thị hay bệnh lý",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-khi-nhin-xa-nhin-gan-thi-ro/",
+    "word_count": 2631,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "nếu thử kính mà thị lực không lên được, vấn đề nằm ở phía sau thấu kính chứ không phải ở khúc xạ.",
+        "reason": "Không cải thiện bằng kính gọng không định vị bệnh ở sau hệ thấu kính: khô hoặc sẹo giác mạc, đục thủy tinh thể, loạn thị không đều và bệnh võng mạc đều có thể làm thị lực chỉnh kính kém. FAQ lặp lại cùng lỗi này.",
+        "proposed_edit": "Nói đây là dấu hiệu cần khám toàn diện giác mạc, thủy tinh thể, đáy mắt và thần kinh thị giác; không kết luận vị trí tổn thương chỉ từ thử kính.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Cataract",
+          "https://aao.org/eye-health/tips-prevention/side-effects-cataract-surgery-complications-cope"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 107,
+    "id": 575,
+    "title": "Mắt mờ một bên, bên kia vẫn rõ: khi nào cần lo",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-mot-ben-ben-kia-van-ro/",
+    "word_count": 2691,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Mờ kèm nhìn đôi — nhóm tổn thương thần kinh thị giác.",
+        "reason": "Nhìn đôi mới xuất hiện thường liên quan lệch trục hai mắt, cơ vận nhãn hoặc dây thần kinh vận nhãn; quy ngay cho dây thần kinh thị giác là sai vị trí bệnh và có thể làm sai phân luồng.",
+        "proposed_edit": "Viết 'nhìn đôi mới xuất hiện có thể do cơ/dây thần kinh vận nhãn hoặc nguyên nhân thần kinh khác, cần khám khẩn theo triệu chứng đi kèm'.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/On_Call_Ophthalmology"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 108,
+    "id": 589,
+    "title": "Ánh sáng xanh từ màn hình: bằng chứng nói gì và không nói gì",
+    "url": "https://mathanoibacninh.com/kien-thuc/anh-sang-xanh-tu-man-hinh/",
+    "word_count": 2741,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 109,
+    "id": 590,
+    "title": "Bắc Giang giờ thuộc tỉnh nào? Khám mắt và dùng bảo hiểm y tế ở đâu",
+    "url": "https://mathanoibacninh.com/kien-thuc/bac-giang-gio-thuoc-tinh-nao/",
+    "word_count": 2299,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Bắc Giang là một tỉnh độc lập, mã tỉnh 24, không thuộc tỉnh nào khác. Bắc Giang và Bắc Ninh là hai tỉnh riêng biệt.",
+      "reason": "Thông tin hành chính cốt lõi của toàn bài đã sai: Bắc Giang và Bắc Ninh hợp nhất thành tỉnh Bắc Ninh từ năm 2025, rồi toàn tỉnh được thành lập thành phố Bắc Ninh trực thuộc Trung ương từ 20/09/2026 theo Nghị quyết 39/2026/QH16. Bài đăng năm 2026 có thể làm bệnh nhân hiểu sai địa chỉ, thủ tục và cơ sở khám.",
+      "proposed_edit": "Tạm gỡ hoặc sửa ngay toàn bài: khu vực Bắc Giang cũ hiện thuộc thành phố Bắc Ninh trực thuộc Trung ương; phân biệt rõ tên tỉnh giai đoạn 2025–19/09/2026 với tên thành phố hiện hành; rà lại mọi tên địa phương, mã hành chính và chỉ dẫn bệnh viện.",
+        "severity": "critical",
+        "source_urls": [
+        "https://xaydungchinhsach.chinhphu.vn/quoc-hoi-thong-qua-nghi-quyet-sap-xep-don-vi-hanh-chinh-cap-tinh-119250612101356465.htm",
+        "https://vanban.chinhphu.vn/?classid=1&docid=219328&pageid=27160"
+        ]
+      },
+      {
+        "quote": "nếu là cơ sở tại tỉnh A thì khám tại đó trước",
+        "reason": "Mô tả quyền lợi BHYT bằng quy tắc theo tỉnh/giấy chuyển tuyến cố định là quá đơn giản và có thể sai sau sửa đổi Luật BHYT có hiệu lực 1/7/2025; còn tùy cấp chuyên môn, cơ sở, tình huống và mức hưởng.",
+        "proposed_edit": "Cho bộ phận BHYT/pháp chế kiểm tra lại theo luật và hướng dẫn hiện hành; ghi điều kiện theo cấp cơ sở, trường hợp được khám khác nơi đăng ký, giấy chuyển và mức hưởng thay vì quy tắc tỉnh A/B.",
+        "severity": "high",
+        "source_urls": [
+        "https://congbao.chinhphu.vn/van-ban/luat-so-51-2024-qh15-43559.htm",
+        "https://chinhphu.vn/?classid=1&docid=214515&orggroupid=2&pageid=27160"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 110,
+    "id": 591,
+    "title": "Bụi và hoá chất trong môi trường làm việc: tổn thương tích tụ",
+    "url": "https://mathanoibacninh.com/kien-thuc/bui-va-hoa-chat-trong-moi-truong-lam-viec/",
+    "word_count": 2721,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "rửa mắt bằng nước sạch liên tục ít nhất 15 phút",
+        "reason": "Mốc 'ít nhất 15 phút' có trong một số hướng dẫn cấp cứu, nhưng hướng dẫn cho công chúng của NHS khuyên ít nhất 20 phút. Nên nhấn mạnh bắt đầu rửa ngay, thật nhiều và tiếp tục trong lúc chuyển cấp cứu nếu có thể, thay vì để người đọc hiểu là dừng ở phút 15.",
+        "proposed_edit": "Sửa thành 'rửa ngay bằng nước sạch chảy liên tục ít nhất 20 phút, tiếp tục trên đường đến cấp cứu; không đợi có nước muối hay thuốc'.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Chemical_%28Alkali_and_Acid%29_Injury_of_the_Conjunctiva_and_Cornea",
+          "https://eyewiki.aao.org/On_Call_Ophthalmology",
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      },
+      {
+        "quote": "có thể gây bỏng nhẹ bề mặt",
+        "reason": "Xi măng/vôi và bột kiềm có thể gây bỏng kiềm sâu, đe dọa thị lực; gọi là 'nhẹ' làm giảm mức cảnh giác.",
+        "proposed_edit": "Nêu nguy cơ bỏng kiềm nặng; loại bỏ hạt bột nhìn thấy được nếu an toàn, tưới rửa ngay thật nhiều và đi cấp cứu mắt.",
+        "severity": "high",
+        "source_urls": [
+          "https://eyewiki.aao.org/Chemical_%28Alkali_and_Acid%29_Injury_of_the_Conjunctiva_and_Cornea"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 111,
+    "id": 592,
+    "title": "Đeo kính bảo hộ đúng cách: vì sao nhiều người bỏ không dùng",
+    "url": "https://mathanoibacninh.com/kien-thuc/deo-kinh-bao-ho-dung-cach/",
+    "word_count": 2755,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Hoá chất dạng hơi hoặc bắn",
+        "reason": "Gộp hơi hóa chất với giọt bắn và gợi ý một kiểu kính bảo hộ cho cả hai có thể khiến người lao động tin kính ôm kín là đủ trước hơi/khí độc. Thiết bị phải theo đánh giá nguy cơ và bảng dữ liệu an toàn.",
+        "proposed_edit": "Tách bắn tóe chất lỏng khỏi hơi/khí; kính chống bắn, tấm che mặt, thông gió và bảo vệ hô hấp phải được chọn theo SDS và bộ phận an toàn lao động.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.osha.gov/shms/chapter-8"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 112,
+    "id": 593,
+    "title": "Hàn điện và tia cực tím: vì sao mắt đau sau nhiều giờ",
+    "url": "https://mathanoibacninh.com/kien-thuc/han-dien-va-tia-cuc-tim/",
+    "word_count": 2711,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 113,
+    "id": 594,
+    "title": "Khám mắt ngoài giờ hành chính: vì sao công nhân khó đi khám",
+    "url": "https://mathanoibacninh.com/kien-thuc/kham-mat-ngoai-gio-hanh-chinh/",
+    "word_count": 2259,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 114,
+    "id": 595,
+    "title": "Khám sức khoẻ thị lực cho công nhân: nội dung tối thiểu cần có",
+    "url": "https://mathanoibacninh.com/kien-thuc/kham-suc-khoe-thi-luc-cho-cong-nhan/",
+    "word_count": 2736,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 115,
+    "id": 596,
+    "title": "Lái xe ban đêm nhìn kém: nguyên nhân từ mắt và cách kiểm tra",
+    "url": "https://mathanoibacninh.com/kien-thuc/lai-xe-ban-dem-nhin-kem/",
+    "word_count": 2725,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 116,
+    "id": 597,
+    "title": "Mắt và công việc trong nhà máy: bốn yếu tố gây tổn thương",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-va-cong-viec-nha-may/",
+    "word_count": 2728,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "cần rửa mắt bằng nước sạch liên tục ít nhất 15 phút",
+        "reason": "Mốc 'ít nhất 15 phút' phù hợp một số hướng dẫn chuyên môn; hướng dẫn cho công chúng của NHS dùng ít nhất 20 phút. Cần làm rõ rằng phải bắt đầu rửa ngay, tưới nhiều nước và tiếp tục trong khi đến cấp cứu nếu có thể, thay vì xem 15 phút là thời điểm dừng.",
+        "proposed_edit": "Sửa thành rửa ngay thật nhiều với nước sạch ít nhất 20 phút, tiếp tục trong quá trình đi cấp cứu và không chờ tìm dung dịch đặc biệt.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Chemical_%28Alkali_and_Acid%29_Injury_of_the_Conjunctiva_and_Cornea",
+          "https://eyewiki.aao.org/On_Call_Ophthalmology",
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 117,
+    "id": 598,
+    "title": "Quy tắc 20-20-20 và những gì thực sự giúp mắt khi làm máy tính",
+    "url": "https://mathanoibacninh.com/kien-thuc/quy-tac-20-20-20-cho-nguoi-lam-may-tinh/",
+    "word_count": 2724,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 118,
+    "id": 616,
+    "title": "Chảy nước mắt một bên kéo dài nhiều tháng: vì sao và làm gì",
+    "url": "https://mathanoibacninh.com/kien-thuc/chay-nuoc-mat-mot-ben-keo-dai-nhieu-thang/",
+    "word_count": 2709,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Động tác này tạo áp lực đẩy dịch ứ đi và giúp đoạn hẹp không bít lại hẳn.",
+        "reason": "Bài nói về người lớn chảy nước mắt một bên nhiều tháng nhưng khẳng định xoa túi lệ sẽ giữ ống lệ không tắc; massage chủ yếu được dùng trong tắc lệ đạo bẩm sinh, còn tắc mắc phải cần tìm nguyên nhân và thường phải can thiệp.",
+        "proposed_edit": "Bỏ lời hứa massage chống tắc ở người lớn; chỉ hướng dẫn lau sạch nhẹ và khám chuyên khoa để đánh giá lệ đạo, nhất là khi sưng đau hoặc chảy mủ.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Secondary_Acquired_Nasolacrimal_Duct_Obstruction"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 119,
+    "id": 617,
+    "title": "Chảy nước mắt nhiều khi ra gió hoặc ra nắng: vì sao",
+    "url": "https://mathanoibacninh.com/kien-thuc/chay-nuoc-mat-nhieu-khi-ra-gio-hoac-nang/",
+    "word_count": 2757,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "Lông mọc lại thường cứng và nhọn hơn, cọ mạnh hơn lần trước.",
+        "reason": "Bài khẳng định nhổ lông làm lông mọc lại cứng hơn dù không có bằng chứng cho thay đổi cấu trúc sợi lông. Vấn đề thật là nhổ chỉ có tác dụng tạm thời khi hướng mi quặp chưa được xử lý.",
+        "proposed_edit": "Viết 'Không tự nhổ vì có thể làm trầy mắt và lông sẽ mọc lại khi nang còn nguyên; cần khám để xử lý nguyên nhân lông mi cọ giác mạc'.",
+        "severity": "low",
+        "source_urls": [
+          "https://eyewiki.aao.org/Trichiasis"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 120,
+    "id": 618,
+    "title": "Ghèn trong dính kéo thành sợi ở khoé mắt: vì sao và làm gì",
+    "url": "https://mathanoibacninh.com/kien-thuc/ghen-trong-dinh-nhu-keo-chi/",
+    "word_count": 2711,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 121,
+    "id": 619,
+    "title": "Hai mắt nhìn không cùng hướng ở người trưởng thành",
+    "url": "https://mathanoibacninh.com/kien-thuc/hai-mat-nhin-khong-cung-huong-o-nguoi-truong-thanh/",
+    "word_count": 2628,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Nhìn đôi xuất hiện trong vài ngày qua, không kèm dấu hiệu 🔴 nào ở trên.",
+        "reason": "Nhìn đôi mới xuất hiện được đặt vào nhóm có thể chờ vài ngày dù có thể do liệt dây vận nhãn hoặc bệnh thần kinh cấp.",
+        "proposed_edit": "Khuyên người có nhìn đôi mới xuất hiện liên hệ cấp cứu/bác sĩ mắt trong ngày; đi cấp cứu ngay nếu kèm đau đầu, sụp mi, đồng tử bất thường hoặc dấu thần kinh.",
+        "severity": "high",
+        "source_urls": [
+          "https://eyewiki.aao.org/On_Call_Ophthalmology"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 122,
+    "id": 620,
+    "title": "Lồi mắt một bên, khác hẳn trước: nguyên nhân và khi nào cần khám",
+    "url": "https://mathanoibacninh.com/kien-thuc/loi-mat-mot-ben-khac-han-truoc/",
+    "word_count": 2630,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 123,
+    "id": 621,
+    "title": "Mắt đỏ kèm ghèn vàng dính mi buổi sáng: nguyên nhân và xử lý",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-do-kem-ghen-vang-dinh-mi-buoi-sang/",
+    "word_count": 2584,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 124,
+    "id": 622,
+    "title": "Mắt đỏ kéo dài nhiều tuần không đỡ: nguyên nhân thật sự",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-do-keo-dai-nhieu-tuan-khong-do/",
+    "word_count": 2701,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 125,
+    "id": 623,
+    "title": "Mắt đỏ một mảng tím sẫm dưới kết mạc: có nguy hiểm không",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-do-mot-mang-tim-sam-duoi-ket-mac/",
+    "word_count": 2679,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 126,
+    "id": 624,
+    "title": "Mắt đỏ sau khi bơi hoặc tắm biển: nguyên nhân và xử lý",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-do-sau-khi-boi-hoac-tam-bien/",
+    "word_count": 2634,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "Tháo kính áp tròng và bỏ luôn cả cặp kính cùng hộp đựng nếu bạn đã đeo chúng xuống nước.",
+        "reason": "Ở người đang đau/đỏ mắt sau tiếp xúc nước, đoạn trước lại dặn giữ kính và hộp cho bác sĩ xem; mệnh lệnh bỏ ngay có thể làm mất vật liệu hữu ích để đánh giá nguy cơ nhiễm trùng.",
+        "proposed_edit": "Nếu có triệu chứng, tháo kính, không đeo lại, giữ kính/hộp để hỏi bác sĩ có cần kiểm tra; sau đó thay kính và hộp theo hướng dẫn.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.cdc.gov/contact-lenses/causes/index.html"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 127,
+    "id": 625,
+    "title": "Mắt nóng rát kèm chảy nước mắt: nguyên nhân và cách xử lý",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-nong-rat-kem-chay-nuoc-mat/",
+    "word_count": 2588,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "rửa mắt liên tục bằng nước sạch hoặc nước muối sinh lý ít nhất 15 phút",
+        "reason": "Mốc 'ít nhất 15 phút' không sai trong mọi hướng dẫn cấp cứu, nhưng thiếu chỉ dẫn tiếp tục rửa trong lúc chuyển đến cấp cứu. Hướng dẫn công chúng của NHS dùng ít nhất 20 phút; bác sĩ cần thống nhất câu chữ áp dụng cho bệnh viện.",
+        "proposed_edit": "Dặn tưới rửa bằng nước sạch ngay, liên tục ít nhất 20 phút và tiếp tục nếu có thể tới khi bàn giao cấp cứu; không trì hoãn để tìm nước muối.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Chemical_%28Alkali_and_Acid%29_Injury_of_the_Conjunctiva_and_Cornea",
+          "https://eyewiki.aao.org/On_Call_Ophthalmology",
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 128,
+    "id": 626,
+    "title": "Mắt tiết dịch lẫn máu: nguyên nhân và khi nào phải đi khám",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-tiet-dich-lan-mau/",
+    "word_count": 2659,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "hay gặp nhất do viêm kết mạc xuất huyết vì virus",
+        "reason": "Nước mắt/ghèn thực sự lẫn máu có nhiều nguyên nhân từ kết mạc, lệ đạo, chấn thương, chảy máu mũi ngược dòng đến u; khẳng định virus là nguyên nhân thường gặp nhất chưa có cơ sở và có thể tạo cảm giác an toàn giả.",
+        "proposed_edit": "Nêu chẩn đoán phân biệt rộng, tránh gán nguyên nhân trước khi khám, đặc biệt khi một bên hoặc tái phát.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Bloody_tears"
+        ]
+      },
+      {
+        "quote": "Dịch lẫn máu kéo dài quá năm đến bảy ngày thay vì nhạt dần.",
+        "reason": "Bài đã có mục khám trong ngày cho đau, giảm thị lực và chấn thương. Với máu trong nước mắt không rõ nguyên nhân nhưng không có các dấu này, nguồn tham khảo ủng hộ việc đánh giá và tìm nguyên nhân song không quy định chắc mốc 5–7 ngày; bác sĩ cần duyệt lại cách phân luồng.",
+        "proposed_edit": "Khuyên khám mắt sớm khi có máu trong nước mắt không giải thích được, lặp lại hoặc một bên; đi cấp cứu nếu đau, giảm thị lực, chấn thương hay chảy máu nhiều.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Bloody_tears"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 129,
+    "id": 627,
+    "title": "Sụp mi một bên mới xuất hiện: nguyên nhân và khi nào cần cấp cứu",
+    "url": "https://mathanoibacninh.com/kien-thuc/sup-mi-mot-ben-moi-xuat-hien/",
+    "word_count": 2564,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Horner có thể do u phổi đỉnh, tổn thương tủy sống, hoặc tự phát lành tính.",
+        "reason": "Thiếu nguyên nhân nguy cấp quan trọng nhất ở sụp mi/Horner mới xuất hiện: bóc tách động mạch cảnh, nhất là kèm đau đầu hoặc đau cổ một bên.",
+        "proposed_edit": "Bổ sung 'Horner mới xuất hiện, đặc biệt đau đầu/cổ một bên, cần cấp cứu để loại trừ bóc tách động mạch cảnh'.",
+        "severity": "high",
+        "source_urls": [
+          "https://eyewiki.aao.org/Horner_Syndrome"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 130,
+    "id": 628,
+    "title": "Sụp mi nặng dần về cuối ngày: vì sao và khi nào khám",
+    "url": "https://mathanoibacninh.com/kien-thuc/sup-mi-nang-dan-ve-cuoi-ngay/",
+    "word_count": 2717,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Nhìn đôi mới xảy ra và liên tục , không đỡ khi che một mắt xong mở lại.",
+        "reason": "Cách mô tả phép che một mắt không rõ: nhìn đôi do lệch hai mắt thường hết khi che một mắt và trở lại khi mở, nên người đọc có thể bỏ qua triệu chứng cần khám khẩn.",
+        "proposed_edit": "Diễn đạt: 'Nếu thấy hai hình khi mở cả hai mắt mà hết khi che một mắt, đó là nhìn đôi hai mắt mới xuất hiện và cần đánh giá sớm; kèm sụp mi, đau đầu, đồng tử bất thường thì đi cấp cứu'.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/On_Call_Ophthalmology"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 131,
+    "id": 629,
+    "title": "Khô mắt nặng, nhỏ thuốc nhiều tháng vẫn không đỡ",
+    "url": "https://mathanoibacninh.com/kien-thuc/kho-mat-nang-khong-do-du-da-nho-thuoc/",
+    "word_count": 2732,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "Một số người bệnh có cải thiện khi bổ sung acid béo omega-3",
+        "reason": "Thử nghiệm DREAM do NEI tài trợ không thấy viên omega-3 cải thiện khô mắt hơn giả dược ở nhóm khô mắt vừa đến nặng; câu hiện tại gợi ý hiệu quả chung mà thiếu bất định.",
+        "proposed_edit": "Nêu bằng chứng bổ sung omega-3 chưa nhất quán và không thay thế điều trị đã được bác sĩ chỉ định; ưu tiên tìm nguyên nhân khô mắt kéo dài.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.nei.nih.gov/research-and-training/research-news/omega-3s-fish-oil-supplements-no-better-placebo-dry-eye"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 132,
+    "id": 630,
+    "title": "Kính không còn đúng độ: khi nào cần đo lại",
+    "url": "https://mathanoibacninh.com/kien-thuc/kinh-khong-con-dung-do-khi-nao-do-lai/",
+    "word_count": 2695,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 133,
+    "id": 631,
+    "title": "Lão thị: vì sao sau 40 tuổi nhìn gần mờ",
+    "url": "https://mathanoibacninh.com/kien-thuc/lao-thi-vi-sao-sau-40-tuoi-nhin-gan-mo/",
+    "word_count": 2685,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "Lão thị không chữa khỏi được bằng thuốc nhỏ mắt",
+        "reason": "Nếu trả lời câu hỏi thuốc nhỏ có làm nhìn gần rõ lại không, câu này dễ bị hiểu là không thuốc nhỏ nào có thể cải thiện tạm thời; thuốc nhỏ co đồng tử điều trị lão thị đã được phê duyệt tại một số thị trường.",
+        "proposed_edit": "Giải thích thuốc nhỏ không đảo ngược lão hóa thể thủy tinh nhưng một số thuốc kê đơn có thể cải thiện nhìn gần tạm thời cho người phù hợp; nêu tính sẵn có tại Việt Nam cần kiểm tra và chỉ dùng theo bác sĩ.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.fda.gov/drugs/drug-trials-snapshots/drug-trials-snapshots-vizz"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 134,
+    "id": 632,
+    "title": "Mi dưới lật ra ngoài, lộ niêm mạc: vì sao và xử lý",
+    "url": "https://mathanoibacninh.com/kien-thuc/mi-duoi-lat-ra-ngoai-lo-niem-mac/",
+    "word_count": 2718,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 135,
+    "id": 633,
+    "title": "Mi quặp vào trong, lông mi chọc vào mắt: nhận biết và xử lý",
+    "url": "https://mathanoibacninh.com/kien-thuc/mi-quap-vao-trong-long-mi-choc-mat/",
+    "word_count": 2428,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "thường ngắn, cứng và nhọn hơn sợi cũ, cọ mạnh hơn",
+        "reason": "Khẳng định lông mọc lại 'cứng' hơn sau nhổ là suy diễn không chắc; lý do cần khám là mi quặp tiếp tục làm lông cọ giác mạc và nhổ chỉ giải quyết tạm thời.",
+        "proposed_edit": "Viết 'lông có thể mọc lại sau vài tuần vì nang lông còn nguyên; nếu mi vẫn quặp, lông mới tiếp tục cọ mắt'.",
+        "severity": "low",
+        "source_urls": [
+          "https://eyewiki.aao.org/Trichiasis"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 136,
+    "id": 634,
+    "title": "Mộng mắt (màng mắt): khi nào cần mổ",
+    "url": "https://mathanoibacninh.com/kien-thuc/mong-mat-khi-nao-can-mo/",
+    "word_count": 2623,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 137,
+    "id": 635,
+    "title": "Sẹo giác mạc sau chấn thương hoặc sau loét: vì sao mắt vẫn mờ",
+    "url": "https://mathanoibacninh.com/kien-thuc/seo-giac-mac-sau-chan-thuong-hoac-loet/",
+    "word_count": 2721,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 138,
+    "id": 636,
+    "title": "Viêm kết mạc dị ứng theo mùa: nhận biết và xử lý",
+    "url": "https://mathanoibacninh.com/kien-thuc/viem-ket-mac-di-ung-theo-mua/",
+    "word_count": 2717,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 139,
+    "id": 653,
+    "title": "Bong võng mạc: dấu hiệu cảnh báo và khi nào cần cấp cứu",
+    "url": "https://mathanoibacninh.com/kien-thuc/bong-vong-mac-dau-hieu-canh-bao/",
+    "word_count": 2265,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Có thấy chớp sáng và ruồi bay trước mắt nhẹ, không lan, nhưng muốn được xác nhận là lành tính.",
+        "reason": "Chớp sáng/ruồi bay mới xuất hiện dù nhẹ vẫn có thể do rách võng mạc; xếp khám vài ngày dễ trì hoãn soi đáy mắt giãn đồng tử.",
+        "proposed_edit": "Chuyển triệu chứng mới xuất hiện sang liên hệ bác sĩ mắt và khám trong ngày hoặc theo phân luồng khẩn; màn che/mất thị lực cần cấp cứu ngay.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 140,
+    "id": 654,
+    "title": "Glôcôm góc mở: mất thị trường âm thầm khó nhận ra",
+    "url": "https://mathanoibacninh.com/kien-thuc/glocom-goc-mo-mat-thi-truong-am-tham/",
+    "word_count": 2228,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "xảy ra khi thủy dịch trong mắt thoát ra kém dần làm nhãn áp tăng từ từ",
+        "reason": "Đây là cơ chế thường gặp nhưng không bao trùm glôcôm góc mở nhãn áp bình thường; câu không có ngoại lệ dù FAQ có nhắc.",
+        "proposed_edit": "Thêm rằng có người tổn thương thần kinh thị giác dù nhãn áp đo trong giới hạn bình thường; cần đánh giá thần kinh thị giác và thị trường, không chỉ nhãn áp.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Normal_Tension_Glaucoma"
+        ]
+      },
+      {
+        "quote": "Bắt đầu thấy hay va vào đồ vật bên hông",
+        "reason": "Câu mô tả hẹp thị trường nhận thấy dần, không khẳng định khuyết vùng nhìn đột ngột. Nên tách rõ triệu chứng kéo dài với khuyết vùng nhìn mới xuất hiện hoặc tiến triển nhanh, vì hai trường hợp cần phân luồng khác nhau.",
+        "proposed_edit": "Nêu mất vùng nhìn mới hoặc tăng nhanh cần được khám trong ngày, đi cấp cứu nếu đột ngột; chỉ triệu chứng âm thầm lâu ngày ổn định mới hẹn khám sớm.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.stroke.org/en/be-fast-experience/eye-changes"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 141,
+    "id": 655,
+    "title": "Lỗ hoàng điểm: vì sao đường thẳng thành cong",
+    "url": "https://mathanoibacninh.com/kien-thuc/lo-hoang-diem-vi-sao-nhin-meo/",
+    "word_count": 2415,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Bạn trên 60 tuổi và mới thấy hình ảnh biến dạng nhẹ",
+        "reason": "Biến dạng hình mới xuất hiện ở người lớn tuổi không thể tự quy cho lỗ hoàng điểm tiến chậm; có thể do thoái hóa hoàng điểm thể ướt cần điều trị nhanh.",
+        "proposed_edit": "Khuyên gọi bác sĩ mắt ngay khi đường thẳng mới cong hoặc hình biến dạng, kể cả còn đọc được chữ.",
+        "severity": "high",
+        "source_urls": [
+          "https://aao.org/eye-health/diseases/amd-macular-degeneration"
+        ]
+      },
+      {
+        "quote": "Vừa có chớp sáng hoặc ruồi bay tăng đột ngột",
+        "reason": "Dấu hiệu được đặt vào nhóm khám trong vài ngày nhưng tăng chớp sáng/ruồi bay đột ngột có thể báo rách võng mạc.",
+        "proposed_edit": "Chuyển sang khám mắt khẩn trong ngày để soi võng mạc; nếu thêm màn che/mất thị lực thì cấp cứu ngay.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 142,
+    "id": 656,
+    "title": "Màng trước võng mạc: vì sao ảnh mờ và biến dạng",
+    "url": "https://mathanoibacninh.com/kien-thuc/mang-truoc-vong-mac-la-gi/",
+    "word_count": 2237,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "đường thẳng bị cong kéo dài hơn hai tuần",
+        "reason": "Ngưỡng chờ hai tuần trước khi hẹn khám cho biến dạng hình mới có thể bỏ lỡ thoái hóa hoàng điểm thể ướt hoặc tổn thương hoàng điểm khác; không thể tự phân biệt với màng trước võng mạc.",
+        "proposed_edit": "Khuyên liên hệ bác sĩ mắt ngay khi thấy biến dạng hình mới; chỉ theo dõi định kỳ khi đã có chẩn đoán và kế hoạch cụ thể.",
+        "severity": "high",
+        "source_urls": [
+          "https://aao.org/eye-health/diseases/amd-macular-degeneration",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/macular-pucker"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 143,
+    "id": 657,
+    "title": "Thoái hoá hoàng điểm dạng khô: tiến triển từ từ",
+    "url": "https://mathanoibacninh.com/kien-thuc/thoai-hoa-hoang-diem-dang-kho/",
+    "word_count": 2442,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Tự kiểm tra bằng lưới Amsler tại nhà mỗi tuần",
+        "reason": "Với người đã mắc hoặc nguy cơ AMD, hướng dẫn AAO khuyên kiểm tra từng mắt hằng ngày để nhận ra chuyển sang thể ướt kịp thời.",
+        "proposed_edit": "Sửa thành dùng lưới Amsler hằng ngày, từng mắt riêng; liên hệ bác sĩ ngay nếu có đường cong, vùng mờ/tối mới.",
+        "severity": "medium",
+        "source_urls": [
+          "https://aao.org/eye-health/diseases/amd-macular-degeneration"
+        ]
+      },
+      {
+        "quote": "Thoái hoá hoàng điểm dạng khô hiện chưa có phương pháp chữa khỏi",
+        "reason": "Đúng là chưa có cách chữa khỏi, nhưng bài tập trung làm chậm bệnh mà bỏ qua thông tin AREDS2 chỉ định theo giai đoạn trung gian hoặc muộn một mắt; người đọc có thể bỏ lỡ một can thiệp có bằng chứng hoặc tự mua sai giai đoạn.",
+        "proposed_edit": "Thêm mục ngắn: hỏi bác sĩ về AREDS2 nếu AMD giai đoạn trung gian hoặc muộn một mắt; không tự dùng cho AMD sớm hoặc người chưa mắc.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/age-related-macular-degeneration/nutritional-supplements-age-related-macular-degeneration"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 144,
+    "id": 658,
+    "title": "Thoái hoá hoàng điểm thể ướt: tiến triển nhanh",
+    "url": "https://mathanoibacninh.com/kien-thuc/thoai-hoa-hoang-diem-dang-uot/",
+    "word_count": 2342,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 145,
+    "id": 659,
+    "title": "Viêm màng bồ đào: mắt đỏ, đau, sợ ánh sáng kéo dài",
+    "url": "https://mathanoibacninh.com/kien-thuc/viem-mang-bo-dao-la-gi/",
+    "word_count": 2318,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Corticoid — dạng nhỏ mắt cho viêm trước, hoặc tiêm quanh mắt, uống cho viêm giữa và sau — là thuốc nền tảng để cắt viêm.",
+        "reason": "Bài đặt corticoid trong bối cảnh bác sĩ kê đơn, nhưng đoạn tóm tắt chưa nêu rõ nguyên nhân nhiễm trùng cần được loại trừ hoặc điều trị đặc hiệu; nên thêm giới hạn để người đọc không hiểu là thuốc dùng cho mọi loại viêm màng bồ đào.",
+        "proposed_edit": "Ghi rõ bác sĩ phải đánh giá nguyên nhân, loại trừ hoặc điều trị nhiễm trùng trước/kèm corticoid; bệnh nhân không tự mua thuốc steroid.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Acute_Anterior_Uveitis"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 146,
+    "id": 660,
+    "title": "Xuất huyết dịch kính: khi máu chảy vào buồng dịch kính",
+    "url": "https://mathanoibacninh.com/kien-thuc/xuat-huyet-dich-kinh/",
+    "word_count": 2226,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Có chớp sáng và ruồi bay trước mắt nhẹ, không lan.",
+        "reason": "Bài về xuất huyết dịch kính nhưng xếp chớp sáng/ruồi bay mới dù nhẹ vào nhóm có thể khám vài ngày; có thể là rách võng mạc cần soi khẩn.",
+        "proposed_edit": "Khuyên khám mắt trong ngày khi mới có chớp sáng hoặc ruồi bay, nhất là kèm mờ hoặc vệt tối; màn che/mất thị lực cần cấp cứu.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 147,
+    "id": 661,
+    "title": "Basedow và lồi mắt: khi tuyến giáp kéo theo cả hai con mắt",
+    "url": "https://mathanoibacninh.com/kien-thuc/benh-basedow-graves-loi-mat/",
+    "word_count": 2287,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Tỷ lệ người bệnh Basedow có biểu hiện ở mắt vào khoảng một nửa số trường hợp",
+        "reason": "Tỷ lệ phụ thuộc định nghĩa và mức độ; AAO EyeWiki nêu khoảng 25% bệnh Graves có bệnh mắt tuyến giáp. 'Một nửa' không kèm nguồn có thể phóng đại nguy cơ bệnh mắt rõ rệt.",
+        "proposed_edit": "Thay bằng mô tả thận trọng 'một phần người bệnh Basedow có biểu hiện mắt, tỷ lệ thay đổi tùy tiêu chuẩn chẩn đoán'; nếu dùng số, trích nguồn và phạm vi.",
+        "severity": "low",
+        "source_urls": [
+          "https://eyewiki.aao.org/Biologics_for_Thyroid_Eye_Disease"
+        ]
+      },
+      {
+        "quote": "có thể gây tăng nhãn áp và đục giác mạc",
+        "reason": "Tác dụng phụ lâu dài điển hình của steroid là tăng nhãn áp/glôcôm và đục thủy tinh thể, không phải 'đục giác mạc'. Đây là lỗi thuật ngữ y khoa rõ ràng.",
+        "proposed_edit": "Sửa 'đục giác mạc' thành 'đục thủy tinh thể'; giữ khuyến cáo không tự dùng corticoid.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Ocular_Manifestations_of_Corticosteroids"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 148,
+    "id": 662,
+    "title": "Mắt và thai kỳ: thay đổi gì, khi nào cần lo",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-va-thai-ky/",
+    "word_count": 2229,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Bạn có đái tháo đường trước khi mang thai hoặc đái tháo đường thai kỳ , cần được soi đáy mắt để kiểm tra võng mạc.",
+        "reason": "Gộp đái tháo đường có trước thai kỳ với đái tháo đường thai kỳ là sai. Hướng dẫn ADA 2026 nêu người chỉ mắc đái tháo đường thai kỳ không tăng nguy cơ bệnh võng mạc đái tháo đường trong thai kỳ và không cần khám võng mạc chỉ vì GDM.",
+        "proposed_edit": "Phân biệt rõ: đái tháo đường type 1/2 có trước thai kỳ cần khám mắt trước/đầu thai kỳ và theo dõi; GDM đơn thuần không cần soi đáy mắt thường quy chỉ vì chẩn đoán này, trừ khi có triệu chứng hoặc nghi đái tháo đường đã có từ trước.",
+        "severity": "medium",
+        "source_urls": [
+          "https://diabetesjournals.org/care/article/49/Supplement_1/S261/163919/12-Retinopathy-Neuropathy-and-Foot-Care-Standards"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 149,
+    "id": 663,
+    "title": "Nhãn áp cao nhưng chưa tổn thương thần kinh thị giác",
+    "url": "https://mathanoibacninh.com/kien-thuc/nhan-ap-cao-chua-ton-thuong/",
+    "word_count": 2279,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Glôcôm là bệnh trong đó đầu dây thần kinh thị giác đã bị tổn thương và thị trường — vùng nhìn bao quát chung quanh — đã bắt đầu hẹp lại.",
+        "reason": "Tổn thương đầu thần kinh/lớp sợi thần kinh có thể xuất hiện trước khi đo thị trường thấy khuyết rõ; không nên đòi cả hai cùng bất thường mới gọi là glôcôm.",
+        "proposed_edit": "Nêu glôcôm là bệnh tổn thương thần kinh thị giác, thường gây khuyết thị trường về sau; bác sĩ kết hợp khám gai thị, OCT, thị trường và các yếu tố nguy cơ.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Primary_Open-Angle_Glaucoma"
+        ]
+      },
+      {
+        "quote": "Bạn thấy thị trường có vẻ hẹp dần , va vào đồ vật bên rìa",
+        "reason": "Câu gốc nói thị trường hẹp dần; không có bằng chứng trong ngữ cảnh rằng triệu chứng xuất hiện đột ngột. Nên bổ sung câu tách khuyết vùng nhìn đột ngột hoặc tiến triển nhanh để người đọc không áp dụng lịch khám vài ngày cho tình huống cấp.",
+        "proposed_edit": "Tách rõ hẹp trường nhìn âm thầm lâu tháng cần khám sớm với khuyết vùng nhìn mới/đột ngột cần đánh giá trong ngày hoặc cấp cứu.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.stroke.org/en/be-fast-experience/eye-changes",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 150,
+    "id": 664,
+    "title": "Tăng huyết áp và võng mạc: khi mạch máu mắt bị tổn thương",
+    "url": "https://mathanoibacninh.com/kien-thuc/tang-huyet-ap-va-vong-mac/",
+    "word_count": 2242,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Võng mạc chịu tổn thương ở vùng ngoại vi trước",
+        "reason": "Bệnh võng mạc do tăng huyết áp không có quy luật bắt đầu từ ngoại vi; dấu hiệu hẹp mạch/xuất huyết/xuất tiết thường được phát hiện ở đáy mắt sau và có thể ảnh hưởng thị lực theo vị trí và biến chứng.",
+        "proposed_edit": "Bỏ mệnh đề 'ngoại vi trước'; giải thích bệnh sớm có thể không gây triệu chứng dù tổn thương mạch máu đã nhìn thấy khi soi đáy mắt.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Hypertensive_Retinopathy"
+        ]
+      },
+      {
+        "quote": "Huyết áp dao động mạnh còn nguy hiểm hơn cho mạch máu võng mạc so với mức cao ổn định.",
+        "reason": "So sánh này thiếu cơ sở và dễ khiến người đọc tưởng huyết áp cao kéo dài ổn định ít nguy hiểm hoặc chấp nhận được; kiểm soát huyết áp ổn định ở mục tiêu cá nhân mới là thông điệp đúng.",
+        "proposed_edit": "Sửa thành 'huyết áp cao kéo dài và các đợt tăng vọt đều có thể gây hại; uống thuốc đều và theo dõi để đạt mục tiêu do bác sĩ đặt ra'.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Hypertensive_Retinopathy",
+          "https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/when-to-call-911-for-high-blood-pressure"
+        ]
+      },
+      {
+        "quote": "Nếu bạn có tăng huyết áp hoặc bất kỳ dấu hiệu 🔴 nào, hãy đến cơ sở có bác sĩ nhãn khoa",
+        "reason": "Gộp người tăng huyết áp ổn định với người có mờ mắt/đau đầu cấp; với huyết áp rất cao kèm thay đổi thị lực, điểm đến phải là khoa cấp cứu để đánh giá tổn thương toàn thân, không chỉ phòng khám mắt.",
+        "proposed_edit": "Tách chỉ dẫn: tăng huyết áp ổn định đặt lịch soi đáy mắt; huyết áp tăng rất cao kèm thay đổi thị lực/triệu chứng thần kinh thì đến cấp cứu ngay hoặc gọi cấp cứu địa phương.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.heart.org/en/health-topics/high-blood-pressure/understanding-blood-pressure-readings/when-to-call-911-for-high-blood-pressure",
+          "https://eyewiki.aao.org/Hypertensive_Retinopathy"
+        ]
+      }
+    ]
+  }
+]

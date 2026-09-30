@@ -1,0 +1,843 @@
+[
+  {
+    "index": 46,
+    "id": 1243,
+    "title": "Khám mắt tại xã Chi Lăng",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-chi-lang/",
+    "word_count": 737,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "nếu hóa chất bắn vào, bắt đầu rửa bằng nước sạch và tìm hỗ trợ y tế.",
+        "reason": "Hướng dẫn bắt đầu rửa là đúng, nhưng không nêu thời lượng tối thiểu; người đọc có thể dừng quá sớm khi đang tìm nơi cấp cứu.",
+        "proposed_edit": "Nêu rõ rửa liên tục bằng nhiều nước sạch ít nhất 20 phút, bắt đầu ngay và tiếp tục trong lúc tìm hỗ trợ cấp cứu.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 47,
+    "id": 1244,
+    "title": "Khám mắt tại xã Phù Lãng",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-phu-lang/",
+    "word_count": 747,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Nếu hóa chất, bắt đầu rửa mắt bằng nước sạch ngay và tìm giúp đỡ y tế.",
+        "reason": "Hướng dẫn bắt đầu rửa là đúng, nhưng không nêu thời lượng tối thiểu; người đọc có thể dừng quá sớm khi đang tìm nơi cấp cứu.",
+        "proposed_edit": "Nêu rõ rửa liên tục bằng nhiều nước sạch ít nhất 20 phút, bắt đầu ngay và tiếp tục trong lúc tìm hỗ trợ cấp cứu.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 48,
+    "id": 1245,
+    "title": "Khám mắt tại xã Yên Phong",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-yen-phong/",
+    "word_count": 744,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 49,
+    "id": 1246,
+    "title": "Khám mắt tại xã Văn Môn",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-van-mon/",
+    "word_count": 747,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Nếu hóa chất bắn vào mắt, bắt đầu rửa mắt ngay bằng nhiều nước sạch, rồi tìm trợ giúp y tế khẩn.",
+        "reason": "Hướng dẫn bắt đầu rửa là đúng, nhưng không nêu thời lượng tối thiểu; người đọc có thể dừng quá sớm khi đang tìm nơi cấp cứu.",
+        "proposed_edit": "Nêu rõ rửa liên tục bằng nhiều nước sạch ít nhất 20 phút, bắt đầu ngay và tiếp tục trong lúc tìm hỗ trợ cấp cứu.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 50,
+    "id": 1247,
+    "title": "Khám mắt tại xã Tam Giang",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-tam-giang/",
+    "word_count": 703,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 51,
+    "id": 1248,
+    "title": "Khám mắt tại xã Yên Trung",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-yen-trung/",
+    "word_count": 682,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 52,
+    "id": 1249,
+    "title": "Khám mắt tại xã Tam Đa",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-tam-da/",
+    "word_count": 704,
+    "status": "urgent",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Mắt lệch mới xuất hiện sau chấn thương, kèm đau đầu dữ dội, nhìn đôi mới, giảm thị lực hoặc biểu hiện thần kinh khác cần được đánh giá y tế sớm, có thể là cấp cứu.",
+        "reason": "Lác/nhìn đôi mới kèm đau đầu dữ dội hoặc dấu thần kinh có thể báo hiệu bệnh thần kinh cấp; “sớm, có thể” để mức khẩn không rõ.",
+        "proposed_edit": "Hướng dẫn đến khoa cấp cứu ngay khi trẻ mới lác/nhìn đôi kèm đau đầu dữ dội, chấn thương hoặc dấu thần kinh.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nhs.uk/symptoms/double-vision/"
+        ]
+      },
+      {
+        "quote": "Với trẻ sơ sinh hoặc trẻ nhỏ có ánh đồng tử trắng trong ảnh, cũng nên được bác sĩ kiểm tra sớm thay vì chờ lớn.",
+        "reason": "Phản xạ đồng tử trắng có thể là dấu hiệu bệnh mắt nghiêm trọng, kể cả u nguyên bào võng mạc; “sớm” chưa cho thấy cần liên hệ ngay.",
+        "proposed_edit": "Viết “liên hệ bác sĩ/nơi khám mắt trẻ em ngay để được đánh giá khẩn, kể cả khi trẻ vẫn sinh hoạt bình thường”.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinoblastoma"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 53,
+    "id": 1250,
+    "title": "Khám mắt tại xã Tiên Du",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-tien-du/",
+    "word_count": 695,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 54,
+    "id": 1251,
+    "title": "Khám mắt tại xã Liên Bão",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-lien-bao/",
+    "word_count": 677,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 55,
+    "id": 1252,
+    "title": "Khám mắt tại xã Tân Chi",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-tan-chi/",
+    "word_count": 702,
+    "status": "urgent",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Mất nhìn đột ngột, nhiều chấm bay mới, màn tối, mắt đỏ đau dữ dội hoặc chấn thương cần đánh giá y tế sớm hay cấp cứu phù hợp.",
+        "reason": "Cụm “sớm hay cấp cứu” gộp dấu hiệu rách/bong võng mạc và mất thị lực đột ngột với tình huống ít khẩn, có thể làm người đọc đợi lịch.",
+        "proposed_edit": "Nêu rõ màn che, nhiều chấm bay mới, mất thị lực đột ngột hoặc đau dữ dội cần đến bác sĩ mắt/khoa cấp cứu ngay.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/floaters",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 56,
+    "id": 1253,
+    "title": "Khám mắt tại xã Đại Đồng",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-dai-dong/",
+    "word_count": 672,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 57,
+    "id": 1254,
+    "title": "Khám mắt tại xã Phật Tích",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-phat-tich/",
+    "word_count": 670,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Nếu bạn thấy mép cửa, dòng chữ hay đường kẻ mới cong đi, hãy liên hệ bác sĩ mắt sớm",
+        "reason": "Đường thẳng mới nhìn cong là dấu hiệu cảnh báo bệnh hoàng điểm giai đoạn muộn; NEI khuyên gặp bác sĩ mắt ngay, còn “sớm” có thể hiểu là chờ lịch thường.",
+        "proposed_edit": "Viết “liên hệ bác sĩ mắt ngay khi đường thẳng mới nhìn cong hoặc xuất hiện điểm trống trung tâm; không chờ lần đổi kính”.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/age-related-macular-degeneration"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 58,
+    "id": 1255,
+    "title": "Khám mắt tại xã Gia Bình",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-gia-binh/",
+    "word_count": 740,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 59,
+    "id": 1256,
+    "title": "Khám mắt tại xã Nhân Thắng",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-nhan-thang/",
+    "word_count": 701,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Mờ đột ngột, mất một phần tầm nhìn, chữ méo mới xuất hiện, đau mắt dữ dội hoặc nhìn đôi mới không nên xử trí bằng cách mua kính đọc. Hãy liên hệ cơ sở y tế sớm;",
+        "reason": "Nhìn đôi mới cần đánh giá khẩn; nếu kèm đau đầu dữ dội hoặc đồng tử bất thường thì cần cấp cứu ngay. “Liên hệ sớm” chưa tách rõ mức độ.",
+        "proposed_edit": "Tách câu: nhìn đôi mới cần liên hệ khám khẩn; nhìn đôi kèm đau đầu dữ dội, đồng tử bất thường hoặc dấu thần kinh cần đến cấp cứu ngay.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/symptoms/double-vision/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 60,
+    "id": 1257,
+    "title": "Khám mắt tại xã Đại Lai",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-dai-lai/",
+    "word_count": 725,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 61,
+    "id": 1258,
+    "title": "Khám mắt tại xã Cao Đức",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-cao-duc/",
+    "word_count": 706,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 62,
+    "id": 1259,
+    "title": "Khám mắt tại xã Đông Cứu",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-dong-cuu/",
+    "word_count": 728,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 63,
+    "id": 1260,
+    "title": "Khám mắt tại xã Lương Tài",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-luong-tai/",
+    "word_count": 657,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 64,
+    "id": 1261,
+    "title": "Khám mắt tại xã Lâm Thao",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-lam-thao/",
+    "word_count": 677,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Với hóa chất, bắt đầu rửa mắt bằng nước sạch ngay và liên hệ cấp cứu.",
+        "reason": "Hướng dẫn bắt đầu rửa là đúng, nhưng không nêu thời lượng tối thiểu; người đọc có thể dừng quá sớm khi đang tìm nơi cấp cứu.",
+        "proposed_edit": "Nêu rõ rửa liên tục bằng nhiều nước sạch ít nhất 20 phút, bắt đầu ngay và tiếp tục trong lúc tìm hỗ trợ cấp cứu.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 65,
+    "id": 1262,
+    "title": "Khám mắt tại xã Trung Chính",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-trung-chinh/",
+    "word_count": 652,
+    "status": "urgent",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Đỏ đau dữ dội, chấn thương mắt, hóa chất văng vào hoặc giảm thị lực đột ngột ở trẻ không nên chờ lịch kiểm tra kính. Hãy đến cơ sở cấp cứu phù hợp gần nhất.",
+        "reason": "Hướng dẫn hóa chất chỉ nói đi cấp cứu, thiếu bước rửa mắt ngay trong lúc chuẩn bị di chuyển; trì hoãn rửa có thể làm tăng tổn thương.",
+        "proposed_edit": "Thêm “nếu hóa chất văng vào mắt trẻ, bắt đầu rửa liên tục bằng nước sạch ít nhất 20 phút ngay và tìm trợ giúp cấp cứu”.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 66,
+    "id": 1263,
+    "title": "Khám mắt tại xã Trung Kênh",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-trung-kenh/",
+    "word_count": 660,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 67,
+    "id": 1264,
+    "title": "Khám mắt tại xã Đại Sơn",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/xa-dai-son/",
+    "word_count": 646,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Đại Sơn nằm trong nhóm địa bàn Bắc Giang trước sắp xếp; xem",
+        "reason": "Chính bài và Nghị quyết 1658 đặt Đại Sơn trong nhóm Bắc Giang trước sắp xếp, nhưng URL trang lại nằm dưới `/kham-mat-bac-ninh/`, trái với liên kết dẫn tới danh mục Bắc Giang.",
+        "proposed_edit": "Chuyển/canonical trang sang nhánh Bắc Giang cũ và đặt chuyển hướng 301 từ URL hiện tại; cập nhật liên kết trong danh mục.",
+        "severity": "medium",
+        "source_urls": [
+          "https://xaydungchinhsach.chinhphu.vn/toan-van-nghi-quyet-so-1658-nq-ubtvqh15-sap-xep-cac-dvhc-cap-xa-cua-tinh-bac-ninh-nam-2025-119250616193651987.htm"
+        ]
+      },
+      {
+        "quote": "Với hóa chất, bắt đầu rửa mắt bằng nước sạch ngay và tìm nơi cấp cứu phù hợp gần nhất.",
+        "reason": "Hướng dẫn bắt đầu rửa là đúng, nhưng không nêu thời lượng tối thiểu; người đọc có thể dừng quá sớm khi đang tìm nơi cấp cứu.",
+        "proposed_edit": "Nêu rõ rửa liên tục bằng nhiều nước sạch ít nhất 20 phút, bắt đầu ngay và tiếp tục trong lúc tìm hỗ trợ cấp cứu.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      },
+      {
+        "quote": "CDC: Contact Lens-related Eye Infections",
+        "reason": "Liên kết đang dùng `/contact-lenses/causes/index.html`; trang CDC hiện công bố đường dẫn chuẩn tại `/contact-lenses/causes/`. Đường cũ không xác minh được trong kiểm tra liên kết.",
+        "proposed_edit": "Cập nhật href sang trang CDC hiện hành về nguyên nhân nhiễm trùng khi đeo kính áp tròng.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.cdc.gov/contact-lenses/causes/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 68,
+    "id": 1265,
+    "title": "Khám mắt tại xã Sơn Động",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-son-dong/",
+    "word_count": 668,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Nếu hóa chất vào mắt, bắt đầu rửa bằng nước sạch ngay và tìm hỗ trợ y tế;",
+        "reason": "Hướng dẫn bắt đầu rửa là đúng, nhưng không nêu thời lượng tối thiểu; người đọc có thể dừng quá sớm khi đang tìm nơi cấp cứu.",
+        "proposed_edit": "Nêu rõ rửa liên tục bằng nhiều nước sạch ít nhất 20 phút, bắt đầu ngay và tiếp tục trong lúc tìm hỗ trợ cấp cứu.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 69,
+    "id": 1266,
+    "title": "Khám mắt tại xã Tây Yên Tử",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-tay-yen-tu/",
+    "word_count": 653,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Bắt đầu rửa mắt bằng nước sạch ngay, không chờ hỏi người khác loại thuốc nhỏ phù hợp, rồi đi cấp cứu.",
+        "reason": "Hướng dẫn bắt đầu rửa là đúng, nhưng không nêu thời lượng tối thiểu; người đọc có thể dừng quá sớm khi đang tìm nơi cấp cứu.",
+        "proposed_edit": "Nêu rõ rửa liên tục bằng nhiều nước sạch ít nhất 20 phút, bắt đầu ngay và tiếp tục trong lúc tìm hỗ trợ cấp cứu.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 70,
+    "id": 1267,
+    "title": "Khám mắt tại xã Dương Hưu",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-duong-huu/",
+    "word_count": 641,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 71,
+    "id": 1268,
+    "title": "Khám mắt tại xã Yên Định",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-yen-dinh/",
+    "word_count": 637,
+    "status": "urgent",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Điều cần báo sớm là sự xuất hiện đột ngột của nhiều chấm bay, chớp sáng hoặc vùng tối như rèm che",
+        "reason": "Nhiều chấm bay mới, chớp sáng hoặc màn che có thể báo rách/bong võng mạc; câu đầu dùng “báo sớm” dù cần đánh giá ngay, nhất là chấm bay mới không kèm triệu chứng khác.",
+        "proposed_edit": "Viết “đến bác sĩ mắt hoặc khoa cấp cứu ngay khi nhiều chấm bay mới xuất hiện đột ngột, có chớp sáng hoặc màn che”.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/floaters",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment"
+        ]
+      },
+      {
+        "quote": "mắt đỏ đau, hóa chất hoặc vật nhọn vào mắt cũng là những tình huống cấp cứu khác, cần tiếp cận y tế sớm.",
+        "reason": "“Tiếp cận y tế sớm” chưa rõ phải đi ngay; với hóa chất còn thiếu hướng dẫn rửa mắt lập tức trước khi di chuyển.",
+        "proposed_edit": "Viết “rửa hóa chất ngay bằng nước sạch ít nhất 20 phút trong lúc tìm cấp cứu; với vật nhọn cắm vào mắt, không tự rút và đến cấp cứu ngay”.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 72,
+    "id": 1269,
+    "title": "Khám mắt tại xã An Lạc",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-an-lac/",
+    "word_count": 647,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 73,
+    "id": 1270,
+    "title": "Khám mắt tại xã Vân Sơn",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-van-son/",
+    "word_count": 645,
+    "status": "urgent",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Nếu đồng tử có phản xạ trắng trong ảnh, mắt đỏ đau, chấn thương hoặc trẻ bỗng không nhìn theo vật như trước, cần đi khám sớm.",
+        "reason": "Phản xạ đồng tử trắng ở trẻ cần liên hệ y tế khẩn để loại trừ bệnh nghiêm trọng; gom dưới “khám sớm” có thể khiến gia đình chờ lịch thường.",
+        "proposed_edit": "Nêu riêng đồng tử trắng: liên hệ bác sĩ/nơi khám mắt trẻ em ngay để được đánh giá khẩn.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinoblastoma"
+        ]
+      },
+      {
+        "quote": "Trẻ có mất thị lực đột ngột, chấn thương vật nhọn hoặc hóa chất vào mắt phải được đánh giá khẩn tại cơ sở phù hợp gần nhất.",
+        "reason": "Câu hướng dẫn hóa chất thiếu bước rửa mắt ngay trước và trong lúc tìm cấp cứu.",
+        "proposed_edit": "Thêm “nếu hóa chất vào mắt, bắt đầu rửa liên tục bằng nước sạch ít nhất 20 phút ngay; không đợi đến cơ sở y tế mới rửa”.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 74,
+    "id": 1271,
+    "title": "Khám mắt tại xã Biển Động",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-bien-dong/",
+    "word_count": 636,
+    "status": "urgent",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Nếu đau dữ dội, thị lực giảm đột ngột, hóa chất bắn hoặc vật nhọn vào mắt, hãy tìm cơ sở cấp cứu phù hợp gần nhất.",
+        "reason": "Câu hướng dẫn cho hóa chất chỉ yêu cầu tìm cấp cứu, thiếu sơ cứu rửa mắt ngay tại chỗ.",
+        "proposed_edit": "Thêm “với hóa chất, bắt đầu rửa liên tục bằng nước sạch ít nhất 20 phút ngay trong lúc tìm cấp cứu”.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 75,
+    "id": 1272,
+    "title": "Khám mắt tại xã Lục Ngạn",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-luc-ngan/",
+    "word_count": 646,
+    "status": "urgent",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Mờ mắt đột ngột, một vùng nhìn bị che, méo hình mới xuất hiện hoặc đau mắt dữ dội cần được đánh giá y tế sớm",
+        "reason": "Màn che hoặc mờ đột ngột có thể là cấp cứu võng mạc/mạch máu; “đánh giá sớm” dễ bị hiểu là chờ lịch dù đoạn sau chỉ nhắc cấp cứu khi mất hẳn thị lực.",
+        "proposed_edit": "Tách mức khẩn: mờ/mất thị lực đột ngột hoặc màn che cần đến bác sĩ mắt/khoa cấp cứu ngay; méo hình mới cần liên hệ bác sĩ mắt ngay.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/age-related-macular-degeneration"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 76,
+    "id": 1273,
+    "title": "Khám mắt tại xã Đèo Gia",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-deo-gia/",
+    "word_count": 636,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "với hóa chất bắt đầu rửa bằng nước sạch ngay.",
+        "reason": "Hướng dẫn bắt đầu rửa là đúng, nhưng không nêu thời lượng tối thiểu; người đọc có thể dừng quá sớm khi đang tìm nơi cấp cứu.",
+        "proposed_edit": "Nêu rõ rửa liên tục bằng nhiều nước sạch ít nhất 20 phút, bắt đầu ngay và tiếp tục trong lúc tìm hỗ trợ cấp cứu.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 77,
+    "id": 1274,
+    "title": "Khám mắt tại xã Sơn Hải",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-son-hai/",
+    "word_count": 644,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Nếu méo hình mới xuất hiện hoặc trung tâm tầm nhìn đột ngột có vùng tối, nên liên hệ bác sĩ mắt sớm.",
+        "reason": "Biến dạng đường thẳng mới hoặc điểm tối trung tâm cần được bác sĩ mắt đánh giá ngay; “sớm” chưa đủ rõ về thời điểm.",
+        "proposed_edit": "Viết “liên hệ bác sĩ mắt ngay khi đường thẳng mới nhìn cong hoặc xuất hiện điểm tối trung tâm”.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/age-related-macular-degeneration"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 78,
+    "id": 1275,
+    "title": "Khám mắt tại xã Tân Sơn",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-tan-son/",
+    "word_count": 678,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 79,
+    "id": 1276,
+    "title": "Khám mắt tại xã Biên Sơn",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-bien-son/",
+    "word_count": 650,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Nếu trong ảnh thấy đồng tử trắng, trẻ không nhìn theo đồ vật hoặc lác mới xuất hiện, cần nói rõ để được hướng dẫn khám sớm.",
+        "reason": "Đồng tử trắng ở trẻ có thể báo u nguyên bào võng mạc hoặc bệnh mắt khác cần đánh giá khẩn; “hướng dẫn khám sớm” có thể dẫn đến chờ lịch thường.",
+        "proposed_edit": "Viết “liên hệ ngay nơi khám mắt trẻ em để được đánh giá khẩn khi thấy đồng tử trắng trong ảnh”.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinoblastoma"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 80,
+    "id": 1277,
+    "title": "Khám mắt tại xã Sa Lý",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-sa-ly/",
+    "word_count": 647,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 81,
+    "id": 1278,
+    "title": "Khám mắt tại xã Nam Dương",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-nam-duong/",
+    "word_count": 603,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 82,
+    "id": 1279,
+    "title": "Khám mắt tại xã Kiên Lao",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-kien-lao/",
+    "word_count": 638,
+    "status": "urgent",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Nếu xuất hiện nhiều chấm đen mới, màn tối hay giảm nhìn rõ rệt, đừng chờ lịch kiểm tra năm sau.",
+        "reason": "“Đừng chờ lịch năm sau” không chỉ rõ cần đi ngay; màn che và nhiều chấm bay mới có thể báo rách/bong võng mạc.",
+        "proposed_edit": "Thay bằng “đến bác sĩ mắt hoặc khoa cấp cứu ngay khi có màn che, nhiều chấm bay mới hoặc giảm thị lực đột ngột”.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/floaters",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 83,
+    "id": 1280,
+    "title": "Khám mắt tại xã Lục Sơn",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-luc-son/",
+    "word_count": 621,
+    "status": "urgent",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Một màn tối mới che tầm nhìn hay nhiều chấm bay kèm chớp sáng cần khám võng mạc sớm.",
+        "reason": "Màn che và chấm bay mới kèm chớp sáng là dấu hiệu cấp cứu võng mạc; “sớm” có thể bị hiểu là chờ lịch.",
+        "proposed_edit": "Viết “đến bác sĩ mắt hoặc khoa cấp cứu ngay, kể cả khi mắt không đau”.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/floaters",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 84,
+    "id": 1281,
+    "title": "Khám mắt tại xã Trường Sơn",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-truong-son/",
+    "word_count": 624,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Hóa chất vào mắt phải rửa ngay bằng nước sạch và tìm hỗ trợ y tế; không trì hoãn để đặt lịch.",
+        "reason": "Hướng dẫn bắt đầu rửa là đúng, nhưng không nêu thời lượng tối thiểu; người đọc có thể dừng quá sớm khi đang tìm nơi cấp cứu.",
+        "proposed_edit": "Nêu rõ rửa liên tục bằng nhiều nước sạch ít nhất 20 phút, bắt đầu ngay và tiếp tục trong lúc tìm hỗ trợ cấp cứu.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 85,
+    "id": 1282,
+    "title": "Khám mắt tại xã Cẩm Lý",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-cam-ly/",
+    "word_count": 641,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "bắt đầu rửa ngay bằng nhiều nước sạch sẵn có.",
+        "reason": "Hướng dẫn bắt đầu rửa là đúng, nhưng không nêu thời lượng tối thiểu; người đọc có thể dừng quá sớm khi đang tìm nơi cấp cứu.",
+        "proposed_edit": "Nêu rõ rửa liên tục bằng nhiều nước sạch ít nhất 20 phút, bắt đầu ngay và tiếp tục trong lúc tìm hỗ trợ cấp cứu.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 86,
+    "id": 1283,
+    "title": "Khám mắt tại xã Đông Phú",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-dong-phu/",
+    "word_count": 604,
+    "status": "urgent",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Nếu mờ đột ngột một bên hoặc kèm đau, màn che, mục tiêu không phải mua kính mới mà là đánh giá nguyên nhân sớm.",
+        "reason": "Mờ đột ngột một mắt hoặc màn che có thể là cấp cứu; “đánh giá sớm” có thể làm người đọc chờ lịch đo kính/khám thường.",
+        "proposed_edit": "Nêu “đến bác sĩ mắt hoặc khoa cấp cứu ngay nếu mờ đột ngột một mắt hay có màn che; không tự lái xe khi nhìn kém”.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 87,
+    "id": 1284,
+    "title": "Khám mắt tại xã Nghĩa Phương",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-nghia-phuong/",
+    "word_count": 638,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 88,
+    "id": 1285,
+    "title": "Khám mắt tại xã Lục Nam",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-luc-nam/",
+    "word_count": 620,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 89,
+    "id": 1286,
+    "title": "Khám mắt tại xã Bắc Lũng",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-bac-lung/",
+    "word_count": 620,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 90,
+    "id": 1287,
+    "title": "Khám mắt tại xã Bảo Đài",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-bao-dai/",
+    "word_count": 655,
+    "status": "urgent",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Một màn tối mới che tầm nhìn hay nhiều chấm bay kèm chớp sáng cần khám võng mạc sớm.",
+        "reason": "Màn che và chấm bay mới kèm chớp sáng có thể là bong võng mạc; cần đánh giá ngay, không chỉ “sớm”.",
+        "proposed_edit": "Viết “đến bác sĩ mắt hoặc khoa cấp cứu ngay khi xuất hiện các dấu hiệu này”.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/floaters",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 91,
+    "id": 1288,
+    "title": "Khám mắt tại xã Lạng Giang",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-lang-giang/",
+    "word_count": 644,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Hóa chất vào mắt phải rửa ngay bằng nước sạch và tìm hỗ trợ y tế; không trì hoãn để đặt lịch.",
+        "reason": "Hướng dẫn bắt đầu rửa là đúng, nhưng không nêu thời lượng tối thiểu; người đọc có thể dừng quá sớm khi đang tìm nơi cấp cứu.",
+        "proposed_edit": "Nêu rõ rửa liên tục bằng nhiều nước sạch ít nhất 20 phút, bắt đầu ngay và tiếp tục trong lúc tìm hỗ trợ cấp cứu.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 92,
+    "id": 1289,
+    "title": "Khám mắt tại xã Mỹ Thái",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-my-thai/",
+    "word_count": 622,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Nếu trẻ đau mắt, sợ sáng hoặc nhìn đôi mới xuất hiện, cần đề cập ngay vì không nên quy tất cả cho cận thị.",
+        "reason": "“Đề cập ngay” chưa nói phải tìm đánh giá khẩn cho nhìn đôi mới; người đọc có thể chỉ kể trong lần đo kính sau.",
+        "proposed_edit": "Viết “liên hệ khám khẩn khi trẻ mới nhìn đôi; nếu kèm đau đầu dữ dội, chấn thương hoặc dấu thần kinh, đến khoa cấp cứu ngay”.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/symptoms/double-vision/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 93,
+    "id": 1290,
+    "title": "Khám mắt tại xã Kép",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-kep/",
+    "word_count": 626,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 94,
+    "id": 1291,
+    "title": "Khám mắt tại xã Tân Dĩnh",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-tan-dinh/",
+    "word_count": 651,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Nếu biến dạng mới xuất hiện hoặc tiến triển nhanh, nên liên hệ bác sĩ mắt sớm.",
+        "reason": "Đường thẳng mới nhìn cong là dấu hiệu cảnh báo bệnh hoàng điểm giai đoạn muộn; NEI khuyên gặp bác sĩ mắt ngay.",
+        "proposed_edit": "Viết “liên hệ bác sĩ mắt ngay khi hình mới biến dạng hoặc xuất hiện điểm trống trung tâm”.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/age-related-macular-degeneration"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 95,
+    "id": 1292,
+    "title": "Khám mắt tại xã Tiên Lục",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/xa-tien-luc/",
+    "word_count": 638,
+    "status": "medical-review",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Với hóa chất, việc rửa mắt ngay phải bắt đầu trước khi di chuyển;",
+        "reason": "Hướng dẫn bắt đầu rửa là đúng, nhưng không nêu thời lượng tối thiểu; người đọc có thể dừng quá sớm khi đang tìm nơi cấp cứu.",
+        "proposed_edit": "Nêu rõ rửa liên tục bằng nhiều nước sạch ít nhất 20 phút, bắt đầu ngay và tiếp tục trong lúc tìm hỗ trợ cấp cứu.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  }
+]

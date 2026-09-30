@@ -1,0 +1,756 @@
+[
+  {
+    "index": 1,
+    "id": 6,
+    "title": "Giới thiệu",
+    "url": "https://mathanoibacninh.com/gioi-thieu/",
+    "word_count": 807,
+    "status": "clarity",
+    "content_source": "rendered",
+    "issues": [
+      {
+        "quote": "duy trì sự nhất quán trong từng điểm chạm trước, trong và sau buổi khám.",
+        "reason": "“Điểm chạm” là thuật ngữ tiếp thị, không giải thích thông tin nào sẽ nhất quán cho người bệnh.",
+        "proposed_edit": "Viết “giữ thông tin hướng dẫn nhất quán trước, trong và sau buổi khám”.",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 2,
+    "id": 7,
+    "title": "Tầm nhìn và giá trị",
+    "url": "https://mathanoibacninh.com/gioi-thieu/tam-nhin-gia-tri/",
+    "word_count": 44,
+    "status": "clarity",
+    "content_source": "rendered",
+    "issues": [
+      {
+        "quote": "Bạn cần hỗ trợ về nội dung này?",
+        "reason": "Trang đã công bố nhưng không có thông tin nào về tầm nhìn hoặc giá trị; chỉ còn hộp hỗ trợ chung.",
+        "proposed_edit": "Viết nội dung tầm nhìn và giá trị đã được bệnh viện xác nhận, hoặc bỏ trang khỏi điều hướng cho đến khi hoàn tất.",
+        "severity": "medium",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 3,
+    "id": 8,
+    "title": "Cơ sở vật chất",
+    "url": "https://mathanoibacninh.com/gioi-thieu/co-so-vat-chat/",
+    "word_count": 42,
+    "status": "clarity",
+    "content_source": "rendered",
+    "issues": [
+      {
+        "quote": "Bạn cần hỗ trợ về nội dung này?",
+        "reason": "Trang cơ sở vật chất đã công bố nhưng không mô tả cơ sở hoặc hình ảnh đã xác minh.",
+        "proposed_edit": "Bổ sung thông tin và hình ảnh cơ sở vật chất đã kiểm chứng, hoặc ẩn liên kết trang trống.",
+        "severity": "medium",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 4,
+    "id": 9,
+    "title": "Trang thiết bị",
+    "url": "https://mathanoibacninh.com/gioi-thieu/trang-thiet-bi/",
+    "word_count": 40,
+    "status": "clarity",
+    "content_source": "rendered",
+    "issues": [
+      {
+        "quote": "Bạn cần hỗ trợ về nội dung này?",
+        "reason": "Trang thiết bị đã công bố nhưng không cho biết thiết bị nào đã được xác minh và dùng cho mục đích gì.",
+        "proposed_edit": "Bổ sung danh mục thiết bị đã xác minh cùng công dụng theo hồ sơ, hoặc ẩn liên kết trang trống.",
+        "severity": "medium",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 5,
+    "id": 10,
+    "title": "Hồ sơ pháp lý",
+    "url": "https://mathanoibacninh.com/gioi-thieu/ho-so-phap-ly/",
+    "word_count": 42,
+    "status": "clarity",
+    "content_source": "rendered",
+    "issues": [
+      {
+        "quote": "Bạn cần hỗ trợ về nội dung này?",
+        "reason": "Trang hồ sơ pháp lý đã công bố nhưng không có hồ sơ nào để người đọc đối chiếu.",
+        "proposed_edit": "Công bố thông tin pháp lý được phép và đã xác minh, hoặc ẩn liên kết trang trống.",
+        "severity": "medium",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 6,
+    "id": 11,
+    "title": "Đội ngũ bác sĩ",
+    "url": "https://mathanoibacninh.com/doi-ngu-bac-si/",
+    "word_count": 3231,
+    "status": "clarity",
+    "content_source": "db",
+    "issues": [
+      {
+        "quote": "Trang này và slider trang chủ dùng cùng nguồn dữ liệu.",
+        "reason": "Đoạn FAQ nói về cách quản trị WordPress thay vì giúp người bệnh chọn hoặc liên hệ bác sĩ.",
+        "proposed_edit": "Thay bằng cách xác nhận chuyên môn, lịch khám và hồ sơ bác sĩ mới nhất qua kênh tiếp nhận.",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 7,
+    "id": 12,
+    "title": "Chuyên khoa",
+    "url": "https://mathanoibacninh.com/chuyen-khoa/",
+    "word_count": 2698,
+    "status": "clarity",
+    "content_source": "db",
+    "issues": [
+      {
+        "quote": "6. Tính tin cậy và E-E-A-T của nội dung",
+        "reason": "Phần này giải thích thuật ngữ SEO, FAQPage và MedicalWebPage cho người bệnh; ngôn ngữ kỹ thuật làm đứt mạch hướng dẫn lâm sàng.",
+        "proposed_edit": "Giữ tên bác sĩ, ngày cập nhật và nguồn tham khảo dưới mục “Nguồn và người biên soạn”; bỏ giải thích thuật ngữ SEO.",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 8,
+    "id": 14,
+    "title": "Cận thị",
+    "url": "https://mathanoibacninh.com/chuyen-khoa/tat-khuc-xa/can-thi/",
+    "word_count": 1022,
+    "status": "ok",
+    "content_source": "db",
+    "issues": []
+  },
+  {
+    "index": 9,
+    "id": 15,
+    "title": "Viễn thị",
+    "url": "https://mathanoibacninh.com/chuyen-khoa/tat-khuc-xa/vien-thi/",
+    "word_count": 1202,
+    "status": "ok",
+    "content_source": "db",
+    "issues": []
+  },
+  {
+    "index": 10,
+    "id": 16,
+    "title": "Loạn thị",
+    "url": "https://mathanoibacninh.com/chuyen-khoa/tat-khuc-xa/loan-thi/",
+    "word_count": 1067,
+    "status": "medical-review",
+    "content_source": "db",
+    "issues": [
+      {
+        "quote": "An toàn khi được đo đúng, vệ sinh đúng và tái khám.",
+        "reason": "Câu trả lời khẳng định an toàn tuyệt đối; kính áp tròng vẫn có nguy cơ viêm giác mạc ngay cả khi sử dụng đúng.",
+        "proposed_edit": "Viết “Thường an toàn khi được đo và chăm sóc đúng, nhưng vẫn có nguy cơ nhiễm trùng; tháo kính và đi khám ngay nếu đỏ, đau, sợ sáng hoặc nhìn mờ”.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.cdc.gov/contact-lenses/about/index.html"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 11,
+    "id": 18,
+    "title": "Glôcôm (cườm nước)",
+    "url": "https://mathanoibacninh.com/chuyen-khoa/glocom/",
+    "word_count": 1043,
+    "status": "urgent",
+    "content_source": "db",
+    "issues": [
+      {
+        "quote": "Mắt bị hóa chất, dị vật, chấn thương hoặc có dấu hiệu nhiễm trùng sau can thiệp.",
+        "reason": "Đặt hóa chất và chấn thương xuyên thấu dưới mục “khám sớm” có thể khiến người đọc chờ lịch thông thường.",
+        "proposed_edit": "Nêu rõ đây là cấp cứu: rửa hóa chất ngay bằng nước sạch ít nhất 20 phút trong khi tìm trợ giúp; không rút dị vật cắm vào mắt; đến cơ sở cấp cứu ngay.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 12,
+    "id": 19,
+    "title": "Dịch kính – võng mạc",
+    "url": "https://mathanoibacninh.com/chuyen-khoa/dich-kinh-vong-mac/",
+    "word_count": 1086,
+    "status": "urgent",
+    "content_source": "db",
+    "issues": [
+      {
+        "quote": "cần khám sớm để loại trừ rách hay bong võng mạc.",
+        "reason": "Ruồi bay mới xuất hiện dồn dập, chớp sáng hoặc màn che có thể là rách/bong võng mạc; “khám sớm” chưa đủ rõ về mức khẩn.",
+        "proposed_edit": "Viết “đến bác sĩ mắt hoặc khoa cấp cứu ngay khi xuất hiện các dấu hiệu này, kể cả khi không đau”.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/floaters",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment/types-and-causes-retinal-detachment"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 13,
+    "id": 20,
+    "title": "Giác mạc – kết mạc",
+    "url": "https://mathanoibacninh.com/chuyen-khoa/giac-mac-ket-mac/",
+    "word_count": 1051,
+    "status": "urgent",
+    "content_source": "db",
+    "issues": [
+      {
+        "quote": "Hóa chất bắn vào mắt cần rửa liên tục bằng nước sạch và đi khám.",
+        "reason": "Hướng dẫn không nói phải bắt đầu rửa ngay và thời lượng tối thiểu; phơi nhiễm hóa chất cần cấp cứu.",
+        "proposed_edit": "Viết “bắt đầu rửa ngay bằng nhiều nước sạch ít nhất 20 phút, tiếp tục rửa trong lúc tìm trợ giúp và đến cấp cứu”.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 14,
+    "id": 21,
+    "title": "Mắt trẻ em",
+    "url": "https://mathanoibacninh.com/chuyen-khoa/mat-tre-em/",
+    "word_count": 1061,
+    "status": "clarity",
+    "content_source": "db",
+    "issues": [
+      {
+        "quote": "Triệu chứng ở trẻ nhỏ, người cao tuổi hoặc người có bệnh nền diễn tiến nhanh.",
+        "reason": "Đoạn cảnh báo sao chép từ mẫu chung, nêu người cao tuổi trong trang mắt trẻ em và không ưu tiên dấu hiệu đặc trưng của trẻ.",
+        "proposed_edit": "Thay bằng dấu hiệu trẻ cần khám ngay như đồng tử trắng, lác mới xuất hiện, giảm nhìn đột ngột, đau/sợ sáng hoặc chấn thương.",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 15,
+    "id": 22,
+    "title": "Kiểm soát tiến triển cận thị",
+    "url": "https://mathanoibacninh.com/chuyen-khoa/mat-tre-em/kiem-soat-can-thi/",
+    "word_count": 49,
+    "status": "clarity",
+    "content_source": "rendered",
+    "issues": [
+      {
+        "quote": "Bạn cần hỗ trợ về nội dung này?",
+        "reason": "Trang kiểm soát cận thị ở trẻ được công bố nhưng không giải thích biện pháp, giới hạn hoặc cách theo dõi.",
+        "proposed_edit": "Bổ sung nội dung đã được bác sĩ rà soát hoặc ẩn liên kết trang trống; điều hướng tạm tới bài cận thị hiện có.",
+        "severity": "medium",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 16,
+    "id": 23,
+    "title": "Nhược thị và lác",
+    "url": "https://mathanoibacninh.com/chuyen-khoa/mat-tre-em/nhuoc-thi-lac/",
+    "word_count": 45,
+    "status": "clarity",
+    "content_source": "rendered",
+    "issues": [
+      {
+        "quote": "Bạn cần hỗ trợ về nội dung này?",
+        "reason": "Trang nhược thị và lác được công bố nhưng không có hướng dẫn nhận biết hoặc thời điểm đi khám.",
+        "proposed_edit": "Bổ sung nội dung đã được bác sĩ rà soát về dấu hiệu và khám trẻ, hoặc ẩn liên kết trang trống.",
+        "severity": "medium",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 17,
+    "id": 24,
+    "title": "Mắt người cao tuổi",
+    "url": "https://mathanoibacninh.com/chuyen-khoa/mat-nguoi-cao-tuoi/",
+    "word_count": 1005,
+    "status": "clarity",
+    "content_source": "db",
+    "issues": [
+      {
+        "quote": "Trẻ nhỏ hoặc người lớn tuổi nên có người đi cùng để mô tả thay đổi trong sinh hoạt.",
+        "reason": "Đoạn chuẩn bị và FAQ dùng lại mẫu chung, nêu trẻ nhỏ trong trang dành cho người cao tuổi.",
+        "proposed_edit": "Viết lại cho người cao tuổi: người đi cùng khi khó di chuyển/nhớ thuốc, mang danh sách thuốc và hồ sơ bệnh nền.",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 18,
+    "id": 25,
+    "title": "Dịch vụ",
+    "url": "https://mathanoibacninh.com/dich-vu/",
+    "word_count": 312,
+    "status": "clarity",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Danh mục được cập nhật trực tiếp từ các trang dịch vụ trong WordPress Admin.",
+        "reason": "Thuật ngữ hệ quản trị không giúp người bệnh hiểu phạm vi dịch vụ và có vẻ là ghi chú nội bộ.",
+        "proposed_edit": "Viết “Danh mục được bệnh viện cập nhật; hãy liên hệ để xác nhận dịch vụ và lịch thực hiện trước khi đến”.",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 19,
+    "id": 26,
+    "title": "Khám mắt tổng quát",
+    "url": "https://mathanoibacninh.com/dich-vu/kham-mat-tong-quat/",
+    "word_count": 3284,
+    "status": "urgent",
+    "content_source": "db",
+    "issues": [
+      {
+        "quote": "Giảm thị lực đột ngột, đau mắt dữ dội, mắt đỏ kèm buồn nôn",
+        "reason": "Nhóm dấu hiệu cấp được đặt dưới tiêu đề “đi khám sớm” mà không chỉ dẫn đến cấp cứu ngay; mất thị lực đột ngột có thể không chờ.",
+        "proposed_edit": "Đổi thành “Cần đánh giá cấp cứu ngay” và chỉ người bệnh đến cơ sở có khả năng tiếp nhận gần nhất.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment/types-and-causes-retinal-detachment",
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 20,
+    "id": 27,
+    "title": "Phẫu thuật khúc xạ",
+    "url": "https://mathanoibacninh.com/dich-vu/phau-thuat-khuc-xa/",
+    "word_count": 3017,
+    "status": "ok",
+    "content_source": "db",
+    "issues": []
+  },
+  {
+    "index": 21,
+    "id": 31,
+    "title": "Phẫu thuật thay thủy tinh thể",
+    "url": "https://mathanoibacninh.com/dich-vu/phau-thuat-phaco/",
+    "word_count": 3210,
+    "status": "ok",
+    "content_source": "db",
+    "issues": []
+  },
+  {
+    "index": 22,
+    "id": 42,
+    "title": "Bảng giá dịch vụ",
+    "url": "https://mathanoibacninh.com/bang-gia/",
+    "word_count": 2309,
+    "status": "medical-review",
+    "content_source": "rendered",
+    "issues": [
+      {
+        "quote": "Phẫu thuật Phaco sử dụng hệ thống Femtosecond Laser (không dùng dao mổ)",
+        "reason": "Cụm “không dùng dao mổ” dễ khiến người bệnh hiểu là không có đường rạch hoặc toàn bộ phẫu thuật do laser thực hiện; laser chỉ hỗ trợ một số bước.",
+        "proposed_edit": "Đổi thành “Phẫu thuật Phaco có hỗ trợ laser femtosecond”; giải thích bác sĩ vẫn tạo đường vào, lấy thủy tinh thể và đặt kính nội nhãn theo kỹ thuật cụ thể.",
+        "severity": "medium",
+        "source_urls": [
+          "https://aao.org/eye-health/tips-prevention/traditional-vs-laser-assisted-cataract-surgery"
+        ]
+      },
+      {
+        "quote": "Phẫu thuật lác",
+        "reason": "Dịch vụ này đang nằm trong nhóm “THẨM MỸ”, trong khi điều trị lác còn nhằm cải thiện song thị, vận nhãn và phối hợp hai mắt.",
+        "proposed_edit": "Chuyển sang nhóm phẫu thuật mắt/lác hoặc ghi rõ mục tiêu chức năng và thẩm mỹ tùy chỉ định.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.cuh.nhs.uk/patient-information/adult-squint-surgery/"
+        ]
+      },
+      {
+        "quote": "Otho-K",
+        "reason": "Tên kỹ thuật trong giá dịch vụ viết sai, làm khó người bệnh đối chiếu đúng dịch vụ kính định hình giác mạc ban đêm.",
+        "proposed_edit": "Sửa thành “Ortho-K” và rà lại các tên kỹ thuật, đơn vị tính cùng lỗi gõ trong danh mục.",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 23,
+    "id": 47,
+    "title": "Hỏi đáp",
+    "url": "https://mathanoibacninh.com/hoi-dap/",
+    "word_count": 367,
+    "status": "urgent",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "cần đến cơ sở khám mắt gần nhất sớm, không chờ tư vấn trực tuyến.",
+        "reason": "Câu hỏi hỏi “đi khám ngay” nhưng câu trả lời giảm mức khẩn xuống “sớm” dù có mất thị lực, chớp sáng và màn che.",
+        "proposed_edit": "Viết “đến cơ sở cấp cứu hoặc bác sĩ mắt có khả năng khám ngay; không chờ lịch hay tư vấn trực tuyến”.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/floaters",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment/types-and-causes-retinal-detachment"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 24,
+    "id": 48,
+    "title": "Trước khi đi khám",
+    "url": "https://mathanoibacninh.com/hoi-dap/truoc-khi-di-kham/",
+    "word_count": 2770,
+    "status": "medical-review",
+    "content_source": "db",
+    "issues": [
+      {
+        "quote": "glôcôm, tức bệnh tăng nhãn áp gây tổn hại thần kinh thị giác",
+        "reason": "Đồng nhất glôcôm với tăng nhãn áp có thể khiến người có nhãn áp bình thường nghĩ mình không có nguy cơ; glôcôm nhãn áp bình thường là dạng được công nhận.",
+        "proposed_edit": "Viết “glôcôm là nhóm bệnh làm tổn thương thần kinh thị giác; nhãn áp cao là yếu tố nguy cơ nhưng bệnh vẫn có thể xảy ra khi nhãn áp đo trong giới hạn thường gặp”.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/glaucoma/types-glaucoma"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 25,
+    "id": 49,
+    "title": "Mổ mắt và hồi phục",
+    "url": "https://mathanoibacninh.com/hoi-dap/mo-mat-va-hoi-phuc/",
+    "word_count": 2585,
+    "status": "medical-review",
+    "content_source": "db",
+    "issues": [
+      {
+        "quote": "Sau mổ mắt kiêng ăn gì, kiêng làm gì? Danh sách theo tuần",
+        "reason": "Tiêu đề hứa hướng dẫn cho mọi phẫu thuật mắt, nhưng lịch theo tuần và nhiều khuyến nghị trong bài dành chủ yếu cho phẫu thuật thủy tinh thể; người mổ võng mạc hoặc giác mạc có thể áp dụng sai.",
+        "proposed_edit": "Đổi tiêu đề và mở đầu thành “Sau mổ đục thủy tinh thể…”; với các phẫu thuật khác chỉ dẫn theo đơn và lời dặn riêng của nơi mổ.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.guysandstthomas.nhs.uk/health-information/cataract-surgery/after-cataract-surgery"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 26,
+    "id": 51,
+    "title": "Mắt trẻ em",
+    "url": "https://mathanoibacninh.com/hoi-dap/hoi-dap-mat-tre-em/",
+    "word_count": 2803,
+    "status": "medical-review",
+    "content_source": "db",
+    "issues": [
+      {
+        "quote": "các đợt nhìn gần liên tục kéo dài được xem là bất lợi hơn tổng thời gian, nên chia nhỏ có giá trị thật.",
+        "reason": "Câu này trình bày hiệu quả của nghỉ nhìn gần đối với tiến triển cận thị như đã chắc chắn, trong khi đồng thuận chuyên môn nói bằng chứng về việc nghỉ giữa các tác vụ gần còn chưa rõ.",
+        "proposed_edit": "Giữ khuyên nghỉ mắt để giảm mỏi; nói rõ chưa đủ bằng chứng coi quy tắc nghỉ cụ thể là điều trị làm chậm tăng độ cận.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.iapb.org/wp-content/uploads/2023/04/WSPOS-Myopia-Consensus-Statement-2023.pdf",
+          "https://myopiainstitute.org/imi-whitepaper/imi-risk-factors-for-myopia/"
+        ]
+      },
+      {
+        "quote": "vì nó không có mặt hại nào.",
+        "reason": "Khuyến khích hoạt động ngoài trời là hợp lý nhưng khẳng định không có hại bỏ qua tia UV và chấn thương mắt khi chơi thể thao.",
+        "proposed_edit": "Viết “có lợi và ít rủi ro khi trẻ được che nắng, dùng kính chống UV và bảo vệ mắt phù hợp hoạt động”.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/healthy-vision/nei-for-kids/protective-eyewear"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 27,
+    "id": 52,
+    "title": "Kiến thức nhãn khoa",
+    "url": "https://mathanoibacninh.com/kien-thuc/",
+    "word_count": 648,
+    "status": "clarity",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "để người đọc và quản trị viên tìm nhanh hơn.",
+        "reason": "“Quản trị viên” là ghi chú vận hành website trong lời giới thiệu thư viện cho bệnh nhân.",
+        "proposed_edit": "Viết “để bạn dễ tìm bài theo chủ đề”.",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 28,
+    "id": 53,
+    "title": "Tin tức",
+    "url": "https://mathanoibacninh.com/tin-tuc/",
+    "word_count": 36,
+    "status": "clarity",
+    "content_source": "rendered",
+    "issues": [
+      {
+        "quote": "Bạn cần hỗ trợ về nội dung này?",
+        "reason": "Trang Tin tức đã công bố nhưng không có tin, danh sách bài hoặc lời giải thích; chỉ hiện hộp hỗ trợ chung.",
+        "proposed_edit": "Hiển thị các tin đã xác minh hoặc ẩn trang khỏi điều hướng cho đến khi có nội dung.",
+        "severity": "medium",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 29,
+    "id": 54,
+    "title": "Khu vực",
+    "url": "https://mathanoibacninh.com/khu-vuc/",
+    "word_count": 4128,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 30,
+    "id": 55,
+    "title": "Khám mắt tại Bắc Giang",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-giang/",
+    "word_count": 3855,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 31,
+    "id": 56,
+    "title": "Khám mắt tại Bắc Ninh",
+    "url": "https://mathanoibacninh.com/khu-vuc/kham-mat-bac-ninh/",
+    "word_count": 3840,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 32,
+    "id": 57,
+    "title": "Đặt lịch khám",
+    "url": "https://mathanoibacninh.com/dat-lich-kham/",
+    "word_count": 154,
+    "status": "urgent",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "hãy đến cơ sở khám mắt gần nhất ngay hôm nay, không chờ đặt lịch.",
+        "reason": "Thông báo cảnh báo trên trang đặt lịch dùng “ngay hôm nay” cho mất thị lực đột ngột hoặc màn che, có thể được hiểu là có thể đợi nhiều giờ.",
+        "proposed_edit": "Viết “đến cơ sở cấp cứu có khả năng đánh giá mắt ngay; không chờ đặt lịch hoặc tự lái xe khi thị lực giảm”.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment/types-and-causes-retinal-detachment"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 33,
+    "id": 58,
+    "title": "Liên hệ",
+    "url": "https://mathanoibacninh.com/lien-he/",
+    "word_count": 3714,
+    "status": "ok",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 34,
+    "id": 59,
+    "title": "Tuyển dụng",
+    "url": "https://mathanoibacninh.com/tuyen-dung/",
+    "word_count": 36,
+    "status": "clarity",
+    "content_source": "rendered",
+    "issues": [
+      {
+        "quote": "Bạn cần hỗ trợ về nội dung này?",
+        "reason": "Trang Tuyển dụng đã công bố nhưng không có thông tin vị trí, cách ứng tuyển hay thông báo không tuyển.",
+        "proposed_edit": "Bổ sung trạng thái tuyển dụng và kênh ứng tuyển đã xác minh, hoặc ẩn trang khỏi điều hướng.",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 35,
+    "id": 60,
+    "title": "Chính sách",
+    "url": "https://mathanoibacninh.com/chinh-sach/",
+    "word_count": 17,
+    "status": "nonclinical",
+    "content_source": "rendered",
+    "issues": []
+  },
+  {
+    "index": 36,
+    "id": 61,
+    "title": "Chính sách quyền riêng tư",
+    "url": "https://mathanoibacninh.com/chinh-sach/quyen-rieng-tu/",
+    "word_count": 1273,
+    "status": "nonclinical",
+    "content_source": "theme",
+    "issues": []
+  },
+  {
+    "index": 37,
+    "id": 62,
+    "title": "Miễn trừ trách nhiệm y khoa",
+    "url": "https://mathanoibacninh.com/chinh-sach/mien-tru-trach-nhiem-y-khoa/",
+    "word_count": 1901,
+    "status": "urgent",
+    "content_source": "db",
+    "issues": [
+      {
+        "quote": "hãy đến cơ sở y tế có khả năng cấp cứu gần nhất ngay trong ngày.",
+        "reason": "Cụm “ngay trong ngày” có thể cho phép trì hoãn với hóa chất, dị vật găm hoặc mất thị lực đột ngột.",
+        "proposed_edit": "Viết “rửa hóa chất ngay bằng nước sạch ít nhất 20 phút và đến cấp cứu ngay; với dị vật xuyên thấu không rút ra; mất thị lực đột ngột cũng cần đánh giá cấp cứu ngay”.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment/types-and-causes-retinal-detachment"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 38,
+    "id": 63,
+    "title": "Trang đăng ký",
+    "url": "https://mathanoibacninh.com/trang-dang-ky/",
+    "word_count": 38,
+    "status": "clarity",
+    "content_source": "rendered",
+    "issues": [
+      {
+        "quote": "Bạn cần hỗ trợ về nội dung này?",
+        "reason": "Trang đăng ký công bố công khai nhưng không có biểu mẫu hay hướng dẫn đăng ký.",
+        "proposed_edit": "Làm rõ mục đích trang; bổ sung biểu mẫu hợp lệ hoặc ẩn trang không dùng.",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 39,
+    "id": 64,
+    "title": "Đặt lịch thành công",
+    "url": "https://mathanoibacninh.com/dat-lich-thanh-cong/",
+    "word_count": 40,
+    "status": "clarity",
+    "content_source": "rendered",
+    "issues": [
+      {
+        "quote": "Bạn cần hỗ trợ về nội dung này?",
+        "reason": "Trang “Đặt lịch thành công” không có lời xác nhận, bước tiếp theo hoặc hướng dẫn khi chưa được nhân viên xác nhận.",
+        "proposed_edit": "Hiển thị thông báo đã nhận yêu cầu, cách bệnh viện xác nhận và kênh liên hệ; nếu trang không còn dùng thì ẩn khỏi điều hướng.",
+        "severity": "medium",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 40,
+    "id": 362,
+    "title": "Chẩn đoán nhãn khoa",
+    "url": "https://mathanoibacninh.com/dich-vu/chan-doan-nhan-khoa/",
+    "word_count": 3297,
+    "status": "ok",
+    "content_source": "db",
+    "issues": []
+  },
+  {
+    "index": 41,
+    "id": 365,
+    "title": "Phẫu thuật mộng mắt",
+    "url": "https://mathanoibacninh.com/dich-vu/phau-thuat-mong/",
+    "word_count": 2994,
+    "status": "ok",
+    "content_source": "db",
+    "issues": []
+  },
+  {
+    "index": 42,
+    "id": 366,
+    "title": "Phẫu thuật quặm mi",
+    "url": "https://mathanoibacninh.com/dich-vu/phau-thuat-quem/",
+    "word_count": 2922,
+    "status": "ok",
+    "content_source": "db",
+    "issues": []
+  },
+  {
+    "index": 43,
+    "id": 367,
+    "title": "Mi mắt và lệ đạo",
+    "url": "https://mathanoibacninh.com/dich-vu/mi-mat-le-dao/",
+    "word_count": 2990,
+    "status": "urgent",
+    "content_source": "db",
+    "issues": [
+      {
+        "quote": "Sụp mi đột ngột kèm song thị hoặc đau đầu",
+        "reason": "Tổ hợp sụp mi mới xuất hiện, nhìn đôi và đau đầu có thể báo hiệu bệnh thần kinh/mạch máu cấp; câu trả lời chỉ nói “đánh giá sớm”.",
+        "proposed_edit": "Hướng dẫn đến khoa cấp cứu ngay, nhất là khi đau đầu dữ dội, đồng tử bất thường hoặc triệu chứng thần kinh đi kèm.",
+        "severity": "high",
+        "source_urls": [
+          "https://int.sussex.ics.nhs.uk/clinical_documents/ophthalmological-conditions-what-to-do-and-when-for-adults-and-children/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 44,
+    "id": 368,
+    "title": "Xét nghiệm trước phẫu thuật",
+    "url": "https://mathanoibacninh.com/dich-vu/xet-nghiem-truoc-phau-thuat/",
+    "word_count": 3145,
+    "status": "ok",
+    "content_source": "db",
+    "issues": []
+  },
+  {
+    "index": 45,
+    "id": 576,
+    "title": "Về chúng tôi",
+    "url": "https://mathanoibacninh.com/ve-chung-toi/",
+    "word_count": 781,
+    "status": "clarity",
+    "content_source": "theme",
+    "issues": [
+      {
+        "quote": "Ảnh cập nhật từ admin",
+        "reason": "Ghi chú về giao diện quản trị hiện hiển thị công khai; phần đội ngũ cũng nói dữ liệu lấy từ WordPress thay vì giải thích thông tin bác sĩ.",
+        "proposed_edit": "Bỏ nhãn “admin/WordPress”; thay bằng mô tả ảnh, tên bác sĩ, chức danh và ngày xác nhận hồ sơ theo thông tin đã kiểm chứng.",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  }
+]

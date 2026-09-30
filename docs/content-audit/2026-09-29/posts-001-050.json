@@ -1,0 +1,1243 @@
+[
+  {
+    "index": 1,
+    "id": 73,
+    "title": "Hè Đừng Chăm Da Mà Quên Mắt: Bác Sĩ Tiết Lộ Lý Do!",
+    "url": "https://mathanoibacninh.com/kien-thuc/he-dung-cham-da-ma-quen-mat-bac-si-tiet-lo-ly-do/",
+    "word_count": 489,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Đỏ mắt kéo dài trên 2 ngày",
+        "reason": "Mốc chờ hai ngày có thể khiến người có đau, sợ ánh sáng hoặc giảm thị lực tưởng vẫn nên đợi. Danh sách có nêu triệu chứng khác nhưng chưa phân biệt mức khẩn.",
+        "proposed_edit": "Nói rõ đau mắt, sợ ánh sáng hay giảm thị lực mới xuất hiện cần khám sớm trong ngày; chỉ đỏ nhẹ đơn thuần mới có thể theo dõi ngắn.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.cdc.gov/conjunctivitis/treatment/index.html"
+        ]
+      },
+      {
+        "quote": "Bổ sung dinh dưỡng tốt cho mắt (vitamin A, lutein, omega-3…)",
+        "reason": "Câu này dễ được hiểu là nên uống viên bổ sung để chống tác hại mùa hè, trong khi bằng chứng không hỗ trợ omega-3 dạng viên để điều trị khô mắt thông thường.",
+        "proposed_edit": "Khuyến khích ăn uống cân bằng; chỉ dùng viên bổ sung theo chỉ định khi có thiếu hụt hoặc bệnh lý cụ thể. Đặt kính chống UV ở trọng tâm phòng ngừa.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/healthy-vision/8-things-you-can-do-right-now-protect-your-vision",
+          "https://www.nei.nih.gov/research-and-training/research-news/omega-3s-fish-oil-supplements-no-better-placebo-dry-eye"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 2,
+    "id": 74,
+    "title": "Không nên tự ý mua kháng sinh trị đau mắt đỏ",
+    "url": "https://mathanoibacninh.com/kien-thuc/khong-nen-tu-y-mua-khang-sinh-tri-dau-mat-do/",
+    "word_count": 611,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Trẻ nhỏ bị đỏ mắt",
+        "reason": "Gộp trẻ sơ sinh với trẻ lớn làm mờ một nhóm cần khám ngay; ngược lại không phải mọi trẻ lớn chỉ đỏ mắt đơn thuần đều là cấp cứu.",
+        "proposed_edit": "Ghi rõ trẻ sơ sinh đỏ mắt cần được bác sĩ đánh giá ngay; trẻ lớn cần khám nhanh khi đau, sợ sáng, mờ thị lực hoặc triệu chứng nặng lên.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.cdc.gov/conjunctivitis/treatment/index.html"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 3,
+    "id": 75,
+    "title": "Cách đeo lens và tháo lens đơn giản cho người mới bắt đầu",
+    "url": "https://mathanoibacninh.com/kien-thuc/cach-deo-lens-va-thao-lens-don-gian-cho-nguoi-moi-bat-dau/",
+    "word_count": 496,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "đeo lens không đau, không nguy hiểm",
+        "reason": "Khẳng định tuyệt đối che giấu nguy cơ loét/viêm giác mạc do kính áp tròng, kể cả khi người đeo tuân thủ tương đối tốt.",
+        "proposed_edit": "Viết: đa số có thể dùng an toàn khi được đo, hướng dẫn và chăm sóc đúng, nhưng kính áp tròng vẫn có nguy cơ nhiễm trùng giác mạc.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/healthy-vision/contact-lenses"
+        ]
+      },
+      {
+        "quote": "Bước 1: Nhỏ 1–2 giọt nước nhỏ mắt (nếu khô)",
+        "reason": "'Nước nhỏ mắt' không xác định loại nào, có thể khiến người đọc dùng thuốc hoặc nước không tương thích với lens.",
+        "proposed_edit": "Chỉ dùng giọt làm ẩm vô khuẩn được ghi rõ dùng cùng kính áp tròng và theo hướng dẫn của chuyên viên; nếu lens dính chặt, đau hay đỏ, ngừng thao tác và liên hệ cơ sở mắt.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/healthy-vision/contact-lenses",
+          "https://www.cdc.gov/contact-lenses/about/healthy-habits-keeping-water-away-from-contact-lenses.html"
+        ]
+      },
+      {
+        "quote": "Không nên quá 8 tiếng/ngày",
+        "reason": "Đưa 8 giờ như ngưỡng an toàn chung, trong khi thời gian đeo phụ thuộc loại lens, tình trạng mắt và hướng dẫn kê đơn. Bài cũng thiếu chỉ dẫn không tiếp xúc nước và cách khử khuẩn lens tái sử dụng.",
+        "proposed_edit": "Thay bằng: đeo theo lịch do người kê kính hướng dẫn; không ngủ, tắm hay bơi với lens nếu không được chỉ định; không rửa/bảo quản bằng nước hoặc nước bọt; dùng dung dịch mới để làm sạch và khử khuẩn lens tái sử dụng.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/healthy-vision/contact-lenses",
+          "https://www.cdc.gov/contact-lenses/about/healthy-habits-keeping-water-away-from-contact-lenses.html"
+        ]
+      },
+      {
+        "quote": "Nếu có khó chịu kéo dài, nên đi khám chuyên khoa mắt",
+        "reason": "Đau, đỏ, sợ sáng hoặc nhìn mờ khi đeo lens có thể là viêm giác mạc cần đánh giá sớm, không đợi tới khi 'kéo dài'.",
+        "proposed_edit": "Nếu đau, đỏ, sợ sáng hoặc nhìn mờ: tháo lens ngay, không đeo lại và khám mắt khẩn trong ngày.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/healthy-vision/contact-lenses"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 4,
+    "id": 107,
+    "title": "Cận thị là gì? Nguyên nhân, dấu hiệu và cách nhận biết sớm",
+    "url": "https://mathanoibacninh.com/kien-thuc/can-thi-la-gi-nguyen-nhan-va-dau-hieu-2/",
+    "word_count": 2300,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "Nếu bạn gật đầu với ba mục trở lên, khả năng cao đây không phải mỏi mắt đơn thuần.",
+        "reason": "Ngưỡng ba triệu chứng không phải tiêu chuẩn chẩn đoán. Một dấu hiệu nhìn xa mờ kéo dài cũng đủ để đo thị lực/khúc xạ; các triệu chứng như quầng sáng không đặc hiệu cho cận.",
+        "proposed_edit": "Bỏ ngưỡng đếm; nói các dấu hiệu chỉ gợi ý và cần khám để xác định nguyên nhân.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/nearsightedness-myopia"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 5,
+    "id": 108,
+    "title": "Đổi kính liên tục mà vẫn mờ: bảy nguyên nhân thường gặp",
+    "url": "https://mathanoibacninh.com/kien-thuc/doi-kinh-lien-tuc-ma-van-mo-2/",
+    "word_count": 2465,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Nếu bạn gặp ba mục trở lên sau khi vừa thay kính, khả năng cao vấn đề chưa được xử lý đúng chỗ.",
+        "reason": "Không có cơ sở cho ngưỡng ba dấu hiệu; một bên giảm thị lực hoặc hình méo đã cần khám, không chờ đủ ba.",
+        "proposed_edit": "Bỏ câu đếm dấu hiệu; nêu rằng bất kỳ tình trạng mờ kéo dài sau đổi kính nên kiểm tra lại kính và mắt, còn mờ đột ngột/méo hình cần khám gấp.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/healthy-vision/finding-eye-doctor/get-dilated-eye-exam"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 6,
+    "id": 109,
+    "title": "Khám khúc xạ gồm những bước nào và mất bao lâu?",
+    "url": "https://mathanoibacninh.com/kien-thuc/kham-khuc-xa-gom-nhung-gi-2/",
+    "word_count": 2482,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 7,
+    "id": 116,
+    "title": "Cận thị là gì? Nguyên nhân, dấu hiệu và cách nhận biết sớm",
+    "url": "https://mathanoibacninh.com/kien-thuc/can-thi-la-gi-nguyen-nhan-va-dau-hieu/",
+    "word_count": 2301,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "Cận thị là gì? Nguyên nhân, dấu hiệu và cách nhận biết sớm",
+        "reason": "Bài 7 (ID 116) trùng gần nguyên văn bài 4 (ID 107), cùng tiêu đề, và cuối bài còn tạo liên kết gợi ý tới chính nó. Hai URL cùng nội dung làm người đọc khó biết bản chính.",
+        "proposed_edit": "Chọn một URL chuẩn và hợp nhất nội dung/điều hướng theo quy trình biên tập; kiểm tra, gỡ liên kết tự trỏ. Giữ nguyên nội dung tới khi có kế hoạch chuyển hướng phù hợp.",
+        "severity": "low",
+        "source_urls": []
+      },
+      {
+        "quote": "Nếu bạn gật đầu với ba mục trở lên, khả năng cao đây không phải mỏi mắt đơn thuần.",
+        "reason": "Ngưỡng ba triệu chứng không được xác thực cho chẩn đoán cận thị.",
+        "proposed_edit": "Bỏ ngưỡng đếm; khuyên đo thị lực/khúc xạ nếu nhìn xa mờ kéo dài, dù chỉ có một dấu hiệu.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/nearsightedness-myopia"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 8,
+    "id": 117,
+    "title": "Vì sao cận thị vẫn tăng độ sau 20 tuổi?",
+    "url": "https://mathanoibacninh.com/kien-thuc/can-thi-tang-do-nhanh-o-nguoi-truong-thanh/",
+    "word_count": 2759,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Mức tăng thường chậm, khoảng một phần tư đến nửa diop mỗi năm.",
+        "reason": "Gọi 0,25–0,50 D/năm là 'thường' ở mọi người trưởng thành thổi phồng tiến triển; tổng quan IMI báo phần lớn ổn định, trung bình khoảng 0,05–0,25 D/năm ở nhóm trẻ tuổi và thấp hơn ở tuổi 25–40.",
+        "proposed_edit": "Viết rằng đa số người lớn ổn định; một số vẫn tăng chậm và tốc độ cá nhân cần so từ các lần đo chuẩn hóa.",
+        "severity": "medium",
+        "source_urls": [
+          "https://myopiainstitute.org/imi-whitepaper/imi-2025-digest/"
+        ]
+      },
+      {
+        "quote": "Tăng từ nửa diop trở lên mỗi năm",
+        "reason": "Bài dùng 0,5 D/năm như ngưỡng cần xem xét nhưng mở đầu lại mô tả chính mức này là thường gặp; mâu thuẫn khiến người đọc không biết khi nào cần đi khám.",
+        "proposed_edit": "Thống nhất thông điệp: thay đổi độ đo đáng kể hoặc liên tục cần đánh giá, nhất là khi có triệu chứng, và không dựa vào một ngưỡng đơn lẻ.",
+        "severity": "low",
+        "source_urls": [
+          "https://myopiainstitute.org/imi-whitepaper/imi-2025-digest/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 9,
+    "id": 118,
+    "title": "Cận bao nhiêu độ là nặng? Cách hiểu con số trên đơn kính",
+    "url": "https://mathanoibacninh.com/kien-thuc/do-can-bao-nhieu-la-nang/",
+    "word_count": 2460,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "trên 6 diop là cận cao",
+        "reason": "Ngưỡng cận cao thường được định nghĩa tương đương cầu ≤ −6,00 D; chính xác −6,00 D cũng thuộc nhóm cao, không chỉ 'trên 6'.",
+        "proposed_edit": "Sửa thành: từ 6,00 D cận trở lên (spherical equivalent ≤ −6,00 D); giải thích ngưỡng là quy ước và xét kèm trục nhãn cầu/đáy mắt.",
+        "severity": "medium",
+        "source_urls": [
+          "https://myopiainstitute.org/imi-whitepaper/defining-and-classifying-myopia/",
+          "https://aapos.org/glossary/myopia-and-treatment-of-myopia-in-children"
+        ]
+      },
+      {
+        "quote": "CYL là phần trụ, tức độ loạn thị. Nó có đơn vị riêng",
+        "reason": "Công suất cầu và trụ đều đo bằng diop; điều khác nhau là hai thành phần và trục, không phải đơn vị. Bài lặp lại lỗi ở FAQ.",
+        "proposed_edit": "Sửa thành: SPH và CYL đều tính bằng diop nhưng ghi riêng; không cộng trực tiếp SPH + CYL để gọi là 'độ cận'.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/nhs-services/opticians/nhs-voucher-values-for-glasses-and-lenses/"
+        ]
+      },
+      {
+        "quote": "Cận thị bản thân nó không dẫn tới mù",
+        "reason": "Khẳng định quá tuyệt đối: cận nặng/cận bệnh lý có thể gây tổn thương võng mạc, tân mạch và mất thị lực vĩnh viễn. Câu sau có nêu tăng nguy cơ nhưng câu này vẫn dễ khiến người đọc an tâm sai.",
+        "proposed_edit": "Viết: đa số người cận được chỉnh kính để nhìn rõ, nhưng cận cao làm tăng nguy cơ biến chứng đe dọa thị lực và cần khám đáy mắt định kỳ.",
+        "severity": "medium",
+        "source_urls": [
+          "https://aapos.org/glossary/myopia-and-treatment-of-myopia-in-children"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 10,
+    "id": 119,
+    "title": "Đổi kính liên tục mà vẫn mờ: bảy nguyên nhân thường gặp",
+    "url": "https://mathanoibacninh.com/kien-thuc/doi-kinh-lien-tuc-ma-van-mo/",
+    "word_count": 2483,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Đổi kính liên tục mà vẫn mờ: bảy nguyên nhân thường gặp",
+        "reason": "Bài 10 (ID 119) trùng gần nguyên văn bài 5 (ID 108), cùng tiêu đề; khối gợi ý cuối bài tự trỏ về chính bài.",
+        "proposed_edit": "Chọn URL chuẩn, hợp nhất nội dung/điều hướng và gỡ liên kết tự trỏ theo kế hoạch biên tập.",
+        "severity": "low",
+        "source_urls": []
+      },
+      {
+        "quote": "Nếu bạn gặp ba mục trở lên sau khi vừa thay kính",
+        "reason": "Ngưỡng ba dấu hiệu không được xác thực và có thể trì hoãn khám dù chỉ một dấu hiệu quan trọng.",
+        "proposed_edit": "Bỏ ngưỡng đếm; nhấn mạnh mờ kéo dài sau đổi kính cần đánh giá, mờ đột ngột hoặc méo hình cần khám gấp.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/healthy-vision/finding-eye-doctor/get-dilated-eye-exam"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 11,
+    "id": 120,
+    "title": "Khám khúc xạ gồm những bước nào và mất bao lâu?",
+    "url": "https://mathanoibacninh.com/kien-thuc/kham-khuc-xa-gom-nhung-gi/",
+    "word_count": 2499,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "Khám khúc xạ gồm những bước nào và mất bao lâu?",
+        "reason": "Bài 11 (ID 120) trùng gần nguyên văn bài 6 (ID 109), cùng tiêu đề; khối gợi ý cuối bài tự trỏ về chính bài.",
+        "proposed_edit": "Chọn URL chuẩn, hợp nhất nội dung/điều hướng và gỡ liên kết tự trỏ theo kế hoạch biên tập.",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 12,
+    "id": 121,
+    "title": "Lệch độ hai mắt: khi nào cần xử lý và xử lý bằng cách nào",
+    "url": "https://mathanoibacninh.com/kien-thuc/lech-do-hai-mat/",
+    "word_count": 2616,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "bác sĩ có thể kê thấp hơn số đo ở bên nặng để giảm lệch cỡ hình",
+        "reason": "Bài đưa hướng giảm số kính như lời khuyên chung mà không tách người lớn với trẻ. Ở trẻ lệch độ, việc chỉnh quang đầy đủ theo bác sĩ là bước đầu để phòng/điều trị nhược thị; cố ý giảm độ có thể làm mắt kém tiếp tục mờ.",
+        "proposed_edit": "Giới hạn câu này cho một số người lớn khó thích nghi sau đánh giá hai mắt; thêm rằng trẻ lệch độ cần khám sớm và tuân đơn cá thể hóa để phòng nhược thị, không tự giảm số.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.aapos.org/glossary/anisometropia",
+          "https://www.aapos.org/glossary/glasses-for-children"
+        ]
+      },
+      {
+        "quote": "Chênh từ hai diop trở lên hay bắt đầu gây khó chịu khi đeo kính gọng.",
+        "reason": "Con số 2 D có thể hữu ích làm mốc tham khảo nhưng không phải điểm xuất hiện triệu chứng chung; trẻ có thể nhược thị dù không khó chịu.",
+        "proposed_edit": "Ghi rõ ngưỡng chỉ mang tính gợi ý ở người lớn, không dùng để quyết định có khám cho trẻ hay không.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.aapos.org/glossary/anisometropia"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 13,
+    "id": 122,
+    "title": "Loạn thị là gì và khác cận thị thế nào?",
+    "url": "https://mathanoibacninh.com/kien-thuc/loan-thi-la-gi-khac-can-thi-the-nao/",
+    "word_count": 2533,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "đơn kính ghi chúng ở hai cột riêng biệt với hai đơn vị riêng",
+        "reason": "SPH và CYL đều là công suất kính đo bằng diop, nên 'hai đơn vị riêng' sai về kỹ thuật.",
+        "proposed_edit": "Viết 'hai cột riêng, cùng đơn vị diop; CYL còn có trục AX tính bằng độ góc'.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/nhs-services/opticians/nhs-voucher-values-for-glasses-and-lenses/"
+        ]
+      },
+      {
+        "quote": "Loạn thị làm hình nhoè hoặc kéo vệt ở mọi khoảng cách",
+        "reason": "Khái quát như dấu hiệu bắt buộc; loạn thị nhẹ có thể không gây triệu chứng và kiểu mờ tùy mức độ, khoảng cách.",
+        "proposed_edit": "Viết 'có thể làm mờ hoặc méo hình ở gần và/hoặc xa'; xác định bằng khám khúc xạ.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/astigmatism"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 14,
+    "id": 123,
+    "title": "Mắt mờ một bên nhưng không phải cận thị: những khả năng cần loại trừ",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-mot-ben-khong-phai-can-thi/",
+    "word_count": 2720,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "tật khúc xạ thường ảnh hưởng cả hai mắt ở mức tương đối gần nhau",
+        "reason": "Lệch khúc xạ giữa hai mắt là nguyên nhân thực sự của mờ một bên, nhất là ở trẻ; câu mở đầu có thể khiến người đọc loại trừ quá sớm.",
+        "proposed_edit": "Viết rằng cả tật khúc xạ lẫn bệnh mắt có thể chỉ nổi bật ở một mắt, cần đo thị lực từng mắt.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.aapos.org/glossary/anisometropia"
+        ]
+      },
+      {
+        "quote": "nếu đổi kính vẫn không rõ hơn, nguyên nhân nằm ngoài khúc xạ",
+        "reason": "Đây không phải phép phân định tuyệt đối; nhược thị do lệch khúc xạ từ nhỏ và giác mạc không đều có thể không cải thiện hoàn toàn bằng kính thường.",
+        "proposed_edit": "Viết 'gợi ý cần tìm thêm nguyên nhân', không tự kết luận bằng thử kính ở nhà.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.aapos.org/glossary/anisometropia"
+        ]
+      },
+      {
+        "quote": "Mờ một bên xuất hiện nhanh trong vài giờ đến vài ngày là tình huống cần khám ngay trong ngày.",
+        "reason": "Mất thị lực một mắt đột ngột, nhất là kiểu màn che hoặc hồi phục sau vài phút, có thể là thiếu máu võng mạc/TIA và cần đánh giá cấp cứu ngay, không chờ tới cuối ngày.",
+        "proposed_edit": "Thêm chỉ dẫn gọi cấp cứu/đến khoa cấp cứu có khả năng đánh giá đột quỵ ngay nếu mất thị lực một mắt đột ngột, kể cả đã hồi phục.",
+        "severity": "critical",
+        "source_urls": [
+          "https://newsroom.heart.org/news/stroke-symptoms-even-if-they-disappear-within-an-hour-need-emergency-assessment",
+          "https://www.nhs.uk/conditions/stroke/symptoms/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 15,
+    "id": 124,
+    "title": "Nhìn mờ là do mắt hay do não? Cách phân biệt ban đầu",
+    "url": "https://mathanoibacninh.com/kien-thuc/nhin-mo-do-mat-hay-do-nao/",
+    "word_count": 2734,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Mờ do mắt thường liên quan đến một bên",
+        "reason": "Nhiều bệnh mắt xảy ra ở cả hai bên, còn rối loạn mạch máu/tổn thương đường thị giác có thể gây mất thị lực chỉ một bên; cách chia quá đơn giản.",
+        "proposed_edit": "Chuyển thành: che từng mắt giúp mô tả kiểu mất thị lực, nhưng không xác định nguồn gốc tại nhà.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/stroke/symptoms/"
+        ]
+      },
+      {
+        "quote": "Nhìn mờ đột ngột rồi hết sau vài phút thì có cần đi khám không?",
+        "reason": "Mất thị lực thoáng qua, nhất là một mắt, có thể là cơn thiếu máu não thoáng qua; AHA khuyến cáo đánh giá cấp cứu ngay cả khi triệu chứng biến mất. Phần trả lời hiện chỉ nói 'đi khám sớm'.",
+        "proposed_edit": "Thay 'đi khám sớm' bằng 'gọi cấp cứu/đến khoa cấp cứu ngay, ghi giờ khởi phát, không tự lái xe', dù đã nhìn lại bình thường.",
+        "severity": "critical",
+        "source_urls": [
+          "https://newsroom.heart.org/news/stroke-symptoms-even-if-they-disappear-within-an-hour-need-emergency-assessment",
+          "https://www.nhs.uk/conditions/stroke/symptoms/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 16,
+    "id": 125,
+    "title": "Viễn thị ở người trưởng thành: vì sao nhìn gần lại mỏi?",
+    "url": "https://mathanoibacninh.com/kien-thuc/vien-thi-o-nguoi-truong-thanh/",
+    "word_count": 2760,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Nhức đầu dữ dội khác hẳn mọi lần, kèm nôn hoặc yếu tay chân.",
+        "reason": "Triệu chứng thần kinh cấp này được xếp cùng nhóm 'khám tại cơ sở nhãn khoa gần nhất trong ngày', có thể làm chậm xử trí đột quỵ/xuất huyết não.",
+        "proposed_edit": "Tách nhóm: gọi cấp cứu ngay và đến khoa cấp cứu khi nhức đầu dữ dội mới xuất hiện kèm yếu tay chân, lú lẫn/nôn; không chờ khám mắt thường.",
+        "severity": "critical",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/stroke/symptoms/",
+          "https://newsroom.heart.org/news/stroke-symptoms-even-if-they-disappear-within-an-hour-need-emergency-assessment"
+        ]
+      },
+      {
+        "quote": "Sụp mi, đồng tử hai bên to nhỏ khác nhau xuất hiện đột ngột.",
+        "reason": "Sụp mi kèm bất đồng tử mới xuất hiện có thể liên quan vấn đề thần kinh cấp; hướng chung tới nhãn khoa 'trong ngày' chưa đủ rõ về mức khẩn.",
+        "proposed_edit": "Khuyên đánh giá cấp cứu ngay khi sụp mi/bất đồng tử mới xuất hiện, đặc biệt kèm đau đầu, nhìn đôi hoặc yếu liệt.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nhs.uk/symptoms/double-vision/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 17,
+    "id": 140,
+    "title": "Cách hạn chế tăng độ cận cho trẻ: việc có căn cứ và việc không",
+    "url": "https://mathanoibacninh.com/kien-thuc/cach-han-che-tang-do-can-cho-tre/",
+    "word_count": 2747,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "không có mặt hại nào",
+        "reason": "Hoạt động ngoài trời có lợi nhưng vẫn có nguy cơ tia UV và chấn thương; diễn đạt tuyệt đối không phù hợp trong tài liệu y tế.",
+        "proposed_edit": "Viết 'có thêm lợi ích sức khỏe khi được che nắng và bảo vệ mắt phù hợp'; khuyên mũ/kính chặn UV và an toàn khi chơi.",
+        "severity": "low",
+        "source_urls": [
+          "https://aapos.org/glossary/myopia-and-treatment-of-myopia-in-children",
+          "https://www.nei.nih.gov/eye-health-information/healthy-vision/8-things-you-can-do-right-now-protect-your-vision"
+        ]
+      },
+      {
+        "quote": "Kính đúng số không làm chậm tiến triển",
+        "reason": "Nếu hiểu là mọi kính gọng, câu này mâu thuẫn với phần sau: kính thiết kế chuyên biệt có thể làm chậm tiến triển.",
+        "proposed_edit": "Ghi rõ 'kính một tròng thông thường giúp nhìn rõ nhưng không phải phương pháp kiểm soát cận; kính thiết kế chuyên biệt có thể được bác sĩ cân nhắc'.",
+        "severity": "low",
+        "source_urls": [
+          "https://aapos.org/glossary/myopia-and-treatment-of-myopia-in-children"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 18,
+    "id": 141,
+    "title": "Con bị cận có tăng độ nữa không? Điều cha mẹ cần biết",
+    "url": "https://mathanoibacninh.com/kien-thuc/con-bi-can-co-tang-do-nua-khong/",
+    "word_count": 2759,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "kính gọng đúng số giúp con nhìn rõ và học được, nhưng bản thân việc đeo kính không làm thay đổi tiến triển theo hướng nào cả",
+        "reason": "Câu phủ định chung dễ bao gồm cả kính kiểm soát cận thiết kế đặc biệt, vốn có bằng chứng làm chậm tăng độ/trục nhãn cầu ở một số trẻ.",
+        "proposed_edit": "Nêu rõ kính gọng một tròng thông thường chỉ chỉnh thị lực; một số tròng chuyên biệt được bác sĩ chỉ định có thể làm chậm tiến triển.",
+        "severity": "low",
+        "source_urls": [
+          "https://aapos.org/glossary/myopia-and-treatment-of-myopia-in-children"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 19,
+    "id": 142,
+    "title": "Con hay nheo mắt, nghiêng đầu khi xem tivi là bị gì?",
+    "url": "https://mathanoibacninh.com/kien-thuc/con-hay-nheo-mat-khi-xem-tivi/",
+    "word_count": 2602,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Nheo mắt hầu như luôn liên quan đến tật khúc xạ",
+        "reason": "Nheo mắt có thể do lác, sợ ánh sáng, bệnh bề mặt mắt hoặc nguyên nhân khác; khẳng định gần như tuyệt đối có thể làm phụ huynh quy sai.",
+        "proposed_edit": "Viết 'nheo mắt có thể gợi ý tật khúc xạ, nhưng khám mới xác định được nguyên nhân'.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.aapos.org/glossary/vision-screening-description"
+        ]
+      },
+      {
+        "quote": "Đồng tử một bên có ánh trắng hoặc ánh khác thường khi chụp ảnh có đèn.",
+        "reason": "Ánh đồng tử trắng ở trẻ có thể là dấu hiệu ung thư võng mạc hoặc đục thủy tinh thể bẩm sinh, cần liên hệ bác sĩ và được đánh giá nhãn khoa khẩn; chữ 'xem sớm' chưa đủ cụ thể.",
+        "proposed_edit": "Ghi rõ cần gọi bác sĩ của trẻ ngay và thu xếp khám mắt khẩn, không chờ lịch sàng lọc thường lệ.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinoblastoma",
+          "https://www.aapos.org/glossary/leukocoria"
+        ]
+      },
+      {
+        "quote": "Tư thế nghiêng đầu xuất hiện đột ngột, kèm nhức đầu, nôn, hoặc con đi loạng choạng.",
+        "reason": "Dấu hiệu thần kinh mới ở trẻ được đưa chung vào nhóm bác sĩ mắt xem 'sớm', trong khi đau đầu/nôn/mất điều hòa đột ngột cần cấp cứu ngay.",
+        "proposed_edit": "Tách nhóm này và hướng dẫn đưa trẻ đến khoa cấp cứu ngay; không đợi lịch khám mắt.",
+        "severity": "critical",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/stroke/symptoms/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 20,
+    "id": 143,
+    "title": "Chín dấu hiệu trẻ bị cận thị mà cha mẹ thường bỏ qua",
+    "url": "https://mathanoibacninh.com/kien-thuc/dau-hieu-tre-bi-can-thi-som/",
+    "word_count": 2753,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Nếu thấy hai đến ba biểu hiện lặp lại trong vài tuần, hãy cho con đo mắt",
+        "reason": "Ngưỡng hai đến ba biểu hiện có thể khiến gia đình trì hoãn dù trẻ chỉ có một dấu hiệu dai dẳng như nheo mắt hoặc nhìn xa kém. Các dấu hiệu đơn lẻ vẫn có thể cần đánh giá thị lực.",
+        "proposed_edit": "Nếu thấy một biểu hiện nhìn kém lặp lại hoặc kết quả sàng lọc bất thường, hãy đặt lịch kiểm tra thị lực/khám mắt; không cần đợi đủ hai đến ba dấu hiệu. Giữ riêng danh sách triệu chứng cần đi cấp cứu ngay.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/amblyopia-lazy-eye",
+          "https://www.aao.org/advocacy/issues/public-health-safety/vision-screening"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 21,
+    "id": 144,
+    "title": "Khám mắt học đường: sàng lọc gì và cha mẹ cần làm gì sau đó",
+    "url": "https://mathanoibacninh.com/kien-thuc/kham-mat-hoc-duong-cho-hoc-sinh/",
+    "word_count": 2348,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 22,
+    "id": 145,
+    "title": "Thời gian ngoài trời và cận thị ở trẻ: bằng chứng nói gì",
+    "url": "https://mathanoibacninh.com/kien-thuc/thoi-gian-ngoai-troi-va-can-thi-tre/",
+    "word_count": 2465,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 23,
+    "id": 146,
+    "title": "Trẻ đeo kính có bị phụ thuộc và tăng độ nhanh hơn không?",
+    "url": "https://mathanoibacninh.com/kien-thuc/tre-deo-kinh-co-bi-phu-thuoc-khong/",
+    "word_count": 2428,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "cặp kính đặt trước mắt không tham gia vào đó theo hướng nào cả",
+        "reason": "Khẳng định áp dụng cho mọi kính là sai: kính đơn tròng thông thường chủ yếu chỉnh thị lực, nhưng một số thiết kế quang học chuyên biệt có thể làm chậm tăng độ và tăng chiều dài trục mắt. Bài còn nói đến biện pháp kiểm soát cận thị ở phần sau.",
+        "proposed_edit": "Phân biệt kính đơn tròng thông thường (giúp nhìn rõ, không làm mắt yếu đi) với kính/thấu kính chuyên dụng kiểm soát cận thị có thể tác động đến tốc độ tiến triển khi được chỉ định và theo dõi.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/research-and-training/research-news/contact-lenses-used-slow-nearsightedness-youth-have-lasting-effect",
+          "https://eyewiki.aao.org/Myopia"
+        ]
+      },
+      {
+        "quote": "Chỉ nên đeo khi nhìn xa, còn lúc khác nên bỏ ra cho mắt nghỉ.",
+        "reason": "Bài xếp toàn bộ câu này vào nhóm 'đều không có cơ sở' nhưng phía sau lại khuyên làm theo đơn bác sĩ về đeo thường xuyên hay chỉ khi nhìn xa. Cách đeo tùy độ cận, tuổi, tình trạng hai mắt và chỉ định.",
+        "proposed_edit": "Đổi thành: 'Tự ý bỏ kính khi cần nhìn rõ để mắt nghỉ' là quan niệm sai; lịch đeo kính (toàn thời gian hay theo hoạt động) phải theo chỉ định cá nhân của bác sĩ.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.aapos.org/glossary/glasses-for-children"
+        ]
+      },
+      {
+        "quote": "Mức nhoè thực tế không đổi, chỉ có khả năng nhận ra nó là mới.",
+        "reason": "Chỉ đúng khi số khúc xạ chưa thay đổi. Cận thị ở trẻ có thể tiếp tục tăng trong thời gian đeo kính, khi đó mức mờ không kính thực sự tăng; câu hiện tại loại trừ khả năng này.",
+        "proposed_edit": "Nói cảm giác mờ hơn có thể do quen với hình rõ, nhưng cũng có thể do độ cận tăng; nếu trẻ nhìn kém hơn, hãy đo lại thay vì tự kết luận chỉ là cảm giác.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/refractive-errors/eyeglasses-refractive-errors",
+          "https://www.nei.nih.gov/research-and-training/research-news/contact-lenses-used-slow-nearsightedness-youth-have-lasting-effect"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 24,
+    "id": 147,
+    "title": "Trẻ học trực tuyến nhiều ảnh hưởng mắt thế nào?",
+    "url": "https://mathanoibacninh.com/kien-thuc/tre-hoc-online-nhieu-anh-huong-mat/",
+    "word_count": 2461,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Trẻ chưa được chỉnh kính đúng số phải điều tiết nhiều hơn để bù",
+        "reason": "Cơ chế này đúng với một số trường hợp viễn thị, nhưng không thể dùng chung cho cận thị: trẻ cận thường nhìn gần rõ và không thể điều tiết để xóa mờ khi nhìn xa. Bài tập trung vào cận thị nên câu dễ gây hiểu sai.",
+        "proposed_edit": "Viết rằng tật khúc xạ chưa được chỉnh có thể góp phần gây khó chịu thị giác tùy loại và mức độ; bác sĩ cần đo khúc xạ, đánh giá điều tiết và phối hợp hai mắt để xác định nguyên nhân.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.aapos.org/glossary/glasses-for-children",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/refractive-errors"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 25,
+    "id": 148,
+    "title": "Trẻ mấy tuổi thì đo mắt được? Mốc kiểm tra theo tuổi",
+    "url": "https://mathanoibacninh.com/kien-thuc/tre-may-tuoi-thi-do-mat-duoc/",
+    "word_count": 2729,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Đưa khám mắt vào danh sách khám định kỳ của con.",
+        "reason": "Bài mang tên 'mốc kiểm tra theo tuổi' nhưng chỉ mô tả cách đo ở mỗi tuổi, không đưa lịch sàng lọc rõ ràng. Lời khuyên khám chuyên khoa định kỳ cho mọi trẻ không triệu chứng cũng không phân biệt với sàng lọc thị lực định kỳ; AAO/AAPOS khuyến nghị sàng lọc định kỳ, rồi khám chuyên khoa khi kết quả bất thường hoặc có dấu hiệu.",
+        "proposed_edit": "Bổ sung lịch sàng lọc theo tuổi: đánh giá mắt từ sơ sinh, kiểm tra trong giai đoạn nhũ nhi và mẫu giáo, đo thị lực khoảng 3–5 tuổi, sau 5 tuổi sàng lọc mỗi 1–2 năm; khám chuyên khoa nếu không đạt sàng lọc hoặc có dấu hiệu/nguy cơ. Cá nhân hóa theo bác sĩ.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.aapos.org/syndicated/vision-screening",
+          "https://www.aao.org/advocacy/issues/public-health-safety/vision-screening"
+        ]
+      },
+      {
+        "quote": "con hợp tác hay khóc cũng không làm sai kết quả",
+        "reason": "Nói tuyệt đối là không chính xác: trẻ khó hợp tác có thể làm phép đo thị lực, đo khúc xạ hoặc khám đáy mắt khó thực hiện hay kém tin cậy; bác sĩ có cách đánh giá theo tuổi và có thể phải đo lại.",
+        "proposed_edit": "Viết: 'Trẻ chưa nói được vẫn có thể kiểm tra bằng phương pháp phù hợp; nếu trẻ quấy khóc hoặc cử động nhiều, bác sĩ sẽ điều chỉnh cách đo hoặc hẹn đánh giá lại khi cần.'",
+        "severity": "low",
+        "source_urls": [
+          "https://eyewiki.aao.org/Visual_Acuity_Assessment_in_Children",
+          "https://www.aapos.org/syndicated/vision-screening"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 26,
+    "id": 149,
+    "title": "Bố mẹ 80 tuổi mổ mắt được không? Yếu tố bác sĩ cân nhắc",
+    "url": "https://mathanoibacninh.com/kien-thuc/bo-me-80-tuoi-mo-mat-duoc-khong/",
+    "word_count": 2553,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Mất thị lực một bên dù chỉ trong ít phút rồi tự hồi lại.",
+        "reason": "Bài gom dấu hiệu này vào nhóm 'bác sĩ xem trong ngày'. Mất thị lực một mắt thoáng qua có thể là cơn thiếu máu võng mạc/TIA báo trước đột quỵ; cần đánh giá cấp cứu ngay cả khi đã nhìn lại được.",
+        "proposed_edit": "Tách thành cảnh báo riêng: mất thị lực đột ngột một mắt, kể cả hồi phục sau vài phút, cần đến khoa cấp cứu/trung tâm đột quỵ ngay, đồng thời được khám mắt; không chờ lịch khám nhãn khoa trong ngày.",
+        "severity": "high",
+        "source_urls": [
+          "https://eyewiki.aao.org/Retinal_Artery_Occlusion",
+          "https://newsroom.heart.org/news/stroke-symptoms-even-if-they-disappear-within-an-hour-need-emergency-assessment"
+        ]
+      },
+      {
+        "quote": "Song song là đánh giá toàn thân: xét nghiệm cơ bản, điện tim",
+        "reason": "Cách viết khiến xét nghiệm và điện tim nghe như thủ tục thường quy cho mọi người mổ đục thủy tinh thể. AAO khuyến nghị chỉ làm xét nghiệm trước mổ khi bệnh sử/khám lâm sàng có chỉ định; trường hợp người bệnh tim trong ví dụ có thể cần điện tim.",
+        "proposed_edit": "Viết: 'Bác sĩ đánh giá toàn thân và chỉ định xét nghiệm hoặc điện tim khi bệnh sử, thuốc đang dùng hay khám lâm sàng cho thấy cần thiết.'",
+        "severity": "low",
+        "source_urls": [
+          "https://aao.org/eye-health/news/choosing-wisely-preoperative-testing"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 27,
+    "id": 150,
+    "title": "Đục thuỷ tinh thể: dấu hiệu sớm và tiến triển theo thời gian",
+    "url": "https://mathanoibacninh.com/kien-thuc/duc-thuy-tinh-the-dau-hieu-som/",
+    "word_count": 2549,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Mất thị lực hoàn toàn ở một bên dù chỉ trong ít phút rồi tự hồi lại.",
+        "reason": "Đặt trong nhóm cần bác sĩ mắt xem 'trong ngày' là chưa đủ khẩn cấp. Mất thị lực một mắt thoáng qua có thể là TIA của võng mạc và cần đánh giá đột quỵ cấp cứu ngay.",
+        "proposed_edit": "Chỉ dẫn đến cấp cứu/trung tâm đột quỵ ngay lập tức nếu mất thị lực đột ngột ở một mắt, kể cả đã hồi phục; không chờ khám ngoại trú.",
+        "severity": "high",
+        "source_urls": [
+          "https://eyewiki.aao.org/Amaurosis_Fugax_%28Transient_Vision_Loss%29",
+          "https://newsroom.heart.org/news/stroke-symptoms-even-if-they-disappear-within-an-hour-need-emergency-assessment"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 28,
+    "id": 151,
+    "title": "Lão thị và đục thuỷ tinh thể khác nhau thế nào?",
+    "url": "https://mathanoibacninh.com/kien-thuc/lao-thi-va-duc-thuy-tinh-the-khac-nhau/",
+    "word_count": 2587,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Mất thị lực một bên dù chỉ trong ít phút rồi tự hồi lại.",
+        "reason": "Bài chỉ dẫn gặp bác sĩ mắt trong ngày. Mất thị lực một mắt thoáng qua có thể là dấu hiệu TIA/đột quỵ và cần đánh giá cấp cứu ngay.",
+        "proposed_edit": "Tách khỏi lịch khám mắt: đến khoa cấp cứu/trung tâm đột quỵ ngay, kể cả thị lực đã hồi phục.",
+        "severity": "high",
+        "source_urls": [
+          "https://eyewiki.aao.org/Retinal_Artery_Occlusion",
+          "https://newsroom.heart.org/news/stroke-symptoms-even-if-they-disappear-within-an-hour-need-emergency-assessment"
+        ]
+      },
+      {
+        "quote": "không có kính nào sửa được",
+        "reason": "Mệnh đề tuyệt đối về đục thủy tinh thể mâu thuẫn với chính phần sau của bài và hướng dẫn AAO: ở giai đoạn sớm, thay đơn kính có thể cải thiện thị lực và sinh hoạt, dù không làm trong lại thủy tinh thể.",
+        "proposed_edit": "Viết: 'Ở giai đoạn sớm, kính mới có thể giúp nhìn rõ hơn một thời gian; khi đục tiến triển và cản trở sinh hoạt, kính thường không còn đủ, và phẫu thuật là cách loại bỏ phần đã đục.'",
+        "severity": "medium",
+        "source_urls": [
+          "https://aao.org/eye-health/diseases/what-are-cataracts"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 29,
+    "id": 152,
+    "title": "Mắt kéo mây là bệnh gì? Có chữa được không?",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-keo-may-la-benh-gi/",
+    "word_count": 2527,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 30,
+    "id": 153,
+    "title": "Mắt người cao tuổi: lịch khám định kỳ và những bệnh cần tầm soát",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-nguoi-cao-tuoi-kham-dinh-ky/",
+    "word_count": 2501,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Mất thị lực một bên dù chỉ trong ít phút rồi tự hồi lại.",
+        "reason": "Bài xếp dấu hiệu này vào nhóm gặp bác sĩ mắt trong ngày, nhưng mất thị lực một mắt thoáng qua có thể là TIA của võng mạc và cần đánh giá đột quỵ cấp cứu ngay.",
+        "proposed_edit": "Khuyến cáo đến khoa cấp cứu/trung tâm đột quỵ ngay lập tức khi đột ngột mất thị lực một mắt, dù sau đó nhìn lại bình thường.",
+        "severity": "high",
+        "source_urls": [
+          "https://eyewiki.aao.org/Retinal_Artery_Occlusion",
+          "https://newsroom.heart.org/news/stroke-symptoms-even-if-they-disappear-within-an-hour-need-emergency-assessment"
+        ]
+      },
+      {
+        "quote": "Hai bệnh hay gặp nhất cần tầm soát ở tuổi này — glôcôm và biến chứng mắt của đái tháo đường",
+        "reason": "Biến chứng mắt do đái tháo đường chỉ áp dụng với người có đái tháo đường, không phải một trong hai bệnh hay gặp nhất của toàn bộ người cao tuổi. Cách viết bỏ qua đục thủy tinh thể và thoái hóa hoàng điểm tuổi già trong khung tầm soát chung.",
+        "proposed_edit": "Viết: 'Khám định kỳ giúp phát hiện glôcôm, bệnh hoàng điểm và đục thủy tinh thể; riêng người có đái tháo đường còn cần tầm soát bệnh võng mạc đái tháo đường theo lịch riêng.'",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/sites/default/files/2023-02/Helping_Older_Adults_See_Well_For_A_Lifetime.pdf",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/diabetic-retinopathy"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 31,
+    "id": 154,
+    "title": "Mổ đục thuỷ tinh thể có nguy hiểm không? Nói thật về rủi ro",
+    "url": "https://mathanoibacninh.com/kien-thuc/mo-duc-thuy-tinh-the-co-nguy-hiem/",
+    "word_count": 2495,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 32,
+    "id": 155,
+    "title": "Mổ mắt bao lâu thì nhìn rõ? Mốc hồi phục theo ngày",
+    "url": "https://mathanoibacninh.com/kien-thuc/mo-mat-bao-lau-thi-nhin-ro/",
+    "word_count": 2505,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Mờ như qua sương trong những ngày đầu là do giác mạc còn phù chứ không phải ca mổ có vấn đề.",
+        "reason": "Mờ nhẹ sau mổ có thể do phù giác mạc, nhưng không thể xác định nguyên nhân chỉ từ triệu chứng. Cách khẳng định này dễ trấn an sai người có tăng nhãn áp, nhiễm trùng hay biến chứng khác, dù phần khác của bài có liệt kê dấu hiệu cảnh báo.",
+        "proposed_edit": "Viết: 'Mờ nhẹ trong những ngày đầu có thể do phù giác mạc và thường cải thiện; cần khám đúng hẹn. Nếu thị lực giảm, mờ tăng, đau hoặc đỏ tăng, liên hệ bác sĩ mổ ngay.'",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/cataracts/cataract-surgery",
+          "https://aao.org/eye-health/tips-prevention/safe-exercise-driving-cataract-surgery-recovery"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 33,
+    "id": 156,
+    "title": "Người già mắt mờ nhìn không rõ là bệnh gì? Bốn nguyên nhân chính",
+    "url": "https://mathanoibacninh.com/kien-thuc/nguoi-gia-mat-mo-nhin-khong-ro/",
+    "word_count": 2553,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Mất thị lực một bên dù chỉ trong ít phút rồi tự hồi lại.",
+        "reason": "Khuyên gặp bác sĩ nhãn khoa trong ngày chưa đủ khẩn. Mất thị lực một mắt thoáng qua ở người cao tuổi có thể là TIA và cần đánh giá đột quỵ cấp cứu ngay.",
+        "proposed_edit": "Khuyến cáo đi khoa cấp cứu/trung tâm đột quỵ ngay kể cả khi thị lực đã trở lại; bác sĩ cấp cứu sẽ phối hợp đánh giá nhãn khoa và mạch máu.",
+        "severity": "high",
+        "source_urls": [
+          "https://eyewiki.aao.org/Amaurosis_Fugax_%28Transient_Vision_Loss%29",
+          "https://newsroom.heart.org/news/stroke-symptoms-even-if-they-disappear-within-an-hour-need-emergency-assessment"
+        ]
+      },
+      {
+        "quote": "Bốn nguyên nhân hay gặp nhất khiến người cao tuổi nhìn kém là đục thuỷ tinh thể, glôcôm, bệnh lý vùng trung tâm võng mạc, và biến chứng mắt của đái tháo đường.",
+        "reason": "Khung 'bốn nguyên nhân hay gặp nhất' không phù hợp với mọi người cao tuổi: bệnh võng mạc đái tháo đường chỉ ở người có đái tháo đường, trong khi sai số kính và bệnh bề mặt mắt cũng có thể gây mờ. Danh sách này nên được gọi là bốn nhóm bệnh quan trọng cần loại trừ, không phải bảng xếp hạng nguyên nhân phổ biến.",
+        "proposed_edit": "Đổi thành 'Bốn nhóm bệnh quan trọng cần nghĩ tới...' và nói rõ nhóm võng mạc đái tháo đường chỉ áp dụng cho người có đái tháo đường; nêu thêm sai số kính/khô mắt và nguyên nhân khác có thể được phát hiện khi khám.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/healthy-vision/finding-eye-doctor/get-dilated-eye-exam",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/diabetic-retinopathy"
+        ]
+      },
+      {
+        "quote": "biến chứng mắt của đái tháo đường, gây mờ dao động theo đường huyết ở giai đoạn đầu và tổn thương đáy mắt về sau",
+        "reason": "Câu nhập nhằng giữa mờ thị lực do dao động đường huyết và bệnh võng mạc đái tháo đường do tổn thương mạch máu. Bệnh võng mạc có thể đã hiện diện và tiến triển âm thầm trước khi người bệnh thấy mờ.",
+        "proposed_edit": "Tách hai hiện tượng: đường huyết thay đổi có thể gây mờ dao động, còn bệnh võng mạc đái tháo đường là tổn thương mạch máu ở đáy mắt, thường không có triệu chứng giai đoạn đầu và cần khám định kỳ.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/diabetic-retinopathy"
+        ]
+      },
+      {
+        "quote": "kính không sửa được phần mờ do đục hay do đáy mắt",
+        "reason": "Kính không chữa được nguyên nhân đục thủy tinh thể, nhưng đổi kính có thể cải thiện thị lực ở giai đoạn đục nhẹ. Câu tuyệt đối mâu thuẫn với hướng dẫn AAO và có thể làm người đọc hiểu rằng không cần thử số kính.",
+        "proposed_edit": "Viết: 'Kính có thể giúp ở giai đoạn đục nhẹ nhưng không làm trong lại thủy tinh thể; mờ tăng dần cần khám để tìm cả nguyên nhân đáy mắt.'",
+        "severity": "low",
+        "source_urls": [
+          "https://aao.org/eye-health/diseases/what-are-cataracts"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 34,
+    "id": 157,
+    "title": "Sau mổ mắt kiêng ăn gì, kiêng làm gì? Danh sách theo tuần",
+    "url": "https://mathanoibacninh.com/kien-thuc/sau-mo-mat-kieng-an-gi-kieng-lam-gi/",
+    "word_count": 2528,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "Vẫn giữ các hạn chế về cúi gập người, mang vác nặng, bơi lội và xông hơi cho tới khi bác sĩ cho phép — thường tới khoảng hết tháng đầu",
+        "reason": "Gộp mọi hoạt động vào cùng mốc gần một tháng dễ tạo ấn tượng đây là hạn chế chuẩn cho mọi ca. Thời hạn khác nhau theo hoạt động, kỹ thuật mổ và lời dặn bác sĩ; AAO đưa thời gian ngắn hơn cho một số hoạt động thông thường.",
+        "proposed_edit": "Tách thời hạn theo từng hoạt động, ghi rõ đây chỉ là ví dụ và bác sĩ mổ quyết định theo ca. Tránh nêu một mốc 'hết tháng đầu' cho cả cúi gập, mang vác và bơi lội.",
+        "severity": "low",
+        "source_urls": [
+          "https://aao.org/eye-health/tips-prevention/safe-exercise-driving-cataract-surgery-recovery"
+        ]
+      },
+      {
+        "quote": "vết mổ ở đây rất nhỏ và nằm trong mắt, không phải vết thương ngoài da",
+        "reason": "Kết luận không cần kiêng thực phẩm dân gian là hợp lý, nhưng mô tả giải phẫu chưa đúng: đường mổ đi qua bề mặt giác mạc ở phía trước mắt, không phải một vết chỉ nằm bên trong nhãn cầu.",
+        "proposed_edit": "Giữ lời khuyên ăn đủ chất, bỏ giải thích 'vết mổ nằm trong mắt'; có thể nói không có bằng chứng các món đó cản trở lành vết mổ giác mạc.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/cataracts/cataract-surgery"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 35,
+    "id": 158,
+    "title": "Thuỷ tinh thể nhân tạo: các nhóm và cách bác sĩ chọn",
+    "url": "https://mathanoibacninh.com/kien-thuc/thuy-tinh-the-nhan-tao-chon-loai-nao/",
+    "word_count": 2610,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 36,
+    "id": 159,
+    "title": "Ai dễ bị glôcôm? Bảy nhóm nguy cơ cần tầm soát định kỳ",
+    "url": "https://mathanoibacninh.com/kien-thuc/ai-de-bi-glocom/",
+    "word_count": 2658,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Ngoài ra bác sĩ khám bằng đèn khe để đánh giá góc thoát dịch",
+        "reason": "Đèn khe đơn thuần chỉ ước lượng độ sâu tiền phòng; để quan sát trực tiếp và phân loại góc cần soi góc bằng kính chuyên dụng hoặc thăm dò tương ứng. Câu này có thể khiến người đọc tưởng khám đèn khe thường quy đã loại trừ được góc hẹp.",
+        "proposed_edit": "Khi cần đánh giá góc thoát dịch, bác sĩ soi góc tiền phòng bằng kính chuyên dụng; đèn khe giúp đánh giá sơ bộ phần trước của mắt.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Gonioscopy"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 37,
+    "id": 160,
+    "title": "Cườm nước và cườm khô khác nhau thế nào?",
+    "url": "https://mathanoibacninh.com/kien-thuc/cuom-nuoc-va-cuom-kho-khac-nhau/",
+    "word_count": 2646,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "Cườm nước là glôcôm — dây thần kinh thị giác tổn thương do nhãn áp",
+        "reason": "Cách nói nhân quả tuyệt đối mâu thuẫn với glôcôm nhãn áp bình thường; nhãn áp cao là yếu tố nguy cơ và đích điều trị quan trọng, không phải điều kiện bắt buộc để mắc bệnh.",
+        "proposed_edit": "Cườm nước là glôcôm — nhóm bệnh làm tổn thương dây thần kinh thị giác, thường liên quan đến nhãn áp cao hơn mức mắt đó chịu được.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/glaucoma/glaucoma-and-eye-pressure"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 38,
+    "id": 161,
+    "title": "Glôcôm giai đoạn sớm gần như không có dấu hiệu — làm sao phát hiện",
+    "url": "https://mathanoibacninh.com/kien-thuc/dau-hieu-glocom-giai-doan-som/",
+    "word_count": 2632,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Tổn thương bắt đầu ở vùng rìa tầm nhìn, trong khi phần giữa — nơi ta dùng để đọc và nhìn chi tiết — vẫn nguyên tới giai đoạn muộn.",
+        "reason": "Đây là mô hình thường gặp nhưng không phải quy luật. Một số thể glôcôm, nhất là nhãn áp bình thường, có ám điểm gần điểm nhìn ngay giai đoạn sớm. Diễn đạt tuyệt đối có thể làm người có triệu chứng ở gần trung tâm tự loại trừ bệnh.",
+        "proposed_edit": "Tổn thương thường ảnh hưởng vùng nhìn bên trước khi thị lực đọc chữ giảm, nhưng cũng có thể xuất hiện gần trung tâm; không thể dựa vào vị trí mờ để tự loại trừ glôcôm.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Normal_Tension_Glaucoma",
+          "https://eyewiki.aao.org/Standard_Automated_Perimetry"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 39,
+    "id": 162,
+    "title": "Đo nhãn áp là gì và con số bao nhiêu là bình thường?",
+    "url": "https://mathanoibacninh.com/kien-thuc/do-nhan-ap-la-gi/",
+    "word_count": 2651,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 40,
+    "id": 163,
+    "title": "Cơn glôcôm cấp: đau mắt dữ dội kèm nhìn mờ và nôn",
+    "url": "https://mathanoibacninh.com/kien-thuc/glocom-cap-dau-mat-du-doi/",
+    "word_count": 2661,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Sờ nhẹ qua mi thấy nhãn cầu căng cứng hơn bên kia.",
+        "reason": "Tự sờ nhãn cầu không phải cách xác định cơn glôcôm cấp; người đọc có thể trì hoãn đi cấp cứu nếu không cảm thấy khác. Chẩn đoán cần đo nhãn áp và khám chuyên khoa.",
+        "proposed_edit": "Bỏ dấu hiệu tự sờ này khỏi danh sách dành cho người bệnh; giữ hướng dẫn đi cấp cứu ngay khi có đau mắt dữ dội, nhìn mờ và quầng sáng.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/On_Call_Ophthalmology"
+        ]
+      },
+      {
+        "quote": "Nếu được hạ áp kịp thời, phần lớn thị lực thường giữ được.",
+        "reason": "Lời hứa về kết quả 'phần lớn' không được bài viết định lượng hay giới hạn theo thời gian và mức tổn thương đã có; người bệnh có thể vẫn mất thị lực dù được điều trị kịp.",
+        "proposed_edit": "Điều trị càng sớm càng tăng cơ hội bảo vệ thị lực, nhưng mức hồi phục phụ thuộc tổn thương đã xảy ra và đáp ứng điều trị.",
+        "severity": "low",
+        "source_urls": [
+          "https://store.aao.org/media/resources/051189/051189-glaucoma-rf1.pdf"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 41,
+    "id": 164,
+    "title": "Glôcôm có di truyền không? Người thân nên tầm soát từ tuổi nào",
+    "url": "https://mathanoibacninh.com/kien-thuc/glocom-co-di-truyen-khong/",
+    "word_count": 2583,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Bệnh không truyền theo kiểu một gen một bệnh như các bệnh di truyền đơn giản, mà là kết quả của nhiều yếu tố cộng lại.",
+        "reason": "Đúng với nhiều ca glôcôm người lớn nhưng sai nếu nói cho toàn bộ nhóm bệnh: một số thể khởi phát sớm hoặc bẩm sinh có nguyên nhân đơn gen như MYOC hoặc CYP1B1.",
+        "proposed_edit": "Phần lớn glôcôm ở người lớn do nhiều yếu tố phối hợp; một số thể khởi phát sớm hoặc bẩm sinh có thể liên quan đột biến ở một gen, nên gia đình có người mắc trẻ tuổi cần hỏi bác sĩ về đánh giá phù hợp.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/about/news-and-events/news/glaucoma-silent-thief-begins-tell-its-secrets",
+          "https://www.nei.nih.gov/grants-and-funding/research-priorities/advisory-committees/national-advisory-eye-council-naec/minutes-past-naec-meetings/naec-meeting-minutes-june-14-2018"
+        ]
+      },
+      {
+        "quote": "Người có người thân ruột thịt mắc bệnh nên bắt đầu sớm hơn, thường vào khoảng ba mươi lăm tuổi",
+        "reason": "Không có mốc 35 tuổi thống nhất cho mọi loại glôcôm gia đình; bệnh khởi phát sớm trong gia đình có thể đòi hỏi đánh giá trước tuổi đó. Nêu mốc cố định có thể gây chậm khám.",
+        "proposed_edit": "Khi biết bố mẹ, anh chị em hoặc con mắc glôcôm, hãy hỏi bác sĩ mắt thời điểm khám ban đầu và lịch theo dõi; gia đình có bệnh khởi phát trẻ cần được đánh giá sớm hơn theo thể bệnh cụ thể.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/healthy-vision/finding-eye-doctor/get-dilated-eye-exam",
+          "https://eyewiki.aao.org/Glaucoma_Screening"
+        ]
+      },
+      {
+        "quote": "khám bằng đèn khe để đánh giá góc thoát dịch",
+        "reason": "Đèn khe không nhìn trực tiếp được cấu trúc góc nếu không dùng kính soi góc; việc xác định góc hẹp/đóng cần soi góc hoặc thăm dò chuyên biệt.",
+        "proposed_edit": "Khám đèn khe và, khi cần phân loại góc, soi góc tiền phòng bằng kính chuyên dụng.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Gonioscopy"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 42,
+    "id": 165,
+    "title": "Glôcôm (cườm nước) là bệnh gì? Vì sao gọi là kẻ cắp thị lực",
+    "url": "https://mathanoibacninh.com/kien-thuc/glocom-cuom-nuoc-la-benh-gi/",
+    "word_count": 2742,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "khám bằng đèn khe để đánh giá phần trước của mắt và góc thoát dịch",
+        "reason": "Đèn khe giúp xem phần trước và ước lượng độ sâu tiền phòng, nhưng không tự nó cho phép nhìn trực tiếp góc thoát dịch; khám glôcôm nghi ngờ cần soi góc để phân loại.",
+        "proposed_edit": "Khám đèn khe để xem phần trước của mắt; nếu cần đánh giá góc thoát dịch, bác sĩ dùng kính soi góc hoặc phương pháp chẩn đoán phù hợp.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Gonioscopy"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 43,
+    "id": 166,
+    "title": "Thị trường thu hẹp dần: vì sao người bệnh không tự nhận ra",
+    "url": "https://mathanoibacninh.com/kien-thuc/thi-truong-mat-thu-hep-dan/",
+    "word_count": 2662,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Vì các sợi thần kinh phụ trách vùng rìa đi vào đầu dây thần kinh thị giác ở phần ngoài, đúng chỗ chịu ép nhiều nhất khi nhãn áp cao. Các sợi phụ trách phần giữa nằm ở vùng được bảo vệ hơn",
+        "reason": "Giải thích đường đi sợi thần kinh và mức 'được bảo vệ' này không phản ánh các kiểu khuyết thị trường glôcôm. Tổn thương thường tạo ám điểm cung, bậc mũi hoặc cạnh trung tâm, đôi khi cạnh trung tâm từ sớm; không phải cứ mất rìa rồi tiến đều vào giữa.",
+        "proposed_edit": "Bỏ mô tả sợi ngoài bị ép trước. Viết: glôcôm thường gây khuyết thị trường khó tự nhận ra và thị lực đọc chữ có thể còn tốt, nhưng vị trí tổn thương thay đổi theo người; chỉ đo thị trường mới xác định được.",
+        "severity": "high",
+        "source_urls": [
+          "https://eyewiki.aao.org/Standard_Automated_Perimetry",
+          "https://eyewiki.aao.org/Normal_Tension_Glaucoma"
+        ]
+      },
+      {
+        "quote": "nếu không chắc có thấy hay không thì cứ bấm khi cảm giác có",
+        "reason": "Khuyên bấm khi chưa chắc dễ tăng đáp ứng dương tính giả, làm kết quả đo thị trường kém tin cậy.",
+        "proposed_edit": "Chỉ bấm khi bạn thật sự thấy điểm sáng; không cần đoán, vì máy sẽ thử lại các vị trí cần thiết. Báo kỹ thuật viên nếu mỏi hoặc chưa hiểu cách đo.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Standard_Automated_Perimetry",
+          "https://glaucoma.org/articles/why-do-i-need-a-visual-field-test"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 44,
+    "id": 167,
+    "title": "Thuốc nhỏ mắt hạ nhãn áp: vì sao không được tự ý bỏ",
+    "url": "https://mathanoibacninh.com/kien-thuc/thuoc-nho-mat-ha-nhan-ap-dung-dung/",
+    "word_count": 2551,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Khi ngừng, nhãn áp trở lại mức cũ trong vòng vài ngày, và áp lực đó lại tiếp tục ép lên đầu dây thần kinh thị giác. Các sợi thần kinh mất đi trong giai đoạn ngừng thuốc là vĩnh viễn",
+        "reason": "Thời gian hết tác dụng khác nhau giữa các thuốc và không thể khẳng định ngừng vài ngày đã làm mất sợi thần kinh ở từng người. Thông điệp phải dùng đều là đúng, nhưng chuỗi hậu quả được trình bày quá chắc chắn.",
+        "proposed_edit": "Ngừng thuốc có thể khiến nhãn áp tăng trở lại và làm tăng nguy cơ bệnh tiến triển; thời gian và mức tăng tùy thuốc và từng mắt. Không tự ngưng mà liên hệ bác sĩ khi gặp khó khăn.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/glaucoma/glaucoma-medicines"
+        ]
+      },
+      {
+        "quote": "Nếu quên nhiều ngày liền, hãy dùng lại theo lịch cũ và nói với bác sĩ ở lần khám tới",
+        "reason": "Nếu lần khám tới còn xa, lời khuyên này trì hoãn kiểm tra và giải quyết lý do bỏ thuốc trong khi nhãn áp có thể mất kiểm soát.",
+        "proposed_edit": "Nếu quên nhiều ngày, dùng lại đúng đơn và liên hệ bác sĩ đang điều trị sớm để được hướng dẫn thời điểm đo nhãn áp; không tự nhỏ bù hoặc tăng liều.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/glaucoma/glaucoma-medicines"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 45,
+    "id": 168,
+    "title": "Biến chứng mắt ở người tiểu đường: vì sao phải khám dù mắt còn tốt",
+    "url": "https://mathanoibacninh.com/kien-thuc/bien-chung-mat-o-nguoi-tieu-duong/",
+    "word_count": 2401,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "người đái tháo đường cần soi đáy mắt định kỳ ngay từ khi được chẩn đoán",
+        "reason": "Câu trả lời ngắn gộp hai típ; phía dưới bài lại nói típ 1 thường khám lần đầu vài năm sau chẩn đoán. Hướng dẫn hiện hành phân biệt típ 2 khám lúc chẩn đoán và típ 1 trong vòng khoảng 5 năm ở người lớn.",
+        "proposed_edit": "Người đái tháo đường típ 2 cần khám đáy mắt lúc chẩn đoán; típ 1 cần khám theo mốc bác sĩ đặt, thường trong vòng 5 năm sau chẩn đoán ở người lớn. Sau đó duy trì lịch theo kết quả.",
+        "severity": "medium",
+        "source_urls": [
+          "https://diabetesjournals.org/care/article/40/3/412/36975/Diabetic-Retinopathy-A-Position-Statement-by-the"
+        ]
+      },
+      {
+        "quote": "càng lâu thì khả năng có tổn thương càng cao, gần như bất kể kiểm soát tốt tới đâu.",
+        "reason": "Thời gian mắc bệnh quan trọng, nhưng cụm 'gần như bất kể kiểm soát tốt tới đâu' phủ nhẹ tác dụng lớn đã được thử nghiệm của kiểm soát đường huyết trong phòng và làm chậm bệnh võng mạc.",
+        "proposed_edit": "Nguy cơ tăng theo thời gian mắc bệnh, đặc biệt khi đường huyết, huyết áp hoặc mỡ máu kiểm soát chưa tốt; kiểm soát tốt giúp giảm đáng kể nguy cơ và làm chậm tiến triển.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/sites/default/files/health-pdfs/Diabetic_Retinopathy_What_You_Should_Know.pdf"
+        ]
+      },
+      {
+        "quote": "chứ không phải để lấy lại phần đã mất",
+        "reason": "Với phù hoàng điểm do đái tháo đường và một số ca xuất huyết dịch kính, anti-VEGF hoặc phẫu thuật có thể cải thiện thị lực đã giảm. Khẳng định không thể lấy lại làm giảm động lực điều trị.",
+        "proposed_edit": "Điều trị nhằm ngăn bệnh tiến triển và trong một số trường hợp, nhất là phù hoàng điểm, có thể cải thiện thị lực; mức cải thiện tùy tổn thương và thời điểm điều trị.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/diabetic-retinopathy/injections-treat-eye-conditions",
+          "https://www.nei.nih.gov/research-and-training/research-news/surgical-and-drug-treatment-options-lead-similar-outcomes-diabetic-eye-disease"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 46,
+    "id": 169,
+    "title": "Cận nặng và nguy cơ võng mạc: vì sao cần khám đáy mắt định kỳ",
+    "url": "https://mathanoibacninh.com/kien-thuc/can-nang-va-nguy-co-vong-mac/",
+    "word_count": 2341,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 47,
+    "id": 170,
+    "title": "Cao huyết áp ảnh hưởng đến mắt thế nào?",
+    "url": "https://mathanoibacninh.com/kien-thuc/cao-huyet-ap-anh-huong-mat/",
+    "word_count": 2467,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "nó là bằng chứng cho thấy mức kiểm soát hiện tại chưa đủ",
+        "reason": "Một số dấu hiệu mạch võng mạc là dấu tích của tăng huyết áp kéo dài và có thể còn sau khi huyết áp đã được kiểm soát; không thể dùng riêng ảnh đáy mắt để kết luận mức kiểm soát hiện tại.",
+        "proposed_edit": "Kết quả soi đáy mắt là thông tin về tổn thương cơ quan đích cần chia sẻ với bác sĩ điều trị huyết áp và đối chiếu với các số đo huyết áp gần đây.",
+        "severity": "medium",
+        "source_urls": [
+          "https://eyewiki.aao.org/Hypertensive_Retinopathy"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 48,
+    "id": 171,
+    "title": "Chớp sáng và ruồi bay trước mắt: khi nào là cấp cứu",
+    "url": "https://mathanoibacninh.com/kien-thuc/chop-sang-va-ruoi-bay-truoc-mat/",
+    "word_count": 2509,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "chớp sáng nghĩa là có lực kéo đang tác động lên võng mạc",
+        "reason": "Chớp sáng mới có thể do co kéo dịch kính-võng mạc, nhưng cũng có nguyên nhân khác như migraine hoặc bệnh thần kinh; triệu chứng một mình không xác định cơ chế. Lời khuyên đi khám khi mới xuất hiện vẫn đúng.",
+        "proposed_edit": "Chớp sáng mới có thể là dấu hiệu dịch kính đang kéo võng mạc và cần được khám để loại trừ vết rách; cũng có những nguyên nhân khác nên không thể tự kết luận ở nhà.",
+        "severity": "low",
+        "source_urls": [
+          "https://eyewiki.aao.org/Horseshoe_or_Flap_Tear",
+          "https://store.aao.org/media/resources/051187/051187-floaters-rf1.pdf"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 49,
+    "id": 172,
+    "title": "Thấy màn che trước mắt như bức màn buông: dấu hiệu bong võng mạc",
+    "url": "https://mathanoibacninh.com/kien-thuc/man-che-truoc-mat-nhu-buc-man/",
+    "word_count": 2459,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Bong võng mạc hiếm khi đến mà không báo trước. Chuỗi điển hình gồm ba bước",
+        "reason": "Không phải người bệnh nào cũng nhận thấy chớp sáng và ruồi bay trước khi xuất hiện màn che; mô tả thành chuỗi gần như bắt buộc có thể khiến người chỉ thấy màn che đánh giá thấp triệu chứng.",
+        "proposed_edit": "Bong võng mạc có thể kèm chớp sáng hoặc nhiều ruồi bay mới, nhưng cũng có thể được nhận ra lần đầu bằng một mảng tối/màn che. Bất kỳ dấu hiệu nào trong nhóm đều cần khám ngay.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment"
+        ]
+      },
+      {
+        "quote": "còn đợi tới bước ba thì cần phẫu thuật",
+        "reason": "Chớp sáng/ruồi bay có thể chỉ là bong dịch kính và không cần laser; ngược lại một số người đã bong võng mạc trước khi thấy màn che. Phương án điều trị phụ thuộc kết quả soi, không phụ thuộc cứng vào thứ tự triệu chứng.",
+        "proposed_edit": "Đi khám ngay khi chớp sáng hoặc ruồi bay tăng giúp bác sĩ phát hiện vết rách trước khi bong; nếu có vết rách thích hợp có thể điều trị laser/lạnh đông, còn nếu đã bong cần lựa chọn điều trị theo mức độ.",
+        "severity": "high",
+        "source_urls": [
+          "https://eyewiki.aao.org/Posterior_Vitreous_Detachment",
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 50,
+    "id": 173,
+    "title": "Mắt mờ đột ngột một bên: những nguyên nhân cần loại trừ ngay",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-dot-ngot-mot-ben/",
+    "word_count": 2483,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Một đợt mờ vài phút rồi tự hết có thể là dấu hiệu báo trước đột quỵ, nên nó không phải lý do để yên tâm mà là lý do đi ngay.",
+        "reason": "Bài vẫn nhiều lần định nghĩa 'đi ngay' là khám mắt trong ngày và chỉ dặn gọi cấp cứu khi có thêm nói khó/yếu tay chân. Mất thị lực một mắt đột ngột, nhất là mất hoàn toàn hoặc thoáng qua rồi hồi, có thể là tắc động mạch võng mạc hoặc cơn thiếu máu võng mạc thoáng qua và cần đánh giá cấp cứu đột quỵ ngay, kể cả không có triệu chứng thần kinh khác.",
+        "proposed_edit": "Nếu đột ngột mất thị lực một mắt hoặc tối sầm rồi hồi phục, gọi cấp cứu/đến khoa cấp cứu có khả năng đánh giá đột quỵ ngay; không chờ lịch khám mắt trong ngày. Đau mắt, chớp sáng hoặc màn che cũng cần đánh giá khẩn theo nguyên nhân.",
+        "severity": "critical",
+        "source_urls": [
+          "https://www.ahajournals.org/doi/epdf/10.1161/STR.0000000000000366",
+          "https://professional.heart.org/en/science-news/management-of-central-retinal-artery-occlusion/Commentary"
+        ]
+      },
+      {
+        "quote": "cơ chế của nó thường là một cục máu đông nhỏ trôi qua rồi tan",
+        "reason": "Cơn mất thị lực thoáng qua có nhiều cơ chế, gồm thuyên tắc, giảm tưới máu, viêm động mạch và nguyên nhân khác; không thể suy ra cục máu đông đã tan từ triệu chứng tự hồi phục.",
+        "proposed_edit": "Một đợt tối mắt thoáng qua có thể do thiếu máu võng mạc tạm thời và báo nguy cơ đột quỵ; nguyên nhân cụ thể chỉ xác định được qua đánh giá cấp cứu.",
+        "severity": "medium",
+        "source_urls": [
+          "https://professional.heart.org/en/science-news/management-of-central-retinal-artery-occlusion/Commentary",
+          "https://eyewiki.aao.org/Giant_Cell_Arteritis"
+        ]
+      },
+      {
+        "quote": "Thiếu máu đầu dây thần kinh thị giác thường gặp ở người lớn tuổi có bệnh mạch máu, mờ xuất hiện đột ngột khi thức dậy.",
+        "reason": "Phần nguyên nhân không nhắc viêm động mạch tế bào khổng lồ ở người trên 50 tuổi. Đây là nguyên nhân cấp cứu của mất thị lực đột ngột, đặc biệt khi có đau đầu mới, đau hàm khi nhai hoặc đau da đầu; bỏ sót có thể dẫn tới mù mắt còn lại rất nhanh.",
+        "proposed_edit": "Thêm: ở người trên 50 tuổi, nhất là khi có đau đầu mới, đau hàm khi nhai hoặc đau da đầu, cần loại trừ viêm động mạch tế bào khổng lồ ngay tại khoa cấp cứu.",
+        "severity": "high",
+        "source_urls": [
+          "https://eyewiki.aao.org/Giant_Cell_Arteritis",
+          "https://eyewiki.aao.org/Retinal_Artery_Occlusion"
+        ]
+      }
+    ]
+  }
+]

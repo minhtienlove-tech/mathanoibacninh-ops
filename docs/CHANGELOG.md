@@ -1,5 +1,12 @@
 # Production changelog
 
+## 2026-09-30 — rà soát 294 bài/trang, CHƯA TRIỂN KHAI SỬA NỘI DUNG
+
+- Xuất và đọc toàn văn 150 bài viết, 144 trang đã công bố (trong đó 99 trang xã/phường lấy HTML từ child theme). Lập báo cáo, chỉ mục đủ 294 URL và sáu tệp phát hiện tại `docs/content-audit/2026-09-29/`; 228 điểm cần xem lại, 49 URL ưu tiên sửa, 76 URL cần bác sĩ duyệt. Đối chiếu câu trích, ID, URL và nguồn chuyên môn gốc; hạ mức các cảnh báo chưa đủ bằng chứng sau QA độc lập.
+- Nêu các nhóm cần duyệt trước: phân luồng mất thị lực/TIA/bong võng mạc, hóa chất/chấn thương, đồng tử trắng ở trẻ, mô tả bệnh và thuốc. Rà riêng địa danh theo Nghị quyết 39/2026/QH16 có hiệu lực 20/09/2026: bài ID 590 sai thông tin hành chính, schema địa chỉ dùng chung và SEO 99 trang còn ghi “Tỉnh Bắc Ninh”, xã Đại Sơn nằm sai nhánh lịch sử. Liệt kê câu lịch sử cần giữ, không thay chuỗi hàng loạt.
+- Chỉ thêm tài liệu trong Git; không sửa WordPress DB, child theme hoặc website production. Đề xuất sửa y khoa cần bác sĩ bệnh viện duyệt, phần BHYT và địa chỉ cần đơn vị có thẩm quyền xác nhận. Chưa kiểm tra toàn bộ 294 bản kết xuất bằng trình duyệt.
+- Kiểm tra sau rà soát: sáu JSON hợp lệ, đủ 294 ID/URL duy nhất và 228 vấn đề; smoke test 6 URL chính + SSH đạt; PHP lint read-only trên production cho `footer.php` và `page-lien-he.php` đạt. Máy local không có lệnh `php`, nên dùng PHP trên server để kiểm tra hai tệp không thay đổi.
+
 ## 2026-09-25 — sửa thẻ bác sĩ trang Chuyên khoa
 
 - Sửa CSS riêng cho thẻ thông tin bác sĩ ở cuối `/chuyen-khoa/`: đặt ảnh cạnh tên, bỏ khoảng cách tiêu đề của bài viết, tăng tương phản nhãn/tên/ghi chú, thu gọn số liệu và ngày cập nhật. Không đổi nội dung y khoa hoặc HTML.

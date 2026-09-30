@@ -1,0 +1,732 @@
+[
+  {
+    "index": 51,
+    "id": 174,
+    "title": "Soi đáy mắt là gì, có phải nhỏ thuốc giãn đồng tử không?",
+    "url": "https://mathanoibacninh.com/kien-thuc/soi-day-mat-la-gi/",
+    "word_count": 2306,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "Từ chối nhỏ thuốc giãn đồng tử để tiết kiệm thời gian là việc làm hỏng giá trị của cả buổi khám",
+        "reason": "Khẳng định tuyệt đối; khám không giãn đồng tử vẫn có giá trị cho thị lực, nhãn áp và bán phần trước. Quyết định giãn tùy chỉ định và chống chỉ định.",
+        "proposed_edit": "Nếu bác sĩ chỉ định giãn đồng tử để đánh giá đáy mắt, nên thực hiện hoặc trao đổi lý do không thể nhỏ thuốc; không giãn có thể hạn chế phần đánh giá võng mạc.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/healthy-vision/finding-eye-doctor/get-dilated-eye-exam"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 52,
+    "id": 175,
+    "title": "Thoái hoá điểm vàng tuổi già: nhìn méo và mất vùng trung tâm",
+    "url": "https://mathanoibacninh.com/kien-thuc/thoai-hoa-diem-vang-tuoi-gia/",
+    "word_count": 2528,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "vẫn đủ để đi lại",
+        "reason": "Thoái hóa hoàng điểm chủ yếu ảnh hưởng thị lực trung tâm, nhưng không bảo đảm mọi người bệnh đều đi lại an toàn; bệnh mắt khác hoặc tổn thương thị lực ngoại vi có thể cùng tồn tại.",
+        "proposed_edit": "Thị lực ngoại vi thường được bảo tồn nên nhiều người vẫn định hướng và đi lại, nhưng khả năng thực tế cần được đánh giá theo từng mắt và bệnh kèm.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/age-related-macular-degeneration"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 53,
+    "id": 176,
+    "title": "Võng mạc tiểu đường: các giai đoạn và điều gì quyết định thị lực",
+    "url": "https://mathanoibacninh.com/kien-thuc/vong-mac-tieu-duong-cac-giai-doan/",
+    "word_count": 2467,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Phù vùng trung tâm mới là thứ làm mờ",
+        "reason": "Diễn đạt loại trừ sai: xuất huyết dịch kính, thiếu máu hoàng điểm, bong võng mạc co kéo cũng có thể làm giảm thị lực do bệnh võng mạc đái tháo đường.",
+        "proposed_edit": "Phù hoàng điểm là một nguyên nhân quan trọng gây mờ; xuất huyết dịch kính, thiếu máu hoặc bong võng mạc co kéo cũng có thể gây giảm thị lực.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/diabetic-retinopathy"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 54,
+    "id": 177,
+    "title": "Lẹo và chắp ở mí mắt: khác nhau và cách xử lý ban đầu",
+    "url": "https://mathanoibacninh.com/kien-thuc/chalazion-va-leo-mat/",
+    "word_count": 2255,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 55,
+    "id": 178,
+    "title": "Đau mắt đỏ bao lâu thì khỏi? Diễn biến theo ngày",
+    "url": "https://mathanoibacninh.com/kien-thuc/dau-mat-do-bao-lau-thi-khoi/",
+    "word_count": 2263,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "Ngày 10–14 — mắt gần trở lại bình thường",
+        "reason": "Mốc hồi phục viêm kết mạc virus được trình bày như lịch cố định, trong khi thời gian khác nhau theo tác nhân và mức độ; có thể kéo dài hơn hai tuần.",
+        "proposed_edit": "Nhiều ca cải thiện trong 1–2 tuần, nhưng có thể lâu hơn; khám lại nếu đau, sợ sáng, giảm thị lực hoặc triệu chứng không cải thiện.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.cdc.gov/conjunctivitis/treatment/index.html"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 56,
+    "id": 179,
+    "title": "Đau mắt đỏ lây qua đường nào? Cách tránh lây cho cả nhà",
+    "url": "https://mathanoibacninh.com/kien-thuc/dau-mat-do-lay-qua-duong-nao/",
+    "word_count": 2283,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 57,
+    "id": 180,
+    "title": "Dị vật bay vào mắt: việc nên làm và việc tuyệt đối không",
+    "url": "https://mathanoibacninh.com/kien-thuc/di-vat-bay-vao-mat-xu-ly-the-nao/",
+    "word_count": 2266,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "rửa thật lâu, liên tục dưới vòi nước trong nhiều phút",
+        "reason": "Hướng dẫn hóa chất bắn vào mắt thiếu thời lượng tối thiểu rõ ràng, có thể khiến người đọc ngừng rửa quá sớm.",
+        "proposed_edit": "Nếu hóa chất vào mắt, mở mi và xả nước sạch nhẹ liên tục ít nhất 20 phút ngay lập tức; tiếp tục rửa trong lúc gọi/đi cấp cứu, không chờ khám mới rửa.",
+        "severity": "critical",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 58,
+    "id": 181,
+    "title": "Khô mắt: vì sao càng nhỏ thuốc càng khô",
+    "url": "https://mathanoibacninh.com/kien-thuc/kho-mat-nguyen-nhan-va-xu-tri/",
+    "word_count": 2386,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 59,
+    "id": 182,
+    "title": "Loét giác mạc: dấu hiệu phải đi khám trong hôm nay",
+    "url": "https://mathanoibacninh.com/kien-thuc/loet-giac-mac-dau-hieu-nguy-hiem/",
+    "word_count": 2278,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 60,
+    "id": 183,
+    "title": "Mắt cộm như có hạt cát: khô mắt hay có dị vật thật?",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-com-nhu-co-hat-cat/",
+    "word_count": 2411,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 61,
+    "id": 184,
+    "title": "Mắt đỏ nhưng không phải đau mắt đỏ: bốn khả năng nghiêm trọng hơn",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-do-khong-phai-dau-mat-do/",
+    "word_count": 2297,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Sờ nhãn cầu qua mi thấy cứng hơn bên kia",
+        "reason": "Đưa tự sờ nhãn cầu thành dấu hiệu nhận biết glôcôm cấp có thể khiến người đọc trì hoãn đi cấp cứu và ấn vào mắt đang đau hoặc sau chấn thương.",
+        "proposed_edit": "Bỏ thao tác tự sờ mắt; đau mắt dữ dội kèm đỏ, nhìn mờ/quầng sáng, nhức đầu hoặc nôn cần cấp cứu để đo nhãn áp và khám trực tiếp.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/glaucoma/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 62,
+    "id": 185,
+    "title": "Nước mắt nhân tạo: cách chọn và cách dùng đúng",
+    "url": "https://mathanoibacninh.com/kien-thuc/nuoc-mat-nhan-tao-dung-the-nao/",
+    "word_count": 2261,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 63,
+    "id": 186,
+    "title": "Viêm bờ mi: bệnh dai dẳng bị bỏ qua nhiều nhất",
+    "url": "https://mathanoibacninh.com/kien-thuc/viem-bo-mi-mat/",
+    "word_count": 2242,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 64,
+    "id": 187,
+    "title": "Lác mắt ở trẻ có tự hết không?",
+    "url": "https://mathanoibacninh.com/kien-thuc/lac-mat-o-tre-co-tu-het-khong/",
+    "word_count": 2255,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 65,
+    "id": 188,
+    "title": "Lác trong và lác ngoài khác nhau thế nào?",
+    "url": "https://mathanoibacninh.com/kien-thuc/lac-trong-lac-ngoai-khac-nhau/",
+    "word_count": 2243,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "xu hướng chung là các đợt lệch xuất hiện dày hơn theo thời gian",
+        "reason": "Diễn tiến lác ngoài từng lúc không mặc định xấu đi. Theo dõi 3 năm trong nghiên cứu PEDIG cho thấy nhiều trẻ ổn định hoặc cải thiện nhẹ.",
+        "proposed_edit": "Một số trẻ lệch mắt thường xuyên hơn, nhưng nhiều trường hợp ổn định; cần khám định kỳ để đánh giá kiểm soát lác và thị giác hai mắt.",
+        "severity": "medium",
+        "source_urls": [
+          "https://pubmed.ncbi.nlm.nih.gov/30690128/"
+        ]
+      },
+      {
+        "quote": "việc mổ trong trường hợp này là không cần thiết",
+        "reason": "Câu áp dụng quá rộng cho lác trong liên quan viễn thị; nếu kính không chỉnh thẳng hoàn toàn, trẻ có thể vẫn cần mổ phần lác còn lại.",
+        "proposed_edit": "Kính có thể làm thẳng mắt trong lác điều tiết hoàn toàn; nếu còn lác khi đeo kính đúng, bác sĩ có thể cân nhắc phẫu thuật.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.aapos.org/glossary/accommodative-esotropia"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 66,
+    "id": 189,
+    "title": "Nhược thị điều trị được đến tuổi nào? Vì sao thời gian quan trọng",
+    "url": "https://mathanoibacninh.com/kien-thuc/nhuoc-thi-dieu-tri-den-tuoi-nao/",
+    "word_count": 2246,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 67,
+    "id": 190,
+    "title": "Nhược thị ở trẻ là gì? Vì sao đeo kính vẫn không nhìn rõ",
+    "url": "https://mathanoibacninh.com/kien-thuc/nhuoc-thi-la-gi-o-tre/",
+    "word_count": 2402,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Chỉ làm phần một mà bỏ phần hai chính là lý do nhiều gia đình thấy",
+        "reason": "Hàm ý mọi trẻ nhược thị đều cần bịt mắt/điều trị kích thích sau đeo kính. Kính đơn thuần có thể cải thiện đủ ở một số trẻ; bước sau tùy đáp ứng.",
+        "proposed_edit": "Đeo kính đúng và tái khám để đo đáp ứng; nếu thị lực còn kém hoặc ngừng cải thiện, bác sĩ mới chọn bịt mắt, atropine hoặc phương án khác.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/research-and-training/research-news/extended-daily-eye-patching-effective-treating-stubborn-amblyopia-children",
+          "https://www.nei.nih.gov/research-and-training/research-news/nei-supported-project-expands-access-care-children-amblyopia"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 68,
+    "id": 191,
+    "title": "Mắt trẻ sơ sinh hơi lác: khi nào là bình thường",
+    "url": "https://mathanoibacninh.com/kien-thuc/tre-so-sinh-mat-lac-nhe/",
+    "word_count": 2284,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 69,
+    "id": 192,
+    "title": "Bịt mắt điều trị nhược thị: vì sao phải kiên trì và bịt bao lâu",
+    "url": "https://mathanoibacninh.com/kien-thuc/bit-mat-dieu-tri-nhuoc-thi/",
+    "word_count": 2404,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "kính chỉ làm ảnh rõ trên võng mạc chứ không tập được phần não đọc ảnh",
+        "reason": "Phủ nhận hiệu quả điều trị nhược thị của kính; chỉnh khúc xạ đơn thuần có thể cải thiện thị lực nhược thị ở nhiều trẻ.",
+        "proposed_edit": "Kính tạo ảnh rõ và có thể giúp thị lực mắt nhược cải thiện; theo dõi đáp ứng rồi bổ sung bịt mắt, atropine hoặc cách khác nếu cần.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nei.nih.gov/research-and-training/research-news/extended-daily-eye-patching-effective-treating-stubborn-amblyopia-children"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 70,
+    "id": 193,
+    "title": "Đồng tử trắng hoặc ánh sáng lạ trong ảnh chụp trẻ",
+    "url": "https://mathanoibacninh.com/kien-thuc/dong-tu-trang-o-tre/",
+    "word_count": 2308,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Chuyên khoa phụ trách là nhược thị và lác",
+        "reason": "Định tuyến chuyên khoa hẹp có thể bỏ sót u nội nhãn hoặc đục thể thủy tinh bẩm sinh.",
+        "proposed_edit": "Ghi “khám mắt trẻ em khẩn để loại trừ bệnh nội nhãn; chuyển chuyên khoa ung bướu mắt nếu nghi u nguyên bào võng mạc”.",
+        "severity": "high",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/retinoblastoma/symptoms/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 71,
+    "id": 194,
+    "title": "Khám mắt cho trẻ trước tuổi đi học: những gì được kiểm tra",
+    "url": "https://mathanoibacninh.com/kien-thuc/kham-mat-cho-tre-truoc-tuoi-di-hoc/",
+    "word_count": 2265,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 72,
+    "id": 199,
+    "title": "Sụp mi ở trẻ nhỏ: vì sao ảnh hưởng đến phát triển thị lực",
+    "url": "https://mathanoibacninh.com/kien-thuc/sup-mi-o-tre-nho/",
+    "word_count": 2440,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 73,
+    "id": 200,
+    "title": "Trẻ chậm phản ứng với ánh sáng và đồ vật: mốc thị giác theo tháng tuổi",
+    "url": "https://mathanoibacninh.com/kien-thuc/tre-cham-phan-ung-anh-sang/",
+    "word_count": 2361,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "mốc thị giác theo tháng tuổi",
+        "reason": "Tiêu đề hứa mốc theo tháng nhưng phần thân chỉ chia sơ sinh, vài tháng đầu và nửa cuối năm đầu; phụ huynh khó đối chiếu tuổi cụ thể.",
+        "proposed_edit": "Thêm bảng tuổi theo tháng (ví dụ 0–2, 3–4, 6, 9–12 tháng) và dấu hiệu cần đánh giá, có nguồn phát triển thị giác đáng tin cậy.",
+        "severity": "low",
+        "source_urls": []
+      }
+    ]
+  },
+  {
+    "index": 74,
+    "id": 254,
+    "title": "Đau mắt dữ dội kèm nhức đầu và nôn: vì sao không được chờ",
+    "url": "https://mathanoibacninh.com/kien-thuc/dau-mat-du-doi-kem-nhuc-dau-non/",
+    "word_count": 2248,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Sờ thấy nhãn cầu bên đau căng cứng hơn bên lành rõ rệt",
+        "reason": "Không nên hướng dẫn tự ấn vào mắt nghi cấp cứu; sờ không thay thế đo nhãn áp và có thể gây đau hoặc hại thêm nếu nguyên nhân là chấn thương.",
+        "proposed_edit": "Bỏ dấu hiệu tự sờ; nhấn mạnh đau mắt dữ dội, đỏ, nhìn mờ/quầng sáng và nôn là lý do cấp cứu nhãn khoa ngay.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/glaucoma/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 75,
+    "id": 255,
+    "title": "Mắt bị chấn thương do vật nhọn hoặc hoá chất: sơ cứu đúng cách",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-bi-cham-thuong-do-vat-nhon/",
+    "word_count": 2281,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "nhiều hơn mức bạn nghĩ là đủ",
+        "reason": "Thiếu mốc tối thiểu để xử trí bỏng hóa chất; người đọc có thể rửa vài phút rồi dừng.",
+        "proposed_edit": "Rửa ngay bằng nước sạch chảy nhẹ, giữ mở mi liên tục ít nhất 20 phút; gọi/đến cấp cứu và tiếp tục rửa khi chờ hỗ trợ, đặc biệt với hóa chất mạnh.",
+        "severity": "critical",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/eye-injuries/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 76,
+    "id": 256,
+    "title": "Mắt giật và co mí liên tục: khi nào cần khám",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-giat-va-co-mi-lien-tuc/",
+    "word_count": 2254,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 77,
+    "id": 257,
+    "title": "Mắt mờ đột ngột trong vài phút rồi trở lại: có nên bỏ qua",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-dot-ngot-trong-vai-phut/",
+    "word_count": 2294,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "đi khám trong hôm nay",
+        "reason": "Mất thị lực một mắt thoáng qua có thể là cơn thiếu máu não thoáng qua ở võng mạc, cần đường cấp cứu đột quỵ ngay dù đã hồi phục, không chỉ hẹn khám mắt trong ngày.",
+        "proposed_edit": "Nếu đột ngột mất thị lực một mắt dù đã tự hồi phục, gọi cấp cứu/đến khoa cấp cứu có khả năng đánh giá đột quỵ ngay; đánh giá mắt và tim mạch song song.",
+        "severity": "critical",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/transient-ischaemic-attack-tia/symptoms/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 78,
+    "id": 258,
+    "title": "Mắt nhạy cảm với ánh sáng bất thường: những khả năng cần khám",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-nhay-cam-voi-anh-sang/",
+    "word_count": 2319,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 79,
+    "id": 259,
+    "title": "Mười dấu hiệu ở mắt phải đi khám ngay trong hôm nay",
+    "url": "https://mathanoibacninh.com/kien-thuc/muoi-dau-hieu-o-mat-phai-di-kham-ngay/",
+    "word_count": 2381,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Đi khám nhãn khoa ngay trong hôm nay",
+        "reason": "Bài gom mất thị lực thoáng qua với các triệu chứng mắt khác vào lịch nhãn khoa trong ngày; mất thị lực đột ngột có thể là TIA cần cấp cứu ngay.",
+        "proposed_edit": "Tách mất thị lực đột ngột hoặc thoáng qua thành chỉ dẫn đến cấp cứu đột quỵ ngay, kể cả khi đã hết; các dấu hiệu mắt khác tùy phân tầng.",
+        "severity": "critical",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/transient-ischaemic-attack-tia/symptoms/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 80,
+    "id": 260,
+    "title": "Nhìn đôi, nhìn nhoè: khi nào liên quan đến vấn đề ngoài mắt",
+    "url": "https://mathanoibacninh.com/kien-thuc/nhin-doi-nhin-nhoe/",
+    "word_count": 2280,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Nhìn đôi kèm nhức đầu dữ dội",
+        "reason": "Nhìn đôi mới xuất hiện kèm nhức đầu dữ dội là cảnh báo thần kinh cần khoa cấp cứu ngay, không chỉ khám mắt trong ngày.",
+        "proposed_edit": "Nhìn đôi mới xuất hiện kèm đau đầu dữ dội, đồng tử giãn/bất thường hoặc sau chấn thương đầu: đi khoa cấp cứu ngay; các trường hợp nhìn đôi mới khác cũng cần đánh giá khẩn.",
+        "severity": "critical",
+        "source_urls": [
+          "https://www.nhs.uk/symptoms/double-vision/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 81,
+    "id": 261,
+    "title": "Nhìn thấy quầng sáng quanh đèn vào buổi tối",
+    "url": "https://mathanoibacninh.com/kien-thuc/nhin-thay-quang-sang-quanh-den/",
+    "word_count": 2357,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 82,
+    "id": 262,
+    "title": "Nhức mỏi mắt khi nhìn máy tính lâu: khi nào chỉ là mỏi",
+    "url": "https://mathanoibacninh.com/kien-thuc/nhuc-moi-mat-khi-nhin-may-tinh/",
+    "word_count": 2356,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 83,
+    "id": 263,
+    "title": "Sưng nề quanh mắt kèm sốt: dấu hiệu nhiễm trùng lan rộng",
+    "url": "https://mathanoibacninh.com/kien-thuc/sung-ne-quanh-mat-va-sot/",
+    "word_count": 2247,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "Sưng nề quanh mắt kèm sốt",
+        "reason": "Sưng mí kèm sốt, lồi mắt, đau/hạn chế vận nhãn hoặc giảm thị lực có thể là viêm tổ chức hốc mắt; chỉ “khám trong hôm nay” dễ làm chậm điều trị nội trú.",
+        "proposed_edit": "Nếu sốt kèm sưng đỏ quanh mắt, đau khi đảo mắt, lồi mắt, nhìn đôi hoặc giảm thị lực: tới khoa cấp cứu ngay để đánh giá viêm hốc mắt và điều trị toàn thân.",
+        "severity": "critical",
+        "source_urls": [
+          "https://www.kingstonandrichmond.nhs.uk/services/healthcare-professionals/how-refer/paediatric-referrals/periorbital-cellulitis"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 84,
+    "id": 267,
+    "title": "Kiểm soát tiến triển cận thị là gì? Phân biệt với chữa cận",
+    "url": "https://mathanoibacninh.com/kien-thuc/kiem-soat-tien-trien-can-thi-la-gi/",
+    "word_count": 2630,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 85,
+    "id": 268,
+    "title": "Glôcôm có chữa khỏi được không? Mục tiêu điều trị thực tế",
+    "url": "https://mathanoibacninh.com/kien-thuc/glocom-co-chua-khoi-duoc-khong/",
+    "word_count": 2619,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Bậc thường bắt đầu là thuốc nhỏ",
+        "reason": "Mô hình thuốc trước, laser sau không còn đúng cho mọi ca glôcôm góc mở/tăng nhãn áp. NICE khuyến nghị SLT 360° là lựa chọn đầu tay cho nhóm đủ điều kiện.",
+        "proposed_edit": "Tùy loại bệnh và nguy cơ, điều trị đầu tay có thể là laser SLT hoặc thuốc nhỏ; phẫu thuật cân nhắc theo mức độ và kiểm soát nhãn áp.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.nice.org.uk/guidance/ng81/chapter/Recommendations"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 86,
+    "id": 269,
+    "title": "Tắc mạch máu võng mạc: mất thị lực đột ngột không đau",
+    "url": "https://mathanoibacninh.com/kien-thuc/tac-mach-mau-vong-mac/",
+    "word_count": 2418,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "cơ sở có chuyên khoa mắt ngay lập tức",
+        "reason": "Tắc động mạch võng mạc và mất thị lực một mắt thoáng qua là dấu hiệu thiếu máu cấp cần đường cấp cứu đột quỵ, không chỉ chuyển tới cơ sở mắt.",
+        "proposed_edit": "Với mất thị lực một mắt đột ngột/thoáng qua hoặc nghi tắc động mạch võng mạc, đến cấp cứu có khả năng đánh giá đột quỵ ngay; phối hợp bác sĩ mắt.",
+        "severity": "critical",
+        "source_urls": [
+          "https://www.nhs.uk/conditions/transient-ischaemic-attack-tia/symptoms/",
+          "https://professional.heart.org/en/science-news/management-of-central-retinal-artery-occlusion/top-things-to-know"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 87,
+    "id": 284,
+    "title": "Bảo hiểm y tế khi khám mắt: cơ chế chi trả và thủ tục cơ bản",
+    "url": "https://mathanoibacninh.com/kien-thuc/bao-hiem-y-te-kham-mat-the-nao/",
+    "word_count": 2698,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "thuộc phạm vi khám chữa bệnh nói chung chứ không nằm trong nhóm bị loại trừ",
+        "reason": "Khẳng định BHYT quá rộng. Điều trị lác, cận thị, tật khúc xạ (trừ trẻ dưới 6 tuổi) và kính mắt thuộc nhóm không được quỹ chi trả.",
+        "proposed_edit": "Khám và điều trị bệnh mắt có thể được BHYT thanh toán khi đáp ứng điều kiện; điều trị lác/cận/tật khúc xạ ở người từ 6 tuổi và kính mắt có ngoại lệ loại trừ, cần kiểm tra danh mục dịch vụ cụ thể.",
+        "severity": "medium",
+        "source_urls": [
+          "https://baohiemxahoi.gov.vn/tintuc/Pages/kinh-te-xa-hoi.aspx?CateID=0&ItemID=22818"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 88,
+    "id": 285,
+    "title": "Đi khám mắt cần chuẩn bị gì? Danh sách mang theo",
+    "url": "https://mathanoibacninh.com/kien-thuc/di-kham-mat-can-chuan-bi-gi/",
+    "word_count": 2727,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 89,
+    "id": 286,
+    "title": "Giấy chuyển tuyến cần những gì và xin ở đâu",
+    "url": "https://mathanoibacninh.com/kien-thuc/giay-chuyen-tuyen-can-nhung-gi/",
+    "word_count": 2699,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "chỗ để bắt đầu là nơi ghi trên thẻ bảo hiểm của bạn",
+        "reason": "Trình bày nơi đăng ký ban đầu như tuyến bắt buộc duy nhất; luật hiện hành cho phép khám tại bất kỳ cơ sở cấp ban đầu và một số trường hợp tự đi không cần giấy chuyển.",
+        "proposed_edit": "Trước khi xin giấy chuyển, kiểm tra cấp chuyên môn của nơi định khám và các trường hợp BHYT được tự đi; nếu thật sự cần chuyển, liên hệ cơ sở đang quản lý/điều trị để được hướng dẫn.",
+        "severity": "medium",
+        "source_urls": [
+          "https://baohiemxahoi.gov.vn/tintuc/Pages/hoat-dong-bhxh-viet-nam.aspx?CateID=0&ItemID=24476&OtItem=date",
+          "https://baohiemxahoi.gov.vn/UserControls/Publishing/News/BinhLuan/pFormPrint.aspx?IsTA=False&ItemID=25069&UrlListProcess=%2Fcontent%2Ftintuc%2Flists%2Fnews"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 90,
+    "id": 287,
+    "title": "Đọc kết quả khám mắt: các chỉ số thường gặp nghĩa là gì",
+    "url": "https://mathanoibacninh.com/kien-thuc/ket-qua-kham-mat-doc-the-nao/",
+    "word_count": 2738,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 91,
+    "id": 288,
+    "title": "Khám đúng tuyến và vượt tuyến khác nhau thế nào",
+    "url": "https://mathanoibacninh.com/kien-thuc/kham-dung-tuyen-va-vuot-tuyen/",
+    "word_count": 2723,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "Vượt tuyến là khi bạn tự đi tới một cơ sở không phải nơi đăng ký ban đầu",
+        "reason": "Định nghĩa giản lược và lỗi thời: có nhiều trường hợp tự đến nơi khác vẫn được hưởng theo mức quy định, gồm cấp ban đầu trên toàn quốc và bệnh thuộc danh mục ngoại lệ.",
+        "proposed_edit": "Giải thích theo cấp cơ sở, loại điều trị và các trường hợp tự đi được hưởng BHYT; tránh đồng nhất mọi trường hợp không giấy chuyển với “vượt tuyến”.",
+        "severity": "medium",
+        "source_urls": [
+          "https://baohiemxahoi.gov.vn/tintuc/Pages/hoat-dong-bhxh-viet-nam.aspx?CateID=0&ItemID=24476&OtItem=date",
+          "https://baohiemxahoi.gov.vn/UserControls/Publishing/News/BinhLuan/pFormPrint.aspx?IsTA=False&ItemID=25069&UrlListProcess=%2Fcontent%2Ftintuc%2Flists%2Fnews"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 92,
+    "id": 289,
+    "title": "Khi nào cần khám lại mắt? Lịch theo từng nhóm bệnh",
+    "url": "https://mathanoibacninh.com/kien-thuc/khi-nao-can-kham-lai-mat/",
+    "word_count": 2631,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "khám đáy mắt theo lịch ngay từ khi được chẩn đoán",
+        "reason": "Không phân biệt đái tháo đường type 1 và type 2: type 2 cần khám sớm khi chẩn đoán, còn type 1 thường bắt đầu trong vòng 5 năm theo hướng dẫn ADA.",
+        "proposed_edit": "Đái tháo đường type 2: khám mắt giãn đồng tử sớm sau chẩn đoán; type 1: khám trong vòng 5 năm sau chẩn đoán, sau đó theo lịch cá nhân của bác sĩ.",
+        "severity": "low",
+        "source_urls": [
+          "https://diabetes.org/health-wellness/eye-health/diabetes-your-eyes-getting-started?form=Donate2"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 93,
+    "id": 290,
+    "title": "Người già đi khám mắt có cần người nhà đi cùng không",
+    "url": "https://mathanoibacninh.com/kien-thuc/nguoi-gia-di-kham-mat-can-nguoi-di-cung/",
+    "word_count": 2743,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 94,
+    "id": 291,
+    "title": "Nhỏ thuốc giãn đồng tử: mờ bao lâu và vì sao cần thiết",
+    "url": "https://mathanoibacninh.com/kien-thuc/nho-thuoc-gian-dong-tu-anh-huong-gi/",
+    "word_count": 2738,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 95,
+    "id": 292,
+    "title": "Quy trình khám mắt gồm mấy bước và mất bao lâu",
+    "url": "https://mathanoibacninh.com/kien-thuc/quy-trinh-kham-mat-gom-may-buoc/",
+    "word_count": 2754,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 96,
+    "id": 293,
+    "title": "Trước khi khám mắt có cần nhịn ăn, có lái xe về được không",
+    "url": "https://mathanoibacninh.com/kien-thuc/truoc-khi-kham-mat-co-can-nhin-an/",
+    "word_count": 2731,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 97,
+    "id": 565,
+    "title": "Cộm mắt kéo dài mà khám không tìm ra dị vật: vì sao và làm gì",
+    "url": "https://mathanoibacninh.com/kien-thuc/com-mat-keo-dai-khong-tim-ra-di-vat/",
+    "word_count": 2764,
+    "status": "ok",
+    "issues": []
+  },
+  {
+    "index": 98,
+    "id": 566,
+    "title": "Đau nhức phía sau nhãn cầu khi động mắt: tại sao lại đau",
+    "url": "https://mathanoibacninh.com/kien-thuc/dau-nhuc-phia-sau-nhan-cau-khi-dong-mat/",
+    "word_count": 2664,
+    "status": "medical-review",
+    "issues": [
+      {
+        "quote": "không tự khỏi",
+        "reason": "Viêm thị thần kinh điển hình thường có thể cải thiện thị lực tự nhiên; steroid có thể rút ngắn thời gian hồi phục, nên câu tuyệt đối là sai. Vẫn phải đánh giá khẩn để xác định nguyên nhân và loại trừ thể không điển hình.",
+        "proposed_edit": "Viêm thị thần kinh cần khám sớm dù thị lực có thể tự hồi phục; điều trị phụ thuộc nguyên nhân, mức độ và đánh giá thần kinh–nhãn khoa.",
+        "severity": "medium",
+        "source_urls": [
+          "https://www.hey.nhs.uk/patient-leaflet/optic-neuritis/"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 99,
+    "id": 567,
+    "title": "Đau quanh hốc mắt kéo dài nhiều ngày: khi nào cần đi khám",
+    "url": "https://mathanoibacninh.com/kien-thuc/dau-quanh-hoc-mat-keo-dai-nhieu-ngay/",
+    "word_count": 2727,
+    "status": "urgent",
+    "issues": [
+      {
+        "quote": "hai đồng tử không đều",
+        "reason": "Sụp mi mới kèm đồng tử bất thường/nhìn đôi và đau có thể là cấp cứu thần kinh hoặc mạch máu; chỉ hướng tới cơ sở mắt trực là chưa đủ.",
+        "proposed_edit": "Với đau mới kèm sụp mi, đồng tử không đều, nhìn đôi hoặc nhức đầu dữ dội, đi khoa cấp cứu ngay để đánh giá thần kinh và mắt.",
+        "severity": "critical",
+        "source_urls": [
+          "https://www.nhs.uk/symptoms/double-vision/"
+        ]
+      },
+      {
+        "quote": "sưng nề lan quanh mắt, đỏ nóng và sốt",
+        "reason": "Bộ dấu hiệu này gợi viêm hốc mắt, cần cấp cứu bệnh viện, không nên chỉ đi cơ sở mắt trong ngày.",
+        "proposed_edit": "Đến khoa cấp cứu bệnh viện ngay khi đau quanh mắt kèm sốt, sưng đỏ, lồi mắt, đau/hạn chế vận nhãn hoặc giảm thị lực.",
+        "severity": "critical",
+        "source_urls": [
+          "https://www.kingstonandrichmond.nhs.uk/services/healthcare-professionals/how-refer/paediatric-referrals/periorbital-cellulitis"
+        ]
+      }
+    ]
+  },
+  {
+    "index": 100,
+    "id": 568,
+    "title": "Mắt đỏ nhưng thị lực bình thường: có cần lo không",
+    "url": "https://mathanoibacninh.com/kien-thuc/mat-do-khong-dau-khong-mo/",
+    "word_count": 2607,
+    "status": "clarity",
+    "issues": [
+      {
+        "quote": "đều lành tính và tự đỡ trong một đến hai tuần",
+        "reason": "Khô mắt thường mạn tính và viêm kết mạc dị ứng có thể tái phát/kéo dài theo dị nguyên; không thể khẳng định cả nhóm tự hết trong 1–2 tuần.",
+        "proposed_edit": "Nhiều nguyên nhân mắt đỏ với thị lực còn tốt ít nguy hiểm, nhưng thời gian hồi phục khác nhau; nếu đỏ dai dẳng/tái phát cần khám để xác định nguyên nhân.",
+        "severity": "low",
+        "source_urls": [
+          "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/dry-eye"
+        ]
+      }
+    ]
+  }
+]
