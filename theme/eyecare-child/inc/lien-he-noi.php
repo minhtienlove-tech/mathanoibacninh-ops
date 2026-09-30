@@ -69,7 +69,7 @@ function eyecare_floating_contact() {
 	$info = eyecare_du_lieu_thuc_the();
 	$socials = array(
 		'zalo' => array( 'Zalo', 'https://zalo.me/0868899396' ),
-		'facebook' => array( 'Facebook', $info['same_as'][0] ?? 'https://www.facebook.com/BenhVienMatHNBN' ),
+		'facebook' => array( 'Facebook', $info['same_as'][0] ?? 'https://www.facebook.com/benhvienmathanoibacninh' ),
 		'tiktok' => array( 'TikTok', 'https://www.tiktok.com/@bnh.vin.mt.h.ni.b' ),
 		'youtube' => array( 'YouTube', 'https://www.youtube.com/@BenhVienMatHNBN' ),
 	);

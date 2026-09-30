@@ -75,7 +75,7 @@ function eyecare_du_lieu_thuc_the() {
 		// Các hồ sơ chính thức khác của bệnh viện trên mạng.
 		// Chỉ thêm địa chỉ đã xác minh là của bệnh viện.
 		'same_as'        => array(
-			'https://www.facebook.com/BenhVienMatHNBN',
+			'https://www.facebook.com/benhvienmathanoibacninh',
 		),
 
 		// URL nhúng Google Maps do người quản trị cập nhật trong trang
@@ -161,7 +161,7 @@ function eyecare_schema_to_chuc() {
 		'telephone'=> $d['dien_thoai'],
 
 		// Chuyên khoa mắt — thuật ngữ chuẩn của schema.org
-		'medicalSpecialty' => 'Ophthalmologic',
+		'medicalSpecialty' => 'https://schema.org/Ophthalmology',
 
 		'address'  => array(
 			'@type'           => 'PostalAddress',
@@ -207,8 +207,10 @@ function eyecare_schema_to_chuc() {
 		);
 	}
 
-	// Liên kết Facebook vẫn hiển thị trên giao diện. Chỉ thêm sameAs vào
-	// schema sau khi quản trị viên xác minh quyền sở hữu và URL chính thức.
+	// URL Facebook chính thức do người phụ trách website xác nhận 30/09/2026.
+	if ( ! empty( $d['same_as'] ) ) {
+		$org['sameAs'] = array_values( array_filter( $d['same_as'], 'esc_url_raw' ) );
+	}
 
 	// Logo: chỉ khai khi website thật sự có logo tuỳ chỉnh.
 	$logo_id = get_theme_mod( 'custom_logo' );

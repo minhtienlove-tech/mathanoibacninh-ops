@@ -553,7 +553,7 @@ function eyecare_schema_bac_si() {
 		'@id'        => $goc . '#bac-si-le-nhu-tung',
 		'name'       => eyecare_bac_si_ten_day_du(),
 		'url'        => eyecare_bac_si_duong_dan(),
-		'medicalSpecialty' => 'Ophthalmologic',
+		'medicalSpecialty' => 'https://schema.org/Ophthalmology',
 		'worksFor'   => array( '@id' => $goc . '#to-chuc' ),
 	);
 
