@@ -40,7 +40,7 @@ function eyecare_du_lieu_thuc_the() {
 
 		'dia_chi'        => 'Lô 4, đường Hùng Vương',
 		'phuong'         => 'Phường Bắc Giang',
-		'tinh'           => 'Tỉnh Bắc Ninh',
+		'tinh'           => 'Thành phố Bắc Ninh',
 		'quoc_gia'       => 'VN',
 
 		// SỐ TỔNG ĐÀI CHÍNH THỨC: 0868 899 396
@@ -207,9 +207,8 @@ function eyecare_schema_to_chuc() {
 		);
 	}
 
-	if ( ! empty( $d['same_as'] ) ) {
-		$org['sameAs'] = array_values( $d['same_as'] );
-	}
+	// Liên kết Facebook vẫn hiển thị trên giao diện. Chỉ thêm sameAs vào
+	// schema sau khi quản trị viên xác minh quyền sở hữu và URL chính thức.
 
 	// Logo: chỉ khai khi website thật sự có logo tuỳ chỉnh.
 	$logo_id = get_theme_mod( 'custom_logo' );
@@ -389,6 +388,14 @@ function eyecare_in_schema() {
 	echo "\n</script>\n";
 }
 add_action( 'wp_head', 'eyecare_in_schema', 5 );
+
+/** Trang chủ tĩnh cần canonical tự tham chiếu; trang đơn dùng canonical của WordPress/SEO. */
+function eyecare_canonical_trang_chu() {
+	if ( is_front_page() && ! is_paged() ) {
+		echo '<link rel="canonical" href="' . esc_url( home_url( '/' ) ) . '">' . "\n";
+	}
+}
+add_action( 'wp_head', 'eyecare_canonical_trang_chu', 4 );
 
 
 /**

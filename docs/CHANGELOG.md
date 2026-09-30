@@ -1,5 +1,12 @@
 # Production changelog
 
+## 2026-09-30 — chuẩn bị sửa schema thực thể và canonical
+
+- Kiểm tra tám URL công khai và nguồn schema: plugin OBS SEO Suite phát `AutoDealer` và hai `LocalBusiness` trùng định danh; child theme đã có `Hospital/MedicalOrganization` đúng `/#to-chuc`. Chưa xác minh hai URL Facebook và nguồn điểm đánh giá 5/6.
+- Sửa child theme: canonical tự trỏ cho trang chủ; ngừng khẳng định Facebook `sameAs` khi chưa xác minh; đồng bộ tên địa giới hiện hành `Thành phố Bắc Ninh` trong schema, footer và nội dung/SEO các trang khu vực liên quan. Không đổi nội dung y khoa hoặc URL.
+- Sao lưu tám tệp và database trước deploy tại `/home/jwhxtzru/backups/seo-entity-20260930-154327/`; mã production trước sửa khớp Git HEAD, ba tệp PHP mới đã lint đạt ở thư mục staging riêng. Chi tiết/bằng chứng và rollback: `docs/seo-ai-fix/README.md`.
+- **Trạng thái khi commit này:** chưa triển khai. Sau khi upload sẽ tắt riêng ba emitter schema qua option WordPress, xóa cache và ghi kết quả kiểm tra sau sửa.
+
 ## 2026-09-30 — rà soát 294 bài/trang, CHƯA TRIỂN KHAI SỬA NỘI DUNG
 
 - Xuất và đọc toàn văn 150 bài viết, 144 trang đã công bố (trong đó 99 trang xã/phường lấy HTML từ child theme). Lập báo cáo, chỉ mục đủ 294 URL và sáu tệp phát hiện tại `docs/content-audit/2026-09-29/`; 228 điểm cần xem lại, 49 URL ưu tiên sửa, 76 URL cần bác sĩ duyệt. Đối chiếu câu trích, ID, URL và nguồn chuyên môn gốc; hạ mức các cảnh báo chưa đủ bằng chứng sau QA độc lập.

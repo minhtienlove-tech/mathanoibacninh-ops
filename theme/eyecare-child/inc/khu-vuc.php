@@ -139,7 +139,7 @@ function eyecare_khu_vuc_danh_sach( $thuoc_tinh ) {
 	foreach ( eyecare_khu_vuc_du_lieu() as $dia_ban ) {
 		$nhom[ $dia_ban['vung_lich_su'] ][] = $dia_ban;
 	}
-	$ra = '<nav class="kv-directory" aria-label="Danh sách xã phường tỉnh Bắc Ninh">';
+	$ra = '<nav class="kv-directory" aria-label="Danh sách xã phường thành phố Bắc Ninh">';
 	foreach ( $nhom as $vung => $danh_sach ) {
 		if ( $thuoc_tinh['vung'] && $thuoc_tinh['vung'] !== $vung ) {
 			continue;
@@ -212,7 +212,7 @@ function eyecare_schema_khu_vuc() {
 		'inLanguage'  => 'vi-VN',
 		'isPartOf'    => array( '@id' => home_url( '/' ) . '#website' ),
 		'publisher'   => array( '@id' => home_url( '/' ) . '#to-chuc' ),
-		'about'       => array( '@type' => 'Thing', 'name' => 'Thông tin khám mắt tại các địa bàn tỉnh Bắc Ninh' ),
+		'about'       => array( '@type' => 'Thing', 'name' => 'Thông tin khám mắt tại các địa bàn thành phố Bắc Ninh' ),
 	);
 }
 
@@ -241,11 +241,11 @@ function eyecare_khu_vuc_meta() {
 		return;
 	}
 	if ( 'dia-ban' === $nguon['loai'] ) {
-		$mo_ta = 'Thông tin khám mắt cho người dân ' . $nguon['dia_ban']['loai'] . ' ' . $nguon['dia_ban']['ten'] . ', tỉnh Bắc Ninh: tên địa bàn hiện hành, dấu hiệu cần khám, chuẩn bị hồ sơ và địa chỉ bệnh viện.';
+		$mo_ta = 'Thông tin khám mắt cho người dân ' . $nguon['dia_ban']['loai'] . ' ' . $nguon['dia_ban']['ten'] . ', thành phố Bắc Ninh: tên địa bàn hiện hành, dấu hiệu cần khám, chuẩn bị hồ sơ và địa chỉ bệnh viện.';
 	} else {
 		$mo_ta = array(
-			'hub' => 'Tra cứu 99 xã, phường tỉnh Bắc Ninh hiện hành, dấu hiệu cần khám mắt, cách chuẩn bị và bài kiến thức nhãn khoa của Bệnh viện Mắt Hà Nội – Bắc Ninh.',
-			'bac-giang' => 'Hướng dẫn khám mắt cho địa bàn Bắc Giang cũ, nay thuộc tỉnh Bắc Ninh: 57 xã, phường, các triệu chứng cần chú ý và thông tin chuẩn bị.',
+			'hub' => 'Tra cứu 99 xã, phường thành phố Bắc Ninh hiện hành, dấu hiệu cần khám mắt, cách chuẩn bị và bài kiến thức nhãn khoa của Bệnh viện Mắt Hà Nội – Bắc Ninh.',
+			'bac-giang' => 'Hướng dẫn khám mắt cho địa bàn Bắc Giang cũ, nay thuộc thành phố Bắc Ninh: 57 xã, phường, các triệu chứng cần chú ý và thông tin chuẩn bị.',
 			'bac-ninh' => 'Hướng dẫn khám mắt tại địa bàn Bắc Ninh cũ: 42 xã, phường hiện hành, triệu chứng, chuẩn bị và bài đọc về nhãn khoa.',
 		)[ $nguon['ma'] ];
 	}

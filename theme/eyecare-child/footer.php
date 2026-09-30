@@ -127,7 +127,7 @@ $eyecare_anh_bac_si_tung   = function_exists( 'eyecare_bac_si_anh_tac_gia' ) ? e
 			</div>
 			<div class="eyecare-ban-do__tien-ich-item">
 				<span class="eyecare-ban-do__tien-ich-icon eyecare-ban-do__tien-ich-icon--vang" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 22s7-7 7-12a7 7 0 1 0-14 0c0 5 7 12 7 12z"></path><circle cx="12" cy="10" r="3"></circle></svg></span>
-				<span><small>Địa chỉ hiện hành</small><strong>Phường Bắc Giang, Tỉnh Bắc Ninh</strong></span>
+				<span><small>Địa chỉ hiện hành</small><strong><?php echo esc_html( $eyecare_tt['phuong'] . ', ' . $eyecare_tt['tinh'] ); ?></strong></span>
 			</div>
 			<div class="eyecare-ban-do__tien-ich-item">
 				<span class="eyecare-ban-do__tien-ich-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M5 12h14M12 5l7 7-7 7"></path></svg></span>
