@@ -1,5 +1,12 @@
 # Production changelog
 
+## 2026-09-30 — đã triển khai sửa schema thực thể và canonical
+
+- Triển khai commit `206bcf8`: tám tệp child theme được upload đúng bản Git, SHA-256 local/live khớp; ba option OBS SEO Suite chỉ tắt emitter `AutoDealer`, GMB schema và LocalBusiness trùng (`enable_dealer=0`, `enable_schema=0`, `schema_enable=0`). Không sửa mã plugin/core.
+- Trước triển khai đã sao lưu tám tệp và database tại `/home/jwhxtzru/backups/seo-entity-20260930-154327/`. Sau triển khai lint PHP 3/3, xóa object cache và LiteSpeed, smoke 6 URL + SSH đạt.
+- Bản audit HTML sau purge gồm 11 URL: HTTP 200, canonical HTTPS đúng một thẻ, không `AutoDealer`, `/#localbusiness`, `AggregateRating`, không lỗi JSON-LD; mỗi URL giữ `Hospital/MedicalOrganization` `/#to-chuc`. Trang chủ có canonical mới, tên địa giới hiện hành đã đồng bộ trong schema/footer/nội dung khu vực liên quan. `robots.txt` và sitemap hoạt động.
+- Trình duyệt desktop/mobile đã kiểm tra giao diện chính; Google Search Console live test trang chủ cho phép lập chỉ mục và đã xác nhận URL vào hàng đợi ưu tiên. Chi tiết bằng chứng, việc còn cần xác minh và rollback: `docs/seo-ai-fix/README.md`.
+
 ## 2026-09-30 — chuẩn bị sửa schema thực thể và canonical
 
 - Kiểm tra tám URL công khai và nguồn schema: plugin OBS SEO Suite phát `AutoDealer` và hai `LocalBusiness` trùng định danh; child theme đã có `Hospital/MedicalOrganization` đúng `/#to-chuc`. Chưa xác minh hai URL Facebook và nguồn điểm đánh giá 5/6.

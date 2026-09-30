@@ -1,6 +1,6 @@
 # Sửa nhận diện thực thể và SEO kỹ thuật — 30/09/2026
 
-Phạm vi: WordPress production `https://mathanoibacninh.com/`, child theme `eyecare-child`, plugin đang hoạt động `obs-seo-suite 2.22.1i`. Bản quét công khai trước thay đổi: [before.json](before.json). Tệp này chỉ chứa các trường công khai phục vụ đối chiếu, không có dữ liệu bệnh nhân. Script đọc: `scripts/seo-schema-audit.py`.
+Phạm vi: WordPress production `https://mathanoibacninh.com/`, child theme `eyecare-child`, plugin đang hoạt động `obs-seo-suite 2.22.1i`. Bản quét công khai [trước](before.json) và [sau](after.json) thay đổi chỉ chứa các trường công khai phục vụ đối chiếu, không có dữ liệu bệnh nhân. Script đọc: `scripts/seo-schema-audit.py`.
 
 ## Hiện trạng đã kiểm tra
 
@@ -17,6 +17,16 @@ Trước sửa, cả tám URL mẫu trả 200, không có `noindex` hay `X-Robot
 
 `robots.txt` trả 200, cho phép trang công khai và chỉ chặn `/wp-admin/`. Sitemap đang dùng là `/wp-sitemap.xml`, dẫn tới ba sitemap OBS; `/sitemap_index.xml` trả 404 nên không phải sitemap đang dùng. HTTPS `www` chuyển về non-www, nhưng `http://mathanoibacninh.com/` vẫn trả 200 và chưa có redirect HTTPS; canonical sẽ trỏ HTTPS, còn quy tắc redirect ở webserver cần xử lý theo phạm vi cấu hình hosting. Không có log WAF/crawler trong quyền SSH hiện có; không thể kết luận bot thật đã hoặc chưa bị chặn.
 
+## Đã triển khai và đối chiếu sau sửa
+
+Đã triển khai commit `206bcf8` lên production ngày 30/09/2026: chép đúng tám tệp child theme đã sao lưu; tắt ba emitter schema bằng `wp option patch update` (`obs_seo_schema.enable_dealer=0`, `obs_seo_gmb.enable_schema=0`, `obs_seo_local_seo.schema_enable=0`). Không sửa plugin, core hay database bằng search-replace. Cả tám tệp live khớp SHA-256 với Git. `php -l` đạt trên ba tệp PHP đã sửa; `wp cache flush` và `wp litespeed-purge all` thành công.
+
+Audit HTML công khai sau purge trên 11 URL gồm trang chủ, giới thiệu, bác sĩ, liên hệ, dịch vụ, bảng giá, bài kiến thức và các trang khu vực: 11/11 HTTP 200, canonical HTTPS tự trỏ đúng một thẻ, không `noindex`/`X-Robots-Tag`, không lỗi parse JSON-LD. `AutoDealer`, `/#dealer`, `/#localbusiness` và `AggregateRating` đều không còn; mỗi URL vẫn có đúng một thực thể `Hospital`/`MedicalOrganization` `/#to-chuc`, địa chỉ vùng là `Thành phố Bắc Ninh` và không còn `sameAs` Facebook chưa xác minh. Trang chủ giảm từ 6 xuống 3 node JSON-LD; các schema `Article`, `FAQ`, `Physician` liên quan vẫn có trên URL tương ứng. Hai node `WebSite` chung `/#website` còn lại thống nhất tên và URL; chưa tắt plugin tổng thể để tránh mất schema trang/bài hợp lệ.
+
+`/robots.txt`, `/wp-sitemap.xml` và các sitemap OBS được kiểm tra lại, đều HTTP 200. `scripts/verify-live.ps1 -CheckSsh` đạt cho sáu URL chính và SSH/WP. Trình duyệt desktop và khung mobile khoảng 518 px đã kiểm tra trang chủ, `/khu-vuc/`, footer, menu và giao diện đặt lịch; không thấy tràn ngang. Form đặt lịch chỉ được kiểm tra giao diện và trạng thái nhập liệu, không gửi lịch thử.
+
+Google Search Console: kiểm tra trực tiếp bản live của trang chủ ngày 30/09/2026, trả “Google có thể lập chỉ mục URL này”, “Trang có thể lập chỉ mục” và “URL không có tính năng nâng cao”. Đã bấm yêu cầu lập chỉ mục; Search Console xác nhận “Đã yêu cầu lập chỉ mục”, URL vào hàng đợi ưu tiên thu thập. Báo cáo dữ liệu đã lập chỉ mục trước đó vẫn có thể hiển thị review snippet cũ cho đến khi Google thu thập lại; việc gửi yêu cầu không bảo đảm thời điểm hoặc vị trí xếp hạng.
+
 ## Sao lưu và rollback
 
 Backup production riêng tư: `/home/jwhxtzru/backups/seo-entity-20260930-154327/`; gồm tám tệp nguồn trước thay đổi và `database.sql` (13 MB). Tám tệp đã được đối chiếu khớp Git HEAD trước khi sửa. Không đưa SQL vào Git.
@@ -28,4 +38,5 @@ Khôi phục riêng đợt này: chép lại tám tệp từ `.../files/wp-conte
 - Fanpage nào là chính thức: `BenhVienMatHNBN` hay `benhvienmathanoibacninh`, hoặc cả hai có cùng Page ID. HTTP 200 ở cả hai URL không chứng minh cùng chủ sở hữu.
 - Nguồn, quyền sử dụng và điều kiện hiển thị công khai của điểm đánh giá 5/6 trong GMB; chưa có chứng cứ để công bố dưới dạng `AggregateRating`.
 - Hồ sơ pháp lý/giấy phép, dữ liệu bác sĩ và các nội dung y khoa đã được đánh dấu trong `docs/content-audit/2026-09-29/` cần người phụ trách chuyên môn duyệt. Đợt sửa này không thay nội dung chuyên môn.
-- Search Console, WAF/CDN và log truy cập bot thật chưa có quyền kiểm tra; HTTP 200 từ trình duyệt không chứng minh đã index hay xuất hiện trong ChatGPT Search.
+- Nguồn và sự đồng ý sử dụng các lời đánh giá/ảnh bệnh nhân vẫn đang hiển thị trên website cần xác nhận riêng; đã bỏ `AggregateRating` chưa chứng minh, chưa đụng vào nội dung lời chứng thực.
+- HTTP → HTTPS cần quy tắc ở lớp webserver/hosting; không sửa ngoài child theme trong đợt này. WAF/CDN và log truy cập bot thật chưa có dữ liệu để xác nhận; HTML công khai và Search Console không chứng minh đã xuất hiện trong ChatGPT Search.
