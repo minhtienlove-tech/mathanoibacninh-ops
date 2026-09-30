@@ -554,7 +554,6 @@ function eyecare_schema_bac_si() {
 		'name'       => eyecare_bac_si_ten_day_du(),
 		'url'        => eyecare_bac_si_duong_dan(),
 		'medicalSpecialty' => 'https://schema.org/Ophthalmology',
-		'worksFor'   => array( '@id' => $goc . '#to-chuc' ),
 	);
 
 	// Chức danh: chỉ khai khi có. Đang để rỗng theo QĐ-03 — trường jobTitle
@@ -918,10 +917,9 @@ function eyecare_schema_bai_viet() {
 		'datePublished'    => get_the_date( 'c', $id ),
 		'dateModified'     => get_the_modified_date( 'c', $id ),
 		'author'           => array( '@id' => $goc . '#bac-si-le-nhu-tung' ),
-		'reviewedBy'       => array( '@id' => $goc . '#bac-si-le-nhu-tung' ),
 		'publisher'        => array( '@id' => $goc . '#to-chuc' ),
 		'isPartOf'         => array( '@id' => $goc . '#website' ),
-		'medicalAudience'  => 'Patient',
+		'medicalAudience'  => array( '@type' => 'Patient' ),
 	);
 
 	$mo_ta = get_the_excerpt( $id );
@@ -938,6 +936,7 @@ function eyecare_schema_bai_viet() {
 	$ngay_duyet = get_post_meta( $id, '_bvmat_bac_si_duyet', true );
 	if ( $ngay_duyet ) {
 		$bai['lastReviewed'] = $ngay_duyet;
+		$bai['reviewedBy'] = array( '@id' => $goc . '#bac-si-le-nhu-tung' );
 	}
 
 	// Bệnh mà bài nói về — điền qua meta _bvmat_benh khi nhập bài.
@@ -984,7 +983,7 @@ function eyecare_schema_trang_y_khoa() {
 		'publisher'        => array( '@id' => $goc . '#to-chuc' ),
 		'isPartOf'         => array( '@id' => $goc . '#website' ),
 		'mainEntityOfPage' => array( '@id' => $url ),
-		'medicalAudience'  => 'Patient',
+		'medicalAudience'  => array( '@type' => 'Patient' ),
 	);
 
 	$mo_ta = get_post_meta( $id, '_bvmat_seo_description', true );

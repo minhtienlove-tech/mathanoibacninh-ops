@@ -105,7 +105,7 @@ function eyecare_schema_lien_he_noi_dung() {
 			'publisher'        => array( '@id' => home_url( '/' ) . '#to-chuc' ),
 			'isPartOf'         => array( '@id' => home_url( '/' ) . '#website' ),
 			'mainEntityOfPage' => array( '@id' => $url ),
-			'medicalAudience'  => 'Patient',
+			'medicalAudience'  => array( '@type' => 'Patient' ),
 			'about'            => array(
 				'@type' => 'MedicalClinic',
 				'name'  => $d['ten'],
