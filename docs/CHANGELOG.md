@@ -6,6 +6,7 @@
 - Thay đổi chỉ ở `inc/tra-cuu-bai-viet.php`, `page-kien-thuc.php` và `style.css`; không đổi nội dung y khoa, URL bài, tiêu đề hoặc metadata SEO. Trạng thái triển khai, backup, QA và rollback được cập nhật sau khi kiểm tra production.
 - Sao lưu ba tệp và database tại `/home/jwhxtzru/backups/article-directory-20261001071715/` trước triển khai. PHP lint đạt; sau purge, `/kien-thuc/` trả 200 và có 162 liên kết trong thư mục, bài `/kien-thuc/chon-noi-kham-mat-o-bac-ninh/` trả 200 và chỉ còn sáu bài liên quan. HTML thô bài mẫu giảm từ 116.070 xuống 85.781 byte. Trình duyệt 375 px không tràn ngang và không ghi lỗi JS. Rollback: khôi phục ba tệp từ thư mục backup, xóa cache; chỉ khôi phục DB nếu cần hoàn tác thay đổi ảnh đại diện.
 - Chuẩn bị `scripts/set-content-plan-featured.php` để dùng 12 ảnh hiện có, đúng chủ đề cho 12 bài ID 1441–1452 còn thiếu ảnh. Script xem trước đã xác nhận mọi ID bài và media; chỉ gắn khi chưa có ảnh, không đổi alt của media dùng chung.
+- Đã chạy script ở chế độ áp dụng sau backup, 12/12 bài có ảnh đại diện; 12/12 URL bài trả 200 và `og:image` không còn là favicon. Không tải ảnh mới hoặc sửa media cũ. Smoke 6 URL chính + SSH đạt. Bản bổ sung bài 08 để bác sĩ/biên tập duyệt nằm tại `docs/content-plan-20/review-08-addendum.md`, chưa đăng.
 
 ## 2026-10-01 — đã xuất bản bộ 20 nội dung sau lệnh “áp dụng hết”
 
