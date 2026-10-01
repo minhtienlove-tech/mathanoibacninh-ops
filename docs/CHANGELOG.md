@@ -4,7 +4,8 @@
 
 - Trang `/kien-thuc/`: danh mục 162 bài giờ chia thành các chủ đề đóng mặc định; mở một chủ đề thấy tám bài đầu và có lựa chọn xem thêm. Giữ đủ liên kết HTML, không đổi URL hay nội dung bài.
 - Trang chủ: thay bốn thẻ dẫn nhanh cao bằng một dải liên kết thấp, cùng màu thương hiệu, bố cục hai cột trên điện thoại. Giữ bốn đích liên kết và khả năng dùng bàn phím.
-- Chỉ sửa `inc/tra-cuu-bai-viet.php`, `style.css`, `assets/home-critical.css`. Backup, kiểm tra và rollback sẽ được ghi sau triển khai.
+- Chỉ sửa `inc/tra-cuu-bai-viet.php`, `style.css`, `assets/home-critical.css`. Backup trước triển khai: `/home/jwhxtzru/backups/compact-navigation-20261001080228/` (ba tệp và database). Rollback giao diện bằng cách chép lại đúng ba tệp từ backup rồi xóa object cache/LiteSpeed; không cần phục hồi database vì đợt này không sửa dữ liệu.
+- PHP lint đạt, smoke sáu URL chính và SSH đạt. Trên Chrome, nhóm 54 bài đóng mặc định, mở ra thấy tám bài và nút xem thêm 46 bài. Ở 375 px không tràn ngang; dải dẫn nhanh cao khoảng 142 px (hai hàng), giữ đủ bốn liên kết, không thấy lỗi JS.
 
 ## 2026-10-01 — rút gọn tra cứu bài viết trên trang chi tiết
 
