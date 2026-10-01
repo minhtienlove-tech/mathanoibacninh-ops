@@ -4,6 +4,7 @@
 
 - Soạn 15 bài độc lập dài 1.461–1.587 từ, đúng nhóm công việc và nguy cơ mắt riêng; giữ nguồn NEI/NIOSH/OSHA/CDC/EPA, FAQ và liên kết nội bộ. Không tự ghi tên tác giả hoặc bác sĩ duyệt.
 - Thêm bộ dựng HTML và importer WP-CLI có kiểm tra trước, ban đầu chỉ tạo bản nháp. Backup database `/home/jwhxtzru/backups/workplace-15-20261001-154151/database.sql`; nhập 15 bản nháp ID 1474–1488. Đã xem bản nháp trên Chrome 375 px và desktop: một H1, nguồn tham khảo và mục lục có neo, không tràn ngang, không lỗi JS ở ba bài mẫu. Chi tiết kiểm tra, triển khai và rollback tại `docs/workplace-15/README.md`.
+- Đã xuất bản đúng 15 bài ID 1474–1488 sau preflight; chuyên mục `mat-va-moi-truong-lam-viec` tăng từ 1 lên 16 bài. Xóa WordPress object cache và LiteSpeed cache. Kiểm tra HTML công khai: 15/15 URL HTTP 200, mỗi bài một H1, một meta description, một canonical đúng URL, có nguồn tham khảo, và đều được liên kết từ `/kien-thuc/`. Smoke sáu URL chính + SSH đạt; PHP lint hai script nhập/xuất bản và `footer.php`, `page-lien-he.php` đạt. Bác sĩ/người biên soạn và ngày duyệt vẫn chờ bệnh viện cung cấp; không hiển thị ghi công chưa xác minh.
 
 ## 2026-10-01 — thu gọn mục bài viết và dải dẫn nhanh theo phản hồi giao diện
 

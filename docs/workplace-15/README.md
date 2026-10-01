@@ -15,4 +15,8 @@ Trước khi ghi WordPress, tạo backup database trong `~/backups/` trên serve
 
 Đợt nhập thực tế: backup `/home/jwhxtzru/backups/workplace-15-20261001-154151/database.sql`, bản nháp ID 1474–1488. Đã kiểm tra giao diện Chrome ở ba bài 1474, 1480, 1488 trên desktop và 375 px: một H1, 15 H2, nguồn tham khảo, không tràn ngang hoặc lỗi JavaScript. Script `scripts/publish-workplace-series.php` kiểm tra lại 15 bản nháp, chuyên mục, số từ, trạng thái ghi công rồi mới chuyển sang `publish`.
 
+15 bài ID 1474–1488 đã xuất bản ngày 01/10/2026. Đã xóa WordPress object cache và LiteSpeed cache. `python scripts/verify-workplace-series.py` đạt: 15/15 URL HTTP 200, mỗi bài có một H1, một meta description, một canonical đúng URL, nguồn tham khảo; cả 15 được liên kết từ `/kien-thuc/`. Chuyên mục tăng từ 1 lên 16 bài. `scripts/verify-live.ps1 -CheckSsh` và PHP lint các tệp được yêu cầu đều đạt. Thông tin biên soạn, bác sĩ duyệt và ngày duyệt chưa được cung cấp; đang để trạng thái chờ xác minh, không tạo ghi công giả.
+
 Rollback nhanh nếu đã công khai: đổi trạng thái 15 bài theo `_eyecare_workplace_series_id` về `draft`, xóa cache WordPress/LiteSpeed và kiểm tra `/kien-thuc/`. Không xóa bài hoặc phục hồi toàn bộ database khi chỉ cần ẩn loạt bài này. Backup database là bản khôi phục cuối cùng nếu có lỗi dữ liệu ngoài phạm vi 15 bài.
+
+Với đợt này, các ID cụ thể là 1474–1488. Có thể đổi từng bài bằng `wp post update ID --post_status=draft` sau khi kiểm tra ID/slug; sau đó chạy `wp cache flush` và `wp litespeed-purge all`. Cách này giữ nội dung để chỉnh sửa và xuất bản lại. Không dùng `wp db import` để rollback riêng loạt bài vì sẽ ghi đè cả thay đổi WordPress phát sinh sau thời điểm backup.
