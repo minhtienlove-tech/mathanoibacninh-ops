@@ -317,6 +317,7 @@ require_once get_stylesheet_directory() . '/inc/quan-ly-bang-gia.php';
 /* Mười thư mục chủ đề C1–C10 và nhãn quản trị bài viết kiến thức. */
 require_once get_stylesheet_directory() . '/inc/quan-ly-bai-viet.php';
 require_once get_stylesheet_directory() . '/inc/tra-cuu-bai-viet.php';
+require_once get_stylesheet_directory() . '/inc/content-plan-seo.php';
 
 /* Giữ /wp-sitemap.xml hoạt động khi OBS SEO dùng sitemap riêng. */
 require_once get_stylesheet_directory() . '/inc/sitemap-tuong-thich.php';
