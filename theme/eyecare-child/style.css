@@ -11380,3 +11380,17 @@ h6 {
 .eyecare-tra-cuu--goi-y p { margin: 1rem 0 0; }
 @media (max-width: 600px) { .eyecare-tra-cuu--goi-y ul { columns: 1; } }
 
+/* The library directory stays short until a reader chooses a topic. */
+.eyecare-tra-cuu--thu-vien { padding: clamp(1rem, 3vw, 1.5rem); }
+.eyecare-tra-cuu--thu-vien h2 { margin: 0 0 .25rem; color: #075765; font-size: clamp(1.2rem, 2vw, 1.5rem); }
+.eyecare-tra-cuu--thu-vien h2 span { color: #52686b; font-size: .9rem; font-weight: 400; }
+.eyecare-tra-cuu--thu-vien > p { margin: 0 0 1rem; }
+.eyecare-tra-cuu--thu-vien .eyecare-tra-cuu__nhom { align-items: start; grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+.eyecare-tra-cuu .eyecare-tra-cuu__chu-de { min-width: 0; padding: 0; border: 1px solid #d7e9e6; border-radius: .75rem; background: #fff; }
+.eyecare-tra-cuu__chu-de > summary { padding: .85rem 1rem; font-size: .95rem; }
+.eyecare-tra-cuu__chu-de[open] > summary { border-bottom: 1px solid #d7e9e6; }
+.eyecare-tra-cuu__chu-de > ul { padding: .8rem 1rem .25rem 2rem; }
+.eyecare-tra-cuu .eyecare-tra-cuu__them { padding: .25rem 1rem 1rem; }
+.eyecare-tra-cuu__them > summary { font-size: .9rem; }
+.eyecare-tra-cuu__them > ul { padding: .8rem 0 0 1rem; }
+

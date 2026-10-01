@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-01 — thu gọn mục bài viết và dải dẫn nhanh theo phản hồi giao diện
+
+- Trang `/kien-thuc/`: danh mục 162 bài giờ chia thành các chủ đề đóng mặc định; mở một chủ đề thấy tám bài đầu và có lựa chọn xem thêm. Giữ đủ liên kết HTML, không đổi URL hay nội dung bài.
+- Trang chủ: thay bốn thẻ dẫn nhanh cao bằng một dải liên kết thấp, cùng màu thương hiệu, bố cục hai cột trên điện thoại. Giữ bốn đích liên kết và khả năng dùng bàn phím.
+- Chỉ sửa `inc/tra-cuu-bai-viet.php`, `style.css`, `assets/home-critical.css`. Backup, kiểm tra và rollback sẽ được ghi sau triển khai.
+
 ## 2026-10-01 — rút gọn tra cứu bài viết trên trang chi tiết
 
 - Chuyển danh mục đầy đủ các bài kiến thức sang `/kien-thuc/#toan-bo-bai-viet`; mỗi bài chi tiết chỉ hiện tối đa sáu bài mới cùng chuyên mục và một liên kết đến danh mục đầy đủ. Giữ liên kết HTML thông thường và thao tác mở rộng bằng `details` trên trang thư viện.

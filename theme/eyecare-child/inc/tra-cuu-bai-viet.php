@@ -91,22 +91,30 @@ function eyecare_tra_cuu_toan_bo_in() {
 	$count = array_sum( array_map( 'count', $groups ) );
 	?>
 	<section class="eyecare-tra-cuu eyecare-tra-cuu--thu-vien" id="toan-bo-bai-viet" aria-label="Tra cứu toàn bộ bài viết về mắt">
-		<details>
-			<summary>Tra cứu toàn bộ bài viết <span>(<?php echo esc_html( (string) $count ); ?> bài)</span></summary>
-			<p>Chọn chủ đề để đọc các bài đã xuất bản.</p>
-			<div class="eyecare-tra-cuu__nhom">
-				<?php foreach ( $groups as $name => $articles ) : ?>
-					<section aria-label="<?php echo esc_attr( $name ); ?>">
-						<h3><?php echo esc_html( $name ); ?> <small>(<?php echo esc_html( (string) count( $articles ) ); ?>)</small></h3>
+		<h2>Tra cứu toàn bộ bài viết <span>(<?php echo esc_html( (string) $count ); ?> bài)</span></h2>
+		<p>Chọn chủ đề để xem các bài đã xuất bản.</p>
+		<div class="eyecare-tra-cuu__nhom">
+			<?php foreach ( $groups as $name => $articles ) : ?>
+				<details class="eyecare-tra-cuu__chu-de">
+					<summary><?php echo esc_html( $name ); ?> <span>(<?php echo esc_html( (string) count( $articles ) ); ?>)</span></summary>
+				<ul>
+						<?php foreach ( array_slice( $articles, 0, 8 ) as $article ) : ?>
+							<li><a href="<?php echo esc_url( $article['url'] ); ?>"><?php echo esc_html( $article['title'] ); ?></a></li>
+						<?php endforeach; ?>
+				</ul>
+				<?php if ( count( $articles ) > 8 ) : ?>
+					<details class="eyecare-tra-cuu__them">
+						<summary>Xem thêm <?php echo esc_html( (string) ( count( $articles ) - 8 ) ); ?> bài</summary>
 						<ul>
-							<?php foreach ( $articles as $article ) : ?>
+							<?php foreach ( array_slice( $articles, 8 ) as $article ) : ?>
 								<li><a href="<?php echo esc_url( $article['url'] ); ?>"><?php echo esc_html( $article['title'] ); ?></a></li>
 							<?php endforeach; ?>
 						</ul>
-					</section>
-				<?php endforeach; ?>
-			</div>
-		</details>
+					</details>
+				<?php endif; ?>
+				</details>
+			<?php endforeach; ?>
+		</div>
 	</section>
 	<?php
 }
