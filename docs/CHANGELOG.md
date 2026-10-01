@@ -1,5 +1,10 @@
 # Production changelog
 
+## 2026-10-01 — rút gọn tra cứu bài viết trên trang chi tiết
+
+- Chuyển danh mục đầy đủ các bài kiến thức sang `/kien-thuc/#toan-bo-bai-viet`; mỗi bài chi tiết chỉ hiện tối đa sáu bài mới cùng chuyên mục và một liên kết đến danh mục đầy đủ. Giữ liên kết HTML thông thường và thao tác mở rộng bằng `details` trên trang thư viện.
+- Thay đổi chỉ ở `inc/tra-cuu-bai-viet.php`, `page-kien-thuc.php` và `style.css`; không đổi nội dung y khoa, URL bài, tiêu đề hoặc metadata SEO. Trạng thái triển khai, backup, QA và rollback được cập nhật sau khi kiểm tra production.
+
 ## 2026-10-01 — đã xuất bản bộ 20 nội dung sau lệnh “áp dụng hết”
 
 - Tạo bản HTML công khai riêng từ 20 bản thảo; loại bỏ ghi chú nội bộ và thông tin chưa xác minh, giữ bản nháp gốc để đối chiếu. Nội dung y khoa chung được đối chiếu với NEI, FDA, AAPOS và luật BHYT; không tự nhận bác sĩ đã duyệt.

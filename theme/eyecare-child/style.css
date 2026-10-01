@@ -11372,4 +11372,11 @@ h6 {
 .eyecare-tra-cuu__nhom ul { margin: 0; padding-left: 1.2rem; }
 .eyecare-tra-cuu__nhom li { margin-bottom: .5rem; line-height: 1.5; overflow-wrap: anywhere; }
 .eyecare-tra-cuu__nhom a { color: #075765; text-decoration: underline; }
+.eyecare-tra-cuu--thu-vien { width: min(100% - 2rem, 1100px); margin: 2rem auto 3rem; }
+.eyecare-tra-cuu--goi-y { padding: 1.25rem; }
+.eyecare-tra-cuu--goi-y h2 { color: #075765; font-size: 1.25rem; margin: 0 0 .75rem; }
+.eyecare-tra-cuu--goi-y ul { margin: 0; padding-left: 1.2rem; columns: 2 15rem; }
+.eyecare-tra-cuu--goi-y li { margin: 0 0 .5rem; break-inside: avoid; }
+.eyecare-tra-cuu--goi-y p { margin: 1rem 0 0; }
+@media (max-width: 600px) { .eyecare-tra-cuu--goi-y ul { columns: 1; } }
 

@@ -1,10 +1,10 @@
 <?php
 /**
- * Accessible, expandable index of every other published knowledge article.
+ * Accessible knowledge index and a compact same-topic list on articles.
  *
  * The index contains ordinary HTML links. A transient avoids querying all
- * posts and categories on every single-post request; the current post is
- * excluded only at render time so one cached index serves every article.
+ * posts and categories on every request. One cached set serves the full
+ * library directory and the short related-article list on single posts.
  *
  * @package Eyecare_Child
  */
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /** Return the lightweight, published-only index data. */
 function eyecare_tra_cuu_du_lieu() {
-	$cache_key = 'eyecare_tra_cuu_bai_viet_v1';
+	$cache_key = 'eyecare_tra_cuu_bai_viet_v2';
 	$rows      = get_transient( $cache_key );
 	if ( is_array( $rows ) ) {
 		return $rows;
@@ -55,6 +55,7 @@ function eyecare_tra_cuu_du_lieu() {
 			'title' => get_the_title( $id ),
 			'url'   => get_permalink( $id ),
 			'group' => $group,
+			'date'  => (int) get_post_time( 'U', true, $id ),
 		);
 	}
 	set_transient( $cache_key, $rows, HOUR_IN_SECONDS );
@@ -64,6 +65,7 @@ function eyecare_tra_cuu_du_lieu() {
 /** Remove the index after article/category changes. */
 function eyecare_tra_cuu_xoa_cache() {
 	delete_transient( 'eyecare_tra_cuu_bai_viet_v1' );
+	delete_transient( 'eyecare_tra_cuu_bai_viet_v2' );
 }
 add_action( 'save_post_post', 'eyecare_tra_cuu_xoa_cache' );
 add_action( 'deleted_post', 'eyecare_tra_cuu_xoa_cache' );
@@ -76,13 +78,10 @@ add_action( 'set_object_terms', function ( $object_id, $terms, $tt_ids, $taxonom
 	}
 }, 10, 4 );
 
-/** Render links in category groups, skipping the current article. */
-function eyecare_tra_cuu_bai_viet_in( $current_id ) {
+/** Render the complete directory once on the knowledge-library page. */
+function eyecare_tra_cuu_toan_bo_in() {
 	$groups = array();
 	foreach ( eyecare_tra_cuu_du_lieu() as $row ) {
-		if ( (int) $current_id === $row['id'] ) {
-			continue;
-		}
 		$groups[ $row['group'] ][] = $row;
 	}
 	if ( ! $groups ) {
@@ -91,10 +90,10 @@ function eyecare_tra_cuu_bai_viet_in( $current_id ) {
 	ksort( $groups, SORT_NATURAL | SORT_FLAG_CASE );
 	$count = array_sum( array_map( 'count', $groups ) );
 	?>
-	<aside class="eyecare-tra-cuu" aria-label="Tra cứu toàn bộ bài viết về mắt">
+	<section class="eyecare-tra-cuu eyecare-tra-cuu--thu-vien" id="toan-bo-bai-viet" aria-label="Tra cứu toàn bộ bài viết về mắt">
 		<details>
-			<summary>Tra cứu toàn bộ bài viết <span>(<?php echo esc_html( (string) $count ); ?> bài khác)</span></summary>
-			<p>Chọn chủ đề để đọc các bài đã xuất bản. <a href="<?php echo esc_url( home_url( '/kien-thuc/' ) ); ?>">Mở thư viện kiến thức mắt</a>.</p>
+			<summary>Tra cứu toàn bộ bài viết <span>(<?php echo esc_html( (string) $count ); ?> bài)</span></summary>
+			<p>Chọn chủ đề để đọc các bài đã xuất bản.</p>
 			<div class="eyecare-tra-cuu__nhom">
 				<?php foreach ( $groups as $name => $articles ) : ?>
 					<section aria-label="<?php echo esc_attr( $name ); ?>">
@@ -108,6 +107,38 @@ function eyecare_tra_cuu_bai_viet_in( $current_id ) {
 				<?php endforeach; ?>
 			</div>
 		</details>
+	</section>
+	<?php
+}
+
+/** Keep only relevant, recent links on each article; the library has the full list. */
+function eyecare_tra_cuu_bai_viet_in( $current_id ) {
+	$rows = eyecare_tra_cuu_du_lieu();
+	$group = '';
+	foreach ( $rows as $row ) {
+		if ( (int) $current_id === $row['id'] ) {
+			$group = $row['group'];
+			break;
+		}
+	}
+	$related = array_values( array_filter( $rows, static function ( $row ) use ( $current_id, $group ) {
+		return (int) $current_id !== $row['id'] && $group === $row['group'];
+	} ) );
+	usort( $related, static function ( $a, $b ) {
+		return $b['date'] <=> $a['date'];
+	} );
+	$related = array_slice( $related, 0, 6 );
+	?>
+	<aside class="eyecare-tra-cuu eyecare-tra-cuu--goi-y" aria-label="Bài viết cùng chủ đề">
+		<h2>Bài cùng chủ đề</h2>
+		<?php if ( $related ) : ?>
+			<ul>
+				<?php foreach ( $related as $article ) : ?>
+					<li><a href="<?php echo esc_url( $article['url'] ); ?>"><?php echo esc_html( $article['title'] ); ?></a></li>
+				<?php endforeach; ?>
+			</ul>
+		<?php endif; ?>
+		<p><a href="<?php echo esc_url( home_url( '/kien-thuc/#toan-bo-bai-viet' ) ); ?>">Tra cứu toàn bộ <?php echo esc_html( (string) count( $rows ) ); ?> bài viết →</a></p>
 	</aside>
 	<?php
 }

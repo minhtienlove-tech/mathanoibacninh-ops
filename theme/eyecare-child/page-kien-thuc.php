@@ -197,6 +197,8 @@ while ( have_posts() ) :
 		</div>
 	</section>
 
+	<?php eyecare_tra_cuu_toan_bo_in(); ?>
+
 	<section class="eyecare-page-cta">
 		<div class="eyecare-noi-dung__khung eyecare-page-cta__trong">
 			<div><p>Cần được hướng dẫn thêm?</p><h2>Liên hệ bệnh viện trước khi đến</h2></div>
