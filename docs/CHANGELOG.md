@@ -1,5 +1,10 @@
 # Production changelog
 
+## 2026-10-01 — nhập 12 bài kiến thức mới dưới dạng bản nháp, CHƯA XUẤT BẢN
+
+- Sau phê duyệt bản xem thử, sao lưu database và tệp theme liên quan tại `/home/jwhxtzru/backups/content-plan-drafts-20261001-081537/`; dùng `scripts/import-content-plan-drafts.php` nhập bản 07, 08, 09, 11, 12, 13, 15–20 thành post ID 1441–1452 ở trạng thái `draft`. Tạo chuyên mục con phẫu thuật khúc xạ ID 17. Chưa gán tác giả/bác sĩ khi chưa xác minh, không cập nhật 8 URL cũ hoặc deploy code khối tra cứu.
+- WP-CLI xác nhận 12 draft, 150 post công khai giữ nguyên; URL dự kiến của bài 07 trả 404 cho người chưa đăng nhập. PHP lint importer + bốn tệp theme live đạt, smoke sáu URL + SSH đạt. Chưa kiểm preview WordPress trên trình duyệt có đăng nhập. Chi tiết và rollback có chọn lọc: `docs/content-plan-20/README.md`.
+
 ## 2026-10-01 — bộ 20 nội dung mắt và khối tra cứu, CHỈ BẢN NHÁP CỤC BỘ
 
 - Kiểm kê 294 URL công khai qua WP-CLI, lập bản đồ ý định tìm kiếm cho 20 chủ đề, viết 20 bản thảo riêng (8 đề xuất cập nhật, 12 bài mới) cùng gói HTML và bản xem thử nội bộ tại `docs/content-plan-20/`.
