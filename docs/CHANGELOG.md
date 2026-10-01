@@ -1,5 +1,10 @@
 # Production changelog
 
+## 2026-10-01 — liên kết hai chiều cho 15 bài mắt và môi trường làm việc (chuẩn bị)
+
+- Đã kiểm tra nội dung 15 bài mới và 11 bài cũ liên quan: bài mới mới chỉ có một liên kết tới bài cũ; chưa có liên kết nội dung từ bài cũ đến loạt mới. Chuẩn bị `scripts/link-workplace-series.php` để thêm hai liên kết cùng ngữ cảnh giữa các bài mới và một khối liên kết từ mỗi bài cũ đến các bài mới tương ứng. Script kiểm tra chính xác 26 bài, lưu nguyên bản nội dung từng bài trước khi ghi; không đổi phần giải thích y khoa cũ.
+
+
 ## 2026-10-01 — chuẩn bị 15 bài “Mắt và môi trường làm việc”
 
 - Soạn 15 bài độc lập dài 1.461–1.587 từ, đúng nhóm công việc và nguy cơ mắt riêng; giữ nguồn NEI/NIOSH/OSHA/CDC/EPA, FAQ và liên kết nội bộ. Không tự ghi tên tác giả hoặc bác sĩ duyệt.

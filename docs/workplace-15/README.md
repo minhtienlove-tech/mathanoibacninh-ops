@@ -20,3 +20,7 @@ Trước khi ghi WordPress, tạo backup database trong `~/backups/` trên serve
 Rollback nhanh nếu đã công khai: đổi trạng thái 15 bài theo `_eyecare_workplace_series_id` về `draft`, xóa cache WordPress/LiteSpeed và kiểm tra `/kien-thuc/`. Không xóa bài hoặc phục hồi toàn bộ database khi chỉ cần ẩn loạt bài này. Backup database là bản khôi phục cuối cùng nếu có lỗi dữ liệu ngoài phạm vi 15 bài.
 
 Với đợt này, các ID cụ thể là 1474–1488. Có thể đổi từng bài bằng `wp post update ID --post_status=draft` sau khi kiểm tra ID/slug; sau đó chạy `wp cache flush` và `wp litespeed-purge all`. Cách này giữ nội dung để chỉnh sửa và xuất bản lại. Không dùng `wp db import` để rollback riêng loạt bài vì sẽ ghi đè cả thay đổi WordPress phát sinh sau thời điểm backup.
+
+## Liên kết hai chiều
+
+Mỗi bài mới đã có một liên kết tới một bài cũ. Đợt bổ sung dùng `scripts/link-workplace-series.php` để thêm hai liên kết sang bài mới cùng tình huống và thêm liên kết chiều ngược từ 11 bài cũ tới đủ 15 bài mới. Khối mới có dấu `eyecare-workplace-links:v1` để kiểm tra và khôi phục chọn lọc. Script lưu nguyên văn `post_content` của 26 bài trong một JSON riêng trên server trước khi cập nhật, ngoài bản backup database.
