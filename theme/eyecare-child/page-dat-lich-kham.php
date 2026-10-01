@@ -10,5 +10,10 @@ get_header();
 		<p class="ec-booking-dialog__intro">Chọn ngày, giờ khám và để lại số điện thoại. Bệnh viện sẽ liên hệ xác nhận lịch hẹn với bạn.</p>
 		<?php eyecare_booking_form( 'page' ); ?>
 	</div>
+	<?php while ( have_posts() ) : the_post(); ?>
+		<?php if ( trim( wp_strip_all_tags( get_the_content() ) ) ) : ?>
+			<div class="eyecare-content-plan-note"><?php the_content(); ?></div>
+		<?php endif; ?>
+	<?php endwhile; ?>
 </section>
 <?php get_footer(); ?>

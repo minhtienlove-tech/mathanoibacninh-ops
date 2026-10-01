@@ -11358,6 +11358,9 @@ h6 {
 }
 
 /* Published-article index: one accessible disclosure below the article body. */
+.eyecare-content-plan-note { width: min(100% - 2rem, 1100px); margin: 2rem auto 3rem; padding: clamp(1rem, 3vw, 2rem); border: 1px solid #cce8e6; border-radius: 1rem; background: #fff; color: #19363c; line-height: 1.7; overflow-wrap: anywhere; }
+.eyecare-content-plan-note h2, .eyecare-content-plan-note h3 { color: #075765; line-height: 1.35; }
+.eyecare-content-plan-note a { color: #075765; text-decoration: underline; }
 .eyecare-tra-cuu { margin: 2rem 0; border: 1px solid #cce8e6; border-radius: 1rem; background: #f7fcfb; }
 .eyecare-tra-cuu details { padding: 1rem 1.25rem; }
 .eyecare-tra-cuu summary { cursor: pointer; color: #075765; font-weight: 700; font-size: 1.1rem; line-height: 1.5; }

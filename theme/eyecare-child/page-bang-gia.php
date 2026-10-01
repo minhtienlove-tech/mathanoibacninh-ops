@@ -113,6 +113,9 @@ while ( have_posts() ) :
 			</div>
 		</div>
 	</section>
+	<?php if ( trim( wp_strip_all_tags( get_the_content() ) ) ) : ?>
+		<div class="eyecare-content-plan-note"><?php the_content(); ?></div>
+	<?php endif; ?>
 </article>
 
 <script>

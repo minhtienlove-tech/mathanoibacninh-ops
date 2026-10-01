@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-01 — chuẩn bị xuất bản bộ 20 nội dung sau lệnh “áp dụng hết”
+
+- Tạo bản HTML công khai riêng từ 20 bản thảo; loại bỏ ghi chú nội bộ và thông tin chưa xác minh, giữ bản nháp gốc để đối chiếu. Nội dung y khoa chung được đối chiếu với NEI, FDA, AAPOS và luật BHYT; không tự nhận bác sĩ đã duyệt.
+- Bổ sung đường hiển thị phần giải thích vào template đặt lịch và bảng giá mà vẫn giữ biểu mẫu và bảng giá; chuẩn bị khối tra cứu bài đã xuất bản trong child theme. Script WP-CLI kiểm tra chính xác 8 URL cũ và 12 bản nháp trước khi ghi, sau đó bổ sung vào nội dung cũ thay vì xóa nội dung đang có.
+- Trạng thái tại thời điểm ghi dòng này: **chưa triển khai**; sẽ cập nhật backup, kiểm thử và kết quả production sau khi thực hiện.
+
 ## 2026-10-01 — kiểm tra 12 draft trên WordPress và sửa ghi công sai/bố cục mobile
 
 - Đăng nhập xem đủ 12 bản nháp trên theme thật ở 1280×800 và 375×812: một H1/bài, 8 neo mục lục hợp lệ, không tràn ngang; thử bấm mục lục bài 20 thành công. Ảnh QA trong `docs/content-plan-20/`.
