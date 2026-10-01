@@ -186,7 +186,14 @@ $eyecare_anh_bac_si_tung   = function_exists( 'eyecare_bac_si_anh_tac_gia' ) ? e
 			<div class="eyecare-chan__cot eyecare-chan__cot--noi-dung">
 				<h2 class="eyecare-chan__td">Thông tin trên trang</h2>
 				<p class="eyecare-chan__mo-ta">Nội dung y khoa được biên soạn để người đọc chuẩn bị tốt hơn trước khi đi khám mắt.</p>
-				<?php if ( ! $eyecare_la_trang_khu_vuc ) : ?>
+				<?php
+				$eyecare_content_plan_id = get_queried_object_id();
+				$eyecare_cho_ghi_cong = $eyecare_content_plan_id && (
+					get_post_meta( $eyecare_content_plan_id, '_eyecare_content_plan_id', true ) ||
+					get_post_meta( $eyecare_content_plan_id, '_eyecare_content_plan_published_id', true )
+				);
+				?>
+				<?php if ( ! $eyecare_la_trang_khu_vuc && ! $eyecare_cho_ghi_cong ) : ?>
 				<div class="eyecare-chan__tac-gia">
 					<div class="eyecare-chan__tac-gia-avatar" aria-hidden="true">
 						<?php if ( $eyecare_anh_bac_si_tung ) : ?>
