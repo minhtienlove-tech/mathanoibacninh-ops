@@ -14,6 +14,7 @@ class Checker(HTMLParser):
         self.h1 = 0
         self.ids = set()
         self.hrefs = []
+        self.descriptions = []
 
     def handle_starttag(self, tag, attrs):
         attrs = dict(attrs)
@@ -23,6 +24,8 @@ class Checker(HTMLParser):
             self.ids.add(attrs["id"])
         if tag == "a" and attrs.get("href", "").startswith("#"):
             self.hrefs.append(attrs["href"][1:])
+        if tag == "meta" and attrs.get("name", "").lower() == "description":
+            self.descriptions.append(attrs.get("content", ""))
 
 
 failed = []
@@ -44,6 +47,12 @@ for item in manifest:
         (parser.h1 == 1, f"one H1 (found {parser.h1})"),
         (not missing, f"TOC targets present (missing {missing[:4]})"),
         ("CẦN XÁC MINH" not in html and "Chặn xuất bản" not in html, "no internal notes"),
+        (
+            (len(parser.descriptions) == 1 and bool(parser.descriptions[0]))
+            if item["id"] in ("02", "06")
+            else parser.descriptions == [item["meta_description"]],
+            "one SEO description",
+        ),
     ]
     if item["action"].startswith("new-"):
         checks.append(("eyecare-tra-cuu" in html, "article index"))

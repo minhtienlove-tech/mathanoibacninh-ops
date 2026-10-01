@@ -30,6 +30,10 @@ add_action( 'wp_head', static function () {
 	if ( ! $id ) {
 		return;
 	}
+	// These pages already emit one managed description from the child theme.
+	if ( in_array( (string) get_post_meta( $id, '_eyecare_content_plan_published_id', true ), array( '02', '06' ), true ) ) {
+		return;
+	}
 	$description = trim( (string) get_post_meta( $id, '_eyecare_meta_description_proposal', true ) );
 	if ( $description ) {
 		echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
