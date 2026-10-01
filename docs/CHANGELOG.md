@@ -1,5 +1,10 @@
 # Production changelog
 
+## 2026-10-01 — chuẩn bị 15 bài “Mắt và môi trường làm việc” (chưa nhập WordPress)
+
+- Soạn 15 bài độc lập dài 1.461–1.587 từ, đúng nhóm công việc và nguy cơ mắt riêng; giữ nguồn NEI/NIOSH/OSHA/CDC/EPA, FAQ và liên kết nội bộ. Không tự ghi tên tác giả hoặc bác sĩ duyệt.
+- Thêm bộ dựng HTML và importer WP-CLI có kiểm tra trước, ban đầu chỉ tạo bản nháp. Chi tiết kiểm tra, triển khai và rollback tại `docs/workplace-15/README.md`.
+
 ## 2026-10-01 — thu gọn mục bài viết và dải dẫn nhanh theo phản hồi giao diện
 
 - Trang `/kien-thuc/`: danh mục 162 bài giờ chia thành các chủ đề đóng mặc định; mở một chủ đề thấy tám bài đầu và có lựa chọn xem thêm. Giữ đủ liên kết HTML, không đổi URL hay nội dung bài.
