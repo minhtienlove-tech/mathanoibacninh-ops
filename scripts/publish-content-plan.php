@@ -48,7 +48,7 @@ foreach ( $existing as $number => $target ) {
 foreach ( $new as $number => $id ) {
 	$post = get_post( $id );
 	if ( ! $post || 'post' !== $post->post_type || 'draft' !== $post->post_status ||
-		$number !== get_post_meta( $id, '_eyecare_content_plan_id', true ) ) {
+		(string) $number !== get_post_meta( $id, '_eyecare_content_plan_id', true ) ) {
 		throw new RuntimeException( "Draft target {$number} changed." );
 	}
 }
