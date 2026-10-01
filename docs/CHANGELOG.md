@@ -1,9 +1,9 @@
 # Production changelog
 
-## 2026-10-01 — chuẩn bị 15 bài “Mắt và môi trường làm việc” (chưa nhập WordPress)
+## 2026-10-01 — chuẩn bị 15 bài “Mắt và môi trường làm việc”
 
 - Soạn 15 bài độc lập dài 1.461–1.587 từ, đúng nhóm công việc và nguy cơ mắt riêng; giữ nguồn NEI/NIOSH/OSHA/CDC/EPA, FAQ và liên kết nội bộ. Không tự ghi tên tác giả hoặc bác sĩ duyệt.
-- Thêm bộ dựng HTML và importer WP-CLI có kiểm tra trước, ban đầu chỉ tạo bản nháp. Chi tiết kiểm tra, triển khai và rollback tại `docs/workplace-15/README.md`.
+- Thêm bộ dựng HTML và importer WP-CLI có kiểm tra trước, ban đầu chỉ tạo bản nháp. Backup database `/home/jwhxtzru/backups/workplace-15-20261001-154151/database.sql`; nhập 15 bản nháp ID 1474–1488. Đã xem bản nháp trên Chrome 375 px và desktop: một H1, nguồn tham khảo và mục lục có neo, không tràn ngang, không lỗi JS ở ba bài mẫu. Chi tiết kiểm tra, triển khai và rollback tại `docs/workplace-15/README.md`.
 
 ## 2026-10-01 — thu gọn mục bài viết và dải dẫn nhanh theo phản hồi giao diện
 
