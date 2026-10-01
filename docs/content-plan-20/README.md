@@ -1,0 +1,31 @@
+# Bàn giao bản thảo 20 chủ đề mắt — 01/10/2026
+
+## Trạng thái thật
+
+- **Đã viết cục bộ:** 20/20 bản thảo, gồm 8 đề xuất cập nhật URL đang xuất bản và 12 bài mới. Mỗi file `drafts/NN.md` có brief, SEO title, meta description, URL/chuyên mục, từ khóa, bài đầy đủ, mục lục, FAQ riêng, nguồn, gợi ý ảnh/alt, liên kết và điểm cần xác minh. Tổng khoảng 11.995 từ theo cách đếm tách khoảng trắng tiếng Việt.
+- **Đã tạo gói HTML:** `package/manifest.json`, `package/NN.html` để nhập biên tập sau khi duyệt; H1 trong body đã bỏ vì theme tự hiển thị H1. Trang bài viết và trang đội ngũ cũng bỏ mục lục viết tay khỏi gói nhập vì plugin OBS hiện tự sinh mục lục; bản xem thử độc lập vẫn giữ mục lục để duyệt. Với các trang còn lại phải kiểm tra có trùng mục lục trong preview WordPress. `package/preview-NN.html` và `package/review.html` là bản xem thử có cảnh báo nội bộ và `noindex`.
+- **Chưa nhập WordPress, chưa xuất bản:** không tạo/chỉnh bài hoặc category, không đổi menu, không đưa code khối tra cứu lên production. Đây là giới hạn có chủ ý của yêu cầu “không coi viết bài là đồng ý triển khai production”, đồng thời còn thiếu xác nhận tác giả, bác sĩ duyệt, danh mục dịch vụ và giá/BHYT cụ thể.
+- **Đã chuẩn bị cục bộ:** child theme có khối `Tra cứu toàn bộ bài viết` trong `inc/tra-cuu-bai-viet.php`, include ở `functions.php`, gọi trong `single.php`, CSS trong `style.css`. Khi triển khai, khối hiện liên kết HTML tới tất cả bài `publish` khác, nhóm chuyên mục, bỏ bài hiện tại, thu gọn bằng `details`, cache một giờ và xóa cache khi bài/category thay đổi. Chưa kiểm tra hoạt động trên WordPress thật vì chưa deploy.
+
+## Tệp chính
+
+- `PLAN.md`: bản đồ 20 chủ đề, dữ liệu bệnh viện và danh sách xác minh.
+- `inventory.json`: xuất WP-CLI đọc-only của 294 nội dung công khai; `inventory-review.csv` thêm nhãn ý định tìm kiếm sơ bộ để biên tập viên rà lại, không phải phân loại được bác sĩ duyệt.
+- `link-map.csv`: liên kết đang có trong 20 bản thảo đến URL công khai; `reverse-link-plan.csv`: 13 liên kết ngược có ngữ cảnh cần thêm **sau** khi bài đích xuất bản.
+- `drafts/`: nguồn biên tập; `package/`: gói HTML/preview sinh tự động. Sửa nội dung trong `drafts/` rồi chạy lại `python scripts/build-content-plan-package.py`.
+
+## Kiểm tra đã làm
+
+1. WP-CLI: 150 post và 144 page đang `publish`, category hiện có, một tài khoản quản trị với display name `bvmat`, `Menu chinh` 8 mục, `/author/bvmat/` HTTP 200. Có hai cặp tiêu đề trùng ở ID 107/116 và 109/120; không can thiệp URL.
+2. `python scripts/check-content-plan.py`: 20 file, 20 SEO title/URL riêng, một H1/bài, tối thiểu ba H2 và ba FAQ, mục lục neo khớp, không có lỗi cấu trúc. Mức trùng lớn nhất giữa hai bản thảo theo giao 5-token là 0,0368 (01/02). 74 liên kết nội bộ trong bản đồ đều trỏ tới URL có trong kiểm kê `publish` (19 đích riêng).
+3. Gói HTML xây thành công; một bản phẫu thuật mẫu (16) đã xem trong trình duyệt cục bộ ở viewport 1280×800 và 375×812. Không tràn ngang tại 375 px (document width 360 < viewport 375), H1 đúng một, bốn liên kết mục lục đều tìm thấy ID. **Chưa kiểm bằng trình duyệt từng bài trong 20 bài hoặc trên theme WordPress thực tế.**
+4. PHP lint thông qua PHP 8.2 trên server bằng stdin cho `functions.php`, `single.php` và `inc/tra-cuu-bai-viet.php`: đều không lỗi. `git diff --check` không có lỗi khoảng trắng. Ước tính từ 150 post hiện có: 149 liên kết trên một bài tăng khoảng 24.599 byte HTML thô hoặc 6.123 byte gzip cho riêng danh sách link; đây là ước tính cục bộ, **chưa phải số đo tải trang sau triển khai**.
+5. Nguồn y khoa đã đối chiếu trên trang gốc NEI, FDA, AAPOS; văn bản BHYT đọc từ cổng pháp luật chính thức. Phần mô tả dịch vụ của bệnh viện dựa trên website và xác nhận của người quản lý ngày 30/09/2026, chưa có giấy phép/danh mục chi tiết. Không có bác sĩ ký duyệt nên không gắn `reviewedBy` mới.
+
+## Dữ liệu còn cần xác nhận và bước triển khai sau duyệt
+
+Ưu tiên xác nhận người biên soạn và bác sĩ duyệt cho từng nhóm, hồ sơ tác giả; chính sách BHYT cụ thể và giấy tờ; giá có hiệu lực/đơn vị một-hai mắt/khoản bao gồm; quy trình đo-cắt kính; danh mục kỹ thuật phẫu thuật đang áp dụng; quy trình khám và hình ảnh thực tế. Các `[CẦN XÁC MINH: …]` trong bản nháp **phải được xử lý trước xuất bản**. Không gắn `FAQPage` hoặc tuyên bố rich result; để schema Article/Hospital hiện có và kiểm tra trùng lặp sau nhập.
+
+Khi có phê duyệt nội dung và chỉ thị nhập WordPress: sao lưu database + các tệp child theme liên quan vào `~/backups/`, tạo category phẫu thuật một lần, nhập 12 bài mới ở `draft`, mở preview WordPress trên máy tính/điện thoại, rà từng FAQ/link/schema, tạo bản sửa của 8 URL hiện có mà không unpublish, bổ sung link ngữ cảnh ngược khi URL mới được xuất bản. Chỉ deploy mã khối tra cứu sau khi đo hiệu năng/UX ở staging hoặc bản xem thử phù hợp, chạy PHP lint/smoke, ghi changelog. Rollback production khi đó: khôi phục tệp từ backup và database nếu cần, purge cache, chạy smoke; không xóa dữ liệu hay search-replace hàng loạt.
+
+Để mở bản xem thử cục bộ trong workspace: `python -m http.server 8877 --bind 127.0.0.1 --directory docs/content-plan-20/package`, rồi vào `http://127.0.0.1:8877/review.html`. Máy ngoài máy làm việc không truy cập được localhost này.

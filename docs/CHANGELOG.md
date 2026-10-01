@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-01 — bộ 20 nội dung mắt và khối tra cứu, CHỈ BẢN NHÁP CỤC BỘ
+
+- Kiểm kê 294 URL công khai qua WP-CLI, lập bản đồ ý định tìm kiếm cho 20 chủ đề, viết 20 bản thảo riêng (8 đề xuất cập nhật, 12 bài mới) cùng gói HTML và bản xem thử nội bộ tại `docs/content-plan-20/`.
+- Chuẩn bị trong child theme khối thu gọn liên kết tới tất cả bài viết công khai khác trên từng bài, nhóm chuyên mục, cache và tự làm mới khi nội dung đổi. Mã **chưa triển khai** vì bộ bài còn cần tác giả/bác sĩ duyệt và kiểm thử WordPress thực tế.
+- QA cấu trúc 20/20 đạt, 74 liên kết nội bộ trong bản đồ trỏ URL công khai, PHP lint ba tệp thay đổi đạt; trình duyệt kiểm tra bản nháp mẫu ở 1280/375 px. Chưa sửa WordPress DB, category, menu hay production theme; chưa cần rollback production. Báo cáo, giới hạn và bước sau duyệt: `docs/content-plan-20/README.md`.
+
 ## 2026-09-30 — fanpage xác nhận và sửa thêm giá trị schema y tế
 
 - Người quản trị chọn `https://www.facebook.com/benhvienmathanoibacninh`. Triển khai commit `74bf209`: dùng URL này cho link giao diện và `Hospital.sameAs`; đổi `medicalSpecialty` sai `Ophthalmologic` sang enum `https://schema.org/Ophthalmology` cho Hospital/Physician.

@@ -139,6 +139,7 @@ while ( have_posts() ) :
 	<div class="eyecare-bai__than">
 		<?php the_content(); ?>
 	</div>
+	<?php eyecare_tra_cuu_bai_viet_in( $bai_hien_tai ); ?>
 		</div>
 
 		<aside class="eyecare-bai__cot-ben eyecare-bai__cot-ben--lien-quan" aria-labelledby="eyecare-bai-lien-quan">
