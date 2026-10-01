@@ -1,4 +1,12 @@
-# Bàn giao bản thảo 20 chủ đề mắt — 01/10/2026
+# Bộ 20 nội dung mắt — trạng thái production 01/10/2026
+
+**Đã công bố:** 8 URL cũ được bổ sung nội dung (giữ nguyên nội dung cũ) và 12 bài mới ID 1441–1452 đã xuất bản. Bản công khai được tạo trong `publication/` từ `package/` sau khi loại bỏ ghi chú biên tập và dữ kiện chưa xác minh. Trang đặt lịch giữ form, bảng giá giữ 184 dòng dịch vụ; khối tra cứu trên bài viết chứa liên kết tới 161 bài khác. Tiêu đề SEO và một mô tả SEO được kiểm tra trên 20/20 URL; hai trang Liên hệ/Đội ngũ giữ mô tả đã được child theme quản lý để tránh thẻ trùng. Mục dưới đây mô tả **các mốc bản nháp lịch sử**, không phải trạng thái hiện tại.
+
+Người quản lý cho biết sẽ cung cấp tên người biên soạn, bác sĩ duyệt và ngày duyệt sau. Chưa ghi công/chưa gắn nhãn đã duyệt cho bộ này; 15 bài viết liên quan mang meta `pending-author-and-medical-review` (12 mới, 3 cũ được bổ sung). Thông tin cụ thể về BHYT, giá, kỹ thuật và quy trình vẫn cần bệnh viện xác nhận; bản công khai không tự nêu mức hưởng hoặc giá chưa xác minh.
+
+Backup trước triển khai: `/home/jwhxtzru/backups/content-plan-publish-20261001-090959/` gồm `database.sql`, bản gốc của các tệp theme đã thay đổi và thư mục `stage/` chứa gói đã triển khai. Muốn khôi phục giao diện, chép các tệp từ `theme/` trong backup về child theme rồi xóa cache; hai tệp mới `inc/tra-cuu-bai-viet.php` và `inc/content-plan-seo.php` sẽ không còn được nạp sau khi khôi phục `functions.php`. Muốn khôi phục nội dung, cần lập kế hoạch bảo toàn mọi thay đổi WordPress phát sinh sau thời điểm backup trước khi nhập lại toàn DB. Không nhập lại DB khi đã có lịch hẹn/nội dung mới.
+
+QA production: 20/20 URL HTTP 200, mỗi trang một H1, neo mục lục đều tồn tại, không lộ ghi chú nội bộ, một mô tả SEO; PHP lint trên server đạt; smoke sáu URL chính + SSH đạt; Chrome kiểm tra bài mới và form đặt lịch ở 375 px, bảng giá ở 375 px và khối tra cứu ở desktop, không tràn ngang hay lỗi JavaScript tại các trang mẫu. Chưa kiểm thủ công từng FAQ trong 20 bài hoặc kết quả lập chỉ mục Google. `python scripts/check-content-plan-live.py` chạy lại bộ kiểm tra HTML công khai.
 
 ## Trạng thái thật
 

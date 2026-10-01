@@ -1,10 +1,11 @@
 # Production changelog
 
-## 2026-10-01 — chuẩn bị xuất bản bộ 20 nội dung sau lệnh “áp dụng hết”
+## 2026-10-01 — đã xuất bản bộ 20 nội dung sau lệnh “áp dụng hết”
 
 - Tạo bản HTML công khai riêng từ 20 bản thảo; loại bỏ ghi chú nội bộ và thông tin chưa xác minh, giữ bản nháp gốc để đối chiếu. Nội dung y khoa chung được đối chiếu với NEI, FDA, AAPOS và luật BHYT; không tự nhận bác sĩ đã duyệt.
 - Bổ sung đường hiển thị phần giải thích vào template đặt lịch và bảng giá mà vẫn giữ biểu mẫu và bảng giá; chuẩn bị khối tra cứu bài đã xuất bản trong child theme. Script WP-CLI kiểm tra chính xác 8 URL cũ và 12 bản nháp trước khi ghi, sau đó bổ sung vào nội dung cũ thay vì xóa nội dung đang có.
-- Trạng thái tại thời điểm ghi dòng này: **chưa triển khai**; sẽ cập nhật backup, kiểm thử và kết quả production sau khi thực hiện.
+- Đã backup database và theme tại `/home/jwhxtzru/backups/content-plan-publish-20261001-090959/`; triển khai child theme, áp dụng 8 bổ sung trên URL cũ và xuất bản 12 bài ID 1441–1452. Thêm tiêu đề/mô tả SEO đã chuẩn bị, giữ thẻ mô tả có sẵn trên Liên hệ/Đội ngũ để tránh trùng. Không gán bác sĩ/tác giả khi người quản lý chưa cung cấp tên và ngày duyệt; 3 bài cũ mới bổ sung cũng chuyển sang trạng thái chờ xác minh ghi công.
+- PHP lint trên server đạt; cache WordPress/LiteSpeed đã xóa; 20/20 URL HTTP 200, H1/mục lục/mô tả SEO hợp lệ, không lộ ghi chú nội bộ; smoke sáu URL + SSH đạt. Chrome đã thử bài mới và form ở 375 px, bảng giá ở 375 px, khối tra cứu ở desktop, không thấy tràn ngang hoặc lỗi JS tại các trang mẫu. Chi tiết và rollback trong `docs/content-plan-20/README.md`.
 
 ## 2026-10-01 — kiểm tra 12 draft trên WordPress và sửa ghi công sai/bố cục mobile
 

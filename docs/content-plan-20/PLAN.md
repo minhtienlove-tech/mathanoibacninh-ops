@@ -1,5 +1,7 @@
 # Kế hoạch 20 chủ đề — bản làm việc, 30/09/2026
 
+> Lưu ý 01/10/2026: đây là kế hoạch trước xuất bản. Bộ 20 nội dung đã được áp dụng lên production; trạng thái hiện tại, QA và rollback ở `README.md`.
+
 Trạng thái: **chưa xuất bản nội dung mới**. Bản kiểm kê `inventory.json` lấy từ WP-CLI gồm 294 URL công khai (150 bài viết, 144 trang), có ID, URL, loại, chuyên mục, tác giả WordPress, ngày sửa và liên kết trong `post_content`. Nội dung sinh động qua template không nằm trong trường này; vì vậy không thể kết luận trang không có liên kết chỉ từ mảng `internal_links` rỗng. Trang thư viện hiện có là `/kien-thuc/`; category gốc `Kiến thức nhãn khoa` có slug `kien-thuc`. Menu WordPress `Menu chinh` có 8 mục, gồm trang thư viện; trang tác giả `/author/bvmat/` đang HTTP 200, tiêu đề chỉ là “bvmat”, cần hồ sơ biên tập thực. URL `/`, `/bang-gia/` và `/khu-vuc/` đều đang hoạt động. Có hai cặp bài trùng tiêu đề 107/116 và 109/120 cần xử lý riêng; không xóa hay đổi URL trong đợt này.
 
 ## Dữ liệu bệnh viện đã đối chiếu
