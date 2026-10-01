@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-01 — kiểm tra 12 draft trên WordPress và sửa ghi công sai/bố cục mobile
+
+- Đăng nhập xem đủ 12 bản nháp trên theme thật ở 1280×800 và 375×812: một H1/bài, 8 neo mục lục hợp lệ, không tràn ngang; thử bấm mục lục bài 20 thành công. Ảnh QA trong `docs/content-plan-20/`.
+- Trên preview, plugin tự gán bác sĩ/người quản trị làm tác giả dù chưa xác minh. Sửa riêng trong child theme `inc/tac-gia-bac-si.php`: bài có meta chờ duyệt không hiển thị các khối ghi công/plugin AI, không xuất Article schema sai, không chèn breadcrumb và thời gian đọc trùng. Bài công khai mẫu vẫn giữ các tính năng như trước.
+- `assets/lien-he-noi.css`: ẩn cụm biểu tượng mạng xã hội nổi dưới 768 px vì che chữ; link footer và nút gọi/đặt lịch vẫn còn. Backup file+database tại `/home/jwhxtzru/backups/draft-attribution-20261001-083352/` và `/home/jwhxtzru/backups/mobile-contact-dock-20261001-084604/`. PHP lint, purge cache, smoke sáu URL đạt; post công khai vẫn 150, draft vẫn 12. Rollback chi tiết: `docs/content-plan-20/README.md`.
+
 ## 2026-10-01 — nhập 12 bài kiến thức mới dưới dạng bản nháp, CHƯA XUẤT BẢN
 
 - Sau phê duyệt bản xem thử, sao lưu database và tệp theme liên quan tại `/home/jwhxtzru/backups/content-plan-drafts-20261001-081537/`; dùng `scripts/import-content-plan-drafts.php` nhập bản 07, 08, 09, 11, 12, 13, 15–20 thành post ID 1441–1452 ở trạng thái `draft`. Tạo chuyên mục con phẫu thuật khúc xạ ID 17. Chưa gán tác giả/bác sĩ khi chưa xác minh, không cập nhật 8 URL cũ hoặc deploy code khối tra cứu.

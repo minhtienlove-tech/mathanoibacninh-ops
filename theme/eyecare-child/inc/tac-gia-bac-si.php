@@ -906,6 +906,11 @@ function eyecare_schema_bai_viet() {
 	}
 
 	$id  = get_the_ID();
+	// Bài trong gói biên tập chưa được xác minh tác giả/bác sĩ: không gán
+	// mặc định bác sĩ đứng tên vào schema, kể cả trên bản xem trước riêng tư.
+	if ( 'pending-author-and-medical-review' === get_post_meta( $id, '_eyecare_content_review_status', true ) ) {
+		return null;
+	}
 	$goc = home_url( '/' );
 
 	$bai = array(
@@ -1126,3 +1131,53 @@ function eyecare_schema_duong_dan_bai_viet() {
 		'itemListElement' => $muc,
 	);
 }
+
+/**
+ * Không hiển thị khối plugin tự nhận bác sĩ là tác giả trên bản nháp chưa duyệt.
+ * Chỉ áp dụng cho bài có meta nội bộ; bài đang xuất bản không bị ảnh hưởng.
+ */
+function eyecare_an_ghi_cong_ban_nhap_chua_duyet() {
+	if ( is_admin() || ! is_singular( 'post' ) ) {
+		return;
+	}
+
+	$id = (int) get_queried_object_id();
+	if ( 'pending-author-and-medical-review' !== get_post_meta( $id, '_eyecare_content_review_status', true ) || ! class_exists( 'OBS_Loader' ) ) {
+		return;
+	}
+
+	$aicb = OBS_Loader::get( 'ai_citation_bridge' );
+	if ( $aicb ) {
+		remove_filter( 'the_content', array( $aicb, 'maybe_inject' ), 8 );
+		remove_filter( 'the_content', array( $aicb, 'maybe_inject_eeat' ), 11 );
+	}
+
+	$author_bio = OBS_Loader::get( 'author_bio' );
+	if ( $author_bio ) {
+		remove_filter( 'the_content', array( $author_bio, 'append_box' ), 99 );
+		remove_filter( 'the_content', array( $author_bio, 'prepend_box' ), 99 );
+		remove_filter( 'the_content', array( $author_bio, 'both_box' ), 99 );
+	}
+
+	// Plugin sẽ gán user quản trị làm author của Article dù post_author=0.
+	// Bản nháp riêng tư không cần Article schema trước khi xác minh người viết.
+	$schema = OBS_Loader::get( 'schema' );
+	if ( $schema ) {
+		remove_action( 'wp_head', array( $schema, 'render' ), 10 );
+	}
+
+	// Template single.php đã có breadcrumb và thời gian đọc riêng.
+	$breadcrumb = OBS_Loader::get( 'breadcrumb' );
+	if ( $breadcrumb ) {
+		remove_filter( 'the_content', array( $breadcrumb, 'auto_insert' ), 5 );
+	}
+	$reading_time = OBS_Loader::get( 'reading_time' );
+	if ( $reading_time ) {
+		remove_filter( 'the_content', array( $reading_time, 'prepend_to_content' ), 4 );
+		remove_filter( 'the_content', array( $reading_time, 'append_to_content' ), 5 );
+	}
+
+	remove_shortcode( 'obs_eeat_box' );
+	remove_shortcode( 'obs_author_bio' );
+}
+add_action( 'wp', 'eyecare_an_ghi_cong_ban_nhap_chua_duyet', 20 );
