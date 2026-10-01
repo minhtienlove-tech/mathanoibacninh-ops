@@ -1,8 +1,10 @@
 # Production changelog
 
-## 2026-10-01 — liên kết hai chiều cho 15 bài mắt và môi trường làm việc (chuẩn bị)
+## 2026-10-01 — liên kết hai chiều cho 15 bài mắt và môi trường làm việc
 
 - Đã kiểm tra nội dung 15 bài mới và 11 bài cũ liên quan: bài mới mới chỉ có một liên kết tới bài cũ; chưa có liên kết nội dung từ bài cũ đến loạt mới. Chuẩn bị `scripts/link-workplace-series.php` để thêm hai liên kết cùng ngữ cảnh giữa các bài mới và một khối liên kết từ mỗi bài cũ đến các bài mới tương ứng. Script kiểm tra chính xác 26 bài, lưu nguyên bản nội dung từng bài trước khi ghi; không đổi phần giải thích y khoa cũ.
+- Đã backup database và nguyên văn 26 bài tại `/home/jwhxtzru/backups/workplace-links-20261001-160029/`, rồi cập nhật 15 bài mới và 11 bài cũ. Cache WordPress/LiteSpeed đã xóa. Kiểm tra HTML công khai: 15/15 bài mới có đúng hai liên kết cùng loạt và một liên kết đến bài cũ; 11/11 bài cũ dẫn ngược tới đủ 15 bài mới. Bài mẫu trên Chrome 375 px không tràn ngang, hiển thị khối liên kết trong mục lục. `scripts/verify-live.ps1 -CheckSsh`, PHP lint và 15 URL công khai đều đạt. Rollback chọn lọc có script và đã kiểm tra dry run 26/26 bài, chưa thực thi rollback.
+- Kế hoạch tiếp theo để từ 177 lên 200 bài công khai: `docs/content-plan-to-200.md` với 23 đề tài riêng, mốc viết/duyệt/xuất bản và cảnh báo ba cặp trùng tiêu đề cần rà. Chưa tạo hoặc đăng 23 bài này.
 
 
 ## 2026-10-01 — chuẩn bị 15 bài “Mắt và môi trường làm việc”

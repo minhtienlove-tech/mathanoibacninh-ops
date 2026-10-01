@@ -24,3 +24,5 @@ Với đợt này, các ID cụ thể là 1474–1488. Có thể đổi từng b
 ## Liên kết hai chiều
 
 Mỗi bài mới đã có một liên kết tới một bài cũ. Đợt bổ sung dùng `scripts/link-workplace-series.php` để thêm hai liên kết sang bài mới cùng tình huống và thêm liên kết chiều ngược từ 11 bài cũ tới đủ 15 bài mới. Khối mới có dấu `eyecare-workplace-links:v1` để kiểm tra và khôi phục chọn lọc. Script lưu nguyên văn `post_content` của 26 bài trong một JSON riêng trên server trước khi cập nhật, ngoài bản backup database.
+
+Đã áp dụng ngày 01/10/2026. Backup: `/home/jwhxtzru/backups/workplace-links-20261001-160029/database.sql` và `original-content.json`. `python scripts/verify-workplace-links.py` đạt 15/15 bài mới, 11/11 bài cũ trên HTML công khai. Muốn hoàn tác riêng liên kết, chạy `scripts/rollback-workplace-links.php` qua WP-CLI với `EYECARE_ROLLBACK_WORKPLACE_LINKS=1` và `EYECARE_WORKPLACE_LINK_BACKUP` trỏ tới JSON backup. Trước khi ghi, đặt thêm `EYECARE_ROLLBACK_WORKPLACE_LINKS_DRY_RUN=1`; dry run 26/26 hiện đạt. Script từ chối rollback nếu nội dung khác ngoài khối liên kết đã thay đổi. Sau rollback thực tế cần xóa cache rồi kiểm tra URL.
