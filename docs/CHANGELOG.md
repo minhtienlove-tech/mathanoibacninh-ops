@@ -1,5 +1,13 @@
 # Production changelog
 
+## 2026-10-02 — hoàn thành 200 bài viết công khai
+
+- Sau khi gộp ba cặp bài gần trùng, tạo 26 bài riêng trong `docs/content-200-26/drafts/` (1.509–1.910 từ/bài), danh mục và danh sách tại `metadata.json`. Mỗi bài có FAQ, nguồn y khoa gốc, tối thiểu hai liên kết tới bài đang xuất bản và dùng ảnh đại diện phù hợp từ thư viện hiện có. Không gán tác giả hay bác sĩ duyệt khi chưa có tên/ngày được xác nhận; meta nội bộ vẫn ghi chờ duyệt chuyên môn.
+- Backup database trước thay đổi tại `/home/jwhxtzru/backups/content-200-26-20261002-0425/database.sql`; cùng thư mục có package, script import/publish và backup excerpt `original-excerpts.json`. Import 26 bản nháp ID 1550–1575, kiểm tra trên Chrome, rồi xuất bản đúng 26 bài. Không sửa WordPress core, plugin hay mã child theme.
+- Sửa dấu Markdown lọt vào mô tả SEO/excerpt của loạt bài; đồng bộ bộ tạo package để không tái phát. Xóa object cache và LiteSpeed cache. WP-CLI xác nhận **200 bài đã xuất bản**; HTTP 200, H1 đơn nhất, canonical, meta description và liên kết nội bộ đạt 26/26. `scripts/verify-live.ps1 -CheckSsh` đạt với các URL chính.
+- Rollback chọn lọc: chuyển đúng ID 1550–1575 về nháp, khôi phục excerpt/meta từ `original-excerpts.json` nếu cần, xóa cache và kiểm tra lại số bài. Backup SQL chỉ dùng để phục hồi toàn diện sau khi đánh giá mọi thay đổi phát sinh từ thời điểm backup; không nhập đè trực tiếp vào website đang có dữ liệu mới.
+- Còn cần bác sĩ/bệnh viện xác nhận người biên soạn, người duyệt và ngày duyệt chuyên môn. Ảnh đại diện hiện được dùng lại từ bài liên quan, chưa tạo ảnh độc quyền cho từng bài.
+
 ## 2026-10-02 — gộp ba cặp bài trùng, chuyển hướng URL cũ
 
 - Người quản lý chọn gộp ba cặp để xây kho 200 bài nội dung riêng. Backup database và `inc/quan-ly-bai-viet.php` tại `/home/jwhxtzru/backups/merge-three-posts-20261002-102441/`; script nhập còn lưu nguyên văn ba bài trùng và năm bài/trang có liên kết cần sửa trong `original-content.json` cùng thư mục.
