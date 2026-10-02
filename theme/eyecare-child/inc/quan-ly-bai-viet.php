@@ -183,6 +183,25 @@ function eyecare_chuyen_huong_chuyen_muc_cu_truc_tiep() {
 }
 add_action( 'template_redirect', 'eyecare_chuyen_huong_chuyen_muc_cu_truc_tiep', 1 );
 
+/** Keep links to three merged duplicate articles working after the copies become drafts. */
+function eyecare_chuyen_huong_bai_trung() {
+	if ( is_admin() || ! isset( $_SERVER['REQUEST_URI'] ) ) {
+		return;
+	}
+	$path = (string) wp_parse_url( wp_unslash( $_SERVER['REQUEST_URI'] ), PHP_URL_PATH );
+	$redirects = array(
+		'/kien-thuc/can-thi-la-gi-nguyen-nhan-va-dau-hieu-2/' => '/kien-thuc/can-thi-la-gi-nguyen-nhan-va-dau-hieu/',
+		'/kien-thuc/doi-kinh-lien-tuc-ma-van-mo-2/' => '/kien-thuc/doi-kinh-lien-tuc-ma-van-mo/',
+		'/kien-thuc/kham-khuc-xa-gom-nhung-gi-2/' => '/kien-thuc/kham-khuc-xa-gom-nhung-gi/',
+	);
+	$path = trailingslashit( $path );
+	if ( isset( $redirects[ $path ] ) ) {
+		wp_safe_redirect( home_url( $redirects[ $path ] ), 301, 'Eyecare Duplicate Article Merge' );
+		exit;
+	}
+}
+add_action( 'template_redirect', 'eyecare_chuyen_huong_bai_trung', 0 );
+
 /**
  * Flush rewrite một lần sau khi triển khai URL gọn.
  * Không xóa rewrite_rules; flush_rewrite_rules() là API WordPress an toàn.

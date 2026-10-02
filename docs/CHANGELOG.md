@@ -1,5 +1,17 @@
 # Production changelog
 
+## 2026-10-02 — gộp ba cặp bài trùng, chuyển hướng URL cũ
+
+- Người quản lý chọn gộp ba cặp để xây kho 200 bài nội dung riêng. Backup database và `inc/quan-ly-bai-viet.php` tại `/home/jwhxtzru/backups/merge-three-posts-20261002-102441/`; script nhập còn lưu nguyên văn ba bài trùng và năm bài/trang có liên kết cần sửa trong `original-content.json` cùng thư mục.
+- Thêm đúng ba redirect 301 trong child theme. Cập nhật liên kết nội bộ từ URL `-2` sang URL gốc trong năm bài/trang, chuyển ID 107, 108, 109 sang nháp; giữ bản gốc ID 116, 119, 120 công khai. Không xóa nội dung hoặc media. Số bài công khai từ 177 còn 174. Kế hoạch tăng lên 26 bài mới.
+- PHP lint cả hai file PHP đạt, dry run xác nhận đúng ba cặp và năm nội dung liên kết. Xóa WordPress/LiteSpeed cache; cả ba URL `-2` trả 301 về đúng URL gốc; smoke sáu URL chính và SSH đạt. Rollback chọn lọc: khôi phục file child theme từ backup, trả ba bài về `publish`, phục hồi năm `post_content` theo `original-content.json`, xóa cache rồi kiểm tra URL. Không dùng `wp db import` nếu website đã có thay đổi mới hơn.
+
+## 2026-10-02 — audit lại kế hoạch 200 bài (chỉ đọc)
+
+- WP-CLI xác nhận 177 bài công khai, cả 177 có ảnh đại diện; 15 bài dưới 1.400 từ theo bộ đếm nội dung, một bài không có liên kết nội bộ trong `post_content`.
+- Kiểm tra nguyên văn ba cặp nghi trùng: ID 107/116 và 108/119 giống khoảng 99,6%; ID 109/120 giống khoảng 91%; cả sáu URL HTTP 200 với canonical riêng. Chưa gộp, xóa, chuyển hướng hoặc sửa production.
+- Báo cáo và hai phương án mốc 200 tại `docs/content-200-audit-20261002.md`; 23 bài mới vẫn chỉ ở mức kế hoạch.
+
 ## 2026-10-02 — ảnh riêng cho 15 bài mắt và môi trường làm việc
 
 - Tạo 15 ảnh minh họa riêng theo đúng tình huống của 15 bài ID 1474–1488; ảnh không mô tả nhân viên hoặc cơ sở thật của bệnh viện. Đổi tên theo slug bài viết, xuất WebP 1200×675 ở 42–92 KB/ảnh (tổng 1.053.434 byte). Giữ ảnh gốc và bản WebP trong thư mục `docs/workplace-15/images/` tại workspace, thư mục này được loại khỏi Git vì media production nằm trong WordPress.

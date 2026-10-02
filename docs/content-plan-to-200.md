@@ -1,16 +1,18 @@
-# Kế hoạch mở rộng thư viện từ 177 lên 200 bài
+# Kế hoạch mở rộng thư viện từ 174 lên 200 bài nội dung riêng
 
-Ngày lập: 01/10/2026. Đích: **23 bài mới, mỗi bài khoảng 1.500 từ**; giữ URL và nội dung 177 bài đang xuất bản. Đây là kế hoạch biên tập, **chưa tạo hoặc đăng 23 bài**.
+Ngày lập: 01/10/2026; cập nhật sau audit 02/10/2026. Đích: **26 bài mới, mỗi bài khoảng 1.500 từ**. Ba bài trùng đã chuyển sang nháp và URL cũ chuyển 301 về bản gốc; hiện còn 174 bài công khai. Đây là kế hoạch biên tập, **chưa tạo hoặc đăng 26 bài**.
+
+Audit production ngày 02/10/2026: [báo cáo kiểm kê và trùng nội dung](content-200-audit-20261002.md). Mốc 177 bài được xác nhận trước khi gộp; sau khi gộp còn 174. Kế hoạch tăng từ 23 lên 26 bài theo lựa chọn của người quản lý.
 
 ## Kiểm kê và nguyên tắc
 
-- WordPress và trang `/kien-thuc/` hiện có 177 bài công khai. Thêm 23 bài sẽ đạt 200 bài công khai nếu không gộp hoặc chuyển nháp bài cũ.
-- Có ba **cặp trùng tiêu đề** cần kiểm tra nội dung và canonical trước khi viết: ID 107/116 (cận thị là gì), 108/119 (đổi kính vẫn mờ), 109/120 (khám khúc xạ). Chưa kết luận nội dung trùng và không tự xóa/chuyển hướng bài nào. Nếu sau này gộp, phải tính lại số bài cần viết để đạt 200 URL công khai.
+- WordPress và trang `/kien-thuc/` hiện có 174 bài công khai sau khi gộp ba cặp; thêm 26 bài sẽ đạt 200 bài công khai nội dung riêng.
+- Ba bài trùng ID 107, 108, 109 đã chuyển sang nháp, nội dung gốc vẫn được giữ trong database và backup; URL chuyển 301 lần lượt về ID 116, 119, 120. Các liên kết nội bộ tìm thấy trong 5 bài/trang đã được cập nhật.
 - Mỗi đề tài dưới đây nhắm một câu hỏi hoặc tình huống riêng. Trước khi soạn, đối chiếu lại 177 tiêu đề, mục đích tìm kiếm và nội dung bài gần nhất để tránh viết lại cùng ý.
 - Mỗi bài: trả lời nhanh; tình huống người bệnh; cách bác sĩ đánh giá; các khả năng cần phân biệt; lựa chọn theo dõi/điều trị ở mức phổ thông; dấu hiệu cần đi khám sớm; FAQ 3–5 câu; nguồn chuyên môn; 2–4 liên kết nội bộ theo ngữ cảnh. Không tự khẳng định bệnh viện có kỹ thuật/dịch vụ cụ thể chưa kiểm chứng.
 - Mọi nội dung y khoa cần biên tập và bác sĩ duyệt trước khi gán tên/ngày duyệt. Không tạo `Review`/điểm sao, thông tin tác giả hay FAQ schema không hiện trên trang. Chỉ tạo schema bài viết khi đúng thực thể và nguồn ghi công đã xác minh.
 
-## 23 đề tài dự kiến
+## 26 đề tài dự kiến
 
 | # | Nhóm | Tiêu đề làm việc và góc riêng | Bài cũ nên liên kết |
 |---|---|---|---|
@@ -37,14 +39,17 @@ Ngày lập: 01/10/2026. Đích: **23 bài mới, mỗi bài khoảng 1.500 từ
 | 21 | Mắt và công việc | Trực màn hình camera nhiều giờ: bố trí màn hình, ánh sáng và lịch nghỉ mắt. Khác bài máy tính phổ thông ở việc theo dõi nhiều khung hình. | Quy tắc 20-20-20; Màn hình bị lóa |
 | 22 | Mắt và công việc | Thợ may và người lắp linh kiện nhìn chi tiết nhỏ: ánh sáng, cỡ chi tiết và khám khúc xạ. | Màn hình đặt gần hay cao; Kính không còn đúng độ |
 | 23 | Mắt và công việc | Cưa, chà nhám gỗ: phòng mảnh gỗ và bụi bay vào mắt. Phân biệt với bài mài kim loại. | Đeo kính bảo hộ đúng cách; Mài và khoan kim loại |
+| 24 | Kính áp tròng | Đau, đỏ hoặc sợ sáng khi đang đeo kính áp tròng: vì sao cần tháo kính và khám sớm? Tập trung dấu hiệu nghi viêm giác mạc, không lặp hướng dẫn đeo kính. | Cách đeo lens; Loét giác mạc |
+| 25 | Cấp cứu mắt | Hai đồng tử có kích thước khác nhau mới xuất hiện: quan sát gì và khi nào cần cấp cứu? Không tự kết luận nguyên nhân từ ảnh chụp. | Nhìn đôi; Sụp mi một bên mới xuất hiện |
+| 26 | Khúc xạ và kính | Kính mới làm đúng đơn nhưng đeo vẫn khó chịu: kiểm tra gọng, tròng, tư thế và thời gian thích nghi ra sao? Phân biệt với bài “đổi kính liên tục vẫn mờ” tập trung nguyên nhân bệnh mắt. | Đổi kính liên tục vẫn mờ; Kính không còn đúng độ |
 
 ## Nguồn và quy trình xuất bản
 
 Ưu tiên nguồn gốc từ [NEI](https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases), [AAO EyeWiki](https://eyewiki.aao.org/), [FDA về phẫu thuật khúc xạ](https://www.fda.gov/medical-devices/lasik/lasik-surgery-checklist), [CDC về biến chứng mắt do đái tháo đường](https://www.cdc.gov/diabetes/diabetes-complications/diabetes-and-vision-loss.html) và [CDC/NIOSH về an toàn mắt tại nơi làm việc](https://www.cdc.gov/niosh/ppe/eye-safety/index.html). Mỗi bản thảo ghi nguồn cụ thể cho từng khẳng định y khoa; kiểm tra ngày cập nhật và đối chiếu với hướng dẫn chuyên môn áp dụng tại Việt Nam trước khi đăng.
 
-1. **Tuần 1:** Kiểm tra ba cặp trùng tiêu đề, chốt 23 brief, từ khóa chính/phụ và đường dẫn dự kiến; xác nhận bác sĩ duyệt cùng quy trình ghi công.
-2. **Tuần 2–4:** Viết theo nhóm 7 + 8 + 8 bài, mỗi bài khoảng 1.500 từ. Kiểm tra mức trùng nội dung với bài đã có và giữa các bản thảo; không kéo dài chỉ để đủ số từ.
+1. **Tuần 1:** Gộp ba cặp trùng, chốt 26 brief, từ khóa chính/phụ và đường dẫn dự kiến; xác nhận bác sĩ duyệt cùng quy trình ghi công.
+2. **Tuần 2–4:** Viết theo nhóm 8 + 9 + 9 bài, mỗi bài khoảng 1.500 từ. Kiểm tra mức trùng nội dung với bài đã có và giữa các bản thảo; không kéo dài chỉ để đủ số từ.
 3. **Tuần 3–5:** Bác sĩ duyệt nội dung, biên tập câu dễ hiểu, kiểm tra FAQ, URL và nguồn. Mỗi bài có ít nhất hai liên kết đến bài cũ cùng chủ đề và một liên kết đến bài mới liên quan; thêm liên kết chiều ngược từ các bài trụ cột, không chèn hàng loạt vào bài không liên quan.
 4. **Tuần 5–6:** Nhập WordPress dưới dạng nháp, xem ở desktop/điện thoại, kiểm tra một H1, meta description/canonical, liên kết HTTP 200, không tràn ngang, rồi xuất bản theo lô nhỏ 4–6 bài. Sau mỗi lô xóa cache phù hợp, kiểm tra HTML công khai và đếm lại tổng bài. Sao lưu database trước từng lô; rollback bằng chuyển lô mới về nháp và phục hồi nội dung bài cũ đã sửa từ bản backup riêng nếu cần.
 
-Đo kết quả bằng chất lượng và khả năng tìm thông tin: 23/23 bài không trùng ý định tìm kiếm; nguồn y khoa và liên kết nội bộ đúng; được bác sĩ duyệt; không có 404; danh mục vẫn dễ dùng trên điện thoại. Mốc 200 bài là kết quả kiểm kê, không phải lý do để tạo nội dung lặp hoặc khẳng định y khoa thiếu kiểm chứng.
+Đo kết quả bằng chất lượng và khả năng tìm thông tin: 26/26 bài không trùng ý định tìm kiếm; nguồn y khoa và liên kết nội bộ đúng; được bác sĩ duyệt; không có 404; danh mục vẫn dễ dùng trên điện thoại. Mốc 200 bài là kết quả kiểm kê, không phải lý do để tạo nội dung lặp hoặc khẳng định y khoa thiếu kiểm chứng.
