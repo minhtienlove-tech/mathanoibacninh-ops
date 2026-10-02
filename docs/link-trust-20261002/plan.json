@@ -1,0 +1,533 @@
+[
+  {
+    "target_id": 1575,
+    "target_slug": "kinh-moi-dung-don-nhung-deo-kho-chiu",
+    "target_title": "Kính mới đúng đơn mà đeo vẫn khó chịu: nên kiểm tra gọng, tròng và mắt ra sao?",
+    "source_id": 119,
+    "source_slug": "doi-kinh-lien-tuc-ma-van-mo",
+    "source_title": "Đổi kính liên tục mà vẫn mờ: bảy nguyên nhân thường gặp",
+    "reverse": true
+  },
+  {
+    "target_id": 1573,
+    "target_slug": "deo-kinh-ap-trong-mat-do-dau-so-sang",
+    "target_title": "Đeo kính áp tròng mà mắt đỏ, đau, sợ sáng: vì sao phải tháo kính và khám sớm?",
+    "source_id": 75,
+    "source_slug": "cach-deo-lens-va-thao-lens-don-gian-cho-nguoi-moi-bat-dau",
+    "source_title": "Cách đeo lens và tháo lens đơn giản cho người mới bắt đầu",
+    "reverse": true
+  },
+  {
+    "target_id": 1574,
+    "target_slug": "hai-dong-tu-khac-kich-thuoc-moi-xuat-hien",
+    "target_title": "Hai đồng tử mới khác kích thước: khi nào cần cấp cứu?",
+    "source_id": 627,
+    "source_slug": "sup-mi-mot-ben-moi-xuat-hien",
+    "source_title": "Sụp mi một bên mới xuất hiện: nguyên nhân và khi nào cần cấp cứu",
+    "reverse": true
+  },
+  {
+    "target_id": 1572,
+    "target_slug": "cua-cha-nham-go-bao-ve-mat",
+    "target_title": "Cưa và chà nhám gỗ: bảo vệ mắt khỏi mảnh văng và bụi mịn",
+    "source_id": 592,
+    "source_slug": "deo-kinh-bao-ho-dung-cach",
+    "source_title": "Đeo kính bảo hộ đúng cách: vì sao nhiều người bỏ không dùng",
+    "reverse": true
+  },
+  {
+    "target_id": 1571,
+    "target_slug": "tho-may-lap-linh-kien-nho-moi-mat",
+    "target_title": "Thợ may và người lắp linh kiện nhỏ: ánh sáng, kính và khoảng nhìn thế nào cho đỡ mỏi?",
+    "source_id": 630,
+    "source_slug": "kinh-khong-con-dung-do-khi-nao-do-lai",
+    "source_title": "Kính không còn đúng độ: khi nào cần đo lại",
+    "reverse": true
+  },
+  {
+    "target_id": 1570,
+    "target_slug": "truc-camera-nhieu-man-hinh-moi-mat",
+    "target_title": "Trực camera nhiều màn hình: bố trí thế nào để mắt đỡ mỏi?",
+    "source_id": 1474,
+    "source_slug": "man-hinh-bi-loa-khi-lam-viec",
+    "source_title": "Màn hình bị lóa khi làm việc: chỉnh ánh sáng trước khi mua kính",
+    "reverse": true
+  },
+  {
+    "target_id": 1568,
+    "target_slug": "dau-nong-ban-vao-mat-so-cuu",
+    "target_title": "Dầu nóng bắn vào mắt khi nấu ăn: sơ cứu thế nào và khi nào cần khám?",
+    "source_id": 255,
+    "source_slug": "mat-bi-cham-thuong-do-vat-nhon",
+    "source_title": "Mắt bị chấn thương do vật nhọn hoặc hoá chất: sơ cứu đúng cách",
+    "reverse": true
+  },
+  {
+    "target_id": 1569,
+    "target_slug": "la-lua-canh-cay-quet-vao-mat",
+    "target_title": "Cành cây hoặc lá lúa quệt vào mắt: vì sao không tự lấy dị vật?",
+    "source_id": 180,
+    "source_slug": "di-vat-bay-vao-mat-xu-ly-the-nao",
+    "source_title": "Dị vật bay vào mắt: việc nên làm và việc tuyệt đối không",
+    "reverse": true
+  },
+  {
+    "target_id": 1567,
+    "target_slug": "mo-lai-sau-mo-duc-thuy-tinh-the",
+    "target_title": "Sau mổ đục thủy tinh thể lại nhìn mờ: đục bao sau hay nguyên nhân khác?",
+    "source_id": 150,
+    "source_slug": "duc-thuy-tinh-the-dau-hieu-som",
+    "source_title": "Đục thuỷ tinh thể: dấu hiệu sớm và tiến triển theo thời gian",
+    "reverse": true
+  },
+  {
+    "target_id": 1566,
+    "target_slug": "phu-hoang-diem-do-dai-thao-duong",
+    "target_title": "Phù hoàng điểm do đái tháo đường: vì sao nhìn trung tâm mờ hoặc méo?",
+    "source_id": 571,
+    "source_slug": "mat-mo-kem-nhin-meo-duong-thang-thanh-cong",
+    "source_title": "Nhìn méo, đường thẳng thành cong: tổn thương hoàng điểm",
+    "reverse": true
+  },
+  {
+    "target_id": 1565,
+    "target_slug": "oct-than-kinh-thi-giac-co-thay-kham-mat",
+    "target_title": "Chụp OCT thần kinh thị giác có thay khám mắt và đo thị trường không?",
+    "source_id": 166,
+    "source_slug": "thi-truong-mat-thu-hep-dan",
+    "source_title": "Thị trường thu hẹp dần: vì sao người bệnh không tự nhận ra",
+    "reverse": true
+  },
+  {
+    "target_id": 1564,
+    "target_slug": "do-thi-truong-chuan-bi-va-lam-lai",
+    "target_title": "Đo thị trường: cần chuẩn bị gì và vì sao bác sĩ có thể yêu cầu làm lại?",
+    "source_id": 663,
+    "source_slug": "nhan-ap-cao-chua-ton-thuong",
+    "source_title": "Nhãn áp cao nhưng chưa tổn thương thần kinh thị giác",
+    "reverse": true
+  },
+  {
+    "target_id": 1562,
+    "target_slug": "loan-thi-khong-deu-kinh-dung-van-mo",
+    "target_title": "Loạn thị không đều: vì sao kính đúng đơn mà hình vẫn méo, nhòe?",
+    "source_id": 122,
+    "source_slug": "loan-thi-la-gi-khac-can-thi-the-nao",
+    "source_title": "Loạn thị là gì và khác cận thị thế nào?",
+    "reverse": true
+  },
+  {
+    "target_id": 1563,
+    "target_slug": "glocom-nhan-ap-binh-thuong",
+    "target_title": "Glôcôm nhãn áp bình thường: vì sao đo áp lực mắt một lần chưa đủ?",
+    "source_id": 162,
+    "source_slug": "do-nhan-ap-la-gi",
+    "source_title": "Đo nhãn áp là gì và con số bao nhiêu là bình thường?",
+    "reverse": true
+  },
+  {
+    "target_id": 1561,
+    "target_slug": "choi-quang-sang-sau-mo-can",
+    "target_title": "Chói và quầng sáng sau mổ cận: nên ghi nhận thế nào, khi nào khám lại?",
+    "source_id": 1450,
+    "source_slug": "cac-phuong-phap-mo-can",
+    "source_title": "Các phương pháp mổ cận khác nhau thế nào?",
+    "reverse": true
+  },
+  {
+    "target_id": 1560,
+    "target_slug": "kho-mat-sau-mo-can-khi-nao-tai-kham",
+    "target_title": "Khô mắt sau mổ cận: triệu chứng nào cần trao đổi ở lần tái khám?",
+    "source_id": 1452,
+    "source_slug": "kham-truoc-mo-can-gom-nhung-gi",
+    "source_title": "Khám trước mổ cận gồm những gì? Cần chuẩn bị ra sao?",
+    "reverse": true
+  },
+  {
+    "target_id": 1559,
+    "target_slug": "kinh-da-trong-sau-tuoi-40",
+    "target_title": "Kính đa tròng sau tuổi 40: ai phù hợp và vì sao cần thời gian làm quen?",
+    "source_id": 631,
+    "source_slug": "lao-thi-vi-sao-sau-40-tuoi-nhin-gan-mo",
+    "source_title": "Lão thị: vì sao sau 40 tuổi nhìn gần mờ",
+    "reverse": true
+  },
+  {
+    "target_id": 1557,
+    "target_slug": "tre-nham-mot-mat-khi-ra-nang",
+    "target_title": "Trẻ hay nhắm một mắt khi ra nắng: cha mẹ cần quan sát gì?",
+    "source_id": 142,
+    "source_slug": "con-hay-nheo-mat-khi-xem-tivi",
+    "source_title": "Con hay nheo mắt, nghiêng đầu khi xem tivi là bị gì?",
+    "reverse": true
+  },
+  {
+    "target_id": 1558,
+    "target_slug": "do-chieu-dai-truc-nhan-cau-o-tre-can-thi",
+    "target_title": "Đo chiều dài trục nhãn cầu ở trẻ cận thị giúp theo dõi điều gì?",
+    "source_id": 145,
+    "source_slug": "thoi-gian-ngoai-troi-va-can-thi-tre",
+    "source_title": "Thời gian ngoài trời và cận thị ở trẻ: bằng chứng nói gì",
+    "reverse": true
+  },
+  {
+    "target_id": 1556,
+    "target_slug": "vien-thi-o-tre-khi-nao-can-kinh",
+    "target_title": "Viễn thị ở trẻ: khi nào theo dõi, khi nào cần kính hoặc đánh giá lác?",
+    "source_id": 148,
+    "source_slug": "tre-may-tuoi-thi-do-mat-duoc",
+    "source_title": "Trẻ mấy tuổi thì đo mắt được? Mốc kiểm tra theo tuổi",
+    "reverse": true
+  },
+  {
+    "target_id": 1555,
+    "target_slug": "tre-bi-loan-thi-khi-nao-can-deo-kinh",
+    "target_title": "Trẻ bị loạn thị: khi nào cần đeo kính để bảo vệ thị giác?",
+    "source_id": 190,
+    "source_slug": "nhuoc-thi-la-gi-o-tre",
+    "source_title": "Nhược thị ở trẻ là gì? Vì sao đeo kính vẫn không nhìn rõ",
+    "reverse": true
+  },
+  {
+    "target_id": 1554,
+    "target_slug": "tre-nhin-mo-sau-hoc-gan-can-thi-hay-dieu-tiet",
+    "target_title": "Trẻ nhìn mờ sau giờ học gần: cận thị thật hay rối loạn điều tiết?",
+    "source_id": 143,
+    "source_slug": "dau-hieu-tre-bi-can-thi-som",
+    "source_title": "Chín dấu hiệu trẻ bị cận thị mà cha mẹ thường bỏ qua",
+    "reverse": true
+  },
+  {
+    "target_id": 1553,
+    "target_slug": "mong-mo-va-mong-thit-khac-nhau",
+    "target_title": "Mộng mỡ và mộng thịt khác nhau ở điểm nào? Khi nào cần khám mắt?",
+    "source_id": 634,
+    "source_slug": "mong-mat-khi-nao-can-mo",
+    "source_title": "Mộng mắt (màng mắt): khi nào cần mổ",
+    "reverse": true
+  },
+  {
+    "target_id": 1551,
+    "target_slug": "giac-mac-hinh-chop-loan-thi-tang",
+    "target_title": "Giác mạc hình chóp: vì sao loạn thị tăng mà đổi kính vẫn khó nhìn rõ?",
+    "source_id": 119,
+    "source_slug": "doi-kinh-lien-tuc-ma-van-mo",
+    "source_title": "Đổi kính liên tục mà vẫn mờ: bảy nguyên nhân thường gặp",
+    "reverse": true
+  },
+  {
+    "target_id": 1552,
+    "target_slug": "tuyen-meibomius-kho-mat-bay-hoi",
+    "target_title": "Tuyến Meibomius hoạt động kém và khô mắt bay hơi: vì sao chỉ nhỏ nước mắt nhân tạo chưa đủ?",
+    "source_id": 629,
+    "source_slug": "kho-mat-nang-khong-do-du-da-nho-thuoc",
+    "source_title": "Khô mắt nặng, nhỏ thuốc nhiều tháng vẫn không đỡ",
+    "reverse": true
+  },
+  {
+    "target_id": 1550,
+    "target_slug": "dau-mat-buoi-sang-trot-bieu-mo-tai-phat",
+    "target_title": "Đau nhói khi mở mắt buổi sáng sau trầy giác mạc: có phải trợt biểu mô tái phát?",
+    "source_id": 182,
+    "source_slug": "loet-giac-mac-dau-hieu-nguy-hiem",
+    "source_title": "Loét giác mạc: dấu hiệu phải đi khám trong hôm nay",
+    "reverse": true
+  },
+  {
+    "target_id": 1451,
+    "target_slug": "tren-40-tuoi-co-mo-can-duoc-khong",
+    "target_title": "Trên 40 tuổi có mổ cận được không?",
+    "source_id": 151,
+    "source_slug": "lao-thi-va-duc-thuy-tinh-the-khac-nhau",
+    "source_title": "Lão thị và đục thuỷ tinh thể khác nhau thế nào?",
+    "reverse": true
+  },
+  {
+    "target_id": 1449,
+    "target_slug": "chi-phi-mo-can-gom-nhung-gi",
+    "target_title": "Chi phí mổ cận gồm những khoản nào?",
+    "source_id": 284,
+    "source_slug": "bao-hiem-y-te-kham-mat-the-nao",
+    "source_title": "Bảo hiểm y tế khi khám mắt: cơ chế chi trả và thủ tục cơ bản",
+    "reverse": true
+  },
+  {
+    "target_id": 1448,
+    "target_slug": "can-bao-nhieu-do-thi-mo-duoc",
+    "target_title": "Cận bao nhiêu độ thì mổ được?",
+    "source_id": 169,
+    "source_slug": "can-nang-va-nguy-co-vong-mac",
+    "source_title": "Cận nặng và nguy cơ võng mạc: vì sao cần khám đáy mắt định kỳ",
+    "reverse": true
+  },
+  {
+    "target_id": 1447,
+    "target_slug": "do-mat-cat-kinh-tai-benh-vien",
+    "target_title": "Bệnh viện có đo mắt và cắt kính không?",
+    "source_id": 120,
+    "source_slug": "kham-khuc-xa-gom-nhung-gi",
+    "source_title": "Khám khúc xạ gồm những bước nào và mất bao lâu?",
+    "reverse": true
+  },
+  {
+    "target_id": 1446,
+    "target_slug": "can-075-do-co-can-deo-kinh",
+    "target_title": "Cận 0,75 độ có cần đeo kính không?",
+    "source_id": 118,
+    "source_slug": "do-can-bao-nhieu-la-nang",
+    "source_title": "Cận bao nhiêu độ là nặng? Cách hiểu con số trên đơn kính",
+    "reverse": true
+  },
+  {
+    "target_id": 1444,
+    "target_slug": "do-mat-lam-kinh-va-kham-mat-khac-nhau",
+    "target_title": "Đo mắt để làm kính và khám mắt chuyên khoa khác nhau thế nào?",
+    "source_id": 120,
+    "source_slug": "kham-khuc-xa-gom-nhung-gi",
+    "source_title": "Khám khúc xạ gồm những bước nào và mất bao lâu?",
+    "reverse": true
+  },
+  {
+    "target_id": 1445,
+    "target_slug": "kham-can-thi-cho-tre-o-bac-ninh",
+    "target_title": "Khám cận thị cho trẻ ở Bắc Ninh: khi nào nên khám và chuẩn bị gì?",
+    "source_id": 267,
+    "source_slug": "kiem-soat-tien-trien-can-thi-la-gi",
+    "source_title": "Kiểm soát tiến triển cận thị là gì? Phân biệt với chữa cận",
+    "reverse": true
+  },
+  {
+    "target_id": 1443,
+    "target_slug": "kham-can-thi-bao-nhieu-tien",
+    "target_title": "Khám mắt cận thị bao nhiêu tiền?",
+    "source_id": 120,
+    "source_slug": "kham-khuc-xa-gom-nhung-gi",
+    "source_title": "Khám khúc xạ gồm những bước nào và mất bao lâu?",
+    "reverse": true
+  },
+  {
+    "target_id": 1442,
+    "target_slug": "chon-noi-kham-mat-o-bac-ninh",
+    "target_title": "Chọn nơi khám mắt ở Bắc Ninh: những thông tin nên kiểm tra trước khi đặt lịch",
+    "source_id": 285,
+    "source_slug": "di-kham-mat-can-chuan-bi-gi",
+    "source_title": "Đi khám mắt cần chuẩn bị gì? Danh sách mang theo",
+    "reverse": true
+  },
+  {
+    "target_id": 1441,
+    "target_slug": "bhyt-kham-mat-tai-benh-vien-mat-ha-noi-bac-ninh",
+    "target_title": "Khám mắt tại Bệnh viện Mắt Hà Nội – Bắc Ninh có dùng BHYT không?",
+    "source_id": 285,
+    "source_slug": "di-kham-mat-can-chuan-bi-gi",
+    "source_title": "Đi khám mắt cần chuẩn bị gì? Danh sách mang theo",
+    "reverse": true
+  },
+  {
+    "target_id": 664,
+    "target_slug": "tang-huyet-ap-va-vong-mac",
+    "target_title": "Tăng huyết áp và võng mạc: khi mạch máu mắt bị tổn thương",
+    "source_id": 269,
+    "source_slug": "tac-mach-mau-vong-mac",
+    "source_title": "Tắc mạch máu võng mạc: mất thị lực đột ngột không đau",
+    "reverse": true
+  },
+  {
+    "target_id": 662,
+    "target_slug": "mat-va-thai-ky",
+    "target_title": "Mắt và thai kỳ: thay đổi gì, khi nào cần lo",
+    "source_id": 289,
+    "source_slug": "khi-nao-can-kham-lai-mat",
+    "source_title": "Khi nào cần khám lại mắt? Lịch theo từng nhóm bệnh",
+    "reverse": true
+  },
+  {
+    "target_id": 661,
+    "target_slug": "benh-basedow-graves-loi-mat",
+    "target_title": "Basedow và lồi mắt: khi tuyến giáp kéo theo cả hai con mắt",
+    "source_id": 619,
+    "source_slug": "hai-mat-nhin-khong-cung-huong-o-nguoi-truong-thanh",
+    "source_title": "Hai mắt nhìn không cùng hướng ở người trưởng thành",
+    "reverse": true
+  },
+  {
+    "target_id": 659,
+    "target_slug": "viem-mang-bo-dao-la-gi",
+    "target_title": "Viêm màng bồ đào: mắt đỏ, đau, sợ ánh sáng kéo dài",
+    "source_id": 258,
+    "source_slug": "mat-nhay-cam-voi-anh-sang",
+    "source_title": "Mắt nhạy cảm với ánh sáng bất thường: những khả năng cần khám",
+    "reverse": true
+  },
+  {
+    "target_id": 660,
+    "target_slug": "xuat-huyet-dich-kinh",
+    "target_title": "Xuất huyết dịch kính: khi máu chảy vào buồng dịch kính",
+    "source_id": 170,
+    "source_slug": "cao-huyet-ap-anh-huong-mat",
+    "source_title": "Cao huyết áp ảnh hưởng đến mắt thế nào?",
+    "reverse": true
+  },
+  {
+    "target_id": 658,
+    "target_slug": "thoai-hoa-hoang-diem-dang-uot",
+    "target_title": "Thoái hoá hoàng điểm thể ướt: tiến triển nhanh",
+    "source_id": 175,
+    "source_slug": "thoai-hoa-diem-vang-tuoi-gia",
+    "source_title": "Thoái hoá điểm vàng tuổi già: nhìn méo và mất vùng trung tâm",
+    "reverse": true
+  },
+  {
+    "target_id": 656,
+    "target_slug": "mang-truoc-vong-mac-la-gi",
+    "target_title": "Màng trước võng mạc: vì sao ảnh mờ và biến dạng",
+    "source_id": 653,
+    "source_slug": "bong-vong-mac-dau-hieu-canh-bao",
+    "source_title": "Bong võng mạc: dấu hiệu cảnh báo và khi nào cần cấp cứu",
+    "reverse": true
+  },
+  {
+    "target_id": 657,
+    "target_slug": "thoai-hoa-hoang-diem-dang-kho",
+    "target_title": "Thoái hoá hoàng điểm dạng khô: tiến triển từ từ",
+    "source_id": 175,
+    "source_slug": "thoai-hoa-diem-vang-tuoi-gia",
+    "source_title": "Thoái hoá điểm vàng tuổi già: nhìn méo và mất vùng trung tâm",
+    "reverse": true
+  },
+  {
+    "target_id": 655,
+    "target_slug": "lo-hoang-diem-vi-sao-nhin-meo",
+    "target_title": "Lỗ hoàng điểm: vì sao đường thẳng thành cong",
+    "source_id": 571,
+    "source_slug": "mat-mo-kem-nhin-meo-duong-thang-thanh-cong",
+    "source_title": "Nhìn méo, đường thẳng thành cong: tổn thương hoàng điểm",
+    "reverse": true
+  },
+  {
+    "target_id": 569,
+    "target_slug": "mat-mo-buoi-toi-ban-ngay-thi-ro",
+    "target_title": "Mắt mờ buổi tối, ban ngày thì rõ: nguyên nhân và khi nào cần khám",
+    "source_id": 156,
+    "source_slug": "nguoi-gia-mat-mo-nhin-khong-ro",
+    "source_title": "Người già mắt mờ nhìn không rõ là bệnh gì? Bốn nguyên nhân chính",
+    "reverse": true
+  },
+  {
+    "target_id": 635,
+    "target_slug": "seo-giac-mac-sau-chan-thuong-hoac-loet",
+    "target_title": "Sẹo giác mạc sau chấn thương hoặc sau loét: vì sao mắt vẫn mờ",
+    "source_id": 575,
+    "source_slug": "mat-mo-mot-ben-ben-kia-van-ro",
+    "source_title": "Mắt mờ một bên, bên kia vẫn rõ: khi nào cần lo",
+    "reverse": true
+  },
+  {
+    "target_id": 636,
+    "target_slug": "viem-ket-mac-di-ung-theo-mua",
+    "target_title": "Viêm kết mạc dị ứng theo mùa: nhận biết và xử lý",
+    "source_id": 185,
+    "source_slug": "nuoc-mat-nhan-tao-dung-the-nao",
+    "source_title": "Nước mắt nhân tạo: cách chọn và cách dùng đúng",
+    "reverse": true
+  },
+  {
+    "target_id": 632,
+    "target_slug": "mi-duoi-lat-ra-ngoai-lo-niem-mac",
+    "target_title": "Mi dưới lật ra ngoài, lộ niêm mạc: vì sao và xử lý",
+    "source_id": 186,
+    "source_slug": "viem-bo-mi-mat",
+    "source_title": "Viêm bờ mi: bệnh dai dẳng bị bỏ qua nhiều nhất",
+    "reverse": true
+  },
+  {
+    "target_id": 633,
+    "target_slug": "mi-quap-vao-trong-long-mi-choc-mat",
+    "target_title": "Mi quặp vào trong, lông mi chọc vào mắt: nhận biết và xử lý",
+    "source_id": 256,
+    "source_slug": "mat-giat-va-co-mi-lien-tuc",
+    "source_title": "Mắt giật và co mí liên tục: khi nào cần khám",
+    "reverse": true
+  },
+  {
+    "target_id": 628,
+    "target_slug": "sup-mi-nang-dan-ve-cuoi-ngay",
+    "target_title": "Sụp mi nặng dần về cuối ngày: vì sao và khi nào khám",
+    "source_id": 199,
+    "source_slug": "sup-mi-o-tre-nho",
+    "source_title": "Sụp mi ở trẻ nhỏ: vì sao ảnh hưởng đến phát triển thị lực",
+    "reverse": true
+  },
+  {
+    "target_id": 626,
+    "target_slug": "mat-tiet-dich-lan-mau",
+    "target_title": "Mắt tiết dịch lẫn máu: nguyên nhân và khi nào phải đi khám",
+    "source_id": 259,
+    "source_slug": "muoi-dau-hieu-o-mat-phai-di-kham-ngay",
+    "source_title": "Mười dấu hiệu ở mắt phải đi khám ngay trong hôm nay",
+    "reverse": true
+  },
+  {
+    "target_id": 625,
+    "target_slug": "mat-nong-rat-kem-chay-nuoc-mat",
+    "target_title": "Mắt nóng rát kèm chảy nước mắt: nguyên nhân và cách xử lý",
+    "source_id": 177,
+    "source_slug": "chalazion-va-leo-mat",
+    "source_title": "Lẹo và chắp ở mí mắt: khác nhau và cách xử lý ban đầu",
+    "reverse": true
+  },
+  {
+    "target_id": 623,
+    "target_slug": "mat-do-mot-mang-tim-sam-duoi-ket-mac",
+    "target_title": "Mắt đỏ một mảng tím sẫm dưới kết mạc: có nguy hiểm không",
+    "source_id": 568,
+    "source_slug": "mat-do-khong-dau-khong-mo",
+    "source_title": "Mắt đỏ nhưng thị lực bình thường: có cần lo không",
+    "reverse": true
+  },
+  {
+    "target_id": 624,
+    "target_slug": "mat-do-sau-khi-boi-hoac-tam-bien",
+    "target_title": "Mắt đỏ sau khi bơi hoặc tắm biển: nguyên nhân và xử lý",
+    "source_id": 183,
+    "source_slug": "mat-com-nhu-co-hat-cat",
+    "source_title": "Mắt cộm như có hạt cát: khô mắt hay có dị vật thật?",
+    "reverse": true
+  },
+  {
+    "target_id": 622,
+    "target_slug": "mat-do-keo-dai-nhieu-tuan-khong-do",
+    "target_title": "Mắt đỏ kéo dài nhiều tuần không đỡ: nguyên nhân thật sự",
+    "source_id": 565,
+    "source_slug": "com-mat-keo-dai-khong-tim-ra-di-vat",
+    "source_title": "Cộm mắt kéo dài mà khám không tìm ra dị vật: vì sao và làm gì",
+    "reverse": true
+  },
+  {
+    "target_id": 621,
+    "target_slug": "mat-do-kem-ghen-vang-dinh-mi-buoi-sang",
+    "target_title": "Mắt đỏ kèm ghèn vàng dính mi buổi sáng: nguyên nhân và xử lý",
+    "source_id": 177,
+    "source_slug": "chalazion-va-leo-mat",
+    "source_title": "Lẹo và chắp ở mí mắt: khác nhau và cách xử lý ban đầu",
+    "reverse": true
+  },
+  {
+    "target_id": 618,
+    "target_slug": "ghen-trong-dinh-nhu-keo-chi",
+    "target_title": "Ghèn trong dính kéo thành sợi ở khoé mắt: vì sao và làm gì",
+    "source_id": 565,
+    "source_slug": "com-mat-keo-dai-khong-tim-ra-di-vat",
+    "source_title": "Cộm mắt kéo dài mà khám không tìm ra dị vật: vì sao và làm gì",
+    "reverse": true
+  },
+  {
+    "target_id": 616,
+    "target_slug": "chay-nuoc-mat-mot-ben-keo-dai-nhieu-thang",
+    "target_title": "Chảy nước mắt một bên kéo dài nhiều tháng: vì sao và làm gì",
+    "source_id": 565,
+    "source_slug": "com-mat-keo-dai-khong-tim-ra-di-vat",
+    "source_title": "Cộm mắt kéo dài mà khám không tìm ra dị vật: vì sao và làm gì",
+    "reverse": true
+  }
+]

@@ -526,3 +526,6 @@ require_once get_stylesheet_directory() . '/inc/khu-vuc.php';
 
 /* Tối ưu ảnh và tên file theo bài viết, có khôi phục bản gốc. */
 require_once get_stylesheet_directory() . '/inc/toi-uu-anh.php';
+
+/* Trang giữ chỗ và trang xác nhận không nên được lập chỉ mục tìm kiếm. */
+require_once get_stylesheet_directory() . '/inc/seo-trang-giu-cho.php';

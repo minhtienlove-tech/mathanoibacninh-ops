@@ -151,6 +151,7 @@ while ( have_posts() ) :
 					<h2 id="tong-quan-tieu-de">Một địa chỉ nhãn khoa được tổ chức quanh nhu cầu của người bệnh</h2>
 					<p>Bệnh viện tập trung vào chuyên khoa Mắt, từ thăm khám ban đầu, theo dõi thị lực đến hướng dẫn chuẩn bị cho các chỉ định chuyên môn. Thông tin trên website được sắp xếp theo chuyên khoa, dịch vụ, đội ngũ bác sĩ, hỏi đáp và kiến thức nhãn khoa để người đọc tìm đúng nội dung nhanh hơn.</p>
 					<p>Trước khi đến, bạn có thể kiểm tra giờ làm việc, địa chỉ, bảng giá đang được công khai và gọi tổng đài để hỏi những giấy tờ cần mang theo. Với từng trường hợp, bác sĩ sẽ đánh giá trực tiếp và giải thích hướng xử trí phù hợp; nội dung trực tuyến không thay thế chẩn đoán tại cơ sở y tế.</p>
+					<p>Tìm hiểu thêm về lịch sử, định hướng và cách tổ chức chăm sóc tại trang <a href="<?php echo esc_url( home_url( '/ve-chung-toi/' ) ); ?>">Về chúng tôi</a>.</p>
 				</div>
 
 				<div class="eyecare-gioi-thieu__cam-ket" aria-label="Những điều bệnh viện hướng tới">

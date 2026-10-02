@@ -1,5 +1,13 @@
 # Production changelog
 
+## 2026-10-02 — sửa luồng liên kết từ trang chủ
+
+- Kiểm tra 200 bài, 144 trang và 12 danh mục trong sitemap. Sau backup database tại `/home/jwhxtzru/backups/link-trust-20261002-084027/`, làm mới quy tắc URL và LiteSpeed cache để sửa danh mục phẫu thuật khúc xạ trả 404.
+- Thêm 59 liên kết đọc tiếp theo chủ đề vào 50 bài nguồn, nối 59 bài trước đó không có liên kết từ thân bài khác. Nội dung gốc của 50 bài được lưu tại `original-linked-post-content.json`; mapping cụ thể ở `docs/link-trust-20261002/plan.json`.
+- Thêm liên kết từ trang Giới thiệu đến trang Về chúng tôi. Sáu trang giữ chỗ hoặc trang xác nhận được đánh dấu `noindex, follow` trong child theme và loại khỏi sitemap qua cấu hình OBS, giữ nguyên nội dung và quyền truy cập. File theme cũ và cấu hình sitemap cũ nằm trong thư mục backup trên.
+- Xác nhận HTML công khai: 50/50 bài nguồn trả HTTP 200, 59/59 liên kết xuất hiện trong thân bài; danh mục cũ 200, liên kết Giới thiệu → Về chúng tôi có mặt; sáu trang đều 200 + `noindex` và không còn trong sitemap. PHP lint các file mới đạt, `scripts/verify-live.ps1 -CheckSsh` đạt.
+- Kiểm tra và rollback chi tiết tại `docs/link-trust-20261002/README.md`.
+
 ## 2026-10-02 — hoàn thành 200 bài viết công khai
 
 - Sau khi gộp ba cặp bài gần trùng, tạo 26 bài riêng trong `docs/content-200-26/drafts/` (1.509–1.910 từ/bài), danh mục và danh sách tại `metadata.json`. Mỗi bài có FAQ, nguồn y khoa gốc, tối thiểu hai liên kết tới bài đang xuất bản và dùng ảnh đại diện phù hợp từ thư viện hiện có. Không gán tác giả hay bác sĩ duyệt khi chưa có tên/ngày được xác nhận; meta nội bộ vẫn ghi chờ duyệt chuyên môn.
