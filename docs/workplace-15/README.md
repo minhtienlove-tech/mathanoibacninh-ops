@@ -1,5 +1,11 @@
 # Mắt và môi trường làm việc — 15 bài mới
 
+## Ảnh đại diện (02/10/2026)
+
+15 ảnh minh họa tạo riêng cho 15 chủ đề, không thể hiện nhân viên hoặc cơ sở thực của bệnh viện. Ảnh gốc được xuất thành WebP 1200×675 bằng `scripts/prepare-workplace-images.py`, đặt tên đúng slug bài viết. File local ở `docs/workplace-15/images/` không được đưa vào Git; Media Library WordPress giữ bản công khai và các cỡ ảnh tự sinh. `scripts/attach-workplace-images.php` kiểm tra đủ 15 bài đã xuất bản, chưa có ảnh đại diện và file WebP hợp lệ trước khi gắn.
+
+Backup trước khi nhập: `/home/jwhxtzru/backups/workplace-images-20261002-094009/database.sql`. WordPress post ID 1474–1488 được gắn media ID 1530–1544 theo thứ tự manifest. Nếu cần hoàn tác riêng ảnh đại diện, kiểm tra ID và slug rồi gỡ `_thumbnail_id` của đúng 15 bài; không xóa media khi chưa được xác nhận. Xóa cache WordPress/LiteSpeed và kiểm tra lại HTML công khai sau đó. Ảnh có caption trong Media Library ghi rõ là hình minh họa tạo bằng AI.
+
 Ngày soạn: 01/10/2026. Chuyên mục WordPress: `mat-va-moi-truong-lam-viec` (ID 15), thuộc `kien-thuc` (ID 3).
 
 ## Nội dung và kiểm tra

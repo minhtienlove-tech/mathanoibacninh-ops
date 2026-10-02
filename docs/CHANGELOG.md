@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-02 — ảnh riêng cho 15 bài mắt và môi trường làm việc
+
+- Tạo 15 ảnh minh họa riêng theo đúng tình huống của 15 bài ID 1474–1488; ảnh không mô tả nhân viên hoặc cơ sở thật của bệnh viện. Đổi tên theo slug bài viết, xuất WebP 1200×675 ở 42–92 KB/ảnh (tổng 1.053.434 byte). Giữ ảnh gốc và bản WebP trong thư mục `docs/workplace-15/images/` tại workspace, thư mục này được loại khỏi Git vì media production nằm trong WordPress.
+- Trước khi sửa, xác nhận cả 15 bài đều chưa có featured image. Backup database tại `/home/jwhxtzru/backups/workplace-images-20261002-094009/database.sql`; nhập 15 ảnh vào Media Library (ID 1530–1544), gắn lần lượt vào bài và thêm alt/caption ghi rõ tính minh họa. Không sửa nội dung y khoa, URL, tiêu đề hoặc metadata SEO cũ.
+- PHP lint script nhập đạt; xóa WordPress object cache và LiteSpeed cache. Kiểm tra 15/15 URL công khai HTTP 200 có đúng ảnh trong nội dung và `og:image`; bài mẫu hiển thị ảnh hoàn chỉnh ở 319 px và 1280 px, không tràn ngang. `scripts/verify-live.ps1 -CheckSsh` đạt. Cách khôi phục: gỡ `_thumbnail_id` của đúng 15 bài (trước đó đều trống) sau khi xác nhận; ảnh đã tải lên có thể giữ nguyên để tránh xóa media nhầm. Backup DB chỉ dùng khi cần khôi phục rộng hơn.
+
 ## 2026-10-01 — liên kết hai chiều cho 15 bài mắt và môi trường làm việc
 
 - Đã kiểm tra nội dung 15 bài mới và 11 bài cũ liên quan: bài mới mới chỉ có một liên kết tới bài cũ; chưa có liên kết nội dung từ bài cũ đến loạt mới. Chuẩn bị `scripts/link-workplace-series.php` để thêm hai liên kết cùng ngữ cảnh giữa các bài mới và một khối liên kết từ mỗi bài cũ đến các bài mới tương ứng. Script kiểm tra chính xác 26 bài, lưu nguyên bản nội dung từng bài trước khi ghi; không đổi phần giải thích y khoa cũ.
