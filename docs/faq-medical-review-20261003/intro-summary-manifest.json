@@ -1,0 +1,342 @@
+{
+  "scope": "12 published medical article intros/short answers; review required before applying",
+  "posts": [
+    {
+      "id": 566,
+      "slug": "dau-nhuc-phia-sau-nhan-cau-khi-dong-mat",
+      "url": "https://mathanoibacninh.com/kien-thuc/dau-nhuc-phia-sau-nhan-cau-khi-dong-mat/",
+      "title": "Đau nhức phía sau nhãn cầu khi động mắt: tại sao lại đau",
+      "expected_sha256": "21aebd1aab8a0011fc479a5c423424f9539c26bc9a6420054210521707e7a168",
+      "expected_new_sha256": "f120035955d329813ac1e7aab4ef5cfe1596ca0afee6d858b83817a299f79e15",
+      "snapshot_modified_gmt": "2026-10-03 07:42:42",
+      "replacements": [
+        {
+          "section": "short_answer",
+          "old": "<p><strong>Trả lời ngắn:</strong> Đau phía sau nhãn cầu khi cử động mắt có nhiều nguyên nhân, cần đánh giá triệu chứng đi kèm để phân biệt nhóm lành tính với viêm thần kinh thị giác hoặc bệnh hốc mắt. Nhóm này đau âm ỉ, thị lực giữ nguyên và đỡ khi nghỉ. Nhưng cùng kiểu đau đó cũng gặp trong viêm thần kinh thị giác, viêm màng bồ đào và viêm mô hốc mắt. Hãy đi khám ngay nếu đau kèm mờ mắt, nhìn đôi, sưng nề quanh mắt hoặc sốt; đi khám trong vài ngày nếu đau kéo dài quá ba đến bốn ngày.</p>",
+          "new": "<p><strong>Trả lời ngắn:</strong> Đau phía sau mắt tăng khi cử động có nhiều nguyên nhân, trong đó có bệnh ở mắt, hốc mắt hoặc dây thần kinh thị giác; không thể xác định nguyên nhân chỉ từ vị trí đau. Nếu đau mới xuất hiện hoặc kéo dài, hãy được khám mắt. Nếu kèm nhìn mờ, màu sắc nhạt đi, nhìn đôi, sưng quanh mắt, sốt hoặc đau dữ dội, cần được đánh giá khẩn.</p>",
+          "count": 1
+        }
+      ],
+      "source_urls": [
+        "https://www.nhs.uk/symptoms/eye-pain/",
+        "https://www.gosh.nhs.uk/conditions-and-treatments/conditions-we-treat/optic-neuritis/"
+      ],
+      "medical_review_required": true,
+      "reviewer_name": "",
+      "review_date": ""
+    },
+    {
+      "id": 567,
+      "slug": "dau-quanh-hoc-mat-keo-dai-nhieu-ngay",
+      "url": "https://mathanoibacninh.com/kien-thuc/dau-quanh-hoc-mat-keo-dai-nhieu-ngay/",
+      "title": "Đau quanh hốc mắt kéo dài nhiều ngày: khi nào cần đi khám",
+      "expected_sha256": "96160eed4a389e7384da7c840d460688332e7aa94a3af99dbc52a9635ef0c0e4",
+      "expected_new_sha256": "7f498330bde2c0da62ff9f47e52905cf666ad9ce03493f2632d868b5f52e22c8",
+      "snapshot_modified_gmt": "2026-10-03 07:42:43",
+      "replacements": [
+        {
+          "section": "intro",
+          "old": "<p>Ba ngày nay bạn nhức âm ỉ ở phía trên mắt phải, cảm giác như có vật gì đè lên mí. Buổi sáng còn nhẹ, đến chiều thì nặng trĩu, xoa bóp một lúc đỡ được vài phút rồi đau lại. Bạn đã ngủ sớm hai đêm, bớt dùng điện thoại, nhỏ nước muối sinh lý, nhưng cơn nhức vẫn còn nguyên. Đau quanh hốc mắt kéo dài nhiều ngày là lý do đi khám rất hay gặp, và phần lớn không xuất phát từ bản thân nhãn cầu mà từ những cấu trúc nằm sát nó.</p>",
+          "new": "<p>Ba ngày nay bạn nhức âm ỉ ở phía trên mắt phải, cảm giác như có vật gì đè lên mí. Buổi sáng còn nhẹ, đến chiều thì nặng trĩu, xoa bóp một lúc đỡ được vài phút rồi đau lại. Bạn đã ngủ sớm hai đêm, bớt dùng điện thoại, nhỏ nước muối sinh lý, nhưng cơn nhức vẫn còn nguyên. Đau quanh hốc mắt kéo dài nhiều ngày có thể liên quan đến mắt, hốc mắt, xoang hoặc nguyên nhân thần kinh; cần hỏi bệnh và khám để xác định.</p>",
+          "count": 1
+        },
+        {
+          "section": "short_answer",
+          "old": "<p><strong>Trả lời ngắn:</strong> Đau quanh hốc mắt kéo dài phần lớn do mỏi điều tiết, khô mắt hoặc tật khúc xạ chưa chỉnh đúng — nhóm này đau âm ỉ, nặng về cuối ngày và đỡ rõ khi nghỉ. Nhóm phải loại trừ gồm viêm xoang, đau nửa đầu, nhãn áp tăng, viêm màng bồ đào và viêm tổ chức hốc mắt. Hãy đi khám ngay hôm nay nếu đau kèm nhìn mờ, nhìn đôi, sụp mi, đỏ mắt quanh tròng đen, buồn nôn, sốt hoặc sưng nề quanh mắt.</p>",
+          "new": "<p><strong>Trả lời ngắn:</strong> Đau quanh hốc mắt kéo dài có nhiều nguyên nhân, từ mỏi mắt, khô mắt đến bệnh ở mắt, hốc mắt, xoang hoặc nguyên nhân thần kinh; không thể kết luận là lành tính chỉ dựa vào kiểu đau hay thời điểm trong ngày. Nếu đau tăng hoặc kèm nhìn mờ, nhìn đôi, sụp mi, đỏ mắt, sợ ánh sáng, sốt hay sưng quanh mắt, hãy được khám sớm. Đau dữ dội hoặc giảm thị lực đột ngột cần được đánh giá cấp cứu.</p>",
+          "count": 1
+        }
+      ],
+      "source_urls": [
+        "https://www.nhs.uk/symptoms/eye-pain/",
+        "https://www.nhs.uk/symptoms/double-vision/"
+      ],
+      "medical_review_required": true,
+      "reviewer_name": "",
+      "review_date": ""
+    },
+    {
+      "id": 568,
+      "slug": "mat-do-khong-dau-khong-mo",
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-do-khong-dau-khong-mo/",
+      "title": "Mắt đỏ nhưng thị lực bình thường: có cần lo không",
+      "expected_sha256": "66ef5a1fea3f9778187270912d8bb4547d395daf8d3fc8d4ad24f31a3b90d349",
+      "expected_new_sha256": "75fd4798f1bd968c0f1b8179d5c91a234dab8082c7da027a691aed74307f0673",
+      "snapshot_modified_gmt": "2026-10-03 07:42:43",
+      "replacements": [
+        {
+          "section": "intro",
+          "old": "<p>Buổi sáng soi gương, bạn thấy một bên lòng trắng đỏ lên rõ rệt, có khi đỏ tươi thành cả một mảng. Nhưng mắt không nhức, không cộm, che mắt kia lại thì vẫn đọc được chữ nhỏ như thường. Cảm giác lúc đó thường là lưỡng lự: trông thì đáng lo mà người lại chẳng thấy gì bất thường. Nhóm mắt đỏ không kèm mờ này đa phần lành tính, nhưng có vài tình huống nhìn bên ngoài giống hệt mà cần được khám sớm.</p>",
+          "new": "<p>Buổi sáng soi gương, bạn thấy một bên lòng trắng đỏ lên rõ rệt, có khi đỏ tươi thành cả một mảng. Nhưng mắt không nhức, không cộm, che mắt kia lại thì vẫn đọc được chữ nhỏ như thường. Cảm giác lúc đó thường là lưỡng lự: trông thì đáng lo mà người lại chẳng thấy gì bất thường. Mắt đỏ khi thị lực còn rõ có thể do nguyên nhân nhẹ, nhưng riêng điều đó không loại trừ bệnh cần khám.</p>",
+          "count": 1
+        },
+        {
+          "section": "short_answer",
+          "old": "<p><strong>Trả lời ngắn:</strong> Mắt đỏ mà thị lực vẫn bình thường phần lớn do <strong>viêm kết mạc dị ứng</strong>, <strong>khô mắt</strong>, <strong>giãn mạch vì mỏi mắt</strong> hoặc <strong>xuất huyết dưới kết mạc</strong> — có thể lành tính, nhưng không thể kết luận chỉ từ việc thị lực còn bình thường. Hãy đi khám nếu đỏ không giảm sau vài ngày, quay lại nhiều đợt ở cùng một bên, đỏ thành vòng sát quanh lòng đen, hoặc bắt đầu kèm nhức sâu, sợ ánh sáng và nhìn mờ dù chỉ nhẹ.</p>",
+          "new": "<p><strong>Trả lời ngắn:</strong> Mắt đỏ nhưng còn nhìn rõ có thể gặp trong kích ứng, khô mắt, viêm kết mạc hoặc xuất huyết dưới kết mạc; không thể tự xác định nguyên nhân chỉ bằng việc còn nhìn rõ. Người đeo kính áp tròng nên tháo kính và liên hệ bác sĩ mắt khi mắt đỏ. Đau, sợ sáng, giảm thị lực, đỏ nhiều, chấn thương hoặc tiếp xúc hóa chất cần được đánh giá khẩn; đỏ kéo dài hoặc tái phát cũng nên được khám.</p>",
+          "count": 1
+        }
+      ],
+      "source_urls": [
+        "https://www.nei.nih.gov/eye-health-information/healthy-vision/finding-eye-doctor",
+        "https://www.nei.nih.gov/eye-health-information/healthy-vision/contact-lenses"
+      ],
+      "medical_review_required": true,
+      "reviewer_name": "",
+      "review_date": ""
+    },
+    {
+      "id": 569,
+      "slug": "mat-mo-buoi-toi-ban-ngay-thi-ro",
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-buoi-toi-ban-ngay-thi-ro/",
+      "title": "Mắt mờ buổi tối, ban ngày thì rõ: nguyên nhân và khi nào cần khám",
+      "expected_sha256": "626026bf8a4a1d0676a4f0df7f9c862b0d5b5940a11a93a26d0293caa549acf2",
+      "expected_new_sha256": "883683950c2e2ce6fdcb4e07e3ea96654b90c1893adacf6073ede6a45595e128",
+      "snapshot_modified_gmt": "2026-10-03 07:42:44",
+      "replacements": [
+        {
+          "section": "short_answer",
+          "old": "<p><strong>Trả lời ngắn:</strong> Mắt mờ buổi tối nhưng ban ngày rõ phần lớn do lão thị, khô mắt hoặc tật khúc xạ chưa chỉnh đủ — nhất là loạn thị. Nó cũng có thể là dấu hiệu sớm của <strong>đục thủy tinh thể</strong>, <strong>glôcôm góc mở</strong> hoặc <strong>bệnh võng mạc</strong>. Hãy đi khám nếu mờ về đêm <strong>nặng dần theo thời gian</strong>, kèm <strong>quầng sáng quanh đèn</strong>, chỉ xảy ra ở <strong>một bên</strong>, hoặc kèm <strong>đau và đỏ mắt</strong>.</p>",
+          "new": "<p><strong>Trả lời ngắn:</strong> Nhìn kém khi trời tối hoặc chói, thấy quầng quanh đèn có thể liên quan đến tật khúc xạ, khô mắt, đục thủy tinh thể hoặc bệnh mắt khác; không thể xác định nguyên nhân chỉ từ thời điểm bị mờ. Hãy khám mắt nếu triệu chứng mới xuất hiện, tăng dần, ảnh hưởng việc lái xe hoặc rõ hơn ở một bên. Nếu kèm đau, đỏ mắt hay giảm thị lực đột ngột, cần được đánh giá khẩn.</p>",
+          "count": 1
+        }
+      ],
+      "source_urls": [
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/cataracts"
+      ],
+      "medical_review_required": true,
+      "reviewer_name": "",
+      "review_date": ""
+    },
+    {
+      "id": 571,
+      "slug": "mat-mo-kem-nhin-meo-duong-thang-thanh-cong",
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-kem-nhin-meo-duong-thang-thanh-cong/",
+      "title": "Nhìn méo, đường thẳng thành cong: tổn thương hoàng điểm",
+      "expected_sha256": "e98e6689e800173af017c5ea25d83a36ec6157c6114606f3a8318589af2babd5",
+      "expected_new_sha256": "5e7e6352d5d54da16a121c00b5e5d54ed26dfe497879ace19b8e66c01efc02a1",
+      "snapshot_modified_gmt": "2026-10-03 07:42:46",
+      "replacements": [
+        {
+          "section": "intro",
+          "old": "<p>Đọc chữ thì đường thẳng bị uốn cong, nhìn mặt đồng hồ thì kim bị vẹo sang một bên, đường thẳng trên giấy bị lượn sóng ở giữa. Đây là một trong những triệu chứng đáng báo động nhất ở mắt — nó nói rằng vùng võng mạc phụ trách nhìn rõ nhất, được gọi là hoàng điểm, đang có vấn đề. Không giống như mờ mắt đơn thuần có thể do khúc xạ, nhìn méo luôn cần được khám chuyên khoa vì nó gợi ý tổn thương trực tiếp tại võng mạc.</p>",
+          "new": "<p>Đọc chữ thì đường thẳng bị uốn cong, nhìn mặt đồng hồ thì kim bị vẹo sang một bên, đường thẳng trên giấy bị lượn sóng ở giữa. Nhìn méo mới xuất hiện có thể liên quan đến hoàng điểm hoặc phần khác của hệ thị giác. Triệu chứng này cần được khám mắt sớm để xác định nguyên nhân.</p>",
+          "count": 1
+        },
+        {
+          "section": "short_answer",
+          "old": "<p><strong>Trả lời ngắn:</strong> Nhìn méo — đường thẳng thành cong — là dấu hiệu cần đi khám sớm, vì nó thường liên quan đến tổn thương hoàng điểm. Nguyên nhân hay gặp nhất là <strong>thoái hoá hoàng điểm tuổi già</strong> (AMD), nhưng cũng có thể là <strong>phù hoàng điểm</strong>, <strong>màng trước võng mạc</strong>, hoặc <strong>tổn thương võng mạc do cận nặng</strong>. Cần khám mắt sớm ngay khi nhìn méo mới xuất hiện, và 🔴 đi ngay nếu kèm nhìn mờ đột ngột hoặc mất một vùng tầm nhìn.</p>",
+          "new": "<p><strong>Trả lời ngắn:</strong> Đường thẳng nhìn thành cong là dấu hiệu cần khám mắt sớm, nhất là khi mới xuất hiện ở một bên. Các nguyên nhân có thể gồm thoái hóa hoàng điểm tuổi già, phù hoàng điểm hoặc màng trước võng mạc; không thể xác định bệnh chỉ qua triệu chứng. Nếu kèm giảm thị lực đột ngột hoặc mất một vùng nhìn, hãy đến cơ sở cấp cứu ngay.</p>",
+          "count": 1
+        }
+      ],
+      "source_urls": [
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/age-related-macular-degeneration",
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/macular-edema",
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/macular-pucker"
+      ],
+      "medical_review_required": true,
+      "reviewer_name": "",
+      "review_date": ""
+    },
+    {
+      "id": 572,
+      "slug": "mat-mo-kem-thay-man-che-hoac-mat-mang-tam-nhin",
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-kem-thay-man-che-hoac-mat-mang-tam-nhin/",
+      "title": "Mắt mờ kèm thấy màn che hoặc mất mảng tầm nhìn: cảnh báo võng mạc",
+      "expected_sha256": "f4c96252bdc492b408169db34092b9d3771114f715019e99fb535ad10d1051f6",
+      "expected_new_sha256": "44920ec44ec2d01bd5218a6d5344010a07eec6d019eb7c1b130ac46cdb3d07ba",
+      "snapshot_modified_gmt": "2026-10-03 07:42:47",
+      "replacements": [
+        {
+          "section": "short_answer",
+          "old": "<p><strong>Trả lời ngắn:</strong> Một mảng tối cố định che một phía tầm nhìn, không mất đi khi chớp mắt hay khi nhìn hướng khác, là dấu hiệu cần được khám <strong>ngay trong hôm nay</strong>. Nguyên nhân hay gặp nhất là <strong>bong võng mạc</strong>; ngoài ra còn có tắc mạch máu võng mạc, xuất huyết dịch kính, glôcôm giai đoạn muộn và tổn thương đường dẫn truyền thị giác. Đừng chờ qua đêm.</p>",
+          "new": "<p><strong>Trả lời ngắn:</strong> Một mảng tối hoặc cảm giác như màn che mới xuất hiện trong tầm nhìn là dấu hiệu cần được đánh giá cấp cứu ngay, dù chưa đau và dù vùng tối còn nhỏ. Bong võng mạc là một nguyên nhân cần loại trừ; bệnh mạch máu võng mạc hoặc đường dẫn truyền thị giác cũng có thể gây mất một vùng nhìn. Không tự xác định nguyên nhân hoặc chờ qua đêm. Nếu vùng tối đã tự hết, vẫn cần đánh giá cấp cứu vì có thể liên quan cơn thiếu máu thoáng qua.</p>",
+          "count": 1
+        }
+      ],
+      "source_urls": [
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment",
+        "https://www.stroke.org/en/about-stroke/types-of-stroke/tia-transient-ischemic-attack"
+      ],
+      "medical_review_required": true,
+      "reviewer_name": "",
+      "review_date": ""
+    },
+    {
+      "id": 575,
+      "slug": "mat-mo-mot-ben-ben-kia-van-ro",
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-mot-ben-ben-kia-van-ro/",
+      "title": "Mắt mờ một bên, bên kia vẫn rõ: khi nào cần lo",
+      "expected_sha256": "4be72ebb6253b488f517f9e70eb95b44581b44cf52dc1a3513bdde3dc518dbd3",
+      "expected_new_sha256": "7314968fc9ace65ab4275b0fe03b3194bc52b06ee0f503250e5d89481cc1d4fd",
+      "snapshot_modified_gmt": "2026-10-03 07:42:47",
+      "replacements": [
+        {
+          "section": "intro",
+          "old": "<p>Một buổi sáng bạn nhận ra mắt trái nhìn rõ nhưng mắt phải lại nhoè, đọc chữ khó hơn hẳn. Hoặc ngược lại. Tình huống mắt mờ lệch — một bên rõ, một bên mờ — khác hoàn toàn với mờ đều hai bên. Mờ ở cả hai mắt cũng có thể do nhiều nguyên nhân; mức độ khẩn phụ thuộc tốc độ xuất hiện và triệu chứng đi kèm. Nhưng mờ một bên mang ý nghĩa khác: nó gợi ý có gì đó đang xảy ra ở chính mắt đó, và thời gian không phải lúc nào cũng ở bên bạn.</p>",
+          "new": "<p>Một buổi sáng bạn nhận ra mắt trái nhìn rõ nhưng mắt phải lại nhoè, đọc chữ khó hơn hẳn. Hoặc ngược lại. Tình huống mắt mờ lệch — một bên rõ, một bên mờ — khác hoàn toàn với mờ đều hai bên. Mờ ở cả hai mắt cũng có thể do nhiều nguyên nhân; mức độ khẩn phụ thuộc tốc độ xuất hiện và triệu chứng đi kèm. Mờ mới xuất hiện ở một bên có thể liên quan đến mắt, dây thần kinh thị giác hoặc mạch máu; thời điểm khởi phát và các triệu chứng kèm theo quyết định mức độ khẩn.</p>",
+          "count": 1
+        },
+        {
+          "section": "short_answer",
+          "old": "<p><strong>Trả lời ngắn:</strong> Mắt mờ một bên cần được khám sớm, vì nó có thể do tật khúc xạ lệch giữa hai mắt, nhưng cũng có thể là dấu hiệu của đục thủy tinh thể một bên, bong võng mạc, tắc mạch máu võng mạc, glôcôm, tổn thương thần kinh thị giác hoặc bệnh ở vùng điểm vàng. Hãy đi khám ngay trong hôm nay nếu mờ <strong>đột ngột</strong>, <strong>nặng dần trong vài ngày</strong>, kèm <strong>đau hoặc đỏ</strong>, hoặc kèm <strong>nhìn một vật thành hai</strong>.</p>",
+          "new": "<p><strong>Trả lời ngắn:</strong> Mờ một bên tồn tại ổn định lâu ngày có thể do tật khúc xạ hoặc bệnh mắt tiến triển chậm, nhưng mờ mới xuất hiện, đặc biệt đột ngột, có thể là cấp cứu ở mắt hoặc dấu hiệu thiếu máu não. Nếu giảm thị lực đột ngột, mất một vùng nhìn, nhìn đôi hoặc có yếu liệt, nói khó, hãy đến cấp cứu ngay. Ngay cả khi thị lực tự trở lại sau vài phút, vẫn cần được đánh giá cấp cứu.</p>",
+          "count": 1
+        }
+      ],
+      "source_urls": [
+        "https://www.stroke.org/en/about-stroke/types-of-stroke/tia-transient-ischemic-attack",
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment"
+      ],
+      "medical_review_required": true,
+      "reviewer_name": "",
+      "review_date": ""
+    },
+    {
+      "id": 621,
+      "slug": "mat-do-kem-ghen-vang-dinh-mi-buoi-sang",
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-do-kem-ghen-vang-dinh-mi-buoi-sang/",
+      "title": "Mắt đỏ kèm ghèn vàng dính mi buổi sáng: nguyên nhân và xử lý",
+      "expected_sha256": "950571a6f49206d87d2ba4d6ed00d7e04ac5789f11c0f58cbbcb201664c48c12",
+      "expected_new_sha256": "053aaf6a7d76de91789d650ceaa613fc54aca8ef9622673df0bf84cb5ec03172",
+      "snapshot_modified_gmt": "2026-10-03 07:42:49",
+      "replacements": [
+        {
+          "section": "intro",
+          "old": "<p>Sáng ra bạn khó mở mắt vì hai mi bị dính lại bởi một lớp ghèn vàng đặc, phải lấy khăn ấm lau mới mở được. Mắt đỏ, cảm giác cộm như có sạn, và đến trưa thì ghèn lại đọng ở khoé mắt. Sang ngày thứ hai, mắt còn lại cũng bắt đầu đỏ theo. Đây là bộ triệu chứng rất hay gặp, phần lớn lành tính và tự khỏi, nhưng cách xử lý trong vài ngày đầu quyết định việc bệnh gọn lại hay lan ra cả nhà.</p>",
+          "new": "<p>Sáng ra bạn khó mở mắt vì hai mi bị dính lại bởi một lớp ghèn vàng đặc, phải lấy khăn ấm lau mới mở được. Mắt đỏ, cảm giác cộm như có sạn, và đến trưa thì ghèn lại đọng ở khoé mắt. Sang ngày thứ hai, mắt còn lại cũng bắt đầu đỏ theo. Đây có thể là viêm kết mạc, nhưng màu ghèn và mắt đỏ không đủ để xác định nguyên nhân hay loại trừ bệnh cần điều trị.</p>",
+          "count": 1
+        },
+        {
+          "section": "short_answer",
+          "old": "<p><strong>Trả lời ngắn:</strong> Mắt đỏ kèm ghèn vàng đặc dính mi buổi sáng thường là <strong>viêm kết mạc do vi khuẩn</strong> hoặc do virus ở giai đoạn có bội nhiễm. Phần lớn tự đỡ trong 5–7 ngày với vệ sinh mắt đúng cách và không cần thuốc đặc hiệu. Cần đi khám nếu ghèn nhiều lên sau ba ngày, thị lực giảm, đau sâu trong mắt, hoặc bạn đang đeo kính áp tròng.</p>",
+          "new": "<p><strong>Trả lời ngắn:</strong> Ghèn đặc làm dính mi có thể gặp trong viêm kết mạc do vi khuẩn, nhưng chỉ màu ghèn không đủ để tự chẩn đoán hoặc quyết định dùng kháng sinh. Lau ghèn bằng vật sạch, rửa tay và không dùng chung khăn; người đeo kính áp tròng cần tháo kính và liên hệ bác sĩ mắt khi mắt đỏ hoặc tiết dịch. Hãy khám nếu ghèn nhiều, triệu chứng nặng lên hoặc không cải thiện, đau mắt, sợ sáng hay nhìn mờ. Trẻ sơ sinh có mắt đỏ hoặc ghèn cần được bác sĩ đánh giá ngay.</p>",
+          "count": 1
+        }
+      ],
+      "source_urls": [
+        "https://www.cdc.gov/conjunctivitis/signs-symptoms/index.html",
+        "https://www.cdc.gov/conjunctivitis/treatment/index.html"
+      ],
+      "medical_review_required": true,
+      "reviewer_name": "",
+      "review_date": ""
+    },
+    {
+      "id": 628,
+      "slug": "sup-mi-nang-dan-ve-cuoi-ngay",
+      "url": "https://mathanoibacninh.com/kien-thuc/sup-mi-nang-dan-ve-cuoi-ngay/",
+      "title": "Sụp mi nặng dần về cuối ngày: vì sao và khi nào khám",
+      "expected_sha256": "827f17885942d343b96bc6393aece36429dfc76500502c4ff917fbd950bcf68d",
+      "expected_new_sha256": "695e979103527def99abc7e08796ca96f9a337cf08ff290170e4d9dbdf200951",
+      "snapshot_modified_gmt": "2026-10-03 07:42:51",
+      "replacements": [
+        {
+          "section": "intro",
+          "old": "<p>Buổi sáng bạn thấy hai mắt bình thường. Đến chiều, mi trên bên phải bắt đầu trĩu xuống, che dần một phần lòng đen, và khi đọc lâu thì chữ có lúc nhòe thành hai. Bạn nhắm mắt nghỉ mươi phút thì mi mở lại được, rồi tối đến lại sụp. Hôm sau nhẹ hơn, hôm sau nữa nặng hơn. Kiểu diễn biến lên xuống theo giờ và theo ngày này không phải chuyện mỏi mắt thông thường — nó là một chỉ dấu khá đặc hiệu, và nhận ra được thì hướng xử lý khác hẳn.</p>",
+          "new": "<p>Buổi sáng bạn thấy hai mắt bình thường. Đến chiều, mi trên bên phải bắt đầu trĩu xuống, che dần một phần lòng đen, và khi đọc lâu thì chữ có lúc nhòe thành hai. Bạn nhắm mắt nghỉ mươi phút thì mi mở lại được, rồi tối đến lại sụp. Hôm sau nhẹ hơn, hôm sau nữa nặng hơn. Sụp mi dao động và nhìn đôi có thể gợi ý nhược cơ, nhưng cũng cần loại trừ các nguyên nhân khác, đặc biệt khi triệu chứng mới xuất hiện.</p>",
+          "count": 1
+        },
+        {
+          "section": "short_answer",
+          "old": "<p><strong>Trả lời ngắn:</strong> Sụp mi nhẹ vào buổi sáng, nặng dần về cuối ngày và đỡ rõ sau khi nghỉ hoặc sau khi ngủ là dấu hiệu gợi ý mạnh tới <strong>nhược cơ</strong> — bệnh tự miễn làm gián đoạn dẫn truyền giữa dây thần kinh và cơ. Nếu kèm nhìn đôi, khó nhai, khó nuốt hoặc yếu tay chân thì cần được khám sớm; kèm khó thở là 🔴 cấp cứu. Đây là bệnh điều trị được và kiểm soát được, nên chẩn đoán đúng có ý nghĩa lớn.</p>",
+          "new": "<p><strong>Trả lời ngắn:</strong> Sụp mi tăng khi mệt và đỡ sau nghỉ, đôi khi kèm nhìn đôi, có thể gợi ý nhược cơ nhưng không đủ để tự chẩn đoán. Sụp mi hoặc nhìn đôi mới xuất hiện cần được khám sớm; nếu khởi phát đột ngột, kèm đau đầu dữ dội, đồng tử hai bên khác nhau, yếu liệt hoặc nói khó, hãy đến cấp cứu. Khó nuốt hoặc khó thở là dấu hiệu cần cấp cứu ngay.</p>",
+          "count": 1
+        }
+      ],
+      "source_urls": [
+        "https://www.nhs.uk/conditions/myasthenia-gravis/",
+        "https://www.ninds.nih.gov/sites/default/files/2025-05/myasthenia-gravis.pdf",
+        "https://www.nhs.uk/symptoms/double-vision/",
+        "https://www.stroke.org/en/about-stroke/stroke-symptoms"
+      ],
+      "medical_review_required": true,
+      "reviewer_name": "",
+      "review_date": ""
+    },
+    {
+      "id": 654,
+      "slug": "glocom-goc-mo-mat-thi-truong-am-tham",
+      "url": "https://mathanoibacninh.com/kien-thuc/glocom-goc-mo-mat-thi-truong-am-tham/",
+      "title": "Glôcôm góc mở: mất thị trường âm thầm khó nhận ra",
+      "expected_sha256": "40b8cf8220e0274bbd9610429c934713f61ff22bfbe0265762ec988dfdbeaeec",
+      "expected_new_sha256": "c6bb419b8e9d51dd092b7bb72cf2faf4a9fd069dbe344e69f7c27350469bcb01",
+      "snapshot_modified_gmt": "2026-10-03 07:42:55",
+      "replacements": [
+        {
+          "section": "short_answer",
+          "old": "<p><strong>Trả lời ngắn:</strong> Glôcôm góc mở là thể glôcôm hay gặp nhất, xảy ra khi thủy dịch trong mắt thoát ra kém dần làm nhãn áp tăng từ từ, ép hỏng dây thần kinh thị giác. Bệnh lấy đi thị trường ngoại vi trước, phần nhìn trung tâm còn tốt lâu nên người bệnh không nhận ra tới giai đoạn muộn. Bệnh thường không đau và không có dấu hiệu sớm rõ. Cách duy nhất để phát hiện là khám mắt định kỳ với đo nhãn áp, soi đáy mắt và đo thị trường.</p>",
+          "new": "<p><strong>Trả lời ngắn:</strong> Glôcôm góc mở gây tổn thương tiến triển ở dây thần kinh thị giác và thường ảnh hưởng vùng nhìn ngoại vi trước, trong khi thị lực trung tâm còn tốt lâu. Nhãn áp cao là yếu tố nguy cơ quan trọng nhưng bệnh vẫn có thể xảy ra khi kết quả đo nhãn áp nằm trong giới hạn thông thường. Vì bệnh thường không đau và ít biểu hiện sớm, cần khám mắt toàn diện; một lần đo nhãn áp riêng lẻ không đủ để loại trừ glôcôm.</p>",
+          "count": 1
+        }
+      ],
+      "source_urls": [
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/glaucoma/glaucoma-and-eye-pressure",
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/glaucoma/types-glaucoma"
+      ],
+      "medical_review_required": true,
+      "reviewer_name": "",
+      "review_date": ""
+    },
+    {
+      "id": 656,
+      "slug": "mang-truoc-vong-mac-la-gi",
+      "url": "https://mathanoibacninh.com/kien-thuc/mang-truoc-vong-mac-la-gi/",
+      "title": "Màng trước võng mạc: vì sao ảnh mờ và biến dạng",
+      "expected_sha256": "ec9c3e26506bb6e140e88b2e8f2a47c245859636f5f39312b478b2c4317153ef",
+      "expected_new_sha256": "7f60785482e12f5843ff263ff6a88af9be8ea967497ef7e7e7849a2ed6a979a5",
+      "snapshot_modified_gmt": "2026-10-03 07:42:56",
+      "replacements": [
+        {
+          "section": "intro",
+          "old": "<p>Bạn đang đọc tin nhắn trên điện thoại thì nhận ra các chữ cái hơi cong, đường thẳng trên biểu đồ dường như bị uốn nhẹ. Mới vài tháng trước mọi thứ vẫn rõ ràng, nhưng giờ khoảng trống giữa các chữ đột ngột bị kéo giãn, hình ảnh phản chiếu trong gương cũng hơi méo so với bình thường. Bạn dụi mắt, thử lại — vẫn y nguyên. Đây không phải mỏi mắt hay thay đổi độ cận. Đó là dấu hiệu sớm của màng trước võng mạc, một lớp xơ mỏng bám trên bề mặt võng mạc, đặc biệt ở vùng hoàng điểm — nơi chịu trách nhiệm cho thị lực trung tâm.</p>",
+          "new": "<p>Bạn đang đọc tin nhắn trên điện thoại thì nhận ra các chữ cái hơi cong, đường thẳng trên biểu đồ dường như bị uốn nhẹ. Mới vài tháng trước mọi thứ vẫn rõ ràng, nhưng giờ khoảng trống giữa các chữ đột ngột bị kéo giãn, hình ảnh phản chiếu trong gương cũng hơi méo so với bình thường. Bạn dụi mắt, thử lại — vẫn y nguyên. Nhìn méo mới xuất hiện có thể do màng trước võng mạc hoặc bệnh khác ở hoàng điểm; cần khám để xác định nguyên nhân.</p>",
+          "count": 1
+        },
+        {
+          "section": "short_answer",
+          "old": "<p><strong>Trả lời ngắn:</strong> Màng trước võng mạc (epiretinal membrane) là lớp mô xơ mỏng bám lên bề mặt võng mạc, thường gặp nhất ở người trên 50 tuổi, gây nhìn méo, giảm độ nét và ảnh mờ dần. Nguyên nhân hay gặp nhất là thay đổi dịch kính tự nhiên theo tuổi, không liên quan đến chấn thương. Nếu triệu chứng ảnh hưởng sinh hoạt, phẫu thuật bóc màng có thể cải thiện thị lực — đây là phẫu thuật phổ biến, tiên lượng tốt ở đa số người bệnh.</p>",
+          "new": "<p><strong>Trả lời ngắn:</strong> Màng trước võng mạc là lớp mô mỏng trên bề mặt võng mạc, có thể làm hình ảnh lượn sóng, nhìn méo hoặc giảm độ nét. Tuy nhiên, nhìn méo không đặc hiệu cho bệnh này; bác sĩ thường cần khám đáy mắt và có thể chụp OCT để phân biệt với bệnh hoàng điểm khác. Trường hợp nhẹ thường được theo dõi; khi ảnh hưởng sinh hoạt, bác sĩ có thể cân nhắc phẫu thuật. Mức cải thiện sau mổ khác nhau ở từng người.</p>",
+          "count": 1
+        }
+      ],
+      "source_urls": [
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/macular-pucker"
+      ],
+      "medical_review_required": true,
+      "reviewer_name": "",
+      "review_date": ""
+    },
+    {
+      "id": 661,
+      "slug": "benh-basedow-graves-loi-mat",
+      "url": "https://mathanoibacninh.com/kien-thuc/benh-basedow-graves-loi-mat/",
+      "title": "Basedow và lồi mắt: khi tuyến giáp kéo theo cả hai con mắt",
+      "expected_sha256": "b5d398675e3ffee7eae6d9a4ea82aed35edf35f0aacc79eed6a02273f592c8a4",
+      "expected_new_sha256": "64ad744a55d39322f41ea624a8808921cc08a5824975e8c45f94f3d6b759bf6d",
+      "snapshot_modified_gmt": "2026-10-03 07:42:57",
+      "replacements": [
+        {
+          "section": "intro",
+          "old": "<p>Một sáng thức dậy, bạn soi gương thấy mắt hơi lồi hơn hôm qua. Mi dưới hở nhiều hơn, lòng trắng lộ ra rõ. Ban đầu bạn nghĩ do thức khuya, nhưng hai ba tuần sau người quen nhận ra trước khi bạn tự nhận. Mắt khô hơn, cộm như có bụi, thỉnh thoảng nhìn một vật mà thấy hình đôi. Đây không phải vấn đề riêng của mắt — đó là dấu hiệu bệnh Basedow, hay cường giáp tự miễn, đang ảnh hưởng đến hốc mắt và cơ vận nhãn.</p>",
+          "new": "<p>Một sáng thức dậy, bạn soi gương thấy mắt hơi lồi hơn hôm qua. Mi dưới hở nhiều hơn, lòng trắng lộ ra rõ. Ban đầu bạn nghĩ do thức khuya, nhưng hai ba tuần sau người quen nhận ra trước khi bạn tự nhận. Mắt khô hơn, cộm như có bụi, thỉnh thoảng nhìn một vật mà thấy hình đôi. Mắt lồi mới xuất hiện kèm khô cộm hoặc nhìn đôi có thể liên quan bệnh mắt do tuyến giáp, nhưng cũng có nguyên nhân khác ở hốc mắt; cần được khám để xác định.</p>",
+          "count": 1
+        },
+        {
+          "section": "short_answer",
+          "old": "<p><strong>Trả lời ngắn:</strong> Basedow là bệnh tuyến giáp tự miễn khiến cơ thể sản sinh kháng thể kích thích tuyến giáp hoạt động quá mức. Ở một số người, kháng thể đó cũng tác động lên mô hốc mắt và cơ vận nhãn gây lồi mắt, khô cộm, nhìn đôi và nhạy cảm ánh sáng. Nếu giảm thị lực hoặc nhìn màu nhạt đi xuất hiện kèm đau nhức tăng nhanh sau hốc mắt, hãy khám ngay trong hôm nay — đó có thể là dấu hiệu chèn ép thần kinh thị giác cần cấp cứu.</p>",
+          "new": "<p><strong>Trả lời ngắn:</strong> Bệnh mắt do tuyến giáp là tình trạng viêm tự miễn ở mô hốc mắt, thường đi cùng bệnh Basedow nhưng cũng có thể xảy ra khi xét nghiệm chức năng tuyến giáp bình thường. Triệu chứng có thể gồm lồi mắt, khô cộm, mi co rút hoặc nhìn đôi; người bệnh cần được bác sĩ mắt và bác sĩ nội tiết đánh giá. Nếu thị lực giảm, màu sắc nhìn nhạt đi, mất vùng nhìn, mắt không nhắm kín hoặc lồi mắt tăng nhanh kèm đau dữ dội, hãy được đánh giá khẩn.</p>",
+          "count": 1
+        }
+      ],
+      "source_urls": [
+        "https://www.thyroid.org/thyroid-eye-disease/",
+        "https://www.nhs.uk/symptoms/bulging-eyes/"
+      ],
+      "medical_review_required": true,
+      "reviewer_name": "",
+      "review_date": ""
+    }
+  ]
+}

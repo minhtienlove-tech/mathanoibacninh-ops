@@ -41,3 +41,24 @@ Các nhóm cần chú ý khi duyệt:
 **Người duyệt nhãn khoa:** ____________________  **Ngày:** __________
 
 **Người duyệt sản/nội tiết cho bài 662:** ____________________  **Ngày:** __________
+
+## Đợt tiếp theo: đoạn mở đầu và “Trả lời ngắn” của 12 bài
+
+**Chưa áp dụng trên website. Cần bác sĩ nhãn khoa duyệt từng thay đổi trước khi xuất bản.** Bản đang công khai vẫn chứa các câu tóm tắt được đánh dấu. Tệp [intro-summary-manifest.json](intro-summary-manifest.json) ghi nguyên văn trước/sau, SHA-256 từng bài và nguồn y khoa; [script WP-CLI](../../scripts/apply-medical-intro-summaries-20261003.php) chỉ chạy kiểm tra trước theo mặc định. Ngày 03/10/2026, dry-run trên hosting đạt tiền kiểm cho 12 bài và 20 đoạn thay thế (8 đoạn mở đầu, 12 đoạn “Trả lời ngắn”); không ghi vào WordPress.
+
+| Bài | Điểm cần bác sĩ kiểm tra | Nguồn đối chiếu chính | Duyệt |
+|---|---|---|---|
+| [566](https://mathanoibacninh.com/kien-thuc/dau-nhuc-phia-sau-nhan-cau-khi-dong-mat/) | Đau khi cử động mắt, dấu hiệu cần khám khẩn | [NHS](https://www.nhs.uk/symptoms/eye-pain/) | Chờ |
+| [567](https://mathanoibacninh.com/kien-thuc/dau-quanh-hoc-mat-keo-dai-nhieu-ngay/) | Đau quanh hốc mắt không mặc định lành tính | [NHS](https://www.nhs.uk/symptoms/eye-pain/) | Chờ |
+| [568](https://mathanoibacninh.com/kien-thuc/mat-do-khong-dau-khong-mo/) | Mắt đỏ ở người đeo kính áp tròng | [NEI](https://www.nei.nih.gov/eye-health-information/healthy-vision/contact-lenses) | Chờ |
+| [569](https://mathanoibacninh.com/kien-thuc/mat-mo-buoi-toi-ban-ngay-thi-ro/) | Không khẳng định nguyên nhân chỉ từ thời điểm mờ | [NEI](https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/cataracts) | Chờ |
+| [571](https://mathanoibacninh.com/kien-thuc/mat-mo-kem-nhin-meo-duong-thang-thanh-cong/) | Nhìn méo không đặc hiệu cho một bệnh võng mạc | [NEI](https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/age-related-macular-degeneration) | Chờ |
+| [572](https://mathanoibacninh.com/kien-thuc/mat-mo-kem-thay-man-che-hoac-mat-mang-tam-nhin/) | Màn che/vùng tối mới xuất hiện là cấp cứu | [NEI](https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment), [ASA](https://www.stroke.org/en/about-stroke/types-of-stroke/tia-transient-ischemic-attack) | Chờ |
+| [575](https://mathanoibacninh.com/kien-thuc/mat-mo-mot-ben-ben-kia-van-ro/) | Mờ một bên mới/đột ngột, kể cả tự hết | [ASA](https://www.stroke.org/en/about-stroke/types-of-stroke/tia-transient-ischemic-attack) | Chờ |
+| [621](https://mathanoibacninh.com/kien-thuc/mat-do-kem-ghen-vang-dinh-mi-buoi-sang/) | Màu ghèn không đủ tự chẩn đoán; lưu ý trẻ sơ sinh | [CDC](https://www.cdc.gov/conjunctivitis/treatment/index.html) | Chờ |
+| [628](https://mathanoibacninh.com/kien-thuc/sup-mi-nang-dan-ve-cuoi-ngay/) | Sụp mi, nhìn đôi và dấu hiệu thần kinh cấp cứu | [NHS](https://www.nhs.uk/conditions/myasthenia-gravis/) | Chờ |
+| [654](https://mathanoibacninh.com/kien-thuc/glocom-goc-mo-mat-thi-truong-am-tham/) | Nhãn áp bình thường không loại trừ glôcôm | [NEI](https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/glaucoma/glaucoma-and-eye-pressure) | Chờ |
+| [656](https://mathanoibacninh.com/kien-thuc/mang-truoc-vong-mac-la-gi/) | Nhìn méo và tiên lượng sau bóc màng | [NEI](https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/macular-pucker) | Chờ |
+| [661](https://mathanoibacninh.com/kien-thuc/benh-basedow-graves-loi-mat/) | Bệnh mắt do tuyến giáp không chỉ xảy ra khi cường giáp | [ATA](https://www.thyroid.org/thyroid-eye-disease/) | Chờ |
+
+Sau khi duyệt các đoạn này, bác sĩ cần đọc toàn bài và FAQ tương ứng để phát hiện câu còn mâu thuẫn trong phần thân bài. Chưa ghi tên hoặc ngày duyệt nào vì chưa được xác minh.
