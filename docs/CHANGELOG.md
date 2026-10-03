@@ -1,5 +1,13 @@
 # Production changelog
 
+## 2026-10-03 — làm rõ bệnh viện ở địa bàn Bắc Giang
+
+- Kiểm tra trước sửa: `/khu-vuc/kham-mat-bac-giang/` đã được Google lập chỉ mục, nhưng tiêu đề, mô tả và H1 chỉ giới thiệu danh mục khám mắt; trang chưa trả lời ngay truy vấn tìm bệnh viện. Trang chủ có đoạn nói về Bắc Giang nhưng thiếu liên kết theo ngữ cảnh đến trang này và còn gọi đơn vị hiện hành là “tỉnh Bắc Ninh” trong đoạn giải thích.
+- Triển khai commit `9e911cd` chỉ trong child theme: đổi tiêu đề, mô tả và H1 của trang Bắc Giang; đặt câu trả lời ngắn về tên chính thức, **một** địa chỉ đã công bố và liên kết tới bản đồ/liên hệ trước danh mục 57 xã, phường; nối đoạn trên trang chủ tới trang Bắc Giang và sửa tên địa giới thành “thành phố Bắc Ninh”. `WebPage.about` của trang Bắc Giang tham chiếu thực thể Hospital sẵn có, không tạo thực thể/chi nhánh mới. Không đổi nội dung hướng dẫn y khoa hoặc URL.
+- Sao lưu ba tệp và database trước triển khai tại `/home/jwhxtzru/backups/bac-giang-entity-20261003-072753/`. PHP lint hai tệp PHP thay đổi đạt; SHA-256 ba tệp production khớp bản đã kiểm thử; xóa object cache và LiteSpeed cache. HTML công khai trang chủ, trang Bắc Giang và trang Bắc Ninh đều 200; trang Bắc Giang có một H1, một meta description, một canonical và một Hospital JSON-LD. Kiểm tra trực quan trang Bắc Giang ở khung điện thoại: câu trả lời đầu trang hiển thị đủ, không tràn ngang. `scripts/verify-live.ps1 -CheckSsh` đạt sáu URL chính.
+- Google Search Console xác nhận URL Bắc Giang đã nằm trên Google; đã gửi yêu cầu thu thập lại và được thêm vào hàng đợi ưu tiên. Chưa thể xác nhận trang sẽ được ChatGPT, Gemini hoặc Google AI trích dẫn. Còn cần kiểm tra/hoàn thiện Google Business Profile, tọa độ và giấy phép hoạt động khi bệnh viện cung cấp bằng chứng; không tự khai các trường chưa xác minh.
+- Rollback có chọn lọc: chép lại đúng ba tệp từ thư mục backup vào cùng đường dẫn child theme rồi chạy `wp cache flush` và `wp litespeed-purge all`; kiểm tra lại URL. Database không bị sửa trong đợt này, vì vậy không nhập đè SQL backup lên dữ liệu mới.
+
 ## 2026-10-02 — sửa luồng liên kết từ trang chủ
 
 - Kiểm tra 200 bài, 144 trang và 12 danh mục trong sitemap. Sau backup database tại `/home/jwhxtzru/backups/link-trust-20261002-084027/`, làm mới quy tắc URL và LiteSpeed cache để sửa danh mục phẫu thuật khúc xạ trả 404.
