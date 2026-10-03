@@ -141,7 +141,7 @@ function eyecare_schema_lien_he_noi_dung() {
  * plugin SEO. Nội dung dùng dữ liệu Admin để không bị cũ khi đổi hotline.
  */
 function eyecare_lien_he_seo_meta() {
-	if ( ! is_page( 'lien-he' ) ) {
+	if ( ! is_page() || 'lien-he' !== trim( get_page_uri( get_queried_object() ), '/' ) ) {
 		return;
 	}
 
@@ -155,6 +155,26 @@ function eyecare_lien_he_seo_meta() {
 	);
 
 	echo '<meta name="description" content="' . esc_attr( $mo_ta ) . '" />' . "\n";
-	echo '<meta property="og:description" content="' . esc_attr( $mo_ta ) . '" />' . "\n";
+	$hinh = get_site_icon_url( 512 );
+	$og = array(
+		'og:type'        => 'website',
+		'og:site_name'   => $d['ten'],
+		'og:locale'      => 'vi_VN',
+		'og:title'       => wp_get_document_title(),
+		'og:description' => $mo_ta,
+		'og:url'         => get_permalink( get_queried_object_id() ),
+	);
+	if ( $hinh ) {
+		$og['og:image'] = $hinh;
+	}
+	foreach ( $og as $thuoc_tinh => $gia_tri ) {
+		echo '<meta property="' . esc_attr( $thuoc_tinh ) . '" content="' . esc_attr( $gia_tri ) . '" />' . "\n";
+	}
+	echo '<meta name="twitter:card" content="summary_large_image" />' . "\n";
+	echo '<meta name="twitter:title" content="' . esc_attr( $og['og:title'] ) . '" />' . "\n";
+	echo '<meta name="twitter:description" content="' . esc_attr( $mo_ta ) . '" />' . "\n";
+	if ( $hinh ) {
+		echo '<meta name="twitter:image" content="' . esc_url( $hinh ) . '" />' . "\n";
+	}
 }
 add_action( 'wp_head', 'eyecare_lien_he_seo_meta', 3 );

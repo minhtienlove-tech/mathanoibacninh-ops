@@ -394,6 +394,45 @@ function eyecare_in_schema() {
 }
 add_action( 'wp_head', 'eyecare_in_schema', 5 );
 
+/**
+ * Trang Giới thiệu và Liên hệ đã có Hospital/BreadcrumbList từ child theme;
+ * Liên hệ còn có schema bài hướng dẫn và FAQ. Giữ breadcrumb hiển thị của OBS,
+ * chỉ bỏ JSON-LD thừa và OG trùng trên trang Liên hệ.
+ */
+function eyecare_go_metadata_obs_trang_thong_tin() {
+	if ( ! is_page() || ! class_exists( 'OBS_Loader' ) ) {
+		return;
+	}
+
+	$trang = get_queried_object();
+	if ( ! $trang instanceof WP_Post ) {
+		return;
+	}
+
+	$duong_dan = trim( get_page_uri( $trang ), '/' );
+	if ( ! in_array( $duong_dan, array( 'lien-he', 'gioi-thieu' ), true ) ) {
+		return;
+	}
+
+	$schema = OBS_Loader::get( 'schema' );
+	if ( $schema ) {
+		remove_action( 'wp_head', array( $schema, 'render' ), 10 );
+	}
+
+	$breadcrumb = OBS_Loader::get( 'breadcrumb' );
+	if ( $breadcrumb ) {
+		remove_action( 'wp_head', array( $breadcrumb, 'render_schema' ), 15 );
+	}
+
+	if ( 'lien-he' === $duong_dan ) {
+		$opengraph = OBS_Loader::get( 'opengraph' );
+		if ( $opengraph ) {
+			remove_action( 'wp_head', array( $opengraph, 'render' ), 5 );
+		}
+	}
+}
+add_action( 'wp', 'eyecare_go_metadata_obs_trang_thong_tin', 20 );
+
 /** Trang chủ tĩnh cần canonical tự tham chiếu; trang đơn dùng canonical của WordPress/SEO. */
 function eyecare_canonical_trang_chu() {
 	if ( is_front_page() && ! is_paged() ) {

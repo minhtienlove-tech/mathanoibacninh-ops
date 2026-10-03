@@ -1,0 +1,605 @@
+{
+  "scope": {
+    "published_posts_with_both_sources": 46,
+    "shortcode_questions": 273,
+    "obs_items": 276,
+    "snapshot": "2026-10-03, read-only WordPress WP-CLI"
+  },
+  "faq_changes": [
+    {
+      "post_id": 566,
+      "url": "https://mathanoibacninh.com/kien-thuc/dau-nhuc-phia-sau-nhan-cau-khi-dong-mat/",
+      "question": "Đau sau nhãn cầu khi động mắt có phải luôn là viêm thần kinh thị giác?",
+      "old_answer": "Không. Phần lớn trường hợp thuộc nhóm mỏi cơ vận nhãn, khô mắt hoặc viêm xoang, và các nhóm này đỡ khi nghỉ mà không để lại hậu quả. Điểm khiến phải nghĩ tới viêm thần kinh thị giác là thị lực giảm trong vài giờ đến vài ngày, màu sắc ở mắt bệnh trông nhạt hơn, hoặc mất một vùng trong tầm nhìn. Có những dấu hiệu đó thì đi khám ngay.",
+      "new_answer": "Không thể xác định nguyên nhân chỉ từ vị trí đau. Đau khi cử động mắt có thể liên quan nhiều bệnh khác nhau, trong đó có viêm thần kinh thị giác. Nếu thị lực giảm, màu sắc nhìn nhạt đi, mất một vùng nhìn, nhìn đôi, sưng quanh mắt hoặc sốt, hãy đi khám khẩn. Nếu đau kéo dài dù còn nhìn rõ, vẫn nên được bác sĩ đánh giá.",
+      "reason": "Câu cũ khẳng định phần lớn là mỏi cơ/khô mắt/viêm xoang, dễ trấn an quá mức.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.nei.nih.gov/index.php/about/news-and-events/news/oral-corticosteroids-alone-found-ineffective-optic-neuritis",
+        "https://www.nhs.uk/conditions/vision-loss/"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 566,
+      "url": "https://mathanoibacninh.com/kien-thuc/dau-nhuc-phia-sau-nhan-cau-khi-dong-mat/",
+      "question": "Cơn đau này có thể tự hết được không?",
+      "old_answer": "Nhóm mỏi cơ, mỏi điều tiết và khô mắt thường tự đỡ trong vài ngày khi bạn giảm nhìn gần, ngủ đủ và giữ bề mặt mắt được bôi trơn. Nhóm viêm xoang cần điều trị mới hết. Nhóm viêm thần kinh thị giác, viêm màng bồ đào và viêm mô hốc mắt không tự khỏi và cần được bác sĩ đánh giá, theo dõi.",
+      "new_answer": "Một số nguyên nhân như mỏi mắt hoặc khô mắt có thể cải thiện khi nghỉ và chăm sóc bề mặt mắt. Viêm thần kinh thị giác cũng có thể cải thiện thị lực tự nhiên ở một số người, nhưng vẫn cần được khám để xác định nguyên nhân và theo dõi. Không tự chờ khi có giảm thị lực, thay đổi màu sắc, nhìn đôi, sưng hoặc sốt.",
+      "reason": "Câu cũ nói viêm thần kinh thị giác không tự khỏi, trái dữ liệu thử nghiệm; đồng thời phải giữ hướng khám khẩn.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.nei.nih.gov/index.php/about/news-and-events/news/oral-corticosteroids-alone-found-ineffective-optic-neuritis"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 567,
+      "url": "https://mathanoibacninh.com/kien-thuc/dau-quanh-hoc-mat-keo-dai-nhieu-ngay/",
+      "question": "Đau quanh hốc mắt có phải luôn là bệnh của mắt không?",
+      "old_answer": "Không. Hốc mắt giáp ba xoang và dùng chung đường cảm giác với trán, mũi, thái dương, nên viêm xoang, đau nửa đầu hay huyết áp tăng đều gây cảm giác đau \"trong mắt\". Dù vậy, hướng mắt vẫn cần được loại trừ trước bằng đo thị lực, đo nhãn áp và khám đèn khe, vì vài bệnh của nhãn cầu diễn biến nhanh và để lại di chứng lâu dài.",
+      "new_answer": "Không. Đau vùng quanh mắt có thể bắt nguồn từ mắt, xoang, đau đầu hoặc cấu trúc lân cận; không thể xác định nguyên nhân chỉ bằng vị trí đau. Tăng huyết áp thường không có triệu chứng, nên không nên tự gán cơn đau mắt cho huyết áp. Nếu huyết áp rất cao kèm thay đổi thị lực, đau đầu dữ dội hoặc triệu chứng thần kinh, hãy đến cấp cứu ngay.",
+      "reason": "Câu cũ gán tăng huyết áp là nguyên nhân đau trong mắt thường gặp.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.heart.org/en/health-topics/high-blood-pressure/blood-pressure-explained",
+        "https://www.nhs.uk/conditions/vision-loss/"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 567,
+      "url": "https://mathanoibacninh.com/kien-thuc/dau-quanh-hoc-mat-keo-dai-nhieu-ngay/",
+      "question": "Đau quanh mắt kèm ngạt mũi một bên nghĩa là gì?",
+      "old_answer": "Đó là bộ dấu hiệu nghiêng nhiều về viêm xoang, vì xoang trán và xoang sàng chỉ cách hốc mắt một vách xương mỏng. Điểm gợi ý thêm là đau tăng khi cúi đầu, ấn bờ trên hố mắt thấy tức, dịch mũi đặc, giảm mùi, còn thị lực vẫn bình thường. Hướng xử lý thuộc chuyên khoa tai mũi họng, nhưng nên khám mắt để loại trừ biến chứng lan vào hốc mắt.",
+      "new_answer": "Ngạt mũi kèm đau quanh mắt có thể gợi ý bệnh xoang, nhưng không đủ để tự chẩn đoán. Nếu đau kéo dài, hãy khám để phân biệt nguyên nhân ở mắt và tai mũi họng. Nếu có sưng đỏ quanh mắt, sốt, nhìn đôi, đau khi cử động mắt hoặc giảm thị lực, cần đánh giá khẩn vì có thể có biến chứng hốc mắt.",
+      "reason": "Câu cũ nghiêng quá mạnh về viêm xoang dựa trên triệu chứng không đặc hiệu.",
+      "priority": 2,
+      "source_urls": [
+        "https://www.nhs.uk/conditions/vision-loss/"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 567,
+      "url": "https://mathanoibacninh.com/kien-thuc/dau-quanh-hoc-mat-keo-dai-nhieu-ngay/",
+      "question": "Đau quanh hốc mắt bao lâu thì phải đi khám?",
+      "old_answer": "Nếu đau âm ỉ, đỡ khi nghỉ, không kèm dấu hiệu nào khác, bạn có thể theo dõi khoảng năm đến bảy ngày kèm nghỉ mắt và nhỏ nước mắt nhân tạo. Quá một tuần không đỡ, hoặc nặng dần, thì cần khám. Còn khi có nhìn mờ, nhìn đôi, sụp mí, nôn, sốt hay sưng nề quanh mắt thì đi ngay trong hôm nay.",
+      "new_answer": "Nếu đau quanh mắt kéo dài nhiều ngày hoặc không giảm rõ sau khi nghỉ, hãy sắp xếp khám sớm, thay vì tự đặt mốc chờ năm đến bảy ngày. Đến cơ sở cấp cứu ngay nếu đau dữ dội, mờ mắt, đỏ mắt kèm sợ ánh sáng, nhìn đôi, sụp mi, nôn, sốt, sưng quanh mắt hoặc xảy ra sau chấn thương.",
+      "reason": "Câu cũ cho chờ 5–7 ngày và mâu thuẫn với thân bài nói ngày thứ ba không giảm đã cần đánh giá.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.nhs.uk/conditions/vision-loss/"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 568,
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-do-khong-dau-khong-mo/",
+      "question": "Mắt đỏ mà vẫn nhìn rõ thì có cần đi khám không?",
+      "old_answer": "Nếu đỏ nhẹ, xuất hiện sau một ngày thiếu ngủ hoặc nhìn màn hình nhiều và nhạt dần trong vài ngày thì có thể theo dõi tại nhà. Cần đi khám khi đỏ kéo dài quá mười ngày, quay lại nhiều đợt ở cùng một bên, hoặc bắt đầu kèm đau nhức sâu, sợ ánh sáng và nhìn mờ dù chỉ nhẹ.",
+      "new_answer": "Mắt đỏ nhẹ có thể do kích ứng, khô mắt hoặc viêm kết mạc, nhưng nhìn rõ không đủ để loại trừ bệnh cần điều trị. Nếu không giảm sau vài ngày hoặc tái diễn, hãy khám. Người đeo kính áp tròng cần tháo kính và liên hệ bác sĩ mắt khi đỏ; đau, sợ sáng, nhìn mờ, đỏ nhiều, chấn thương hoặc tiếp xúc hóa chất cần được đánh giá khẩn.",
+      "reason": "Mốc chờ 10 ngày thiếu ngoại lệ quan trọng, nhất là kính áp tròng.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/pink-eye",
+        "https://www.nei.nih.gov/eye-health-information/healthy-vision/contact-lenses"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 568,
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-do-khong-dau-khong-mo/",
+      "question": "Đỏ mắt bao lâu thì hết là bình thường?",
+      "old_answer": "Nhóm mỏi mắt và kích thích môi trường thường nhạt trong một đến hai ngày sau khi nghỉ mắt. Nhóm dị ứng đỡ khi tách khỏi dị nguyên. Nhóm virus mất khoảng bảy đến mười bốn ngày, diễn biến từng ngày ở bài <a href=\"https://mathanoibacninh.com/kien-thuc/dau-mat-do-bao-lau-thi-khoi/\">đau mắt đỏ bao lâu thì khỏi</a>. Quá mười ngày còn đỏ thì cần khám.",
+      "new_answer": "Thời gian hồi phục tùy nguyên nhân, không có mốc mười ngày áp dụng cho mọi mắt đỏ. Nếu mắt đỏ không cải thiện sau vài ngày hoặc nặng lên, hãy khám. Đau, sợ ánh sáng, nhìn mờ, đỏ nhiều hoặc đang đeo kính áp tròng là lý do cần liên hệ bác sĩ mắt sớm, không đợi đủ ngày.",
+      "reason": "Mốc 10 ngày cứng có thể trì hoãn viêm giác mạc và bệnh cấp.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/pink-eye",
+        "https://www.nei.nih.gov/eye-health-information/healthy-vision/contact-lenses"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 569,
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-buoi-toi-ban-ngay-thi-ro/",
+      "question": "Có nên tiếp tục lái xe đêm khi mắt mờ buổi tối?",
+      "old_answer": "Nếu bạn thấy không an toàn thì nên hạn chế, và tránh hẳn những tuyến đường nhiều đèn ngược chiều. Mờ về đêm có thể là dấu hiệu sớm của đục thủy tinh thể hoặc glôcôm, nên hợp lý hơn cả là đi đo mắt trước rồi mới quyết định, thay vì tự tập cho quen dần.",
+      "new_answer": "Nếu nhìn ban đêm không đủ rõ để nhận biết biển báo, người đi bộ hoặc xe khác, hãy ngừng lái xe đêm cho đến khi được kiểm tra mắt và xử lý nguyên nhân. Đừng chỉ đổi sang tuyến đường ít đèn. Mờ đêm có thể liên quan khúc xạ, bề mặt mắt hoặc đục thủy tinh thể; bác sĩ sẽ xác định sau khám.",
+      "reason": "Câu cũ khuyên chỉ hạn chế/đổi đường dù người bệnh đã thấy không an toàn.",
+      "priority": 2,
+      "source_urls": [
+        "https://www.nhs.uk/conditions/vision-loss/"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 570,
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-dan-theo-thoi-gian-o-nguoi-truong-thanh/",
+      "question": "Mắt mờ dần từ từ có phải lúc nào cũng là bệnh không?",
+      "old_answer": "Không. Phần lớn trường hợp mờ dần ở người trên 40 tuổi là lão thị — hiện tượng tự nhiên khiến mắt nhìn gần kém đi. Tuy nhiên, nếu mờ nặng lên nhanh, lệch giữa hai mắt, hoặc kèm đau đỏ và nhìn méo, cần khám để loại trừ bệnh lý.",
+      "new_answer": "Nếu chủ yếu mờ khi nhìn gần sau tuổi 40, nhìn xa vẫn rõ và tiến triển chậm ở cả hai mắt, lão thị là một khả năng thường gặp. Mờ nhìn xa, mờ lệch một mắt, nhìn méo, đau, đỏ hoặc thay đổi nhanh không nên quy cho lão thị; hãy khám để tìm nguyên nhân.",
+      "reason": "Câu cũ nói chung mọi mờ dần ở người >40 phần lớn là lão thị, không giới hạn nhìn gần.",
+      "priority": 2,
+      "source_urls": [
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/presbyopia",
+        "https://www.nhs.uk/conditions/vision-loss/"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 571,
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-kem-nhin-meo-duong-thang-thanh-cong/",
+      "question": "Nhìn méo có tự hết được không?",
+      "old_answer": "Tùy nguyên nhân. Nếu phù hoàng điểm do tiểu đường thì có thể cải thiện khi đường huyết ổn định. Nếu AMD thì thường không tự hết, và dạng ướt cần điều trị để ngăn nặng thêm. Nếu màng trước võng mạc thì có thể cần phẫu thuật.",
+      "new_answer": "Tùy nguyên nhân, nhưng nhìn méo mới xuất hiện cần được khám mắt sớm để xác định bệnh ở hoàng điểm hoặc võng mạc. Kiểm soát đường huyết là phần quan trọng trong điều trị bệnh mắt do đái tháo đường, nhưng phù hoàng điểm không nên chỉ chờ đường huyết ổn; bác sĩ sẽ quyết định theo dõi hay can thiệp. Màng trước võng mạc hoặc AMD cần đánh giá riêng.",
+      "reason": "Câu cũ có thể khiến người bị phù hoàng điểm ĐTĐ chờ tự cải thiện chỉ nhờ ổn đường huyết.",
+      "priority": 1,
+      "source_urls": [
+        "https://diabetesjournals.org/care/article/40/3/412/36975/Diabetic-Retinopathy-A-Position-Statement-by-the",
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/age-related-macular-degeneration/nutritional-supplements-age-related-macular-degeneration"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 571,
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-kem-nhin-meo-duong-thang-thanh-cong/",
+      "question": "AMD điều trị thế nào, có hết hẳn được không?",
+      "old_answer": "Hiện tại AMD dạng khô chưa có phương pháp điều trị dứt điểm, nhưng bổ sung vitamin và khoáng chất chuyên dụng có thể làm chậm tiến triển. AMD dạng ướt có thuốc tiêm nội nhãn giúp ngăn mạch máu bất thường và giữ được thị lực, nhưng cần tiêm nhắc lại và theo dõi lâu dài chứ không phải một lần là xong.",
+      "new_answer": "Cách xử trí phụ thuộc giai đoạn và thể AMD. Công thức AREDS2 chỉ được cân nhắc ở nhóm phù hợp, như AMD trung gian hoặc AMD muộn ở một mắt; không chứng minh lợi ích cho AMD giai đoạn sớm. AMD thể ướt có thể cần tiêm thuốc nội nhãn và theo dõi lâu dài. Bác sĩ mắt cần xác định giai đoạn trước khi dùng thực phẩm bổ sung.",
+      "reason": "Câu cũ nói vitamin chuyên dụng cho AMD khô nói chung, thiếu phân giai đoạn và rủi ro tự bổ sung.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/age-related-macular-degeneration/nutritional-supplements-age-related-macular-degeneration"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 572,
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-kem-thay-man-che-hoac-mat-mang-tam-nhin/",
+      "question": "Tôi thấy vùng khuyết rồi nó tự hết sau nửa giờ, còn cần khám không?",
+      "old_answer": "Cần, ít nhất một lần để xác định nhóm. Hình ảnh lan rộng rồi tự hết trong dưới một giờ nghiêng về hào quang thị giác của migraine, nhóm hồi phục. Nhưng thiếu máu thoáng qua ở mắt hoặc ở não cũng biểu hiện tương tự và là dấu hiệu báo trước, nên lần đầu gặp thì không tự kết luận.",
+      "new_answer": "Cần được đánh giá cấp cứu ngay, kể cả khi vùng nhìn đã trở lại bình thường. Mất thị lực hoặc vùng nhìn thoáng qua có thể là cơn thiếu máu thoáng qua ở mắt hoặc não, một dấu hiệu cảnh báo đột quỵ. Hào quang migraine cũng có thể gây triệu chứng tương tự, nhưng không nên tự kết luận trước khi bác sĩ đánh giá.",
+      "reason": "“Ít nhất một lần” và quy hướng migraine có thể trì hoãn xử trí TIA.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.stroke.org/en/about-stroke/types-of-stroke/tia-transient-ischemic-attack"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 572,
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-kem-thay-man-che-hoac-mat-mang-tam-nhin/",
+      "question": "Làm sao biết mảng tối là do mắt hay do não?",
+      "old_answer": "Cách phân biệt nhanh là che lần lượt từng mắt. Nếu vùng khuyết chỉ có ở một mắt và mắt kia bình thường, tổn thương nằm tại mắt đó. Nếu cùng một nửa tầm nhìn bị mất ở cả hai mắt, hướng nghĩ là đường dẫn truyền thị giác phía sau, thường sau đột quỵ, và cần đi cấp cứu chung ngay.",
+      "new_answer": "Che từng mắt có thể giúp mô tả triệu chứng cho bác sĩ, nhưng không xác định chắc chắn vị trí tổn thương. Nếu mới mất một mảng tầm nhìn ở một hoặc cả hai mắt, nhất là đột ngột, hãy được đánh giá khẩn tại cơ sở y tế; đừng dùng phép thử tại nhà để quyết định chờ khám.",
+      "reason": "Câu cũ coi che mắt là phép định vị chắc chắn và gán tổn thương hai mắt thường do đột quỵ đã xảy ra.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.stroke.org/en/about-stroke/types-of-stroke/tia-transient-ischemic-attack",
+        "https://www.nhs.uk/conditions/vision-loss/"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 572,
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-kem-thay-man-che-hoac-mat-mang-tam-nhin/",
+      "question": "Chớp sáng và ruồi bay tăng lên nhưng chưa thấy màn che thì sao?",
+      "old_answer": "Đó là mốc phải đi khám sớm chứ không phải chờ. Một đợt chớp sáng kèm ruồi bay mới xuất hiện trong vài giờ gợi ý dịch kính vừa bong khỏi võng mạc, và một phần trong số này có vết rách kèm theo. Rách được phát hiện lúc võng mạc chưa bong thường hàn được bằng laser trong buổi khám.",
+      "new_answer": "Chớp sáng hoặc ruồi bay mới xuất hiện đột ngột, nhất là tăng nhanh hoặc kèm vùng tối như màn che, cần khám mắt có giãn đồng tử ngay để loại trừ rách/bong võng mạc. Không nên đợi thấy màn che mới đi khám; vết rách được phát hiện sớm có thể được xử lý trước khi bong rộng.",
+      "reason": "“Khám sớm” chưa đủ rõ với triệu chứng mới tăng nhanh.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/floaters",
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 575,
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-mot-ben-ben-kia-van-ro/",
+      "question": "Tại sao mờ một bên lại nguy hiểm hơn mờ đều hai bên?",
+      "old_answer": "Mờ đều hai bên phần lớn là khúc xạ hoặc lão thị nên thường lành tính. Mờ một bên gợi ý có vấn đề tại chính mắt đó, và nhiều nguyên nhân nghiêm trọng như bong võng mạc, tắc mạch máu võng mạc hay viêm thần kinh thị giác thường chỉ biểu hiện ở một mắt lúc đầu.",
+      "new_answer": "Mờ mới xuất hiện ở một bên cần được đánh giá vì có thể liên quan mắt, thần kinh thị giác hoặc mạch máu. Mờ cả hai bên cũng không mặc nhiên là khúc xạ hay lão thị; mức độ khẩn tùy thời điểm khởi phát và triệu chứng kèm theo. Nếu mờ đột ngột, mất thị lực hoặc có triệu chứng thần kinh, hãy đến cấp cứu.",
+      "reason": "Câu cũ trấn an mờ hai mắt là thường lành tính.",
+      "priority": 2,
+      "source_urls": [
+        "https://www.nhs.uk/conditions/vision-loss/"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 591,
+      "url": "https://mathanoibacninh.com/kien-thuc/bui-va-hoa-chat-trong-moi-truong-lam-viec/",
+      "question": "Hoá chất bắn vào mắt nhưng rửa xong thấy đỡ thì có cần đi khám không?",
+      "old_answer": "Vẫn nên đến cơ sở y tế kiểm tra, dù đã đỡ sau khi rửa. Một số tổn thương bề mặt do hoá chất không biểu hiện rõ ngay và cần được đánh giá bằng đèn khe để chắc chắn không có tổn thương sâu hơn. Trước đó, hãy rửa liên tục ít nhất 15 phút với mi mở ra, cho nước chảy từ góc trong ra góc ngoài.",
+      "new_answer": "Vẫn cần được đánh giá y tế ngay. Bắt đầu xả nước sạch liên tục ngay khi hóa chất bắn vào mắt, giữ mi mở, rửa ít nhất 20 phút và tiếp tục rửa trong lúc chờ trợ giúp nếu là hóa chất mạnh; tháo kính áp tròng nếu tháo được dễ dàng, không nhỏ hóa chất trung hòa. Mang theo tên hoặc vỏ sản phẩm khi đi cấp cứu.",
+      "reason": "Rửa 15 phút như điểm kết thúc có thể chưa đủ cho hóa chất mạnh; cần cấp cứu dù đã đỡ.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.nhs.uk/conditions/eye-injuries/"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 591,
+      "url": "https://mathanoibacninh.com/kien-thuc/bui-va-hoa-chat-trong-moi-truong-lam-viec/",
+      "question": "Nghi có mạt kim loại bay vào mắt lúc mài thì nên làm gì?",
+      "old_answer": "Đừng dụi và đừng nhờ người khác lấy bằng tăm hay góc giấy, vì cách đó dễ làm xước thêm và đẩy mạt vào sâu hơn. Hãy đi khám trong hôm nay để được lấy ra đúng cách. Mạt sắt nằm lâu còn để lại một vòng rỉ quanh chỗ cắm, phần này cần bác sĩ xử lý chứ không trôi theo nước mắt.",
+      "new_answer": "Mảnh kim loại bắn ra khi mài hoặc khoan có thể đi xuyên vào mắt. Không dụi, ấn vào mắt hay tự lấy dị vật; hãy đến cấp cứu mắt ngay, kể cả khi cảm giác cộm hoặc thị lực chưa thay đổi. Bác sĩ cần kiểm tra để loại trừ tổn thương xuyên nhãn cầu.",
+      "reason": "“Đi khám trong hôm nay” chưa đủ gấp với vật bắn tốc độ cao.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.nhs.uk/conditions/eye-injuries/"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 621,
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-do-kem-ghen-vang-dinh-mi-buoi-sang/",
+      "question": "Bao lâu thì mắt đỏ kèm ghèn hết hẳn?",
+      "old_answer": "Phần lớn trường hợp đỡ rõ sau năm đến bảy ngày và hết hẳn trong khoảng mười ngày. Mắt thứ hai thường bị sau mắt thứ nhất một đến hai ngày và nhẹ hơn. Nếu sau mười ngày vẫn còn ghèn nhiều, hoặc triệu chứng nặng lên từ ngày thứ ba, đó là lúc cần được khám thay vì chờ thêm.",
+      "new_answer": "Thời gian đỡ tùy nguyên nhân. Nếu không cải thiện sau vài ngày, nặng lên, tiết nhiều dịch, đau, sợ sáng hoặc nhìn mờ, hãy khám mắt. Người đeo kính áp tròng cần tháo kính và liên hệ bác sĩ mắt ngay khi đỏ/ghèn; không đợi mười ngày. Trẻ sơ sinh có ghèn bất thường cần được bác sĩ đánh giá ngay.",
+      "reason": "Mốc chờ 10 ngày có thể trì hoãn chăm sóc nhóm nguy cơ.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/pink-eye",
+        "https://www.nei.nih.gov/eye-health-information/healthy-vision/contact-lenses"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 621,
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-do-kem-ghen-vang-dinh-mi-buoi-sang/",
+      "question": "Trẻ nhỏ bị đỏ mắt kèm ghèn có xử lý giống người lớn không?",
+      "old_answer": "Nguyên tắc vệ sinh thì giống, nhưng ngưỡng đi khám thấp hơn nhiều. Trẻ sơ sinh dưới một tháng tuổi có ghèn nhiều cần được khám sớm. Trẻ có ghèn tái phát nhiều đợt ở cùng một bên kèm chảy nước mắt thường xuyên gợi ý tắc lệ đạo, cần bác sĩ đánh giá thay vì chỉ lau và chờ tự đỡ.",
+      "new_answer": "Trẻ sơ sinh có mắt đỏ, ghèn hoặc dịch tiết bất thường cần được bác sĩ đánh giá ngay trong ngày vì một số nguyên nhân có thể ảnh hưởng mắt nghiêm trọng. Trẻ lớn có đau, sợ sáng, không mở mắt được hoặc nhìn kém cũng cần khám sớm. Không tự nhỏ kháng sinh hoặc chỉ lau mắt kéo dài khi chưa rõ nguyên nhân.",
+      "reason": "“Khám sớm” ở trẻ sơ sinh dưới một tháng là mốc quá mơ hồ.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/pink-eye"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 624,
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-do-sau-khi-boi-hoac-tam-bien/",
+      "question": "Mắt đỏ sau khi bơi bao lâu thì hết?",
+      "old_answer": "Nếu là kích ứng do hoá chất hoặc nước mặn, mắt thường dịu rõ trong vài giờ và hết trong vòng một ngày sau khi rửa mắt và nhỏ nước mắt nhân tạo. Viêm biểu mô do tia cực tím mất một đến hai ngày. Còn đỏ kéo dài quá 48 giờ, hoặc nặng lên thay vì đỡ, thì không còn thuộc nhóm tự khỏi và cần được khám.",
+      "new_answer": "Kích ứng nhẹ có thể giảm sau khi rời nước, rửa sạch và nghỉ, nhưng không thể đặt mốc 48 giờ cho mọi trường hợp. Nếu đã đeo kính áp tròng khi bơi, hãy tháo kính và đi khám mắt sớm dù triệu chứng còn nhẹ. Đau, sợ sáng, nhìn mờ, đốm trắng ở giác mạc hoặc đỏ tăng cần đánh giá khẩn.",
+      "reason": "FAQ mốc 48 giờ thiếu ngoại lệ kính áp tròng, trong khi thân bài đã nêu.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.nei.nih.gov/eye-health-information/healthy-vision/contact-lenses",
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/pink-eye"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 625,
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-nong-rat-kem-chay-nuoc-mat/",
+      "question": "Rát mắt sau khi lau nhà bằng dung dịch tẩy rửa có cần đi khám?",
+      "old_answer": "Nếu chỉ là hơi hoá chất bay lên gây rát và hết sau khi ra chỗ thoáng, rửa mắt bằng nước sạch rồi theo dõi là đủ. Nhưng nếu dung dịch bắn trực tiếp vào mắt thì rửa liên tục ít nhất 15 phút rồi đi khám ngay, kể cả khi đã thấy đỡ, vì tổn thương do chất kiềm tiến triển ngầm.",
+      "new_answer": "Nếu hóa chất chỉ ở trong không khí và cảm giác rát hết nhanh sau khi ra nơi thoáng, hãy rửa mắt bằng nước sạch và theo dõi; nếu triệu chứng còn, tăng hoặc nhìn mờ thì đi khám. Nếu dung dịch bắn trực tiếp vào mắt, xả nước liên tục ngay ít nhất 20 phút, tiếp tục rửa khi chờ trợ giúp nếu là chất tẩy mạnh và đến cấp cứu ngay.",
+      "reason": "Mốc 15 phút chưa đủ an toàn cho chất tẩy mạnh, cần nhấn mạnh tiếp tục rửa và cấp cứu.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.nhs.uk/conditions/eye-injuries/"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 628,
+      "url": "https://mathanoibacninh.com/kien-thuc/sup-mi-nang-dan-ve-cuoi-ngay/",
+      "question": "Nhìn đôi đi kèm sụp mi có nguy hiểm không?",
+      "old_answer": "Nhìn đôi lúc có lúc không, nặng khi mỏi, thường cùng nhóm nguyên nhân với sụp mi dao động và cần được khám trong vài ngày tới. Nhưng nhìn đôi xảy ra đột ngột và liên tục, nhất là khi kèm đau đầu hoặc đồng tử hai bên không đều, là tình huống cần đánh giá ngay trong hôm nay chứ không hẹn lịch.",
+      "new_answer": "Nhìn đôi và sụp mi mới xuất hiện cần được bác sĩ đánh giá để xác định nguyên nhân; không tự quy hết cho nhược cơ. Nếu triệu chứng xuất hiện đột ngột và liên tục, hoặc kèm đau đầu dữ dội, đồng tử không đều hay yếu tay chân, hãy đi cấp cứu. Nếu kèm khó nuốt, nói yếu hoặc khó thở tăng dần, gọi cấp cứu ngay vì có thể là cơn nhược cơ.",
+      "reason": "FAQ thiếu dấu hiệu cấp cứu khó nuốt/khó thở dù thân bài đã có.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.nhs.uk/conditions/myasthenia-gravis/symptoms/",
+        "https://www.nhs.uk/conditions/vision-loss/"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 629,
+      "url": "https://mathanoibacninh.com/kien-thuc/kho-mat-nang-khong-do-du-da-nho-thuoc/",
+      "question": "Uống thêm nước và bổ sung dầu cá có giúp được không?",
+      "old_answer": "Uống đủ nước là việc nên làm nhưng không đủ để chữa khô mắt do tắc tuyến bờ mi. Một số người bệnh có cải thiện khi bổ sung acid béo omega-3, mức đáp ứng không giống nhau giữa các cá nhân. Hãy trao đổi với bác sĩ trước khi dùng dài ngày, nhất là khi bạn đang dùng thuốc chống đông.",
+      "new_answer": "Uống đủ nước là tốt cho sức khỏe nhưng không thay thế đánh giá nguyên nhân khô mắt. Một thử nghiệm lớn do National Eye Institute tài trợ không thấy viên omega-3 tốt hơn giả dược ở người khô mắt mức vừa đến nặng; vì vậy không nên xem dầu cá là điều trị đã được chứng minh. Hãy trao đổi với bác sĩ trước khi dùng thực phẩm bổ sung, nhất là nếu đang dùng thuốc chống đông.",
+      "reason": "Câu cũ nói một số người cải thiện với omega-3 mà không nêu thử nghiệm lớn âm tính.",
+      "priority": 2,
+      "source_urls": [
+        "https://www.nei.nih.gov/research-and-training/research-news/omega-3s-fish-oil-supplements-no-better-placebo-dry-eye"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 631,
+      "url": "https://mathanoibacninh.com/kien-thuc/lao-thi-vi-sao-sau-40-tuoi-nhin-gan-mo/",
+      "question": "Có bài tập hay thuốc nhỏ nào làm mắt nhìn gần rõ lại không?",
+      "old_answer": "Bài tập mắt giúp giảm mỏi và cải thiện sự phối hợp hai mắt, nhưng không phục hồi được tính đàn hồi đã mất của thủy tinh thể. Lão thị <strong>không chữa khỏi được bằng thuốc nhỏ mắt</strong>, và các sản phẩm quảng cáo làm sáng mắt còn có thể gây kích ứng bề mặt. Cách xử lý hiệu quả vẫn là kính đọc gần đo đúng khoảng cách làm việc.",
+      "new_answer": "Bài tập mắt không làm thủy tinh thể trẻ lại. Kính đọc hoặc phương án chỉnh thị lực khác có thể giúp nhìn gần; một số thuốc nhỏ có thể cải thiện nhìn gần tạm thời ở người phù hợp nhưng không chữa khỏi lão thị. Không tự mua thuốc quảng cáo hoặc dùng thuốc không rõ thành phần; hãy hỏi bác sĩ về lựa chọn có sẵn và phù hợp tại Việt Nam.",
+      "reason": "Câu cũ có thể bị hiểu là không tồn tại thuốc nhỏ giúp nhìn gần; FDA đã phê duyệt thuốc điều trị triệu chứng tại Mỹ, chưa xác minh phép lưu hành ở VN.",
+      "priority": 2,
+      "source_urls": [
+        "https://www.fda.gov/drugs/drug-trials-snapshots/drug-trials-snapshots-vizz"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 653,
+      "url": "https://mathanoibacninh.com/kien-thuc/bong-vong-mac-dau-hieu-canh-bao/",
+      "question": "Chớp sáng khi quay đầu trong phòng tối có luôn là dấu hiệu bệnh?",
+      "old_answer": "Không phải luôn vậy, nhưng đây là dấu hiệu cần chú ý. Chớp sáng thoáng qua, hiếm gặp, không kèm ruồi bay tăng có thể chỉ là dịch kính co tự nhiên. Nếu chớp sáng lặp lại nhiều lần trong vài ngày, đặc biệt kèm ruồi bay mới hoặc vùng tối, hãy đi khám ngay để loại trừ vết rách võng mạc.",
+      "new_answer": "Chớp sáng mới xuất hiện hoặc lặp lại cần được bác sĩ mắt đánh giá, đặc biệt ở người cận nặng hoặc sau chấn thương. Nếu kèm nhiều ruồi bay mới, vùng tối hoặc màn che, hãy đến khám mắt/cấp cứu ngay để loại trừ rách hay bong võng mạc. Không thể tự kết luận là thay đổi dịch kính lành tính chỉ vì chớp sáng hiếm và chưa thấy màn che.",
+      "reason": "Câu cũ trấn an chớp sáng mới/hiếm là dịch kính co tự nhiên trước khi soi đáy mắt.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/floaters",
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 654,
+      "url": "https://mathanoibacninh.com/kien-thuc/glocom-goc-mo-mat-thi-truong-am-tham/",
+      "question": "Glôcôm góc mở khác gì với cơn glôcôm cấp?",
+      "old_answer": "Thể góc mở diễn ra chậm, nhiều năm, thường không đau và mất thị trường ngoại vi từ từ. Cơn glôcôm góc đóng cấp thì ngược lại: nhãn áp tăng vọt đột ngột gây đau nhức mắt dữ dội, nhìn quầng sáng, buồn nôn và cần cấp cứu ngay. Người mắc thể góc mở vẫn có thể gặp cơn cấp, nên cần biết cả hai nhóm dấu hiệu.",
+      "new_answer": "Glôcôm góc mở thường tiến triển âm thầm và làm mất thị trường từ từ. Cơn góc đóng cấp là một cơ chế khác: đau mắt dữ dội, đỏ mắt, nhìn mờ hoặc quầng sáng, buồn nôn; cần đến cấp cứu ngay. Dù đã có chẩn đoán glôcôm, người bệnh không nên tự gán một cơn đau mắt cấp cho bệnh cũ mà cần được khám.",
+      "reason": "Câu cũ nói người mắc góc mở vẫn có thể gặp cơn góc đóng như mối liên hệ thường quy.",
+      "priority": 2,
+      "source_urls": [
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/glaucoma/types-glaucoma"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 656,
+      "url": "https://mathanoibacninh.com/kien-thuc/mang-truoc-vong-mac-la-gi/",
+      "question": "Màng trước võng mạc có tái phát sau phẫu thuật không?",
+      "old_answer": "Tỷ lệ tái phát màng trước võng mạc sau phẫu thuật rất thấp, thường dưới năm phần trăm. Nếu tái phát, có thể phẫu thuật lại để bóc màng mới. Người bệnh đã từng phẫu thuật võng mạc trước đó có nguy cơ tái phát cao hơn một chút so với nhóm màng tự nhiên do tuổi tác.",
+      "new_answer": "Màng trước võng mạc có thể tái phát sau phẫu thuật, nhưng mức nguy cơ khác nhau theo tình trạng từng mắt và kỹ thuật được dùng. Bác sĩ phẫu thuật sẽ giải thích nguy cơ của bạn và hẹn theo dõi bằng khám/OCT khi cần. Nếu nhìn méo hoặc mờ trở lại, hãy tái khám.",
+      "reason": "Số “thường dưới năm phần trăm” chưa có nguồn rõ trong bài và không nên áp cho mọi kỹ thuật.",
+      "priority": 3,
+      "source_urls": [],
+      "doctor_review": true
+    },
+    {
+      "post_id": 661,
+      "url": "https://mathanoibacninh.com/kien-thuc/benh-basedow-graves-loi-mat/",
+      "question": "Basedow có kiểm soát được lâu dài không?",
+      "old_answer": "Basedow là bệnh tự miễn, hiện chưa có phương pháp chữa khỏi, nhưng có thể kiểm soát tốt. Mục tiêu là đưa chức năng tuyến giáp về mức bình thường bằng thuốc kháng giáp hoặc phương pháp khác theo chỉ định bác sĩ nội tiết, từ đó giảm ảnh hưởng lên mắt. Nhiều người bệnh kiểm soát tốt có thể sống bình thường với mắt ổn định lâu dài.",
+      "new_answer": "Basedow có nhiều cách điều trị cường giáp, gồm thuốc kháng giáp và một số phương án điều trị triệt để do bác sĩ nội tiết cân nhắc; sau điều trị triệt để có thể phải dùng hormon thay thế lâu dài. Bệnh mắt do tuyến giáp cần được đánh giá và điều trị riêng, không mặc định sẽ khỏi khi hormon tuyến giáp về bình thường. Bỏ thuốc lá và theo dõi mắt đúng hẹn rất quan trọng.",
+      "reason": "“Chưa có phương pháp chữa khỏi” là tuyệt đối; điều trị cường giáp và bệnh mắt là hai vấn đề khác nhau.",
+      "priority": 2,
+      "source_urls": [
+        "https://www.thyroid.org/thyroid-eye-disease/",
+        "https://www.thyroid.org/surgical-management-graves-disease/"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 661,
+      "url": "https://mathanoibacninh.com/kien-thuc/benh-basedow-graves-loi-mat/",
+      "question": "Lồi mắt do Basedow có tự quay lại bình thường không?",
+      "old_answer": "Ở giai đoạn sớm, khi mô hốc mắt chủ yếu sưng do tích nước và chưa xơ hóa, việc kiểm soát tuyến giáp tốt có thể giúp lồi mắt giảm nhẹ. Tuy nhiên, khi mô đã xơ hóa và cơ vận nhãn dày lên, mắt thường không tự quay lại hoàn toàn, và phẫu thuật chỉnh hình có thể được cân nhắc khi bệnh đã ổn định.",
+      "new_answer": "Mức lồi có thể thay đổi theo giai đoạn hoạt động của bệnh mắt, nhưng không thể dự đoán chỉ từ kết quả xét nghiệm hormon tuyến giáp. Giữ chức năng tuyến giáp ổn định giúp tránh bệnh mắt nặng thêm, còn mức lồi và thị lực cần bác sĩ mắt theo dõi riêng. Khi bệnh đã ổn định, bác sĩ có thể cân nhắc can thiệp phục hồi nếu cần.",
+      "reason": "Câu cũ có thể khiến người bệnh kỳ vọng chỉ kiểm soát tuyến giáp là lồi mắt giảm.",
+      "priority": 2,
+      "source_urls": [
+        "https://www.thyroid.org/thyroid-eye-disease/"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 662,
+      "url": "https://mathanoibacninh.com/kien-thuc/mat-va-thai-ky/",
+      "question": "Tôi bị tiểu đường thai kỳ, có cần khám mắt không?",
+      "old_answer": "Có. Đường huyết cao có thể làm tổn thương mạch máu võng mạc nặng lên trong thai kỳ, kể cả với tiểu đường thai kỳ. Bạn nên được soi đáy mắt để kiểm tra võng mạc và theo dõi theo lịch bác sĩ hẹn. Phát hiện sớm giúp xử lý kịp thời, tránh ảnh hưởng lâu dài tới thị lực.",
+      "new_answer": "Nếu chỉ mới được chẩn đoán đái tháo đường thai kỳ, bác sĩ sản và nội tiết sẽ đánh giá nhu cầu khám mắt dựa trên tiền sử và triệu chứng; không nên mặc định bệnh võng mạc do đái tháo đường sẽ tiến triển trong thai kỳ. Người đã mắc đái tháo đường type 1 hoặc type 2 trước khi mang thai cần được khám mắt sớm và theo dõi theo chỉ định. Bất kỳ mờ mắt mới xuất hiện, nhất là kèm đau đầu hoặc phù, cần được đánh giá để loại trừ nguyên nhân sản khoa.",
+      "reason": "ADA 2026 phân biệt GDM mới với tiểu đường có trước thai kỳ; NEI trang thông tin chung nêu khác, cần bác sĩ duyệt câu mới.",
+      "priority": 1,
+      "source_urls": [
+        "https://diabetesjournals.org/care/article/49/Supplement_1/S261/163919/12-Retinopathy-Neuropathy-and-Foot-Care-Standards",
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/diabetic-retinopathy"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 664,
+      "url": "https://mathanoibacninh.com/kien-thuc/tang-huyet-ap-va-vong-mac/",
+      "question": "Huyết áp cao đã lâu nhưng mắt vẫn nhìn rõ, tôi có cần soi đáy mắt không?",
+      "old_answer": "Có. Tổn thương võng mạc do tăng huyết áp giai đoạn sớm thường không gây thay đổi thị lực vì bắt đầu từ vùng ngoại vi. Khi bạn thấy mờ nghĩa là tổn thương đã lan tới trung tâm. Soi đáy mắt định kỳ giúp bác sĩ phát hiện dấu hiệu sớm và đánh giá mức độ ảnh hưởng của huyết áp lên mạch máu.",
+      "new_answer": "Có. Bệnh võng mạc do tăng huyết áp có thể không gây triệu chứng ở giai đoạn đầu, nên người bệnh vẫn nhìn rõ. Bác sĩ sẽ quyết định lịch khám đáy mắt dựa trên mức huyết áp và bệnh đi kèm. Không thể xác định vị trí tổn thương hay mức độ bệnh chỉ từ việc mắt còn nhìn rõ.",
+      "reason": "Câu cũ khẳng định tổn thương bắt đầu từ vùng ngoại vi, không có căn cứ.",
+      "priority": 2,
+      "source_urls": [
+        "https://www.heart.org/en/health-topics/high-blood-pressure/blood-pressure-explained"
+      ],
+      "doctor_review": true
+    },
+    {
+      "post_id": 664,
+      "url": "https://mathanoibacninh.com/kien-thuc/tang-huyet-ap-va-vong-mac/",
+      "question": "Mờ mắt kèm đau đầu dữ dội khi huyết áp cao có nguy hiểm không?",
+      "old_answer": "Rất cần chú ý. Đây có thể là dấu hiệu tăng huyết áp ác tính, khi huyết áp tăng rất cao và nhanh gây phù gai thị. Đó là tình huống cấp cứu đe dọa cả não và thận, không riêng mắt. Nếu gặp tình trạng này, hãy đến cơ sở y tế ngay trong hôm nay để được hạ huyết áp kịp thời.",
+      "new_answer": "Có thể là tình huống cấp cứu, nhất là khi huyết áp rất cao và xuất hiện thay đổi thị lực, đau đầu dữ dội hoặc triệu chứng thần kinh khác. Hãy gọi cấp cứu hoặc đến khoa cấp cứu ngay, không đợi tới cuối ngày và không tự hạ huyết áp bằng thuốc của người khác. Bác sĩ cần đánh giá tổn thương cơ quan đích và điều trị phù hợp.",
+      "reason": "“Ngay trong hôm nay” chưa đủ gấp khi có triệu chứng của tăng huyết áp cấp cứu.",
+      "priority": 1,
+      "source_urls": [
+        "https://www.heart.org/en/health-topics/high-blood-pressure/blood-pressure-explained"
+      ],
+      "doctor_review": true
+    }
+  ],
+  "body_changes": [
+    {
+      "post_id": 566,
+      "old_text": "Đau phía sau nhãn cầu khi cử động mắt hay gặp nhất là do mỏi cơ vận nhãn, khô mắt hoặc viêm xoang cạnh hốc mắt.",
+      "new_text": "Đau phía sau nhãn cầu khi cử động mắt có nhiều nguyên nhân, cần đánh giá triệu chứng đi kèm để phân biệt nhóm lành tính với viêm thần kinh thị giác hoặc bệnh hốc mắt.",
+      "occurrences": 1,
+      "reason": "Bỏ khẳng định tần suất không có nguồn.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 567,
+      "old_text": "Đau kéo dài <strong>hơn một tuần</strong> dù đã nghỉ mắt và ngủ đủ.",
+      "new_text": "Đau kéo dài <strong>nhiều ngày</strong> dù đã nghỉ mắt và ngủ đủ.",
+      "occurrences": 1,
+      "reason": "Đồng bộ với lời khuyên khám sớm, không chờ một tuần.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 567,
+      "old_text": "Đó là hướng xoang, không phải hướng mắt.",
+      "new_text": "Triệu chứng gợi ý nguyên nhân từ xoang, nhưng vẫn cần thăm khám để xác định và loại trừ bệnh mắt.",
+      "occurrences": 1,
+      "reason": "Không tự chẩn đoán dứt khoát từ ca minh họa.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 568,
+      "old_text": "đều lành tính và tự đỡ trong một đến hai tuần",
+      "new_text": "có thể lành tính, nhưng không thể kết luận chỉ từ việc thị lực còn bình thường",
+      "occurrences": 1,
+      "reason": "Bỏ trấn an chung trước khi xác định nguyên nhân.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 568,
+      "old_text": "đỏ kéo dài quá mười ngày",
+      "new_text": "đỏ không giảm sau vài ngày",
+      "occurrences": 1,
+      "reason": "Không giữ mốc 10 ngày cứng cho mắt đỏ.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 570,
+      "old_text": "Mắt mờ dần ở người trưởng thành thường do lão thị",
+      "new_text": "Nếu chủ yếu mờ nhìn gần sau tuổi 40 trong khi nhìn xa còn rõ, lão thị là một khả năng thường gặp",
+      "occurrences": 1,
+      "reason": "Ràng buộc biểu hiện lão thị với nhìn gần.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 571,
+      "old_text": "Cần đi khám trong tuần nếu mới xuất hiện",
+      "new_text": "Cần khám mắt sớm ngay khi nhìn méo mới xuất hiện",
+      "occurrences": 1,
+      "reason": "NEI khuyên khám ngay khi đường thẳng trông cong.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 571,
+      "old_text": "AMD dạng khô chưa có thuốc chữa dứt điểm, nhưng bổ sung vitamin và khoáng chất chuyên dụng có thể giúp làm chậm tiến triển.",
+      "new_text": "AMD dạng khô chưa có thuốc chữa dứt điểm; bác sĩ có thể cân nhắc công thức AREDS2 ở giai đoạn phù hợp, không dùng như biện pháp chung cho mọi người mắc AMD.",
+      "occurrences": 1,
+      "reason": "Chỉ định AREDS2 phụ thuộc giai đoạn.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 571,
+      "old_text": "Nếu do tiểu đường thì kiểm soát đường huyết tốt là bước quan trọng nhất để cải thiện, và người bệnh có thể cần tiêm thuốc nội nhãn nếu phù không tự thuyên giảm.",
+      "new_text": "Nếu liên quan đái tháo đường, kiểm soát đường huyết là một phần quan trọng, nhưng bác sĩ võng mạc cần đánh giá sớm để quyết định theo dõi hay điều trị phù hoàng điểm, kể cả tiêm thuốc nội nhãn khi phù hợp.",
+      "occurrences": 1,
+      "reason": "Không gợi ý tự chờ phù hoàng điểm giảm nhờ ổn đường huyết.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 575,
+      "old_text": "Khi mờ đều, phần lớn là khúc xạ hoặc lão thị nên dễ xử lý.",
+      "new_text": "Mờ ở cả hai mắt cũng có thể do nhiều nguyên nhân; mức độ khẩn phụ thuộc tốc độ xuất hiện và triệu chứng đi kèm.",
+      "occurrences": 1,
+      "reason": "Bỏ trấn an mờ hai mắt nói chung.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 591,
+      "old_text": "rửa mắt bằng nước sạch liên tục ít nhất 15 phút, sau đó đến cơ sở y tế ngay.",
+      "new_text": "xả mắt bằng nước sạch ngay và liên tục ít nhất 20 phút; nếu là hóa chất mạnh, tiếp tục rửa khi chờ trợ giúp và đến cấp cứu.",
+      "occurrences": 1,
+      "reason": "Đồng bộ với hướng dẫn cấp cứu hóa chất.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 625,
+      "old_text": "rửa mắt liên tục bằng nước sạch hoặc nước muối sinh lý ít nhất 15 phút rồi đi ngay.",
+      "new_text": "xả mắt ngay bằng nhiều nước sạch liên tục ít nhất 20 phút, tiếp tục rửa khi chờ trợ giúp nếu là chất tẩy mạnh và đến cấp cứu ngay.",
+      "occurrences": 1,
+      "reason": "Đồng bộ với hướng dẫn cấp cứu hóa chất.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 631,
+      "old_text": "Lão thị <strong>không chữa khỏi được bằng thuốc nhỏ mắt</strong>, và thuốc không rõ thành phần có thể gây dị ứng bề mặt hoặc kích ứng kéo dài.",
+      "new_text": "Thuốc nhỏ không đảo ngược được lão thị; một số thuốc được dùng để cải thiện nhìn gần tạm thời ở người phù hợp nhưng cần bác sĩ tư vấn, còn thuốc không rõ thành phần có thể gây kích ứng hoặc tác dụng phụ.",
+      "occurrences": 1,
+      "reason": "Giữ phân biệt chữa khỏi và điều trị triệu chứng, chưa khẳng định thuốc có sẵn tại VN.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 654,
+      "old_text": "Dù glôcôm góc mở âm thầm, vẫn có thể xuất hiện cơn góc đóng cấp cần cấp cứu.",
+      "new_text": "Cơn góc đóng cấp là một bệnh cảnh khác cần cấp cứu; dù đã mắc glôcôm góc mở, người bệnh vẫn phải được khám ngay khi đau mắt dữ dội, đỏ mắt, mờ mắt hoặc buồn nôn.",
+      "occurrences": 1,
+      "reason": "Bỏ liên hệ nhân quả/rủi ro thường quy giữa hai cơ chế.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 661,
+      "old_text": "kiểm soát tuyến giáp tốt sẽ giúp giảm bớt tiến triển ở mắt, và ngược lại.",
+      "new_text": "giữ chức năng tuyến giáp ổn định giúp tránh một yếu tố làm bệnh mắt nặng thêm, nhưng bệnh mắt vẫn cần được đánh giá và điều trị riêng.",
+      "occurrences": 1,
+      "reason": "Không hứa kiểm soát hormon tự xử lý bệnh mắt.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 662,
+      "old_text": "Bạn có <strong>đái tháo đường trước khi mang thai hoặc đái tháo đường thai kỳ</strong>, cần được <a href=\"https://mathanoibacninh.com/kien-thuc/soi-day-mat-la-gi/\">soi đáy mắt</a> để kiểm tra võng mạc.",
+      "new_text": "Nếu đã mắc đái tháo đường type 1 hoặc type 2 trước thai kỳ, cần được khám mắt theo chỉ định; với đái tháo đường thai kỳ mới xuất hiện, bác sĩ sản/nội tiết sẽ đánh giá nhu cầu khám mắt theo tiền sử và triệu chứng.",
+      "occurrences": 1,
+      "reason": "Phân biệt bệnh có trước và GDM mới.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 662,
+      "old_text": "<strong>Đi khám mắt nếu bạn có đái tháo đường,</strong> kể cả tiểu đường thai kỳ. Đường huyết cao có thể làm <a href=\"https://mathanoibacninh.com/kien-thuc/bien-chung-mat-o-nguoi-tieu-duong/\">biến chứng mắt ở người tiểu đường</a> nặng lên nhanh hơn trong thai kỳ, và việc theo dõi định kỳ giúp phát hiện sớm.",
+      "new_text": "Nếu đã có đái tháo đường từ trước khi mang thai, hãy trao đổi với bác sĩ về khám mắt sớm và theo dõi phù hợp. Nếu chỉ mới mắc đái tháo đường thai kỳ, lịch khám mắt tùy tiền sử và triệu chứng; mọi thay đổi thị lực mới xuất hiện cần được đánh giá, đồng thời loại trừ bệnh lý sản khoa.",
+      "occurrences": 1,
+      "reason": "Tránh khuyến nghị tầm soát võng mạc thường quy cho GDM mới theo ADA 2026.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 662,
+      "old_text": "Với thai phụ đái tháo đường, bác sĩ <strong>nhỏ thuốc giãn đồng tử rồi soi đáy mắt</strong> để nhìn võng mạc — lớp thần kinh cảm nhận ánh sáng ở đáy mắt.",
+      "new_text": "Với thai phụ đã mắc đái tháo đường type 1 hoặc type 2 trước thai kỳ, bác sĩ có thể chỉ định soi đáy mắt để đánh giá võng mạc và quyết định lịch theo dõi; với đái tháo đường thai kỳ mới xuất hiện, nhu cầu khám mắt tùy tiền sử và triệu chứng.",
+      "occurrences": 1,
+      "reason": "Tránh ngụ ý soi đáy mắt thường quy cho mọi trường hợp đái tháo đường thai kỳ mới xuất hiện.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 664,
+      "old_text": "hãy đi khám ngay trong hôm nay.",
+      "new_text": "hãy đến khoa cấp cứu ngay.",
+      "occurrences": 1,
+      "reason": "Tăng huyết áp rất cao kèm thay đổi thị lực/đau đầu dữ dội là cấp cứu.",
+      "doctor_review": true
+    },
+    {
+      "post_id": 664,
+      "old_text": "Võng mạc chịu tổn thương ở vùng ngoại vi trước, nơi không chịu trách nhiệm nhìn chi tiết, nên bạn vẫn thấy rõ và không hề hay biết.",
+      "new_text": "Tổn thương võng mạc do tăng huyết áp giai đoạn đầu có thể không gây triệu chứng, nên người bệnh vẫn có thể thấy mắt nhìn rõ.",
+      "occurrences": 1,
+      "reason": "Không có cơ sở cho cơ chế luôn bắt đầu từ ngoại vi.",
+      "doctor_review": true
+    }
+  ],
+  "notes": [
+    "Chỉ là đề xuất biên tập; chưa áp dụng production.",
+    "Cần bác sĩ nhãn khoa duyệt tất cả thay đổi chuyên môn trước khi công bố; mục GDM cần phối hợp bác sĩ sản/nội tiết vì ADA 2026 và trang phổ thông NEI diễn giải không đồng nhất.",
+    "Thuốc nhỏ lão thị: FDA đã phê duyệt ở Mỹ, chưa xác minh lưu hành tại Việt Nam."
+  ]
+}

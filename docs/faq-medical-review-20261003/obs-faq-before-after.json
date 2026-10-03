@@ -1,0 +1,146 @@
+[
+  {
+    "post_id": 567,
+    "question": "Khi nào đau quanh hốc mắt cần đi khám ngay?",
+    "old_answer": "Bạn nên đi khám ngay nếu đau kèm giảm thị lực, nhìn mờ, nhìn đôi, mắt đỏ, sưng mí, sốt, đau đầu dữ dội, buồn nôn, mắt lồi, hoặc đau tăng khi đảo mắt. Đây là những dấu hiệu cảnh báo có thể liên quan đến nhiễm trùng, viêm hốc mắt hoặc bệnh lý mắt nghiêm trọng hơn, cần được đánh giá sớm.",
+    "new_answer": "Đau quanh mắt dữ dội kèm nhìn mờ, nhìn đôi, sụp mi, đỏ mắt và sợ sáng, nôn, sốt hoặc sưng quanh mắt cần đánh giá cấp cứu ngay. Đau kéo dài nhiều ngày hoặc không giảm rõ sau nghỉ cũng nên được bác sĩ khám sớm, không chờ tự hết.",
+    "reason": "Đổi “đi khám ngay” mơ hồ thành cấp cứu khi có dấu cảnh báo.",
+    "source_url": "https://www.nhs.uk/conditions/vision-loss/",
+    "doctor_review": true
+  },
+  {
+    "post_id": 568,
+    "question": "Khi nào mắt đỏ là dấu hiệu cần đi khám ngay?",
+    "old_answer": "Cần đi khám ngay nếu mắt đỏ kèm đau nhức rõ, nhìn mờ, chói sáng, chảy mủ hoặc ghèn nhiều, có chấn thương, hoặc đỏ chỉ ở một bên và ngày càng nặng. Đây có thể là dấu hiệu của viêm giác mạc, tăng nhãn áp cấp, viêm màng bồ đào hoặc vấn đề khác cần xử trí sớm. Không nên tự nhỏ thuốc khi chưa rõ nguyên nhân.",
+    "new_answer": "Mắt đỏ kèm đau, sợ sáng, nhìn mờ, đỏ rất nhiều hoặc nhiều dịch cần khám mắt sớm. Nếu đang đeo kính áp tròng, hãy tháo kính và liên hệ bác sĩ mắt; không chờ đủ nhiều ngày. Mắt tiếp xúc hóa chất hoặc bị chấn thương cần xử trí khẩn theo loại tổn thương.",
+    "reason": "Thêm ngoại lệ kính áp tròng, hóa chất/chấn thương.",
+    "source_url": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/pink-eye",
+    "doctor_review": true
+  },
+  {
+    "post_id": 571,
+    "question": "Khi nào cần đi khám ngay nếu thấy nhìn méo?",
+    "old_answer": "Nên đi khám sớm nếu triệu chứng xuất hiện đột ngột, nặng lên nhanh, chỉ xảy ra ở một mắt, hoặc kèm mờ trung tâm, chấm đen giữa nhìn, chớp sáng hay giảm thị lực rõ. Những dấu hiệu này có thể liên quan bệnh ở hoàng điểm và cần được đánh giá sớm để tránh chậm trễ điều trị.",
+    "new_answer": "Đường thẳng đột nhiên trở nên cong, nhìn méo hoặc vùng trung tâm mờ mới xuất hiện cần được bác sĩ mắt đánh giá sớm ngay khi nhận ra. Nếu mất thị lực hoặc có vùng tối đột ngột, hãy đến cấp cứu.",
+    "reason": "NEI khuyên khám ngay khi đường thẳng trông gợn.",
+    "source_url": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/age-related-macular-degeneration",
+    "doctor_review": true
+  },
+  {
+    "post_id": 572,
+    "question": "Mắt mờ kèm thấy màn che hoặc mất mảng tầm nhìn là dấu hiệu của bệnh gì?",
+    "old_answer": "Đây là dấu hiệu cảnh báo quan trọng, thường gặp trong các vấn đề về võng mạc như rách võng mạc hoặc bong võng mạc. Người bệnh có thể thấy như có rèm, màn đen, vùng tối hoặc mất một phần tầm nhìn. Nếu triệu chứng xuất hiện đột ngột, cần đi khám mắt sớm để được bác sĩ đánh giá vì đây có thể là tình trạng cần xử trí khẩn.",
+    "new_answer": "Màn che hoặc mất một mảng tầm nhìn mới xuất hiện là dấu hiệu có thể do rách/bong võng mạc hoặc vấn đề mạch máu. Hãy đến cơ sở có cấp cứu mắt ngay, kể cả khi không đau; nếu vùng nhìn đã hồi phục cũng cần đánh giá khẩn vì có thể là cơn thiếu máu thoáng qua.",
+    "reason": "Không nói “khám sớm” chung cho màn che/mất vùng nhìn.",
+    "source_url": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment",
+    "doctor_review": true
+  },
+  {
+    "post_id": 572,
+    "question": "Khi nào tình trạng thấy màn che ở mắt cần đi cấp cứu ngay?",
+    "old_answer": "Bạn nên đi khám ngay trong ngày, đặc biệt nếu màn che xuất hiện đột ngột, lan nhanh, kèm chớp sáng, ruồi bay nhiều lên, hoặc thị lực giảm rõ. Nếu chỉ có một mắt bị ảnh hưởng, nguy cơ bệnh võng mạc càng cần được loại trừ sớm. Không nên tự theo dõi ở nhà quá lâu vì chậm trễ có thể làm tổn thương lan rộng.",
+    "new_answer": "Màn che mới xuất hiện, lan rộng, kèm ruồi bay/chớp sáng hoặc giảm thị lực cần đến cấp cứu mắt ngay, không đợi hết ngày. Nếu mất vùng nhìn thoáng qua rồi hồi phục cũng cần đánh giá cấp cứu để loại trừ thiếu máu thoáng qua.",
+    "reason": "“Ngay trong ngày” có thể hiểu là chờ đến tối.",
+    "source_url": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment",
+    "doctor_review": true
+  },
+  {
+    "post_id": 572,
+    "question": "Ruồi bay, chớp sáng kèm màn che có nguy hiểm không?",
+    "old_answer": "Có. Tổ hợp triệu chứng ruồi bay tăng đột ngột, chớp sáng và màn che trước mắt thường gợi ý võng mạc đang bị kéo căng, rách hoặc bong. Không phải mọi trường hợp đều là bong võng mạc, nhưng đây là nhóm dấu hiệu không nên bỏ qua. Cần khám chuyên khoa mắt sớm để xác định nguyên nhân và hướng xử trí phù hợp.",
+    "new_answer": "Có. Ruồi bay mới tăng đột ngột, chớp sáng hoặc màn che cần khám mắt có giãn đồng tử ngay để loại trừ rách/bong võng mạc. Không tự theo dõi tại nhà, vì xử trí sớm giúp bảo vệ thị lực.",
+    "reason": "Thay “khám chuyên khoa sớm” bằng hành động khẩn.",
+    "source_url": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment",
+    "doctor_review": true
+  },
+  {
+    "post_id": 572,
+    "question": "Nên làm gì ngay khi nghi ngờ võng mạc bị bong hoặc rách?",
+    "old_answer": "Hãy ngừng tự theo dõi và đi khám mắt sớm, tốt nhất trong ngày nếu có màn che, mất mảng tầm nhìn hoặc giảm thị lực đột ngột. Tránh dụi mắt, tránh tự lái xe nếu nhìn kém, và mang theo thông tin về thời điểm bắt đầu triệu chứng. Việc điều trị cụ thể sẽ do bác sĩ quyết định sau thăm khám; có thể liên hệ hotline +84868899396 để được hướng dẫn tiếp nhận và xác nhận thông tin phù hợp.",
+    "new_answer": "Hãy đến cơ sở có cấp cứu mắt ngay khi có màn che, mất vùng nhìn, ruồi bay tăng đột ngột hoặc chớp sáng mới; không chờ vài giờ hay tự lái xe nếu thị lực kém. Ghi lại thời điểm khởi phát để báo bác sĩ. Việc điều trị do bác sĩ quyết định sau khám.",
+    "reason": "Thay “tốt nhất trong ngày” bằng khám ngay.",
+    "source_url": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment",
+    "doctor_review": true
+  },
+  {
+    "post_id": 591,
+    "question": "Nếu hóa chất bắn vào mắt thì cần làm gì ngay?",
+    "old_answer": "Cần rửa mắt ngay lập tức bằng thật nhiều nước sạch, giữ mí mắt mở và rửa liên tục ít nhất 15 phút. Không tự nhỏ thuốc linh tinh vì có thể làm nặng thêm tổn thương. Sau sơ cứu, nên đến cơ sở nhãn khoa sớm để đánh giá mức độ bỏng hóa chất, vì một số trường hợp có thể gây tổn thương giác mạc nặng.",
+    "new_answer": "Xả nước sạch ngay và liên tục, giữ mi mở, rửa ít nhất 20 phút; với hóa chất mạnh tiếp tục rửa khi chờ trợ giúp. Không dùng thuốc hay hóa chất trung hòa. Đến cấp cứu mắt ngay dù đã bớt rát; mang theo tên/vỏ sản phẩm nếu có.",
+    "reason": "Sửa mốc 15 phút và “khám sớm” không đủ với bỏng hóa chất.",
+    "source_url": "https://www.nhs.uk/conditions/eye-injuries/",
+    "doctor_review": true
+  },
+  {
+    "post_id": 591,
+    "question": "Khi nào cần đi khám mắt nếu nghi do bụi hoặc hóa chất nghề nghiệp?",
+    "old_answer": "Nên đi khám nếu mắt đỏ hoặc cộm không giảm sau khi rửa, đau rát kéo dài, nhìn mờ, chảy nước mắt nhiều, sợ ánh sáng hoặc triệu chứng tái diễn sau mỗi ngày làm việc. Với hóa chất bắn vào mắt, nên đi khám sớm ngay cả khi triệu chứng ban đầu chưa nhiều. Phương pháp xử trí cụ thể cần do bác sĩ xác định sau thăm khám.",
+    "new_answer": "Mắt đau, sợ sáng, nhìn mờ, đỏ kéo dài hoặc nghi có dị vật cần bác sĩ đánh giá. Nếu hóa chất bắn trực tiếp vào mắt, xả nước ngay và đến cấp cứu; nếu mạt kim loại bắn tốc độ cao khi mài/khoan, không ấn hay tự lấy và đến cấp cứu mắt ngay.",
+    "reason": "Hai tình huống hóa chất và vật bắn tốc độ cao cần cấp cứu rõ ràng.",
+    "source_url": "https://www.nhs.uk/conditions/eye-injuries/",
+    "doctor_review": true
+  },
+  {
+    "post_id": 621,
+    "question": "Khi nào mắt đỏ kèm ghèn vàng cần đi khám ngay?",
+    "old_answer": "Nên đi khám sớm nếu mắt đỏ kèm ghèn vàng kéo dài hơn vài ngày, đau nhiều, nhìn mờ, sợ ánh sáng, sưng mí rõ, sốt, hoặc chỉ xảy ra ở một mắt rồi lan nhanh. Trẻ nhỏ, người đeo kính áp tròng, người có bệnh mắt nền hoặc triệu chứng tái phát nhiều lần cũng nên được bác sĩ mắt thăm khám để tránh bỏ sót nguyên nhân nặng hơn.",
+    "new_answer": "Mắt đỏ ghèn kèm đau, sợ sáng, nhìn mờ, đỏ nhiều hoặc không cải thiện sau vài ngày cần khám. Người đeo kính áp tròng phải tháo kính và liên hệ bác sĩ mắt sớm. Trẻ sơ sinh có mắt đỏ hoặc dịch tiết bất thường cần bác sĩ đánh giá ngay trong ngày.",
+    "reason": "Bổ sung nhóm nguy cơ không chờ tự khỏi.",
+    "source_url": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/pink-eye",
+    "doctor_review": true
+  },
+  {
+    "post_id": 624,
+    "question": "Khi nào mắt đỏ sau khi bơi cần đi khám?",
+    "old_answer": "Nên đi khám sớm nếu mắt đỏ không giảm sau 24 giờ, đau nhiều, cộm như có dị vật, chảy ghèn vàng xanh, sưng mi, sợ ánh sáng hoặc nhìn mờ. Đây có thể không chỉ là kích ứng đơn thuần mà còn là viêm kết mạc, viêm giác mạc hoặc tổn thương khác cần bác sĩ kiểm tra. Khám sớm giúp xử lý đúng và an toàn hơn.",
+    "new_answer": "Nếu đeo kính áp tròng khi bơi rồi mắt đỏ/cộm, hãy tháo kính và đi khám mắt sớm để loại trừ viêm giác mạc. Đau, sợ sáng, nhìn mờ, vệt trắng trên giác mạc hoặc đỏ tăng cần đánh giá khẩn. Kích ứng nhẹ không kèm các dấu này mà vẫn không giảm sau một ngày cũng nên khám.",
+    "reason": "Ngoại lệ kính áp tròng sau bơi phải rõ.",
+    "source_url": "https://www.nei.nih.gov/eye-health-information/healthy-vision/contact-lenses",
+    "doctor_review": true
+  },
+  {
+    "post_id": 628,
+    "question": "Khi nào sụp mi cần đi khám ngay?",
+    "old_answer": "Bạn nên đi khám sớm nếu sụp mi xuất hiện đột ngột, chỉ một bên, nặng dần theo ngày, kéo dài quá 1–2 tuần, hoặc ảnh hưởng đến việc nhìn, lái xe, làm việc. Cần khám ngay hơn nữa nếu có nhìn đôi, đau đầu dữ dội, yếu cơ mặt, nói khó, nuốt khó, khó thở. Đây có thể là dấu hiệu của bệnh lý cần đánh giá chuyên khoa.",
+    "new_answer": "Sụp mi đột ngột kèm nhìn đôi, đau đầu dữ dội, đồng tử không đều hoặc yếu tay chân cần cấp cứu. Nếu sụp mi dao động kèm khó nuốt, nói yếu hoặc khó thở tăng dần, gọi cấp cứu ngay vì có thể là cơn nhược cơ.",
+    "reason": "Thêm dấu hiệu nhược cơ toàn thân cấp.",
+    "source_url": "https://www.nhs.uk/conditions/myasthenia-gravis/symptoms/",
+    "doctor_review": true
+  },
+  {
+    "post_id": 653,
+    "question": "Khi nào bong võng mạc cần đi cấp cứu ngay?",
+    "old_answer": "Cần đi cấp cứu ngay nếu có màn đen hoặc bóng như rèm che lan dần vào tầm nhìn, giảm thị lực đột ngột, mất một phần thị trường, hoặc chớp sáng kèm nhiều ruồi bay mới xuất hiện. Đây là tình huống nhãn khoa khẩn cấp vì chậm trễ có thể làm tăng nguy cơ mất thị lực.",
+    "new_answer": "Màn che, vùng tối mới, mất thị lực hoặc nhiều ruồi bay/chớp sáng mới xuất hiện cần khám mắt/cấp cứu ngay để loại trừ rách hay bong võng mạc. Không chờ xem có đau hay không.",
+    "reason": "Thay “ngay trong ngày” bằng cấp cứu ngay.",
+    "source_url": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment",
+    "doctor_review": true
+  },
+  {
+    "post_id": 653,
+    "question": "Ruồi bay và chớp sáng có phải luôn là bong võng mạc không?",
+    "old_answer": "Không phải lúc nào cũng là bong võng mạc, vì ruồi bay hoặc chớp sáng có thể gặp trong nhiều tình trạng khác của mắt. Tuy vậy, nếu triệu chứng xuất hiện đột ngột, tăng nhanh, kèm bóng tối hoặc giảm thị lực, cần khám chuyên khoa mắt sớm để loại trừ rách hoặc bong võng mạc.",
+    "new_answer": "Không phải mọi ruồi bay hay chớp sáng đều do bong võng mạc, nhưng khi chúng mới xuất hiện đột ngột hoặc tăng nhanh, cần khám mắt có giãn đồng tử ngay để loại trừ rách/bong. Màn che hoặc vùng tối mới là cấp cứu.",
+    "reason": "Không trấn an hiện tượng mới trước khi soi đáy mắt.",
+    "source_url": "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment",
+    "doctor_review": true
+  },
+  {
+    "post_id": 662,
+    "question": "Mang thai có cần khám mắt định kỳ không?",
+    "old_answer": "Không phải ai cũng cần khám mắt theo lịch cố định, nhưng nên khám nếu có cận thị nặng, bệnh võng mạc, tăng nhãn áp, tiểu đường, tiền sản giật, hoặc có triệu chứng thị lực bất thường. Với các thay đổi nhẹ, khám mắt giúp phân biệt tình trạng sinh lý tạm thời với dấu hiệu cần theo dõi thêm. Khi cần tư vấn khám và chăm sóc mắt, có thể liên hệ Bệnh viện Mắt Hà Nội Bắc Ninh tại Lô 4, đường Hùng Vương, Phường Bắc Giang, Thành phố Bắc Ninh hoặc hotline/Zalo +84868899396; thông tin trên website chỉ mang tính tham khảo và phương pháp điều trị do bác sĩ xác định sau thăm khám.",
+    "new_answer": "Không phải thai phụ nào cũng cần lịch khám mắt cố định. Người đã mắc đái tháo đường type 1 hoặc type 2 trước thai kỳ cần khám mắt trước/đầu thai kỳ và theo dõi theo bác sĩ. Với đái tháo đường thai kỳ mới xuất hiện, không tự mặc định cần tầm soát võng mạc; bác sĩ sản/nội tiết và bác sĩ mắt quyết định theo tiền sử, triệu chứng. Mờ mắt mới xuất hiện, nhất là kèm đau đầu hoặc phù, cần đánh giá ngay.",
+    "reason": "Phân biệt GDM mới và tiểu đường có trước, cần bác sĩ sản/nội tiết duyệt.",
+    "source_url": "https://diabetesjournals.org/care/article/49/Supplement_1/S261/163919/12-Retinopathy-Neuropathy-and-Foot-Care-Standards",
+    "doctor_review": true
+  },
+  {
+    "post_id": 664,
+    "question": "Khi nào người bị tăng huyết áp cần đi khám mắt?",
+    "old_answer": "Bạn nên khám mắt sớm nếu bị tăng huyết áp kèm nhìn mờ, đau đầu, thấy ruồi bay, chớp sáng hoặc giảm thị lực. Ngay cả khi chưa có triệu chứng, người tăng huyết áp lâu năm vẫn nên kiểm tra mắt định kỳ để phát hiện sớm tổn thương võng mạc. Việc khám sớm giúp bác sĩ đánh giá mức độ ảnh hưởng và tư vấn hướng xử trí phù hợp.",
+    "new_answer": "Nếu huyết áp rất cao kèm thay đổi thị lực, đau đầu dữ dội hoặc triệu chứng thần kinh, gọi cấp cứu ngay để đánh giá tổn thương cơ quan đích. Người tăng huyết áp không triệu chứng cần tuân thủ lịch khám mắt và điều trị huyết áp do bác sĩ hẹn; không đợi tới khi nhìn mờ mới khám.",
+    "reason": "“Khám sớm” chưa đủ với cơn tăng huyết áp có triệu chứng.",
+    "source_url": "https://www.heart.org/en/health-topics/high-blood-pressure/blood-pressure-explained",
+    "doctor_review": true
+  }
+]
