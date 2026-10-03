@@ -78,6 +78,9 @@ function eyecare_khu_vuc_co_noi_dung( $bai ) {
 
 function eyecare_khu_vuc_h1( $bai ) {
 	$nguon = eyecare_khu_vuc_nguon( $bai );
+	if ( $nguon && 'tru-cot' === $nguon['loai'] && 'bac-giang' === $nguon['ma'] ) {
+		return 'Tìm bệnh viện mắt ở Bắc Giang: địa chỉ và hướng dẫn khám';
+	}
 	return $nguon && 'tru-cot' === $nguon['loai'] && 'hub' === $nguon['ma']
 		? 'Khu vực khám mắt' : get_the_title( $bai );
 }
@@ -212,7 +215,9 @@ function eyecare_schema_khu_vuc() {
 		'inLanguage'  => 'vi-VN',
 		'isPartOf'    => array( '@id' => home_url( '/' ) . '#website' ),
 		'publisher'   => array( '@id' => home_url( '/' ) . '#to-chuc' ),
-		'about'       => array( '@type' => 'Thing', 'name' => 'Thông tin khám mắt tại các địa bàn thành phố Bắc Ninh' ),
+		'about'       => 'tru-cot' === $nguon['loai'] && 'bac-giang' === $nguon['ma']
+			? array( '@id' => home_url( '/' ) . '#to-chuc' )
+			: array( '@type' => 'Thing', 'name' => 'Thông tin khám mắt tại các địa bàn thành phố Bắc Ninh' ),
 	);
 }
 
@@ -227,7 +232,7 @@ function eyecare_khu_vuc_title( $tieu_de ) {
 	if ( 'dia-ban' === $nguon['loai'] ) {
 		return 'Khám mắt tại ' . $nguon['dia_ban']['loai'] . ' ' . $nguon['dia_ban']['ten'] . ' | Bệnh viện Mắt Hà Nội – Bắc Ninh';
 	}
-	$ten = array( 'hub' => 'Khu vực khám mắt tại 99 xã, phường Bắc Ninh', 'bac-giang' => 'Khám mắt địa bàn Bắc Giang – Hướng dẫn và danh sách xã, phường', 'bac-ninh' => 'Khám mắt Bắc Ninh – Hướng dẫn và danh sách xã, phường' );
+	$ten = array( 'hub' => 'Khu vực khám mắt tại 99 xã, phường Bắc Ninh', 'bac-giang' => 'Bệnh viện mắt ở Bắc Giang: địa chỉ và hướng dẫn khám', 'bac-ninh' => 'Khám mắt Bắc Ninh – Hướng dẫn và danh sách xã, phường' );
 	return $ten[ $nguon['ma'] ] . ' | Bệnh viện Mắt Hà Nội – Bắc Ninh';
 }
 add_filter( 'pre_get_document_title', 'eyecare_khu_vuc_title', 30 );
@@ -245,7 +250,7 @@ function eyecare_khu_vuc_meta() {
 	} else {
 		$mo_ta = array(
 			'hub' => 'Tra cứu 99 xã, phường thành phố Bắc Ninh hiện hành, dấu hiệu cần khám mắt, cách chuẩn bị và bài kiến thức nhãn khoa của Bệnh viện Mắt Hà Nội – Bắc Ninh.',
-			'bac-giang' => 'Hướng dẫn khám mắt cho địa bàn Bắc Giang cũ, nay thuộc thành phố Bắc Ninh: 57 xã, phường, các triệu chứng cần chú ý và thông tin chuẩn bị.',
+			'bac-giang' => 'Tìm bệnh viện mắt ở Bắc Giang? Bệnh viện Mắt Hà Nội – Bắc Ninh công bố địa chỉ tại Lô 4, đường Hùng Vương, phường Bắc Giang. Xem bản đồ và hướng dẫn khám.',
 			'bac-ninh' => 'Hướng dẫn khám mắt tại địa bàn Bắc Ninh cũ: 42 xã, phường hiện hành, triệu chứng, chuẩn bị và bài đọc về nhãn khoa.',
 		)[ $nguon['ma'] ];
 	}

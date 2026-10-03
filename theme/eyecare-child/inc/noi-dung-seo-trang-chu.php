@@ -36,7 +36,7 @@ function eyecare_noi_dung_seo_trang_chu_in( $tt ) {
 						đó vào một hướng dẫn thực tế, dùng cả thuật ngữ nhãn khoa lẫn cách gọi quen thuộc của người dân.
 					</p>
 					<p class="eyecare-seo-article__updated">
-						Cập nhật ngày <time datetime="2026-08-10">10/08/2026</time> · Nội dung tham khảo, không thay thế chẩn đoán trực tiếp.
+						Thông tin địa chỉ và liên kết cập nhật <time datetime="2026-10-03">03/10/2026</time> · Nội dung tham khảo, không thay thế chẩn đoán trực tiếp.
 					</p>
 				</header>
 
@@ -78,9 +78,10 @@ function eyecare_noi_dung_seo_trang_chu_in( $tt ) {
 						<p>
 							Địa chỉ của Bệnh viện Mắt Hà Nội – Bắc Ninh được ghi theo đơn vị hành chính hiện hành là
 							<strong><?php echo esc_html( eyecare_dia_chi_day_du() ); ?></strong>. Dòng địa chỉ này chứa cả tên
-							Bắc Giang và Bắc Ninh: “Phường Bắc Giang” là địa danh cụ thể, còn “tỉnh Bắc Ninh” là đơn vị cấp
-							tỉnh hiện nay. Người dân vẫn có thể dùng cụm “bệnh viện mắt Bắc Giang” để tìm vị trí; khi điền giấy
-							tờ, đặt xe hoặc đối chiếu hồ sơ, nên dùng nguyên văn địa chỉ mới để giảm nhầm lẫn.
+							Bắc Giang và Bắc Ninh: “Phường Bắc Giang” là địa danh cụ thể, còn “thành phố Bắc Ninh” là đơn vị
+							hành chính cấp tỉnh hiện nay. Người dân vẫn có thể dùng cụm “bệnh viện mắt Bắc Giang” để tìm vị trí;
+							khi điền giấy tờ, đặt xe hoặc đối chiếu hồ sơ, nên dùng nguyên văn địa chỉ mới để giảm nhầm lẫn.
+							Xem <a href="<?php echo esc_url( home_url( '/khu-vuc/kham-mat-bac-giang/' ) ); ?>">địa chỉ và hướng dẫn khám mắt cho địa bàn Bắc Giang</a>.
 						</p>
 						<p>
 							Khoảng cách có ý nghĩa vì khám mắt không phải lúc nào cũng kết thúc sau một lần. Trẻ bị cận thị
