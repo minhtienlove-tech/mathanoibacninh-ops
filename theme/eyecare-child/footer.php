@@ -16,7 +16,7 @@ $eyecare_tt                = eyecare_du_lieu_thuc_the();
 $eyecare_dia_chi           = eyecare_dia_chi_day_du();
 $eyecare_maps_embed        = 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1105.3745839551725!2d106.20423332026398!3d21.270592741388416!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313509eacd610853%3A0x354f69b583ef6a07!2zQuG7h25oIFZp4buHViBN4bqvdCBIw6AgTuG7mWkgLSBC4bqvYyBOaW5o!5e0!3m2!1svi!2s!4v1786318023452!5m2!1svi!2s';
 $eyecare_maps_query        = rawurlencode( $eyecare_tt['ten'] . ' ' . $eyecare_dia_chi );
-$eyecare_maps_search       = 'https://www.google.com/maps/search/?api=1&query=' . $eyecare_maps_query;
+$eyecare_maps_search       = $eyecare_tt['map_url'];
 $eyecare_maps_directions   = 'https://www.google.com/maps/dir/?api=1&destination=' . $eyecare_maps_query;
 $eyecare_privacy_url       = function_exists( 'get_privacy_policy_url' ) ? get_privacy_policy_url() : '';
 $eyecare_la_trang_khu_vuc  = is_page() && function_exists( 'eyecare_khu_vuc_nguon' ) && eyecare_khu_vuc_nguon( get_queried_object() );

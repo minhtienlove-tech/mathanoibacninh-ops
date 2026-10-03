@@ -77,6 +77,8 @@ function eyecare_du_lieu_thuc_the() {
 		'same_as'        => array(
 			'https://www.facebook.com/benhvienmathanoibacninh',
 		),
+		// Hồ sơ Maps công khai khớp website, số tổng đài và địa điểm nhúng.
+		'map_url'        => 'https://www.google.com/maps/place/B%E1%BB%87nh+Vi%E1%BB%87n+M%E1%BA%AFt+H%C3%A0+N%E1%BB%99i+-+B%E1%BA%AFc+Ninh/data=!4m2!3m1!1s0x313509eacd610853:0x354f69b583ef6a07',
 
 		// URL nhúng Google Maps do người quản trị cập nhật trong trang
 		// “Thông tin liên hệ”. Trường này không được đưa vào schema.
@@ -158,6 +160,7 @@ function eyecare_schema_to_chuc() {
 		'name'     => $d['ten'],
 		'legalName'=> $d['phap_nhan'],
 		'url'      => $goc,
+		'hasMap'   => $d['map_url'],
 		'telephone'=> $d['dien_thoai'],
 
 		// Chuyên khoa mắt — thuật ngữ chuẩn của schema.org
