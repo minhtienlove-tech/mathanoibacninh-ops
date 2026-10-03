@@ -61,23 +61,34 @@ function eyecare_post_meta_description_fallback() {
 		return;
 	}
 
+	$from_excerpt = false;
+	$from_title = false;
 	$description = trim( (string) get_post_meta( $id, '_bvmat_seo_description', true ) );
 	if ( '' === $description ) {
 		$description = trim( (string) get_post_field( 'post_excerpt', $id ) );
+		$from_excerpt = '' !== $description;
 	}
 	if ( '' === $description ) {
 		// Unreviewed body copy can contain medical claims that should not be
 		// promoted into search snippets automatically. The title is the safe,
 		// post-specific fallback until an editor writes an excerpt.
+		$from_title = true;
+		$title = trim( preg_replace( '/[.!?…]+$/u', '', get_the_title( $id ) ) );
 		$description = sprintf(
-			'Tìm hiểu %s. Bài viết của Bệnh viện Mắt Hà Nội – Bắc Ninh giúp bạn nhận biết khi nào cần khám mắt và chuẩn bị câu hỏi để trao đổi với bác sĩ.',
-			get_the_title( $id )
+			'Bài viết về %s. Xem dấu hiệu cần chú ý và thời điểm nên khám tại Bệnh viện Mắt Hà Nội – Bắc Ninh.',
+			$title
 		);
 	}
 
 	$description = html_entity_decode( wp_strip_all_tags( strip_shortcodes( $description ) ), ENT_QUOTES | ENT_HTML5, 'UTF-8' );
 	$description = trim( preg_replace( '/\s+/u', ' ', $description ) );
-	$description = wp_trim_words( $description, 38, '…' );
+	if ( ! $from_title ) {
+		$description = wp_trim_words( $description, 38, '…' );
+	}
+	if ( $from_excerpt && mb_strlen( $description, 'UTF-8' ) < 75 ) {
+		$description = preg_replace( '/[\s.!?…]+$/u', '', $description );
+		$description .= '. Bệnh viện Mắt Hà Nội – Bắc Ninh giải thích khi nào nên khám và cách chuẩn bị.';
+	}
 	if ( '' !== $description ) {
 		echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
 	}
