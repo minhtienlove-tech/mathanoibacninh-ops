@@ -820,6 +820,40 @@ function eyecare_schema_faq() {
 }
 
 /**
+ * Tránh in hai khối FAQ khi bài viết đã có [faq] hợp lệ của child theme.
+ * OBS FAQ Discovery nối thêm một khối và FAQPage riêng sau nội dung; dữ liệu
+ * _obs_faq_items vẫn được giữ để biên tập hoặc dùng ở bài không có shortcode.
+ */
+function eyecare_bo_faq_obs_khi_da_co_faq() {
+	if ( is_admin() || ! is_singular( 'post' ) || ! class_exists( 'OBS_Loader' ) ) {
+		return;
+	}
+
+	$bai = get_post( get_queried_object_id() );
+	if ( ! $bai || ! has_shortcode( $bai->post_content, 'faq' ) ||
+		! preg_match_all( '#\[faq\](.*?)\[/faq\]#s', $bai->post_content, $khop ) ) {
+		return;
+	}
+
+	$co_faq_hop_le = false;
+	foreach ( $khop[1] as $noi_dung ) {
+		if ( eyecare_tach_faq( $noi_dung ) ) {
+			$co_faq_hop_le = true;
+			break;
+		}
+	}
+	if ( ! $co_faq_hop_le ) {
+		return;
+	}
+
+	$module = OBS_Loader::get( 'faq_discovery' );
+	if ( $module ) {
+		remove_filter( 'the_content', array( $module, 'maybe_append_faq' ), 20 );
+	}
+}
+add_action( 'wp', 'eyecare_bo_faq_obs_khi_da_co_faq', 20 );
+
+/**
  * Mã ngắn [doc-them] — khối liên kết nội bộ cuối bài.
  *
  * Cách dùng:
