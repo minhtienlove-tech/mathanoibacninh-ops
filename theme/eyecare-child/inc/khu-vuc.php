@@ -50,12 +50,40 @@ function eyecare_khu_vuc_nguon( $bai ) {
 	return null;
 }
 
+/** Trang khu vực có metadata và schema riêng; tránh OBS xuất thông tin cũ từ trang rỗng trong DB. */
+function eyecare_khu_vuc_go_metadata_obs_trung() {
+	if ( ! is_page() || ! eyecare_khu_vuc_nguon( get_queried_object() ) || ! class_exists( 'OBS_Loader' ) ) {
+		return;
+	}
+	$opengraph = OBS_Loader::get( 'opengraph' );
+	if ( $opengraph ) {
+		remove_action( 'wp_head', array( $opengraph, 'render' ), 5 );
+	}
+	$schema = OBS_Loader::get( 'schema' );
+	if ( $schema ) {
+		remove_action( 'wp_head', array( $schema, 'render' ), 10 );
+	}
+	$breadcrumb = OBS_Loader::get( 'breadcrumb' );
+	if ( $breadcrumb ) {
+		remove_action( 'wp_head', array( $breadcrumb, 'render_schema' ), 15 );
+	}
+}
+add_action( 'wp', 'eyecare_khu_vuc_go_metadata_obs_trung', 20 );
+
 function eyecare_khu_vuc_tep( $ma ) {
 	$cho_phep = array( 'hub', 'bac-giang', 'bac-ninh' );
 	if ( ! in_array( $ma, $cho_phep, true ) ) {
 		return '';
 	}
 	return get_stylesheet_directory() . '/content/khu-vuc/' . $ma . '.html';
+}
+
+/** Cùng một địa chỉ từ dữ liệu thực thể được dùng cho nội dung và FAQ schema. */
+function eyecare_khu_vuc_van_ban_tru_cot( $ma ) {
+	$van_ban = file_get_contents( eyecare_khu_vuc_tep( $ma ) );
+	return 'bac-giang' === $ma
+		? str_replace( '{{dia_chi_benh_vien}}', esc_html( eyecare_dia_chi_day_du() ), $van_ban )
+		: $van_ban;
 }
 
 function eyecare_khu_vuc_tep_dia_ban( $dia_ban ) {
@@ -96,7 +124,7 @@ function eyecare_khu_vuc_noi_dung( $noi_dung ) {
 	}
 	$nguon = eyecare_khu_vuc_nguon( $bai );
 	if ( 'tru-cot' === $nguon['loai'] ) {
-		$van_ban = file_get_contents( eyecare_khu_vuc_tep( $nguon['ma'] ) );
+		$van_ban = eyecare_khu_vuc_van_ban_tru_cot( $nguon['ma'] );
 		return do_shortcode( $van_ban );
 	}
 	return do_shortcode( file_get_contents( eyecare_khu_vuc_tep_dia_ban( $nguon['dia_ban'] ) ) );
@@ -179,7 +207,9 @@ function eyecare_khu_vuc_gom_faq() {
 	if ( ! is_readable( $tep ) || ! function_exists( 'eyecare_tach_faq' ) ) {
 		return;
 	}
-	$noi_dung = file_get_contents( $tep );
+	$noi_dung = 'tru-cot' === $nguon['loai']
+		? eyecare_khu_vuc_van_ban_tru_cot( $nguon['ma'] )
+		: file_get_contents( $tep );
 	if ( preg_match( '#\[faq\](.*?)\[/faq\]#s', $noi_dung, $khop ) ) {
 		global $eyecare_faq_da_gom;
 		$eyecare_faq_da_gom = eyecare_tach_faq( $khop[1] );
@@ -237,23 +267,52 @@ function eyecare_khu_vuc_title( $tieu_de ) {
 }
 add_filter( 'pre_get_document_title', 'eyecare_khu_vuc_title', 30 );
 
+function eyecare_khu_vuc_mo_ta( $nguon ) {
+	if ( 'dia-ban' === $nguon['loai'] ) {
+		return 'Thông tin khám mắt cho người dân ' . $nguon['dia_ban']['loai'] . ' ' . $nguon['dia_ban']['ten'] . ', thành phố Bắc Ninh: tên địa bàn hiện hành, dấu hiệu cần khám, chuẩn bị hồ sơ và địa chỉ bệnh viện.';
+	}
+	if ( 'bac-giang' === $nguon['ma'] ) {
+		$tt = eyecare_du_lieu_thuc_the();
+		return 'Tìm bệnh viện mắt ở Bắc Giang? ' . $tt['ten'] . ' tại ' . eyecare_dia_chi_day_du() . '. Xem bản đồ và hướng dẫn khám.';
+	}
+	return array(
+		'hub'      => 'Tra cứu 99 xã, phường thành phố Bắc Ninh hiện hành, dấu hiệu cần khám mắt, cách chuẩn bị và bài kiến thức nhãn khoa của Bệnh viện Mắt Hà Nội – Bắc Ninh.',
+		'bac-ninh' => 'Hướng dẫn khám mắt tại địa bàn Bắc Ninh cũ: 42 xã, phường hiện hành, triệu chứng, chuẩn bị và bài đọc về nhãn khoa.',
+	)[ $nguon['ma'] ];
+}
+
 function eyecare_khu_vuc_meta() {
 	if ( ! is_page() ) {
 		return;
 	}
-	$nguon = eyecare_khu_vuc_nguon( get_queried_object() );
+	$bai = get_queried_object();
+	$nguon = eyecare_khu_vuc_nguon( $bai );
 	if ( ! $nguon ) {
 		return;
 	}
-	if ( 'dia-ban' === $nguon['loai'] ) {
-		$mo_ta = 'Thông tin khám mắt cho người dân ' . $nguon['dia_ban']['loai'] . ' ' . $nguon['dia_ban']['ten'] . ', thành phố Bắc Ninh: tên địa bàn hiện hành, dấu hiệu cần khám, chuẩn bị hồ sơ và địa chỉ bệnh viện.';
-	} else {
-		$mo_ta = array(
-			'hub' => 'Tra cứu 99 xã, phường thành phố Bắc Ninh hiện hành, dấu hiệu cần khám mắt, cách chuẩn bị và bài kiến thức nhãn khoa của Bệnh viện Mắt Hà Nội – Bắc Ninh.',
-			'bac-giang' => 'Tìm bệnh viện mắt ở Bắc Giang? Bệnh viện Mắt Hà Nội – Bắc Ninh công bố địa chỉ tại Lô 4, đường Hùng Vương, phường Bắc Giang. Xem bản đồ và hướng dẫn khám.',
-			'bac-ninh' => 'Hướng dẫn khám mắt tại địa bàn Bắc Ninh cũ: 42 xã, phường hiện hành, triệu chứng, chuẩn bị và bài đọc về nhãn khoa.',
-		)[ $nguon['ma'] ];
-	}
+	$mo_ta = eyecare_khu_vuc_mo_ta( $nguon );
 	echo '<meta name="description" content="' . esc_attr( $mo_ta ) . '">' . "\n";
+	$tt = eyecare_du_lieu_thuc_the();
+	$hinh = get_site_icon_url( 512 );
+	$og = array(
+		'og:type'        => 'website',
+		'og:site_name'   => $tt['ten'],
+		'og:locale'      => 'vi_VN',
+		'og:title'       => eyecare_khu_vuc_title( '' ),
+		'og:description' => $mo_ta,
+		'og:url'         => get_permalink( $bai ),
+	);
+	if ( $hinh ) {
+		$og['og:image'] = $hinh;
+	}
+	foreach ( $og as $thuoc_tinh => $gia_tri ) {
+		echo '<meta property="' . esc_attr( $thuoc_tinh ) . '" content="' . esc_attr( $gia_tri ) . '">' . "\n";
+	}
+	echo '<meta name="twitter:card" content="summary_large_image">' . "\n";
+	echo '<meta name="twitter:title" content="' . esc_attr( $og['og:title'] ) . '">' . "\n";
+	echo '<meta name="twitter:description" content="' . esc_attr( $mo_ta ) . '">' . "\n";
+	if ( $hinh ) {
+		echo '<meta name="twitter:image" content="' . esc_url( $hinh ) . '">' . "\n";
+	}
 }
 add_action( 'wp_head', 'eyecare_khu_vuc_meta', 4 );
