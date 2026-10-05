@@ -1,6 +1,6 @@
 <?php
 /**
- * Guarded correction of 12 medical article introductions and short answers.
+ * Guarded correction of 12 medical articles' introductions, short answers and body paragraphs.
  *
  * Usage (read-only): MEDICAL_INTRO_MANIFEST=/absolute/path/intro-summary-manifest.json
  *                   wp eval-file /absolute/path/apply-medical-intro-summaries-20261003.php
@@ -32,6 +32,7 @@ if ( ! is_array( $manifest ) || ! isset( $manifest['posts'] ) || ! is_array( $ma
 }
 
 $expected_ids = array( 566, 567, 568, 569, 571, 572, 575, 621, 628, 654, 656, 661 );
+$expected_counts = array( 566 => 1, 567 => 2, 568 => 2, 569 => 3, 571 => 2, 572 => 2, 575 => 2, 621 => 2, 628 => 2, 654 => 3, 656 => 3, 661 => 2 );
 $seen = array();
 $ready = array();
 foreach ( $manifest['posts'] as $entry ) {
@@ -59,8 +60,8 @@ foreach ( $manifest['posts'] as $entry ) {
 		$section = isset( $change['section'] ) ? $change['section'] : '';
 		$old = isset( $change['old'] ) && is_string( $change['old'] ) ? $change['old'] : '';
 		$new = isset( $change['new'] ) && is_string( $change['new'] ) ? $change['new'] : '';
-		if ( ! in_array( $section, array( 'intro', 'short_answer' ), true ) ||
-			isset( $sections[ $section ] ) || '' === $old || '' === $new || $old === $new ||
+		if ( ! in_array( $section, array( 'intro', 'short_answer', 'body' ), true ) ||
+			( 'body' !== $section && isset( $sections[ $section ] ) ) || '' === $old || '' === $new || $old === $new ||
 			1 !== (int) ( isset( $change['count'] ) ? $change['count'] : 0 ) ||
 			1 !== substr_count( $new_content, $old ) ||
 			0 !== strpos( $old, '<p>' ) || '</p>' !== substr( $old, -4 ) ||
@@ -77,6 +78,9 @@ foreach ( $manifest['posts'] as $entry ) {
 	}
 	if ( ! isset( $sections['short_answer'] ) ) {
 		WP_CLI::error( 'Missing short-answer replacement: ' . $id );
+	}
+	if ( count( $entry['replacements'] ) !== $expected_counts[ $id ] ) {
+		WP_CLI::error( 'Replacement count mismatch: ' . $id );
 	}
 	foreach ( array( '[faq]', '[/faq]', '[tac-gia]', '<p>', '</p>' ) as $marker ) {
 		if ( substr_count( $old_content, $marker ) !== substr_count( $new_content, $marker ) ) {

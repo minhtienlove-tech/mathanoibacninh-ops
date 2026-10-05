@@ -42,13 +42,15 @@ Các nhóm cần chú ý khi duyệt:
 
 **Người duyệt sản/nội tiết cho bài 662:** ____________________  **Ngày:** __________
 
-## Đợt tiếp theo: đoạn mở đầu và “Trả lời ngắn” của 12 bài
+## Đợt tiếp theo: đoạn mở đầu, “Trả lời ngắn” và thân bài của 12 bài
 
-**Chưa áp dụng trên website. Cần bác sĩ nhãn khoa duyệt từng thay đổi trước khi xuất bản.** Bản đang công khai vẫn chứa các câu tóm tắt được đánh dấu. Tệp [intro-summary-manifest.json](intro-summary-manifest.json) ghi nguyên văn trước/sau, SHA-256 từng bài và nguồn y khoa; [script WP-CLI](../../scripts/apply-medical-intro-summaries-20261003.php) chỉ chạy kiểm tra trước theo mặc định. Ngày 03/10/2026, dry-run trên hosting đạt tiền kiểm cho 12 bài và 20 đoạn thay thế (8 đoạn mở đầu, 12 đoạn “Trả lời ngắn”); không ghi vào WordPress.
+**Chưa áp dụng trên website. Cần bác sĩ nhãn khoa duyệt từng thay đổi trước khi xuất bản.** Bản đang công khai vẫn chứa các câu tóm tắt được đánh dấu. Tệp [intro-summary-manifest.json](intro-summary-manifest.json) ghi nguyên văn trước/sau, SHA-256 từng bài và nguồn y khoa; [script WP-CLI](../../scripts/apply-medical-intro-summaries-20261003.php) chỉ chạy kiểm tra trước theo mặc định. Ngày 03/10/2026, bản đầu 20 đoạn đã qua dry-run trên hosting; ngày 05/10, bản dự thảo được mở rộng thành 26 đoạn (8 đoạn mở đầu, 12 đoạn “Trả lời ngắn”, 6 đoạn thân bài). Chưa ghi vào WordPress.
 
-[Phiếu bác sĩ duyệt 12 bài và 20 đoạn](intro-summary-physician-review.md) trình bày văn bản trước/sau cạnh nhau, nguồn đối chiếu và chỗ ghi kết luận, họ tên, ngày duyệt cho từng bài. Đây là mẫu trống; chưa có bác sĩ ký duyệt.
+[Phiếu bác sĩ duyệt 12 bài và 26 đoạn](intro-summary-physician-review.md) trình bày văn bản trước/sau cạnh nhau, nguồn đối chiếu và chỗ ghi kết luận, họ tên, ngày duyệt cho từng bài. Đây là mẫu trống; chưa có bác sĩ ký duyệt.
 
-Rà soát tiếp ngày 05/10 phát hiện bốn đoạn **ngoài manifest** ở bài 569, 572, 654 và 656 cần bác sĩ đánh giá trước khi xuất bản gói này. Phiếu duyệt có mục riêng nêu vấn đề và nguồn đối chiếu. Chưa coi việc duyệt 20 đoạn là duyệt toàn bộ thân bài.
+Rà soát tiếp ngày 05/10 phát hiện bốn chủ đề cần xử lý ở bài 569, 572, 654 và 656, tương ứng sáu đoạn thân bài. Các đoạn này đã được thêm vào manifest và phiếu duyệt, kèm nguồn đối chiếu. Chưa coi lời duyệt chung là xác nhận bác sĩ đã đánh giá từng đoạn và toàn bài.
+
+Bản dự thảo 26 đoạn đã qua PHP lint và WP-CLI dry-run trên hosting ngày 05/10: 12/12 bài và 26/26 đoạn khớp, không ghi WordPress. Bản staged ở `/home/jwhxtzru/backups/medical-intro-stage-20261005/`. Chỉ xuất bản khi có tên/ngày bác sĩ đã duyệt nội dung cuối cùng và backup mới ngay trước triển khai.
 
 | Bài | Điểm cần bác sĩ kiểm tra | Nguồn đối chiếu chính | Duyệt |
 |---|---|---|---|

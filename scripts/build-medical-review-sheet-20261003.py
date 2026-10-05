@@ -32,12 +32,12 @@ def main() -> None:
     data = json.loads(MANIFEST.read_text(encoding="utf-8"))
     posts = data["posts"]
     count = sum(len(post["replacements"]) for post in posts)
-    assert len(posts) == 12 and count == 20
+    assert len(posts) == 12 and count == 26
 
     lines = [
-        "# Phiếu bác sĩ duyệt: đoạn mở đầu và ‘Trả lời ngắn’",
+        "# Phiếu bác sĩ duyệt: 12 bài y khoa, 26 đoạn",
         "",
-        "**Trạng thái: dự thảo, chưa áp dụng lên website.** Đây là 12 bài với 20 đoạn đề xuất thay thế. Mục ‘Trước’ là nội dung đang công khai tại thời điểm chụp bản gốc; mục ‘Sau’ là văn bản dự kiến. Bản [manifest](intro-summary-manifest.json) giữ nguyên HTML, mã SHA-256 và điều kiện thay thế chính xác. Không điền tên hoặc ngày duyệt thay bác sĩ.",
+        "**Trạng thái: dự thảo, chưa áp dụng lên website.** Đây là 12 bài với 26 đoạn đề xuất thay thế: 8 đoạn mở đầu, 12 đoạn ‘Trả lời ngắn’ và 6 đoạn thân bài. Mục ‘Trước’ là nội dung đang công khai tại thời điểm chụp bản gốc; mục ‘Sau’ là văn bản dự kiến. Bản [manifest](intro-summary-manifest.json) giữ nguyên HTML, mã SHA-256 và điều kiện thay thế chính xác. Không điền tên hoặc ngày duyệt thay bác sĩ.",
         "",
         "Bác sĩ cần đọc **toàn bài**, FAQ và đối chiếu hướng dẫn chuyên môn đang áp dụng trước khi ký. Nguồn bên dưới là tài liệu đối chiếu của dự thảo, không phải xác nhận chuyên môn của bệnh viện. Nếu cần sửa câu chữ, ghi vào ô nhận xét và yêu cầu cập nhật manifest trước khi xuất bản.",
         "",
@@ -66,7 +66,11 @@ def main() -> None:
             ]
         )
         for index, replacement in enumerate(post["replacements"], 1):
-            section = "Đoạn mở đầu" if replacement["section"] == "intro" else "Trả lời ngắn"
+            section = {
+                "intro": "Đoạn mở đầu",
+                "short_answer": "Trả lời ngắn",
+                "body": "Đoạn thân bài",
+            }[replacement["section"]]
             lines.extend(
                 [
                     f"### {index}. {section}",
@@ -97,9 +101,9 @@ def main() -> None:
         [
             "---",
             "",
-            "## Bốn đoạn thân bài cần bác sĩ xử lý trước khi đăng",
+            "## Bốn chủ đề cần chú ý khi duyệt sáu đoạn thân bài",
             "",
-            "Các đoạn dưới đây **không nằm trong 20 đoạn thay thế của manifest**. Rà soát sau khi lập phiếu phát hiện chúng có thể khiến người đọc hiểu khác với phần ‘Trả lời ngắn’ mới. Phiếu duyệt 20 đoạn không tự động duyệt những câu này.",
+            "Sáu đoạn thân bài ở các bài 569, 572, 654 và 656 đã được thêm vào manifest. Bác sĩ cần kiểm tra cả phần trước–sau và sự nhất quán với toàn bài, vì đây là các câu có thể khiến người đọc hiểu khác với ‘Trả lời ngắn’ mới.",
             "",
             "- **Bài 569 — mờ mắt buổi tối:** câu ‘Mức bình thường có bốn dấu’ có thể bị hiểu là đủ để tự xác nhận mắt bình thường. Bác sĩ cần xác định tiêu chí và sửa cách diễn đạt nếu cần; trang đang công khai không phải công cụ tự chẩn đoán.",
             "- **Bài 572 — màn che/mất vùng nhìn:** đoạn nói hình ảnh tự hết hoàn toàn là một ‘điểm phân biệt’ có thể gây yên tâm sai; triệu chứng thị giác do cơn thiếu máu thoáng qua cũng có thể tự hết và vẫn cần đánh giá khẩn. [NHS về TIA](https://www.nhs.uk/conditions/transient-ischaemic-attack-tia/symptoms/), [American Stroke Association](https://www.stroke.org/en/about-stroke/types-of-stroke/tia-transient-ischemic-attack).",

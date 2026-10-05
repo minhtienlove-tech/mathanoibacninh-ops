@@ -80,6 +80,43 @@ CHANGES = {
     },
 }
 
+# Additional body paragraphs flagged on 2026-10-05. These remain clinician-review
+# drafts; the exact old paragraph is captured from the read-only production snapshot.
+BODY_CHANGES = {
+    569: [
+        (
+            "Mức bình thường có bốn dấu: hai mắt như nhau, mức độ ổn định qua nhiều tháng, đỡ rõ sau khi lau kính, và ban ngày thị lực vẫn tốt. Vượt ra khỏi bốn điều đó thì nên đo lại mắt.",
+            "Mờ hoặc quầng sáng về đêm không thể được coi là bình thường chỉ vì hai mắt giống nhau, đã kéo dài nhiều tháng, đỡ sau khi lau kính hoặc ban ngày vẫn nhìn rõ. Nếu triệu chứng mới xuất hiện, tăng dần, khác biệt rõ giữa hai mắt hoặc ảnh hưởng lái xe ban đêm, hãy khám mắt để tìm nguyên nhân.",
+        ),
+        (
+            "Bốn nhóm dưới đây chiếm phần lớn số ca.",
+            "Bốn nhóm dưới đây là những khả năng cần xem xét; không thể xác định nguyên nhân chỉ từ việc mờ xuất hiện về đêm.",
+        ),
+    ],
+    572: [
+        (
+            "Nhóm hồi phục, nhưng phải biết để không nhầm. Người bệnh thấy vùng lung linh, đường zíc zắc sáng hoặc mảng khuyết di chuyển chậm rồi tự hết <strong>trong dưới một giờ</strong>. Hai điểm phân biệt: hình ảnh có phần lấp lánh hoặc chuyển động, và nó tự hết hoàn toàn.",
+            "Hình ảnh lung linh, đường zíc zắc sáng hoặc mảng khuyết di chuyển chậm rồi tự hết có thể gặp trong migraine có aura. Tuy nhiên, việc triệu chứng tự hết không đủ để loại trừ cơn thiếu máu thoáng qua hoặc bệnh mắt khác. Nếu mất vùng nhìn mới xuất hiện, nhất là đột ngột hoặc ở một mắt, hãy được đánh giá cấp cứu ngay kể cả khi thị lực đã trở lại.",
+        ),
+    ],
+    654: [
+        (
+            "Nhãn áp cao kéo dài đè lên đầu dây thần kinh thị giác — bó dây mang tín hiệu hình ảnh từ mắt lên não. Các sợi thần kinh chết dần, và điều quan trọng là chúng không mọc lại. Tổn thương này <strong>là vĩnh viễn, không hồi phục</strong>: phần thị lực đã mất không lấy lại được. Đây là lý do glôcôm khác hẳn đục thủy tinh thể, nơi phần nhìn mất đi có thể phục hồi sau mổ. Cũng vì thế, mục tiêu của mọi cách điều trị không phải phục hồi mà là hạ nhãn áp xuống mức an toàn để bảo vệ những sợi thần kinh còn sống.",
+            "Glôcôm góc mở gây tổn thương tiến triển ở đầu dây thần kinh thị giác — bó dây mang tín hiệu hình ảnh từ mắt lên não. Nhãn áp cao là yếu tố nguy cơ quan trọng, nhưng bệnh vẫn có thể xảy ra khi nhãn áp đo được nằm trong giới hạn thông thường. Các sợi thần kinh đã mất không hồi phục; phần thị lực tương ứng thường không thể lấy lại. Vì vậy, mục tiêu điều trị là hạ nhãn áp đến mức phù hợp với từng người và theo dõi để hạn chế tổn thương tiếp diễn.",
+        ),
+        (
+            "Thứ nhất, nhãn áp tăng từ từ nên mắt thích nghi dần, thường không đau và không đỏ.",
+            "Thứ nhất, bệnh thường tiến triển âm thầm, không đau và không đỏ, kể cả ở người có nhãn áp đo được trong giới hạn thông thường.",
+        ),
+    ],
+    656: [
+        (
+            "Đa số người bệnh cải thiện thị lực sau vài tuần, tuy nhiên mức độ cải thiện phụ thuộc vào thời gian màng đã kéo võng mạc và tình trạng hoàng điểm trước phẫu thuật. Nếu màng được bóc sớm trước khi hoàng điểm bị tổn thương kéo dài, tiên lượng cải thiện thị lực tốt hơn. Tuy nhiên, một số trường hợp nhìn méo có thể còn lại dù màng đã được bóc hoàn toàn, vì mô hoàng điểm từng bị kéo giãn lâu ngày cần thêm thời gian để ổn định lại hình dạng ban đầu.",
+            "Sau bóc màng, mắt thường cần vài tuần để hồi phục nhưng thị lực có thể tiếp tục cải thiện trong nhiều tháng; mức cải thiện khác nhau và có người không cải thiện rõ. Tiên lượng phụ thuộc vào tình trạng hoàng điểm, thời gian mắc bệnh và các bệnh mắt đi kèm. Một số người vẫn còn nhìn méo dù màng đã được bóc, vì tổn thương ở hoàng điểm có thể không hồi phục hoàn toàn. Bác sĩ phẫu thuật sẽ trao đổi mức cải thiện dự kiến và các nguy cơ cho từng người.",
+        ),
+    ],
+}
+
 
 def fail(message: str) -> None:
     raise SystemExit(message)
@@ -116,6 +153,19 @@ def main() -> None:
         if content.count(old_short) != 1 or old_short == new_short:
             fail(f"Short answer not uniquely replaceable: {id_}")
         replacements.append({"section": "short_answer", "old": old_short, "new": new_short, "count": 1})
+        for old_fragment, new_fragment in BODY_CHANGES.get(id_, []):
+            matches = [
+                paragraph
+                for paragraph in re.findall(r"<p(?:\s[^>]*)?>.*?</p>", content, re.S | re.I)
+                if old_fragment in paragraph
+            ]
+            if len(matches) != 1 or content.count(old_fragment) != 1:
+                fail(f"Body paragraph not uniquely replaceable: {id_}")
+            old_body = matches[0]
+            new_body = old_body.replace(old_fragment, new_fragment, 1)
+            if old_body in (first.group(0), old_short) or old_body == new_body:
+                fail(f"Body paragraph overlaps another replacement: {id_}")
+            replacements.append({"section": "body", "old": old_body, "new": new_body, "count": 1})
         new_content = content
         for replacement in replacements:
             if new_content.count(replacement["old"]) != 1:
@@ -133,7 +183,11 @@ def main() -> None:
             "expected_new_sha256": hashlib.sha256(new_content.encode()).hexdigest(),
             "snapshot_modified_gmt": row["modified_gmt"],
             "replacements": replacements,
-            "source_urls": changes["sources"],
+            "source_urls": changes["sources"] + (
+                ["https://www.nhs.uk/conditions/transient-ischaemic-attack-tia/symptoms/"] if id_ == 572 else []
+            ) + (
+                ["https://www.moorfields.nhs.uk/eye-conditions/epiretinal-membrane/diagnosis-and-treatment"] if id_ == 656 else []
+            ),
             "medical_review_required": True,
             "reviewer_name": "",
             "review_date": "",

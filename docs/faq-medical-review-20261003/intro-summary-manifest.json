@@ -91,13 +91,25 @@
       "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-buoi-toi-ban-ngay-thi-ro/",
       "title": "Mắt mờ buổi tối, ban ngày thì rõ: nguyên nhân và khi nào cần khám",
       "expected_sha256": "626026bf8a4a1d0676a4f0df7f9c862b0d5b5940a11a93a26d0293caa549acf2",
-      "expected_new_sha256": "883683950c2e2ce6fdcb4e07e3ea96654b90c1893adacf6073ede6a45595e128",
+      "expected_new_sha256": "28a827a5be44ccb28c44c90c41d435f3c84d7039dfdd63def974af462f150de8",
       "snapshot_modified_gmt": "2026-10-03 07:42:44",
       "replacements": [
         {
           "section": "short_answer",
           "old": "<p><strong>Trả lời ngắn:</strong> Mắt mờ buổi tối nhưng ban ngày rõ phần lớn do lão thị, khô mắt hoặc tật khúc xạ chưa chỉnh đủ — nhất là loạn thị. Nó cũng có thể là dấu hiệu sớm của <strong>đục thủy tinh thể</strong>, <strong>glôcôm góc mở</strong> hoặc <strong>bệnh võng mạc</strong>. Hãy đi khám nếu mờ về đêm <strong>nặng dần theo thời gian</strong>, kèm <strong>quầng sáng quanh đèn</strong>, chỉ xảy ra ở <strong>một bên</strong>, hoặc kèm <strong>đau và đỏ mắt</strong>.</p>",
           "new": "<p><strong>Trả lời ngắn:</strong> Nhìn kém khi trời tối hoặc chói, thấy quầng quanh đèn có thể liên quan đến tật khúc xạ, khô mắt, đục thủy tinh thể hoặc bệnh mắt khác; không thể xác định nguyên nhân chỉ từ thời điểm bị mờ. Hãy khám mắt nếu triệu chứng mới xuất hiện, tăng dần, ảnh hưởng việc lái xe hoặc rõ hơn ở một bên. Nếu kèm đau, đỏ mắt hay giảm thị lực đột ngột, cần được đánh giá khẩn.</p>",
+          "count": 1
+        },
+        {
+          "section": "body",
+          "old": "<p>Mức bình thường có bốn dấu: hai mắt như nhau, mức độ ổn định qua nhiều tháng, đỡ rõ sau khi lau kính, và ban ngày thị lực vẫn tốt. Vượt ra khỏi bốn điều đó thì nên đo lại mắt. Kiểu triệu chứng này được mô tả riêng ở bài <a href=\"https://mathanoibacninh.com/kien-thuc/nhin-thay-quang-sang-quanh-den/\">nhìn thấy quầng sáng quanh đèn</a>.</p>",
+          "new": "<p>Mờ hoặc quầng sáng về đêm không thể được coi là bình thường chỉ vì hai mắt giống nhau, đã kéo dài nhiều tháng, đỡ sau khi lau kính hoặc ban ngày vẫn nhìn rõ. Nếu triệu chứng mới xuất hiện, tăng dần, khác biệt rõ giữa hai mắt hoặc ảnh hưởng lái xe ban đêm, hãy khám mắt để tìm nguyên nhân. Kiểu triệu chứng này được mô tả riêng ở bài <a href=\"https://mathanoibacninh.com/kien-thuc/nhin-thay-quang-sang-quanh-den/\">nhìn thấy quầng sáng quanh đèn</a>.</p>",
+          "count": 1
+        },
+        {
+          "section": "body",
+          "old": "<p>Nếu mờ buổi tối nặng hơn rõ rệt so với vài tháng trước, hoặc nặng tới mức không lái xe đêm được nữa, thì đó không còn là hiện tượng quang học thông thường. Bốn nhóm dưới đây chiếm phần lớn số ca.</p>",
+          "new": "<p>Nếu mờ buổi tối nặng hơn rõ rệt so với vài tháng trước, hoặc nặng tới mức không lái xe đêm được nữa, thì đó không còn là hiện tượng quang học thông thường. Bốn nhóm dưới đây là những khả năng cần xem xét; không thể xác định nguyên nhân chỉ từ việc mờ xuất hiện về đêm.</p>",
           "count": 1
         }
       ],
@@ -145,7 +157,7 @@
       "url": "https://mathanoibacninh.com/kien-thuc/mat-mo-kem-thay-man-che-hoac-mat-mang-tam-nhin/",
       "title": "Mắt mờ kèm thấy màn che hoặc mất mảng tầm nhìn: cảnh báo võng mạc",
       "expected_sha256": "f4c96252bdc492b408169db34092b9d3771114f715019e99fb535ad10d1051f6",
-      "expected_new_sha256": "44920ec44ec2d01bd5218a6d5344010a07eec6d019eb7c1b130ac46cdb3d07ba",
+      "expected_new_sha256": "6dc2ada2b2ceb46850e1fdd9d35519755caa1831ac744e0d07c4eae74902a33d",
       "snapshot_modified_gmt": "2026-10-03 07:42:47",
       "replacements": [
         {
@@ -153,11 +165,18 @@
           "old": "<p><strong>Trả lời ngắn:</strong> Một mảng tối cố định che một phía tầm nhìn, không mất đi khi chớp mắt hay khi nhìn hướng khác, là dấu hiệu cần được khám <strong>ngay trong hôm nay</strong>. Nguyên nhân hay gặp nhất là <strong>bong võng mạc</strong>; ngoài ra còn có tắc mạch máu võng mạc, xuất huyết dịch kính, glôcôm giai đoạn muộn và tổn thương đường dẫn truyền thị giác. Đừng chờ qua đêm.</p>",
           "new": "<p><strong>Trả lời ngắn:</strong> Một mảng tối hoặc cảm giác như màn che mới xuất hiện trong tầm nhìn là dấu hiệu cần được đánh giá cấp cứu ngay, dù chưa đau và dù vùng tối còn nhỏ. Bong võng mạc là một nguyên nhân cần loại trừ; bệnh mạch máu võng mạc hoặc đường dẫn truyền thị giác cũng có thể gây mất một vùng nhìn. Không tự xác định nguyên nhân hoặc chờ qua đêm. Nếu vùng tối đã tự hết, vẫn cần đánh giá cấp cứu vì có thể liên quan cơn thiếu máu thoáng qua.</p>",
           "count": 1
+        },
+        {
+          "section": "body",
+          "old": "<p>Nhóm hồi phục, nhưng phải biết để không nhầm. Người bệnh thấy vùng lung linh, đường zíc zắc sáng hoặc mảng khuyết di chuyển chậm rồi tự hết <strong>trong dưới một giờ</strong>. Hai điểm phân biệt: hình ảnh có phần lấp lánh hoặc chuyển động, và nó tự hết hoàn toàn.</p>",
+          "new": "<p>Hình ảnh lung linh, đường zíc zắc sáng hoặc mảng khuyết di chuyển chậm rồi tự hết có thể gặp trong migraine có aura. Tuy nhiên, việc triệu chứng tự hết không đủ để loại trừ cơn thiếu máu thoáng qua hoặc bệnh mắt khác. Nếu mất vùng nhìn mới xuất hiện, nhất là đột ngột hoặc ở một mắt, hãy được đánh giá cấp cứu ngay kể cả khi thị lực đã trở lại.</p>",
+          "count": 1
         }
       ],
       "source_urls": [
         "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment",
-        "https://www.stroke.org/en/about-stroke/types-of-stroke/tia-transient-ischemic-attack"
+        "https://www.stroke.org/en/about-stroke/types-of-stroke/tia-transient-ischemic-attack",
+        "https://www.nhs.uk/conditions/transient-ischaemic-attack-tia/symptoms/"
       ],
       "medical_review_required": true,
       "reviewer_name": "",
@@ -261,13 +280,25 @@
       "url": "https://mathanoibacninh.com/kien-thuc/glocom-goc-mo-mat-thi-truong-am-tham/",
       "title": "Glôcôm góc mở: mất thị trường âm thầm khó nhận ra",
       "expected_sha256": "40b8cf8220e0274bbd9610429c934713f61ff22bfbe0265762ec988dfdbeaeec",
-      "expected_new_sha256": "c6bb419b8e9d51dd092b7bb72cf2faf4a9fd069dbe344e69f7c27350469bcb01",
+      "expected_new_sha256": "85b20450233515e7e7d47ab490d69bb2e0c688d7f9ca711d6bce3adc3aec5db2",
       "snapshot_modified_gmt": "2026-10-03 07:42:55",
       "replacements": [
         {
           "section": "short_answer",
           "old": "<p><strong>Trả lời ngắn:</strong> Glôcôm góc mở là thể glôcôm hay gặp nhất, xảy ra khi thủy dịch trong mắt thoát ra kém dần làm nhãn áp tăng từ từ, ép hỏng dây thần kinh thị giác. Bệnh lấy đi thị trường ngoại vi trước, phần nhìn trung tâm còn tốt lâu nên người bệnh không nhận ra tới giai đoạn muộn. Bệnh thường không đau và không có dấu hiệu sớm rõ. Cách duy nhất để phát hiện là khám mắt định kỳ với đo nhãn áp, soi đáy mắt và đo thị trường.</p>",
           "new": "<p><strong>Trả lời ngắn:</strong> Glôcôm góc mở gây tổn thương tiến triển ở dây thần kinh thị giác và thường ảnh hưởng vùng nhìn ngoại vi trước, trong khi thị lực trung tâm còn tốt lâu. Nhãn áp cao là yếu tố nguy cơ quan trọng nhưng bệnh vẫn có thể xảy ra khi kết quả đo nhãn áp nằm trong giới hạn thông thường. Vì bệnh thường không đau và ít biểu hiện sớm, cần khám mắt toàn diện; một lần đo nhãn áp riêng lẻ không đủ để loại trừ glôcôm.</p>",
+          "count": 1
+        },
+        {
+          "section": "body",
+          "old": "<p>Nhãn áp cao kéo dài đè lên đầu dây thần kinh thị giác — bó dây mang tín hiệu hình ảnh từ mắt lên não. Các sợi thần kinh chết dần, và điều quan trọng là chúng không mọc lại. Tổn thương này <strong>là vĩnh viễn, không hồi phục</strong>: phần thị lực đã mất không lấy lại được. Đây là lý do glôcôm khác hẳn đục thủy tinh thể, nơi phần nhìn mất đi có thể phục hồi sau mổ. Cũng vì thế, mục tiêu của mọi cách điều trị không phải phục hồi mà là hạ nhãn áp xuống mức an toàn để bảo vệ những sợi thần kinh còn sống.</p>",
+          "new": "<p>Glôcôm góc mở gây tổn thương tiến triển ở đầu dây thần kinh thị giác — bó dây mang tín hiệu hình ảnh từ mắt lên não. Nhãn áp cao là yếu tố nguy cơ quan trọng, nhưng bệnh vẫn có thể xảy ra khi nhãn áp đo được nằm trong giới hạn thông thường. Các sợi thần kinh đã mất không hồi phục; phần thị lực tương ứng thường không thể lấy lại. Vì vậy, mục tiêu điều trị là hạ nhãn áp đến mức phù hợp với từng người và theo dõi để hạn chế tổn thương tiếp diễn.</p>",
+          "count": 1
+        },
+        {
+          "section": "body",
+          "old": "<p>Ba đặc điểm cộng lại khiến bệnh khó phát hiện sớm. Thứ nhất, nhãn áp tăng từ từ nên mắt thích nghi dần, thường không đau và không đỏ. Thứ hai, vùng nhìn trung tâm được giữ lâu nên người bệnh vẫn đọc, xem tivi và đi lại bình thường. Thứ ba, mắt còn lại bù trừ cho mắt kém hơn, che lấp khoảng khuyết của bên yếu. Vì vậy nhiều người chỉ phát hiện khi đã mất phần lớn thị trường một bên, đôi khi tình cờ khi bịt mắt lành lại. Đây là điểm khác biệt lớn so với <a href=\"https://mathanoibacninh.com/kien-thuc/glocom-cap-dau-mat-du-doi/\">glôcôm góc đóng cấp</a> — thể gây đau nhức dữ dội và phải cấp cứu ngay.</p>",
+          "new": "<p>Ba đặc điểm cộng lại khiến bệnh khó phát hiện sớm. Thứ nhất, bệnh thường tiến triển âm thầm, không đau và không đỏ, kể cả ở người có nhãn áp đo được trong giới hạn thông thường. Thứ hai, vùng nhìn trung tâm được giữ lâu nên người bệnh vẫn đọc, xem tivi và đi lại bình thường. Thứ ba, mắt còn lại bù trừ cho mắt kém hơn, che lấp khoảng khuyết của bên yếu. Vì vậy nhiều người chỉ phát hiện khi đã mất phần lớn thị trường một bên, đôi khi tình cờ khi bịt mắt lành lại. Đây là điểm khác biệt lớn so với <a href=\"https://mathanoibacninh.com/kien-thuc/glocom-cap-dau-mat-du-doi/\">glôcôm góc đóng cấp</a> — thể gây đau nhức dữ dội và phải cấp cứu ngay.</p>",
           "count": 1
         }
       ],
@@ -285,7 +316,7 @@
       "url": "https://mathanoibacninh.com/kien-thuc/mang-truoc-vong-mac-la-gi/",
       "title": "Màng trước võng mạc: vì sao ảnh mờ và biến dạng",
       "expected_sha256": "ec9c3e26506bb6e140e88b2e8f2a47c245859636f5f39312b478b2c4317153ef",
-      "expected_new_sha256": "7f60785482e12f5843ff263ff6a88af9be8ea967497ef7e7e7849a2ed6a979a5",
+      "expected_new_sha256": "a48e928d2226d81673d4b19206755b887fbe77c70bd7f4988d94d4cb835ef7bf",
       "snapshot_modified_gmt": "2026-10-03 07:42:56",
       "replacements": [
         {
@@ -299,10 +330,17 @@
           "old": "<p><strong>Trả lời ngắn:</strong> Màng trước võng mạc (epiretinal membrane) là lớp mô xơ mỏng bám lên bề mặt võng mạc, thường gặp nhất ở người trên 50 tuổi, gây nhìn méo, giảm độ nét và ảnh mờ dần. Nguyên nhân hay gặp nhất là thay đổi dịch kính tự nhiên theo tuổi, không liên quan đến chấn thương. Nếu triệu chứng ảnh hưởng sinh hoạt, phẫu thuật bóc màng có thể cải thiện thị lực — đây là phẫu thuật phổ biến, tiên lượng tốt ở đa số người bệnh.</p>",
           "new": "<p><strong>Trả lời ngắn:</strong> Màng trước võng mạc là lớp mô mỏng trên bề mặt võng mạc, có thể làm hình ảnh lượn sóng, nhìn méo hoặc giảm độ nét. Tuy nhiên, nhìn méo không đặc hiệu cho bệnh này; bác sĩ thường cần khám đáy mắt và có thể chụp OCT để phân biệt với bệnh hoàng điểm khác. Trường hợp nhẹ thường được theo dõi; khi ảnh hưởng sinh hoạt, bác sĩ có thể cân nhắc phẫu thuật. Mức cải thiện sau mổ khác nhau ở từng người.</p>",
           "count": 1
+        },
+        {
+          "section": "body",
+          "old": "<p>Đa số người bệnh cải thiện thị lực sau vài tuần, tuy nhiên mức độ cải thiện phụ thuộc vào thời gian màng đã kéo võng mạc và tình trạng hoàng điểm trước phẫu thuật. Nếu màng được bóc sớm trước khi hoàng điểm bị tổn thương kéo dài, tiên lượng cải thiện thị lực tốt hơn. Tuy nhiên, một số trường hợp nhìn méo có thể còn lại dù màng đã được bóc hoàn toàn, vì mô hoàng điểm từng bị kéo giãn lâu ngày cần thêm thời gian để ổn định lại hình dạng ban đầu.</p>",
+          "new": "<p>Sau bóc màng, mắt thường cần vài tuần để hồi phục nhưng thị lực có thể tiếp tục cải thiện trong nhiều tháng; mức cải thiện khác nhau và có người không cải thiện rõ. Tiên lượng phụ thuộc vào tình trạng hoàng điểm, thời gian mắc bệnh và các bệnh mắt đi kèm. Một số người vẫn còn nhìn méo dù màng đã được bóc, vì tổn thương ở hoàng điểm có thể không hồi phục hoàn toàn. Bác sĩ phẫu thuật sẽ trao đổi mức cải thiện dự kiến và các nguy cơ cho từng người.</p>",
+          "count": 1
         }
       ],
       "source_urls": [
-        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/macular-pucker"
+        "https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/macular-pucker",
+        "https://www.moorfields.nhs.uk/eye-conditions/epiretinal-membrane/diagnosis-and-treatment"
       ],
       "medical_review_required": true,
       "reviewer_name": "",

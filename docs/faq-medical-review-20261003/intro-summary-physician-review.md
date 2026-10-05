@@ -1,6 +1,6 @@
-# Phiếu bác sĩ duyệt: đoạn mở đầu và ‘Trả lời ngắn’
+# Phiếu bác sĩ duyệt: 12 bài y khoa, 26 đoạn
 
-**Trạng thái: dự thảo, chưa áp dụng lên website.** Đây là 12 bài với 20 đoạn đề xuất thay thế. Mục ‘Trước’ là nội dung đang công khai tại thời điểm chụp bản gốc; mục ‘Sau’ là văn bản dự kiến. Bản [manifest](intro-summary-manifest.json) giữ nguyên HTML, mã SHA-256 và điều kiện thay thế chính xác. Không điền tên hoặc ngày duyệt thay bác sĩ.
+**Trạng thái: dự thảo, chưa áp dụng lên website.** Đây là 12 bài với 26 đoạn đề xuất thay thế: 8 đoạn mở đầu, 12 đoạn ‘Trả lời ngắn’ và 6 đoạn thân bài. Mục ‘Trước’ là nội dung đang công khai tại thời điểm chụp bản gốc; mục ‘Sau’ là văn bản dự kiến. Bản [manifest](intro-summary-manifest.json) giữ nguyên HTML, mã SHA-256 và điều kiện thay thế chính xác. Không điền tên hoặc ngày duyệt thay bác sĩ.
 
 Bác sĩ cần đọc **toàn bài**, FAQ và đối chiếu hướng dẫn chuyên môn đang áp dụng trước khi ký. Nguồn bên dưới là tài liệu đối chiếu của dự thảo, không phải xác nhận chuyên môn của bệnh viện. Nếu cần sửa câu chữ, ghi vào ô nhận xét và yêu cầu cập nhật manifest trước khi xuất bản.
 
@@ -9,14 +9,14 @@ Bác sĩ cần đọc **toàn bài**, FAQ và đối chiếu hướng dẫn chuy
 | [566 — Đau nhức phía sau nhãn cầu khi động mắt: tại sao lại đau](#bai-566) | 1 | ☐ Duyệt ☐ Cần sửa ☐ Không duyệt |
 | [567 — Đau quanh hốc mắt kéo dài nhiều ngày: khi nào cần đi khám](#bai-567) | 2 | ☐ Duyệt ☐ Cần sửa ☐ Không duyệt |
 | [568 — Mắt đỏ nhưng thị lực bình thường: có cần lo không](#bai-568) | 2 | ☐ Duyệt ☐ Cần sửa ☐ Không duyệt |
-| [569 — Mắt mờ buổi tối, ban ngày thì rõ: nguyên nhân và khi nào cần khám](#bai-569) | 1 | ☐ Duyệt ☐ Cần sửa ☐ Không duyệt |
+| [569 — Mắt mờ buổi tối, ban ngày thì rõ: nguyên nhân và khi nào cần khám](#bai-569) | 3 | ☐ Duyệt ☐ Cần sửa ☐ Không duyệt |
 | [571 — Nhìn méo, đường thẳng thành cong: tổn thương hoàng điểm](#bai-571) | 2 | ☐ Duyệt ☐ Cần sửa ☐ Không duyệt |
-| [572 — Mắt mờ kèm thấy màn che hoặc mất mảng tầm nhìn: cảnh báo võng mạc](#bai-572) | 1 | ☐ Duyệt ☐ Cần sửa ☐ Không duyệt |
+| [572 — Mắt mờ kèm thấy màn che hoặc mất mảng tầm nhìn: cảnh báo võng mạc](#bai-572) | 2 | ☐ Duyệt ☐ Cần sửa ☐ Không duyệt |
 | [575 — Mắt mờ một bên, bên kia vẫn rõ: khi nào cần lo](#bai-575) | 2 | ☐ Duyệt ☐ Cần sửa ☐ Không duyệt |
 | [621 — Mắt đỏ kèm ghèn vàng dính mi buổi sáng: nguyên nhân và xử lý](#bai-621) | 2 | ☐ Duyệt ☐ Cần sửa ☐ Không duyệt |
 | [628 — Sụp mi nặng dần về cuối ngày: vì sao và khi nào khám](#bai-628) | 2 | ☐ Duyệt ☐ Cần sửa ☐ Không duyệt |
-| [654 — Glôcôm góc mở: mất thị trường âm thầm khó nhận ra](#bai-654) | 1 | ☐ Duyệt ☐ Cần sửa ☐ Không duyệt |
-| [656 — Màng trước võng mạc: vì sao ảnh mờ và biến dạng](#bai-656) | 2 | ☐ Duyệt ☐ Cần sửa ☐ Không duyệt |
+| [654 — Glôcôm góc mở: mất thị trường âm thầm khó nhận ra](#bai-654) | 3 | ☐ Duyệt ☐ Cần sửa ☐ Không duyệt |
+| [656 — Màng trước võng mạc: vì sao ảnh mờ và biến dạng](#bai-656) | 3 | ☐ Duyệt ☐ Cần sửa ☐ Không duyệt |
 | [661 — Basedow và lồi mắt: khi tuyến giáp kéo theo cả hai con mắt](#bai-661) | 2 | ☐ Duyệt ☐ Cần sửa ☐ Không duyệt |
 
 <a id="bai-566"></a>
@@ -144,6 +144,30 @@ Bác sĩ cần đọc **toàn bài**, FAQ và đối chiếu hướng dẫn chuy
 
 - [ ] Bác sĩ xác nhận thay đổi đoạn này; không mâu thuẫn với toàn bài và FAQ.
 
+### 2. Đoạn thân bài
+
+**Trước — đang công khai theo bản chụp:**
+
+> Mức bình thường có bốn dấu: hai mắt như nhau, mức độ ổn định qua nhiều tháng, đỡ rõ sau khi lau kính, và ban ngày thị lực vẫn tốt. Vượt ra khỏi bốn điều đó thì nên đo lại mắt. Kiểu triệu chứng này được mô tả riêng ở bài nhìn thấy quầng sáng quanh đèn.
+
+**Sau — đề xuất:**
+
+> Mờ hoặc quầng sáng về đêm không thể được coi là bình thường chỉ vì hai mắt giống nhau, đã kéo dài nhiều tháng, đỡ sau khi lau kính hoặc ban ngày vẫn nhìn rõ. Nếu triệu chứng mới xuất hiện, tăng dần, khác biệt rõ giữa hai mắt hoặc ảnh hưởng lái xe ban đêm, hãy khám mắt để tìm nguyên nhân. Kiểu triệu chứng này được mô tả riêng ở bài nhìn thấy quầng sáng quanh đèn.
+
+- [ ] Bác sĩ xác nhận thay đổi đoạn này; không mâu thuẫn với toàn bài và FAQ.
+
+### 3. Đoạn thân bài
+
+**Trước — đang công khai theo bản chụp:**
+
+> Nếu mờ buổi tối nặng hơn rõ rệt so với vài tháng trước, hoặc nặng tới mức không lái xe đêm được nữa, thì đó không còn là hiện tượng quang học thông thường. Bốn nhóm dưới đây chiếm phần lớn số ca.
+
+**Sau — đề xuất:**
+
+> Nếu mờ buổi tối nặng hơn rõ rệt so với vài tháng trước, hoặc nặng tới mức không lái xe đêm được nữa, thì đó không còn là hiện tượng quang học thông thường. Bốn nhóm dưới đây là những khả năng cần xem xét; không thể xác định nguyên nhân chỉ từ việc mờ xuất hiện về đêm.
+
+- [ ] Bác sĩ xác nhận thay đổi đoạn này; không mâu thuẫn với toàn bài và FAQ.
+
 **Kết luận cho bài:** ☐ Duyệt toàn bộ đề xuất ☐ Cần sửa ☐ Không duyệt
 
 **Nhận xét / câu cần chỉnh:** ____________________________________________________________
@@ -196,7 +220,7 @@ Bác sĩ cần đọc **toàn bài**, FAQ và đối chiếu hướng dẫn chuy
 
 **Trang công khai:** [https://mathanoibacninh.com/kien-thuc/mat-mo-kem-thay-man-che-hoac-mat-mang-tam-nhin/](https://mathanoibacninh.com/kien-thuc/mat-mo-kem-thay-man-che-hoac-mat-mang-tam-nhin/)
 
-**Nguồn đối chiếu:** [Nguồn 1](https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment); [Nguồn 2](https://www.stroke.org/en/about-stroke/types-of-stroke/tia-transient-ischemic-attack)
+**Nguồn đối chiếu:** [Nguồn 1](https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/retinal-detachment); [Nguồn 2](https://www.stroke.org/en/about-stroke/types-of-stroke/tia-transient-ischemic-attack); [Nguồn 3](https://www.nhs.uk/conditions/transient-ischaemic-attack-tia/symptoms/)
 
 ### 1. Trả lời ngắn
 
@@ -207,6 +231,18 @@ Bác sĩ cần đọc **toàn bài**, FAQ và đối chiếu hướng dẫn chuy
 **Sau — đề xuất:**
 
 > Trả lời ngắn: Một mảng tối hoặc cảm giác như màn che mới xuất hiện trong tầm nhìn là dấu hiệu cần được đánh giá cấp cứu ngay, dù chưa đau và dù vùng tối còn nhỏ. Bong võng mạc là một nguyên nhân cần loại trừ; bệnh mạch máu võng mạc hoặc đường dẫn truyền thị giác cũng có thể gây mất một vùng nhìn. Không tự xác định nguyên nhân hoặc chờ qua đêm. Nếu vùng tối đã tự hết, vẫn cần đánh giá cấp cứu vì có thể liên quan cơn thiếu máu thoáng qua.
+
+- [ ] Bác sĩ xác nhận thay đổi đoạn này; không mâu thuẫn với toàn bài và FAQ.
+
+### 2. Đoạn thân bài
+
+**Trước — đang công khai theo bản chụp:**
+
+> Nhóm hồi phục, nhưng phải biết để không nhầm. Người bệnh thấy vùng lung linh, đường zíc zắc sáng hoặc mảng khuyết di chuyển chậm rồi tự hết trong dưới một giờ. Hai điểm phân biệt: hình ảnh có phần lấp lánh hoặc chuyển động, và nó tự hết hoàn toàn.
+
+**Sau — đề xuất:**
+
+> Hình ảnh lung linh, đường zíc zắc sáng hoặc mảng khuyết di chuyển chậm rồi tự hết có thể gặp trong migraine có aura. Tuy nhiên, việc triệu chứng tự hết không đủ để loại trừ cơn thiếu máu thoáng qua hoặc bệnh mắt khác. Nếu mất vùng nhìn mới xuất hiện, nhất là đột ngột hoặc ở một mắt, hãy được đánh giá cấp cứu ngay kể cả khi thị lực đã trở lại.
 
 - [ ] Bác sĩ xác nhận thay đổi đoạn này; không mâu thuẫn với toàn bài và FAQ.
 
@@ -354,6 +390,30 @@ Bác sĩ cần đọc **toàn bài**, FAQ và đối chiếu hướng dẫn chuy
 
 - [ ] Bác sĩ xác nhận thay đổi đoạn này; không mâu thuẫn với toàn bài và FAQ.
 
+### 2. Đoạn thân bài
+
+**Trước — đang công khai theo bản chụp:**
+
+> Nhãn áp cao kéo dài đè lên đầu dây thần kinh thị giác — bó dây mang tín hiệu hình ảnh từ mắt lên não. Các sợi thần kinh chết dần, và điều quan trọng là chúng không mọc lại. Tổn thương này là vĩnh viễn, không hồi phục: phần thị lực đã mất không lấy lại được. Đây là lý do glôcôm khác hẳn đục thủy tinh thể, nơi phần nhìn mất đi có thể phục hồi sau mổ. Cũng vì thế, mục tiêu của mọi cách điều trị không phải phục hồi mà là hạ nhãn áp xuống mức an toàn để bảo vệ những sợi thần kinh còn sống.
+
+**Sau — đề xuất:**
+
+> Glôcôm góc mở gây tổn thương tiến triển ở đầu dây thần kinh thị giác — bó dây mang tín hiệu hình ảnh từ mắt lên não. Nhãn áp cao là yếu tố nguy cơ quan trọng, nhưng bệnh vẫn có thể xảy ra khi nhãn áp đo được nằm trong giới hạn thông thường. Các sợi thần kinh đã mất không hồi phục; phần thị lực tương ứng thường không thể lấy lại. Vì vậy, mục tiêu điều trị là hạ nhãn áp đến mức phù hợp với từng người và theo dõi để hạn chế tổn thương tiếp diễn.
+
+- [ ] Bác sĩ xác nhận thay đổi đoạn này; không mâu thuẫn với toàn bài và FAQ.
+
+### 3. Đoạn thân bài
+
+**Trước — đang công khai theo bản chụp:**
+
+> Ba đặc điểm cộng lại khiến bệnh khó phát hiện sớm. Thứ nhất, nhãn áp tăng từ từ nên mắt thích nghi dần, thường không đau và không đỏ. Thứ hai, vùng nhìn trung tâm được giữ lâu nên người bệnh vẫn đọc, xem tivi và đi lại bình thường. Thứ ba, mắt còn lại bù trừ cho mắt kém hơn, che lấp khoảng khuyết của bên yếu. Vì vậy nhiều người chỉ phát hiện khi đã mất phần lớn thị trường một bên, đôi khi tình cờ khi bịt mắt lành lại. Đây là điểm khác biệt lớn so với glôcôm góc đóng cấp — thể gây đau nhức dữ dội và phải cấp cứu ngay.
+
+**Sau — đề xuất:**
+
+> Ba đặc điểm cộng lại khiến bệnh khó phát hiện sớm. Thứ nhất, bệnh thường tiến triển âm thầm, không đau và không đỏ, kể cả ở người có nhãn áp đo được trong giới hạn thông thường. Thứ hai, vùng nhìn trung tâm được giữ lâu nên người bệnh vẫn đọc, xem tivi và đi lại bình thường. Thứ ba, mắt còn lại bù trừ cho mắt kém hơn, che lấp khoảng khuyết của bên yếu. Vì vậy nhiều người chỉ phát hiện khi đã mất phần lớn thị trường một bên, đôi khi tình cờ khi bịt mắt lành lại. Đây là điểm khác biệt lớn so với glôcôm góc đóng cấp — thể gây đau nhức dữ dội và phải cấp cứu ngay.
+
+- [ ] Bác sĩ xác nhận thay đổi đoạn này; không mâu thuẫn với toàn bài và FAQ.
+
 **Kết luận cho bài:** ☐ Duyệt toàn bộ đề xuất ☐ Cần sửa ☐ Không duyệt
 
 **Nhận xét / câu cần chỉnh:** ____________________________________________________________
@@ -367,7 +427,7 @@ Bác sĩ cần đọc **toàn bài**, FAQ và đối chiếu hướng dẫn chuy
 
 **Trang công khai:** [https://mathanoibacninh.com/kien-thuc/mang-truoc-vong-mac-la-gi/](https://mathanoibacninh.com/kien-thuc/mang-truoc-vong-mac-la-gi/)
 
-**Nguồn đối chiếu:** [Nguồn 1](https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/macular-pucker)
+**Nguồn đối chiếu:** [Nguồn 1](https://www.nei.nih.gov/eye-health-information/eye-conditions-and-diseases/macular-pucker); [Nguồn 2](https://www.moorfields.nhs.uk/eye-conditions/epiretinal-membrane/diagnosis-and-treatment)
 
 ### 1. Đoạn mở đầu
 
@@ -390,6 +450,18 @@ Bác sĩ cần đọc **toàn bài**, FAQ và đối chiếu hướng dẫn chuy
 **Sau — đề xuất:**
 
 > Trả lời ngắn: Màng trước võng mạc là lớp mô mỏng trên bề mặt võng mạc, có thể làm hình ảnh lượn sóng, nhìn méo hoặc giảm độ nét. Tuy nhiên, nhìn méo không đặc hiệu cho bệnh này; bác sĩ thường cần khám đáy mắt và có thể chụp OCT để phân biệt với bệnh hoàng điểm khác. Trường hợp nhẹ thường được theo dõi; khi ảnh hưởng sinh hoạt, bác sĩ có thể cân nhắc phẫu thuật. Mức cải thiện sau mổ khác nhau ở từng người.
+
+- [ ] Bác sĩ xác nhận thay đổi đoạn này; không mâu thuẫn với toàn bài và FAQ.
+
+### 3. Đoạn thân bài
+
+**Trước — đang công khai theo bản chụp:**
+
+> Đa số người bệnh cải thiện thị lực sau vài tuần, tuy nhiên mức độ cải thiện phụ thuộc vào thời gian màng đã kéo võng mạc và tình trạng hoàng điểm trước phẫu thuật. Nếu màng được bóc sớm trước khi hoàng điểm bị tổn thương kéo dài, tiên lượng cải thiện thị lực tốt hơn. Tuy nhiên, một số trường hợp nhìn méo có thể còn lại dù màng đã được bóc hoàn toàn, vì mô hoàng điểm từng bị kéo giãn lâu ngày cần thêm thời gian để ổn định lại hình dạng ban đầu.
+
+**Sau — đề xuất:**
+
+> Sau bóc màng, mắt thường cần vài tuần để hồi phục nhưng thị lực có thể tiếp tục cải thiện trong nhiều tháng; mức cải thiện khác nhau và có người không cải thiện rõ. Tiên lượng phụ thuộc vào tình trạng hoàng điểm, thời gian mắc bệnh và các bệnh mắt đi kèm. Một số người vẫn còn nhìn méo dù màng đã được bóc, vì tổn thương ở hoàng điểm có thể không hồi phục hoàn toàn. Bác sĩ phẫu thuật sẽ trao đổi mức cải thiện dự kiến và các nguy cơ cho từng người.
 
 - [ ] Bác sĩ xác nhận thay đổi đoạn này; không mâu thuẫn với toàn bài và FAQ.
 
@@ -440,9 +512,9 @@ Bác sĩ cần đọc **toàn bài**, FAQ và đối chiếu hướng dẫn chuy
 
 ---
 
-## Bốn đoạn thân bài cần bác sĩ xử lý trước khi đăng
+## Bốn chủ đề cần chú ý khi duyệt sáu đoạn thân bài
 
-Các đoạn dưới đây **không nằm trong 20 đoạn thay thế của manifest**. Rà soát sau khi lập phiếu phát hiện chúng có thể khiến người đọc hiểu khác với phần ‘Trả lời ngắn’ mới. Phiếu duyệt 20 đoạn không tự động duyệt những câu này.
+Sáu đoạn thân bài ở các bài 569, 572, 654 và 656 đã được thêm vào manifest. Bác sĩ cần kiểm tra cả phần trước–sau và sự nhất quán với toàn bài, vì đây là các câu có thể khiến người đọc hiểu khác với ‘Trả lời ngắn’ mới.
 
 - **Bài 569 — mờ mắt buổi tối:** câu ‘Mức bình thường có bốn dấu’ có thể bị hiểu là đủ để tự xác nhận mắt bình thường. Bác sĩ cần xác định tiêu chí và sửa cách diễn đạt nếu cần; trang đang công khai không phải công cụ tự chẩn đoán.
 - **Bài 572 — màn che/mất vùng nhìn:** đoạn nói hình ảnh tự hết hoàn toàn là một ‘điểm phân biệt’ có thể gây yên tâm sai; triệu chứng thị giác do cơn thiếu máu thoáng qua cũng có thể tự hết và vẫn cần đánh giá khẩn. [NHS về TIA](https://www.nhs.uk/conditions/transient-ischaemic-attack-tia/symptoms/), [American Stroke Association](https://www.stroke.org/en/about-stroke/types-of-stroke/tia-transient-ischemic-attack).
