@@ -1,5 +1,10 @@
 # Production changelog
 
+## 2026-10-05 — chuẩn bị phiếu bác sĩ duyệt 12 bài y khoa
+
+- Tạo `docs/faq-medical-review-20261003/intro-summary-physician-review.md` từ manifest đã chụp: 12 bài, 20 đoạn trước–sau, nguồn đối chiếu và ô duyệt riêng từng bài. Script tạo phiếu là `scripts/build-medical-review-sheet-20261003.py`; không thay đổi nội dung công khai.
+- Chạy lại tiền kiểm WP-CLI trên production ngày 05/10: 12/12 bài còn đúng ID, slug, trạng thái, SHA-256; 20 thay thế nguyên văn và hash đầu ra đều đạt. Kết quả `physician-review=PENDING` cho cả 12; chế độ chỉ đọc xác nhận không ghi WordPress. Chưa có tên/ngày bác sĩ duyệt nên **chưa xuất bản gói 12 bài**. Khi có phiếu duyệt thực tế, tạo backup database mới, chạy dưới khóa triển khai, xóa cache và QA 12 URL.
+
 ## 2026-10-03 — hoàn thiện tín hiệu tìm kiếm cho Bắc Giang
 
 - Tiền kiểm: trang `/khu-vuc/kham-mat-bac-giang/` đã có tiêu đề, H1, mô tả, canonical và liên kết theo ngữ cảnh từ trang chủ, thư viện khu vực, Giới thiệu và Liên hệ; 144/200 bài viết công khai thiếu thẻ HTML `meta description`. Trang Giới thiệu và Liên hệ nhận Article/BreadcrumbList trùng từ OBS SEO Suite; Liên hệ còn có hai mô tả Open Graph. Sitemap của ba trang khu vực vẫn ghi `lastmod` 05/08 dù nội dung và schema trong child theme đã thay đổi 03/10.

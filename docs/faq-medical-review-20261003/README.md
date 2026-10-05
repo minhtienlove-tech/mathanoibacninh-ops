@@ -46,6 +46,8 @@ Các nhóm cần chú ý khi duyệt:
 
 **Chưa áp dụng trên website. Cần bác sĩ nhãn khoa duyệt từng thay đổi trước khi xuất bản.** Bản đang công khai vẫn chứa các câu tóm tắt được đánh dấu. Tệp [intro-summary-manifest.json](intro-summary-manifest.json) ghi nguyên văn trước/sau, SHA-256 từng bài và nguồn y khoa; [script WP-CLI](../../scripts/apply-medical-intro-summaries-20261003.php) chỉ chạy kiểm tra trước theo mặc định. Ngày 03/10/2026, dry-run trên hosting đạt tiền kiểm cho 12 bài và 20 đoạn thay thế (8 đoạn mở đầu, 12 đoạn “Trả lời ngắn”); không ghi vào WordPress.
 
+[Phiếu bác sĩ duyệt 12 bài và 20 đoạn](intro-summary-physician-review.md) trình bày văn bản trước/sau cạnh nhau, nguồn đối chiếu và chỗ ghi kết luận, họ tên, ngày duyệt cho từng bài. Đây là mẫu trống; chưa có bác sĩ ký duyệt.
+
 | Bài | Điểm cần bác sĩ kiểm tra | Nguồn đối chiếu chính | Duyệt |
 |---|---|---|---|
 | [566](https://mathanoibacninh.com/kien-thuc/dau-nhuc-phia-sau-nhan-cau-khi-dong-mat/) | Đau khi cử động mắt, dấu hiệu cần khám khẩn | [NHS](https://www.nhs.uk/symptoms/eye-pain/) | Chờ |
