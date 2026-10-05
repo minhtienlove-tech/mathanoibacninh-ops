@@ -4,6 +4,7 @@
 
 - Tạo `docs/faq-medical-review-20261003/intro-summary-physician-review.md` từ manifest đã chụp: 12 bài, 20 đoạn trước–sau, nguồn đối chiếu và ô duyệt riêng từng bài. Script tạo phiếu là `scripts/build-medical-review-sheet-20261003.py`; không thay đổi nội dung công khai.
 - Chạy lại tiền kiểm WP-CLI trên production ngày 05/10: 12/12 bài còn đúng ID, slug, trạng thái, SHA-256; 20 thay thế nguyên văn và hash đầu ra đều đạt. Kết quả `physician-review=PENDING` cho cả 12; chế độ chỉ đọc xác nhận không ghi WordPress. Chưa có tên/ngày bác sĩ duyệt nên **chưa xuất bản gói 12 bài**. Khi có phiếu duyệt thực tế, tạo backup database mới, chạy dưới khóa triển khai, xóa cache và QA 12 URL.
+- Rà soát thân bài sau bản dự thảo thấy thêm bốn đoạn ngoài manifest cần bác sĩ xét riêng (bài 569: tiêu chí ‘bình thường’; 572: triệu chứng tự hết không loại trừ TIA; 654: glôcôm có thể không tăng nhãn áp; 656: thời gian cải thiện thị lực sau bóc màng). Đã ghi nhận trong phiếu duyệt với nguồn đối chiếu chính thức; chưa chỉnh nội dung công khai hay tự kết luận chuyên môn thay bác sĩ.
 
 ## 2026-10-03 — hoàn thiện tín hiệu tìm kiếm cho Bắc Giang
 

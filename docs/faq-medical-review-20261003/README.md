@@ -48,6 +48,8 @@ Các nhóm cần chú ý khi duyệt:
 
 [Phiếu bác sĩ duyệt 12 bài và 20 đoạn](intro-summary-physician-review.md) trình bày văn bản trước/sau cạnh nhau, nguồn đối chiếu và chỗ ghi kết luận, họ tên, ngày duyệt cho từng bài. Đây là mẫu trống; chưa có bác sĩ ký duyệt.
 
+Rà soát tiếp ngày 05/10 phát hiện bốn đoạn **ngoài manifest** ở bài 569, 572, 654 và 656 cần bác sĩ đánh giá trước khi xuất bản gói này. Phiếu duyệt có mục riêng nêu vấn đề và nguồn đối chiếu. Chưa coi việc duyệt 20 đoạn là duyệt toàn bộ thân bài.
+
 | Bài | Điểm cần bác sĩ kiểm tra | Nguồn đối chiếu chính | Duyệt |
 |---|---|---|---|
 | [566](https://mathanoibacninh.com/kien-thuc/dau-nhuc-phia-sau-nhan-cau-khi-dong-mat/) | Đau khi cử động mắt, dấu hiệu cần khám khẩn | [NHS](https://www.nhs.uk/symptoms/eye-pain/) | Chờ |
