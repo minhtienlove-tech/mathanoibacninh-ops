@@ -1,0 +1,49 @@
+{
+  "started_utc": "2026-10-05T01:06:43.725785+00:00",
+  "checkpoint_utc": "2026-10-05T01:11:42.429392+00:00",
+  "done": true,
+  "sitemap_urls": 349,
+  "cms_urls": 344,
+  "discovered": 401,
+  "fetched": 401,
+  "rendered": 0,
+  "excluded": {},
+  "blocked": 0,
+  "http_status": {
+    "200": 400,
+    "404": 1
+  },
+  "issue_id": {
+    "HTTP_ERROR": 1,
+    "CANONICAL_DIFFERS": 19
+  },
+  "sitemap_not_in_cms": [
+    "https://mathanoibacninh.com/kien-thuc/can-thi-tre-em/",
+    "https://mathanoibacninh.com/kien-thuc/chuan-bi-kham-bao-hiem/",
+    "https://mathanoibacninh.com/kien-thuc/dau-hieu-can-kham-ngay/",
+    "https://mathanoibacninh.com/kien-thuc/dich-kinh-vong-mac/",
+    "https://mathanoibacninh.com/kien-thuc/giac-mac-ket-mac-kho-mat/",
+    "https://mathanoibacninh.com/kien-thuc/glocom-cuom-nuoc/",
+    "https://mathanoibacninh.com/kien-thuc/kien-thuc-phau-thuat-khuc-xa/",
+    "https://mathanoibacninh.com/kien-thuc/mat-nguoi-cao-tuoi/",
+    "https://mathanoibacninh.com/kien-thuc/mat-va-moi-truong-lam-viec/",
+    "https://mathanoibacninh.com/kien-thuc/nhuoc-thi-lac-tre-em/",
+    "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/"
+  ],
+  "cms_not_in_sitemap": [
+    "https://mathanoibacninh.com/dat-lich-thanh-cong/",
+    "https://mathanoibacninh.com/gioi-thieu/ho-so-phap-ly/",
+    "https://mathanoibacninh.com/gioi-thieu/tam-nhin-gia-tri/",
+    "https://mathanoibacninh.com/tin-tuc/",
+    "https://mathanoibacninh.com/trang-dang-ky/",
+    "https://mathanoibacninh.com/tuyen-dung/"
+  ],
+  "no_inbound_from_fetched": [
+    "https://mathanoibacninh.com/dat-lich-thanh-cong/",
+    "https://mathanoibacninh.com/gioi-thieu/ho-so-phap-ly/",
+    "https://mathanoibacninh.com/gioi-thieu/tam-nhin-gia-tri/",
+    "https://mathanoibacninh.com/tin-tuc/",
+    "https://mathanoibacninh.com/trang-dang-ky/",
+    "https://mathanoibacninh.com/tuyen-dung/"
+  ]
+}
