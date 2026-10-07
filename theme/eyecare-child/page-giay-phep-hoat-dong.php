@@ -45,17 +45,28 @@ while ( have_posts() ) :
 	?>
 
 <article id="trang-<?php the_ID(); ?>" <?php post_class( 'eyecare-gphd' ); ?>>
-	<section class="eyecare-page-hero eyecare-page-hero--gphd" aria-labelledby="gphd-tieu-de">
-		<div class="eyecare-page-hero__khung">
-			<?php if ( function_exists( 'eyecare_duong_dan_in' ) ) : ?><div class="eyecare-page-hero__duong-dan"><?php eyecare_duong_dan_in(); ?></div><?php endif; ?>
-			<div class="eyecare-page-hero__grid">
-				<div>
-					<p class="eyecare-page-hero__nhan">Hồ sơ pháp lý công khai</p>
+	<section class="eyecare-gphd__hero" aria-labelledby="gphd-tieu-de">
+		<div class="eyecare-noi-dung__khung">
+			<?php if ( function_exists( 'eyecare_duong_dan_in' ) ) : ?><div class="eyecare-gphd__duong-dan"><?php eyecare_duong_dan_in(); ?></div><?php endif; ?>
+			<div class="eyecare-gphd__hero-grid<?php echo $eyecare_gp_co ? '' : ' eyecare-gphd__hero-grid--mot-cot'; ?>">
+				<div class="eyecare-gphd__hero-copy">
+					<p class="eyecare-gphd__nhan">Hồ sơ pháp lý công khai</p>
 					<h1 id="gphd-tieu-de"><?php the_title(); ?></h1>
-					<p class="eyecare-page-hero__dan">Người bệnh có quyền biết cơ sở mình đến khám đã được cấp phép hay chưa, do cơ quan nào cấp và phạm vi hoạt động là gì. Trang này công bố nguyên văn thông tin trên giấy phép hoạt động khám bệnh, chữa bệnh của bệnh viện.</p>
+					<p class="eyecare-gphd__dan">Xem số giấy phép, cơ quan cấp, ngày cấp và bản chụp để đối chiếu trước khi đến khám.</p>
 					<p class="eyecare-gphd__ngay">Cập nhật lần cuối: <strong><?php echo esc_html( $eyecare_gp_cap_nhat ); ?></strong></p>
 				</div>
-				<div class="eyecare-page-hero__art" aria-hidden="true"><svg viewBox="0 0 260 230"><path d="M70 24h85l45 44v138H70Z"/><path d="M155 24v44h45M95 104h110M95 134h110M95 164h70"/><circle cx="188" cy="168" r="30"/><path d="m174 168 10 10 19-22"/></svg><span><strong>Bộ Y tế</strong>cơ quan cấp phép</span></div>
+				<?php if ( $eyecare_gp_co ) : ?>
+				<div class="eyecare-gphd__hero-card" aria-label="Thông tin chính của giấy phép">
+					<div class="eyecare-gphd__hero-card-head"><span aria-hidden="true">✓</span><span>Đã được cấp phép</span></div>
+					<p>Giấy phép hoạt động khám bệnh, chữa bệnh</p>
+					<strong class="eyecare-gphd__hero-so"><?php echo esc_html( $eyecare_gp_tt['so_gphd'] ); ?></strong>
+					<dl>
+						<div><dt>Cơ quan cấp</dt><dd><?php echo esc_html( $eyecare_gp_tt['gphd_co_quan'] ); ?></dd></div>
+						<?php if ( '' !== $eyecare_gp_ngay ) : ?><div><dt>Ngày cấp</dt><dd><?php echo esc_html( $eyecare_gp_ngay ); ?></dd></div><?php endif; ?>
+					</dl>
+					<a href="<?php echo '' !== $eyecare_gp_anh ? '#ban-chup' : '#thong-tin-giay-phep'; ?>"><?php echo '' !== $eyecare_gp_anh ? 'Xem bản chụp giấy phép' : 'Xem thông tin giấy phép'; ?> <span aria-hidden="true">→</span></a>
+				</div>
+				<?php endif; ?>
 			</div>
 		</div>
 	</section>
@@ -66,24 +77,13 @@ while ( have_posts() ) :
 	</div>
 	<?php else : ?>
 
-	<div class="eyecare-gphd__noi-bat eyecare-noi-dung__khung" aria-label="Thông tin chính của giấy phép">
-		<div>
-			<span aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M8 4h11l5 5v19H8Z"/><path d="M19 4v5h5"/><path d="m12 18 2.5 2.5L21 14"/></svg></span>
-			<p><strong>Số <?php echo esc_html( $eyecare_gp_tt['so_gphd'] ); ?></strong><small>Giấy phép hoạt động khám bệnh, chữa bệnh</small></p>
-		</div>
-		<div>
-			<span aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M16 4 6 9v8c0 7 4.3 11.4 10 13 5.7-1.6 10-6 10-13V9L16 4Z"/><path d="m12 16 3 3 6-7"/></svg></span>
-			<p><strong><?php echo esc_html( $eyecare_gp_tt['gphd_co_quan'] ); ?></strong><small>Cơ quan cấp phép</small></p>
-		</div>
-		<?php if ( '' !== $eyecare_gp_ngay ) : ?>
-		<div>
-			<span aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="5" y="8" width="22" height="19" rx="3"/><path d="M5 14h22M11 5v5M21 5v5"/></svg></span>
-			<p><strong><?php echo esc_html( $eyecare_gp_ngay ); ?></strong><small>Ngày cấp</small></p>
-		</div>
-		<?php endif; ?>
-	</div>
-
 	<div class="eyecare-gphd__bo-cuc eyecare-noi-dung__khung">
+		<nav class="eyecare-gphd__nhay-muc" aria-label="Đi nhanh đến thông tin giấy phép">
+			<a href="#thong-tin-giay-phep">Thông tin giấy phép</a>
+			<?php if ( '' !== $eyecare_gp_anh ) : ?><a href="#ban-chup">Bản chụp</a><?php endif; ?>
+			<a href="#gio-tiep-nhan">Giờ tiếp nhận</a>
+			<a href="#doi-chieu">Đối chiếu thông tin</a>
+		</nav>
 		<div class="eyecare-gphd__noi-dung">
 			<header class="eyecare-gphd__mo-dau">
 				<p>Vì sao trang này tồn tại</p>

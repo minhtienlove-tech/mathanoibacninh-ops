@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-07 — làm rõ giao diện trang giấy phép hoạt động
+
+- Trang `/giay-phep-hoat-dong/` trước đây dùng chữ trắng trên nền xanh rất nhạt, tiêu đề quá lớn và các thẻ tóm tắt chồng lên phần nội dung. Đổi sang phần đầu màu sáng với chữ xanh đậm, thẻ hiển thị trực tiếp số giấy phép/cơ quan cấp/ngày cấp và liên kết bản chụp; thêm liên kết nhảy đến các mục chính.
+- Chỉ sửa `theme/eyecare-child/page-giay-phep-hoat-dong.php` và `theme/eyecare-child/assets/page-layouts.css`; giữ nguyên nguồn dữ liệu pháp lý và nội dung các mục. Các mục nội dung thành thẻ dễ đọc; có bố cục riêng cho màn hình nhỏ và không che bản chụp giấy phép.
+- Backup production, kết quả lint/smoke test và đường dẫn rollback được ghi sau khi triển khai.
+
 ## 2026-10-07 — ảnh riêng cho 12 bài giới thiệu chuyên mục (đã triển khai)
 
 - Trước khi sửa, bài ID 1678–1689 đều không có `_thumbnail_id`; `inc/anh-bai-du-phong.php` đưa cùng một ảnh khám mắt dự phòng vào các thẻ bài. Tạo 12 ảnh biên tập minh họa khác nhau theo đúng 5 chủ đề kiến thức và 7 chủ đề tin bệnh viện; không dùng hình này làm bằng chứng về bác sĩ, người bệnh, ưu đãi hay hoạt động thực tế.
