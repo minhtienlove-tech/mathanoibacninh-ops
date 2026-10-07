@@ -24,10 +24,10 @@ function eyecare_eye_model_render() {
 	<section class="eyecare-eye" id="cau-tao-mat-3d" aria-labelledby="eyecare-eye-title">
 		<div class="eyecare-eye__inner">
 			<header class="eyecare-eye__heading">
-				<div><p class="eyecare-eye__eyebrow">HIỂU HƠN VỀ ĐÔI MẮT</p><h2 id="eyecare-eye-title">Khám phá cấu tạo mắt qua mô hình 3D</h2></div>
-				<a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener">Mở mô hình trong tab riêng <span aria-hidden="true">↗</span></a>
+				<div><p class="eyecare-eye__eyebrow">HIỂU HƠN VỀ ĐÔI MẮT</p><h2 id="eyecare-eye-title">Cấu tạo mắt qua mô hình 3D</h2></div>
+				<a href="<?php echo esc_url( $url ); ?>" target="_blank" rel="noopener">Mở mô hình 3D riêng <span aria-hidden="true">↗</span></a>
 			</header>
-			<p class="eyecare-eye__intro" id="eyecare-eye-help">Xoay, phóng to hoặc mở mặt cắt. Chọn một trong 12 bộ phận để đọc giải thích bằng tiếng Việt.</p>
+			<p class="eyecare-eye__intro" id="eyecare-eye-help">Từ giác mạc đến võng mạc: các lớp cấu tạo nên đôi mắt.</p>
 			<iframe class="eyecare-eye__frame" data-eye-frame src="<?php echo esc_url( $url ); ?>" title="Mô hình cấu tạo mắt 3D tương tác — Bệnh viện Mắt Hà Nội – Bắc Ninh" aria-describedby="eyecare-eye-help" loading="lazy" width="1200" height="1400" referrerpolicy="same-origin"></iframe>
 		</div>
 	</section>

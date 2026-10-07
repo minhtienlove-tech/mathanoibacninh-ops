@@ -5309,6 +5309,161 @@
 	}
 }
 
+/* Bố cục hero đội ngũ: một ảnh chính, hai ảnh phụ, không chồng khuôn mặt. */
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__hero-visual {
+	min-height: 520px;
+	align-self: center;
+}
+
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__hero-visual::before {
+	inset: 2% 0 3% 6%;
+	background:
+		radial-gradient(circle at 72% 25%, rgba(255, 216, 77, .2), transparent 30%),
+		linear-gradient(145deg, rgba(255, 255, 255, .17), rgba(255, 255, 255, .035));
+	border-radius: 30px 72px 30px 72px;
+	backdrop-filter: blur(7px);
+}
+
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__orb {
+	top: 12%;
+	right: 6%;
+	width: 76%;
+	opacity: .42;
+}
+
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portraits {
+	inset: 1.3rem .65rem 3.55rem 1.15rem;
+	display: grid;
+	grid-template-columns: minmax(0, 1.28fr) minmax(145px, .72fr);
+	grid-template-rows: repeat(2, minmax(0, 1fr));
+	gap: .85rem;
+}
+
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait,
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait--1,
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait--2,
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait--3 {
+	position: relative;
+	top: auto;
+	right: auto;
+	left: auto;
+	width: auto;
+	min-height: 0;
+	aspect-ratio: auto;
+	border: 1px solid rgba(255, 255, 255, .72);
+	border-radius: 24px;
+	box-shadow: 0 18px 34px rgba(0, 35, 18, .23);
+	transform: none;
+	transition: transform .28s ease, box-shadow .28s ease;
+}
+
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait--1 {
+	grid-column: 1;
+	grid-row: 1 / -1;
+}
+
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait--2 {
+	grid-column: 2;
+	grid-row: 1;
+}
+
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait--3 {
+	grid-column: 2;
+	grid-row: 2;
+}
+
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait:hover {
+	box-shadow: 0 24px 44px rgba(0, 35, 18, .31);
+	transform: translateY(-4px);
+}
+
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait img {
+	min-height: 100%;
+	object-position: center top;
+}
+
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait figcaption {
+	position: absolute;
+	right: .65rem;
+	bottom: .65rem;
+	left: .65rem;
+	display: grid;
+	gap: .15rem;
+	padding: .58rem .68rem;
+	color: #fff;
+	background: linear-gradient(180deg, rgba(1, 37, 24, 0), rgba(1, 37, 24, .86) 38%);
+	border-radius: 0 0 17px 17px;
+}
+
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait figcaption strong {
+	font-size: .8rem;
+	line-height: 1.2;
+	text-wrap: balance;
+}
+
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait figcaption span {
+	color: rgba(255, 255, 255, .78);
+	font-size: .63rem;
+	line-height: 1.35;
+	text-wrap: pretty;
+}
+
+.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__team-note {
+	right: .7rem;
+	bottom: .35rem;
+	min-width: 245px;
+	padding: .62rem .78rem;
+	border-radius: 14px;
+	box-shadow: 0 15px 30px rgba(0, 34, 18, .2);
+}
+
+@media (max-width: 760px) {
+	.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__hero-visual {
+		min-height: 415px;
+	}
+
+	.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portraits {
+		inset: .8rem .45rem 3.65rem;
+		display: flex;
+		gap: .75rem;
+		overflow-x: auto;
+		overflow-y: hidden;
+		padding: 0 .1rem .55rem;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait,
+	.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait--1,
+	.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait--2,
+	.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait--3 {
+		flex: 0 0 min(78vw, 300px);
+		min-height: 0;
+		aspect-ratio: .78;
+		scroll-snap-align: start;
+	}
+
+	.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__team-note {
+		right: .45rem;
+		bottom: .45rem;
+		min-width: 0;
+		width: min(86%, 290px);
+	}
+}
+
+@media (max-width: 520px) {
+	.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__hero-visual {
+		min-height: 390px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.eyecare-gioi-thieu .eyecare-page-hero--gioi-thieu .eyecare-gioi-thieu__portrait {
+		animation: none;
+		transition: none;
+	}
+}
+
 /* ==========================================================================
    TRANG GIẤY PHÉP HOẠT ĐỘNG (page-giay-phep-hoat-dong.php)
    Bố cục một cột: trang ngắn, nội dung pháp lý cần đọc tuần tự, không cần

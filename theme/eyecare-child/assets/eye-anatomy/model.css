@@ -10,6 +10,11 @@
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
 @media print{header,main{padding:15px}.viewer{height:350px}.scene-controls,.modebar,.below-view,.part-nav,.parts{display:none}.workspace{display:block}.details{display:block;border:0}.detail-top{margin-bottom:10px}}
 
+.viewer{height:610px}
+.callout{max-width:175px;overflow:hidden;text-overflow:ellipsis}
+@media(max-width:850px){.viewer{height:590px}}
+@media(max-width:600px){.viewer{height:420px}.mobile-model-labels{max-height:300px;overflow:auto}}
+
 /* Embedded presentation. All styles remain inside the model document. */
 :root{background:#fff}
 main{max-width:none;margin:0;padding:0 0 8px}
@@ -44,4 +49,27 @@ footer{margin:24px 0 0;padding:18px 4px 0}
   .part-button{padding:11px 8px;gap:6px}
   .part-button .name{overflow-wrap:anywhere}
   footer{padding-right:4px;padding-left:4px}
+}
+
+@media print{.viewer{height:350px}}
+
+/* Three stable view modes, including the separated anatomical layers. */
+.modebar .segmented{border-radius:8px;flex:1;max-width:360px;display:grid;grid-template-columns:1fr 1fr 1.3fr}
+.modebar .segmented button{justify-content:center;min-height:44px;padding:8px;border-radius:6px;letter-spacing:0}
+.viewer[data-mode=exploded]{background:#162e35}
+.scene-top .caption,.detail-eyebrow,.details h2{letter-spacing:0}
+.leader-svg path{fill:none;stroke:#9bdae4;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;opacity:.9}
+.callout.preview{border-color:#98dbea;background:#145062;color:#fff}
+@media(max-width:850px){
+  .model-labels .callout,.leader-svg{display:none}
+  .mobile-model-labels{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:12px;background:#eef8fa;border-top:1px solid var(--line)}
+  .mobile-model-labels button{min-height:44px;border:1px solid #b8dce3;border-radius:8px;padding:8px;background:white;font-size:.8125rem;line-height:1.4;color:#075e70}
+  .mobile-model-labels button[aria-pressed=true]{background:#073b4a;border-color:#073b4a;color:white}
+}
+@media(max-width:600px){
+  .modebar{flex-wrap:nowrap;padding:8px;gap:4px}
+  .mode-extra span{display:none}
+  .modebar .segmented button{font-size:.75rem;padding:6px 3px}
+  .mobile-model-labels{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mobile-model-labels{max-height:none;overflow:visible}
 }

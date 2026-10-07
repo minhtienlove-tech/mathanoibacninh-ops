@@ -104,6 +104,7 @@ function createEyeModel(T) {
   for(const cut of [false,true]){
     mesh(spherePatch(1.79,.985,cut?Math.PI:0,cut?Math.PI:Math.PI*2),mat('#87cadc',{transparent:true,opacity:.06,depthWrite:false,shininess:90}),'vitreous',cut?'cut':'whole',false);
   }
+  mesh(spherePatch(1.76,.985,0,Math.PI*2),mat('#d1e7e8',{transparent:true,opacity:.14,depthWrite:false,roughness:.12,clearcoat:1,envMapIntensity:.9}),'vitreous','exploded',false);
   // Posterior macula and separate optic disc, both on the inner retinal surface.
   function patchOnRetina(center,r,color,id){
     const c=new T.Vector3(...center).normalize().multiplyScalar(1.783),g=new T.CircleGeometry(r,48);
@@ -184,7 +185,33 @@ function createEyeModel(T) {
   for(let i=0;i<6;i++){const dot=new T.Mesh(new T.SphereGeometry(.026,8,6),new T.MeshBasicMaterial({color:'#ffe894'}));rays.add(dot);sparks.push(dot);}
   rays.visible=false;
   let active='cornea',mode='whole';
-  function setMode(next){mode=next;for(const m of modeObjects)m.visible=m.userData.mode===mode;}
+  const separation={cornea:-2.1,aqueous:-1.7,iris:-1.15,pupil:-1.15,lens:-.5,ciliary:-.5,vitreous:-.15,retina:0,macula:0,nerve:0,choroid:.35,sclera:.7};
+  const fullAnterior=new Set(['cornea','aqueous','iris','pupil','lens','ciliary']);
+  let spread=0,spreadStart=0,spreadTarget=0,transitionTime=0;
+  function applyLayout(){
+    for(const [id,g] of Object.entries(parts))g.position.x=spread===0?0:separation[id]*spread;
+  }
+  function setMode(next,animated=false){
+    if(!['whole','cut','exploded'].includes(next))throw new Error('Unknown eye view');
+    mode=next;
+    for(const m of modeObjects){
+      const id=m.userData.id;
+      const geometryMode=mode==='exploded'?(fullAnterior.has(id)?'whole':'cut'):mode;
+      m.visible=id==='vitreous'&&mode==='exploded'?m.userData.mode==='exploded':m.userData.mode===geometryMode;
+      // A pupil remains an aperture, not a separate black disc in the exploded view.
+      if(mode==='exploded'&&id==='pupil'&&m.material.isMeshBasicMaterial)m.visible=false;
+    }
+    spreadStart=spread;spreadTarget=mode==='exploded'?1:0;transitionTime=0;
+    if(!animated){spread=spreadTarget;applyLayout();}
+  }
+  function updateLayout(dt){
+    if(spread===spreadTarget)return false;
+    transitionTime=Math.min(.65,transitionTime+Math.max(0,dt));
+    const t=transitionTime/.65,eased=t*t*(3-2*t);
+    spread=transitionTime===.65?spreadTarget:spreadStart+(spreadTarget-spreadStart)*eased;
+    applyLayout();return true;
+  }
+  function getAnchor(id){return anchors[id].map((value,i)=>value+parts[id].position.getComponent(i));}
   function highlight(id){
     active=id;
     for(const [key,g] of Object.entries(parts))g.traverse(obj=>{
@@ -194,7 +221,7 @@ function createEyeModel(T) {
   }
   function animateLight(t){sparks.forEach((dot,i)=>{const pts=lightTracks[i%3],progress=((t*.22+i/6)%1)*(pts.length-1),seg=Math.floor(progress);dot.position.copy(pts[seg]).lerp(pts[Math.min(seg+1,pts.length-1)],progress-seg);});}
   setMode('whole');highlight(active);
-  return {eye,parts,anchors,pickables,setMode,highlight,rays,animateLight,get mode(){return mode;}};
+  return {eye,parts,anchors,pickables,setMode,updateLayout,getAnchor,highlight,rays,animateLight,get mode(){return mode;}};
 }
 if(typeof module!=='undefined' && module.exports)module.exports=createEyeModel;
 
@@ -215,7 +242,7 @@ if(typeof module!=='undefined' && module.exports)module.exports=createEyeModel;
     {id:'nerve',name:'Dây thần kinh thị giác',en:'Optic nerve',color:'#d3ba85',summary:'Bó sợi thần kinh truyền tín hiệu từ võng mạc về não, góp phần tạo nên hình ảnh mà bạn nhìn thấy.',location:'Đi ra ở phía sau nhãn cầu, bắt đầu tại đĩa thị trên võng mạc.',fact:'Dây thần kinh thị giác truyền tín hiệu điện đến não. Ánh sáng không chạy dọc trong dây thần kinh này.'}
   ];
   const $=id=>document.getElementById(id);
-  let selected=0,mode='whole',labelsOn=true,rotating=false,lightOn=false,model=null,renderer=null,camera=null,scene=null;
+  let selected=0,mode='exploded',labelsOn=true,rotating=false,lightOn=false,model=null,renderer=null,camera=null,scene=null;
   let zoom=1,dirty=true,interacting=false,lastTime=0,canRender=false,animationId=0,hostVisible=true;
   window.addEventListener('eyecare-eye-visibility',event=>{
     hostVisible=event.detail.visible!==false;
@@ -245,21 +272,24 @@ if(typeof module!=='undefined' && module.exports)module.exports=createEyeModel;
       if(reset){stopRotation();resetView(false);}
       model.highlight(d.id);dirty=true;
     }
-    for(const l of labelObjects)l.el.classList.toggle('active',l.id===d.id);
+    for(const l of labelObjects){l.el.classList.toggle('active',l.id===d.id);l.el.setAttribute('aria-pressed',String(l.id===d.id));}
     document.querySelectorAll('[data-label-id]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.labelId===d.id)));
     announce(d.name+'. '+d.summary);
   }
   function setMode(next,notify=true){
-    mode=next;$('cut-btn').setAttribute('aria-pressed',String(mode==='cut'));$('whole-btn').setAttribute('aria-pressed',String(mode==='whole'));
-    $('view-caption').textContent=mode==='cut'?'MẶT CẮT NHÃN CẦU':'NHÃN CẦU NGUYÊN VẸN';
-    if(mode==='whole'&&lightOn)setLight(false);
-    if(model){model.setMode(mode);stopRotation();resetView(false);}
-    if(notify)announce(mode==='cut'?'Đã mở mặt cắt để xem các bộ phận bên trong.':'Đang xem bề mặt nguyên vẹn của nhãn cầu.');dirty=true;
+    mode=next;
+    for(const name of ['exploded','cut','whole'])$(name+'-btn').setAttribute('aria-pressed',String(mode===name));
+    viewer.dataset.mode=mode;
+    const captions={exploded:'CÁC LỚP CỦA MẮT',cut:'MẶT CẮT NHÃN CẦU',whole:'NHÃN CẦU NGUYÊN VẸN'};
+    $('view-caption').textContent=captions[mode];
+    if(mode!=='cut'&&lightOn)setLight(false);
+    if(model){model.setMode(mode,!reduced);stopRotation();resetView(false);}
+    if(notify)announce(captions[mode]);dirty=true;
   }
   function setLight(on){
     lightOn=on;if(on&&mode!=='cut')setMode('cut',false);
     $('light-btn').setAttribute('aria-pressed',String(on));$('light-explanation').hidden=!on;
-    if(model){model.rays.visible=on;if(on){stopRotation();resetView(false);}dirty=true;}
+    if(model){if(on)model.setMode('cut',false);model.rays.visible=on;if(on){stopRotation();resetView(false);}dirty=true;}
   }
   function resetView(notify=true){
     if(!model)return;model.eye.rotation.set(0,0,0);zoom=1;setCamera();dirty=true;
@@ -269,30 +299,50 @@ if(typeof module!=='undefined' && module.exports)module.exports=createEyeModel;
   function setCamera(){
     if(!camera)return;
     const w=viewer.clientWidth,h=viewer.clientHeight,aspect=w/h;
-    const distance=(aspect<1?10.8:(aspect<1.35?9.8:8.9))/zoom;
-    camera.aspect=aspect;camera.position.set(mode==='cut'?-5.4:-10,mode==='cut'?2.3:1.3,mode==='cut'?8.5:4.0).normalize().multiplyScalar(distance);
-    camera.lookAt(.05,0,0);camera.updateProjectionMatrix();dirty=true;
+    let distance=(aspect<1?10.8:(aspect<1.35?9.8:8.9))/zoom;
+    camera.aspect=aspect;
+    if(mode==='exploded'){
+      // Fit the separated anterior layers at narrow iframe widths, not just window widths.
+      distance=Math.max(11.8,12.6/aspect)/zoom;
+      camera.position.set(-6,2.2,10).normalize().multiplyScalar(distance).add(new THREE.Vector3(-.85,0,0));
+      camera.lookAt(-.85,0,0);
+    }else{
+      camera.position.set(mode==='cut'?-5.4:-10,mode==='cut'?2.3:1.3,mode==='cut'?8.5:4.0).normalize().multiplyScalar(distance);
+      camera.lookAt(.05,0,0);
+    }
+    camera.updateProjectionMatrix();dirty=true;
     $('zoom-in').disabled=zoom>=1.64;$('zoom-out').disabled=zoom<=.70;
   }
   function changeZoom(factor){zoom=Math.max(.70,Math.min(1.65,zoom*factor));setCamera();}
+  $('exploded-btn').addEventListener('click',()=>setMode('exploded'));
   $('cut-btn').addEventListener('click',()=>setMode('cut'));$('whole-btn').addEventListener('click',()=>setMode('whole'));
   $('prev-part').addEventListener('click',()=>{if(selected>0)selectPart(selected-1);});$('next-part').addEventListener('click',()=>{if(selected<data.length-1)selectPart(selected+1);});
   $('labels-btn').addEventListener('click',()=>{labelsOn=!labelsOn;$('labels-btn').setAttribute('aria-pressed',String(labelsOn));$('model-labels').hidden=!labelsOn;$('mobile-model-labels').hidden=!labelsOn;dirty=true;});
   $('light-btn').addEventListener('click',()=>setLight(!lightOn));$('rotate-btn').addEventListener('click',()=>{if(!model)return;rotating=!rotating;updateRotateButton();dirty=true;});
   $('zoom-in').addEventListener('click',()=>changeZoom(1.15));$('zoom-out').addEventListener('click',()=>changeZoom(1/1.15));$('reset-btn').addEventListener('click',()=>resetView());$('retry-btn').addEventListener('click',()=>location.reload());
   const labelObjects=[];
-  const labelPositions=[['cornea',4,27],['lens',5,64],['retina',78,24],['nerve',77,65]];
+  let hoveredLabel=null,focusedLabel=null;
+  const labelPositions=[
+    ['cornea',3,14],['aqueous',3,27],['iris',3,40],['pupil',3,53],['lens',3,66],['ciliary',3,79],
+    ['sclera',77,14],['choroid',77,27],['retina',77,40],['vitreous',77,53],['macula',77,66],['nerve',77,79]
+  ];
   const ns='http://www.w3.org/2000/svg';
   for(const [id,x,y] of labelPositions){
-    const d=data.find(d=>d.id===id),el=document.createElement('button');el.className='callout';el.textContent=d.name;if(x>50)el.style.right='4%';else el.style.left=x+'%';el.style.top=y+'%';el.addEventListener('click',()=>selectPart(data.indexOf(d)));
-    const line=document.createElementNS(ns,'line'),circle=document.createElementNS(ns,'circle');circle.setAttribute('r','3');$('leaders').append(line,circle);$('model-labels').append(el);labelObjects.push({id,el,line,circle});
+    const d=data.find(d=>d.id===id),el=document.createElement('button');el.type='button';el.className='callout';el.textContent=d.name;if(x>50)el.style.right='3%';else el.style.left=x+'%';el.style.top=y+'%';el.addEventListener('click',()=>selectPart(data.indexOf(d)));
+    el.addEventListener('pointerenter',event=>{if(event.pointerType!=='touch'){hoveredLabel=id;dirty=true;}});
+    el.addEventListener('pointerleave',()=>{if(hoveredLabel===id)hoveredLabel=null;dirty=true;});
+    el.addEventListener('focus',()=>{focusedLabel=id;dirty=true;});
+    el.addEventListener('blur',()=>{if(focusedLabel===id)focusedLabel=null;dirty=true;});
+    const line=document.createElementNS(ns,'path'),circle=document.createElementNS(ns,'circle');
+    line.dataset.id=id;line.style.display='none';circle.style.display='none';circle.setAttribute('r','3');
+    $('leaders').append(line,circle);$('model-labels').append(el);labelObjects.push({id,el,line,circle,left:x<50});
     const mobileLabel=document.createElement('button');mobileLabel.type='button';mobileLabel.dataset.labelId=id;mobileLabel.textContent=d.name;
     mobileLabel.setAttribute('aria-pressed','false');mobileLabel.addEventListener('click',()=>selectPart(data.indexOf(d)));$('mobile-model-labels').append(mobileLabel);
   }
   selectPart(0,false);
   function fallback(){
     canRender=false;$('loader').hidden=true;$('fallback').hidden=false;$('model-labels').hidden=true;$('mobile-model-labels').hidden=true;
-    for(const id of ['cut-btn','whole-btn','labels-btn','rotate-btn','zoom-in','zoom-out','reset-btn','light-btn'])$(id).disabled=true;
+    for(const id of ['exploded-btn','cut-btn','whole-btn','labels-btn','rotate-btn','zoom-in','zoom-out','reset-btn','light-btn'])$(id).disabled=true;
   }
   try {
     if(typeof THREE==='undefined')throw new Error('3D engine unavailable');
@@ -306,7 +356,7 @@ if(typeof module!=='undefined' && module.exports)module.exports=createEyeModel;
     const main=new T.DirectionalLight(0xfff5e9,2.7);main.position.set(-4,6,7);scene.add(main);
     const fill=new T.DirectionalLight(0xc7e1ff,.65);fill.position.set(4,1,5);scene.add(fill);
     const rim=new T.DirectionalLight(0xe2f8ff,1.8);rim.position.set(-1,-3,-5);scene.add(rim);
-    model=createEyeModel(T);scene.add(model.eye);model.highlight(data[selected].id);
+    model=createEyeModel(T);model.setMode(mode);scene.add(model.eye);model.highlight(data[selected].id);
     const raycaster=new T.Raycaster(),pointer=new T.Vector2(),projected=new T.Vector3();
     const pointers=new Map();let down=null,pinchDistance=0;
     function resize(){const w=viewer.clientWidth,h=viewer.clientHeight;if(w&&h){renderer.setSize(w,h,false);setCamera();}}
@@ -316,14 +366,26 @@ if(typeof module!=='undefined' && module.exports)module.exports=createEyeModel;
       if(!labelsOn)return;
       const w=viewer.clientWidth,h=viewer.clientHeight;model.eye.updateMatrixWorld(true);camera.updateMatrixWorld(true);
       for(const l of labelObjects){
-        const p=localToScreen(model.anchors[l.id]);let visible=mode==='cut'||l.id==='cornea'||l.id==='nerve';
+        const p=localToScreen(model.getAnchor(l.id));let visible=mode!=='whole'||l.id==='cornea'||l.id==='nerve';
         visible=visible&&p.z>-1&&p.z<1&&p.x>0&&p.x<w&&p.y>0&&p.y<h;
-        l.el.hidden=!visible;l.line.style.display=visible?'':'none';l.circle.style.display=visible?'':'none';if(!visible)continue;
-        const x=l.el.offsetLeft+l.el.offsetWidth/2,y=l.el.offsetTop+l.el.offsetHeight/2;
-        l.line.setAttribute('x1',String(x));l.line.setAttribute('y1',String(y));l.line.setAttribute('x2',p.x.toFixed(1));l.line.setAttribute('y2',p.y.toFixed(1));l.circle.setAttribute('cx',p.x.toFixed(1));l.circle.setAttribute('cy',p.y.toFixed(1));
+        l.el.hidden=!visible;l.projected=p;l.available=visible&&l.el.offsetWidth>0;
       }
-      const d=data[selected],p=localToScreen(model.anchors[d.id]);const dot=$('selected-point');
-      dot.hidden=p.x<6||p.x>w-6||p.y<6||p.y>h-6||p.z>1||(mode==='whole'&&!['cornea','sclera','iris','pupil','nerve'].includes(d.id));
+      const available=id=>labelObjects.some(l=>l.id===id&&l.available);
+      if(!available(hoveredLabel))hoveredLabel=null;
+      if(!available(focusedLabel))focusedLabel=null;
+      const activeId=hoveredLabel||focusedLabel||data[selected].id;
+      for(const l of labelObjects){
+        const visible=l.available&&l.id===activeId;
+        l.line.style.display=visible?'':'none';l.circle.style.display=visible?'':'none';
+        l.el.classList.toggle('preview',visible&&l.id!==data[selected].id);
+        if(!visible)continue;
+        const p=l.projected,x=l.el.offsetLeft+(l.left?l.el.offsetWidth:0),y=l.el.offsetTop+l.el.offsetHeight/2;
+        const elbow=x+(l.left?18:-18);
+        l.line.setAttribute('d',`M ${x} ${y} H ${elbow} L ${p.x.toFixed(1)} ${p.y.toFixed(1)}`);
+        l.circle.setAttribute('cx',p.x.toFixed(1));l.circle.setAttribute('cy',p.y.toFixed(1));
+      }
+      const p=localToScreen(model.getAnchor(activeId)),dot=$('selected-point');
+      dot.hidden=p.x<6||p.x>w-6||p.y<6||p.y>h-6||p.z<-1||p.z>1||(mode==='whole'&&!['cornea','sclera','iris','pupil','nerve'].includes(activeId));
       dot.style.left=p.x+'px';dot.style.top=p.y+'px';
     }
     function pick(clientX,clientY){
@@ -365,6 +427,7 @@ if(typeof module!=='undefined' && module.exports)module.exports=createEyeModel;
       animationId=requestAnimationFrame(frame);
       if(!canRender||document.hidden||!inView||!hostVisible){lastTime=time;return;}
       const dt=Math.min((time-lastTime)/1000,.05);lastTime=time;
+      if(model.updateLayout(dt))dirty=true;
       if(rotating&&!interacting){model.eye.rotation.y+=dt*.22;dirty=true;$('view-orientation').textContent='Đang xoay · Bấm dừng để quan sát';}
       if(lightOn&&!reduced){model.animateLight(time/1000);dirty=true;}
       if(dirty){renderer.render(scene,camera);updateLabels();dirty=false;}

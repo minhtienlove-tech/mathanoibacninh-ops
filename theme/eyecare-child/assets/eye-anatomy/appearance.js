@@ -77,5 +77,3 @@ function createEyeStudio(T,renderer){
   generator.dispose();room.traverse(o=>{if(o.isMesh){o.geometry.dispose();o.material.dispose();}});
   return target;
 }
-
-
