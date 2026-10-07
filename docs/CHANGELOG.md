@@ -4,7 +4,7 @@
 
 - Trang `/giay-phep-hoat-dong/` trước đây dùng chữ trắng trên nền xanh rất nhạt, tiêu đề quá lớn và các thẻ tóm tắt chồng lên phần nội dung. Đổi sang phần đầu màu sáng với chữ xanh đậm, thẻ hiển thị trực tiếp số giấy phép/cơ quan cấp/ngày cấp và liên kết bản chụp; thêm liên kết nhảy đến các mục chính.
 - Chỉ sửa `theme/eyecare-child/page-giay-phep-hoat-dong.php` và `theme/eyecare-child/assets/page-layouts.css`; giữ nguyên nguồn dữ liệu pháp lý và nội dung các mục. Các mục nội dung thành thẻ dễ đọc; có bố cục riêng cho màn hình nhỏ và không che bản chụp giấy phép.
-- Backup production, kết quả lint/smoke test và đường dẫn rollback được ghi sau khi triển khai.
+- Đã sao lưu hai file gốc và database tại `/home/jwhxtzru/backups/gphd-design-20261007-140933/`; script `scripts/deploy-gphd-design-20261007.sh` chỉ ghi khi checksum bản production khớp, có khóa deploy và in sẵn lệnh rollback chọn lọc. `php -l` trên staging/production đạt, xóa object/LiteSpeed cache, `verify-live.ps1 -CheckSsh` đạt. HTML công khai còn đủ số 444/BYT-GPHĐ, cơ quan cấp, ngày cấp, 5 mục nội dung và ảnh scan. Kiểm tra Chrome desktop và viewport 390 px thấy chữ đầu trang tương phản tốt, thẻ thông tin không đè nội dung, không tràn ngang.
 
 ## 2026-10-07 — ảnh riêng cho 12 bài giới thiệu chuyên mục (đã triển khai)
 
