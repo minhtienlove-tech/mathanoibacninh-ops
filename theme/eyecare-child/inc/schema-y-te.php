@@ -69,9 +69,34 @@ function eyecare_du_lieu_thuc_the() {
 		'vi_do'          => '',
 		'kinh_do'        => '',
 
-		// Bệnh viện xác nhận đã có GPHĐ ngày 06/10/2026; số giấy phép chưa cung cấp.
-		// Để trống cho tới khi đối chiếu bản giấy, không tự điền vào schema.
-		'so_gphd'        => '',
+		/* ---- GIẤY PHÉP HOẠT ĐỘNG — đọc từ bản giấy ----------------- */
+
+		// Số giấy phép do người phụ trách đối chiếu bản giấy và xác nhận
+		// ngày 07/10/2026. Trước đó trường này để rỗng vì chưa có bản giấy.
+		// Rỗng thì khối identifier và trang công bố tự ẩn, KHÔNG bịa số.
+		'so_gphd'        => '444/BYT-GPHĐ',
+		'gphd_ngay_cap'  => '2026-10-06',
+		'gphd_co_quan'   => 'Bộ Y tế',
+		'gphd_nguoi_ky'  => 'Thứ trưởng Thường trực Vũ Mạnh Hà',
+		'gphd_hinh_thuc' => 'Bệnh viện chuyên khoa',
+
+		// Địa chỉ ghi NGUYÊN VĂN trên bản giấy. Giấy cấp 06/10/2026 còn dùng
+		// “tỉnh Bắc Ninh”, trong khi địa danh hành chính hiện hành là
+		// “Thành phố Bắc Ninh” (Nghị quyết 202/2025/QH15 và 39/2026/QH16).
+		// Giữ cả hai: schema/giao diện dùng địa danh hiện hành ở trên,
+		// trường này chỉ để trích dẫn đúng bản giấy trên trang công bố.
+		'gphd_dia_chi_nguyen_van' => 'Lô 04, đường Hùng Vương, phường Bắc Giang, tỉnh Bắc Ninh',
+
+		// Giờ hoạt động ghi trên giấy phép là “24/24 giờ”. Giờ tiếp nhận
+		// khám theo lịch vẫn là gio_mo–gio_dong ở trên. CHƯA công bố 24/24
+		// cho người bệnh vì đang chờ bệnh viện xác nhận có trực đêm thật;
+		// để rỗng thì trang giấy phép không in dòng giờ trên giấy.
+		'gphd_gio_tren_giay' => '',
+
+		// Ảnh chụp bản giấy, đặt trong assets/giay-phep/.
+		'gphd_anh'       => 'giay-phep/gphd-444-byt-2026.webp',
+		'gphd_anh_rong'  => 1496,
+		'gphd_anh_cao'   => 2000,
 
 		// Các hồ sơ chính thức khác của bệnh viện trên mạng.
 		// Chỉ thêm địa chỉ đã xác minh là của bệnh viện.
@@ -105,6 +130,78 @@ function eyecare_du_lieu_thuc_the() {
 function eyecare_dia_chi_day_du() {
 	$d = eyecare_du_lieu_thuc_the();
 	return $d['dia_chi'] . ', ' . $d['phuong'] . ', ' . $d['tinh'];
+}
+
+/* ==========================================================================
+ * GIẤY PHÉP HOẠT ĐỘNG
+ * --------------------------------------------------------------------------
+ * Mọi nơi hiển thị giấy phép (trang công bố, chân trang, schema) đọc qua
+ * các hàm dưới đây. Chưa có số giấy phép thì eyecare_co_gphd() trả false và
+ * tất cả các điểm hiển thị tự ẩn — không có chỗ nào in giá trị tạm.
+ * ========================================================================== */
+
+/** Đường dẫn trang công bố giấy phép. */
+const EYECARE_GPHD_SLUG = 'giay-phep-hoat-dong';
+
+/**
+ * Đã có số giấy phép để công bố hay chưa.
+ *
+ * @return bool
+ */
+function eyecare_co_gphd() {
+	$d = eyecare_du_lieu_thuc_the();
+	return ! empty( $d['so_gphd'] );
+}
+
+/**
+ * URL trang công bố giấy phép, rỗng khi chưa có số giấy phép.
+ *
+ * @return string
+ */
+function eyecare_gphd_url() {
+	if ( ! eyecare_co_gphd() ) {
+		return '';
+	}
+	return home_url( '/' . EYECARE_GPHD_SLUG . '/' );
+}
+
+/**
+ * Ngày cấp dạng người Việt đọc được, rỗng khi chưa có hoặc sai định dạng.
+ *
+ * @return string
+ */
+function eyecare_gphd_ngay_hien() {
+	$d = eyecare_du_lieu_thuc_the();
+	$ngay = isset( $d['gphd_ngay_cap'] ) ? (string) $d['gphd_ngay_cap'] : '';
+
+	if ( ! preg_match( '/^\d{4}-\d{2}-\d{2}$/', $ngay ) ) {
+		return '';
+	}
+
+	$moc = strtotime( $ngay . ' 00:00:00 +0000' );
+	if ( false === $moc ) {
+		return '';
+	}
+
+	return wp_date( 'd/m/Y', $moc, new DateTimeZone( 'UTC' ) );
+}
+
+/**
+ * URL ảnh chụp bản giấy, rỗng khi tệp không tồn tại trong theme.
+ *
+ * Kiểm tra tệp thật để trang không hiển thị ô ảnh lỗi khi ảnh bị xóa.
+ *
+ * @return string
+ */
+function eyecare_gphd_anh_url() {
+	$d = eyecare_du_lieu_thuc_the();
+	$duong_dan = isset( $d['gphd_anh'] ) ? ltrim( (string) $d['gphd_anh'], '/' ) : '';
+
+	if ( '' === $duong_dan || ! is_file( get_stylesheet_directory() . '/assets/' . $duong_dan ) ) {
+		return '';
+	}
+
+	return get_stylesheet_directory_uri() . '/assets/' . $duong_dan;
 }
 
 /**
@@ -209,6 +306,32 @@ function eyecare_schema_to_chuc() {
 			'name'  => 'Giấy phép hoạt động khám bệnh, chữa bệnh',
 			'value' => $d['so_gphd'],
 		);
+
+		/* Khai cả dạng hasCredential để máy đọc biết cơ quan cấp và ngày cấp,
+		   không chỉ một con số trơ. Mỗi trường chỉ in khi thật sự có. */
+		$chung_nhan = array(
+			'@type' => array( 'EducationalOccupationalCredential' ),
+			'name'  => 'Giấy phép hoạt động khám bệnh, chữa bệnh số ' . $d['so_gphd'],
+			'identifier' => $d['so_gphd'],
+		);
+
+		if ( ! empty( $d['gphd_co_quan'] ) ) {
+			$chung_nhan['recognizedBy'] = array(
+				'@type' => 'GovernmentOrganization',
+				'name'  => $d['gphd_co_quan'],
+			);
+		}
+
+		if ( ! empty( $d['gphd_ngay_cap'] ) ) {
+			$chung_nhan['validFrom'] = $d['gphd_ngay_cap'];
+		}
+
+		$trang_gphd = eyecare_gphd_url();
+		if ( '' !== $trang_gphd ) {
+			$chung_nhan['url'] = $trang_gphd;
+		}
+
+		$org['hasCredential'] = $chung_nhan;
 	}
 
 	// URL Facebook chính thức do người phụ trách website xác nhận 30/09/2026.

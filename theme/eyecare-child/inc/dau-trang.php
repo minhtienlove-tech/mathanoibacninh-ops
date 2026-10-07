@@ -138,8 +138,10 @@ function eyecare_menu_url( $duong_dan ) {
  * Các đích chính đã publish; nhánh Khu vực hiển thị ba trang trụ cột,
  * còn 99 trang xã/phường được điều hướng trong chính nội dung nhánh.
  *
- * Giấy phép hoạt động đã được người phụ trách xác nhận ngày 06/10/2026;
- * số giấy phép chưa được cung cấp nên không đưa số vào nội dung/schema.
+ * Giấy phép hoạt động số 444/BYT-GPHĐ do Bộ Y tế cấp ngày 06/10/2026, người
+ * phụ trách đối chiếu bản giấy ngày 07/10/2026. Trang công bố nằm ở
+ * /giay-phep-hoat-dong/, liên kết từ chân trang chứ không vào menu chính —
+ * đây là trang tra cứu khi cần, không phải đích điều hướng thường xuyên.
  *
  * @return array[] Mảng các mảng: duong_dan, nhan.
  */

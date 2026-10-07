@@ -3,8 +3,9 @@
  * Trang Giới thiệu bệnh viện.
  *
  * Nội dung định danh, liên hệ và đội ngũ được lấy từ nguồn dữ liệu dùng chung
- * của theme. Các thông tin chưa xác minh như số giấy phép hoặc tên thiết bị
- * cụ thể không được tự suy diễn trong template này.
+ * của theme. Các thông tin chưa xác minh như tên thiết bị cụ thể không được tự
+ * suy diễn trong template này. Số giấy phép hoạt động nay đã có và được công
+ * bố riêng tại /giay-phep-hoat-dong/.
  *
  * @package Eyecare_Child
  */

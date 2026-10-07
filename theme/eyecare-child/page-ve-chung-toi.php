@@ -3,8 +3,9 @@
  * Trang Về chúng tôi.
  *
  * Nội dung định danh, liên hệ và đội ngũ được lấy từ nguồn dữ liệu dùng chung
- * của theme. Các thông tin chưa xác minh như số giấy phép hoặc tên thiết bị
- * cụ thể không được tự suy diễn trong template này.
+ * của theme. Các thông tin chưa xác minh như tên thiết bị cụ thể không được tự
+ * suy diễn trong template này. Số giấy phép hoạt động nay đã có và được công
+ * bố riêng tại /giay-phep-hoat-dong/; khối Hồ sơ pháp lý dẫn sang trang đó.
  *
  * @package Eyecare_Child
  */
@@ -201,6 +202,11 @@ while ( have_posts() ) :
 					<?php foreach ( $cac_muc as $i => $muc ) :
 						$trang_con = get_page_by_path( 'gioi-thieu/' . $muc['slug'] );
 						$co_trang_con = $trang_con instanceof WP_Post && 'publish' === $trang_con->post_status && '' !== trim( wp_strip_all_tags( strip_shortcodes( $trang_con->post_content ) ) );
+
+						/* Khối Hồ sơ pháp lý dẫn sang trang công bố giấy phép khi đã có
+						   số giấy phép. Trước đó khối này không có đích nào để đi. */
+						$dich_gphd = ( 'ho-so-phap-ly' === $muc['slug'] && function_exists( 'eyecare_gphd_url' ) )
+							? eyecare_gphd_url() : '';
 						?>
 						<article id="gt-<?php echo esc_attr( $muc['slug'] ); ?>" class="eyecare-gioi-thieu__bento-card eyecare-gioi-thieu__bento-card--<?php echo esc_attr( (string) ( $i + 1 ) ); ?>">
 							<span class="eyecare-gioi-thieu__bento-icon"><?php echo eyecare_gioi_thieu_icon( $muc['icon'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
@@ -209,6 +215,8 @@ while ( have_posts() ) :
 							<div><?php echo esc_html( $muc['mo_ta'] ); ?></div>
 							<?php if ( $co_trang_con ) : ?>
 								<a href="<?php echo esc_url( get_permalink( $trang_con->ID ) ); ?>">Xem nội dung chi tiết <span aria-hidden="true">→</span></a>
+							<?php elseif ( '' !== $dich_gphd ) : ?>
+								<a href="<?php echo esc_url( $dich_gphd ); ?>">Xem giấy phép hoạt động <span aria-hidden="true">→</span></a>
 							<?php endif; ?>
 						</article>
 					<?php endforeach; ?>

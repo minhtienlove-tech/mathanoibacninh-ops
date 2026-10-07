@@ -4517,6 +4517,30 @@ ul, ol {
 	background: rgba(255, 255, 255, .18);
 }
 
+/* Giấy phép hoạt động: tín hiệu pháp lý người bệnh tìm, nên rõ hơn hai liên
+   kết còn lại trong cụm thay vì chìm xuống cùng mức xám. */
+.eyecare-chan__phap-ly a.eyecare-chan__gphd {
+	display: inline-flex;
+	align-items: center;
+	gap: .34rem;
+	color: rgba(235, 248, 240, .86);
+	font-weight: 600;
+}
+
+.eyecare-chan__phap-ly a.eyecare-chan__gphd::before {
+	width: .95rem;
+	height: .95rem;
+	background: currentColor;
+	content: "";
+	-webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpath d='M14 2v6h6'/%3E%3Cpath d='m9 15 2 2 4-4'/%3E%3C/svg%3E") center / contain no-repeat;
+	mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z'/%3E%3Cpath d='M14 2v6h6'/%3E%3Cpath d='m9 15 2 2 4-4'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.eyecare-chan__phap-ly a.eyecare-chan__gphd:hover,
+.eyecare-chan__phap-ly a.eyecare-chan__gphd:focus-visible {
+	color: #ffe184;
+}
+
 @keyframes eyecare-map-orb-left {
 	0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
 	50% { transform: translate3d(2.2rem, -1.2rem, 0) scale(1.06); }

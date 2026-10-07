@@ -348,9 +348,15 @@ require_once get_stylesheet_directory() . '/inc/noi-dung-lien-he-seo.php';
  *
  * Dữ liệu chưa có thì để rỗng trong hàm eyecare_du_lieu_thuc_the() —
  * trường rỗng tự động bị bỏ khỏi schema, KHÔNG bịa giá trị tạm.
- * Còn thiếu: toạ độ (B-16), số Giấy phép hoạt động để đối chiếu bản giấy.
+ * Còn thiếu: toạ độ (B-16).
+ * Số Giấy phép hoạt động đã có từ 07/10/2026 (444/BYT-GPHĐ, Bộ Y tế cấp
+ * 06/10/2026) và được công bố tại /giay-phep-hoat-dong/.
  * ========================================================================== */
 require_once get_stylesheet_directory() . '/inc/schema-y-te.php';
+
+/* Tiêu đề/mô tả/OG cho trang công bố giấy phép hoạt động. Nạp sau schema vì
+ * dùng eyecare_co_gphd() và EYECARE_GPHD_SLUG khai trong inc/schema-y-te.php. */
+require_once get_stylesheet_directory() . '/inc/giay-phep-seo.php';
 
 /* Quản trị số điện thoại, giờ mở cửa, địa chỉ và bản đồ từ một màn hình. */
 require_once get_stylesheet_directory() . '/inc/quan-ly-lien-he.php';

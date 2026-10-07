@@ -19,6 +19,8 @@ $eyecare_maps_query        = rawurlencode( $eyecare_tt['ten'] . ' ' . $eyecare_d
 $eyecare_maps_search       = $eyecare_tt['map_url'];
 $eyecare_maps_directions   = 'https://www.google.com/maps/dir/?api=1&destination=' . $eyecare_maps_query;
 $eyecare_privacy_url       = function_exists( 'get_privacy_policy_url' ) ? get_privacy_policy_url() : '';
+/* Rỗng khi chưa có số giấy phép — liên kết và dòng pháp nhân tự ẩn. */
+$eyecare_gphd_url          = function_exists( 'eyecare_gphd_url' ) ? eyecare_gphd_url() : '';
 $eyecare_la_trang_khu_vuc  = is_page() && function_exists( 'eyecare_khu_vuc_nguon' ) && eyecare_khu_vuc_nguon( get_queried_object() );
 $eyecare_facebook_url      = ! empty( $eyecare_tt['same_as'][0] ) ? $eyecare_tt['same_as'][0] : '';
 $eyecare_mang_xa_hoi       = array(
@@ -220,6 +222,7 @@ $eyecare_footer_doctor_image = $eyecare_footer_byline ? get_the_post_thumbnail_u
 		<div class="eyecare-chan__day">
 			<p><?php printf( esc_html__( '© %1$s %2$s', 'eyecare-child' ), esc_html( gmdate( 'Y' ) ), esc_html( $eyecare_tt['phap_nhan'] ) ); ?> · Mã số thuế <?php echo esc_html( $eyecare_tt['mst'] ); ?></p>
 			<nav class="eyecare-chan__phap-ly" aria-label="Liên kết pháp lý">
+				<?php if ( $eyecare_gphd_url ) : ?><a class="eyecare-chan__gphd" href="<?php echo esc_url( $eyecare_gphd_url ); ?>">Giấy phép hoạt động số <?php echo esc_html( $eyecare_tt['so_gphd'] ); ?></a><span aria-hidden="true"></span><?php endif; ?>
 				<?php if ( $eyecare_privacy_url ) : ?><a href="<?php echo esc_url( $eyecare_privacy_url ); ?>">Chính sách bảo mật</a><span aria-hidden="true"></span><?php endif; ?>
 				<a href="<?php echo esc_url( home_url( '/wp-sitemap.xml' ) ); ?>">Sơ đồ trang</a>
 			</nav>
