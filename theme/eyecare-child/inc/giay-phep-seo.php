@@ -86,8 +86,12 @@ add_filter( 'pre_get_document_title', 'eyecare_gphd_tieu_de', 110 );
 /**
  * Gỡ Open Graph và schema trùng của OBS trên riêng trang giấy phép.
  *
- * Giữ dữ liệu OBS nguyên vẹn, chỉ ngừng đầu ra ở trang này để trang không có
- * hai bộ og:description khác nhau.
+ * Giữ dữ liệu OBS nguyên vẹn, chỉ ngừng đầu ra ở trang này vì:
+ * - Open Graph: tránh hai bộ og:description khác nhau trên cùng một trang.
+ * - Schema Article: sai loại cho một trang công bố hồ sơ pháp lý, và vì
+ *   post_content rỗng nên OBS sinh ra description rỗng cùng author.name rỗng.
+ *   Thực thể Hospital kèm hasCredential ở inc/schema-y-te.php đã mô tả đúng
+ *   nội dung trang này.
  *
  * @return void
  */
@@ -99,6 +103,19 @@ function eyecare_gphd_go_metadata_obs_trung() {
 	$opengraph = OBS_Loader::get( 'opengraph' );
 	if ( $opengraph ) {
 		remove_action( 'wp_head', array( $opengraph, 'render' ), 5 );
+	}
+
+	$schema = OBS_Loader::get( 'schema' );
+	if ( $schema ) {
+		remove_action( 'wp_head', array( $schema, 'render' ), 10 );
+	}
+
+	/* BreadcrumbList: theme đã xuất một bộ trong @graph. Bộ của OBS trùng nội
+	   dung và đặt emoji vào trường name, nên gỡ bộ thứ hai ở trang này.
+	   Lưu ý: trùng lặp này còn tồn tại trên toàn site, cần xử lý riêng. */
+	$breadcrumb = OBS_Loader::get( 'breadcrumb' );
+	if ( $breadcrumb ) {
+		remove_action( 'wp_head', array( $breadcrumb, 'render_schema' ), 15 );
 	}
 }
 add_action( 'wp', 'eyecare_gphd_go_metadata_obs_trung', 20 );
