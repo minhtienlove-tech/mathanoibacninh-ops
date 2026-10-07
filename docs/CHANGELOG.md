@@ -1,5 +1,13 @@
 # Production changelog
 
+## 2026-10-07 — ảnh riêng cho 12 bài giới thiệu chuyên mục (đã triển khai)
+
+- Trước khi sửa, bài ID 1678–1689 đều không có `_thumbnail_id`; `inc/anh-bai-du-phong.php` đưa cùng một ảnh khám mắt dự phòng vào các thẻ bài. Tạo 12 ảnh biên tập minh họa khác nhau theo đúng 5 chủ đề kiến thức và 7 chủ đề tin bệnh viện; không dùng hình này làm bằng chứng về bác sĩ, người bệnh, ưu đãi hay hoạt động thực tế.
+- Từ PNG nguồn tạo 12 WebP rộng 1200 px bằng `scripts/prepare-category-intro-images.py`; mỗi ảnh 34–82 KB, tổng 708.398 byte. Ảnh tối ưu, manifest SHA-256/alt và bảng ánh xạ bài–attachment lưu trong `docs/drafts/category-intros/images/`. PNG nguồn nằm cục bộ trong `image-source/`, không đưa vào Git.
+- Dưới khóa `~/website-ops-deploy.lock`, `scripts/deploy-category-intro-images-20261007.sh` kiểm tra đủ 12 ID/slug/trạng thái, SHA và ảnh đại diện đang trống; sao lưu database, rồi nhập attachment **1707–1718** và gắn từng ảnh cho đúng bài. Media có alt mô tả cảnh, caption nêu rõ ảnh tạo bằng AI, meta `_eyecare_ai_illustration=1`. Không sửa theme hay bài viết. Đã xóa object cache và LiteSpeed cache.
+- Backup và rollback chọn lọc: `/home/jwhxtzru/backups/category-images-20261007-112802/` có `database-before.sql`, WebP gốc, `featured-before.tsv`, `imported.tsv`, `ROLLBACK.txt`. Nếu cần hoàn tác, chỉ gỡ `_thumbnail_id` cho 12 ID theo bảng cũ; giữ attachment cho đến khi có xác nhận xóa.
+- Kiểm tra sau triển khai: 12/12 URL bài chuẩn và 12/12 URL ảnh HTTP 200, đúng 12 file WebP khác nhau và MIME `image/webp`; ảnh đại diện xuất hiện trong HTML công khai, không redirect. Kiểm tra trực quan `/tin-tuc/` thấy các thẻ dùng ảnh khác nhau. PHP lint `footer.php`/`page-lien-he.php` và `verify-live.ps1 -CheckSsh` đều đạt.
+
 ## 2026-10-07 — bấm bác sĩ nào cũng mở đúng hồ sơ trên /doi-ngu-bac-si/ (đã triển khai ~11:29)
 
 - Trước đây bấm ảnh/tên ba bác sĩ có Facebook (Lê Như Tùng, Đặng Công Hải, Bùi Văn Cảnh) mở thẳng Facebook ở tab mới; ba người còn lại về `/doi-ngu-bac-si/#bac-si-...` nhưng sáu hồ sơ luôn mở hết.

@@ -1,0 +1,3 @@
+# Keep full-resolution generated PNG sources locally; Git stores the optimized WebP assets.
+*.png
+prompts-*.json

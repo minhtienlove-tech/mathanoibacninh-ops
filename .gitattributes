@@ -1,0 +1,3 @@
+# Deployment scripts and tabular manifests must retain Unix line endings on Windows.
+scripts/*.sh text eol=lf
+docs/drafts/category-intros/images/*.tsv text eol=lf
