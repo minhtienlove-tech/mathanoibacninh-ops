@@ -21,6 +21,7 @@ while ( have_posts() ) :
 	$bs_id       = get_the_ID();
 	$bs          = function_exists( 'eyecare_bac_si_du_lieu_theo_id' ) ? eyecare_bac_si_du_lieu_theo_id( $bs_id ) : array();
 	$bs_ten      = $bs ? trim( $bs['hoc_vi'] . ' ' . $bs['ho_ten'] ) : get_the_title();
+	$bs_la_bac_si = $bs && false !== strpos( strtoupper( (string) $bs['hoc_vi'] ), 'BS' );
 	$bs_doi_ngu  = eyecare_du_lieu_doi_ngu();
 	$bs_the      = array();
 	foreach ( $bs_doi_ngu as $bs_muc ) {
@@ -33,6 +34,7 @@ while ( have_posts() ) :
 	$bs_phong    = eyecare_bac_si_phong_kham_url( $bs_id );
 	$bs_khac     = eyecare_bac_si_lien_ket_khac( $bs_id );
 	$bs_bai      = eyecare_bac_si_bai_viet_ids( $bs_id, 12 );
+	$bs_nguon_thanh_tich = trim( (string) get_post_meta( $bs_id, '_eyecare_nguon_thanh_tich', true ) );
 	$bs_tom_tat  = trim( (string) get_post_field( 'post_excerpt', $bs_id, 'raw' ) );
 	$bs_co_bio   = '' !== trim( wp_strip_all_tags( strip_shortcodes( get_the_content() ) ) );
 	$bs_dat_lich = get_page_by_path( 'dat-lich-kham' );
@@ -59,7 +61,7 @@ while ( have_posts() ) :
 							<?php endif; ?>
 						</figure>
 						<div class="eyecare-bac-si-page__heading">
-							<p class="eyecare-news__eyebrow">Hồ sơ bác sĩ</p>
+							<p class="eyecare-news__eyebrow"><?php echo $bs_la_bac_si ? 'Hồ sơ bác sĩ' : 'Hồ sơ nhân sự chuyên môn'; ?></p>
 							<h1><?php echo esc_html( $bs_ten ); ?></h1>
 							<?php if ( ! empty( $bs['chuc_danh'] ) ) : ?>
 								<p class="eyecare-bac-si-page__role"><?php echo esc_html( $bs['chuc_danh'] ); ?></p>
@@ -88,7 +90,7 @@ while ( have_posts() ) :
 
 			<div class="eyecare-news__container eyecare-bac-si-page__body">
 				<div class="eyecare-bac-si-page__main">
-					<?php if ( ! empty( $bs_the['highlights'] ) ) : ?>
+					<?php if ( $bs_nguon_thanh_tich && ! empty( $bs_the['highlights'] ) ) : ?>
 						<section class="eyecare-bac-si-page__card" aria-labelledby="eyecare-bs-chuyen-mon">
 							<h2 id="eyecare-bs-chuyen-mon">Chuyên môn và kinh nghiệm</h2>
 							<ul class="eyecare-bac-si-page__checks">

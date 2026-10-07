@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-07 — nội dung 6 hồ sơ nhân sự chuyên môn
+
+- Biên tập lại 6 bản nháp trong `docs/drafts/bac-si/` từ dữ liệu hồ sơ hiện có; bỏ số ca, thành tích, kỹ thuật, lịch làm việc và mô tả quy trình cá nhân chưa có nguồn đối chiếu. Nội dung y khoa chung được tách khỏi thông tin cá nhân. Hai cử nhân khúc xạ/cận lâm sàng được gọi đúng chức danh, không giới thiệu là bác sĩ.
+- `single-eyecare_bac_si.php` dùng nhãn “Hồ sơ nhân sự chuyên môn” cho cử nhân và chỉ in thẻ thành tích khi trường nguồn thành tích có dữ liệu. Vai trò Lê Như Tùng trong nội dung và metadata thống nhất là “Cố vấn chuyên môn”; bỏ chức danh Chủ tịch HĐQT chưa có văn bản xác nhận.
+- Triển khai qua `scripts/deploy-doctor-bios-20261007.sh`, sao lưu file và database trước khi đổi nội dung WordPress; ghi đường dẫn backup và kết quả kiểm tra sau triển khai.
+
 ## 2026-10-07 — rà soát 6 bản nháp hồ sơ nhân sự (chưa xuất bản)
 
 - Đối chiếu 6 tệp trong `docs/drafts/bac-si/` với dữ liệu hồ sơ WordPress; kiểm tra số từ và 37 đích liên kết nội bộ (đều HTTP 200). Báo cáo chi tiết ở `docs/drafts/bac-si/AUDIT-2026-10-07.md`.
