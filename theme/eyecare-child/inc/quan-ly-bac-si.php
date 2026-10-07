@@ -691,8 +691,8 @@ function eyecare_bai_bac_si_byline( $post_id ) {
  * @return string
  */
 function eyecare_bac_si_trang_ca_nhan_url( $doctor ) {
-	$facebook = eyecare_bac_si_facebook_url( $doctor );
-	return $facebook ?: eyecare_bac_si_ho_so_url( $doctor );
+	// Mọi lượt bấm vào bác sĩ đều về hồ sơ nội bộ; Facebook nằm trong hồ sơ đó.
+	return eyecare_bac_si_ho_so_url( $doctor );
 }
 
 /**

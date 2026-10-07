@@ -1,5 +1,20 @@
 # Production changelog
 
+## 2026-10-07 — bấm bác sĩ nào cũng mở đúng hồ sơ trên /doi-ngu-bac-si/ (đã triển khai ~11:29)
+
+- Trước đây bấm ảnh/tên ba bác sĩ có Facebook (Lê Như Tùng, Đặng Công Hải, Bùi Văn Cảnh) mở thẳng Facebook ở tab mới; ba người còn lại về `/doi-ngu-bac-si/#bac-si-...` nhưng sáu hồ sơ luôn mở hết.
+- `eyecare_bac_si_trang_ca_nhan_url()` nay luôn trả hồ sơ nội bộ `/doi-ngu-bac-si/#bac-si-<slug>`. Áp dụng cho khối đội ngũ (trang chủ, Giới thiệu, Đội ngũ), tên bác sĩ trong bài viết, khung người đứng tên/duyệt bài và chân trang. Liên kết Facebook vẫn hiện trong hồ sơ dưới dạng “Trang cá nhân Facebook ↗”.
+- Hồ sơ trên `/doi-ngu-bac-si/` thành accordion: tiêu đề là nút có `aria-expanded`/`aria-controls`, bấm mở một người thì những người khác gập lại. `assets/doctor-profiles.js` (chỉ nạp ở trang này, `defer`) mở đúng người theo `#bac-si-...` và cuộn tới; không có hash thì mở người đầu tiên; bấm lại cùng hash vẫn mở được. Không có JS thì toàn bộ hồ sơ vẫn mở (HTML mặc định không `hidden`). Bỏ dòng chức danh lặp trong khung vì đã có ở tiêu đề.
+- `tests/home-team-section-test.php` thêm kiểm tra: khối đội ngũ không có `facebook.com`/`target="_blank"` và có đủ sáu liên kết hồ sơ nội bộ.
+- Backup `~/backups/doi-ngu-accordion-20261007-112854/` (5 tệp gốc + `database-before.sql`). Staging `~/staging/doi-ngu-accordion/`, checksum khớp local, `php -l` đạt, áp dưới `flock ~/website-ops-deploy.lock`, xóa object cache và LiteSpeed. Smoke test trên server đạt. Chrome headless trên production: từ trang chủ và Giới thiệu bấm bác sĩ → về đúng `#bac-si-...`, chỉ người đó mở, đầu khung cách đỉnh 125 px (dưới header); đổi người, gập rồi bấm lại cùng hash, mở trực tiếp không hash đều đúng; 375 px không tràn ngang; không lỗi JS.
+
+## 2026-10-07 — khối đội ngũ đồng bộ ảnh và chức danh từ Admin (đã triển khai ~10:58)
+
+- Trước đây khối đội ngũ (trang chủ, `/gioi-thieu/`, `/doi-ngu-bac-si/`) luôn dùng ảnh chân dung trong `assets/` của theme, và đổi chức danh có chữ “Chủ tịch HĐQT” thành “Cố vấn chuyên môn cao cấp”, nên ảnh đại diện mới tải lên Admin lúc 08:42–08:47 và chức danh nhập tay không hiện ra.
+- Theo yêu cầu người phụ trách, khối này nay lấy ảnh đại diện (cỡ `large` + srcset của WordPress) và chức danh đúng như Admin. Ảnh trong theme chỉ còn là ảnh dự phòng khi bác sĩ chưa có ảnh đại diện; chức danh “Cố vấn chuyên môn cao cấp” chỉ dùng khi ô chức danh trống. Bệnh viện chịu trách nhiệm nội dung in trên poster và chức danh nhập trong Admin.
+- `tests/home-team-section-test.php` kiểm tra ảnh và chức danh khớp bản ghi Admin, so tên không phân biệt hoa thường (test cũ đã fail vì tên trong Admin viết hoa).
+- Backup: `~/backups/doi-ngu-sync-admin-20261007/` (3 tệp gốc + meta bản ghi 337). Kiểm tra: `php -l` đạt, smoke test đạt trên server, ba URL trả 200 và hiển thị ảnh `2-1…2-6-683x1024.png`.
+
 ## 2026-10-07 — công bố giấy phép hoạt động (chưa triển khai)
 
 - Người phụ trách cung cấp ảnh chụp giấy phép và xác nhận số đọc được: **444/BYT-GPHĐ**, Bộ Y tế cấp **06/10/2026**, người ký Thứ trưởng Thường trực Vũ Mạnh Hà, hình thức tổ chức “Bệnh viện chuyên khoa”, chủ sở hữu Công ty CP Bệnh viện Mắt Hà Nội – Bắc Ninh. Trước đợt này `so_gphd` để rỗng nên schema không có khối giấy phép.

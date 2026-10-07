@@ -47,14 +47,21 @@ while ( have_posts() ) :
 					<?php
 					$eyecare_slug = function_exists( 'eyecare_bac_si_slug' ) ? eyecare_bac_si_slug( $eyecare_bac_si ) : sanitize_title( $eyecare_bac_si['ho_ten'] );
 					$eyecare_fb   = function_exists( 'eyecare_bac_si_facebook_url' ) ? eyecare_bac_si_facebook_url( $eyecare_bac_si ) : '';
-					$eyecare_link = $eyecare_fb ?: ( ! empty( $eyecare_bac_si['profile'] ) ? $eyecare_bac_si['profile'] : home_url( '/doi-ngu-bac-si/#bac-si-' . $eyecare_slug ) );
+					$eyecare_link = $eyecare_fb ?: home_url( '/doi-ngu-bac-si/#bac-si-' . $eyecare_slug );
 					$eyecare_bio  = isset( $eyecare_bac_si['gioi_thieu'] ) ? trim( (string) $eyecare_bac_si['gioi_thieu'] ) : '';
 					$eyecare_name = function_exists( 'eyecare_doi_ngu_ten_day_du' ) ? eyecare_doi_ngu_ten_day_du( $eyecare_bac_si ) : $eyecare_bac_si['ho_ten'];
+					$eyecare_pid  = 'ho-so-' . $eyecare_slug;
 					?>
-					<article id="bac-si-<?php echo esc_attr( $eyecare_slug ); ?>" class="eyecare-doctor-profiles__item">
+					<article id="bac-si-<?php echo esc_attr( $eyecare_slug ); ?>" class="eyecare-doctor-profiles__item" data-doctor-profile="true">
+						<h3 class="eyecare-doctor-profiles__heading">
+							<button type="button" class="eyecare-doctor-profiles__toggle" aria-expanded="true" aria-controls="<?php echo esc_attr( $eyecare_pid ); ?>">
+								<span class="eyecare-doctor-profiles__name"><?php echo esc_html( $eyecare_name ); ?></span>
+								<?php if ( ! empty( $eyecare_bac_si['chuc_danh'] ) ) : ?><span class="eyecare-doctor-profiles__role"><?php echo esc_html( $eyecare_bac_si['chuc_danh'] ); ?></span><?php endif; ?>
+								<span class="eyecare-doctor-profiles__icon" aria-hidden="true"></span>
+							</button>
+						</h3>
+						<div id="<?php echo esc_attr( $eyecare_pid ); ?>" class="eyecare-doctor-profiles__panel">
 						<div class="eyecare-doctor-profiles__summary">
-							<h3><a href="<?php echo esc_url( $eyecare_link ); ?>"<?php echo $eyecare_fb ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html( $eyecare_name ); ?></a></h3>
-							<?php if ( ! empty( $eyecare_bac_si['chuc_danh'] ) ) : ?><p><?php echo esc_html( $eyecare_bac_si['chuc_danh'] ); ?></p><?php endif; ?>
 							<?php if ( ! empty( $eyecare_bac_si['chuyen_khoa'] ) ) : ?><p><?php echo esc_html( $eyecare_bac_si['chuyen_khoa'] ); ?></p><?php endif; ?>
 							<?php if ( $eyecare_fb ) : ?><a href="<?php echo esc_url( $eyecare_fb ); ?>" target="_blank" rel="noopener noreferrer">Trang cá nhân Facebook ↗</a><?php endif; ?>
 						</div>
@@ -67,6 +74,7 @@ while ( have_posts() ) :
 							<?php else : ?>
 								<p><?php echo esc_html( $eyecare_name ); ?> là thành viên trong đội ngũ chuyên môn của Bệnh viện Mắt Hà Nội – Bắc Ninh<?php echo ! empty( $eyecare_bac_si['chuc_danh'] ) ? ', hiện được giới thiệu với vai trò ' . esc_html( $eyecare_bac_si['chuc_danh'] ) : ''; ?>.<?php echo ! empty( $eyecare_bac_si['chuyen_khoa'] ) ? ' Lĩnh vực được giới thiệu: ' . esc_html( $eyecare_bac_si['chuyen_khoa'] ) . '.' : ''; ?> Thông tin đào tạo và quá trình công tác chi tiết đang được bệnh viện bổ sung từ hồ sơ đã đối chiếu.</p>
 							<?php endif; ?>
+						</div>
 						</div>
 					</article>
 				<?php endforeach; ?>

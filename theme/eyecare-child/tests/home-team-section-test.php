@@ -33,9 +33,10 @@ $expected_names = array(
 	'Cử nhân Nguyễn Đăng Đạt',
 );
 
+// Tên hiển thị theo cách viết trong Admin (thường là chữ hoa) nên so không phân biệt hoa thường.
 foreach ( $expected_names as $name ) {
 	eyecare_test_assert(
-		false !== strpos( $html, $name ),
+		false !== mb_stripos( str_replace( '. ', '.', $html ), str_replace( '. ', '.', $name ) ),
 		'Thiếu bác sĩ: ' . $name
 	);
 }
@@ -45,16 +46,21 @@ eyecare_test_assert(
 	'Khối cố vấn phải xuất hiện đúng một lần.'
 );
 
-eyecare_test_assert(
-	false !== strpos( $html, 'Cố vấn chuyên môn cao cấp' ),
-	'Thiếu vai trò cố vấn chuyên môn cao cấp.'
-);
-
-foreach ( array( 'Chủ tịch HĐQT', '100.000 ca', '100,000 ca' ) as $unsupported_claim ) {
-	eyecare_test_assert(
-		false === strpos( $html, $unsupported_claim ),
-		'Không được hiển thị chức danh hoặc thành tích chưa đối chiếu: ' . $unsupported_claim
-	);
+// Chức danh và ảnh đại diện phải khớp đúng bản ghi bác sĩ trong Admin.
+foreach ( eyecare_du_lieu_doi_ngu() as $doctor ) {
+	if ( ! empty( $doctor['chuc_danh'] ) ) {
+		eyecare_test_assert(
+			false !== strpos( $html, esc_html( $doctor['chuc_danh'] ) ),
+			'Chức danh chưa đồng bộ từ Admin: ' . $doctor['chuc_danh']
+		);
+	}
+	if ( ! empty( $doctor['anh'] ) ) {
+		$admin_url = wp_get_attachment_image_url( (int) $doctor['anh'], 'large' );
+		eyecare_test_assert(
+			$admin_url && false !== strpos( $html, esc_url( $admin_url ) ),
+			'Ảnh đại diện chưa đồng bộ từ Admin: ' . $doctor['ho_ten']
+		);
+	}
 }
 
 eyecare_test_assert(
@@ -62,7 +68,7 @@ eyecare_test_assert(
 	'Lưới bác sĩ phải có đúng năm thẻ.'
 );
 
-// Các chân dung gốc được duyệt hiện nằm trong assets/, không dùng poster cũ.
+// Chân dung trong assets/ là ảnh dự phòng khi bác sĩ chưa có ảnh đại diện.
 $portrait_files = array(
 	'doctor-le-nhu-tung.png',
 	'doctor-dang-cong-hai.png',
@@ -74,8 +80,20 @@ $portrait_files = array(
 
 foreach ( $portrait_files as $filename ) {
 	$path = get_stylesheet_directory() . '/assets/' . $filename;
-	eyecare_test_assert( is_file( $path ), 'Thiếu chân dung gốc: ' . $filename );
-	eyecare_test_assert( false !== strpos( $html, $filename ), 'HTML chưa dùng chân dung gốc: ' . $filename );
+	eyecare_test_assert( is_file( $path ), 'Thiếu chân dung dự phòng: ' . $filename );
+}
+
+// Bấm vào bác sĩ nào cũng về hồ sơ nội bộ /doi-ngu-bac-si/#bac-si-..., không mở Facebook.
+eyecare_test_assert(
+	false === strpos( $html, 'facebook.com' ) && false === strpos( $html, 'target="_blank"' ),
+	'Khối đội ngũ không được dẫn thẳng sang Facebook.'
+);
+foreach ( eyecare_du_lieu_doi_ngu() as $doctor ) {
+	$profile = esc_url( home_url( '/doi-ngu-bac-si/#bac-si-' . eyecare_bac_si_slug( $doctor ) ) );
+	eyecare_test_assert(
+		false !== strpos( $html, 'href="' . $profile . '"' ),
+		'Thiếu liên kết hồ sơ nội bộ: ' . $doctor['ho_ten']
+	);
 }
 
 echo "PASS: homepage doctor team renders the approved 1 + 5 layout.\n";

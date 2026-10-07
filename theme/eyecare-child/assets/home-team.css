@@ -421,22 +421,96 @@
 }
 
 .eyecare-doctor-profiles__item {
-	display: grid;
-	grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
-	gap: clamp(24px, 4vw, 56px);
-	padding: clamp(26px, 4vw, 46px);
-	margin-block: 16px;
+	margin-block: 12px;
 	background: #fff;
 	border: 1px solid #dce9e1;
 	border-radius: 20px;
 	box-shadow: 0 12px 38px rgba(9, 51, 33, 0.05);
 	scroll-margin-top: 125px;
+	overflow: hidden;
 }
 
-.eyecare-doctor-profiles__summary h3 {
-	margin: 0 0 12px;
+.eyecare-doctor-profiles__item.is-open {
+	border-color: #9fceb3;
+	box-shadow: 0 16px 44px rgba(9, 51, 33, 0.1);
+}
+
+.eyecare-doctor-profiles__heading {
+	margin: 0;
+}
+
+.eyecare-doctor-profiles__toggle {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: 4px 16px;
+	width: 100%;
+	padding: clamp(18px, 2.6vw, 26px) clamp(20px, 4vw, 46px);
+	padding-right: 72px;
+	position: relative;
+	background: transparent;
+	border: 0;
 	color: #064e35;
-	font-size: clamp(1.3rem, 2vw, 1.8rem);
+	font: inherit;
+	text-align: left;
+	cursor: pointer;
+}
+
+.eyecare-doctor-profiles__toggle:focus-visible {
+	outline: 3px solid #0d7d4a;
+	outline-offset: -3px;
+	border-radius: 20px;
+}
+
+.eyecare-doctor-profiles__name {
+	font-size: clamp(1.15rem, 1.8vw, 1.5rem);
+	font-weight: 700;
+}
+
+.eyecare-doctor-profiles__role {
+	color: #4a6b5d;
+	font-size: 0.95rem;
+	font-weight: 500;
+}
+
+.eyecare-doctor-profiles__icon {
+	position: absolute;
+	top: 50%;
+	right: clamp(20px, 3vw, 36px);
+	width: 28px;
+	height: 28px;
+	margin-top: -14px;
+	border-radius: 50%;
+	background: #e6f3eb;
+}
+
+.eyecare-doctor-profiles__icon::before,
+.eyecare-doctor-profiles__icon::after {
+	content: "";
+	position: absolute;
+	top: 13px;
+	left: 8px;
+	width: 12px;
+	height: 2px;
+	background: #0d7d4a;
+	transition: transform 0.2s ease;
+}
+
+.eyecare-doctor-profiles__icon::after { transform: rotate(90deg); }
+.is-open .eyecare-doctor-profiles__icon::after { transform: rotate(0deg); }
+
+.eyecare-doctor-profiles__panel {
+	display: grid;
+	grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
+	gap: clamp(24px, 4vw, 56px);
+	padding: 0 clamp(20px, 4vw, 46px) clamp(26px, 4vw, 46px);
+}
+
+.eyecare-doctor-profiles__panel[hidden] { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+	.eyecare-doctor-profiles__icon::before,
+	.eyecare-doctor-profiles__icon::after { transition: none; }
 }
 
 .eyecare-doctor-profiles__summary p {
@@ -469,5 +543,5 @@
 .eyecare-doctor-profiles__bio > :last-child { margin-bottom: 0; }
 
 @media (max-width: 720px) {
-	.eyecare-doctor-profiles__item { grid-template-columns: 1fr; }
+	.eyecare-doctor-profiles__panel { grid-template-columns: 1fr; gap: 16px; }
 }

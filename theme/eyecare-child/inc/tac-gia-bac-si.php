@@ -224,7 +224,7 @@ function eyecare_du_lieu_doi_ngu_cong_khai( $doctor, $post_id = 0 ) {
 		$doctor['badge'] = ! empty( $doctor['badges'] ) ? $doctor['badges'][0] : '';
 	}
 	if ( 'le-nhu-tung' === sanitize_title( isset( $doctor['ho_ten'] ) ? $doctor['ho_ten'] : '' )
-		&& ( empty( $doctor['chuc_danh'] ) || preg_match( '/chủ\s+tịch\s+hđqt/ui', (string) $doctor['chuc_danh'] ) ) ) {
+		&& empty( $doctor['chuc_danh'] ) ) {
 		$doctor['chuc_danh'] = 'Cố vấn chuyên môn cao cấp';
 	}
 	return $doctor;

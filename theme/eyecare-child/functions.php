@@ -97,6 +97,18 @@ function eyecare_nap_css_doi_ngu_trang_chu() {
 		array( 'eyecare-child-style' ),
 		filemtime( $css )
 	);
+
+	// Hồ sơ dạng gập/mở: chỉ bác sĩ được bấm (theo #bac-si-...) mở ra.
+	$js = get_stylesheet_directory() . '/assets/doctor-profiles.js';
+	if ( is_page( 'doi-ngu-bac-si' ) && file_exists( $js ) ) {
+		wp_enqueue_script(
+			'eyecare-doctor-profiles',
+			get_stylesheet_directory_uri() . '/assets/doctor-profiles.js',
+			array(),
+			filemtime( $js ),
+			array( 'in_footer' => true, 'strategy' => 'defer' )
+		);
+	}
 }
 add_action( 'wp_enqueue_scripts', 'eyecare_nap_css_doi_ngu_trang_chu', 105 );
 
