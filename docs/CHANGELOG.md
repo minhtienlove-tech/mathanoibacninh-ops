@@ -4,7 +4,8 @@
 
 - Biên tập lại 6 bản nháp trong `docs/drafts/bac-si/` từ dữ liệu hồ sơ hiện có; bỏ số ca, thành tích, kỹ thuật, lịch làm việc và mô tả quy trình cá nhân chưa có nguồn đối chiếu. Nội dung y khoa chung được tách khỏi thông tin cá nhân. Hai cử nhân khúc xạ/cận lâm sàng được gọi đúng chức danh, không giới thiệu là bác sĩ.
 - `single-eyecare_bac_si.php` dùng nhãn “Hồ sơ nhân sự chuyên môn” cho cử nhân và chỉ in thẻ thành tích khi trường nguồn thành tích có dữ liệu. Vai trò Lê Như Tùng trong nội dung và metadata thống nhất là “Cố vấn chuyên môn”; bỏ chức danh Chủ tịch HĐQT chưa có văn bản xác nhận.
-- Triển khai qua `scripts/deploy-doctor-bios-20261007.sh`, sao lưu file và database trước khi đổi nội dung WordPress; ghi đường dẫn backup và kết quả kiểm tra sau triển khai.
+- Triển khai qua `scripts/deploy-doctor-bios-20261007.sh`, sao lưu file và database trước khi đổi nội dung WordPress. Lần chạy đầu dừng sau bài 337 do phép so hash khác đúng một LF cuối; đã khôi phục ngay nội dung, meta và template từ backup. Lần chạy lại dùng so sánh byte đầu ra WP-CLI với tệp nguồn và đăng đủ 6 bài; backup `/home/jwhxtzru/backups/doctor-bios-20261007-164919/`.
+- Kiểm tra trang công khai thấy bộ tự chèn liên kết đưa tên bệnh viện trong nội dung sang một bài kiến thức không liên quan. Sáu bản HTML được thay bằng liên kết rõ ràng về trang chủ và cập nhật qua `scripts/deploy-doctor-bios-linkfix-20261007.sh` sau khi sao lưu lại database.
 
 ## 2026-10-07 — rà soát 6 bản nháp hồ sơ nhân sự (chưa xuất bản)
 
