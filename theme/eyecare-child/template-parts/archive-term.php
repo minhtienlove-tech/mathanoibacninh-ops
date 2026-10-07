@@ -15,13 +15,24 @@ if ( ! $eyecare_term instanceof WP_Term ) {
 	return;
 }
 
+// Tin bệnh viện có giọng biên tập và người viết riêng; không dùng khung
+// kiến thức nhãn khoa vốn mặc định một bác sĩ đứng tên mọi chuyên mục.
+if ( 'category' === $eyecare_term->taxonomy ) {
+	$eyecare_news_root = get_category_by_slug( 'tin-tuc' );
+	if ( $eyecare_news_root instanceof WP_Term &&
+		( (int) $eyecare_term->term_id === (int) $eyecare_news_root->term_id ||
+		term_is_ancestor_of( $eyecare_news_root->term_id, $eyecare_term->term_id, 'category' ) ) ) {
+		get_template_part( 'template-parts/archive', 'news' );
+		return;
+	}
+}
+
 $eyecare_noi_dung    = get_term_meta( $eyecare_term->term_id, '_eyecare_noi_dung_dai', true );
 $eyecare_mo_ta       = trim( wp_strip_all_tags( term_description( $eyecare_term->term_id, $eyecare_term->taxonomy ) ) );
 $eyecare_so_tu       = absint( get_term_meta( $eyecare_term->term_id, '_eyecare_so_tu', true ) );
 $eyecare_thuc_the    = function_exists( 'eyecare_du_lieu_thuc_the' ) ? eyecare_du_lieu_thuc_the() : array( 'ten' => get_bloginfo( 'name' ) );
-$eyecare_anh_tac_gia = function_exists( 'eyecare_bac_si_anh_tac_gia' ) ? eyecare_bac_si_anh_tac_gia() : '';
-$eyecare_ten_tac_gia = function_exists( 'eyecare_bac_si_ten_day_du' ) ? eyecare_bac_si_ten_day_du() : 'Ths.BS Lê Như Tùng';
-$eyecare_link_tac_gia = function_exists( 'eyecare_bac_si_duong_dan' ) ? eyecare_bac_si_duong_dan() : home_url( '/doi-ngu-bac-si/' );
+$eyecare_ten_tac_gia  = $eyecare_thuc_the['ten'];
+$eyecare_link_tac_gia = home_url( '/gioi-thieu/' );
 
 get_header();
 ?>
@@ -101,16 +112,11 @@ get_header();
 					<?php echo apply_filters( 'the_content', $eyecare_noi_dung ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
 
-				<aside class="eyecare-chuyen-khoa__eeat" aria-label="Thông tin người đứng tên nội dung">
+				<aside class="eyecare-chuyen-khoa__eeat" aria-label="Nguồn thông tin">
 					<div class="eyecare-chuyen-khoa__eeat-card">
 						<p class="eyecare-chuyen-khoa__eeat-label">Nội dung y khoa</p>
-						<?php if ( $eyecare_anh_tac_gia ) : ?>
-							<img src="<?php echo esc_url( $eyecare_anh_tac_gia ); ?>" alt="<?php echo esc_attr( $eyecare_ten_tac_gia ); ?>" width="120" height="120" loading="lazy">
-						<?php endif; ?>
-						<p class="eyecare-chuyen-khoa__eeat-kicker">Người đứng tên nội dung</p>
+						<p class="eyecare-chuyen-khoa__eeat-kicker">Đơn vị cung cấp thông tin</p>
 						<h2><a href="<?php echo esc_url( $eyecare_link_tac_gia ); ?>"><?php echo esc_html( $eyecare_ten_tac_gia ); ?></a></h2>
-						<p>Bác sĩ chuyên khoa Mắt<br><?php echo esc_html( $eyecare_thuc_the['ten'] ); ?></p>
-						<?php if ( function_exists( 'eyecare_bac_si_chi_so_in' ) ) { eyecare_bac_si_chi_so_in(); } ?>
 						<?php if ( $eyecare_so_tu ) : ?><p><?php echo esc_html( number_format_i18n( $eyecare_so_tu ) ); ?> từ trong cẩm nang chuyên mục</p><?php endif; ?>
 						<p class="eyecare-chuyen-khoa__eeat-note">Thông tin tham khảo, không dùng để tự chẩn đoán hoặc trì hoãn việc khám khi thị lực thay đổi nhanh.</p>
 					</div>

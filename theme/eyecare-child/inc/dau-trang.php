@@ -66,6 +66,52 @@ function eyecare_menu_dich_vu_con() {
 	return $ra;
 }
 
+/** Chỉ hiện các chuyên mục kiến thức đã tạo và có bài công khai. */
+function eyecare_menu_kien_thuc_con() {
+	$ra = array( array( 'duong_dan' => '/kien-thuc/', 'nhan' => 'Toàn bộ kiến thức' ) );
+	$slugs = array(
+		'mi-mat-le-dao-hoc-mat',
+		'trieu-chung-mat-thuong-gap',
+		'mat-va-benh-toan-than',
+		'hieu-ket-qua-kham-mat',
+		'dung-thuoc-mat-an-toan',
+	);
+	foreach ( $slugs as $slug ) {
+		$term = get_category_by_slug( $slug );
+		if ( $term && (int) $term->count > 0 ) {
+			$url = get_term_link( $term );
+			if ( ! is_wp_error( $url ) ) {
+				$ra[] = array( 'duong_dan' => $url, 'nhan' => $term->name );
+			}
+		}
+	}
+	return $ra;
+}
+
+/** Trung tâm tin và các nhánh hoạt động bệnh viện có bài công khai. */
+function eyecare_menu_tin_tuc_con() {
+	$ra = array( array( 'duong_dan' => '/tin-tuc/', 'nhan' => 'Tất cả tin bệnh viện' ) );
+	$slugs = array(
+		'cau-chuyen-nguoi-benh',
+		'goc-bac-si',
+		'doi-song-benh-vien',
+		'hoat-dong-cong-dong',
+		'thong-bao-benh-vien',
+		'uu-dai-va-ho-tro-nguoi-benh',
+	);
+	foreach ( $slugs as $slug ) {
+		$term = get_category_by_slug( $slug );
+		if ( $term && (int) $term->count > 0 ) {
+			$url = get_term_link( $term );
+			if ( ! is_wp_error( $url ) ) {
+				$ra[] = array( 'duong_dan' => $url, 'nhan' => $term->name );
+			}
+		}
+	}
+	$ra[] = array( 'duong_dan' => '/tuyen-dung/', 'nhan' => 'Tuyển dụng' );
+	return $ra;
+}
+
 /**
  * Chuẩn hóa đích menu thành URL tuyệt đối.
  *
@@ -92,10 +138,8 @@ function eyecare_menu_url( $duong_dan ) {
  * Các đích chính đã publish; nhánh Khu vực hiển thị ba trang trụ cột,
  * còn 99 trang xã/phường được điều hướng trong chính nội dung nhánh.
  *
- * 🔴 KHÔNG có "Đặt lịch khám": bệnh viện chưa có Giấy phép hoạt động (B-03),
- * chưa được quảng cáo dịch vụ khám chữa bệnh. Cùng một cửa đã giữ nút đặt lịch
- * khỏi trang chủ. Trang /dat-lich-kham/ có tồn tại nhưng không đưa vào điều
- * hướng chính cho tới khi có giấy phép.
+ * Giấy phép hoạt động đã được người phụ trách xác nhận ngày 06/10/2026;
+ * số giấy phép chưa được cung cấp nên không đưa số vào nội dung/schema.
  *
  * @return array[] Mảng các mảng: duong_dan, nhan.
  */
@@ -108,7 +152,8 @@ function eyecare_menu_muc() {
 			'nhan'      => 'Dịch vụ',
 			'con'       => eyecare_menu_dich_vu_con(),
 		),
-		array( 'duong_dan' => '/kien-thuc/',      'nhan' => 'Kiến thức nhãn khoa' ),
+		array( 'duong_dan' => '/kien-thuc/', 'nhan' => 'Kiến thức nhãn khoa', 'con' => eyecare_menu_kien_thuc_con() ),
+		array( 'duong_dan' => '/tin-tuc/', 'nhan' => 'Tin bệnh viện', 'con' => eyecare_menu_tin_tuc_con() ),
 		array(
 			'duong_dan' => '/khu-vuc/',
 			'nhan'      => 'Khu vực khám mắt',

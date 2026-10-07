@@ -52,7 +52,7 @@ function eyecare_dang_ky_post_type_bac_si() {
 			'show_in_nav_menus'   => false,
 			'menu_position'       => 21,
 			'menu_icon'           => 'dashicons-businessperson',
-			'supports'            => array( 'title', 'thumbnail' ),
+			'supports'            => array( 'title', 'editor', 'thumbnail', 'revisions' ),
 			'has_archive'         => false,
 			'rewrite'             => false,
 			'query_var'           => false,
@@ -68,7 +68,7 @@ add_action( 'init', 'eyecare_dang_ky_post_type_bac_si', 5 );
 function eyecare_them_hop_thong_tin_bac_si() {
 	add_meta_box(
 		'eyecare-thong-tin-bac-si',
-		'Thông tin hiển thị trên trang chủ',
+		'Thông tin hồ sơ và trang chủ',
 		'eyecare_in_hop_thong_tin_bac_si',
 		EYECARE_POST_TYPE_BAC_SI,
 		'normal',
@@ -87,6 +87,7 @@ function eyecare_in_hop_thong_tin_bac_si( $post ) {
 
 	$hoc_vi     = get_post_meta( $post->ID, '_eyecare_hoc_vi', true );
 	$chuc_danh  = get_post_meta( $post->ID, '_eyecare_chuc_danh', true );
+	$chuyen_mon = get_post_meta( $post->ID, '_eyecare_chuyen_mon', true );
 	$badges     = get_post_meta( $post->ID, '_eyecare_badges', true );
 	if ( empty( $badges ) ) {
 		$badges = get_post_meta( $post->ID, '_eyecare_badge', true );
@@ -94,6 +95,8 @@ function eyecare_in_hop_thong_tin_bac_si( $post ) {
 	$highlights = get_post_meta( $post->ID, '_eyecare_highlights', true );
 	$thu_tu     = get_post_meta( $post->ID, '_eyecare_thu_tu', true );
 	$anh_mau    = get_post_meta( $post->ID, '_eyecare_anh_url', true );
+	$facebook   = eyecare_bac_si_facebook_url( $post->ID );
+	$nguon_thanh_tich = get_post_meta( $post->ID, '_eyecare_nguon_thanh_tich', true );
 
 	if ( is_array( $highlights ) ) {
 		$highlights = implode( "\n", $highlights );
@@ -116,6 +119,7 @@ function eyecare_in_hop_thong_tin_bac_si( $post ) {
 		@media (max-width:782px) { .eyecare-admin-doctor-grid { grid-template-columns:1fr; } .eyecare-admin-doctor-field--wide { grid-column:auto; } }
 	</style>
 	<p><strong>Cập nhật hình ảnh:</strong> dùng hộp “Ảnh bác sĩ” ở cột bên phải để chọn ảnh từ Thư viện hoặc tải ảnh mới lên.</p>
+	<p><strong>Giới thiệu chi tiết:</strong> dùng trình soạn thảo nội dung của bác sĩ để viết quá trình đào tạo, chuyên môn, kinh nghiệm và vai trò hiện tại. Chỉ đăng các thành tích đã đối chiếu với hồ sơ.</p>
 	<?php if ( ! has_post_thumbnail( $post->ID ) && $anh_mau ) : ?>
 		<div style="display:flex;align-items:center;gap:12px;margin:12px 0 18px;padding:12px;background:#f6faf7;border:1px solid #dce9df;border-radius:8px">
 			<img src="<?php echo esc_url( $anh_mau ); ?>" alt="" style="width:72px;height:72px;border-radius:50%;object-fit:cover">
@@ -129,17 +133,31 @@ function eyecare_in_hop_thong_tin_bac_si( $post ) {
 		</div>
 		<div class="eyecare-admin-doctor-field">
 			<label for="eyecare-badges">Thông tin nổi trên ảnh</label>
-			<textarea id="eyecare-badges" name="eyecare_badges" rows="4" placeholder="Mỗi dòng một thông tin, ví dụ:\n20+ năm\nHơn 10.000 ca"><?php echo esc_textarea( (string) $badges ); ?></textarea>
-			<p class="eyecare-admin-doctor-help">Mỗi dòng là một badge. Các badge sẽ tự luân phiên theo thông tin của bác sĩ.</p>
+			<textarea id="eyecare-badges" name="eyecare_badges" rows="4" placeholder="Mỗi dòng một thông tin, ví dụ:\nPhẫu thuật Phaco\nKhám nhãn khoa"><?php echo esc_textarea( (string) $badges ); ?></textarea>
+			<p class="eyecare-admin-doctor-help">Mỗi dòng là một badge. Chỉ nhập số ca, số năm hoặc giải thưởng khi đã lưu nguồn đối chiếu bên dưới.</p>
 		</div>
 		<div class="eyecare-admin-doctor-field eyecare-admin-doctor-field--wide">
 			<label for="eyecare-chuc-danh">Chức danh</label>
 			<input id="eyecare-chuc-danh" name="eyecare_chuc_danh" type="text" value="<?php echo esc_attr( $chuc_danh ); ?>" placeholder="Ví dụ: GIÁM ĐỐC BỆNH VIỆN">
 		</div>
 		<div class="eyecare-admin-doctor-field eyecare-admin-doctor-field--wide">
+			<label for="eyecare-chuyen-mon">Lĩnh vực chuyên môn</label>
+			<input id="eyecare-chuyen-mon" name="eyecare_chuyen_mon" type="text" value="<?php echo esc_attr( $chuyen_mon ); ?>" placeholder="Ví dụ: Nhãn khoa; phẫu thuật Phaco">
+		</div>
+		<div class="eyecare-admin-doctor-field eyecare-admin-doctor-field--wide">
+			<label for="eyecare-facebook-url">Trang Facebook của bác sĩ</label>
+			<input id="eyecare-facebook-url" name="eyecare_facebook_url" type="url" value="<?php echo esc_attr( $facebook ); ?>" placeholder="https://www.facebook.com/ten-trang">
+			<p class="eyecare-admin-doctor-help">Chỉ chấp nhận liên kết HTTPS thuộc facebook.com. Để trống rồi lưu nếu không muốn hiển thị.</p>
+		</div>
+		<div class="eyecare-admin-doctor-field eyecare-admin-doctor-field--wide">
 			<label for="eyecare-highlights">Thành tích và chuyên môn</label>
 			<textarea id="eyecare-highlights" name="eyecare_highlights" rows="9" placeholder="Mỗi thành tích nhập trên một dòng"><?php echo esc_textarea( (string) $highlights ); ?></textarea>
 			<p class="eyecare-admin-doctor-help">Mỗi dòng là một dấu tích. Trang chủ hiển thị 3 dòng đầu, phần còn lại nằm trong nút “Xem thêm”.</p>
+		</div>
+		<div class="eyecare-admin-doctor-field eyecare-admin-doctor-field--wide">
+			<label for="eyecare-nguon-thanh-tich">Nguồn đối chiếu thành tích định lượng (nội bộ)</label>
+			<input id="eyecare-nguon-thanh-tich" name="eyecare_nguon_thanh_tich" type="text" value="<?php echo esc_attr( (string) $nguon_thanh_tich ); ?>" placeholder="Mã hồ sơ, quyết định hoặc đường dẫn tài liệu">
+			<p class="eyecare-admin-doctor-help">Các mốc số ca, số năm, giải thưởng trong badge và thành tích chỉ hiển thị khi có nguồn đối chiếu. Trường này không xuất ra trang công khai.</p>
 		</div>
 		<div class="eyecare-admin-doctor-field">
 			<label for="eyecare-thu-tu">Thứ tự hiển thị</label>
@@ -173,12 +191,19 @@ function eyecare_luu_thong_tin_bac_si( $post_id, $post ) {
 	$truong_chu = array(
 		'_eyecare_hoc_vi'    => 'eyecare_hoc_vi',
 		'_eyecare_chuc_danh' => 'eyecare_chuc_danh',
+		'_eyecare_chuyen_mon' => 'eyecare_chuyen_mon',
 	);
 
 	foreach ( $truong_chu as $meta_key => $post_key ) {
 		$value = isset( $_POST[ $post_key ] ) ? sanitize_text_field( wp_unslash( $_POST[ $post_key ] ) ) : '';
 		update_post_meta( $post_id, $meta_key, $value );
 	}
+
+	$facebook_raw = isset( $_POST['eyecare_facebook_url'] ) ? wp_unslash( $_POST['eyecare_facebook_url'] ) : '';
+	$facebook_url = eyecare_bac_si_facebook_hop_le( $facebook_raw );
+	update_post_meta( $post_id, '_eyecare_facebook_url', $facebook_url );
+	$nguon_thanh_tich = isset( $_POST['eyecare_nguon_thanh_tich'] ) ? sanitize_text_field( wp_unslash( $_POST['eyecare_nguon_thanh_tich'] ) ) : '';
+	update_post_meta( $post_id, '_eyecare_nguon_thanh_tich', $nguon_thanh_tich );
 
 	$badges_raw = isset( $_POST['eyecare_badges'] )
 		? sanitize_textarea_field( wp_unslash( $_POST['eyecare_badges'] ) )
@@ -211,6 +236,14 @@ function eyecare_luu_thong_tin_bac_si( $post_id, $post ) {
 }
 add_action( 'save_post_' . EYECARE_POST_TYPE_BAC_SI, 'eyecare_luu_thong_tin_bac_si', 10, 2 );
 
+/** Seed only the claims that are safe to show without a source document. */
+function eyecare_bac_si_mau_an_toan() {
+	$defaults = eyecare_du_lieu_doi_ngu_mac_dinh();
+	return function_exists( 'eyecare_du_lieu_doi_ngu_cong_khai' )
+		? array_map( 'eyecare_du_lieu_doi_ngu_cong_khai', $defaults )
+		: array();
+}
+
 /**
  * Tạo các hồ sơ bác sĩ mẫu đúng dữ liệu đang hiển thị, chỉ một lần.
  */
@@ -241,7 +274,7 @@ function eyecare_tao_bac_si_mau() {
 	}
 
 	$so_da_tao = 0;
-	foreach ( eyecare_du_lieu_doi_ngu_mac_dinh() as $index => $bac_si ) {
+	foreach ( eyecare_bac_si_mau_an_toan() as $index => $bac_si ) {
 		$post_id = wp_insert_post(
 			array(
 				'post_type'   => EYECARE_POST_TYPE_BAC_SI,
@@ -284,7 +317,7 @@ function eyecare_bo_sung_cach_cat_anh_mau() {
 		return;
 	}
 
-	$defaults = eyecare_du_lieu_doi_ngu_mac_dinh();
+	$defaults = eyecare_bac_si_mau_an_toan();
 	$posts    = get_posts(
 		array(
 			'post_type'      => EYECARE_POST_TYPE_BAC_SI,
@@ -316,7 +349,7 @@ function eyecare_bo_sung_badge_xoay_mau() {
 		return;
 	}
 
-	$defaults = eyecare_du_lieu_doi_ngu_mac_dinh();
+	$defaults = eyecare_bac_si_mau_an_toan();
 	$posts    = get_posts(
 		array(
 			'post_type'      => EYECARE_POST_TYPE_BAC_SI,
@@ -353,7 +386,7 @@ function eyecare_bo_sung_doi_ngu_poster_v4() {
 		return;
 	}
 
-	$defaults = eyecare_du_lieu_doi_ngu_mac_dinh();
+	$defaults = eyecare_bac_si_mau_an_toan();
 	$posts    = get_posts(
 		array(
 			'post_type'      => EYECARE_POST_TYPE_BAC_SI,
@@ -519,3 +552,287 @@ function eyecare_noi_dung_cot_bac_si( $column, $post_id ) {
 	}
 }
 add_action( 'manage_' . EYECARE_POST_TYPE_BAC_SI . '_posts_custom_column', 'eyecare_noi_dung_cot_bac_si', 10, 2 );
+
+/**
+ * Chỉ nhận URL Facebook HTTPS thật, tránh liên kết giả mạo trong hồ sơ bác sĩ.
+ *
+ * @param string $url URL người quản trị nhập.
+ * @return string URL hợp lệ hoặc chuỗi rỗng.
+ */
+function eyecare_bac_si_facebook_hop_le( $url ) {
+	$url   = trim( (string) $url );
+	$parts = wp_parse_url( $url );
+	if ( ! $url || ! is_array( $parts ) || ! isset( $parts['scheme'], $parts['host'] ) ) {
+		return '';
+	}
+	$host = strtolower( $parts['host'] );
+	if ( 'https' !== strtolower( $parts['scheme'] )
+		|| ! in_array( $host, array( 'facebook.com', 'www.facebook.com' ), true )
+		|| isset( $parts['user'] ) || isset( $parts['pass'] ) || isset( $parts['port'] ) ) {
+		return '';
+	}
+	return esc_url_raw( $url, array( 'https' ) );
+}
+
+/** Canonical slug for a doctor, including names with an academic prefix. */
+function eyecare_bac_si_slug( $doctor ) {
+	if ( is_numeric( $doctor ) ) {
+		$doctor = get_the_title( absint( $doctor ) );
+	} elseif ( is_array( $doctor ) ) {
+		$doctor = isset( $doctor['ho_ten'] ) ? $doctor['ho_ten'] : '';
+	} elseif ( $doctor instanceof WP_Post ) {
+		$doctor = $doctor->post_title;
+	}
+	$slug = sanitize_title( (string) $doctor );
+	foreach ( array( 'le-nhu-tung', 'dang-cong-hai', 'bui-van-canh' ) as $known ) {
+		if ( $slug === $known || str_ends_with( $slug, '-' . $known ) ) {
+			return $known;
+		}
+	}
+	return $slug;
+}
+
+/** Internal profile destination for a doctor's name or CPT record. */
+function eyecare_bac_si_ho_so_url( $doctor ) {
+	$slug = eyecare_bac_si_slug( $doctor );
+	return home_url( '/doi-ngu-bac-si/' ) . ( $slug ? '#bac-si-' . rawurlencode( $slug ) : '' );
+}
+
+/**
+ * Three links supplied by the hospital. They remain editable per doctor in Admin.
+ * An explicitly saved empty value suppresses the fallback link.
+ */
+function eyecare_bac_si_facebook_url( $doctor ) {
+	$post_id = 0;
+	if ( is_numeric( $doctor ) ) {
+		$post_id = absint( $doctor );
+	} elseif ( $doctor instanceof WP_Post ) {
+		$post_id = (int) $doctor->ID;
+	} elseif ( is_array( $doctor ) && ! empty( $doctor['post_id'] ) ) {
+		$post_id = absint( $doctor['post_id'] );
+	}
+	if ( $post_id && metadata_exists( 'post', $post_id, '_eyecare_facebook_url' ) ) {
+		return eyecare_bac_si_facebook_hop_le( get_post_meta( $post_id, '_eyecare_facebook_url', true ) );
+	}
+	$slug = eyecare_bac_si_slug( $post_id ?: $doctor );
+	$urls = array(
+		'le-nhu-tung'   => 'https://www.facebook.com/tung.lenhu.54',
+		'dang-cong-hai' => 'https://www.facebook.com/bshaickm',
+		'bui-van-canh'  => 'https://www.facebook.com/phongkhammatbsckibuivancanh',
+	);
+	return isset( $urls[ $slug ] ) ? $urls[ $slug ] : '';
+}
+
+/** Return a selected, published doctor record; never infer authorship by default. */
+function eyecare_bai_bac_si_id( $post_id ) {
+	$post_id   = absint( $post_id );
+	$doctor_id = $post_id ? absint( get_post_meta( $post_id, '_eyecare_bac_si_nguoi_viet', true ) ) : 0;
+	return $doctor_id && EYECARE_POST_TYPE_BAC_SI === get_post_type( $doctor_id ) && 'publish' === get_post_status( $doctor_id )
+		? $doctor_id : 0;
+}
+
+/** Return an explicitly selected medical reviewer, if any. */
+function eyecare_bai_bac_si_duyet_id( $post_id ) {
+	$post_id   = absint( $post_id );
+	$doctor_id = $post_id ? absint( get_post_meta( $post_id, '_eyecare_bac_si_nguoi_duyet', true ) ) : 0;
+	return $doctor_id && EYECARE_POST_TYPE_BAC_SI === get_post_type( $doctor_id ) && 'publish' === get_post_status( $doctor_id )
+		? $doctor_id : 0;
+}
+
+/** Read a selected doctor's visible profile without falling back to another person. */
+function eyecare_bac_si_du_lieu_theo_id( $doctor_id ) {
+	$doctor_id = absint( $doctor_id );
+	if ( ! $doctor_id || EYECARE_POST_TYPE_BAC_SI !== get_post_type( $doctor_id ) || 'publish' !== get_post_status( $doctor_id ) ) {
+		return array();
+	}
+	$specialty = (string) get_post_meta( $doctor_id, '_eyecare_chuyen_mon', true );
+	if ( '' === $specialty && function_exists( 'eyecare_du_lieu_doi_ngu_mac_dinh' ) ) {
+		foreach ( eyecare_du_lieu_doi_ngu_mac_dinh() as $default ) {
+			if ( sanitize_title( $default['ho_ten'] ) === sanitize_title( get_the_title( $doctor_id ) ) ) {
+				$specialty = $default['chuyen_khoa'];
+				break;
+			}
+		}
+	}
+	$doctor = array(
+		'post_id'    => $doctor_id,
+		'ho_ten'     => get_the_title( $doctor_id ),
+		'hoc_vi'     => (string) get_post_meta( $doctor_id, '_eyecare_hoc_vi', true ),
+		'chuc_danh'  => (string) get_post_meta( $doctor_id, '_eyecare_chuc_danh', true ),
+		'chuyen_mon' => $specialty,
+		'facebook'   => eyecare_bac_si_facebook_url( $doctor_id ),
+		'profile'    => eyecare_bac_si_ho_so_url( $doctor_id ),
+	);
+	return function_exists( 'eyecare_du_lieu_doi_ngu_cong_khai' )
+		? eyecare_du_lieu_doi_ngu_cong_khai( $doctor, $doctor_id )
+		: $doctor;
+}
+
+/** Name and internal profile URL for a confirmed article author. */
+function eyecare_bai_bac_si_byline( $post_id ) {
+	$doctor = eyecare_bac_si_du_lieu_theo_id( eyecare_bai_bac_si_id( $post_id ) );
+	if ( ! $doctor ) {
+		return array();
+	}
+	return array(
+		'name'     => trim( $doctor['hoc_vi'] . ' ' . $doctor['ho_ten'] ),
+		'url'      => eyecare_bac_si_trang_ca_nhan_url( $doctor['post_id'] ),
+		'profile'  => $doctor['profile'],
+		'facebook' => $doctor['facebook'],
+		'id'       => $doctor['post_id'],
+	);
+}
+
+/**
+ * Public destination for a named clinician. Prefer the personal page supplied
+ * by the hospital; other team members lead to their on-site profile.
+ *
+ * @param int|array|WP_Post|string $doctor Doctor record or name.
+ * @return string
+ */
+function eyecare_bac_si_trang_ca_nhan_url( $doctor ) {
+	$facebook = eyecare_bac_si_facebook_url( $doctor );
+	return $facebook ?: eyecare_bac_si_ho_so_url( $doctor );
+}
+
+/**
+ * Link doctor names in editorial body copy without rewriting stored content.
+ * Existing links, scripts and styles are left intact. This is deliberately
+ * limited to full names in the main singular article/page body.
+ */
+function eyecare_lien_ket_ten_bac_si_trong_noi_dung( $html ) {
+	if ( is_admin() || ! is_singular() || ! in_the_loop() || get_the_ID() !== get_queried_object_id()
+		|| ! is_string( $html ) || '' === $html ) {
+		return $html;
+	}
+
+	$doctors = function_exists( 'eyecare_du_lieu_doi_ngu' ) ? eyecare_du_lieu_doi_ngu() : array();
+	$links   = array();
+	foreach ( $doctors as $doctor ) {
+		$name = isset( $doctor['ho_ten'] ) ? trim( $doctor['ho_ten'] ) : '';
+		$url  = $name ? eyecare_bac_si_trang_ca_nhan_url( $doctor ) : '';
+		if ( $name && $url ) {
+			$links[ $name ] = $url;
+		}
+	}
+	if ( ! $links ) {
+		return $html;
+	}
+
+	uksort( $links, static function ( $left, $right ) {
+		$length_left  = function_exists( 'mb_strlen' ) ? mb_strlen( $left, 'UTF-8' ) : strlen( $left );
+		$length_right = function_exists( 'mb_strlen' ) ? mb_strlen( $right, 'UTF-8' ) : strlen( $right );
+		return $length_right <=> $length_left;
+	} );
+	$names = implode( '|', array_map( static function ( $name ) { return preg_quote( $name, '/' ); }, array_keys( $links ) ) );
+	$parts = preg_split( '/(<[^>]+>)/u', $html, -1, PREG_SPLIT_DELIM_CAPTURE );
+	if ( ! is_array( $parts ) ) {
+		return $html;
+	}
+	$inside = array();
+	foreach ( $parts as &$part ) {
+		if ( '' === $part ) {
+			continue;
+		}
+		if ( '<' === $part[0] ) {
+			if ( preg_match( '/^<\s*(a|script|style|textarea|noscript)\b/iu', $part, $tag ) ) {
+				$inside[] = strtolower( $tag[1] );
+			} elseif ( preg_match( '/^<\s*\/\s*(a|script|style|textarea|noscript)\b/iu', $part, $tag ) ) {
+				$position = array_search( strtolower( $tag[1] ), $inside, true );
+				if ( false !== $position ) {
+					unset( $inside[ $position ] );
+				}
+			}
+			continue;
+		}
+		if ( $inside ) {
+			continue;
+		}
+		$part = preg_replace_callback( '/(?<![\p{L}\p{N}])(' . $names . ')(?![\p{L}\p{N}])/iu', static function ( $match ) use ( $links ) {
+			foreach ( $links as $name => $url ) {
+				$same_name = function_exists( 'mb_strtolower' )
+					? mb_strtolower( $match[1], 'UTF-8' ) === mb_strtolower( $name, 'UTF-8' )
+					: 0 === strcasecmp( $match[1], $name );
+				if ( $same_name ) {
+					$external = false !== strpos( $url, 'facebook.com' );
+					return '<a class="eyecare-bac-si-link" href="' . esc_url( $url ) . '"'
+						. ( $external ? ' target="_blank" rel="noopener noreferrer"' : '' )
+						. '>' . esc_html( $match[1] ) . '</a>';
+				}
+			}
+			return $match[1];
+		}, $part );
+	}
+	unset( $part );
+	return implode( '', $parts );
+}
+add_filter( 'the_content', 'eyecare_lien_ket_ten_bac_si_trong_noi_dung', 25 );
+
+/** Add explicit doctor attribution controls to editorial posts and pages. */
+function eyecare_bai_them_hop_bac_si() {
+	foreach ( array( 'post', 'page' ) as $post_type ) {
+		add_meta_box( 'eyecare-bai-bac-si', 'Tác giả và duyệt chuyên môn', 'eyecare_bai_hop_bac_si_in', $post_type, 'side', 'default' );
+	}
+}
+add_action( 'add_meta_boxes', 'eyecare_bai_them_hop_bac_si' );
+
+/** Render the doctor selectors. Blank means the author/reviewer is unverified. */
+function eyecare_bai_hop_bac_si_in( $post ) {
+	wp_nonce_field( 'eyecare_bai_luu_bac_si', 'eyecare_bai_bac_si_nonce' );
+	$doctors = get_posts( array(
+		'post_type'      => EYECARE_POST_TYPE_BAC_SI,
+		'post_status'    => 'publish',
+		'posts_per_page' => -1,
+		'orderby'        => 'title',
+		'order'          => 'ASC',
+	) );
+	$fields = array(
+		'_eyecare_bac_si_nguoi_viet'  => 'Bác sĩ đứng tên viết nội dung',
+		'_eyecare_bac_si_nguoi_duyet' => 'Bác sĩ duyệt chuyên môn',
+	);
+	foreach ( $fields as $key => $label ) {
+		$current = absint( get_post_meta( $post->ID, $key, true ) );
+		$name    = ltrim( $key, '_' );
+		echo '<p><label for="' . esc_attr( $name ) . '"><strong>' . esc_html( $label ) . '</strong></label><br>';
+		echo '<select id="' . esc_attr( $name ) . '" name="' . esc_attr( $name ) . '" style="width:100%">';
+		echo '<option value="0">Chưa xác nhận</option>';
+		foreach ( $doctors as $doctor ) {
+			echo '<option value="' . esc_attr( (string) $doctor->ID ) . '" ' . selected( $current, $doctor->ID, false ) . '>' . esc_html( get_the_title( $doctor ) ) . '</option>';
+		}
+		echo '</select></p>';
+	}
+	$reviewed_at = (string) get_post_meta( $post->ID, '_bvmat_bac_si_duyet', true );
+	echo '<p><label for="eyecare-ngay-duyet"><strong>Ngày duyệt thực tế</strong></label><br>';
+	echo '<input id="eyecare-ngay-duyet" name="eyecare_ngay_duyet" type="date" value="' . esc_attr( $reviewed_at ) . '" style="width:100%"></p>';
+	echo '<p class="description">Chỉ chọn người thực sự viết hoặc duyệt, và chỉ điền ngày khi đã duyệt. Trang hồ sơ và Facebook lấy từ mục Đội ngũ bác sĩ.</p>';
+}
+
+/** Save explicit author/reviewer attribution without assigning a default doctor. */
+function eyecare_bai_luu_bac_si( $post_id ) {
+	if ( ! isset( $_POST['eyecare_bai_bac_si_nonce'] )
+		|| ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['eyecare_bai_bac_si_nonce'] ) ), 'eyecare_bai_luu_bac_si' )
+		|| ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE )
+		|| wp_is_post_revision( $post_id ) || ! current_user_can( 'edit_post', $post_id ) ) {
+		return;
+	}
+	foreach ( array( '_eyecare_bac_si_nguoi_viet', '_eyecare_bac_si_nguoi_duyet' ) as $key ) {
+		$name      = ltrim( $key, '_' );
+		$doctor_id = isset( $_POST[ $name ] ) ? absint( wp_unslash( $_POST[ $name ] ) ) : 0;
+		if ( $doctor_id && EYECARE_POST_TYPE_BAC_SI === get_post_type( $doctor_id ) && 'publish' === get_post_status( $doctor_id ) ) {
+			update_post_meta( $post_id, $key, $doctor_id );
+		} else {
+			delete_post_meta( $post_id, $key );
+		}
+	}
+	$date = isset( $_POST['eyecare_ngay_duyet'] ) ? sanitize_text_field( wp_unslash( $_POST['eyecare_ngay_duyet'] ) ) : '';
+	if ( preg_match( '/^\d{4}-\d{2}-\d{2}$/', $date ) ) {
+		$parts = explode( '-', $date );
+		if ( checkdate( (int) $parts[1], (int) $parts[2], (int) $parts[0] ) ) {
+			update_post_meta( $post_id, '_bvmat_bac_si_duyet', $date );
+		}
+	} elseif ( '' === $date ) {
+		delete_post_meta( $post_id, '_bvmat_bac_si_duyet' );
+	}
+}
+add_action( 'save_post_post', 'eyecare_bai_luu_bac_si' );
+add_action( 'save_post_page', 'eyecare_bai_luu_bac_si' );

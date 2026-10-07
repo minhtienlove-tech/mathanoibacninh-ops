@@ -51,8 +51,14 @@ while ( have_posts() ) :
 
 	$dich_vu = function_exists( 'eyecare_trang_con_hub' ) ? eyecare_trang_con_hub( 'dich-vu', 8 ) : array();
 	$tt      = function_exists( 'eyecare_du_lieu_thuc_the' ) ? eyecare_du_lieu_thuc_the() : array( 'dien_thoai' => '', 'dien_thoai_hien' => '' );
-	$ten_tac_gia = function_exists( 'eyecare_bac_si_ten_day_du' ) ? eyecare_bac_si_ten_day_du() : 'Ths.BS Lê Như Tùng';
-	$link_tac_gia = function_exists( 'eyecare_bac_si_duong_dan' ) ? eyecare_bac_si_duong_dan() : home_url( '/doi-ngu-bac-si/' );
+	$bac_si_dung_ten = function_exists( 'eyecare_bai_bac_si_byline' ) ? eyecare_bai_bac_si_byline( $trang_hien_tai ) : array();
+	$co_bac_si       = ! empty( $bac_si_dung_ten['id'] );
+	$anh_tac_gia    = $co_bac_si ? get_the_post_thumbnail_url( $bac_si_dung_ten['id'], 'thumbnail' ) : '';
+	if ( $co_bac_si && ! $anh_tac_gia ) {
+		$anh_tac_gia = get_post_meta( $bac_si_dung_ten['id'], '_eyecare_anh_url', true );
+	}
+	$ten_tac_gia    = $co_bac_si ? $bac_si_dung_ten['name'] : get_bloginfo( 'name' );
+	$link_tac_gia   = $co_bac_si ? ( $bac_si_dung_ten['facebook'] ?: $bac_si_dung_ten['url'] ) : home_url( '/gioi-thieu/' );
 
 	$chu = wp_strip_all_tags( strip_shortcodes( get_the_content() ) );
 	$so_tu = count( preg_split( '/\s+/u', trim( $chu ), -1, PREG_SPLIT_NO_EMPTY ) );
@@ -76,13 +82,17 @@ while ( have_posts() ) :
 			<div class="eyecare-bai__than">
 				<?php the_content(); ?>
 
-				<section class="eyecare-khuc-xa__eeat" aria-label="Thông tin người biên soạn">
-					<div class="eyecare-khuc-xa__eeat-mark" aria-hidden="true">✓</div>
+				<section class="eyecare-khuc-xa__eeat" aria-label="Nguồn thông tin">
+					<?php if ( $anh_tac_gia ) : ?>
+						<img class="eyecare-khuc-xa__eeat-mark" src="<?php echo esc_url( $anh_tac_gia ); ?>" alt="<?php echo esc_attr( $ten_tac_gia ); ?>" width="32" height="32" loading="lazy" decoding="async" style="object-fit:cover">
+					<?php else : ?>
+						<div class="eyecare-khuc-xa__eeat-mark" aria-hidden="true">✓</div>
+					<?php endif; ?>
 					<div>
-						<p class="eyecare-khuc-xa__eeat-label">Nội dung y khoa được rà soát</p>
-						<p><strong><?php echo esc_html( $ten_tac_gia ); ?></strong> · Bác sĩ chuyên khoa Mắt</p>
+						<p class="eyecare-khuc-xa__eeat-label"><?php echo $co_bac_si ? 'Bác sĩ đứng tên nội dung' : 'Đơn vị cung cấp thông tin'; ?></p>
+						<p><strong><a href="<?php echo esc_url( $link_tac_gia ); ?>"><?php echo esc_html( $ten_tac_gia ); ?></a></strong></p>
 						<p class="eyecare-khuc-xa__eeat-note">Thông tin mang tính tham khảo, không thay thế chẩn đoán và chỉ định trực tiếp. Nếu thị lực giảm đột ngột, đau mắt dữ dội hoặc có chấn thương, hãy đến cơ sở y tế gần nhất.</p>
-						<a href="<?php echo esc_url( $link_tac_gia ); ?>">Xem đội ngũ bác sĩ <span aria-hidden="true">→</span></a>
+						<a href="<?php echo esc_url( home_url( '/doi-ngu-bac-si/' ) ); ?>">Xem đội ngũ bác sĩ <span aria-hidden="true">→</span></a>
 					</div>
 				</section>
 			</div>

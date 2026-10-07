@@ -56,10 +56,19 @@ while ( have_posts() ) :
 	);
 	if ( $thu_muc_chon ) {
 		$tham_so['cat'] = (int) $thu_muc_chon->term_id;
+	} elseif ( $thu_muc_cha ) {
+		$tham_so['cat'] = (int) $thu_muc_cha->term_id;
 	}
 
 	$bai_viet    = new WP_Query( $tham_so );
-	$tong_bai    = (int) wp_count_posts( 'post' )->publish;
+	$tong_bai    = 0;
+	if ( $thu_muc_cha ) {
+		$dem_bai = new WP_Query( array(
+			'post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => 1,
+			'cat' => (int) $thu_muc_cha->term_id, 'fields' => 'ids',
+		) );
+		$tong_bai = (int) $dem_bai->found_posts;
+	}
 	$link_thu_vien = get_permalink();
 	?>
 
@@ -79,6 +88,7 @@ while ( have_posts() ) :
 						<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 4 4"/></svg>
 						<input id="tim-kien-thuc" type="search" name="s" placeholder="Tìm bài viết về mắt...">
 						<input type="hidden" name="post_type" value="post">
+						<?php if ( $thu_muc_cha ) : ?><input type="hidden" name="cat" value="<?php echo esc_attr( (string) $thu_muc_cha->term_id ); ?>"><?php endif; ?>
 						<button type="submit">Tìm kiếm</button>
 					</form>
 				</div>

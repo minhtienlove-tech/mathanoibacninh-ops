@@ -1,5 +1,14 @@
 # Production changelog
 
+## 2026-10-07 — chuẩn bị chuyên mục mới và hồ sơ bác sĩ
+
+- Tiền kiểm production: 200 bài viết, 144 trang và sáu hồ sơ đội ngũ đang công khai. Trang `/tin-tuc/` và `/tuyen-dung/` còn là trang giữ chỗ, `noindex` và bị loại khỏi OBS sitemap bởi tùy chọn `exclude_ids=7,10,53,59,63,64`. Sáu hồ sơ bác sĩ chưa có nội dung tiểu sử trong WordPress.
+- Sao lưu toàn bộ child theme và database trước khi ghi production tại `/home/jwhxtzru/backups/categories-doctors-20261007-prepare1/` (`child-theme-before.tar.gz`, `database-before.sql`); đã kiểm tra archive và SQL. Trình nhập 12 bài chạy dry-run, đối chiếu hai trang ID 53/59 và sitemap option; chưa ghi WordPress tại thời điểm commit này.
+- Child theme bổ sung năm chuyên mục kiến thức và bảy chuyên mục tin bệnh viện vào menu; mẫu trang Tin bệnh viện/Tuyển dụng, mẫu lưu trữ và bài tin riêng; kho Kiến thức chỉ liệt kê bài thuộc cây kiến thức. Bộ 12 bài giới thiệu nằm trong `docs/drafts/category-intros/`, chỉ nói về phạm vi chuyên mục, không giả lập phỏng vấn, tuyển dụng, ưu đãi hay lịch khám cộng đồng.
+- Quản trị hồ sơ bác sĩ có ô Facebook, nguồn đối chiếu thành tích và nội dung giới thiệu dài; bài/trang có ô chọn người viết, người duyệt và ngày duyệt thực tế. Liên kết tên bác sĩ trỏ Facebook do bệnh viện cung cấp khi có, còn schema tham chiếu hồ sơ nội bộ; gỡ việc tự gán ThS.BS Lê Như Tùng cho bài chưa xác nhận. Thay ảnh poster có chữ thành ảnh chân dung, ẩn các mốc số ca/năm, giải thưởng và chức vụ cũ thiếu nguồn. Người phụ trách xác nhận đã có giấy phép hoạt động nhưng chưa cung cấp số giấy phép, nên schema để trống số.
+- Script `scripts/publish-approved-categories-20261007.php` mặc định chỉ tiền kiểm, khi áp dụng sẽ tạo đúng 12 danh mục/bài mở đầu, cập nhật hai trang giữ chỗ và gỡ riêng ID 53/59 khỏi danh sách loại sitemap; lưu ID và giá trị cũ để rollback có chọn lọc. Bài giới thiệu tuyển dụng được đánh dấu riêng để không xuất hiện như một vị trí đang tuyển.
+- Kiểm tra trước triển khai: lint 22 tệp PHP mới/sửa bằng PHP local và toàn bộ PHP của gói staged bằng PHP 8.2 trên server; `git diff --check` đạt. Bước ghi production và kiểm tra HTML công khai sẽ cập nhật sau.
+
 ## 2026-10-05 — chuẩn bị phiếu bác sĩ duyệt 12 bài y khoa
 
 - Tạo `docs/faq-medical-review-20261003/intro-summary-physician-review.md` từ manifest đã chụp: 12 bài, 20 đoạn trước–sau, nguồn đối chiếu và ô duyệt riêng từng bài. Script tạo phiếu là `scripts/build-medical-review-sheet-20261003.py`; không thay đổi nội dung công khai.

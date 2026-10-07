@@ -29,13 +29,18 @@ $url             = static function ( $path ) {
 		</div>
 
 		<?php
-		$anh_tac_gia  = function_exists( 'eyecare_bac_si_anh_tac_gia' ) ? eyecare_bac_si_anh_tac_gia() : '';
-		$ten_tac_gia  = function_exists( 'eyecare_bac_si_ten_day_du' ) ? eyecare_bac_si_ten_day_du() : 'Ths.BS Lê Như Tùng';
-		$link_tac_gia = function_exists( 'eyecare_bac_si_duong_dan' ) ? eyecare_bac_si_duong_dan() : home_url( '/doi-ngu-bac-si/' );
+		$bac_si_dung_ten = function_exists( 'eyecare_bai_bac_si_byline' ) ? eyecare_bai_bac_si_byline( get_the_ID() ) : array();
+		$co_bac_si       = ! empty( $bac_si_dung_ten['id'] );
+		$anh_tac_gia    = $co_bac_si ? get_the_post_thumbnail_url( $bac_si_dung_ten['id'], 'thumbnail' ) : '';
+		if ( $co_bac_si && ! $anh_tac_gia ) {
+			$anh_tac_gia = get_post_meta( $bac_si_dung_ten['id'], '_eyecare_anh_url', true );
+		}
+		$ten_tac_gia  = $co_bac_si ? $bac_si_dung_ten['name'] : $tt['ten'];
+		$link_tac_gia = $co_bac_si ? ( $bac_si_dung_ten['facebook'] ?: $bac_si_dung_ten['url'] ) : home_url( '/gioi-thieu/' );
 		?>
-		<div class="eyecare-lien-he-seo__byline" aria-label="Thông tin người biên soạn">
+		<div class="eyecare-lien-he-seo__byline" aria-label="Nguồn thông tin">
 			<?php if ( $anh_tac_gia ) : ?><img src="<?php echo esc_url( $anh_tac_gia ); ?>" alt="<?php echo esc_attr( $ten_tac_gia ); ?>" width="54" height="54" loading="lazy" decoding="async"><?php endif; ?>
-			<div><span>Người biên soạn nội dung</span><strong><a href="<?php echo esc_url( $link_tac_gia ); ?>"><?php echo esc_html( $ten_tac_gia ); ?></a></strong><small>Cập nhật lần cuối <?php echo esc_html( get_the_modified_date( 'd/m/Y' ) ); ?> · Thông tin tham khảo, không thay thế thăm khám trực tiếp.</small></div>
+			<div><span><?php echo $co_bac_si ? 'Bác sĩ đứng tên nội dung' : 'Đơn vị cung cấp thông tin'; ?></span><strong><a href="<?php echo esc_url( $link_tac_gia ); ?>"><?php echo esc_html( $ten_tac_gia ); ?></a></strong><small>Cập nhật lần cuối <?php echo esc_html( get_the_modified_date( 'd/m/Y' ) ); ?> · Thông tin tham khảo, không thay thế thăm khám trực tiếp.</small></div>
 		</div>
 
 		<div class="eyecare-lien-he-seo__answer" role="note">

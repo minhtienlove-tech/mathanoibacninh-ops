@@ -44,9 +44,14 @@ while ( have_posts() ) :
 	$chuyen_khoa  = eyecare_trang_con_hub( 'chuyen-khoa' );
 	$noi_dung     = trim( get_the_content() );
 	$co_noi_dung  = '' !== trim( wp_strip_all_tags( strip_shortcodes( $noi_dung ) ) );
-	$anh_tac_gia  = function_exists( 'eyecare_bac_si_anh_tac_gia' ) ? eyecare_bac_si_anh_tac_gia() : '';
-	$ten_tac_gia  = function_exists( 'eyecare_bac_si_ten_day_du' ) ? eyecare_bac_si_ten_day_du() : 'Ths.BS Lê Như Tùng';
-	$link_tac_gia = function_exists( 'eyecare_bac_si_duong_dan' ) ? eyecare_bac_si_duong_dan() : home_url( '/doi-ngu-bac-si/' );
+	$bac_si_dung_ten = function_exists( 'eyecare_bai_bac_si_byline' ) ? eyecare_bai_bac_si_byline( get_the_ID() ) : array();
+	$co_bac_si      = ! empty( $bac_si_dung_ten['id'] );
+	$anh_tac_gia   = $co_bac_si ? get_the_post_thumbnail_url( $bac_si_dung_ten['id'], 'thumbnail' ) : '';
+	if ( $co_bac_si && ! $anh_tac_gia ) {
+		$anh_tac_gia = get_post_meta( $bac_si_dung_ten['id'], '_eyecare_anh_url', true );
+	}
+	$ten_tac_gia  = $co_bac_si ? $bac_si_dung_ten['name'] : $tt['ten'];
+	$link_tac_gia = $co_bac_si ? ( $bac_si_dung_ten['facebook'] ?: $bac_si_dung_ten['url'] ) : home_url( '/gioi-thieu/' );
 	$so_tu        = absint( get_post_meta( get_the_ID(), '_bvmat_so_tu', true ) );
 	$anh_nen      = function_exists( 'eyecare_anh_giao_dien_lay' ) ? eyecare_anh_giao_dien_lay( 'chuyen_khoa_nen', 'full' ) : null;
 	$mo_ta        = array(
@@ -175,10 +180,9 @@ while ( have_posts() ) :
 								<?php if ( $anh_tac_gia ) : ?>
 									<img src="<?php echo esc_url( $anh_tac_gia ); ?>" alt="<?php echo esc_attr( $ten_tac_gia ); ?>" width="120" height="120" loading="lazy">
 								<?php endif; ?>
-								<p class="eyecare-chuyen-khoa__eeat-kicker">Người đứng tên nội dung</p>
+								<p class="eyecare-chuyen-khoa__eeat-kicker"><?php echo $co_bac_si ? 'Bác sĩ đứng tên nội dung' : 'Đơn vị cung cấp thông tin'; ?></p>
 								<h2><a href="<?php echo esc_url( $link_tac_gia ); ?>"><?php echo esc_html( $ten_tac_gia ); ?></a></h2>
-								<p>Bác sĩ chuyên khoa Mắt<br><?php echo esc_html( $tt['ten'] ); ?></p>
-								<?php if ( function_exists( 'eyecare_bac_si_chi_so_in' ) ) { eyecare_bac_si_chi_so_in(); } ?>
+								<?php if ( $co_bac_si ) : ?><p><?php echo esc_html( $tt['ten'] ); ?></p><?php endif; ?>
 								<dl>
 									<div><dt>Cập nhật</dt><dd><?php echo esc_html( get_the_modified_date( 'd/m/Y' ) ); ?></dd></div>
 									<?php if ( $so_tu ) : ?><div><dt>Độ dài</dt><dd><?php echo esc_html( number_format_i18n( $so_tu ) ); ?> từ</dd></div><?php endif; ?>

@@ -48,6 +48,38 @@ function eyecare_child_enqueue_styles() {
 }
 add_action( 'wp_enqueue_scripts', 'eyecare_child_enqueue_styles', 100 );
 
+/** Bài thuộc cây Tin tức là nội dung hoạt động bệnh viện, không phải bài y khoa. */
+function eyecare_la_bai_tin_tuc( $post_id ) {
+	$goc = get_category_by_slug( 'tin-tuc' );
+	if ( ! $goc || ! $post_id ) {
+		return false;
+	}
+	foreach ( wp_get_post_categories( (int) $post_id ) as $term_id ) {
+		if ( (int) $term_id === (int) $goc->term_id || term_is_ancestor_of( (int) $goc->term_id, (int) $term_id, 'category' ) ) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/** CSS cho trung tâm tin, chuyên mục tin và bài tin (kể cả Tuyển dụng). */
+function eyecare_nap_css_tin_tuc() {
+	$la_muc_tin = false;
+	if ( is_category() ) {
+		$goc = get_category_by_slug( 'tin-tuc' );
+		$id  = get_queried_object_id();
+		$la_muc_tin = $goc && ( (int) $id === (int) $goc->term_id || term_is_ancestor_of( (int) $goc->term_id, (int) $id, 'category' ) );
+	}
+	if ( ! is_page( array( 'tin-tuc', 'tuyen-dung' ) ) && ! $la_muc_tin && !( is_singular( 'post' ) && eyecare_la_bai_tin_tuc( get_queried_object_id() ) ) ) {
+		return;
+	}
+	$css = get_stylesheet_directory() . '/assets/news.css';
+	if ( file_exists( $css ) ) {
+		wp_enqueue_style( 'eyecare-news', get_stylesheet_directory_uri() . '/assets/news.css', array( 'eyecare-child-style' ), filemtime( $css ) );
+	}
+}
+add_action( 'wp_enqueue_scripts', 'eyecare_nap_css_tin_tuc', 110 );
+
 /** Nạp CSS cho khối đội ngũ dạng poster tại ba nơi đang dùng component. */
 function eyecare_nap_css_doi_ngu_trang_chu() {
 	if ( ! is_front_page() && ! is_page( array( 'gioi-thieu', 'doi-ngu-bac-si' ) ) ) {
@@ -156,6 +188,21 @@ function eyecare_home_meta_description() {
 	echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
 }
 add_action( 'wp_head', 'eyecare_home_meta_description', 3 );
+
+/** Hai trang tin trước đây giữ chỗ, nay có mô tả tìm kiếm riêng. */
+function eyecare_news_hub_meta_description() {
+	$descriptions = array(
+		'tin-tuc' => 'Tin từ Bệnh viện Mắt Hà Nội – Bắc Ninh: đội ngũ bác sĩ, đời sống bệnh viện, hoạt động cộng đồng, câu chuyện người bệnh và thông báo đã xác nhận.',
+		'tuyen-dung' => 'Thông tin tuyển dụng và môi trường làm việc tại Bệnh viện Mắt Hà Nội – Bắc Ninh. Xem vị trí đã công bố, điều kiện và kênh ứng tuyển chính thức.',
+	);
+	foreach ( $descriptions as $slug => $description ) {
+		if ( is_page( $slug ) ) {
+			echo '<meta name="description" content="' . esc_attr( $description ) . '">' . "\n";
+			return;
+		}
+	}
+}
+add_action( 'wp_head', 'eyecare_news_hub_meta_description', 4 );
 
 /** Nạp slider máy móc hiện đại chỉ ở trang chủ. */
 function eyecare_nap_js_thiet_bi() {
@@ -301,7 +348,7 @@ require_once get_stylesheet_directory() . '/inc/noi-dung-lien-he-seo.php';
  *
  * Dữ liệu chưa có thì để rỗng trong hàm eyecare_du_lieu_thuc_the() —
  * trường rỗng tự động bị bỏ khỏi schema, KHÔNG bịa giá trị tạm.
- * Còn thiếu: toạ độ (B-16), số Giấy phép hoạt động (B-03).
+ * Còn thiếu: toạ độ (B-16), số Giấy phép hoạt động để đối chiếu bản giấy.
  * ========================================================================== */
 require_once get_stylesheet_directory() . '/inc/schema-y-te.php';
 
@@ -450,6 +497,41 @@ function eyecare_bo_khoi_bien_soan_va_tac_gia() {
 	remove_shortcode( 'obs_author_bio' );
 }
 add_action( 'wp', 'eyecare_bo_khoi_bien_soan_va_tac_gia', 20 );
+
+/** Tin bệnh viện có nguồn biên tập riêng, không nhận hộp E-E-A-T bác sĩ mặc định của plugin SEO. */
+function eyecare_tin_tuc_bo_ghi_cong_obs() {
+	if ( is_admin() || ! is_singular( 'post' ) || ! eyecare_la_bai_tin_tuc( get_queried_object_id() ) || ! class_exists( 'OBS_Loader' ) ) {
+		return;
+	}
+	$eeat = OBS_Loader::get( 'ai_citation_bridge' );
+	if ( $eeat ) {
+		remove_filter( 'the_content', array( $eeat, 'maybe_inject' ), 8 );
+		remove_filter( 'the_content', array( $eeat, 'maybe_inject_eeat' ), 11 );
+	}
+	$bio = OBS_Loader::get( 'author_bio' );
+	if ( $bio ) {
+		foreach ( array( 'append_box', 'prepend_box', 'both_box' ) as $method ) {
+			remove_filter( 'the_content', array( $bio, $method ), 99 );
+		}
+	}
+	$schema = OBS_Loader::get( 'schema' );
+	if ( $schema ) {
+		remove_action( 'wp_head', array( $schema, 'render' ), 10 );
+	}
+	$breadcrumb = OBS_Loader::get( 'breadcrumb' );
+	if ( $breadcrumb ) {
+		remove_action( 'wp_head', array( $breadcrumb, 'render_schema' ), 15 );
+		remove_filter( 'the_content', array( $breadcrumb, 'auto_insert' ), 5 );
+	}
+	$reading_time = OBS_Loader::get( 'reading_time' );
+	if ( $reading_time ) {
+		remove_filter( 'the_content', array( $reading_time, 'prepend_to_content' ), 4 );
+		remove_filter( 'the_content', array( $reading_time, 'append_to_content' ), 5 );
+	}
+	remove_shortcode( 'obs_eeat_box' );
+	remove_shortcode( 'obs_author_bio' );
+}
+add_action( 'wp', 'eyecare_tin_tuc_bo_ghi_cong_obs', 30 );
 
 
 /* ==========================================================================

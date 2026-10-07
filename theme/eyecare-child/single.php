@@ -17,6 +17,13 @@
  * @package Eyecare_Child
  */
 
+// Tin hoạt động, phỏng vấn, ưu đãi và nhân sự không phải bài y khoa.
+// Dùng khuôn riêng để không gắn cách trình bày kiến thức/EEAT bác sĩ lên tin.
+if ( function_exists( 'eyecare_la_bai_tin_tuc' ) && eyecare_la_bai_tin_tuc( get_queried_object_id() ) ) {
+	get_template_part( 'template-parts/single', 'news' );
+	return;
+}
+
 get_header();
 
 while ( have_posts() ) :

@@ -59,7 +59,9 @@ $eyecare_mang_xa_hoi       = array(
 		'lop'    => 'tiktok',
 	),
 );
-$eyecare_anh_bac_si_tung   = function_exists( 'eyecare_bac_si_anh_tac_gia' ) ? eyecare_bac_si_anh_tac_gia() : '';
+$eyecare_footer_byline     = is_singular( array( 'post', 'page' ) ) && function_exists( 'eyecare_bai_bac_si_byline' )
+	? eyecare_bai_bac_si_byline( get_queried_object_id() ) : array();
+$eyecare_footer_doctor_image = $eyecare_footer_byline ? get_the_post_thumbnail_url( $eyecare_footer_byline['id'], 'thumbnail' ) : '';
 ?>
 
 </main><?php /* Mở ở header.php */ ?>
@@ -193,17 +195,17 @@ $eyecare_anh_bac_si_tung   = function_exists( 'eyecare_bac_si_anh_tac_gia' ) ? e
 					get_post_meta( $eyecare_content_plan_id, '_eyecare_content_plan_published_id', true )
 				);
 				?>
-				<?php if ( ! $eyecare_la_trang_khu_vuc && ! $eyecare_cho_ghi_cong ) : ?>
+				<?php if ( ! $eyecare_la_trang_khu_vuc && $eyecare_footer_byline ) : ?>
 				<div class="eyecare-chan__tac-gia">
 					<div class="eyecare-chan__tac-gia-avatar" aria-hidden="true">
-						<?php if ( $eyecare_anh_bac_si_tung ) : ?>
-							<img src="<?php echo esc_url( $eyecare_anh_bac_si_tung ); ?>" alt="" loading="lazy" decoding="async">
+						<?php if ( $eyecare_footer_doctor_image ) : ?>
+							<img src="<?php echo esc_url( $eyecare_footer_doctor_image ); ?>" alt="" loading="lazy" decoding="async">
 						<?php else : ?>
-							LT
+						BS
 						<?php endif; ?>
 						<span>✓</span>
 					</div>
-					<div><strong><?php echo esc_html( eyecare_bac_si_ten_day_du() ); ?></strong><small>Người đứng tên nội dung y khoa</small><em>Đã xác thực chuyên môn</em></div>
+					<div><strong><a href="<?php echo esc_url( $eyecare_footer_byline['facebook'] ? $eyecare_footer_byline['facebook'] : $eyecare_footer_byline['url'] ); ?>"<?php echo $eyecare_footer_byline['facebook'] ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html( $eyecare_footer_byline['name'] ); ?></a></strong><small>Người đứng tên nội dung</small></div>
 				</div>
 				<?php endif; ?>
 				<div class="eyecare-chan__luu-y">

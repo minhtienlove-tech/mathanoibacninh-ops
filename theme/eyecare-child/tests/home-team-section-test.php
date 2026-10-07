@@ -46,24 +46,36 @@ eyecare_test_assert(
 );
 
 eyecare_test_assert(
-	false !== strpos( $html, 'Cố vấn chuyên môn cao cấp và Chủ tịch HĐQT' ),
-	'Thiếu chức danh đầy đủ của cố vấn chuyên môn.'
+	false !== strpos( $html, 'Cố vấn chuyên môn cao cấp' ),
+	'Thiếu vai trò cố vấn chuyên môn cao cấp.'
 );
 
-eyecare_test_assert(
-	false !== strpos( $html, 'Hơn 100.000 ca mổ Phaco trên toàn quốc và nước ngoài' ),
-	'Thiếu thông tin số ca mổ Phaco của cố vấn chuyên môn.'
-);
+foreach ( array( 'Chủ tịch HĐQT', '100.000 ca', '100,000 ca' ) as $unsupported_claim ) {
+	eyecare_test_assert(
+		false === strpos( $html, $unsupported_claim ),
+		'Không được hiển thị chức danh hoặc thành tích chưa đối chiếu: ' . $unsupported_claim
+	);
+}
 
 eyecare_test_assert(
 	5 === substr_count( $html, 'eyecare-home-team__card"' ),
 	'Lưới bác sĩ phải có đúng năm thẻ.'
 );
 
-foreach ( array( 'le-nhu-tung', 'dang-cong-hai', 'bui-van-canh', 'tran-khanh-thang', 'tran-duc-thinh', 'nguyen-dang-dat' ) as $slug ) {
-	$path = get_stylesheet_directory() . '/assets/doctor-posters/' . $slug . '.webp';
-	eyecare_test_assert( file_exists( $path ), 'Thiếu ảnh tối ưu: ' . $slug . '.webp' );
-	eyecare_test_assert( false !== strpos( $html, $slug . '.webp' ), 'HTML chưa dùng ảnh: ' . $slug . '.webp' );
+// Các chân dung gốc được duyệt hiện nằm trong assets/, không dùng poster cũ.
+$portrait_files = array(
+	'doctor-le-nhu-tung.png',
+	'doctor-dang-cong-hai.png',
+	'doctor-bui-van-canh.png',
+	'doctor-tran-khanh-thang.jpg',
+	'doctor-tran-duc-thinh.jpg',
+	'doctor-nguyen-dang-dat.jpg',
+);
+
+foreach ( $portrait_files as $filename ) {
+	$path = get_stylesheet_directory() . '/assets/' . $filename;
+	eyecare_test_assert( is_file( $path ), 'Thiếu chân dung gốc: ' . $filename );
+	eyecare_test_assert( false !== strpos( $html, $filename ), 'HTML chưa dùng chân dung gốc: ' . $filename );
 }
 
 echo "PASS: homepage doctor team renders the approved 1 + 5 layout.\n";

@@ -69,7 +69,8 @@ function eyecare_du_lieu_thuc_the() {
 		'vi_do'          => '',
 		'kinh_do'        => '',
 
-		// Số Giấy phép hoạt động. Chưa có GPHĐ — câu hỏi B-03.
+		// Bệnh viện xác nhận đã có GPHĐ ngày 06/10/2026; số giấy phép chưa cung cấp.
+		// Để trống cho tới khi đối chiếu bản giấy, không tự điền vào schema.
 		'so_gphd'        => '',
 
 		// Các hồ sơ chính thức khác của bệnh viện trên mạng.
@@ -245,6 +246,79 @@ function eyecare_schema_website() {
 	);
 }
 
+/** Schema bài tin bệnh viện: không gắn nhãn trang y khoa hay người duyệt giả định. */
+function eyecare_schema_bai_tin() {
+	if ( ! is_singular( 'post' ) || ! function_exists( 'eyecare_la_bai_tin_tuc' ) || ! eyecare_la_bai_tin_tuc( get_queried_object_id() ) ) {
+		return null;
+	}
+	$id   = (int) get_queried_object_id();
+	$goc  = home_url( '/' );
+	$link = get_permalink( $id );
+	$mo_ta = get_the_excerpt( $id );
+	$bai  = array(
+		'@type'            => 'Article',
+		'@id'              => $link . '#bai-viet',
+		'mainEntityOfPage'  => array( '@id' => $link ),
+		'headline'         => get_the_title( $id ),
+		'datePublished'     => get_post_time( DATE_W3C, false, $id ),
+		'dateModified'      => get_post_modified_time( DATE_W3C, false, $id ),
+		'inLanguage'        => 'vi-VN',
+		'publisher'         => array( '@id' => $goc . '#to-chuc' ),
+		'author'            => array( '@id' => $goc . '#to-chuc' ),
+	);
+	if ( $mo_ta ) {
+		$bai['description'] = wp_strip_all_tags( $mo_ta );
+	}
+	$thumbnail = get_the_post_thumbnail_url( $id, 'full' );
+	if ( $thumbnail ) {
+		$bai['image'] = esc_url_raw( $thumbnail );
+	}
+	if ( function_exists( 'eyecare_bai_bac_si_id' ) ) {
+		$doctor_id = (int) eyecare_bai_bac_si_id( $id );
+		if ( $doctor_id && function_exists( 'eyecare_bac_si_ho_so_url' ) ) {
+			$facebook = function_exists( 'eyecare_bac_si_facebook_url' ) ? eyecare_bac_si_facebook_url( $doctor_id ) : '';
+			$bai['author'] = array(
+				'@type' => 'Person',
+				'name'  => get_the_title( $doctor_id ),
+				'url'   => $facebook ?: eyecare_bac_si_ho_so_url( $doctor_id ),
+			);
+			if ( $facebook ) {
+				$bai['author']['sameAs'] = array( $facebook );
+			}
+		}
+	}
+	return $bai;
+}
+
+/** Breadcrumb thống nhất với giao diện bài tin. */
+function eyecare_schema_duong_dan_bai_tin() {
+	if ( ! is_singular( 'post' ) || ! function_exists( 'eyecare_la_bai_tin_tuc' ) || ! eyecare_la_bai_tin_tuc( get_queried_object_id() ) ) {
+		return null;
+	}
+	$id    = (int) get_queried_object_id();
+	$root  = get_category_by_slug( 'tin-tuc' );
+	$terms = get_the_category( $id );
+	$child = null;
+	foreach ( $terms as $term ) {
+		if ( $root && (int) $term->parent === (int) $root->term_id ) {
+			$child = $term;
+			break;
+		}
+	}
+	$items = array(
+		array( '@type' => 'ListItem', 'position' => 1, 'name' => 'Trang chủ', 'item' => home_url( '/' ) ),
+		array( '@type' => 'ListItem', 'position' => 2, 'name' => 'Tin bệnh viện', 'item' => home_url( '/tin-tuc/' ) ),
+	);
+	if ( $child ) {
+		$url = get_term_link( $child );
+		if ( ! is_wp_error( $url ) ) {
+			$items[] = array( '@type' => 'ListItem', 'position' => 3, 'name' => $child->name, 'item' => $url );
+		}
+	}
+	$items[] = array( '@type' => 'ListItem', 'position' => count( $items ) + 1, 'name' => get_the_title( $id ) );
+	return array( '@type' => 'BreadcrumbList', '@id' => get_permalink( $id ) . '#duong-dan', 'itemListElement' => $items );
+}
+
 /**
  * Đường dẫn phân cấp (breadcrumb) — giúp máy hiểu cây thư mục 4 cấp.
  */
@@ -342,8 +416,17 @@ function eyecare_in_schema() {
 		if ( $trang_y_khoa ) {
 			$do_thi[] = $trang_y_khoa;
 
-			if ( function_exists( 'eyecare_schema_bac_si' ) ) {
-				$do_thi[] = eyecare_schema_bac_si();
+			if ( function_exists( 'eyecare_schema_bac_si' ) && function_exists( 'eyecare_bai_bac_si_id' ) ) {
+				$ids = array( eyecare_bai_bac_si_id( get_queried_object_id() ) );
+				if ( function_exists( 'eyecare_bai_bac_si_duyet_id' ) && get_post_meta( get_queried_object_id(), '_bvmat_bac_si_duyet', true ) ) {
+					$ids[] = eyecare_bai_bac_si_duyet_id( get_queried_object_id() );
+				}
+				foreach ( array_unique( array_filter( $ids ) ) as $doctor_id ) {
+					$node = eyecare_schema_bac_si( $doctor_id );
+					if ( $node ) {
+						$do_thi[] = $node;
+					}
+				}
 			}
 		}
 	}
@@ -356,13 +439,26 @@ function eyecare_in_schema() {
 		}
 	}
 
-	// Bài viết: MedicalWebPage + Article, breadcrumb theo chuyên mục,
-	// và khối bác sĩ đứng tên nội dung.
-	if ( function_exists( 'eyecare_schema_bai_viet' ) ) {
+	// Tin bệnh viện là Article thông thường; chỉ bài kiến thức mới là MedicalWebPage.
+	if ( function_exists( 'eyecare_la_bai_tin_tuc' ) && is_singular( 'post' ) && eyecare_la_bai_tin_tuc( get_queried_object_id() ) ) {
+		$do_thi[] = eyecare_schema_bai_tin();
+		$do_thi[] = eyecare_schema_duong_dan_bai_tin();
+	} elseif ( function_exists( 'eyecare_schema_bai_viet' ) ) {
 		$bv = eyecare_schema_bai_viet();
 		if ( $bv ) {
 			$do_thi[] = $bv;
-			$do_thi[] = eyecare_schema_bac_si();
+			if ( function_exists( 'eyecare_schema_bac_si' ) && function_exists( 'eyecare_bai_bac_si_id' ) ) {
+				$ids = array( eyecare_bai_bac_si_id( get_queried_object_id() ) );
+				if ( function_exists( 'eyecare_bai_bac_si_duyet_id' ) && get_post_meta( get_queried_object_id(), '_bvmat_bac_si_duyet', true ) ) {
+					$ids[] = eyecare_bai_bac_si_duyet_id( get_queried_object_id() );
+				}
+				foreach ( array_unique( array_filter( $ids ) ) as $doctor_id ) {
+					$node = eyecare_schema_bac_si( $doctor_id );
+					if ( $node ) {
+						$do_thi[] = $node;
+					}
+				}
+			}
 
 			$dd_bv = eyecare_schema_duong_dan_bai_viet();
 			if ( $dd_bv ) {

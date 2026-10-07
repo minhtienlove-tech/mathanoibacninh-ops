@@ -2,9 +2,8 @@
 /**
  * Khối đội ngũ chuyên môn dùng chung cho các trang giới thiệu bệnh viện.
  *
- * Ảnh poster được tối ưu từ bộ ảnh đã duyệt và lưu trong theme để không phụ
- * thuộc dữ liệu đồng bộ của WordPress. Trang /doi-ngu-bac-si/ vẫn dùng bộ
- * hồ sơ động hiện có trong inc/tac-gia-bac-si.php.
+ * Ảnh chân dung lưu trong theme để khối giới thiệu không phụ thuộc dữ liệu
+ * đồng bộ của WordPress. Hồ sơ chi tiết vẫn lấy từ bản ghi bác sĩ trong Admin.
  *
  * @package eyecare-child
  */
@@ -21,36 +20,42 @@ if ( ! defined( 'ABSPATH' ) ) {
 function eyecare_doi_ngu_trang_chu_du_lieu() {
 	return array(
 		'featured' => array(
+			'slug'  => 'le-nhu-tung',
 			'name'  => 'ThS.BS Lê Như Tùng',
-			'role'  => 'Cố vấn chuyên môn cao cấp và Chủ tịch HĐQT',
-			'note'  => 'Hơn 100.000 ca mổ Phaco trên toàn quốc và nước ngoài',
-			'image' => 'le-nhu-tung.webp',
+			'role'  => 'Cố vấn chuyên môn cao cấp',
+			'note'  => 'Đồng hành cùng đội ngũ trong khám và điều trị nhãn khoa',
+			'image' => 'doctor-le-nhu-tung.png',
 		),
 		'members'  => array(
 			array(
+				'slug'  => 'dang-cong-hai',
 				'name'  => 'BSCKI. Đặng Công Hải',
 				'role'  => 'Giám đốc bệnh viện',
-				'image' => 'dang-cong-hai.webp',
+				'image' => 'doctor-dang-cong-hai.png',
 			),
 			array(
+				'slug'  => 'bui-van-canh',
 				'name'  => 'BSCKI. Bùi Văn Cảnh',
 				'role'  => 'Phó giám đốc chuyên môn',
-				'image' => 'bui-van-canh.webp',
+				'image' => 'doctor-bui-van-canh.png',
 			),
 			array(
+				'slug'  => 'tran-khanh-thang',
 				'name'  => 'BSCK. Trần Khánh Thắng',
 				'role'  => 'Trưởng khoa khúc xạ',
-				'image' => 'tran-khanh-thang.webp',
+				'image' => 'doctor-tran-khanh-thang.jpg',
 			),
 			array(
+				'slug'  => 'tran-duc-thinh',
 				'name'  => 'Cử nhân khúc xạ Trần Đức Thịnh',
 				'role'  => 'Chuyên gia khúc xạ',
-				'image' => 'tran-duc-thinh.webp',
+				'image' => 'doctor-tran-duc-thinh.jpg',
 			),
 			array(
+				'slug'  => 'nguyen-dang-dat',
 				'name'  => 'Cử nhân Nguyễn Đăng Đạt',
 				'role'  => 'Trưởng khoa cận lâm sàng',
-				'image' => 'nguyen-dang-dat.webp',
+				'image' => 'doctor-nguyen-dang-dat.jpg',
 			),
 		),
 	);
@@ -64,18 +69,21 @@ function eyecare_doi_ngu_trang_chu_du_lieu() {
  */
 function eyecare_doi_ngu_trang_chu_anh_url( $filename ) {
 	$filename = sanitize_file_name( $filename );
-	$path     = get_stylesheet_directory() . '/assets/doctor-posters/' . $filename;
-
-	if ( ! is_file( $path ) ) {
-		return '';
+	foreach ( array( '/assets/doctor-posters/', '/assets/' ) as $directory ) {
+		$path = get_stylesheet_directory() . $directory . $filename;
+		if ( is_file( $path ) ) {
+			return get_stylesheet_directory_uri() . $directory . rawurlencode( $filename );
+		}
 	}
-
-	return get_stylesheet_directory_uri() . '/assets/doctor-posters/' . rawurlencode( $filename );
+	return '';
 }
 
-/** Responsive poster URLs retain the original as the high-density fallback. */
+/** Responsive WebP variants retain the original as the high-density fallback. */
 function eyecare_doi_ngu_trang_chu_anh_srcset( $filename ) {
 	$filename = sanitize_file_name( $filename );
+	if ( 'webp' !== strtolower( pathinfo( $filename, PATHINFO_EXTENSION ) ) ) {
+		return '';
+	}
 	$base     = pathinfo( $filename, PATHINFO_FILENAME );
 	$urls     = array();
 	foreach ( array( 400, 800 ) as $width ) {
@@ -101,6 +109,26 @@ function eyecare_doi_ngu_trang_chu_in( $heading_level = 2 ) {
 	$data        = eyecare_doi_ngu_trang_chu_du_lieu();
 	$featured    = $data['featured'];
 	$members     = $data['members'];
+	if ( function_exists( 'eyecare_du_lieu_doi_ngu' ) ) {
+		foreach ( eyecare_du_lieu_doi_ngu() as $doctor ) {
+			$slug = function_exists( 'eyecare_bac_si_slug' ) ? eyecare_bac_si_slug( $doctor ) : '';
+			if ( 'le-nhu-tung' === $slug ) {
+				$featured['name'] = eyecare_doi_ngu_ten_day_du( $doctor );
+				$featured['role'] = ! empty( $doctor['chuc_danh'] ) ? $doctor['chuc_danh'] : $featured['role'];
+				$featured['doctor_id'] = ! empty( $doctor['post_id'] ) ? (int) $doctor['post_id'] : 0;
+			}
+			foreach ( $members as &$member ) {
+				if ( $slug === $member['slug'] ) {
+					$member['name'] = eyecare_doi_ngu_ten_day_du( $doctor );
+					$member['role'] = ! empty( $doctor['chuc_danh'] ) ? $doctor['chuc_danh'] : $member['role'];
+					$member['doctor_id'] = ! empty( $doctor['post_id'] ) ? (int) $doctor['post_id'] : 0;
+				}
+			}
+			unset( $member );
+		}
+	}
+	$featured_link = function_exists( 'eyecare_bac_si_trang_ca_nhan_url' ) ? eyecare_bac_si_trang_ca_nhan_url( ! empty( $featured['doctor_id'] ) ? $featured['doctor_id'] : $featured['name'] ) : home_url( '/doi-ngu-bac-si/' );
+	$featured_external = false !== strpos( $featured_link, 'facebook.com' );
 	$hero_url    = eyecare_doi_ngu_trang_chu_anh_url( $featured['image'] );
 	$hero_small  = eyecare_doi_ngu_trang_chu_anh_url( pathinfo( $featured['image'], PATHINFO_FILENAME ) . '-400.webp' );
 	$hero_srcset = eyecare_doi_ngu_trang_chu_anh_srcset( $featured['image'] );
@@ -124,10 +152,10 @@ function eyecare_doi_ngu_trang_chu_in( $heading_level = 2 ) {
 				<div class="eyecare-home-team__featured-copy">
 					<p><?php echo esc_html( $featured['note'] ); ?></p>
 					<h3><?php echo esc_html( $featured['role'] ); ?></h3>
-					<span><?php echo esc_html( $featured['name'] ); ?></span>
+					<span><a href="<?php echo esc_url( $featured_link ); ?>"<?php echo $featured_external ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html( $featured['name'] ); ?></a></span>
 				</div>
 				<figure class="eyecare-home-team__featured-media">
-					<img src="<?php echo esc_url( $hero_small ?: $hero_url ); ?>" srcset="<?php echo esc_attr( $hero_srcset ); ?>" sizes="(min-width: 1025px) 340px, (min-width: 701px) 310px, 330px" width="400" height="600" loading="lazy" decoding="async" alt="Hồ sơ chuyên môn <?php echo esc_attr( $featured['name'] ); ?>">
+					<a href="<?php echo esc_url( $featured_link ); ?>"<?php echo $featured_external ? ' target="_blank" rel="noopener noreferrer"' : ''; ?> aria-label="Xem hồ sơ <?php echo esc_attr( $featured['name'] ); ?>"><img src="<?php echo esc_url( $hero_small ?: $hero_url ); ?>" srcset="<?php echo esc_attr( $hero_srcset ); ?>" sizes="(min-width: 1025px) 340px, (min-width: 701px) 310px, 330px" width="400" height="600" loading="lazy" decoding="async" alt="Hồ sơ chuyên môn <?php echo esc_attr( $featured['name'] ); ?>"></a>
 				</figure>
 			</article>
 
@@ -135,13 +163,15 @@ function eyecare_doi_ngu_trang_chu_in( $heading_level = 2 ) {
 				<?php foreach ( $members as $member ) : ?>
 					<?php $image_url = eyecare_doi_ngu_trang_chu_anh_url( $member['image'] ); ?>
 					<?php $image_small = eyecare_doi_ngu_trang_chu_anh_url( pathinfo( $member['image'], PATHINFO_FILENAME ) . '-400.webp' ); ?>
+					<?php $member_link = function_exists( 'eyecare_bac_si_trang_ca_nhan_url' ) ? eyecare_bac_si_trang_ca_nhan_url( ! empty( $member['doctor_id'] ) ? $member['doctor_id'] : $member['name'] ) : home_url( '/doi-ngu-bac-si/' ); ?>
+					<?php $member_external = false !== strpos( $member_link, 'facebook.com' ); ?>
 					<?php if ( '' === $image_url ) { continue; } ?>
 					<article class="eyecare-home-team__card">
 						<figure class="eyecare-home-team__card-media">
-							<img src="<?php echo esc_url( $image_small ?: $image_url ); ?>" srcset="<?php echo esc_attr( eyecare_doi_ngu_trang_chu_anh_srcset( $member['image'] ) ); ?>" sizes="(min-width: 1025px) 200px, (min-width: 701px) 30vw, 45vw" width="400" height="600" loading="lazy" decoding="async" alt="Hồ sơ chuyên môn <?php echo esc_attr( $member['name'] ); ?>">
+							<a href="<?php echo esc_url( $member_link ); ?>"<?php echo $member_external ? ' target="_blank" rel="noopener noreferrer"' : ''; ?> aria-label="Xem hồ sơ <?php echo esc_attr( $member['name'] ); ?>"><img src="<?php echo esc_url( $image_small ?: $image_url ); ?>" srcset="<?php echo esc_attr( eyecare_doi_ngu_trang_chu_anh_srcset( $member['image'] ) ); ?>" sizes="(min-width: 1025px) 200px, (min-width: 701px) 30vw, 45vw" width="400" height="600" loading="lazy" decoding="async" alt="Hồ sơ chuyên môn <?php echo esc_attr( $member['name'] ); ?>"></a>
 						</figure>
 						<div class="eyecare-home-team__caption">
-							<h3><?php echo esc_html( $member['name'] ); ?></h3>
+							<h3><a href="<?php echo esc_url( $member_link ); ?>"<?php echo $member_external ? ' target="_blank" rel="noopener noreferrer"' : ''; ?>><?php echo esc_html( $member['name'] ); ?></a></h3>
 							<p><?php echo esc_html( $member['role'] ); ?></p>
 						</div>
 					</article>

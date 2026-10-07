@@ -101,7 +101,7 @@ function eyecare_schema_lien_he_noi_dung() {
 			'inLanguage'       => 'vi-VN',
 			'datePublished'    => get_the_date( 'c', $id ),
 			'dateModified'     => get_the_modified_date( 'c', $id ),
-			'author'           => array( '@id' => home_url( '/' ) . '#bac-si-le-nhu-tung' ),
+			'author'           => array( '@id' => home_url( '/' ) . '#to-chuc' ),
 			'publisher'        => array( '@id' => home_url( '/' ) . '#to-chuc' ),
 			'isPartOf'         => array( '@id' => home_url( '/' ) . '#website' ),
 			'mainEntityOfPage' => array( '@id' => $url ),
@@ -120,17 +120,28 @@ function eyecare_schema_lien_he_noi_dung() {
 		),
 	);
 
-	// Chỉ khai reviewedBy sau khi có ngày bác sĩ duyệt trong hồ sơ page.
-	$ngay_duyet = get_post_meta( $id, '_bvmat_bac_si_duyet', true );
-	if ( $ngay_duyet ) {
-		$do_thi[0]['reviewedBy']    = array( '@id' => home_url( '/' ) . '#bac-si-le-nhu-tung' );
-		$do_thi[0]['lastReviewed']  = $ngay_duyet;
-	}
-
-	// Bổ sung thực thể Physician mà MedicalWebPage đang trỏ tới, để máy đọc
-	// được đầy đủ người biên soạn ngay cả khi page chưa bật meta y khoa chung.
+	// Chỉ ghi tên bác sĩ khi người viết/người duyệt được chọn rõ trong Admin.
 	if ( function_exists( 'eyecare_schema_bac_si' ) ) {
-		$do_thi[] = eyecare_schema_bac_si();
+		$author_id = function_exists( 'eyecare_bai_bac_si_id' ) ? eyecare_bai_bac_si_id( $id ) : 0;
+		$reviewer_id = function_exists( 'eyecare_bai_bac_si_duyet_id' ) ? eyecare_bai_bac_si_duyet_id( $id ) : 0;
+		if ( $author_id ) {
+			$author = eyecare_schema_bac_si( $author_id );
+			if ( $author ) {
+				$do_thi[0]['author'] = array( '@id' => $author['@id'] );
+				$do_thi[] = $author;
+			}
+		}
+		$ngay_duyet = get_post_meta( $id, '_bvmat_bac_si_duyet', true );
+		if ( $reviewer_id && $ngay_duyet ) {
+			$reviewer = eyecare_schema_bac_si( $reviewer_id );
+			if ( $reviewer ) {
+				$do_thi[0]['reviewedBy'] = array( '@id' => $reviewer['@id'] );
+				$do_thi[0]['lastReviewed'] = $ngay_duyet;
+				if ( $reviewer_id !== $author_id ) {
+					$do_thi[] = $reviewer;
+				}
+			}
+		}
 	}
 
 	return $do_thi;

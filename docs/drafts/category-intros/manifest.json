@@ -1,0 +1,139 @@
+{
+  "version": 1,
+  "site": "https://mathanoibacninh.com",
+  "purpose": "One unique introductory post for each approved category. HTML files contain post body only.",
+  "entries": [
+    {
+      "group": "kien-thuc",
+      "category": "Mi mắt – lệ đạo – hốc mắt",
+      "category_slug": "mi-mat-le-dao-hoc-mat",
+      "parent_category_slug": "kien-thuc",
+      "category_description": "Tìm hiểu các vấn đề ở mi mắt, đường dẫn nước mắt và hốc mắt; dấu hiệu cần trao đổi khi khám.",
+      "post_title": "Tìm hiểu về mi mắt, lệ đạo và hốc mắt",
+      "post_slug": "tim-hieu-mi-mat-le-dao-hoc-mat",
+      "excerpt": "Bắt đầu từ triệu chứng, phân biệt các vùng quanh mắt và chuẩn bị câu hỏi trước buổi khám.",
+      "file": "mi-mat-le-dao-hoc-mat.html"
+    },
+    {
+      "group": "kien-thuc",
+      "category": "Triệu chứng mắt thường gặp",
+      "category_slug": "trieu-chung-mat-thuong-gap",
+      "parent_category_slug": "kien-thuc",
+      "category_description": "Tra cứu các biểu hiện như đỏ, đau, nhìn mờ, khô hoặc chảy nước mắt mà không tự chẩn đoán.",
+      "post_title": "Cách tìm hiểu các triệu chứng mắt thường gặp",
+      "post_slug": "tim-hieu-trieu-chung-mat-thuong-gap",
+      "excerpt": "Cách mô tả triệu chứng mắt, ghi nhận thời điểm xuất hiện và chuẩn bị thông tin để trao đổi với bác sĩ.",
+      "file": "trieu-chung-mat-thuong-gap.html"
+    },
+    {
+      "group": "kien-thuc",
+      "category": "Mắt và bệnh toàn thân",
+      "category_slug": "mat-va-benh-toan-than",
+      "parent_category_slug": "kien-thuc",
+      "category_description": "Mối liên hệ giữa sức khỏe mắt với bệnh nền và cách phối hợp thông tin khi đi khám.",
+      "post_title": "Sức khỏe mắt khi đang theo dõi bệnh toàn thân",
+      "post_slug": "suc-khoe-mat-va-benh-toan-than",
+      "excerpt": "Hiểu vì sao bác sĩ mắt cần biết bệnh nền, thuốc đang dùng và các kết quả khám trước đây.",
+      "file": "mat-va-benh-toan-than.html"
+    },
+    {
+      "group": "kien-thuc",
+      "category": "Hiểu kết quả khám mắt",
+      "category_slug": "hieu-ket-qua-kham-mat",
+      "parent_category_slug": "kien-thuc",
+      "category_description": "Giải thích thuật ngữ và chỉ số phổ biến trên phiếu khám mắt trong đúng bối cảnh.",
+      "post_title": "Đọc kết quả khám mắt: bắt đầu từ đâu?",
+      "post_slug": "doc-ket-qua-kham-mat-bat-dau-tu-dau",
+      "excerpt": "Thị lực, độ kính và các kết quả kiểm tra cần được hiểu cùng triệu chứng, bệnh sử và lời giải thích của bác sĩ.",
+      "file": "hieu-ket-qua-kham-mat.html"
+    },
+    {
+      "group": "kien-thuc",
+      "category": "Dùng thuốc mắt an toàn",
+      "category_slug": "dung-thuoc-mat-an-toan",
+      "parent_category_slug": "kien-thuc",
+      "category_description": "Cách đọc và sử dụng thuốc mắt đúng hướng dẫn, giữ vệ sinh và trao đổi về đơn thuốc.",
+      "post_title": "Dùng thuốc mắt an toàn: những điều nên hỏi trước khi sử dụng",
+      "post_slug": "dung-thuoc-mat-an-toan-nhung-dieu-nen-hoi",
+      "excerpt": "Thuốc nhỏ mắt cần được dùng theo chỉ định; hãy giữ đơn, đọc nhãn và hỏi rõ cách theo dõi khi sử dụng.",
+      "file": "dung-thuoc-mat-an-toan.html"
+    },
+    {
+      "group": "tin-tuc",
+      "category": "Câu chuyện người bệnh",
+      "category_slug": "cau-chuyen-nguoi-benh",
+      "parent_category_slug": "tin-tuc",
+      "category_description": "Trải nghiệm và phỏng vấn người bệnh được chia sẻ sau khi có sự đồng ý phù hợp.",
+      "post_title": "Câu chuyện người bệnh: lắng nghe trải nghiệm, tôn trọng riêng tư",
+      "post_slug": "gioi-thieu-cau-chuyen-nguoi-benh",
+      "excerpt": "Nơi chia sẻ hành trình đi khám qua lời kể tự nguyện, không suy rộng kết quả cá nhân thành cam kết điều trị.",
+      "file": "cau-chuyen-nguoi-benh.html"
+    },
+    {
+      "group": "tin-tuc",
+      "category": "Góc bác sĩ",
+      "category_slug": "goc-bac-si",
+      "parent_category_slug": "tin-tuc",
+      "category_description": "Bài giới thiệu bác sĩ và trao đổi chuyên môn có người tham gia, người duyệt và thời điểm cập nhật rõ ràng.",
+      "post_title": "Góc bác sĩ: hiểu thêm người chăm sóc đôi mắt",
+      "post_slug": "gioi-thieu-goc-bac-si",
+      "excerpt": "Tìm hiểu vai trò bác sĩ, cách chuẩn bị câu hỏi và giới hạn của thông tin tư vấn công khai.",
+      "file": "goc-bac-si.html"
+    },
+    {
+      "group": "tin-tuc",
+      "category": "Đời sống bệnh viện",
+      "category_slug": "doi-song-benh-vien",
+      "parent_category_slug": "tin-tuc",
+      "category_description": "Câu chuyện về nhân sự và công việc thường ngày đã được xác nhận, với sự tôn trọng quyền riêng tư.",
+      "post_title": "Đời sống bệnh viện: con người phía sau mỗi ngày làm việc",
+      "post_slug": "gioi-thieu-doi-song-benh-vien",
+      "excerpt": "Tìm hiểu cách những công việc khác nhau góp phần vào hành trình tiếp đón và hỗ trợ người bệnh.",
+      "file": "doi-song-benh-vien.html"
+    },
+    {
+      "group": "tin-tuc",
+      "category": "Hoạt động cộng đồng",
+      "category_slug": "hoat-dong-cong-dong",
+      "parent_category_slug": "tin-tuc",
+      "category_description": "Thông tin giáo dục sức khỏe mắt và các hoạt động khám cộng đồng đã được xác nhận.",
+      "post_title": "Hoạt động cộng đồng: thông tin chăm sóc mắt đến gần hơn",
+      "post_slug": "gioi-thieu-hoat-dong-cong-dong",
+      "excerpt": "Chuyên mục dành cho hoạt động thực tế với học sinh, người cao tuổi và cộng đồng khi kế hoạch đã chốt.",
+      "file": "hoat-dong-cong-dong.html"
+    },
+    {
+      "group": "tin-tuc",
+      "category": "Thông báo bệnh viện",
+      "category_slug": "thong-bao-benh-vien",
+      "parent_category_slug": "tin-tuc",
+      "category_description": "Các thay đổi vận hành có ngày hiệu lực và kênh xác nhận rõ ràng.",
+      "post_title": "Thông báo bệnh viện: theo dõi thông tin đang áp dụng",
+      "post_slug": "gioi-thieu-thong-bao-benh-vien",
+      "excerpt": "Tìm lịch làm việc, hướng dẫn liên hệ và các thông tin cần biết từ thông báo đã được xác nhận.",
+      "file": "thong-bao-benh-vien.html"
+    },
+    {
+      "group": "tin-tuc",
+      "category": "Ưu đãi và hỗ trợ người bệnh",
+      "category_slug": "uu-dai-va-ho-tro-nguoi-benh",
+      "parent_category_slug": "tin-tuc",
+      "category_description": "Chương trình đã được xác nhận cùng điều kiện, thời hạn và phạm vi áp dụng rõ ràng.",
+      "post_title": "Ưu đãi và hỗ trợ người bệnh: xem rõ điều kiện trước khi quyết định",
+      "post_slug": "gioi-thieu-uu-dai-va-ho-tro-nguoi-benh",
+      "excerpt": "Cách đọc thông tin ưu đãi và hỗ trợ; hiện chưa thông báo chương trình cụ thể trong bài mở đầu.",
+      "file": "uu-dai-va-ho-tro-nguoi-benh.html"
+    },
+    {
+      "group": "tin-tuc",
+      "category": "Tuyển dụng",
+      "category_slug": "tuyen-dung",
+      "parent_category_slug": "tin-tuc",
+      "category_description": "Vị trí tuyển dụng được xác nhận, với nhiệm vụ, yêu cầu, hạn nhận hồ sơ và kênh nộp chính thức.",
+      "post_title": "Tuyển dụng: nơi cập nhật cơ hội làm việc được xác nhận",
+      "post_slug": "gioi-thieu-tuyen-dung",
+      "excerpt": "Cách xem tin tuyển dụng và kiểm tra trạng thái vị trí; bài giới thiệu chưa công bố việc làm cụ thể.",
+      "file": "tuyen-dung.html"
+    }
+  ]
+}

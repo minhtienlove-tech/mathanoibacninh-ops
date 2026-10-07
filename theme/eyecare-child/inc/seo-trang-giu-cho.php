@@ -4,9 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-/** IDs are the six verified placeholder/confirmation pages on this site. */
+/** Các trang còn đang giữ chỗ hoặc là trang xác nhận; Tin tức/Tuyển dụng đã có nội dung. */
 function eyecare_trang_giu_cho_ids() {
-	return array( 7, 10, 53, 59, 63, 64 );
+	return array( 7, 10, 63, 64 );
 }
 
 function eyecare_trang_giu_cho_robots( $robots ) {

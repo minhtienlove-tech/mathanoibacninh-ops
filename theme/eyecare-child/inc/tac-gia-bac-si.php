@@ -27,7 +27,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Dữ liệu bác sĩ đứng tên nội dung — nguồn sự thật duy nhất.
+ * Dữ liệu hồ sơ kế thừa. Không dùng để suy luận tác giả cho bài/trang mới.
  *
  * Căn cứ: Giấy chứng nhận ĐKDN (ĐÓNG-01) cho họ tên và vai trò pháp nhân;
  * hồ sơ chuyên môn do chủ đầu tư cung cấp (F018) cho học vị và chức danh.
@@ -73,9 +73,8 @@ function eyecare_du_lieu_bac_si() {
 /**
  * ĐỘI NGŨ BÁC SĨ — dữ liệu hiển thị trên trang chủ.
  *
- * Nội dung chức danh, số năm, số ca và chuyên môn dưới đây do chủ đầu tư cung
- * cấp cho khối giới thiệu đội ngũ. Số giấy phép hành nghề không được hiển thị
- * trong khối marketing này vì không nằm trong yêu cầu dữ liệu.
+ * Đây là dữ liệu mẫu kế thừa. Các mốc định lượng/chức vụ cũ chưa có nguồn
+ * đối chiếu được lọc trước khi hiển thị hoặc tạo hồ sơ mới.
  *
  * @return array[]
  */
@@ -209,6 +208,28 @@ function eyecare_du_lieu_doi_ngu_mac_dinh() {
 	);
 }
 
+/** Suppress legacy numeric, award and previous-position claims pending evidence. */
+function eyecare_du_lieu_doi_ngu_cong_khai( $doctor, $post_id = 0 ) {
+	$source = $post_id ? trim( (string) get_post_meta( $post_id, '_eyecare_nguon_thanh_tich', true ) ) : '';
+	if ( '' === $source ) {
+		$needs_source = static function ( $line ) {
+			return (bool) preg_match( '/\d|hàng\s+(?:nghìn|chục)|giải\s+(?:nhất|nhì|ba)|nguyên\s+|từng\s+|thành\s+viên\s+hội|thực\s+hiện\s+thành\s+công|phó\s+giám\s+đốc\s+phụ\s+trách|đào\s+tạo\s+phẫu\s+thuật\s+tại/iu', (string) $line );
+		};
+		foreach ( array( 'badges', 'highlights' ) as $key ) {
+			$lines = isset( $doctor[ $key ] ) && is_array( $doctor[ $key ] ) ? $doctor[ $key ] : array();
+			$doctor[ $key ] = array_values( array_filter( $lines, static function ( $line ) use ( $needs_source ) {
+				return ! $needs_source( $line );
+			} ) );
+		}
+		$doctor['badge'] = ! empty( $doctor['badges'] ) ? $doctor['badges'][0] : '';
+	}
+	if ( 'le-nhu-tung' === sanitize_title( isset( $doctor['ho_ten'] ) ? $doctor['ho_ten'] : '' )
+		&& ( empty( $doctor['chuc_danh'] ) || preg_match( '/chủ\s+tịch\s+hđqt/ui', (string) $doctor['chuc_danh'] ) ) ) {
+		$doctor['chuc_danh'] = 'Cố vấn chuyên môn cao cấp';
+	}
+	return $doctor;
+}
+
 /**
  * Đọc đội ngũ bác sĩ do người quản trị nhập trong WordPress.
  *
@@ -221,7 +242,7 @@ function eyecare_du_lieu_doi_ngu() {
 	$post_type = defined( 'EYECARE_POST_TYPE_BAC_SI' ) ? EYECARE_POST_TYPE_BAC_SI : 'eyecare_bac_si';
 
 	if ( ! post_type_exists( $post_type ) ) {
-		return eyecare_du_lieu_doi_ngu_mac_dinh();
+		return array_map( 'eyecare_du_lieu_doi_ngu_cong_khai', eyecare_du_lieu_doi_ngu_mac_dinh() );
 	}
 
 	$posts = get_posts(
@@ -242,12 +263,20 @@ function eyecare_du_lieu_doi_ngu() {
 		// sách rỗng có nghĩa là người quản trị đã chủ động xóa/ẩn toàn bộ bác sĩ.
 		return get_option( 'eyecare_doi_ngu_da_tao_mau' )
 			? array()
-			: eyecare_du_lieu_doi_ngu_mac_dinh();
+			: array_map( 'eyecare_du_lieu_doi_ngu_cong_khai', eyecare_du_lieu_doi_ngu_mac_dinh() );
 	}
 
 	$doi_ngu = array();
+	$default_specialties = array();
+	foreach ( eyecare_du_lieu_doi_ngu_mac_dinh() as $default_doctor ) {
+		$default_specialties[ sanitize_title( $default_doctor['ho_ten'] ) ] = $default_doctor['chuyen_khoa'];
+	}
 	foreach ( $posts as $post ) {
 		$ho_ten     = get_the_title( $post );
+		$chuyen_mon = (string) get_post_meta( $post->ID, '_eyecare_chuyen_mon', true );
+		if ( '' === $chuyen_mon ) {
+			$chuyen_mon = isset( $default_specialties[ sanitize_title( $ho_ten ) ] ) ? $default_specialties[ sanitize_title( $ho_ten ) ] : '';
+		}
 		$highlights = get_post_meta( $post->ID, '_eyecare_highlights', true );
 		$badges     = get_post_meta( $post->ID, '_eyecare_badges', true );
 		$anh_id     = (int) get_post_thumbnail_id( $post->ID );
@@ -274,20 +303,24 @@ function eyecare_du_lieu_doi_ngu() {
 			$badges         = '' !== $badge_fallback ? array( $badge_fallback ) : array();
 		}
 
-		$doi_ngu[] = array(
+		$doi_ngu[] = eyecare_du_lieu_doi_ngu_cong_khai( array(
+			'post_id'     => (int) $post->ID,
 			'ho_ten'      => $ho_ten,
 			'hoc_vi'      => (string) get_post_meta( $post->ID, '_eyecare_hoc_vi', true ),
 			'chuc_danh'   => (string) get_post_meta( $post->ID, '_eyecare_chuc_danh', true ),
-			'chuyen_khoa' => 'Nhãn khoa',
+			'chuyen_khoa' => $chuyen_mon,
 			'badge'       => ! empty( $badges ) ? $badges[0] : '',
 			'badges'      => $badges,
 			'anh_url'     => (string) get_post_meta( $post->ID, '_eyecare_anh_url', true ),
 			'anh_can_chinh' => $anh_id ? '' : (string) get_post_meta( $post->ID, '_eyecare_anh_can_chinh', true ),
 			'highlights'  => $highlights,
+			'gioi_thieu'  => $post->post_content,
+			'facebook'    => function_exists( 'eyecare_bac_si_facebook_url' ) ? eyecare_bac_si_facebook_url( $post->ID ) : '',
+			'profile'     => function_exists( 'eyecare_bac_si_ho_so_url' ) ? eyecare_bac_si_ho_so_url( $post->ID ) : home_url( '/doi-ngu-bac-si/' ),
 			'so_gphn'     => '',
 			'anh'         => $anh_id,
 			'la_tac_gia'  => 'le-nhu-tung' === sanitize_title( $ho_ten ),
-		);
+		), $post->ID );
 	}
 
 	return $doi_ngu;
@@ -306,11 +339,8 @@ function eyecare_doi_ngu_ten_day_du( $b ) {
 /**
  * In khối "Đội ngũ bác sĩ" — dùng cho trang chủ (và trang /doi-ngu-bac-si/).
  *
- * VÌ SAO KHÔNG DÙNG itemscope Physician Ở ĐÂY:
- * Schema Physician cho người đứng tên nội dung đã khai một lần trong <head>
- * (inc/tac-gia-bac-si.php → eyecare_schema_bac_si(), @id #bac-si-le-nhu-tung).
- * Khai thêm hai Physician chưa có đủ dữ liệu (chưa có số GPHN) là dạy máy đọc
- * thực thể mỏng. Khối này là GIỚI THIỆU cho người đọc, không phải schema.
+ * Khối này giới thiệu cho người đọc; thực thể Physician/Person trong JSON-LD
+ * chỉ xuất hiện khi bài/trang đã chỉ định đúng người viết hoặc người duyệt.
  *
  * @param bool $tren_trang_chu true: bản gọn cho trang chủ (có nhãn + đường dẫn).
  */
@@ -366,7 +396,10 @@ function eyecare_doi_ngu_bac_si_in( $tren_trang_chu = false ) {
 		echo '</div>';
 
 		echo '<div class="eyecare-doi-ngu__loi">';
-		echo '<h3 class="eyecare-doi-ngu__ten">' . esc_html( $ten ) . '</h3>';
+		$profile_url = function_exists( 'eyecare_bac_si_trang_ca_nhan_url' )
+			? eyecare_bac_si_trang_ca_nhan_url( $b )
+			: ( ! empty( $b['profile'] ) ? $b['profile'] : home_url( '/doi-ngu-bac-si/' ) );
+		echo '<h3 class="eyecare-doi-ngu__ten"><a href="' . esc_url( $profile_url ) . '">' . esc_html( $ten ) . '</a></h3>';
 		if ( ! empty( $b['chuc_danh'] ) ) {
 			echo '<p class="eyecare-doi-ngu__chuc">' . esc_html( $b['chuc_danh'] ) . '</p>';
 		}
@@ -386,6 +419,10 @@ function eyecare_doi_ngu_bac_si_in( $tren_trang_chu = false ) {
 			echo '<span>Xem thêm +' . esc_html( (string) $an_con_lai ) . '</span><span aria-hidden="true">›</span>';
 			echo '</button>';
 		}
+		$facebook_url = ! empty( $b['facebook'] ) ? $b['facebook'] : eyecare_bac_si_facebook_url( $b );
+		if ( $facebook_url ) {
+			echo '<p><a href="' . esc_url( $facebook_url ) . '" target="_blank" rel="noopener noreferrer">Facebook của ' . esc_html( $b['ho_ten'] ) . ' ↗</a></p>';
+		}
 		echo '</div>';
 		echo '</article>';
 	}
@@ -399,9 +436,9 @@ function eyecare_doi_ngu_bac_si_in( $tren_trang_chu = false ) {
 
 	echo '<div class="eyecare-doi-ngu__stats" aria-label="Thống kê đội ngũ">';
 	$stats = array(
-		array( 'value' => '100.000+ ca', 'label' => 'Phẫu thuật thành công', 'target' => 100000, 'suffix' => '+ ca', 'icon' => 'eye' ),
-		array( 'value' => '20+ năm', 'label' => 'Kinh nghiệm nhãn khoa', 'target' => 20, 'suffix' => '+ năm', 'icon' => 'clock' ),
-		array( 'value' => 'Chuẩn hóa', 'label' => 'Quy trình kiểm soát', 'icon' => 'shield' ),
+		array( 'value' => 'Thăm khám', 'label' => 'Đánh giá tình trạng mắt', 'icon' => 'eye' ),
+		array( 'value' => 'Tư vấn', 'label' => 'Giải thích phương án phù hợp', 'icon' => 'clock' ),
+		array( 'value' => 'Theo dõi', 'label' => 'Đồng hành cùng người bệnh', 'icon' => 'shield' ),
 	);
 	foreach ( $stats as $stat ) {
 		echo '<div class="eyecare-doi-ngu__stat" data-doctor-stat="true">';
@@ -531,9 +568,12 @@ function eyecare_bac_si_anh_tac_gia() {
 }
 
 /**
- * Đường dẫn trang hồ sơ bác sĩ, hoặc trang đội ngũ nếu chưa có hồ sơ riêng.
+ * Trang cá nhân được bệnh viện cung cấp, hoặc hồ sơ nội bộ khi chưa có liên kết.
  */
-function eyecare_bac_si_duong_dan() {
+function eyecare_bac_si_duong_dan( $doctor = 'Lê Như Tùng' ) {
+	if ( function_exists( 'eyecare_bac_si_trang_ca_nhan_url' ) ) {
+		return eyecare_bac_si_trang_ca_nhan_url( $doctor );
+	}
 	$b = eyecare_du_lieu_bac_si();
 	if ( '' !== $b['trang_ho_so'] ) {
 		return $b['trang_ho_so'];
@@ -541,36 +581,28 @@ function eyecare_bac_si_duong_dan() {
 	return home_url( '/doi-ngu-bac-si/' );
 }
 
-/**
- * Khối schema Physician — dùng cho author và reviewedBy.
- */
-function eyecare_schema_bac_si() {
-	$b   = eyecare_du_lieu_bac_si();
-	$goc = home_url( '/' );
-
+/** Doctor/person entity only for an explicitly selected published team member. */
+function eyecare_schema_bac_si( $doctor_id = 0 ) {
+	$b = function_exists( 'eyecare_bac_si_du_lieu_theo_id' ) ? eyecare_bac_si_du_lieu_theo_id( $doctor_id ) : array();
+	if ( ! $b ) {
+		return null;
+	}
+	$la_bac_si = false !== strpos( strtoupper( $b['hoc_vi'] ), 'BS' );
 	$bs = array(
-		'@type'      => 'Physician',
-		'@id'        => $goc . '#bac-si-le-nhu-tung',
-		'name'       => eyecare_bac_si_ten_day_du(),
-		'url'        => eyecare_bac_si_duong_dan(),
-		'medicalSpecialty' => 'https://schema.org/Ophthalmology',
+		'@type' => $la_bac_si ? 'Physician' : 'Person',
+		'@id'   => $b['profile'],
+		'name'  => trim( $b['hoc_vi'] . ' ' . $b['ho_ten'] ),
+		'url'   => $b['profile'],
 	);
-
-	// Chức danh: chỉ khai khi có. Đang để rỗng theo QĐ-03 — trường jobTitle
-	// rỗng trong schema còn tệ hơn không khai, vì máy đọc nó như dữ liệu thật.
-	if ( '' !== $b['chuc_danh'] ) {
+	if ( $la_bac_si ) {
+		$bs['medicalSpecialty'] = 'https://schema.org/Ophthalmology';
+	}
+	if ( ! empty( $b['chuc_danh'] ) ) {
 		$bs['jobTitle'] = $b['chuc_danh'];
 	}
-
-	// Số giấy phép hành nghề: chỉ khai khi đã có. Số sai còn hại hơn không có.
-	if ( '' !== $b['so_gphn'] ) {
-		$bs['identifier'] = array(
-			'@type' => 'PropertyValue',
-			'name'  => 'Giấy phép hành nghề khám bệnh, chữa bệnh',
-			'value' => $b['so_gphn'],
-		);
+	if ( ! empty( $b['facebook'] ) ) {
+		$bs['sameAs'] = array( $b['facebook'] );
 	}
-
 	return $bs;
 }
 
@@ -584,14 +616,20 @@ function eyecare_schema_bac_si() {
  * (cụm C8) tuyệt đối không được có nút đặt lịch — xem KIẾN TRÚC §6.3.
  */
 function eyecare_ma_ngan_tac_gia( $thuoc_tinh ) {
-	$b   = eyecare_du_lieu_bac_si();
-	$ten = eyecare_bac_si_ten_day_du();
+	$bai_id    = get_the_ID() ?: get_queried_object_id();
+	$doctor_id = function_exists( 'eyecare_bai_bac_si_id' ) ? eyecare_bai_bac_si_id( $bai_id ) : 0;
+	$b         = $doctor_id && function_exists( 'eyecare_bac_si_du_lieu_theo_id' ) ? eyecare_bac_si_du_lieu_theo_id( $doctor_id ) : array();
+	if ( ! $b ) {
+		return '';
+	}
+	$ten = trim( $b['hoc_vi'] . ' ' . $b['ho_ten'] );
 
 	$h  = '<aside class="eyecare-tac-gia" itemscope itemtype="https://schema.org/Physician">';
 	$h .= '<p class="eyecare-tac-gia__nhan">Người đứng tên nội dung</p>';
 
 	$h .= '<p class="eyecare-tac-gia__ten">';
-	$h .= '<a href="' . esc_url( eyecare_bac_si_duong_dan() ) . '">';
+	$personal_url = function_exists( 'eyecare_bac_si_trang_ca_nhan_url' ) ? eyecare_bac_si_trang_ca_nhan_url( $doctor_id ) : $b['profile'];
+	$h .= '<a href="' . esc_url( $personal_url ) . '">';
 	$h .= '<span itemprop="name">' . esc_html( $ten ) . '</span></a>';
 	$h .= '</p>';
 
@@ -601,11 +639,27 @@ function eyecare_ma_ngan_tac_gia( $thuoc_tinh ) {
 	if ( '' !== $b['chuc_danh'] ) {
 		$h .= esc_html( $b['chuc_danh'] ) . ' · ';
 	}
-	$h .= 'Chuyên khoa ' . esc_html( $b['chuyen_khoa'] );
+	if ( ! empty( $b['chuyen_mon'] ) ) {
+		$h .= esc_html( $b['chuyen_mon'] );
+	}
 	$h .= '</p>';
+	if ( ! empty( $b['facebook'] ) ) {
+		$h .= '<p><a href="' . esc_url( $b['facebook'] ) . '" target="_blank" rel="noopener noreferrer">Facebook của bác sĩ ↗</a></p>';
+	}
+	$reviewer_id = function_exists( 'eyecare_bai_bac_si_duyet_id' ) ? eyecare_bai_bac_si_duyet_id( $bai_id ) : 0;
+	$reviewed_at = (string) get_post_meta( $bai_id, '_bvmat_bac_si_duyet', true );
+	if ( $reviewer_id && $reviewed_at ) {
+		$reviewer = eyecare_bac_si_du_lieu_theo_id( $reviewer_id );
+		if ( $reviewer ) {
+			$reviewer_url = eyecare_bac_si_trang_ca_nhan_url( $reviewer_id );
+			$h .= '<p class="eyecare-tac-gia__duyet">Duyệt chuyên môn: <a href="' . esc_url( $reviewer_url ) . '">'
+				. esc_html( trim( $reviewer['hoc_vi'] . ' ' . $reviewer['ho_ten'] ) ) . '</a>';
+			$h .= ' · ' . esc_html( mysql2date( 'd/m/Y', $reviewed_at, false ) ) . '</p>';
+		}
+	}
 
 	// Chỉ in số giấy phép hành nghề khi thật sự có.
-	if ( '' !== $b['so_gphn'] ) {
+	if ( ! empty( $b['so_gphn'] ) ) {
 		$h .= '<p class="eyecare-tac-gia__gphn">Số giấy phép hành nghề: '
 			. esc_html( $b['so_gphn'] ) . '</p>';
 	}
@@ -925,14 +979,8 @@ function eyecare_ma_ngan_doc_them( $thuoc_tinh, $noi_dung = '' ) {
 add_shortcode( 'doc-them', 'eyecare_ma_ngan_doc_them' );
 
 /**
- * Khối schema cho bài viết: MedicalWebPage + Article.
- *
- * Khai cả author và reviewedBy trỏ về cùng một bác sĩ vì hiện chỉ có một
- * người đứng tên. Khi có bác sĩ duyệt riêng, tách reviewedBy ra.
- *
- * 🔴 lastReviewed chỉ khai khi bài ĐÃ ĐƯỢC BÁC SĨ DUYỆT — đánh dấu bằng
- * meta _bvmat_bac_si_duyet. Khai ngày duyệt cho bài chưa ai duyệt là khai
- * sai với máy đọc, đúng loại lỗi F21 mà tệp schema-y-te.php được viết để sửa.
+ * Khối schema cho bài viết y khoa. Chỉ gắn người viết/người duyệt khi quản
+ * trị viên đã chọn đúng hồ sơ bác sĩ cho từng bài.
  */
 function eyecare_schema_bai_viet() {
 	if ( ! is_singular( 'post' ) ) {
@@ -955,11 +1003,14 @@ function eyecare_schema_bai_viet() {
 		'inLanguage'       => 'vi-VN',
 		'datePublished'    => get_the_date( 'c', $id ),
 		'dateModified'     => get_the_modified_date( 'c', $id ),
-		'author'           => array( '@id' => $goc . '#bac-si-le-nhu-tung' ),
 		'publisher'        => array( '@id' => $goc . '#to-chuc' ),
 		'isPartOf'         => array( '@id' => $goc . '#website' ),
 		'medicalAudience'  => array( '@type' => 'Patient' ),
 	);
+	$author_id = function_exists( 'eyecare_bai_bac_si_id' ) ? eyecare_bai_bac_si_id( $id ) : 0;
+	if ( $author_id ) {
+		$bai['author'] = array( '@id' => eyecare_bac_si_ho_so_url( $author_id ) );
+	}
 
 	$mo_ta = get_the_excerpt( $id );
 	if ( $mo_ta ) {
@@ -973,9 +1024,10 @@ function eyecare_schema_bai_viet() {
 
 	// Ngày bác sĩ duyệt — chỉ khai khi thật sự đã duyệt.
 	$ngay_duyet = get_post_meta( $id, '_bvmat_bac_si_duyet', true );
-	if ( $ngay_duyet ) {
+	$reviewer_id = function_exists( 'eyecare_bai_bac_si_duyet_id' ) ? eyecare_bai_bac_si_duyet_id( $id ) : 0;
+	if ( $ngay_duyet && $reviewer_id ) {
 		$bai['lastReviewed'] = $ngay_duyet;
-		$bai['reviewedBy'] = array( '@id' => $goc . '#bac-si-le-nhu-tung' );
+		$bai['reviewedBy'] = array( '@id' => eyecare_bac_si_ho_so_url( $reviewer_id ) );
 	}
 
 	// Bệnh mà bài nói về — điền qua meta _bvmat_benh khi nhập bài.
@@ -1018,12 +1070,15 @@ function eyecare_schema_trang_y_khoa() {
 		'inLanguage'       => 'vi-VN',
 		'datePublished'    => get_the_date( 'c', $id ),
 		'dateModified'     => get_the_modified_date( 'c', $id ),
-		'author'           => array( '@id' => $goc . '#bac-si-le-nhu-tung' ),
 		'publisher'        => array( '@id' => $goc . '#to-chuc' ),
 		'isPartOf'         => array( '@id' => $goc . '#website' ),
 		'mainEntityOfPage' => array( '@id' => $url ),
 		'medicalAudience'  => array( '@type' => 'Patient' ),
 	);
+	$author_id = function_exists( 'eyecare_bai_bac_si_id' ) ? eyecare_bai_bac_si_id( $id ) : 0;
+	if ( $author_id ) {
+		$trang['author'] = array( '@id' => eyecare_bac_si_ho_so_url( $author_id ) );
+	}
 
 	$mo_ta = get_post_meta( $id, '_bvmat_seo_description', true );
 	if ( ! $mo_ta ) {
@@ -1061,8 +1116,9 @@ function eyecare_schema_trang_y_khoa() {
 	}
 
 	$ngay_duyet = get_post_meta( $id, '_bvmat_bac_si_duyet', true );
-	if ( $ngay_duyet ) {
-		$trang['reviewedBy']   = array( '@id' => $goc . '#bac-si-le-nhu-tung' );
+	$reviewer_id = function_exists( 'eyecare_bai_bac_si_duyet_id' ) ? eyecare_bai_bac_si_duyet_id( $id ) : 0;
+	if ( $ngay_duyet && $reviewer_id ) {
+		$trang['reviewedBy']   = array( '@id' => eyecare_bac_si_ho_so_url( $reviewer_id ) );
 		$trang['lastReviewed'] = $ngay_duyet;
 	}
 

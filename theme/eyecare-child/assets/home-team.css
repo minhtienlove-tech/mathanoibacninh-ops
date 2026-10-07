@@ -160,6 +160,18 @@
 	font-weight: 600;
 }
 
+.eyecare-home-team__featured-copy a,
+.eyecare-home-team__caption h3 a {
+	color: inherit;
+	text-decoration: none;
+	text-underline-offset: 0.22em;
+}
+
+.eyecare-home-team__featured-copy a:is(:hover, :focus-visible),
+.eyecare-home-team__caption h3 a:is(:hover, :focus-visible) {
+	text-decoration: underline;
+}
+
 .eyecare-home-team__featured-media,
 .eyecare-home-team__card-media {
 	position: relative;
@@ -371,4 +383,91 @@
 	.eyecare-home-team__card-media img {
 		transition: none;
 	}
+}
+
+/* Hồ sơ dài trên /doi-ngu-bac-si/: đích đến của các liên kết tên bác sĩ. */
+.eyecare-doctor-profiles {
+	padding: clamp(56px, 7vw, 100px) 0;
+	background: #f5faf6;
+	color: #12382c;
+}
+
+.eyecare-doctor-profiles__inner {
+	width: min(1100px, calc(100% - 32px));
+	margin-inline: auto;
+}
+
+.eyecare-doctor-profiles__header {
+	max-width: 760px;
+	margin-bottom: 36px;
+}
+
+.eyecare-doctor-profiles__header > p:first-child {
+	color: #0d7d4a;
+	font-size: 0.78rem;
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+.eyecare-doctor-profiles__header h2 {
+	margin: 8px 0 12px;
+	color: #063b2a;
+	font-size: clamp(1.8rem, 3vw, 2.6rem);
+}
+
+.eyecare-doctor-profiles__header > p:last-child {
+	line-height: 1.7;
+}
+
+.eyecare-doctor-profiles__item {
+	display: grid;
+	grid-template-columns: minmax(220px, 0.7fr) minmax(0, 1.3fr);
+	gap: clamp(24px, 4vw, 56px);
+	padding: clamp(26px, 4vw, 46px);
+	margin-block: 16px;
+	background: #fff;
+	border: 1px solid #dce9e1;
+	border-radius: 20px;
+	box-shadow: 0 12px 38px rgba(9, 51, 33, 0.05);
+	scroll-margin-top: 125px;
+}
+
+.eyecare-doctor-profiles__summary h3 {
+	margin: 0 0 12px;
+	color: #064e35;
+	font-size: clamp(1.3rem, 2vw, 1.8rem);
+}
+
+.eyecare-doctor-profiles__summary p {
+	margin: 0 0 8px;
+	line-height: 1.55;
+}
+
+.eyecare-doctor-profiles__summary > a {
+	display: inline-block;
+	margin-top: 12px;
+	font-weight: 700;
+}
+
+.eyecare-doctor-profiles__summary h3 a {
+	color: inherit;
+	text-decoration: none;
+	text-underline-offset: 0.2em;
+}
+
+.eyecare-doctor-profiles__summary h3 a:is(:hover, :focus-visible) {
+	text-decoration: underline;
+}
+
+.eyecare-doctor-profiles__bio {
+	font-size: 1rem;
+	line-height: 1.78;
+}
+
+.eyecare-doctor-profiles__bio > :first-child { margin-top: 0; }
+.eyecare-doctor-profiles__bio > :last-child { margin-bottom: 0; }
+
+@media (max-width: 720px) {
+	.eyecare-doctor-profiles__item { grid-template-columns: 1fr; }
 }
