@@ -444,6 +444,9 @@ add_action( 'after_setup_theme', 'eyecare_nen_tang_theme' );
  * ========================================================================== */
 require_once get_stylesheet_directory() . '/inc/quan-ly-bac-si.php';
 
+/* Trang cá nhân từng bác sĩ /bac-si/<slug>/: SEO, schema, CSS, lọc bài trong Admin. */
+require_once get_stylesheet_directory() . '/inc/trang-bac-si.php';
+
 /* Quản lý các thẻ “Dịch vụ của chúng tôi” trên trang chủ: ảnh, mô tả,
  * icon, liên kết, màu và thứ tự đều chỉnh được trong WordPress Admin. */
 require_once get_stylesheet_directory() . '/inc/quan-ly-linh-vuc.php';

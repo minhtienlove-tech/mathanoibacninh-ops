@@ -1,0 +1,106 @@
+/* Trang cá nhân bác sĩ /bac-si/<slug>/ — dùng chung biến màu và thẻ bài của news.css. */
+.eyecare-bac-si-page__intro {
+	display: grid;
+	grid-template-columns: minmax(200px, 320px) minmax(0, 1fr);
+	gap: clamp(1.5rem, 4vw, 3rem);
+	align-items: center;
+}
+.eyecare-bac-si-page__photo {
+	margin: 0;
+	aspect-ratio: 4 / 5;
+	overflow: hidden;
+	border: 4px solid rgba(255, 255, 255, .85);
+	border-radius: 22px;
+	background: #d9f2ef;
+	box-shadow: 0 18px 40px rgba(0, 0, 0, .2);
+}
+.eyecare-bac-si-page__photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+.eyecare-bac-si-page__initial {
+	display: grid;
+	place-items: center;
+	width: 100%;
+	height: 100%;
+	color: #0a6471;
+	font-size: 5rem;
+	font-weight: 800;
+}
+.eyecare-bac-si-page__hero h1 { max-width: none; font-size: clamp(1.9rem, 4.2vw, 3.2rem); }
+.eyecare-bac-si-page__role {
+	margin: .7rem 0 0;
+	color: #fff;
+	font-size: clamp(1rem, 1.6vw, 1.2rem);
+	font-weight: 700;
+	letter-spacing: .02em;
+	text-transform: uppercase;
+}
+.eyecare-bac-si-page__actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.5rem; }
+.eyecare-bac-si-page__btn {
+	display: inline-flex;
+	align-items: center;
+	gap: .35rem;
+	min-height: 44px;
+	padding: .6rem 1.1rem;
+	border: 1px solid rgba(255, 255, 255, .6);
+	border-radius: 999px;
+	color: #fff;
+	font-size: .9rem;
+	font-weight: 700;
+	text-decoration: none;
+}
+.eyecare-bac-si-page__btn:hover,
+.eyecare-bac-si-page__btn:focus-visible { border-color: #fff; background: rgba(255, 255, 255, .12); color: #fff; }
+.eyecare-bac-si-page__btn--primary { border-color: #fff; background: #fff; color: #075d6b; }
+.eyecare-bac-si-page__btn--primary:hover,
+.eyecare-bac-si-page__btn--primary:focus-visible { background: #e0f3f4; color: #064b56; }
+
+.eyecare-bac-si-page__body {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(240px, 320px);
+	gap: clamp(1.5rem, 4vw, 3rem);
+	align-items: start;
+	padding: clamp(2rem, 4vw, 3.5rem) 0;
+}
+.eyecare-bac-si-page__body > :only-child { grid-column: 1 / -1; max-width: 820px; }
+.eyecare-bac-si-page__main { min-width: 0; }
+.eyecare-bac-si-page__card {
+	padding: 1.4rem 1.5rem;
+	border: 1px solid var(--news-line);
+	border-radius: 18px;
+	background: #fff;
+	box-shadow: 0 10px 28px rgba(9, 70, 76, .055);
+}
+.eyecare-bac-si-page__card h2 { margin: 0 0 .9rem; color: #0b4f5a; font-size: 1.2rem; line-height: 1.35; }
+.eyecare-bac-si-page__checks { margin: 0; padding: 0; list-style: none; }
+.eyecare-bac-si-page__checks li { position: relative; margin: 0 0 .55rem; padding-left: 1.6rem; line-height: 1.6; }
+.eyecare-bac-si-page__checks li::before { content: "✓"; position: absolute; left: 0; color: var(--news-teal); font-weight: 800; }
+.eyecare-bac-si-page__bio { padding-top: 1.75rem; }
+.eyecare-bac-si-page__sources { position: sticky; top: 110px; }
+.eyecare-bac-si-page__sources ul { margin: 0; padding: 0; list-style: none; }
+.eyecare-bac-si-page__sources li + li { margin-top: .6rem; padding-top: .6rem; border-top: 1px solid var(--news-line); }
+.eyecare-bac-si-page__sources a { color: var(--news-teal); font-weight: 600; overflow-wrap: anywhere; text-underline-offset: .2em; }
+
+.eyecare-bac-si-page__team { padding: clamp(2rem, 4vw, 3rem) 0 0; }
+.eyecare-bac-si-page__team h2 { margin: 0 0 1rem; color: var(--news-ink); font-size: 1.25rem; }
+.eyecare-bac-si-page__team ul { display: flex; flex-wrap: wrap; gap: .55rem; margin: 0; padding: 0; list-style: none; }
+.eyecare-bac-si-page__team a {
+	display: inline-block;
+	padding: .5rem .9rem;
+	border: 1px solid var(--news-line);
+	border-radius: 999px;
+	background: #fff;
+	color: var(--news-ink);
+	font-size: .88rem;
+	font-weight: 600;
+	text-decoration: none;
+}
+.eyecare-bac-si-page__team a:hover,
+.eyecare-bac-si-page__team a:focus-visible { border-color: var(--news-teal); background: #e0f3f4; color: #075d6b; }
+
+@media (max-width: 900px) {
+	.eyecare-bac-si-page__body { grid-template-columns: minmax(0, 1fr); }
+	.eyecare-bac-si-page__sources { position: static; }
+}
+@media (max-width: 700px) {
+	.eyecare-bac-si-page__intro { grid-template-columns: minmax(0, 1fr); }
+	.eyecare-bac-si-page__photo { width: min(260px, 75vw); }
+}

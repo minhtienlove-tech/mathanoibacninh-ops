@@ -83,13 +83,13 @@ foreach ( $portrait_files as $filename ) {
 	eyecare_test_assert( is_file( $path ), 'Thiếu chân dung dự phòng: ' . $filename );
 }
 
-// Bấm vào bác sĩ nào cũng về hồ sơ nội bộ /doi-ngu-bac-si/#bac-si-..., không mở Facebook.
+// Bấm vào bác sĩ nào cũng về trang cá nhân /bac-si/<slug>/, không mở Facebook.
 eyecare_test_assert(
 	false === strpos( $html, 'facebook.com' ) && false === strpos( $html, 'target="_blank"' ),
 	'Khối đội ngũ không được dẫn thẳng sang Facebook.'
 );
 foreach ( eyecare_du_lieu_doi_ngu() as $doctor ) {
-	$profile = esc_url( home_url( '/doi-ngu-bac-si/#bac-si-' . eyecare_bac_si_slug( $doctor ) ) );
+	$profile = esc_url( eyecare_bac_si_ho_so_url( $doctor ) );
 	eyecare_test_assert(
 		false !== strpos( $html, 'href="' . $profile . '"' ),
 		'Thiếu liên kết hồ sơ nội bộ: ' . $doctor['ho_ten']

@@ -63,6 +63,7 @@ while ( have_posts() ) :
 						<div id="<?php echo esc_attr( $eyecare_pid ); ?>" class="eyecare-doctor-profiles__panel">
 						<div class="eyecare-doctor-profiles__summary">
 							<?php if ( ! empty( $eyecare_bac_si['chuyen_khoa'] ) ) : ?><p><?php echo esc_html( $eyecare_bac_si['chuyen_khoa'] ); ?></p><?php endif; ?>
+							<?php if ( ! empty( $eyecare_bac_si['post_id'] ) && 'publish' === get_post_status( $eyecare_bac_si['post_id'] ) ) : ?><a href="<?php echo esc_url( get_permalink( $eyecare_bac_si['post_id'] ) ); ?>">Xem trang cá nhân và bài viết →</a><?php endif; ?>
 							<?php if ( $eyecare_fb ) : ?><a href="<?php echo esc_url( $eyecare_fb ); ?>" target="_blank" rel="noopener noreferrer">Trang cá nhân Facebook ↗</a><?php endif; ?>
 						</div>
 						<div class="eyecare-doctor-profiles__bio">

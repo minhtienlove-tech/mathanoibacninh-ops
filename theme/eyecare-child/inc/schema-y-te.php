@@ -562,6 +562,13 @@ function eyecare_in_schema() {
 		}
 	}
 
+	// Trang cá nhân bác sĩ: ProfilePage + Physician + BreadcrumbList.
+	if ( function_exists( 'eyecare_schema_trang_bac_si' ) ) {
+		foreach ( eyecare_schema_trang_bac_si() as $nut ) {
+			$do_thi[] = $nut;
+		}
+	}
+
 	// Tin bệnh viện là Article thông thường; chỉ bài kiến thức mới là MedicalWebPage.
 	if ( function_exists( 'eyecare_la_bai_tin_tuc' ) && is_singular( 'post' ) && eyecare_la_bai_tin_tuc( get_queried_object_id() ) ) {
 		$do_thi[] = eyecare_schema_bai_tin();
