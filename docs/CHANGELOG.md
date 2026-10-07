@@ -1,5 +1,10 @@
 # Production changelog
 
+## 2026-10-07 — rà soát 6 bản nháp hồ sơ nhân sự (chưa xuất bản)
+
+- Đối chiếu 6 tệp trong `docs/drafts/bac-si/` với dữ liệu hồ sơ WordPress; kiểm tra số từ và 37 đích liên kết nội bộ (đều HTTP 200). Báo cáo chi tiết ở `docs/drafts/bac-si/AUDIT-2026-10-07.md`.
+- Sửa ba diễn đạt có thể gây hiểu nhầm về điều trị quặm, phạm vi công việc của cử nhân khúc xạ và mức đau của phép đo. Còn nhiều kỹ thuật, quy trình cá nhân và thành tích chưa có nguồn/duyệt; giữ toàn bộ nội dung ở bản nháp, không ghi vào database.
+
 ## 2026-10-07 — trang cá nhân riêng cho từng bác sĩ /bac-si/<slug>/ (đã triển khai ~15:10)
 
 - Post type `eyecare_bac_si` nay công khai với đường dẫn `/bac-si/<slug>/` (vẫn loại khỏi tìm kiếm nội bộ, không có trang lưu trữ; danh sách chung vẫn là `/doi-ngu-bac-si/`). Rewrite được làm mới một lần qua option `eyecare_bac_si_rewrite_version`. Thêm, sửa, xóa bác sĩ vẫn ở Admin → Đội ngũ bác sĩ; mỗi bác sĩ đã đăng tự có trang riêng.
