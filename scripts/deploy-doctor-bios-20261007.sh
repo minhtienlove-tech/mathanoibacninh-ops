@@ -59,9 +59,9 @@ for i in "${!ids[@]}"; do
 	id=${ids[$i]}
 	slug=${slugs[$i]}
 	wp post update "$id" --post_content="$(cat "$stage/$slug.html")" --quiet
-	actual=$(wp eval "echo hash('sha256', get_post_field('post_content', $id, 'raw'));" )
-	expected=$(sha256sum "$stage/$slug.html" | cut -d' ' -f1)
-	[[ "$actual" == "$expected" ]] || { echo "Content checksum mismatch for $id"; exit 1; }
+	# wp post update bỏ LF cuối qua command substitution; wp post get thêm LF
+	# khi in ra. So byte đầu ra công khai của WP với tệp nguồn.
+	wp post get "$id" --field=post_content | cmp -s - "$stage/$slug.html"
 	echo "PUBLISHED $id $slug"
 done
 wp cache flush --quiet
