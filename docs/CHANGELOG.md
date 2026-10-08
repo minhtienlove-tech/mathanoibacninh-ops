@@ -1,5 +1,13 @@
 # Production changelog
 
+## 2026-10-08 — bài giới thiệu BSCKI. Đặng Công Hải và ảnh chân dung tại “Bài viết mới”
+
+- Xuất bản bài ID 1736 tại `/tin-tuc/goc-bac-si/gioi-thieu-bscki-dang-cong-hai/`, thuộc chuyên mục Góc bác sĩ và liên kết với hồ sơ bác sĩ ID 336. Dùng lại ảnh bệnh viện đã cung cấp (media ID 1693), cập nhật alt mô tả đúng nhân vật. Các mốc hơn 20 năm kinh nghiệm và hơn 10.000 ca phẫu thuật dựa trên xác nhận của người phụ trách; không gán chức danh cũ tại Bệnh viện Mắt Sông Cầu vì các nguồn mô tả không thống nhất.
+- Sửa `front-page.php` và `style.css` của child theme: thẻ bài viết có ảnh chân dung giữ toàn bộ ảnh trong khung phù hợp trên desktop và điện thoại; ảnh ngang vẫn dùng bố cục cũ. Bài mới của bác sĩ Hải và ảnh bác sĩ Lê Như Tùng ở các thẻ liên quan không còn bị cắt khuôn mặt.
+- Đã `git pull` trước khi sửa, triển khai dưới khóa deploy với đối chiếu checksum. Backup theme và database: `/home/jwhxtzru/backups/home-doctor-portraits-20261008-081852/`; backup trước khi xuất bản bài và đổi alt: `/home/jwhxtzru/backups/doctor-hai-blog-20261008-082644/`. Lần chạy xuất bản đầu dừng ở bản nháp ID 1736 do WP-CLI chuẩn hóa một dấu xuống dòng cuối; script được sửa để tiếp tục đúng bản nháp, không tạo bài trùng.
+- Kiểm tra production: `php -l` các file PHP liên quan đạt; `verify-live.ps1 -CheckSsh` đạt; bài công khai có một H1, canonical tự trỏ, mô tả, ảnh OG, Article/Breadcrumb schema và liên kết về hồ sơ bác sĩ; trang hồ sơ có liên kết ngược về bài. Xem trực tiếp trang chủ và bài ở desktop, thử viewport 390 px: ảnh chân dung hiển thị trọn và không tràn ngang.
+- Rollback chọn lọc: chép lại hai file theme từ backup đầu; đưa bài ID 1736 về nháp và khôi phục alt ảnh từ backup thứ hai, sau đó xóa WordPress/LiteSpeed cache. Không cần khôi phục toàn bộ database nếu chỉ hoàn tác các thay đổi này.
+
 ## 2026-10-08 — mở rộng slider hero trang chủ
 
 - Bố cục cũ đặt banner trong cột phải, ảnh hiển thị khoảng 866 × 371 px tại viewport 1280 px. Trên desktop, slider mới nằm sát dưới menu, rộng toàn bộ khung nhìn và giữ đúng tỷ lệ ảnh 1600:609; phần H1, giờ tiếp nhận và nút đặt lịch chuyển thành dải xanh gọn bên dưới. Giữ nguyên năm ảnh và bộ điều khiển trượt; không lấy ảnh hay nhận diện từ trang tham khảo.
