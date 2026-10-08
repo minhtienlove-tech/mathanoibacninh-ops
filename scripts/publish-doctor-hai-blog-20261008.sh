@@ -19,9 +19,13 @@ cd "$root"
 [[ $(wp post get 336 --field=post_status) == publish ]]
 [[ $(wp post get 1693 --field=post_type) == attachment ]]
 [[ $(wp term get category 24 --field=slug) == goc-bac-si ]]
-[[ -z $(wp post list --post_type=post --post_status=any --name="$slug" --format=ids) ]] || {
-  echo 'A post with this slug already exists' >&2; exit 1;
-}
+existing_id=$(wp post list --post_type=post --post_status=any --name="$slug" --format=ids)
+if [[ -n "$existing_id" ]]; then
+  [[ "$existing_id" == 1736 ]] || { echo 'Unexpected post with this slug exists' >&2; exit 1; }
+  [[ $(wp post get "$existing_id" --field=post_status) == draft ]] || {
+    echo 'Existing post is not a draft' >&2; exit 1;
+  }
+fi
 
 backup="/home/jwhxtzru/backups/doctor-hai-blog-$(date +%Y%m%d-%H%M%S)"
 mkdir -p "$backup"
@@ -46,23 +50,27 @@ rollback_on_error() {
 }
 trap rollback_on_error ERR
 
-post_id=$(wp post create "$content" \
-  --post_type=post \
-  --post_status=draft \
-  --post_author=0 \
-  --post_category=24 \
-  --comment_status=closed \
-  --ping_status=closed \
-  --post_name="$slug" \
-  --post_title='Giới thiệu BSCKI. Đặng Công Hải – Giám đốc Bệnh viện Mắt Hà Nội – Bắc Ninh' \
-  --post_excerpt='Gặp gỡ BSCKI. Đặng Công Hải, Giám đốc Bệnh viện Mắt Hà Nội – Bắc Ninh, với hơn 20 năm kinh nghiệm nhãn khoa và hơn 10.000 ca phẫu thuật.' \
-  --porcelain)
+if [[ -n "$existing_id" ]]; then
+  post_id="$existing_id"
+else
+  post_id=$(wp post create "$content" \
+    --post_type=post \
+    --post_status=draft \
+    --post_author=0 \
+    --post_category=24 \
+    --comment_status=closed \
+    --ping_status=closed \
+    --post_name="$slug" \
+    --post_title='Giới thiệu BSCKI. Đặng Công Hải – Giám đốc Bệnh viện Mắt Hà Nội – Bắc Ninh' \
+    --post_excerpt='Gặp gỡ BSCKI. Đặng Công Hải, Giám đốc Bệnh viện Mắt Hà Nội – Bắc Ninh, với hơn 20 năm kinh nghiệm nhãn khoa và hơn 10.000 ca phẫu thuật.' \
+    --porcelain)
+fi
 printf '%s\n' "$post_id" > "$backup/new-post-id.txt"
 
 wp post meta update "$post_id" _eyecare_bac_si_lien_quan 336 --quiet
 wp post meta update "$post_id" _thumbnail_id 1693 --quiet
 wp post meta update 1693 _wp_attachment_image_alt 'Ảnh giới thiệu BSCKI. Đặng Công Hải, Giám đốc Bệnh viện Mắt Hà Nội – Bắc Ninh' --quiet
-wp post get "$post_id" --field=post_content | cmp -s - "$content"
+wp post get "$post_id" --field=post_content | python3 -c 'import pathlib,sys; source=pathlib.Path(sys.argv[1]).read_bytes().rstrip(b"\r\n"); stored=sys.stdin.buffer.read().rstrip(b"\r\n"); sys.exit(0 if source == stored else 1)' "$content"
 [[ $(wp post meta get "$post_id" _eyecare_bac_si_lien_quan) == 336 ]]
 [[ $(wp post meta get "$post_id" _thumbnail_id) == 1693 ]]
 
