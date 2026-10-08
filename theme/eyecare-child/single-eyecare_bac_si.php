@@ -133,7 +133,7 @@ while ( have_posts() ) :
 					<div class="eyecare-news__post-grid">
 						<?php foreach ( $bs_bai as $bs_bai_id ) : ?>
 							<article class="eyecare-news__post-card">
-								<a class="eyecare-news__post-image" href="<?php echo esc_url( get_permalink( $bs_bai_id ) ); ?>" tabindex="-1" aria-hidden="true">
+								<a class="eyecare-news__post-image<?php echo eyecare_anh_dai_dien_dang_doc( $bs_bai_id ) ? ' eyecare-news__post-image--doc' : ''; ?>" href="<?php echo esc_url( get_permalink( $bs_bai_id ) ); ?>" tabindex="-1" aria-hidden="true">
 									<?php if ( has_post_thumbnail( $bs_bai_id ) ) : ?>
 										<?php echo wp_kses_post( get_the_post_thumbnail( $bs_bai_id, 'medium_large', array( 'loading' => 'lazy', 'decoding' => 'async', 'alt' => '' ) ) ); ?>
 									<?php else : ?>

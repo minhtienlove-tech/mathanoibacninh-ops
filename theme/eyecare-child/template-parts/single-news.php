@@ -118,7 +118,7 @@ while ( have_posts() ) :
 					<div class="eyecare-news__post-grid">
 						<?php foreach ( $news_related as $news_post ) : ?>
 							<article class="eyecare-news__post-card">
-								<a class="eyecare-news__post-image" href="<?php echo esc_url( get_permalink( $news_post ) ); ?>" tabindex="-1" aria-hidden="true">
+								<a class="eyecare-news__post-image<?php echo eyecare_anh_dai_dien_dang_doc( $news_post->ID ) ? ' eyecare-news__post-image--doc' : ''; ?>" href="<?php echo esc_url( get_permalink( $news_post ) ); ?>" tabindex="-1" aria-hidden="true">
 									<?php if ( has_post_thumbnail( $news_post ) ) : ?>
 										<?php echo wp_kses_post( get_the_post_thumbnail( $news_post, 'medium_large', array( 'loading' => 'lazy', 'decoding' => 'async', 'alt' => '' ) ) ); ?>
 									<?php else : ?>

@@ -158,6 +158,8 @@
 	background: linear-gradient(140deg, #d9f2ef, #eaf7f8);
 }
 .eyecare-news__post-image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.eyecare-news__post-image--doc { aspect-ratio: 3 / 4; }
+.eyecare-news__post-image--doc img { object-fit: contain; }
 .eyecare-news__image-fallback {
 	display: grid;
 	place-items: center;

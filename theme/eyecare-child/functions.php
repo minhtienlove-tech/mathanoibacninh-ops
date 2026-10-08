@@ -62,6 +62,20 @@ function eyecare_la_bai_tin_tuc( $post_id ) {
 	return false;
 }
 
+/** Giữ trọn ảnh đại diện dạng dọc trên các thẻ bài tin. */
+function eyecare_anh_dai_dien_dang_doc( $post_id ) {
+	$attachment_id = get_post_thumbnail_id( $post_id );
+	if ( ! $attachment_id ) {
+		return false;
+	}
+
+	$metadata = wp_get_attachment_metadata( $attachment_id );
+	return is_array( $metadata )
+		&& ! empty( $metadata['width'] )
+		&& ! empty( $metadata['height'] )
+		&& (int) $metadata['height'] > (int) $metadata['width'];
+}
+
 /** CSS cho trung tâm tin, chuyên mục tin và bài tin (kể cả Tuyển dụng). */
 function eyecare_nap_css_tin_tuc() {
 	$la_muc_tin = false;

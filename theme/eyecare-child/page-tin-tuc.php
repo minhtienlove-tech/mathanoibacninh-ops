@@ -108,7 +108,7 @@ while ( have_posts() ) :
 					<div class="eyecare-news__post-grid">
 						<?php while ( $news_posts->have_posts() ) : $news_posts->the_post(); ?>
 							<article <?php post_class( 'eyecare-news__post-card' ); ?>>
-								<a class="eyecare-news__post-image" href="<?php the_permalink(); ?>" tabindex="-1" aria-hidden="true">
+								<a class="eyecare-news__post-image<?php echo eyecare_anh_dai_dien_dang_doc( get_the_ID() ) ? ' eyecare-news__post-image--doc' : ''; ?>" href="<?php the_permalink(); ?>" tabindex="-1" aria-hidden="true">
 									<?php if ( has_post_thumbnail() ) : ?>
 										<?php the_post_thumbnail( 'medium_large', array( 'loading' => 'lazy', 'decoding' => 'async', 'alt' => '' ) ); ?>
 									<?php else : ?>
