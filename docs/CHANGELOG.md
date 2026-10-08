@@ -1,5 +1,12 @@
 # Production changelog
 
+## 2026-10-08 — giữ trọn ảnh bác sĩ trong thẻ bài Tin bệnh viện
+
+- Trang `/tin-tuc/goc-bac-si/` trước đây ép poster dọc 2:3 vào khung ngang 16:9 với `object-fit: cover`, làm cắt phần mặt của BSCKI. Đặng Công Hải và ThS.BS Lê Như Tùng. Thêm nhận diện tỷ lệ ảnh từ metadata WordPress và kiểu khung 3:4, `object-fit: contain` cho ảnh dọc; ảnh ngang giữ nguyên 16:9.
+- Áp dụng cùng kiểu thẻ cho lưu trữ chuyên mục, `/tin-tuc/`, tin liên quan và danh sách bài trong hồ sơ bác sĩ. Chỉ sửa sáu tệp child theme: `functions.php`, `assets/news.css`, `template-parts/archive-news.php`, `page-tin-tuc.php`, `template-parts/single-news.php`, `single-eyecare_bac_si.php`. Không sửa ảnh gốc hoặc nội dung bài.
+- Sau `git pull`, triển khai bằng `scripts/deploy-news-portrait-cards-20261008.sh` dưới khóa deploy, đối chiếu checksum production/staging, sao lưu sáu tệp và database tại `/home/jwhxtzru/backups/news-portrait-cards-20261008-084006/`. Script có khôi phục file nếu lỗi sau khi bắt đầu áp dụng; WordPress và LiteSpeed cache đã được xóa.
+- Kiểm tra production: `php -l` năm tệp PHP mới và hai tệp tối thiểu đạt; `verify-live.ps1 -CheckSsh` đạt, URL chuyên mục trả 200. Trình duyệt xác nhận hai poster dùng class ảnh dọc, khung 3:4 và `object-fit: contain`, thấy toàn bộ khuôn mặt ở desktop và viewport 390 px; thẻ ảnh ngang vẫn 16:9 và trang di động không tràn ngang. Rollback chọn lọc: chép lại sáu tệp từ backup và xóa cache; database không bị thay đổi.
+
 ## 2026-10-08 — bài giới thiệu BSCKI. Đặng Công Hải và ảnh chân dung tại “Bài viết mới”
 
 - Xuất bản bài ID 1736 tại `/tin-tuc/goc-bac-si/gioi-thieu-bscki-dang-cong-hai/`, thuộc chuyên mục Góc bác sĩ và liên kết với hồ sơ bác sĩ ID 336. Dùng lại ảnh bệnh viện đã cung cấp (media ID 1693), cập nhật alt mô tả đúng nhân vật. Các mốc hơn 20 năm kinh nghiệm và hơn 10.000 ca phẫu thuật dựa trên xác nhận của người phụ trách; không gán chức danh cũ tại Bệnh viện Mắt Sông Cầu vì các nguồn mô tả không thống nhất.
