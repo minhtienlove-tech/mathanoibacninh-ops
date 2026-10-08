@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-08 — mở rộng slider hero trang chủ
+
+- Bố cục cũ đặt banner trong cột phải, ảnh hiển thị khoảng 866 × 371 px tại viewport 1280 px. Trên desktop, slider mới nằm sát dưới menu, rộng toàn bộ khung nhìn và giữ đúng tỷ lệ ảnh 1600:609; phần H1, giờ tiếp nhận và nút đặt lịch chuyển thành dải xanh gọn bên dưới. Giữ nguyên năm ảnh và bộ điều khiển trượt; không lấy ảnh hay nhận diện từ trang tham khảo.
+- Chỉ đổi `assets/home-critical.css`, `inc/trang-chu.php` và `functions.php`. Thuộc tính `sizes` của ảnh và `imagesizes` của preload cùng phản ánh khổ mới để trình duyệt chọn ảnh đủ nét. Ảnh dùng `object-fit: contain`, không cắt chữ/logo in sẵn. Dưới 701 px giữ bố cục cũ của điện thoại.
+- Xem trước bằng HTML công khai cùng CSS mới: tại 1280 px ảnh rộng 1265 px, cao 481 px; tại 1920 px rộng 1905 px, cao 725 px. Kiểm tra các viewport 390/701/1024/1920 px không tràn ngang. Triển khai qua `scripts/deploy-home-hero-20261008.sh` sau khi đối chiếu checksum production, sao lưu ba file và database; ghi kết quả kiểm tra production bên dưới sau khi áp dụng.
+
 ## 2026-10-07 — nội dung 6 hồ sơ nhân sự chuyên môn
 
 - Biên tập lại 6 bản nháp trong `docs/drafts/bac-si/` từ dữ liệu hồ sơ hiện có; bỏ số ca, thành tích, kỹ thuật, lịch làm việc và mô tả quy trình cá nhân chưa có nguồn đối chiếu. Nội dung y khoa chung được tách khỏi thông tin cá nhân. Hai cử nhân khúc xạ/cận lâm sàng được gọi đúng chức danh, không giới thiệu là bác sĩ.

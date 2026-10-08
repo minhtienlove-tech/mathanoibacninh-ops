@@ -223,3 +223,89 @@
  #trang-chu .eyecare-dai-gap__icon svg { width: 19px; height: 19px; }
  #trang-chu .eyecare-dai-gap__ten { font-size: 12px; }
 }
+
+/* Full-width desktop hero: the five banners already contain their own logo
+   and copy. Show each complete image directly below the header, then keep the
+   real H1 and booking controls in a compact, high-contrast strip below it. */
+@media (min-width: 701px) {
+ #trang-chu > .eyecare-hero--anh {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  padding: 0;
+  min-height: 0;
+  background: #fff;
+ }
+ #trang-chu > .eyecare-hero--anh::before,
+ #trang-chu > .eyecare-hero--anh::after { display: none; }
+ #trang-chu .eyecare-hero--anh .eyecare-hero__media {
+  order: 0;
+  flex: 0 0 auto;
+  width: 100%;
+  max-width: none;
+  aspect-ratio: 1600 / 609;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+ }
+ #trang-chu .eyecare-hero--anh .eyecare-hero__media::after { display: none; }
+ #trang-chu .eyecare-hero--anh .eyecare-hero__loi {
+  order: 1;
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 18px clamp(24px, 4vw, 64px);
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  background: #073e29;
+ }
+ #trang-chu .eyecare-hero--anh .eyecare-hero__loi .eyecare-chu__khung {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto auto;
+  align-items: center;
+  column-gap: clamp(20px, 4vw, 60px);
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+ }
+ #trang-chu .eyecare-hero--anh .eyecare-hero__nhan {
+  grid-column: 1;
+  grid-row: 1;
+  justify-self: start;
+  margin: 0 0 6px;
+  padding: 5px 9px;
+ }
+ #trang-chu .eyecare-hero--anh .eyecare-hero__td {
+  grid-column: 1;
+  grid-row: 2;
+  max-width: none;
+  margin: 0 0 5px;
+  font-size: clamp(21px, 2vw, 30px);
+  line-height: 1.25;
+ }
+ #trang-chu .eyecare-hero--anh .eyecare-hero__promise {
+  grid-column: 1;
+  grid-row: 3;
+  margin: 0;
+  font-size: clamp(16px, 1.35vw, 20px);
+  line-height: 1.35;
+ }
+ #trang-chu .eyecare-hero--anh .eyecare-hero__mt {
+  grid-column: 2;
+  grid-row: 1 / 3;
+  align-self: center;
+  min-width: 245px;
+  padding-top: 0;
+  padding-bottom: 0;
+ }
+ #trang-chu .eyecare-hero--anh .eyecare-hero__nut {
+  grid-column: 2;
+  grid-row: 3;
+  justify-content: flex-start;
+  margin-top: 12px;
+ }
+ #trang-chu .eyecare-hero--anh .eyecare-hero__progress { display: none; }
+}
