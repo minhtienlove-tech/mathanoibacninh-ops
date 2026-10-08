@@ -30,6 +30,17 @@
 #trang-chu .eyecare-chu__bai { background: #f5f9f6; padding: 72px 0; }
 #trang-chu .eyecare-chu__bai::before, #trang-chu .eyecare-chu__bai::after { display: none; }
 #trang-chu .eyecare-chu__bai-noi-bat, #trang-chu .eyecare-chu__bai-muc { border: 1px solid #dfe8e2; border-radius: 16px; box-shadow: none; background: #fff; }
+#trang-chu .eyecare-chu__bai-noi-bat { overflow: hidden; border-color: #d5e5db; border-radius: 20px; box-shadow: 0 12px 32px rgba(16, 79, 52, .1); transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+#trang-chu .eyecare-chu__bai-noi-bat > .eyecare-chu__bai-anh { border-radius: 0; }
+#trang-chu .eyecare-chu__bai-noi-bat .eyecare-chu__bai-noi-dung { padding: 24px 26px 28px; }
+#trang-chu .eyecare-chu__bai-noi-bat .eyecare-chu__bai-ngay { margin-bottom: .8rem; }
+#trang-chu .eyecare-chu__bai-noi-bat .eyecare-chu__bai-tom-tat { margin-top: .85rem; }
+#trang-chu .eyecare-chu__bai-noi-bat .eyecare-chu__bai-doc { margin-top: 1.15rem; }
+#trang-chu .eyecare-chu__bai-noi-bat:focus-within { border-color: #5eaa7a; box-shadow: 0 18px 40px rgba(16, 79, 52, .16); }
+@media (hover: hover) and (pointer: fine) {
+ #trang-chu .eyecare-chu__bai-noi-bat:hover { transform: translateY(-4px); border-color: #5eaa7a; box-shadow: 0 22px 44px rgba(16, 79, 52, .18); }
+ #trang-chu .eyecare-chu__bai-noi-bat:hover .eyecare-chu__bai-td a { color: #0a6e40; }
+}
 #trang-chu .eyecare-chu__bai-td { font-family: 'Be Vietnam Pro', Arial, sans-serif !important; text-transform: none; letter-spacing: -.02em; line-height: 1.45; }
 #trang-chu .eyecare-chu__cta { padding: 0; margin: 64px auto; width: min(1240px, calc(100% - 64px)); background: #104f34; border-radius: 24px; overflow: hidden; }
 #trang-chu .eyecare-chu__cta-trong { padding: 40px; width: 100%; }
@@ -55,6 +66,7 @@
 }
 @media (max-width: 700px) {
  #trang-chu .eyecare-linh-vuc-showcase, #trang-chu .eyecare-chu__khoa, #trang-chu .eyecare-chu__bai { padding: 44px 0; }
+ #trang-chu .eyecare-chu__bai-noi-bat .eyecare-chu__bai-noi-dung { padding: 20px 20px 24px; }
  #trang-chu .eyecare-linh-vuc-showcase__luoi { grid-template-columns: minmax(0, 1fr); gap: 18px; }
  #trang-chu .eyecare-linh-vuc-showcase__khung { width: calc(100% - 40px); }
  #trang-chu .eyecare-linh-vuc-card__anh > img { aspect-ratio: 16 / 8; }
@@ -63,6 +75,10 @@
  #trang-chu .eyecare-home-guide { width: calc(100% - 40px); margin: 24px auto 40px; }
  #trang-chu .eyecare-home-guide > summary { align-items: flex-start; flex-direction: column; padding: 24px; gap: 20px; }
  #trang-chu .eyecare-home-guide summary strong { font-size: 21px; }
+}
+@media (prefers-reduced-motion: reduce) {
+ #trang-chu .eyecare-chu__bai-noi-bat { transition: none; }
+ #trang-chu .eyecare-chu__bai-noi-bat:hover { transform: none; }
 }
 
 /* Equipment showcase: one focused slide, with an accessible touch-friendly track. */
