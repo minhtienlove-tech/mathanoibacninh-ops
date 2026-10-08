@@ -704,6 +704,40 @@ ul, ol {
 	line-height: 1.2;
 }
 
+/* Thẻ bài mới trên trang dịch vụ: tách từng bài và giữ trọn ảnh chân dung. */
+.eyecare-trang--dich-vu-con .eyecare-bai__cot-ben--moi .eyecare-bai__danh-sach li {
+	border-top: 0;
+}
+
+.eyecare-trang--dich-vu-con .eyecare-bai__cot-ben--moi .eyecare-bai__bai-ben {
+	margin: .45rem 0 0;
+	padding: .7rem .55rem;
+	background: #f8fcf9;
+	border-color: #e0ece4;
+	border-radius: 14px;
+	box-shadow: 0 4px 14px rgba(8, 78, 39, .06);
+}
+
+.eyecare-trang--dich-vu-con .eyecare-bai__cot-ben--moi .eyecare-bai__anh-ben img {
+	object-fit: contain;
+}
+
+.eyecare-trang--dich-vu-con .eyecare-bai__cot-ben--moi .eyecare-bai__bai-ben:hover,
+.eyecare-trang--dich-vu-con .eyecare-bai__cot-ben--moi .eyecare-bai__bai-ben:focus-visible {
+	box-shadow: 0 9px 22px rgba(8, 78, 39, .12);
+	transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.eyecare-trang--dich-vu-con .eyecare-bai__cot-ben--moi .eyecare-bai__bai-ben,
+	.eyecare-trang--dich-vu-con .eyecare-bai__cot-ben--moi .eyecare-bai__bai-ben:hover,
+	.eyecare-trang--dich-vu-con .eyecare-bai__cot-ben--moi .eyecare-bai__bai-ben:focus-visible,
+	.eyecare-trang--dich-vu-con .eyecare-bai__cot-ben--moi .eyecare-bai__anh-ben img {
+		transition: none;
+		transform: none;
+	}
+}
+
 /* Màn hình laptop 13–14 inch: thu gọn hai cột phụ để phần chữ ở giữa
    không bị bó hẹp bởi thanh cuộn và khoảng đệm trình duyệt. */
 @media (min-width: 1181px) and (max-width: 1340px) {
@@ -1002,6 +1036,10 @@ ul, ol {
 	.eyecare-bai__copy-ben strong {
 		font-size: .84rem;
 		-webkit-line-clamp: 2;
+	}
+
+	.eyecare-trang--dich-vu-con .eyecare-bai__cot-ben--moi .eyecare-bai__copy-ben strong {
+		-webkit-line-clamp: unset;
 	}
 }
 
