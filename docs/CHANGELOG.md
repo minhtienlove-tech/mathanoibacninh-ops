@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-08 — thẻ bài nổi bật “Bài viết mới” trên trang chủ
+
+- Thẻ bài giới thiệu BSCKI. Đặng Công Hải trên trang chủ trước đây có phần chữ sát mép dưới và hai bên, viền bo nhỏ và thiếu chiều sâu. Chỉ sửa `theme/eyecare-child/assets/home-refresh.css`: bo góc 20 px, thêm viền và bóng nhẹ, tăng đệm nội dung (desktop 24/26/28 px, điện thoại 20/20/24 px), giãn khoảng cách giữa ngày đăng, tiêu đề, đoạn dẫn và liên kết. Thêm hiệu ứng nâng nhẹ khi rê chuột, trạng thái bàn phím `focus-within` và tắt chuyển động theo `prefers-reduced-motion`; ảnh poster dọc vẫn hiển thị trọn với `object-fit: contain`.
+- Sau `git pull`, triển khai bằng `scripts/deploy-home-news-card-20261008.sh` dưới khóa deploy và đối chiếu SHA-256 trước/sau. Đã sao lưu CSS và database tại `/home/jwhxtzru/backups/home-news-card-20261008-103906/`, xóa WordPress/LiteSpeed cache. Mã nguồn và script ở commit `c294c79`.
+- Kiểm tra production: `php -l` cho `footer.php` và `page-lien-he.php` đạt; `verify-live.ps1 -CheckSsh` đạt, sáu URL chính đều HTTP 200. Trình duyệt xác nhận bo góc 20 px, bóng, đệm desktop 24/26/28 px và điện thoại 20/20/24 px tại 390 px, không tràn ngang và không cắt ảnh bác sĩ. Rollback chọn lọc: khôi phục `assets/home-refresh.css` từ thư mục backup trên rồi xóa WordPress/LiteSpeed cache; database không thay đổi.
+
 ## 2026-10-08 — giữ trọn ảnh bác sĩ trong thẻ bài Tin bệnh viện
 
 - Trang `/tin-tuc/goc-bac-si/` trước đây ép poster dọc 2:3 vào khung ngang 16:9 với `object-fit: cover`, làm cắt phần mặt của BSCKI. Đặng Công Hải và ThS.BS Lê Như Tùng. Thêm nhận diện tỷ lệ ảnh từ metadata WordPress và kiểu khung 3:4, `object-fit: contain` cho ảnh dọc; ảnh ngang giữ nguyên 16:9.
