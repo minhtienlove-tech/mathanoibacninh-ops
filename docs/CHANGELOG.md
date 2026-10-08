@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-08 — thẻ “Bài viết mới” trong các trang dịch vụ
+
+- Trang `/dich-vu/phau-thuat-quem/` dùng danh sách bài gọn riêng với thẻ lớn ở trang chủ. Trên điện thoại, tiêu đề hai dòng bị cắt và ảnh poster dọc trong ô nhỏ bị xén. Chỉ sửa `theme/eyecare-child/style.css`, giới hạn dưới `.eyecare-trang--dich-vu-con .eyecare-bai__cot-ben--moi`: thêm nền, viền bo 14 px, khoảng đệm, bóng nhẹ và hiệu ứng hover/focus cho từng bài; hiển thị toàn bộ ảnh bằng `object-fit: contain`; bỏ giới hạn hai dòng của tiêu đề ở màn hình dưới 550 px. Hỗ trợ `prefers-reduced-motion`.
+- Sau `git pull`, triển khai bằng `scripts/deploy-service-news-card-20261008.sh` dưới khóa deploy và đối chiếu SHA-256. Backup `style.css` cùng database tại `/home/jwhxtzru/backups/service-news-card-20261008-105256/`; xóa WordPress/LiteSpeed cache. Mã nguồn và script ở commit `ffb1dab`.
+- Kiểm tra production: `php -l` cho `footer.php` và `page-lien-he.php` đạt, `verify-live.ps1 -CheckSsh` đạt, sáu URL chính HTTP 200; checksum production khớp bản triển khai. Trình duyệt xác nhận thẻ có đệm 11,2 × 8,8 px, bo 14 px và bóng; ảnh không bị xén. Ở viewport 390 và 320 px, chiều cao tiêu đề bằng chiều cao cuộn nội dung, không bị cắt và trang không tràn ngang. Rollback chọn lọc: khôi phục `style.css` từ thư mục backup rồi xóa WordPress/LiteSpeed cache; database không thay đổi.
+
 ## 2026-10-08 — thẻ bài nổi bật “Bài viết mới” trên trang chủ
 
 - Thẻ bài giới thiệu BSCKI. Đặng Công Hải trên trang chủ trước đây có phần chữ sát mép dưới và hai bên, viền bo nhỏ và thiếu chiều sâu. Chỉ sửa `theme/eyecare-child/assets/home-refresh.css`: bo góc 20 px, thêm viền và bóng nhẹ, tăng đệm nội dung (desktop 24/26/28 px, điện thoại 20/20/24 px), giãn khoảng cách giữa ngày đăng, tiêu đề, đoạn dẫn và liên kết. Thêm hiệu ứng nâng nhẹ khi rê chuột, trạng thái bàn phím `focus-within` và tắt chuyển động theo `prefers-reduced-motion`; ảnh poster dọc vẫn hiển thị trọn với `object-fit: contain`.
