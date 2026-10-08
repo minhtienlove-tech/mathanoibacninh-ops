@@ -33,7 +33,7 @@
 
 .eyecare-slider-ds > li {
 	position: relative;
-	width: 150px;
+	width: 220px;
 	padding: 8px;
 	background: #fff;
 	border: 1px solid #c3c4c7;
@@ -46,10 +46,15 @@
 	cursor: grabbing;
 }
 
+.eyecare-slider-ds > li:focus-within {
+	border-color: #2271b1;
+	box-shadow: 0 0 0 1px #2271b1;
+}
+
 .eyecare-slider-ds > li img {
 	display: block;
 	width: 100%;
-	height: 90px;
+	height: 105px;
 	object-fit: cover;
 	border-radius: 3px;
 	margin-bottom: 6px;
@@ -64,6 +69,30 @@
 	word-break: break-word;
 	max-height: 3.4em;
 	overflow: hidden;
+}
+
+.eyecare-slider-lien-ket {
+	display: block;
+	margin-top: 9px;
+	color: #1d2327;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.4;
+	cursor: text;
+}
+
+.eyecare-slider-lien-ket span {
+	display: block;
+	margin-bottom: 4px;
+}
+
+.eyecare-slider-lien-ket input {
+	width: 100%;
+	min-width: 0;
+	box-sizing: border-box;
+	font-size: 12px;
+	font-weight: 400;
+	cursor: text;
 }
 
 /* Nhãn cảnh báo thiếu alt — vàng nhạt, không đỏ (không phải lỗi chặn). */
@@ -113,8 +142,8 @@
 
 /* Ô giữ chỗ khi đang kéo — khung nét đứt cùng cỡ thẻ. */
 .eyecare-slider-cho-trong {
-	width: 150px;
-	height: 138px;
+	width: 220px;
+	min-height: 210px;
 	border: 2px dashed #2271b1;
 	border-radius: 4px;
 	background: #f0f6fc;

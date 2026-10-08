@@ -1340,6 +1340,18 @@ ul, ol {
 	object-fit: cover;
 }
 
+.eyecare-hero__lien-ket {
+	display: block;
+	width: 100%;
+	height: 100%;
+	cursor: pointer;
+}
+
+.eyecare-hero__lien-ket:focus-visible {
+	outline: 4px solid #d8f573;
+	outline-offset: -6px;
+}
+
 /* Chấm nổi ở đáy ảnh, nằm trong một pill kính mờ để luôn rõ trên cả banner
    sáng lẫn tối mà không sinh thêm dải màu bên dưới ảnh. */
 .eyecare-hero__cham {
@@ -6244,6 +6256,16 @@ ul, ol {
 	opacity: 1;
 	pointer-events: auto;
 	z-index: 1;
+}
+
+/* Mở ngang kết hợp mờ dần: ảnh đứng yên ở kích thước gốc, không xén chữ in trên banner. */
+.eyecare-hero--mo.eyecare-hero--hu-mo_rong .eyecare-hero__khung {
+	clip-path: inset(0 100% 0 0);
+	transition: opacity .9s ease, clip-path 1.1s cubic-bezier(.22, 1, .36, 1);
+}
+
+.eyecare-hero--mo.eyecare-hero--hu-mo_rong .eyecare-hero__khung--hien {
+	clip-path: inset(0 0 0 0);
 }
 
 /* --- Chấm chỉ mục của ảnh đang xem ------------------------------------- */

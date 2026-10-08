@@ -92,10 +92,12 @@
  #trang-chu .eyecare-hero__mt { animation: eyecare-hero-reveal .8s .2s both; }
  #trang-chu .eyecare-hero__nut { animation: eyecare-hero-reveal .8s .3s both; }
  #trang-chu .eyecare-hero--mo .eyecare-hero__khung { transition: opacity .85s ease; }
+ #trang-chu .eyecare-hero--mo.eyecare-hero--hu-mo_rong .eyecare-hero__khung { transition: opacity .9s ease, clip-path 1.1s cubic-bezier(.22, 1, .36, 1); }
 }
 @media (prefers-reduced-motion: reduce) {
  #trang-chu > .eyecare-hero::before, #trang-chu > .eyecare-hero::after { transform: none; transition: none; }
  #trang-chu .eyecare-hero__track i { animation: none !important; }
+ #trang-chu .eyecare-hero--mo.eyecare-hero--hu-mo_rong .eyecare-hero__khung { transition: none; }
 }
 
 #trang-chu .eyecare-dai-gap { background: #fff; padding: 0 32px 32px; margin: 0; }

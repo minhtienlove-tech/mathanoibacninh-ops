@@ -40,12 +40,28 @@ function eyecare_slider_tep_cau_hinh() {
 function eyecare_slider_mac_dinh() {
 	return array(
 		'anh'       => array(),   // Mảng ID ảnh trong Thư viện, theo thứ tự hiển thị.
-		'hieu_ung'  => 'mo',      // mo | truot | khong  (fade | slide | không hiệu ứng)
+		'lien_ket'  => array(),   // URL tuỳ chọn theo ID ảnh; ảnh không có URL không phải liên kết.
+		'hieu_ung'  => 'mo',      // mo | mo_rong | truot | khong.
 		'tu_chay'   => 1,         // 1 = tự chuyển ảnh; 0 = chỉ chuyển khi người dùng bấm.
 		'nhip'      => 6,         // Giây giữa hai ảnh khi tự chạy (4–12).
 		'kieu'      => 'tach',    // tach = chữ trên dải nền riêng phía trên ảnh; phu = chữ đè lên ảnh (điện ảnh hơn).
 		'ken_burns' => 1,         // 1 = ảnh phóng/trôi chậm khi đang hiện (Ken Burns); 0 = ảnh tĩnh.
 	);
+}
+
+/** Chỉ nhận URL HTTP(S) tuyệt đối; bỏ trống hoặc sai định dạng thì không tạo liên kết. */
+function eyecare_slider_chuan_hoa_lien_ket( $url ) {
+	if ( ! is_string( $url ) || '' === trim( $url ) ) {
+		return '';
+	}
+
+	$url    = esc_url_raw( trim( $url ), array( 'http', 'https' ) );
+	$parts  = $url ? wp_parse_url( $url ) : false;
+	$scheme = is_array( $parts ) && isset( $parts['scheme'] ) ? strtolower( $parts['scheme'] ) : '';
+
+	return is_array( $parts ) && ! empty( $parts['host'] ) && in_array( $scheme, array( 'http', 'https' ), true )
+		? $url
+		: '';
 }
 
 /**
@@ -69,8 +85,16 @@ function eyecare_slider_doc_cau_hinh() {
 	$ch = array_merge( $mac_dinh, $data );
 
 	// Chuẩn hoá kiểu dữ liệu — tệp có thể bị sửa tay.
-	$ch['anh']       = array_values( array_filter( array_map( 'absint', (array) $ch['anh'] ) ) );
-	$ch['hieu_ung']  = in_array( $ch['hieu_ung'], array( 'mo', 'truot', 'khong' ), true ) ? $ch['hieu_ung'] : 'mo';
+	$ch['anh']       = array_values( array_unique( array_filter( array_map( 'absint', (array) $ch['anh'] ) ) ) );
+	$lien_ket_raw    = is_array( $ch['lien_ket'] ) ? $ch['lien_ket'] : array();
+	$ch['lien_ket']  = array();
+	foreach ( $ch['anh'] as $id ) {
+		$url = eyecare_slider_chuan_hoa_lien_ket( $lien_ket_raw[ $id ] ?? '' );
+		if ( '' !== $url ) {
+			$ch['lien_ket'][ $id ] = $url;
+		}
+	}
+	$ch['hieu_ung']  = in_array( $ch['hieu_ung'], array( 'mo', 'mo_rong', 'truot', 'khong' ), true ) ? $ch['hieu_ung'] : 'mo';
 	$ch['tu_chay']   = empty( $ch['tu_chay'] ) ? 0 : 1;
 	$ch['nhip']      = min( 12, max( 4, absint( $ch['nhip'] ) ) );
 	$ch['kieu']      = in_array( $ch['kieu'], array( 'tach', 'phu' ), true ) ? $ch['kieu'] : 'tach';
@@ -159,10 +183,21 @@ function eyecare_slider_trang_quan_tri() {
 		check_admin_referer( 'eyecare_slider_luu', 'eyecare_slider_nonce' );
 
 		$anh_raw = isset( $_POST['eyecare_slider_anh'] ) ? sanitize_text_field( wp_unslash( $_POST['eyecare_slider_anh'] ) ) : '';
-		$anh_ids = array_values( array_filter( array_map( 'absint', explode( ',', $anh_raw ) ) ) );
+		$anh_ids = array_values( array_unique( array_filter( array_map( 'absint', explode( ',', $anh_raw ) ) ) ) );
+		$lien_ket_raw = isset( $_POST['eyecare_slider_lien_ket'] ) && is_array( $_POST['eyecare_slider_lien_ket'] )
+			? wp_unslash( $_POST['eyecare_slider_lien_ket'] )
+			: array();
+		$lien_ket = array();
+		foreach ( $anh_ids as $id ) {
+			$url = eyecare_slider_chuan_hoa_lien_ket( $lien_ket_raw[ $id ] ?? '' );
+			if ( '' !== $url ) {
+				$lien_ket[ $id ] = $url;
+			}
+		}
 
 		$ch = array(
 			'anh'       => $anh_ids,
+			'lien_ket'  => $lien_ket,
 			'hieu_ung'  => isset( $_POST['eyecare_slider_hieu_ung'] ) ? sanitize_key( wp_unslash( $_POST['eyecare_slider_hieu_ung'] ) ) : 'mo',
 			'tu_chay'   => empty( $_POST['eyecare_slider_tu_chay'] ) ? 0 : 1,
 			'nhip'      => isset( $_POST['eyecare_slider_nhip'] ) ? absint( wp_unslash( $_POST['eyecare_slider_nhip'] ) ) : 6,
@@ -171,7 +206,7 @@ function eyecare_slider_trang_quan_tri() {
 		);
 
 		// Chuẩn hoá qua bộ đọc để đồng nhất giới hạn.
-		$ch['hieu_ung'] = in_array( $ch['hieu_ung'], array( 'mo', 'truot', 'khong' ), true ) ? $ch['hieu_ung'] : 'mo';
+		$ch['hieu_ung'] = in_array( $ch['hieu_ung'], array( 'mo', 'mo_rong', 'truot', 'khong' ), true ) ? $ch['hieu_ung'] : 'mo';
 		$ch['nhip']     = min( 12, max( 4, $ch['nhip'] ) );
 		$ch['kieu']     = in_array( $ch['kieu'], array( 'tach', 'phu' ), true ) ? $ch['kieu'] : 'tach';
 
@@ -203,7 +238,7 @@ function eyecare_slider_trang_quan_tri() {
 				<button type="button" class="button button-primary" id="eyecare-slider-chon">Chọn ảnh từ Thư viện</button>
 				<button type="button" class="button" id="eyecare-slider-xoa-het">Bỏ tất cả</button>
 			</p>
-			<p class="description">Kéo–thả để đổi thứ tự. Ảnh đầu tiên là ảnh hiển thị khi trang vừa mở.</p>
+			<p class="description">Kéo–thả để đổi thứ tự. Ảnh đầu tiên hiển thị khi trang vừa mở. Dán URL bài viết dưới ảnh muốn bấm; để trống nếu ảnh chỉ để xem.</p>
 
 			<ul id="eyecare-slider-ds" class="eyecare-slider-ds"></ul>
 
@@ -231,6 +266,7 @@ function eyecare_slider_trang_quan_tri() {
 					<td>
 						<select name="eyecare_slider_hieu_ung" id="eyecare-slider-hieu-ung">
 							<option value="mo"    <?php selected( $ch['hieu_ung'], 'mo' ); ?>>Mờ dần (fade)</option>
+							<option value="mo_rong" <?php selected( $ch['hieu_ung'], 'mo_rong' ); ?>>Mở ảnh ngang kết hợp mờ dần</option>
 							<option value="truot" <?php selected( $ch['hieu_ung'], 'truot' ); ?>>Trượt ngang (slide)</option>
 							<option value="khong" <?php selected( $ch['hieu_ung'], 'khong' ); ?>>Không hiệu ứng</option>
 						</select>
@@ -303,6 +339,7 @@ function eyecare_slider_du_lieu_cho_js() {
 			'thumb' => $thumb[0],
 			'alt'   => $alt,
 			'ten'   => get_the_title( $id ),
+			'lien_ket' => $ch['lien_ket'][ $id ] ?? '',
 			'rong'  => ! empty( $meta['width'] ) ? (int) $meta['width'] : 0,
 			'cao'   => ! empty( $meta['height'] ) ? (int) $meta['height'] : 0,
 		);
@@ -310,7 +347,7 @@ function eyecare_slider_du_lieu_cho_js() {
 
 	printf(
 		'<script>window.eyecareSliderData = %s;</script>',
-		wp_json_encode( $ds )
+		wp_json_encode( $ds, JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT )
 	);
 }
 add_action( 'admin_footer', 'eyecare_slider_du_lieu_cho_js' );

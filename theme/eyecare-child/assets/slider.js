@@ -37,6 +37,7 @@
 		&& window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches;
 
 	var hieuUng = gtoc.getAttribute( 'data-hieu-ung' ) || 'mo';
+	var moDan = hieuUng === 'mo' || hieuUng === 'mo_rong';
 	var tuChay  = gtoc.getAttribute( 'data-tu-chay' ) === '1' && ! giamChuyenDong;
 	var nhip    = parseInt( gtoc.getAttribute( 'data-nhip' ), 10 ) || 6;
 
@@ -106,6 +107,17 @@
 				a.removeAttribute( 'aria-current' );
 			}
 		} );
+		// Ảnh ẩn trong chế độ mờ không được nhận Tab hoặc xuất hiện ở cây trợ năng.
+		anh.forEach( function ( figure, idx ) {
+			var link = figure.querySelector( '.eyecare-hero__lien-ket' );
+			if ( gtoc.classList.contains( 'eyecare-hero--mo' ) ) {
+				figure.setAttribute( 'aria-hidden', idx === hienTai ? 'false' : 'true' );
+				if ( link ) { link.tabIndex = idx === hienTai ? 0 : -1; }
+			} else {
+				figure.removeAttribute( 'aria-hidden' );
+				if ( link ) { link.removeAttribute( 'tabindex' ); }
+			}
+		} );
 	}
 
 	/**
@@ -144,7 +156,7 @@
 
 	// --- Chế độ mờ dần: cần đặt ảnh chồng lên nhau (class --mo bật lưới chồng
 	// trong CSS). Chỉ bật ở chế độ mờ và khi không giảm chuyển động.
-	if ( 'mo' === hieuUng && ! giamChuyenDong ) {
+	if ( moDan && ! giamChuyenDong ) {
 		gtoc.classList.add( 'eyecare-hero--mo' );
 	}
 
@@ -191,19 +203,26 @@
 	}
 
 	bang.addEventListener( 'keydown', function ( e ) {
+		var tuLienKet = e.target.closest && e.target.closest( '.eyecare-hero__lien-ket' );
 		if ( 'ArrowLeft' === e.key ) {
 			e.preventDefault();
+			if ( tuLienKet && gtoc.classList.contains( 'eyecare-hero--mo' ) ) { bang.focus( { preventScroll: true } ); }
 			chuyenBangTay( -1 );
 		} else if ( 'ArrowRight' === e.key ) {
 			e.preventDefault();
+			if ( tuLienKet && gtoc.classList.contains( 'eyecare-hero--mo' ) ) { bang.focus( { preventScroll: true } ); }
 			chuyenBangTay( 1 );
+		}
+		if ( tuLienKet && ( 'ArrowLeft' === e.key || 'ArrowRight' === e.key ) && gtoc.classList.contains( 'eyecare-hero--mo' ) ) {
+			var lienKetMoi = anh[ hienTai ].querySelector( '.eyecare-hero__lien-ket' );
+			if ( lienKetMoi ) { lienKetMoi.focus( { preventScroll: true } ); }
 		}
 	} );
 
 	// Vuốt/kéo trực tiếp cũng phải cập nhật chấm và ảnh hiện tại. Chỉ đọc vị
 	// trí ở animation frame kế tiếp để không làm nặng sự kiện scroll.
 	var khungCuon = null;
-	if ( 'mo' !== hieuUng || giamChuyenDong ) {
+	if ( ! moDan || giamChuyenDong ) {
 		bang.addEventListener( 'scroll', function () {
 			if ( khungCuon ) {
 				window.cancelAnimationFrame( khungCuon );
@@ -317,15 +336,28 @@
 	}
 	// Fade mode also supports a deliberate horizontal touch swipe.
 	var touchStart = null;
-	if ( 'mo' === hieuUng && ! giamChuyenDong ) {
+	var vuaVuot = false;
+	bang.addEventListener( 'click', function ( e ) {
+		if ( vuaVuot && e.target.closest( '.eyecare-hero__lien-ket' ) ) {
+			e.preventDefault();
+			e.stopPropagation();
+			vuaVuot = false;
+		}
+	}, true );
+	if ( moDan && ! giamChuyenDong ) {
 		bang.addEventListener( 'touchstart', function ( e ) {
+			vuaVuot = false; // Một lần chạm mới là ý định bấm mới, không phải click sau vuốt.
 			if ( e.touches.length === 1 ) { touchStart = [ e.touches[ 0 ].clientX, e.touches[ 0 ].clientY ]; }
 		}, { passive: true } );
 		bang.addEventListener( 'touchend', function ( e ) {
 			if ( ! touchStart ) { return; }
 			var dx = e.changedTouches[ 0 ].clientX - touchStart[ 0 ];
 			var dy = e.changedTouches[ 0 ].clientY - touchStart[ 1 ];
-			if ( Math.abs( dx ) > 45 && Math.abs( dx ) > Math.abs( dy ) * 1.5 ) { chuyenBangTay( dx < 0 ? 1 : -1 ); }
+			if ( Math.abs( dx ) > 45 && Math.abs( dx ) > Math.abs( dy ) * 1.5 ) {
+				vuaVuot = true;
+				window.setTimeout( function () { vuaVuot = false; }, 400 );
+				chuyenBangTay( dx < 0 ? 1 : -1 );
+			}
 			touchStart = null;
 		}, { passive: true } );
 		bang.addEventListener( 'touchcancel', function () { touchStart = null; }, { passive: true } );

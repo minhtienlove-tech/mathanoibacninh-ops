@@ -96,6 +96,7 @@ function eyecare_anh_slider() {
 					'src'    => $src[0],
 					'srcset' => wp_get_attachment_image_srcset( $id, 'full' ),
 					'alt'    => get_post_meta( $id, '_wp_attachment_image_alt', true ),
+					'lien_ket' => $ch['lien_ket'][ $id ] ?? '',
 					'rong'   => ! empty( $meta['width'] ) ? $meta['width'] : $src[1],
 					'cao'    => ! empty( $meta['height'] ) ? $meta['height'] : $src[2],
 				);
@@ -160,6 +161,7 @@ function eyecare_anh_slider() {
 			'src'    => $src[0],
 			'srcset' => wp_get_attachment_image_srcset( $a->ID, 'full' ),
 			'alt'    => get_post_meta( $a->ID, '_wp_attachment_image_alt', true ),
+			'lien_ket' => '',
 			'rong'   => $meta['width'],
 			'cao'    => $meta['height'],
 		);
@@ -223,6 +225,36 @@ function eyecare_hero_hanh_dong( $tt ) {
 	);
 
 	echo '</div>';
+}
+
+/** In ảnh slider; chỉ tạo liên kết khi ảnh này có URL hợp lệ. */
+function eyecare_slider_html_anh( $a, $i ) {
+	$lien_ket = ! empty( $a['lien_ket'] ) ? esc_url( $a['lien_ket'], array( 'http', 'https' ) ) : '';
+	$srcset = $a['srcset']
+		? sprintf( ' srcset="%s" sizes="(min-width: 701px) 100vw, calc(100vw - 40px)"', esc_attr( $a['srcset'] ) )
+		: '';
+	$img = sprintf(
+		'<img class="eyecare-hero__anh" src="%s"%s width="%d" height="%d" alt="%s" %s decoding="async">',
+		esc_url( $a['src'] ),
+		$srcset,
+		(int) $a['rong'],
+		(int) $a['cao'],
+		esc_attr( $a['alt'] ),
+		0 === $i ? 'fetchpriority="high"' : 'loading="lazy"'
+	);
+
+	if ( '' === $lien_ket ) {
+		return $img;
+	}
+
+	return sprintf(
+		'<a class="eyecare-hero__lien-ket" href="%s" aria-label="%s">%s</a>',
+		$lien_ket,
+		esc_attr( '' !== trim( (string) $a['alt'] )
+			? sprintf( 'Xem nội dung liên quan: %s', $a['alt'] )
+			: sprintf( 'Xem nội dung liên quan đến ảnh %d', (int) $i + 1 ) ),
+		$img
+	);
 }
 
 function eyecare_slider_dau_trang() {
@@ -322,28 +354,8 @@ function eyecare_slider_dau_trang() {
 	foreach ( $anh as $i => $a ) {
 
 		echo '<figure class="eyecare-hero__khung" id="anh-' . (int) $a['id'] . '">';
-
-		/* srcset chỉ in khi thật sự có. Ảnh nhập bằng script khi PHP thiếu
-		   phần mở rộng GD thì không sinh được cỡ phái sinh nào, và
-		   wp_get_attachment_image_srcset() trả về false — in ra srcset=""
-		   là HTML sai, một số trình duyệt hiểu thành "không có ảnh nào". */
-		$srcset = $a['srcset']
-			? sprintf( ' srcset="%s" sizes="(min-width: 701px) 100vw, calc(100vw - 40px)"', esc_attr( $a['srcset'] ) )
-			: '';
-
-		printf(
-			'<img class="eyecare-hero__anh" src="%s"%s'
-				. ' width="%d" height="%d" alt="%s" %s decoding="async">',
-			esc_url( $a['src'] ),
-			$srcset,
-			(int) $a['rong'],
-			(int) $a['cao'],
-			esc_attr( $a['alt'] ),
-			/* Ảnh đầu nạp ngay vì nó nằm trong khung nhìn đầu tiên; ảnh sau
-			   nạp lười. Đặt loading="lazy" cho ảnh đầu làm chậm chính chỉ số
-			   LCP mà nó đang chiếm. */
-			0 === $i ? 'fetchpriority="high"' : 'loading="lazy"'
-		);
+		/* Giữ nguyên srcset, kích thước và mức ưu tiên tải của ảnh đầu. */
+		echo eyecare_slider_html_anh( $a, $i ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML đã escape trong helper.
 
 		echo '</figure>';
 	}

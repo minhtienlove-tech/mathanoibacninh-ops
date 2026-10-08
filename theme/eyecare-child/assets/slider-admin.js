@@ -79,14 +79,20 @@
 				+ '. Ảnh vẫn dùng được, nhưng có thể vỡ hoặc bị cắt trên màn hình lớn.">⚠ kích thước</span>';
 		}
 
-		return $(
-			'<li data-id="' + anh.id + '">' +
-				'<img src="' + anh.thumb + '" alt="">' +
-				'<span class="eyecare-slider-ten">' + ( anh.ten || ( 'Ảnh #' + anh.id ) ) + '</span>' +
-				canhBao +
-				'<button type="button" class="eyecare-slider-bo" aria-label="Bỏ ảnh này">×</button>' +
-			'</li>'
-		);
+		var id = parseInt( anh.id, 10 ) || 0;
+		var $the = $( '<li>' ).attr( 'data-id', id );
+		$( '<img alt="">' ).attr( 'src', anh.thumb ).appendTo( $the );
+		$( '<span class="eyecare-slider-ten">' ).text( anh.ten || ( 'Ảnh #' + id ) ).appendTo( $the );
+		$the.append( canhBao );
+
+		var $nhan = $( '<label class="eyecare-slider-lien-ket">' ).appendTo( $the );
+		$( '<span>' ).text( 'Liên kết khi bấm ảnh (tuỳ chọn)' ).appendTo( $nhan );
+		$( '<input type="url" placeholder="https://mathanoibacninh.com/bai-viet/">' )
+			.attr( 'name', 'eyecare_slider_lien_ket[' + id + ']' )
+			.val( anh.lien_ket || '' )
+			.appendTo( $nhan );
+		$( '<button type="button" class="eyecare-slider-bo" aria-label="Bỏ ảnh này">×</button>' ).appendTo( $the );
+		return $the;
 	}
 
 	/**
@@ -163,6 +169,7 @@
 	if ( $.fn.sortable ) {
 		$ds.sortable( {
 			placeholder: 'eyecare-slider-cho-trong',
+			cancel: 'input, button',
 			update: capNhatGiaTri
 		} );
 	}
