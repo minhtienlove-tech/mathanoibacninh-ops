@@ -1955,6 +1955,10 @@ ul, ol {
 	aspect-ratio: 16 / 9;
 }
 
+.eyecare-chu__bai-noi-bat > .eyecare-chu__bai-anh--doc {
+	aspect-ratio: 3 / 4;
+}
+
 .eyecare-chu__bai .eyecare-chu__bai-anh img {
 	display: block;
 	width: 100%;
@@ -1963,8 +1967,16 @@ ul, ol {
 	transition: transform 350ms ease;
 }
 
+.eyecare-chu__bai .eyecare-chu__bai-anh--doc img {
+	object-fit: contain;
+}
+
 .eyecare-chu__bai .eyecare-chu__bai-anh:hover img {
 	transform: scale(1.025);
+}
+
+.eyecare-chu__bai .eyecare-chu__bai-anh--doc:hover img {
+	transform: none;
 }
 
 .eyecare-chu__bai-noi-bat .eyecare-chu__bai-noi-dung {
@@ -2049,6 +2061,10 @@ ul, ol {
 .eyecare-chu__bai-muc .eyecare-chu__bai-anh {
 	width: 100%;
 	aspect-ratio: 4 / 3;
+}
+
+.eyecare-chu__bai-muc .eyecare-chu__bai-anh--doc {
+	aspect-ratio: 1;
 }
 
 .eyecare-chu__bai-muc .eyecare-chu__bai-tom-tat {

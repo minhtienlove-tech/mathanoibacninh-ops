@@ -443,6 +443,8 @@ $tt = eyecare_du_lieu_thuc_the();
 
 					$la_bai_noi_bat = 0 === $thu_tu_bai;
 					$co_anh_dai_dien = has_post_thumbnail();
+					$anh_metadata    = $co_anh_dai_dien ? wp_get_attachment_metadata( get_post_thumbnail_id() ) : array();
+					$anh_dang_doc    = ! empty( $anh_metadata['width'] ) && ! empty( $anh_metadata['height'] ) && $anh_metadata['height'] > $anh_metadata['width'];
 					$anh_alt         = $co_anh_dai_dien ? get_post_meta( get_post_thumbnail_id(), '_wp_attachment_image_alt', true ) : '';
 					$anh_alt         = $anh_alt ? $anh_alt : get_the_title();
 					$tom_tat         = wp_trim_words(
@@ -453,7 +455,7 @@ $tt = eyecare_du_lieu_thuc_the();
 					?>
 					<?php if ( $la_bai_noi_bat ) : ?>
 						<article class="eyecare-chu__bai-noi-bat">
-							<a class="eyecare-chu__bai-anh" href="<?php echo esc_url( get_permalink() ); ?>" tabindex="-1" aria-hidden="true">
+							<a class="eyecare-chu__bai-anh<?php echo $anh_dang_doc ? ' eyecare-chu__bai-anh--doc' : ''; ?>" href="<?php echo esc_url( get_permalink() ); ?>" tabindex="-1" aria-hidden="true">
 								<?php if ( $co_anh_dai_dien ) : ?>
 									<?php the_post_thumbnail( 'large', array( 'alt' => esc_attr( $anh_alt ), 'loading' => 'lazy', 'decoding' => 'async' ) ); ?>
 								<?php else : ?>
@@ -481,7 +483,7 @@ $tt = eyecare_du_lieu_thuc_the();
 							<div class="eyecare-chu__bai-phu" role="group" aria-label="Các bài viết mới khác">
 						<?php endif; ?>
 							<article class="eyecare-chu__bai-muc">
-								<a class="eyecare-chu__bai-anh" href="<?php echo esc_url( get_permalink() ); ?>" tabindex="-1" aria-hidden="true">
+								<a class="eyecare-chu__bai-anh<?php echo $anh_dang_doc ? ' eyecare-chu__bai-anh--doc' : ''; ?>" href="<?php echo esc_url( get_permalink() ); ?>" tabindex="-1" aria-hidden="true">
 									<?php if ( $co_anh_dai_dien ) : ?>
 										<?php the_post_thumbnail( 'medium', array( 'alt' => esc_attr( $anh_alt ), 'loading' => 'lazy', 'decoding' => 'async' ) ); ?>
 									<?php else : ?>
