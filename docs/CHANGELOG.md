@@ -1,5 +1,13 @@
 # Production changelog
 
+## 2026-10-08 — liên kết tùy chọn và chuyển cảnh mới cho slider trang chủ
+
+- Admin → Appearance → Slider trang chủ có ô URL riêng dưới từng ảnh. Chỉ ảnh được điền URL HTTP(S) hợp lệ mới trở thành liên kết; ảnh để trống vẫn là ảnh thường. Liên kết được lưu theo ID ảnh nên kéo đổi thứ tự không làm gắn nhầm đích. Trang quản trị có thêm lựa chọn **Mở ảnh ngang kết hợp mờ dần**; đã bật kiểu này cho sáu ảnh đang dùng, giữ nguyên thứ tự, nhịp 4 giây và các tùy chọn khác. Chưa tự điền URL bài viết nào thay người quản trị.
+- Sửa bảy tệp child theme: `inc/slider-cai-dat.php`, `inc/trang-chu.php`, `assets/slider-admin.js`, `assets/slider-admin.css`, `assets/slider.js`, `assets/home-critical.css`, `style.css`. Ảnh đầu vẫn có `fetchpriority="high"`; ảnh ẩn không nhận Tab ở chế độ chồng ảnh. Khi dùng phím mũi tên từ một ảnh có link, tiêu điểm chuyển sang ảnh mới hoặc vùng slider trước khi ẩn ảnh cũ. Vuốt ngang không mở nhầm link. Hiệu ứng được tắt theo `prefers-reduced-motion`.
+- Sau `git pull`, triển khai commit `66b6469` bằng `scripts/deploy-slider-links-effect-20261008.sh` dưới khóa deploy và đối chiếu SHA-256 production/staging. Backup bảy tệp, `data/slider.json` và database tại `/home/jwhxtzru/backups/slider-links-effect-20261008-141745/`; cập nhật JSON bằng thay thế tệp nguyên tử, sau đó xóa WordPress/LiteSpeed cache.
+- Kiểm tra: `node --check` hai tệp JS; `php -l` ba tệp PHP trên staging và bốn tệp liên quan trên production; 9 kiểm tra WP-CLI cho URL an toàn, ảnh có/không có link, ưu tiên tải ảnh đầu đều đạt. HTML công khai có `data-hieu-ung="mo_rong"`; trình duyệt xác nhận sáu ảnh, CSS chuyển `opacity` + `clip-path`, nút chuyển hoạt động, trang quản trị hiện đủ sáu ô URL và lựa chọn hiệu ứng. Kiểm tra trực quan desktop và viewport 390 px đạt; không có lỗi JavaScript trong tab trang chủ. `verify-live.ps1 -CheckSsh` đạt, sáu URL chính HTTP 200.
+- Rollback chọn lọc: chép lại bảy tệp và `data/slider.json` từ thư mục backup trên, rồi xóa WordPress/LiteSpeed cache. Database không bị thay đổi; bản export là điểm khôi phục dự phòng.
+
 ## 2026-10-08 — thẻ “Bài viết mới” trong các trang dịch vụ
 
 - Trang `/dich-vu/phau-thuat-quem/` dùng danh sách bài gọn riêng với thẻ lớn ở trang chủ. Trên điện thoại, tiêu đề hai dòng bị cắt và ảnh poster dọc trong ô nhỏ bị xén. Chỉ sửa `theme/eyecare-child/style.css`, giới hạn dưới `.eyecare-trang--dich-vu-con .eyecare-bai__cot-ben--moi`: thêm nền, viền bo 14 px, khoảng đệm, bóng nhẹ và hiệu ứng hover/focus cho từng bài; hiển thị toàn bộ ảnh bằng `object-fit: contain`; bỏ giới hạn hai dòng của tiêu đề ở màn hình dưới 550 px. Hỗ trợ `prefers-reduced-motion`.
