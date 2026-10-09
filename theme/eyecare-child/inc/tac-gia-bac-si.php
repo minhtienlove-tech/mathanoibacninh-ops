@@ -583,6 +583,11 @@ function eyecare_bac_si_duong_dan( $doctor = 'Lê Như Tùng' ) {
 
 /** Doctor/person entity only for an explicitly selected published team member. */
 function eyecare_schema_bac_si( $doctor_id = 0 ) {
+	// Bài công khai đang chờ xác minh không được ngầm gắn bác sĩ vào graph.
+	if ( is_singular( 'post' ) && eyecare_bai_cho_duyet_cong_khai( get_queried_object_id() ) ) {
+		return null;
+	}
+
 	$b = function_exists( 'eyecare_bac_si_du_lieu_theo_id' ) ? eyecare_bac_si_du_lieu_theo_id( $doctor_id ) : array();
 	if ( ! $b ) {
 		return null;
@@ -978,6 +983,12 @@ function eyecare_ma_ngan_doc_them( $thuoc_tinh, $noi_dung = '' ) {
 }
 add_shortcode( 'doc-them', 'eyecare_ma_ngan_doc_them' );
 
+/** Bài đã xuất bản nhưng chưa xác minh người viết và bác sĩ duyệt. */
+function eyecare_bai_cho_duyet_cong_khai( $id ) {
+	return $id && 'post' === get_post_type( $id ) && 'publish' === get_post_status( $id )
+		&& 'pending-author-and-medical-review' === get_post_meta( $id, '_eyecare_content_review_status', true );
+}
+
 /**
  * Khối schema cho bài viết y khoa. Chỉ gắn người viết/người duyệt khi quản
  * trị viên đã chọn đúng hồ sơ bác sĩ cho từng bài.
@@ -987,10 +998,10 @@ function eyecare_schema_bai_viet() {
 		return null;
 	}
 
-	$id  = get_the_ID();
-	// Bài trong gói biên tập chưa được xác minh tác giả/bác sĩ: không gán
-	// mặc định bác sĩ đứng tên vào schema, kể cả trên bản xem trước riêng tư.
-	if ( 'pending-author-and-medical-review' === get_post_meta( $id, '_eyecare_content_review_status', true ) ) {
+	$id = get_the_ID();
+	$cho_duyet = 'pending-author-and-medical-review' === get_post_meta( $id, '_eyecare_content_review_status', true );
+	// Bản xem trước chưa xuất bản chưa cần Article schema.
+	if ( $cho_duyet && ! eyecare_bai_cho_duyet_cong_khai( $id ) ) {
 		return null;
 	}
 	$goc = home_url( '/' );
@@ -1001,13 +1012,13 @@ function eyecare_schema_bai_viet() {
 		'headline'         => get_the_title( $id ),
 		'url'              => get_permalink( $id ),
 		'inLanguage'       => 'vi-VN',
-		'datePublished'    => get_the_date( 'c', $id ),
-		'dateModified'     => get_the_modified_date( 'c', $id ),
+		'datePublished'    => $cho_duyet ? get_post_time( DATE_W3C, false, $id ) : get_the_date( 'c', $id ),
+		'dateModified'     => $cho_duyet ? get_post_modified_time( DATE_W3C, false, $id ) : get_the_modified_date( 'c', $id ),
 		'publisher'        => array( '@id' => $goc . '#to-chuc' ),
 		'isPartOf'         => array( '@id' => $goc . '#website' ),
 		'medicalAudience'  => array( '@type' => 'Patient' ),
 	);
-	$author_id = function_exists( 'eyecare_bai_bac_si_id' ) ? eyecare_bai_bac_si_id( $id ) : 0;
+	$author_id = ! $cho_duyet && function_exists( 'eyecare_bai_bac_si_id' ) ? eyecare_bai_bac_si_id( $id ) : 0;
 	if ( $author_id ) {
 		$bai['author'] = array( '@id' => eyecare_bac_si_ho_so_url( $author_id ) );
 	}
@@ -1024,7 +1035,7 @@ function eyecare_schema_bai_viet() {
 
 	// Ngày bác sĩ duyệt — chỉ khai khi thật sự đã duyệt.
 	$ngay_duyet = get_post_meta( $id, '_bvmat_bac_si_duyet', true );
-	$reviewer_id = function_exists( 'eyecare_bai_bac_si_duyet_id' ) ? eyecare_bai_bac_si_duyet_id( $id ) : 0;
+	$reviewer_id = ! $cho_duyet && function_exists( 'eyecare_bai_bac_si_duyet_id' ) ? eyecare_bai_bac_si_duyet_id( $id ) : 0;
 	if ( $ngay_duyet && $reviewer_id ) {
 		$bai['lastReviewed'] = $ngay_duyet;
 		$bai['reviewedBy'] = array( '@id' => eyecare_bac_si_ho_so_url( $reviewer_id ) );
@@ -1223,8 +1234,8 @@ function eyecare_schema_duong_dan_bai_viet() {
 }
 
 /**
- * Không hiển thị khối plugin tự nhận bác sĩ là tác giả trên bản nháp chưa duyệt.
- * Chỉ áp dụng cho bài có meta nội bộ; bài đang xuất bản không bị ảnh hưởng.
+ * Không hiển thị khối plugin tự nhận bác sĩ là tác giả khi bài chưa duyệt.
+ * Với bài đã xuất bản, thay cả Open Graph của plugin bằng dữ liệu địa phương.
  */
 function eyecare_an_ghi_cong_ban_nhap_chua_duyet() {
 	if ( is_admin() || ! is_singular( 'post' ) ) {
@@ -1250,10 +1261,16 @@ function eyecare_an_ghi_cong_ban_nhap_chua_duyet() {
 	}
 
 	// Plugin sẽ gán user quản trị làm author của Article dù post_author=0.
-	// Bản nháp riêng tư không cần Article schema trước khi xác minh người viết.
+	// Bản nháp không cần Article; bài công khai dùng Article của child theme.
 	$schema = OBS_Loader::get( 'schema' );
 	if ( $schema ) {
 		remove_action( 'wp_head', array( $schema, 'render' ), 10 );
+	}
+	if ( eyecare_bai_cho_duyet_cong_khai( $id ) ) {
+		$opengraph = OBS_Loader::get( 'opengraph' );
+		if ( $opengraph ) {
+			remove_action( 'wp_head', array( $opengraph, 'render' ), 5 );
+		}
 	}
 
 	// Template single.php đã có breadcrumb và thời gian đọc riêng.
@@ -1271,3 +1288,46 @@ function eyecare_an_ghi_cong_ban_nhap_chua_duyet() {
 	remove_shortcode( 'obs_author_bio' );
 }
 add_action( 'wp', 'eyecare_an_ghi_cong_ban_nhap_chua_duyet', 20 );
+
+/** Open Graph và Twitter cho bài công khai còn chờ xác minh người viết. */
+function eyecare_meta_bai_cho_duyet_cong_khai() {
+	if ( ! is_singular( 'post' ) ) {
+		return;
+	}
+	$id = (int) get_queried_object_id();
+	if ( ! eyecare_bai_cho_duyet_cong_khai( $id ) ) {
+		return;
+	}
+
+	$tieu_de = get_the_title( $id );
+	$mo_ta = trim( wp_strip_all_tags( get_the_excerpt( $id ) ) );
+	$anh_dai_dien = get_the_post_thumbnail_url( $id, 'full' );
+	$anh = $anh_dai_dien ?: get_site_icon_url( 512 );
+	$og = array(
+		'og:type'                => 'article',
+		'og:site_name'           => get_bloginfo( 'name' ),
+		'og:locale'              => 'vi_VN',
+		'og:title'               => $tieu_de,
+		'og:url'                 => get_permalink( $id ),
+		'article:published_time' => get_post_time( DATE_W3C, false, $id ),
+		'article:modified_time'  => get_post_modified_time( DATE_W3C, false, $id ),
+	);
+	if ( $mo_ta ) {
+		$og['og:description'] = $mo_ta;
+	}
+	if ( $anh ) {
+		$og['og:image'] = $anh;
+	}
+	foreach ( $og as $thuoc_tinh => $gia_tri ) {
+		echo '<meta property="' . esc_attr( $thuoc_tinh ) . '" content="' . esc_attr( $gia_tri ) . '">' . "\n";
+	}
+	echo '<meta name="twitter:card" content="' . ( $anh_dai_dien ? 'summary_large_image' : 'summary' ) . '">' . "\n";
+	echo '<meta name="twitter:title" content="' . esc_attr( $tieu_de ) . '">' . "\n";
+	if ( $mo_ta ) {
+		echo '<meta name="twitter:description" content="' . esc_attr( $mo_ta ) . '">' . "\n";
+	}
+	if ( $anh ) {
+		echo '<meta name="twitter:image" content="' . esc_url( $anh ) . '">' . "\n";
+	}
+}
+add_action( 'wp_head', 'eyecare_meta_bai_cho_duyet_cong_khai', 4 );
