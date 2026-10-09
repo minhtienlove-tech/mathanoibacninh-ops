@@ -157,6 +157,11 @@ if ( is_wp_error( $post_id ) || ! $post_id ) {
 if ( false === file_put_contents( $base . '/post-id', $post_id . "\n", LOCK_EX ) ) {
     WP_CLI::error( 'Could not record draft ID; draft retained.' );
 }
+// No named author or ophthalmologist reviewer was confirmed for this article.
+// Prevent the SEO plugin from inventing a physician attribution on publication.
+if ( ! update_post_meta( $post_id, '_eyecare_content_review_status', 'pending-author-and-medical-review' ) ) {
+    WP_CLI::error( 'Could not mark author/medical review as pending; draft retained.' );
+}
 
 require_once ABSPATH . 'wp-admin/includes/file.php';
 require_once ABSPATH . 'wp-admin/includes/media.php';
@@ -195,6 +200,7 @@ if ( ! $draft || 'draft' !== $draft->post_status || 'post' !== $draft->post_type
      $title !== $draft->post_title || $excerpt !== $draft->post_excerpt ||
      $clean_body !== $draft->post_content || ! in_array( 3, $assigned, true ) ||
      ! in_array( 16, $assigned, true ) || (int) get_post_thumbnail_id( $post_id ) !== (int) $attachment_id ||
+     'pending-author-and-medical-review' !== get_post_meta( $post_id, '_eyecare_content_review_status', true ) ||
      $alt !== get_post_meta( $attachment_id, '_wp_attachment_image_alt', true ) ||
      '1' !== get_post_meta( $attachment_id, '_eyecare_ai_illustration', true ) ||
      $caption !== get_post_field( 'post_excerpt', $attachment_id ) ) {

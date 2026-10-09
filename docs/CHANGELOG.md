@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-09 — liên kết ngược từ trang Bắc Giang tới bài chọn nơi khám (chờ triển khai)
+
+- Bài kiến thức #1745 đã dẫn tới trang khu vực #55. Trang #55 hiện chỉ dẫn ngược tới bài qua sidebar “Bài viết mới nhất”, vốn thay đổi theo ngày đăng. Thêm một liên kết ngữ cảnh trong mục “Lựa chọn cơ sở và chuẩn bị an toàn khi đi xa” ở theme/eyecare-child/content/khu-vuc/bac-giang.html; không sửa nội dung WordPress trong database.
+- scripts/deploy-bac-giang-reciprocal-link-20261009.ps1 kiểm tra SHA-256 cũ/mới, trạng thái và URL của hai bản ghi, giữ khóa deploy, sao lưu duy nhất file HTML liên quan cùng database, chỉ tải file này lên staging rồi áp vào child theme. Script có kiểm tra HTML công khai và khôi phục file khi triển khai lỗi; có chế độ rollback chọn lọc theo thư mục backup. Chưa chạy triển khai production.
+- Kiểm tra tại local: parser PowerShell và Bash đều đạt, HTML có đúng một liên kết mới; chế độ preflight trên server đạt với SHA cũ 6cddd512 và SHA mới 215c4a9c, hai lệnh php -l đạt. verify-live.ps1 -CheckSsh đạt, sáu URL chính trả HTTP 200. Bản production vẫn ở SHA cũ.
+
 ## 2026-10-08 — liên kết tùy chọn và chuyển cảnh mới cho slider trang chủ
 
 - Admin → Appearance → Slider trang chủ có ô URL riêng dưới từng ảnh. Chỉ ảnh được điền URL HTTP(S) hợp lệ mới trở thành liên kết; ảnh để trống vẫn là ảnh thường. Liên kết được lưu theo ID ảnh nên kéo đổi thứ tự không làm gắn nhầm đích. Trang quản trị có thêm lựa chọn **Mở ảnh ngang kết hợp mờ dần**; đã bật kiểu này cho sáu ảnh đang dùng, giữ nguyên thứ tự, nhịp 4 giây và các tùy chọn khác. Chưa tự điền URL bài viết nào thay người quản trị.
