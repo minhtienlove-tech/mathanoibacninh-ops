@@ -46,6 +46,7 @@ function Invoke-RemoteProgram([string]$command, [string]$program) {
     $start.Arguments = '-o BatchMode=yes -o ConnectTimeout=10 ' + $sshAlias + ' "' + $command + '"'
     $start.UseShellExecute = $false
     $start.RedirectStandardInput = $true
+    $start.StandardInputEncoding = [System.Text.UTF8Encoding]::new($false)
     $start.RedirectStandardOutput = $true
     $start.RedirectStandardError = $true
     $process = New-Object System.Diagnostics.Process
@@ -259,8 +260,10 @@ if any(field in article for field in ('author', 'reviewedBy', 'lastReviewed')):
 if scan.ai_blocks:
     fail('OBS AI/author attribution block remains: ' + ', '.join(scan.ai_blocks))
 body_text = ' '.join(' '.join(scan.body_text).split())
-if re.search(r'Biên soạn bởi:\s*(?:BSCKI\.?\s*)?Đặng Công Hải', body_text, re.IGNORECASE):
-    fail('False Đặng Công Hải authorship remains in the public article')
+credit_label = 'Bi\u00ean so\u1ea1n b\u1edfi:'
+doctor_name = '\u0110\u1eb7ng C\u00f4ng H\u1ea3i'
+if re.search(re.escape(credit_label) + r'\s*(?:BSCKI\.?\s*)?' + re.escape(doctor_name), body_text, re.IGNORECASE):
+    fail('False doctor authorship remains in the public article')
 
 def expect_meta(key, expected, attribute='property'):
     values = [item.get('content') for item in scan.meta if item.get(attribute) == key]
