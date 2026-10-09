@@ -1,0 +1,139 @@
+{
+  "slug": "kham-mat-hoc-duong-thpt-chuyen-bac-giang",
+  "category_id": 26,
+  "featured_source": "DSCF2027.jpg",
+  "inline_sources": [
+    "DSCF1832.jpg",
+    "DSCF1905.jpg",
+    "DSCF1981.jpg",
+    "DSCF1864.jpg"
+  ],
+  "assets": [
+    {
+      "source": "DSCF1803.jpg",
+      "filename": "thpt-chuyen-bac-giang-ao-trang-ban-laptop-dscf1803.webp",
+      "sha256": "7e0c176bbe077ef2e7881433a15ff0df3ea321ff333270307cd0be0794865475",
+      "width": 1280,
+      "height": 1920,
+      "alt": "Một người mặc áo sơ mi trắng mỉm cười bên máy tính xách tay tại bàn của chương trình khám mắt.",
+      "caption": ""
+    },
+    {
+      "source": "DSCF1832.jpg",
+      "filename": "thpt-chuyen-bac-giang-ao-xanh-ban-laptop-dscf1832.webp",
+      "sha256": "18a8a5c511ed5f114f3797ff587d1e7e0870ba53ec2fb62eb7ffdf0a5a7f9399",
+      "width": 1280,
+      "height": 1920,
+      "alt": "Người mặc áo đồng phục xanh làm việc trên máy tính xách tay, bên cạnh là giấy tờ của chương trình.",
+      "caption": "Nhân viên bệnh viện hỗ trợ khâu tiếp nhận của chương trình."
+    },
+    {
+      "source": "DSCF1864.jpg",
+      "filename": "thpt-chuyen-bac-giang-hoc-sinh-hoi-truong-dscf1864.webp",
+      "sha256": "9a12f18c98033ca8c5fe53eef9e403859c25525da5961f56647855fd769387de",
+      "width": 1280,
+      "height": 1920,
+      "alt": "Các nhóm học sinh ngồi trong hội trường, một nữ sinh ở hàng ghế đầu cầm tờ giấy.",
+      "caption": "Học sinh tập trung tại khu vực tổ chức chương trình."
+    },
+    {
+      "source": "DSCF1905.jpg",
+      "filename": "thpt-chuyen-bac-giang-nu-sinh-che-mat-dscf1905.webp",
+      "sha256": "4807517ef773ab1318199433348cac063f47e2b9626e9e1f12d5193a1f8076f0",
+      "width": 1280,
+      "height": 1920,
+      "alt": "Nữ sinh áo trắng dùng dụng cụ che một mắt khi ngồi kiểm tra thị lực; hai học sinh khác đứng bên cạnh.",
+      "caption": "Học sinh kiểm tra thị lực từng mắt tại trường."
+    },
+    {
+      "source": "DSCF1923.jpg",
+      "filename": "thpt-chuyen-bac-giang-nhom-hoc-sinh-dscf1923.webp",
+      "sha256": "f9796120dbdb444f2679b132fdd5c2ed6d2b797dbd5e93ec5420f0ed907b76a5",
+      "width": 1920,
+      "height": 1280,
+      "alt": "Nhóm học sinh mặc đồng phục trắng trao đổi trong khu vực tổ chức chương trình khám mắt.",
+      "caption": ""
+    },
+    {
+      "source": "DSCF1981.jpg",
+      "filename": "thpt-chuyen-bac-giang-nam-sinh-kiem-tra-thi-luc-dscf1981.webp",
+      "sha256": "61a8fac668c75d9ffdcc343e81afcfaf7674b8128049f1074f2824b82dcdd389",
+      "width": 1280,
+      "height": 1920,
+      "alt": "Nam sinh mặc áo khoác đỏ ngồi trên ghế và dùng dụng cụ che một mắt khi kiểm tra thị lực.",
+      "caption": "Một học sinh tham gia bước kiểm tra thị lực."
+    },
+    {
+      "source": "DSCF2027.jpg",
+      "filename": "thpt-chuyen-bac-giang-hai-hoc-sinh-check-in-dscf2027.webp",
+      "sha256": "1e28bd1981fcfd9f69768a4f66b49d43c2c3343d3530617843725d699d4a671c",
+      "width": 1920,
+      "height": 1280,
+      "alt": "Hai học sinh mặc áo trắng chụp ảnh dưới khung check-in của chương trình khám mắt.",
+      "caption": "Học sinh check-in trong chương trình khám mắt học đường tại THPT Chuyên Bắc Giang."
+    },
+    {
+      "source": "DSCF2044.jpg",
+      "filename": "thpt-chuyen-bac-giang-nguoi-deo-kinh-check-in-dscf2044.webp",
+      "sha256": "7b0cb9c38c9817940de40b54e780144507b0865f33aedca1f057602a3bf6bc26",
+      "width": 1920,
+      "height": 1280,
+      "alt": "Người đàn ông đeo kính, mặc áo khoác xám và cầm đạo cụ dưới khung check-in của chương trình.",
+      "caption": ""
+    },
+    {
+      "source": "DSCF2050.jpg",
+      "filename": "thpt-chuyen-bac-giang-nu-sinh-ao-xanh-kiem-tra-dscf2050.webp",
+      "sha256": "3d508beec0beeb0ecbdbd0310f8463d23b8397dfcc5f59248b5d528b9569b72c",
+      "width": 1344,
+      "height": 1920,
+      "alt": "Nữ sinh mặc áo sơ mi xanh ngồi trên ghế, che một mắt bằng dụng cụ cầm tay khi kiểm tra thị lực.",
+      "caption": ""
+    },
+    {
+      "source": "DSCF2054.jpg",
+      "filename": "thpt-chuyen-bac-giang-nu-sinh-ao-xanh-che-mat-dscf2054.webp",
+      "sha256": "f49eb25fced4517885f90b695cc226c1accce4231837a5b3fa5cb6f360523d2d",
+      "width": 1280,
+      "height": 1920,
+      "alt": "Nữ sinh áo xanh ngồi trên ghế, một tay che mắt bằng dụng cụ và tay kia giơ ngón trỏ.",
+      "caption": ""
+    },
+    {
+      "source": "DSCF2127.png",
+      "filename": "thpt-chuyen-bac-giang-nu-sinh-ao-xanh-check-in-dscf2127.webp",
+      "sha256": "9c477b8f2337cea4ad2a1bc1d771a2756dbd762d2b00c5fa1f32e47850edaa47",
+      "width": 1280,
+      "height": 1920,
+      "alt": "Nữ sinh áo xanh đeo kính và cầm bảng Team Cận dưới khung check-in của chương trình.",
+      "caption": ""
+    },
+    {
+      "source": "DSCF2131.png",
+      "filename": "thpt-chuyen-bac-giang-nu-sinh-mim-cuoi-check-in-dscf2131.webp",
+      "sha256": "1be65cbf8134aa7a0a37714829bf030bb9c9290603b98f359d446022fd448ec2",
+      "width": 1280,
+      "height": 1920,
+      "alt": "Nữ sinh áo xanh mỉm cười và cầm bảng chụp ảnh trước khung check-in của chương trình.",
+      "caption": ""
+    },
+    {
+      "source": "DSCF2161.jpg",
+      "filename": "thpt-chuyen-bac-giang-nu-sinh-ao-trang-kiem-tra-dscf2161.webp",
+      "sha256": "07c679da27d9645a128ef40c67d46fe61c1a1650a738d6044c9c40da9ca1c029",
+      "width": 1280,
+      "height": 1920,
+      "alt": "Nữ sinh áo trắng ngồi trên ghế và dùng dụng cụ che một mắt trong khu vực kiểm tra thị lực.",
+      "caption": ""
+    },
+    {
+      "source": "DSCF2179.jpg",
+      "filename": "thpt-chuyen-bac-giang-nam-sinh-ao-trang-check-in-dscf2179.webp",
+      "sha256": "b2e4e675965d71537c41194034162654847ce58aeee451f80f4231b002103201",
+      "width": 1280,
+      "height": 1920,
+      "alt": "Nam sinh mặc áo thun trắng, đeo kính và cầm bảng chụp ảnh dưới khung check-in.",
+      "caption": ""
+    }
+  ]
+}

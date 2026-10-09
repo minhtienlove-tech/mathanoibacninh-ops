@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-09 — tin khám mắt học đường tại THPT Chuyên Bắc Giang
+
+- Chuẩn bị bài tin trong `docs/drafts/thpt-chuyen-bac-giang-20261009/` để đăng tại chuyên mục Hoạt động cộng đồng. Biên tập văn bản người quản lý cung cấp: sửa số liệu 2024–2025 thành 99 giải (120 là số thí sinh dự thi), giữ ranh giới sàng lọc và chẩn đoán, bỏ lặp từ khóa/FAQ dài, dẫn nguồn thành tích trường và 5 liên kết nội bộ liên quan. Không gán ngày tổ chức khi chưa có hồ sơ xác nhận; không công bố kết quả thị lực cá nhân.
+- Chuẩn bị 14 bản WebP đặt tên theo cảnh, alt tiếng Việt riêng cho từng ảnh; giữ nguyên ảnh gốc, loại EXIF/GPS. Tổng dung lượng ảnh đăng khoảng 1,93 MB thay vì 231,45 MB ảnh gốc. Ảnh DSCF2027 làm nổi bật, 4 ảnh trong bài và 9 ảnh trong gallery. `assets/news.css` bổ sung khung ảnh/gallery không cắt ảnh và bố cục đáp ứng. Script xuất bản kiểm tra hash, sao lưu CSS + database, tạo/kiểm tra bản nháp, đặt trạng thái ghi công chờ xác minh rồi mới đăng.
+- Trạng thái triển khai: đang chuẩn bị; sẽ cập nhật ID, URL, backup và kiểm tra sau khi đăng.
+
 ## 2026-10-09 — bài chọn nơi khám mắt ở Bắc Giang và liên kết hai chiều
 
 - Xuất bản bài kiến thức #1745 tại `/kien-thuc/benh-vien-mat-uy-tin-tai-bac-giang/`, khoảng 1.777 từ theo WP-CLI, thuộc chuyên mục Kiến thức nhãn khoa → Chuẩn bị đi khám và bảo hiểm. Bài giải đáp các ý định tìm kiếm “bệnh viện mắt uy tín tại Bắc Giang”, “phòng khám mắt gần đây” và Việt Yên, nhưng ghi rõ tên cơ sở và một địa chỉ công bố, không nhận là chi nhánh tại Việt Yên hoặc xếp hạng cơ sở. Có ba liên kết trong nội dung về trang khu vực #55; ảnh minh họa AI WebP là media #1746 với alt, chú thích và metadata nhận diện ảnh AI. Nguồn bài và manifest SHA-256 lưu ở `docs/drafts/bac-giang-eye-care-20261009/`.

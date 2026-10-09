@@ -231,12 +231,59 @@
 .eyecare-news__article-content a { color: #087b8d; text-decoration: underline; text-underline-offset: .2em; }
 .eyecare-news__article-content blockquote { margin: 1.5rem 0; padding: 1rem 1.25rem; border-left: 4px solid var(--news-brand); background: #eaf7f7; }
 .eyecare-news__article-content .wp-block-table { overflow-x: auto; }
+.eyecare-news__article-content .eyecare-school-photo {
+	max-width: 680px;
+	margin: 1.6rem auto;
+	padding: .65rem;
+	border: 1px solid var(--news-line);
+	border-radius: 18px;
+	background: #fff;
+	box-shadow: 0 12px 32px rgba(10, 65, 57, .08);
+}
+.eyecare-news__article-content .eyecare-school-photo img {
+	display: block;
+	width: 100%;
+	max-height: 720px;
+	object-fit: contain;
+	border-radius: 12px;
+	background: #f3f8f5;
+}
+.eyecare-news__article-content .eyecare-school-photo figcaption {
+	margin: .55rem .35rem .15rem;
+	color: var(--news-muted);
+	font-size: .82rem;
+	line-height: 1.5;
+}
+.eyecare-news__article-content .eyecare-school-gallery {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1rem;
+	margin: 1.5rem 0 2rem;
+}
+.eyecare-news__article-content .eyecare-school-gallery .eyecare-school-photo {
+	display: flex;
+	flex-direction: column;
+	max-width: none;
+	min-width: 0;
+	margin: 0;
+	transition: transform .22s ease, box-shadow .22s ease;
+}
+.eyecare-news__article-content .eyecare-school-gallery .eyecare-school-photo:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 16px 36px rgba(10, 65, 57, .14);
+}
+.eyecare-news__article-content .eyecare-school-gallery img {
+	width: 100%;
+	height: 270px;
+	object-fit: contain;
+}
 .eyecare-news__back { margin: 1rem 0 3rem; }
 .eyecare-news__related { border-top: 1px solid var(--news-line); }
 
 @media (max-width: 900px) {
 	.eyecare-news__topic-grid,
 	.eyecare-news__post-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.eyecare-news__article-content .eyecare-school-gallery { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 600px) {
@@ -245,8 +292,12 @@
 	.eyecare-news__post-grid { grid-template-columns: minmax(0, 1fr); }
 	.eyecare-news__topic { min-height: 0; }
 	.eyecare-news__article-content { font-size: .97rem; }
+	.eyecare-news__article-content .eyecare-school-gallery { gap: .65rem; }
+	.eyecare-news__article-content .eyecare-school-gallery img { height: 190px; }
+	.eyecare-news__article-content .eyecare-school-gallery .eyecare-school-photo figcaption { font-size: .74rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
 	.eyecare-news__topic { transition: none; }
+	.eyecare-news__article-content .eyecare-school-gallery .eyecare-school-photo { transition: none; }
 }
