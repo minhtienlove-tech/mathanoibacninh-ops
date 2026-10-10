@@ -1,0 +1,45 @@
+{
+  "featured_key": "overview",
+  "assets": [
+    {
+      "key": "overview",
+      "filename": "ba-chuong-trinh-tri-an-benh-vien-mat-ha-noi-bac-ninh-2026.webp",
+      "sha256": "33637db9ecc5100bfb3c6a689165f186993c1abda3149f57363076b89b519e1f",
+      "width": 1536,
+      "height": 1024,
+      "bytes": 251088,
+      "alt": "Ấn phẩm Bệnh viện Mắt Hà Nội – Bắc Ninh giới thiệu ba chương trình tri ân từ 12/10 đến 20/11/2026",
+      "caption": "Ấn phẩm tổng quan ba chương trình tri ân; hình tòa nhà trong thiết kế mang tính minh họa."
+    },
+    {
+      "key": "exam",
+      "filename": "chuong-trinh-kham-mat-mien-phi-2026.webp",
+      "sha256": "56bbce9543c49ce5e2f98a8401d4aaa1998251e593ac72d378addae698fb63e3",
+      "width": 1600,
+      "height": 1600,
+      "bytes": 222738,
+      "alt": "Ấn phẩm chương trình khám mắt miễn phí từ 12/10 đến 20/11/2026 với hình minh họa khám bằng đèn khe",
+      "caption": "Ấn phẩm giới thiệu chương trình khám mắt miễn phí; cảnh khám trong thiết kế là hình minh họa."
+    },
+    {
+      "key": "surgery",
+      "filename": "phau-thuat-mien-phi-nguoi-benh-uu-tien-2026.webp",
+      "sha256": "2e2cc6d2f66b0d7e32aaa15f6b269f77d4e5e9bba7488a2e29cf3d1f62ba98e5",
+      "width": 1600,
+      "height": 1600,
+      "bytes": 244610,
+      "alt": "Ấn phẩm chương trình phẫu thuật miễn phí cho người bệnh thuộc nhóm ưu tiên từ 12/10 đến 20/11/2026",
+      "caption": "Ấn phẩm giới thiệu chương trình cho người bệnh thuộc nhóm ưu tiên; hình mắt và dụng cụ là minh họa."
+    },
+    {
+      "key": "glasses",
+      "filename": "mua-mat-kinh-tang-gong-kinh-2026.webp",
+      "sha256": "11a77e3fd3450b531aa6674bf07a227257842363182c3d8831e0c1e88131facb",
+      "width": 1600,
+      "height": 1600,
+      "bytes": 211032,
+      "alt": "Ấn phẩm chương trình mua mắt kính tặng gọng kính từ 12/10 đến 20/11/2026 với ảnh minh họa gọng kính",
+      "caption": "Ấn phẩm giới thiệu chương trình mua mắt kính, tặng gọng theo điều kiện áp dụng."
+    }
+  ]
+}

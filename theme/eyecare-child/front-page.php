@@ -419,6 +419,36 @@ $tt = eyecare_du_lieu_thuc_the();
 			'no_found_rows'       => true,
 		)
 	);
+	/* Ưu tiên một bài được ghim bằng hạn dùng. Hết hạn, thứ tự bài mới
+	   tự trở lại như cũ mà không phải gỡ bài hoặc sửa giao diện. */
+	$bai_ghim_con_han = get_posts(
+		array(
+			'post_type'           => 'post',
+			'post_status'         => 'publish',
+			'posts_per_page'      => 1,
+			'ignore_sticky_posts' => true,
+			'meta_query'         => array(
+				array(
+					'key'     => '_eyecare_home_featured_until',
+					'value'   => current_time( 'Y-m-d' ),
+					'compare' => '>=',
+					'type'    => 'DATE',
+				),
+			),
+		)
+	);
+	if ( $bai_ghim_con_han ) {
+		$da_co = array();
+		$thu_tu = array();
+		foreach ( array_merge( $bai_ghim_con_han, $bai_moi->posts ) as $bai ) {
+			if ( ! isset( $da_co[ $bai->ID ] ) ) {
+				$da_co[ $bai->ID ] = true;
+				$thu_tu[] = $bai;
+			}
+		}
+		$bai_moi->posts = array_slice( $thu_tu, 0, 6 );
+		$bai_moi->post_count = count( $bai_moi->posts );
+	}
 
 	if ( $bai_moi->have_posts() ) :
 		?>
