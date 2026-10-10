@@ -4,7 +4,8 @@
 
 - Người quản trị có thể chọn “Duyệt hiển thị” nhưng nút lưu nằm ở hộp khác; nếu thiếu điều kiện, mã cũ bỏ dấu duyệt mà không giải thích. Thêm nút “Lưu và kiểm tra hiển thị” ngay trong hộp thông báo công khai, danh sách điều kiện còn thiếu và thông báo kết quả sau khi lưu.
 - Dùng cùng một hàm kiểm tra cho giao diện và lúc lưu: tên gọi ngắn hợp lệ/khớp hồ sơ, lịch đã xác nhận hoặc đã khám, đồng ý công khai riêng; hồ sơ từng thu hồi cần đồng ý mới. Không thay đổi quy tắc hiển thị hay dữ liệu lịch khám. Phản hồi trong URL quản trị chỉ chứa mã lỗi, không chứa thông tin người bệnh.
-- Kiểm tra trên staging máy chủ: PHP lint đạt, 29 kiểm tra quyền riêng tư đạt. Triển khai production, backup và smoke test được ghi sau khi hoàn tất.
+- Sau `git pull`, triển khai commit `0b1c5c1` bằng `scripts/deploy-public-proof-approval-feedback-20261010.sh` dưới khóa deploy và đối chiếu SHA-256. Backup file PHP và database tại `/home/jwhxtzru/backups/public-proof-approval-feedback-20261010-154758/`; xóa cache WordPress/LiteSpeed. Không thay đổi hồ sơ lịch khám.
+- Kiểm tra: PHP lint file sửa cùng `footer.php`/`page-lien-he.php` đạt; 29 kiểm tra quyền riêng tư đạt. WP-CLI render hộp quản trị bằng hồ sơ giả lập xác nhận nút lưu, danh sách điều kiện và hướng dẫn đồng ý có trong HTML. Sáu URL smoke đều HTTP 200, API công khai vẫn trả `mode=booking_prompt` với nhãn rỗng; 9 lịch thật hiện có 0 lịch đủ điều kiện công khai. Rollback chọn lọc: chép lại `inc/lich-kham-cong-khai.php` từ backup trên rồi xóa cache; database export chỉ để dự phòng.
 
 ## 2026-10-10 — thay bản xem thử 100 tên bằng lời mời đặt lịch công khai
 
