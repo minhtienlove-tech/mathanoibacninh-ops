@@ -5,6 +5,7 @@
 - Biên tập bài thông báo theo nội dung và bốn ấn phẩm bệnh viện cung cấp, lưu nguồn xuất bản trong `docs/drafts/tri-an-khai-truong-20261010/`. Bài nêu rõ ngày 12/10–20/11/2026, ba nhóm ưu tiên cho chương trình phẫu thuật, điều kiện khám/chỉ định và các phạm vi chưa được công bố; không lặp lại số ca phẫu thuật chưa có hồ sơ đối chiếu. Sáu FAQ và các liên kết đặt lịch, liên hệ, khu vực Bắc Giang, dịch vụ, bảng giá và giấy phép giúp người đọc xác minh thông tin.
 - Chuyển bốn ấn phẩm sang WebP, đặt tên và alt riêng, ghi rõ các cảnh minh họa trong chú thích. Bài dùng ảnh tổng quan làm ảnh đại diện và ba ảnh còn lại theo từng chương trình. Cập nhật bài giới thiệu chuyên mục Ưu đãi để dẫn tới thông báo mới.
 - `front-page.php` cho phép ưu tiên một bài đã xuất bản có `_eyecare_home_featured_until` chưa qua ngày hiện tại. Bài tri ân được ghim ở thẻ lớn trang chủ đến hết 20/11/2026, sau đó tự trở về thứ tự bài mới; `news.css` định dạng ba ảnh trong bài. Script xuất bản xác minh slug, chuyên mục, ảnh/hash, FAQ và nội dung trước khi chuyển bản nháp sang công khai. Chờ ghi thông tin backup và QA production sau triển khai.
+- Sau khi xem bản công khai, đổi tiêu đề khối trang chủ thành “Tin bệnh viện và kiến thức mắt” để phù hợp với bài thông báo đang nổi bật; sửa excerpt bài giới thiệu chuyên mục để không còn câu “chưa có chương trình”.
 
 ## 2026-10-10 — làm rõ thao tác lưu duyệt hiển thị lịch khám
 

@@ -456,12 +456,12 @@ $tt = eyecare_du_lieu_thuc_the();
 		<div class="eyecare-chu__khung">
 			<header class="eyecare-chu__bai-dau">
 				<div>
-					<p class="eyecare-chu__bai-nhan">Kiến thức mới</p>
-					<h2 id="eyecare-bai-moi-tieu-de" class="eyecare-chu__muc-td">Bài viết chăm sóc mắt</h2>
-					<p class="eyecare-chu__bai-dan">Thông tin dễ hiểu giúp bạn nhận biết vấn đề về mắt và chuẩn bị tốt hơn trước khi đi khám.</p>
+					<p class="eyecare-chu__bai-nhan">Bài viết mới</p>
+					<h2 id="eyecare-bai-moi-tieu-de" class="eyecare-chu__muc-td">Tin bệnh viện và kiến thức mắt</h2>
+					<p class="eyecare-chu__bai-dan">Thông báo từ bệnh viện cùng những hướng dẫn chăm sóc mắt hữu ích trước khi đi khám.</p>
 				</div>
-				<a class="eyecare-chu__bai-tat-ca" href="<?php echo esc_url( home_url( '/kien-thuc/' ) ); ?>">
-					Xem tất cả <span aria-hidden="true">&rarr;</span>
+				<a class="eyecare-chu__bai-tat-ca" href="<?php echo esc_url( home_url( '/tin-tuc/' ) ); ?>">
+					Xem tin bệnh viện <span aria-hidden="true">&rarr;</span>
 				</a>
 			</header>
 
