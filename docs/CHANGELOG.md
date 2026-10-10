@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-10 — làm rõ thao tác lưu duyệt hiển thị lịch khám
+
+- Người quản trị có thể chọn “Duyệt hiển thị” nhưng nút lưu nằm ở hộp khác; nếu thiếu điều kiện, mã cũ bỏ dấu duyệt mà không giải thích. Thêm nút “Lưu và kiểm tra hiển thị” ngay trong hộp thông báo công khai, danh sách điều kiện còn thiếu và thông báo kết quả sau khi lưu.
+- Dùng cùng một hàm kiểm tra cho giao diện và lúc lưu: tên gọi ngắn hợp lệ/khớp hồ sơ, lịch đã xác nhận hoặc đã khám, đồng ý công khai riêng; hồ sơ từng thu hồi cần đồng ý mới. Không thay đổi quy tắc hiển thị hay dữ liệu lịch khám. Phản hồi trong URL quản trị chỉ chứa mã lỗi, không chứa thông tin người bệnh.
+- Kiểm tra trên staging máy chủ: PHP lint đạt, 29 kiểm tra quyền riêng tư đạt. Triển khai production, backup và smoke test được ghi sau khi hoàn tất.
+
 ## 2026-10-10 — thay bản xem thử 100 tên bằng lời mời đặt lịch công khai
 
 - Gỡ toàn bộ 100 tên giả và màn xem thử trong quản trị khỏi child theme; xóa hai asset demo và bài kiểm tra demo. Không có 100 lịch hẹn mẫu trong database để xóa. Mục duyệt tên thật theo từng lịch vẫn giữ nguyên, chỉ nhận hồ sơ đã xác nhận/đã khám, có đồng ý công khai riêng và nhãn ngắn khớp.

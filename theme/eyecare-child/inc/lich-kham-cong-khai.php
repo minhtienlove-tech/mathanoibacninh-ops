@@ -114,6 +114,79 @@ function ec_public_proof_has_consent( $post_id, $data = null ) {
 	return $new_consent || $legacy_consent;
 }
 
+/** Trả mã điều kiện còn thiếu để cùng một quy tắc được dùng khi lưu và khi hiển thị trong admin. */
+function ec_public_proof_approval_issues( $post_id, $data, $label, $fresh_consent = false ) {
+	$issues = array();
+	if ( '' === ec_public_proof_clean_label( $label ) ) {
+		$issues[] = 'label_format';
+	} elseif ( ! ec_public_proof_label_matches_booking( $label, $data ) ) {
+		$issues[] = 'label_mismatch';
+	}
+	if ( ! in_array( get_post_meta( $post_id, '_ec_booking_status', true ), array( 'confirmed', 'completed' ), true ) ) {
+		$issues[] = 'status';
+	}
+	if ( ! ec_public_proof_has_consent( $post_id, $data ) ) {
+		$issues[] = 'consent';
+	}
+	if ( get_post_meta( $post_id, '_ec_public_proof_revoked_at', true ) && ! $fresh_consent ) {
+		$issues[] = 'revoked';
+	}
+	return $issues;
+}
+
+function ec_public_proof_feedback_messages() {
+	return array(
+		'approved'       => 'Đã lưu duyệt hiển thị cho yêu cầu này.',
+		'revocation_saved' => 'Đã thu hồi hiển thị cho yêu cầu này.',
+		'label_format'   => 'Tên gọi công khai phải có dạng “Anh Tú” hoặc “Chị Ninh”, không gồm họ tên đầy đủ hay số điện thoại.',
+		'label_mismatch' => 'Tên gọi công khai phải khớp tên cuối trong hồ sơ đặt lịch.',
+		'status'         => 'Chỉ lịch ở trạng thái Đã xác nhận hoặc Đã khám mới được duyệt.',
+		'consent'        => 'Chưa có sự đồng ý riêng để công khai tên. Với lịch cũ, cần nhập ngày, mã chứng cứ và đánh dấu ô xác nhận đã đối chiếu.',
+		'revoked'        => 'Lịch này từng bị thu hồi; cần sự đồng ý mới và chứng cứ mới trước khi duyệt lại.',
+	);
+}
+
+/** Phản hồi qua URL quản trị sau khi WordPress chuyển hướng, không đưa dữ liệu người bệnh vào URL. */
+function ec_public_proof_redirect_feedback( $location ) {
+	if ( empty( $GLOBALS['ec_public_proof_feedback'] ) || ! is_array( $GLOBALS['ec_public_proof_feedback'] ) ) {
+		return $location;
+	}
+	return add_query_arg( 'ec_proof_feedback', implode( ',', $GLOBALS['ec_public_proof_feedback'] ), $location );
+}
+add_filter( 'redirect_post_location', 'ec_public_proof_redirect_feedback' );
+
+function ec_public_proof_admin_feedback() {
+	if ( ! current_user_can( 'manage_options' ) || ! isset( $_GET['ec_proof_feedback'] ) || ! is_string( $_GET['ec_proof_feedback'] ) ) {
+		return;
+	}
+	$screen = get_current_screen();
+	if ( ! $screen || 'ec_appointment' !== $screen->post_type || 'post' !== $screen->base ) {
+		return;
+	}
+	$messages = ec_public_proof_feedback_messages();
+	$codes = array_values( array_unique( array_intersect( explode( ',', sanitize_text_field( wp_unslash( $_GET['ec_proof_feedback'] ) ) ), array_keys( $messages ) ) ) );
+	if ( ! $codes ) {
+		return;
+	}
+	$post_id = isset( $_GET['post'] ) ? absint( $_GET['post'] ) : 0;
+	if ( ! $post_id || 'ec_appointment' !== get_post_type( $post_id ) ) {
+		return;
+	}
+	if ( 'approved' === $codes[0] && '1' !== get_post_meta( $post_id, '_ec_public_proof_approved', true ) ) {
+		return;
+	}
+	if ( 'revocation_saved' === $codes[0] && ! get_post_meta( $post_id, '_ec_public_proof_revoked_at', true ) ) {
+		return;
+	}
+	$success = in_array( $codes[0], array( 'approved', 'revocation_saved' ), true );
+	echo '<div class="notice ' . ( $success ? 'notice-success' : 'notice-error' ) . ' is-dismissible"><p><strong>' . ( $success ? 'Đã lưu.' : 'Chưa thể duyệt hiển thị.' ) . '</strong></p><ul>';
+	foreach ( $codes as $code ) {
+		echo '<li>' . esc_html( $messages[ $code ] ) . '</li>';
+	}
+	echo '</ul></div>';
+}
+add_action( 'admin_notices', 'ec_public_proof_admin_feedback' );
+
 function ec_public_proof_add_meta_box() {
 	add_meta_box( 'ec-public-proof', 'Thông báo đăng ký công khai', 'ec_public_proof_meta_box', 'ec_appointment', 'side', 'default' );
 }
@@ -146,6 +219,20 @@ function ec_public_proof_meta_box( $post ) {
 	echo '<label><input type="radio" name="ec_proof_state" value="approved" ' . checked( $state, 'approved', false ) . '> Duyệt hiển thị</label><br>';
 	echo '<label><input type="radio" name="ec_proof_state" value="revoked" ' . checked( $state, 'revoked', false ) . '> Thu hồi/không dùng nữa</label></p>';
 	echo '<p class="description">Sau khi thu hồi, muốn hiện lại phải có sự đồng ý mới và lưu bằng chứng mới. Chỉ trạng thái Đã xác nhận hoặc Đã khám mới đủ điều kiện.</p>';
+	$issues = ec_public_proof_approval_issues( $post->ID, $data, ec_public_proof_clean_label( get_post_meta( $post->ID, '_ec_public_proof_label', true ) ) );
+	if ( $issues ) {
+		$messages = ec_public_proof_feedback_messages();
+		echo '<div class="notice notice-warning inline"><p><strong>Điều kiện còn thiếu để duyệt:</strong></p><ul>';
+		foreach ( $issues as $issue ) {
+			echo '<li>' . esc_html( $messages[ $issue ] ) . '</li>';
+		}
+		echo '</ul></div>';
+	} elseif ( $approved ) {
+		echo '<p><strong>Đã duyệt hồ sơ này.</strong></p>';
+	} else {
+		echo '<p>Hồ sơ đủ điều kiện. Chọn “Duyệt hiển thị” rồi lưu.</p>';
+	}
+	submit_button( 'Lưu và kiểm tra hiển thị', 'secondary', 'ec_proof_save', false );
 }
 
 function ec_public_proof_save_meta( $post_id ) {
@@ -187,15 +274,23 @@ function ec_public_proof_save_meta( $post_id ) {
 	if ( 'revoked' === $state ) {
 		update_post_meta( $post_id, '_ec_public_proof_revoked_at', time() );
 		delete_post_meta( $post_id, '_ec_public_proof_approved' );
+		$GLOBALS['ec_public_proof_feedback'] = array( 'revocation_saved' );
 		return;
 	}
-	if ( 'approved' === $state && '' !== $label && ec_public_proof_label_matches_booking( $label, $data ) && in_array( get_post_meta( $post_id, '_ec_booking_status', true ), array( 'confirmed', 'completed' ), true ) && ec_public_proof_has_consent( $post_id, $data ) ) {
+	if ( 'approved' === $state ) {
+		$issues = ec_public_proof_approval_issues( $post_id, $data, $label, $recorded_fresh_consent );
+		if ( $issues ) {
+			delete_post_meta( $post_id, '_ec_public_proof_approved' );
+			$GLOBALS['ec_public_proof_feedback'] = $issues;
+			return;
+		}
 		$revoked_at = (int) get_post_meta( $post_id, '_ec_public_proof_revoked_at', true );
 		if ( ! $revoked_at || $recorded_fresh_consent ) {
 			if ( $revoked_at ) {
 				delete_post_meta( $post_id, '_ec_public_proof_revoked_at' );
 			}
 			update_post_meta( $post_id, '_ec_public_proof_approved', '1' );
+			$GLOBALS['ec_public_proof_feedback'] = array( 'approved' );
 			return;
 		}
 	}
