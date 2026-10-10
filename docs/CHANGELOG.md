@@ -3,7 +3,8 @@
 ## 2026-10-10 — xem thử thông báo với 100 dữ liệu mẫu trong quản trị
 
 - Thêm nút “Xem thử popup với 100 dữ liệu mẫu” tại Đặt lịch khám → Thông báo công khai. Bản xem thử yêu cầu quyền quản trị và nonce, tự xoay 100 nhãn “Khách mẫu 001–100”, có tạm dừng/chuyển mẫu và luôn ghi “DỮ LIỆU MẪU”. Không tạo lịch hẹn giả, không đưa mẫu vào API hoặc HTML công khai.
-- Sửa `inc/lich-kham-cong-khai.php`, thêm hai asset `assets/lich-kham-cong-khai-demo.css`/`.js` và kiểm thử riêng. Script `scripts/deploy-booking-proof-demo-20261010.sh` sao lưu PHP cùng database, đối chiếu SHA-256 trước/sau, triển khai hai asset trước PHP và kiểm tra không rò nhãn mẫu ra trang chủ/API. Đang chờ ghi kết quả triển khai, đường dẫn backup và smoke test.
+- Sửa `inc/lich-kham-cong-khai.php`, thêm hai asset `assets/lich-kham-cong-khai-demo.css`/`.js` và kiểm thử riêng. Triển khai commit `e0bb251` bằng `scripts/deploy-booking-proof-demo-20261010.sh` dưới khóa deploy, đối chiếu SHA-256 trước/sau và sao lưu PHP cùng database tại `/home/jwhxtzru/backups/booking-proof-demo-20261010-141505/`. Script triển khai hai asset trước PHP, xóa WordPress/LiteSpeed cache và kiểm tra không rò nhãn mẫu ra trang chủ/API.
+- QA production: WP-CLI với tài khoản quản trị xác nhận 100 nhãn riêng, thẻ mẫu và CSS/JS chỉ được nạp khi có quyền + nonce; trang cài đặt thường không hiện thẻ mẫu. Hai asset HTTP 200; `php -l` tệp thay đổi cùng `footer.php` và `page-lien-he.php` đạt; `verify-live.ps1 -CheckSsh` đạt sáu URL. Cài đặt popup hiện bật nhưng có **0** lịch đủ điều kiện; API công khai vẫn trả nhãn rỗng, nên ngoài trang công khai chưa hiện thông báo. Rollback chọn lọc: khôi phục `inc/lich-kham-cong-khai.php` từ backup này rồi xóa cache; hai asset mới sẽ không được nạp. Không cần import database vì lần triển khai này không sửa dữ liệu hẹn khám hoặc cài đặt.
 
 ## 2026-10-10 — thông báo đăng ký lịch khám luân phiên
 
