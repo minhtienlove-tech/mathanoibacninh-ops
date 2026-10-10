@@ -5,7 +5,10 @@ const path = require('node:path');
 const vm = require('node:vm');
 
 const script = fs.readFileSync(path.join(__dirname, '..', 'assets', 'lich-kham-cong-khai-demo.js'), 'utf8');
-const labels = Array.from({ length: 100 }, (_, index) => `Khách mẫu ${String(index + 1).padStart(3, '0')}`);
+const labels = Array.from({ length: 100 }, (_, index) => `Anh TênMẫu${index + 1} (mẫu)`);
+labels[0] = 'Anh Tú (mẫu)';
+labels[1] = 'Chị Ninh (mẫu)';
+labels[99] = 'Chị Thủy (mẫu)';
 const handlers = {};
 const timers = [];
 const name = { textContent: '' };
@@ -30,15 +33,15 @@ const window = {
 };
 vm.runInNewContext(script, { window, document, Array });
 
-assert.equal(name.textContent, 'Khách mẫu 001');
+assert.equal(name.textContent, 'Anh Tú (mẫu)');
 assert.equal(counter.textContent, 'Mẫu 1/100');
 assert.equal(timers.length, 1);
 handlers.next();
-assert.equal(name.textContent, 'Khách mẫu 002');
+assert.equal(name.textContent, 'Chị Ninh (mẫu)');
 for (let n = 0; n < 98; n += 1) handlers.next();
-assert.equal(name.textContent, 'Khách mẫu 100');
+assert.equal(name.textContent, 'Chị Thủy (mẫu)');
 handlers.next();
-assert.equal(name.textContent, 'Khách mẫu 001');
+assert.equal(name.textContent, 'Anh Tú (mẫu)');
 handlers.toggle();
 assert.equal(toggle.textContent, 'Tiếp tục');
 const countWhenPaused = timers.length;

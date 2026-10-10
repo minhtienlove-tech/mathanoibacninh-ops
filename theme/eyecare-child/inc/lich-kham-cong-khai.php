@@ -53,9 +53,27 @@ add_action( 'admin_menu', 'ec_public_proof_settings_menu' );
 
 /** Bản xem thử là dữ liệu giả lập trong admin, không truy vấn hay sửa hồ sơ lịch khám. */
 function ec_public_proof_demo_labels() {
-	return array_map( static function ( $number ) {
-		return sprintf( 'Khách mẫu %03d', $number );
-	}, range( 1, 100 ) );
+	$male_names = array(
+		'Tú', 'Minh', 'Hùng', 'Hải', 'Nam', 'Dũng', 'Long', 'Đức', 'Hoàng', 'Thành',
+		'Cường', 'Phúc', 'Quang', 'Huy', 'Khánh', 'Khang', 'Tùng', 'Sơn', 'Đạt', 'Tuấn',
+		'Thắng', 'Bình', 'Lâm', 'Hiếu', 'Hòa', 'Kiên', 'Vinh', 'Trường', 'Phong', 'Nghĩa',
+		'Tiến', 'Trung', 'Tài', 'Luân', 'Mạnh', 'Toàn', 'Thịnh', 'Bách', 'Duy', 'An',
+		'Việt', 'Bắc', 'Quốc', 'Nhật', 'Thiện', 'Hưng', 'Vũ', 'Tâm', 'Lộc', 'Đăng',
+	);
+	$female_names = array(
+		'Ninh', 'Lan', 'Hoa', 'Hương', 'Trang', 'Linh', 'Thảo', 'Mai', 'Ngọc', 'Thu',
+		'Hà', 'Hạnh', 'Oanh', 'Yến', 'Nga', 'Nhung', 'Loan', 'Hồng', 'Huệ', 'Phương',
+		'Quỳnh', 'My', 'Ly', 'Trâm', 'Diệp', 'Vân', 'Anh', 'Hiền', 'Duyên', 'Ngân',
+		'Nhi', 'Uyên', 'Chi', 'Như', 'Nguyệt', 'Huyền', 'Thúy', 'Cúc', 'Tuyết', 'Phượng',
+		'Xuân', 'Lệ', 'Ánh', 'Hảo', 'Khanh', 'Vi', 'Giang', 'Trinh', 'Nhàn', 'Thủy',
+	);
+	$labels = array();
+	foreach ( $male_names as $index => $name ) {
+		// Hậu tố giữ từng nhãn giả lập ngoài định dạng tên được phép công khai.
+		$labels[] = 'Anh ' . $name . ' (mẫu)';
+		$labels[] = 'Chị ' . $female_names[ $index ] . ' (mẫu)';
+	}
+	return $labels;
 }
 
 function ec_public_proof_admin_preview_authorized() {

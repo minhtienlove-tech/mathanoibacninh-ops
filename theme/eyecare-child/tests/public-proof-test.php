@@ -52,8 +52,11 @@ require dirname( __DIR__ ) . '/inc/lich-kham-cong-khai.php';
 
 $samples = ec_public_proof_demo_labels();
 expect_proof( count( $samples ) === 100 && count( array_unique( $samples ) ) === 100, 'Admin demo contains 100 unique synthetic labels' );
-expect_proof( 'Khách mẫu 001' === $samples[0] && 'Khách mẫu 100' === $samples[99], 'Demo labels are explicitly synthetic' );
-expect_proof( '' === ec_public_proof_clean_label( $samples[0] ), 'Demo label cannot pass the public booking label validator' );
+expect_proof( 'Anh Tú (mẫu)' === $samples[0] && 'Chị Ninh (mẫu)' === $samples[1] && 'Chị Thủy (mẫu)' === $samples[99], 'Demo labels resemble short Vietnamese names and remain marked as samples' );
+foreach ( $samples as $sample ) {
+	expect_proof( 1 === preg_match( '/^(?:Anh|Chị) [\p{L}\p{M}]+ \(mẫu\)$/uD', $sample ), 'Every sample has a realistic short-name format and explicit sample suffix' );
+	expect_proof( '' === ec_public_proof_clean_label( $sample ), 'No demo label can pass the public booking label validator' );
+}
 $_GET = array( 'post_type' => 'ec_appointment', 'page' => 'ec-public-proof', 'preview' => '1', '_wpnonce' => 'valid' );
 $GLOBALS['proof_allowed'] = false;
 expect_proof( ! ec_public_proof_admin_preview_authorized(), 'Non-admin cannot see demo even with a valid nonce' );
