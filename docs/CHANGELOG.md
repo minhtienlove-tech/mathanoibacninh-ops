@@ -1,5 +1,10 @@
 # Production changelog
 
+## 2026-10-10 — xem thử thông báo với 100 dữ liệu mẫu trong quản trị
+
+- Thêm nút “Xem thử popup với 100 dữ liệu mẫu” tại Đặt lịch khám → Thông báo công khai. Bản xem thử yêu cầu quyền quản trị và nonce, tự xoay 100 nhãn “Khách mẫu 001–100”, có tạm dừng/chuyển mẫu và luôn ghi “DỮ LIỆU MẪU”. Không tạo lịch hẹn giả, không đưa mẫu vào API hoặc HTML công khai.
+- Sửa `inc/lich-kham-cong-khai.php`, thêm hai asset `assets/lich-kham-cong-khai-demo.css`/`.js` và kiểm thử riêng. Script `scripts/deploy-booking-proof-demo-20261010.sh` sao lưu PHP cùng database, đối chiếu SHA-256 trước/sau, triển khai hai asset trước PHP và kiểm tra không rò nhãn mẫu ra trang chủ/API. Đang chờ ghi kết quả triển khai, đường dẫn backup và smoke test.
+
 ## 2026-10-10 — thông báo đăng ký lịch khám luân phiên
 
 - Bổ sung ô đồng ý riêng, không tích sẵn, vào cả biểu mẫu đặt lịch trên trang và hộp thoại. Lưu nguyên văn lựa chọn, phiên bản và thời điểm đồng ý trong hồ sơ riêng tư; yêu cầu cũ không mặc nhiên có đồng ý công khai. Giữ cơ chế gửi lại yêu cầu cũ và không thay đổi dữ liệu bệnh nhân hàng loạt.
