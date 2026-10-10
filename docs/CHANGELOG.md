@@ -1,5 +1,12 @@
 # Production changelog
 
+## 2026-10-10 — thông báo đăng ký lịch khám luân phiên
+
+- Bổ sung ô đồng ý riêng, không tích sẵn, vào cả biểu mẫu đặt lịch trên trang và hộp thoại. Lưu nguyên văn lựa chọn, phiên bản và thời điểm đồng ý trong hồ sơ riêng tư; yêu cầu cũ không mặc nhiên có đồng ý công khai. Giữ cơ chế gửi lại yêu cầu cũ và không thay đổi dữ liệu bệnh nhân hàng loạt.
+- Thêm mục quản trị để duyệt từng tên gọi ngắn khớp hồ sơ, ghi mã chứng cứ đồng ý mới cho lịch cũ, thu hồi hiển thị và bật/tắt popup. Chỉ lịch đã xác nhận/đã khám, có đồng ý riêng và được duyệt mới vào vòng quay; API công khai không trả số điện thoại, ngày hẹn hoặc hồ sơ gốc. Nội dung popup nói “đã từng đăng ký” để không gợi ý sai rằng lịch cũ vừa phát sinh. Cập nhật chính sách quyền riêng tư cho mục đích này.
+- Mã nguồn chỉ ở child theme: `functions.php`, `inc/dat-lich-kham.php`, `inc/lien-he-noi.php`, `inc/lich-kham-cong-khai.php`, `page-quyen-rieng-tu.php`, `assets/lich-kham-cong-khai.css`, `assets/lich-kham-cong-khai.js`. Có kiểm thử hồi quy và script deploy chọn lọc `scripts/deploy-booking-public-proof-20261010.sh`. Popup mặc định tắt cho tới khi có hồ sơ đủ điều kiện.
+- Trạng thái triển khai: đang kiểm thử và chưa áp dụng lên production. Backup, kiểm tra công khai và đường dẫn rollback sẽ được ghi ngay sau khi deploy.
+
 ## 2026-10-09 — tin khám mắt học đường tại THPT Chuyên Bắc Giang
 
 - Chuẩn bị bài tin trong `docs/drafts/thpt-chuyen-bac-giang-20261009/` để đăng tại chuyên mục Hoạt động cộng đồng. Biên tập văn bản người quản lý cung cấp: sửa số liệu 2024–2025 thành 99 giải (120 là số thí sinh dự thi), giữ ranh giới sàng lọc và chẩn đoán, bỏ lặp từ khóa/FAQ dài, dẫn nguồn thành tích trường và 5 liên kết nội bộ liên quan. Không gán ngày tổ chức khi chưa có hồ sơ xác nhận; không công bố kết quả thị lực cá nhân.

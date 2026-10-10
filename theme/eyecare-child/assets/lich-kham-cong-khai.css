@@ -1,0 +1,79 @@
+/* Thẻ thông báo nhỏ phía trên thanh liên hệ; không che nút đặt lịch. */
+.ec-public-proof,
+.ec-public-proof * { box-sizing: border-box; }
+.ec-public-proof[hidden] { display: none !important; }
+.ec-public-proof {
+  position: fixed;
+  z-index: 99970;
+  top: calc(136px + env(safe-area-inset-top));
+  right: max(20px, env(safe-area-inset-right));
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: min(334px, calc(100vw - 32px));
+  margin: 0;
+  padding: 17px 42px 17px 16px;
+  border: 1px solid #cde5d4;
+  border-radius: 16px;
+  color: #173d2b;
+  background: #fff;
+  box-shadow: 0 12px 36px rgba(15, 62, 35, .17);
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.5;
+  animation: ec-public-proof-in .28s ease-out both;
+}
+.ec-public-proof__icon {
+  display: grid;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  background: #117b43;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+}
+.ec-public-proof p { margin: 0; padding: 2px 0 0; }
+.ec-public-proof__name { color: #0b6437; font-weight: 750; }
+.ec-public-proof__close {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: grid;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  color: #476b57;
+  background: transparent;
+  font: inherit;
+  font-size: 23px;
+  line-height: 1;
+  cursor: pointer;
+}
+.ec-public-proof__close:hover { color: #0b6437; background: #eaf6ee; }
+.ec-public-proof__close:focus-visible { outline: 3px solid #dba92e; outline-offset: 1px; }
+@keyframes ec-public-proof-in {
+  from { opacity: 0; transform: translateY(-9px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 767px) {
+  .ec-public-proof {
+    top: calc(82px + env(safe-area-inset-top));
+    right: max(12px, env(safe-area-inset-right));
+    width: min(310px, calc(100vw - 24px));
+    padding: 14px 40px 14px 13px;
+    font-size: 13px;
+  }
+}
+@media (max-height: 460px) {
+  .ec-public-proof { top: calc(12px + env(safe-area-inset-top)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ec-public-proof { animation: none; }
+}

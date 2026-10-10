@@ -112,6 +112,14 @@ ec_expect( $custom['slots'][0] === '08:15' && end( $custom['slots'] ) === '16:45
 ec_expect_error( ec_booking_schedule( $now, array( 'gio_mo' => '18:00', 'gio_dong' => '07:30' ) ), 'hours', 'Invalid hours fail closed' );
 $booking = ec_booking_validate( $valid, $now );
 ec_expect( ! is_wp_error( $booking ) && $booking['phone'] === '0912345678', 'Accept Vietnamese name and normalize +84 phone' );
+ec_expect( $booking['public_share_consent'] === false, 'Missing optional public-name consent defaults to false' );
+$opted_input = array_merge( $valid, array( 'public_share_consent' => '1', 'request_id' => '123e4567-e89b-42d3-a456-426614174002' ) );
+$opted_booking = ec_booking_validate( $opted_input, $now );
+ec_expect( ! is_wp_error( $opted_booking ) && $opted_booking['public_share_consent'] === true, 'Separate public-name consent accepted only when selected' );
+ec_expect( ec_booking_validate( array_merge( $valid, array( 'public_share_consent' => '0' ) ), $now )['public_share_consent'] === false, 'Explicit unchecked consent remains false' );
+foreach ( array( 'yes', '', array( '1' ), null ) as $invalid_public_consent ) {
+	ec_expect_error( ec_booking_validate( array_merge( $valid, array( 'public_share_consent' => $invalid_public_consent ) ), $now ), 'public_share_consent', 'Malformed optional public-name consent rejected' );
+}
 ec_expect( ! is_wp_error( ec_booking_validate( array_merge( $valid, array( 'name' => "Anne O'Connor" ) ), $now ) ), 'Apostrophe in real names accepted' );
 ec_expect( ! is_wp_error( ec_booking_validate( array_merge( $valid, array( 'date' => '2026-09-12' ) ), $now ) ), 'Hospital open weekends' );
 ec_expect( ! is_wp_error( ec_booking_validate( array_merge( $valid, array( 'date' => '2026-12-09', 'time' => '17:00' ) ), $now ) ), 'Last allowed date and 17:00 slot accepted' );
@@ -153,9 +161,18 @@ $first = ec_booking_store( $booking );
 ec_expect( $first === 1 && count( $GLOBALS['ec_test_posts'] ) === 1, 'First valid request saved' );
 $stored = ec_booking_read( $GLOBALS['ec_test_posts'][0] );
 ec_expect( $stored['name'] === $booking['name'] && $stored['phone'] === $booking['phone'] && $stored['consent'] === true, 'Complete data persisted in same row' );
+ec_expect( $stored['public_share_consent'] === false && ! isset( $stored['public_share_consented_at'], $stored['public_share_consent_text'] ), 'Unchecked request stores no public display consent or consent evidence' );
+$legacy_payload = $booking;
+unset( $legacy_payload['request_id'], $legacy_payload['public_share_consent'] );
+ec_expect( $stored['fingerprint'] === hash_hmac( 'sha256', wp_json_encode( $legacy_payload ), wp_salt( 'nonce' ) ), 'Unchecked request preserves historical fingerprint format' );
+$legacy_record = $stored;
+unset( $legacy_record['public_share_consent'] );
+$GLOBALS['ec_test_posts'][0]->post_content = wp_json_encode( $legacy_record );
+ec_expect( ec_booking_replay( $booking ) === $first && empty( ec_booking_read( $GLOBALS['ec_test_posts'][0] )['public_share_consent'] ), 'Historical record without public consent remains private and replayable' );
 ec_expect( $GLOBALS['ec_test_posts'][0]->post_status === 'private' && strpos( $GLOBALS['ec_test_posts'][0]->post_title, $booking['name'] ) === false, 'Storage private and title excludes patient identity' );
 $retry = ec_booking_store( $booking );
 ec_expect( $retry === $first && $GLOBALS['ec_test_insert_count'] === 1, 'Same request retry never inserts a duplicate' );
+ec_expect_error( ec_booking_store( array_merge( $booking, array( 'public_share_consent' => true ) ) ), 'request_conflict', 'Replay cannot turn previously unchecked consent on' );
 ec_expect_error( ec_booking_store( array_merge( $booking, array( 'time' => '08:00' ) ) ), 'request_conflict', 'Reused request ID cannot mutate existing details' );
 $busy_booking = array_merge( $booking, array( 'request_id' => '123e4567-e89b-42d3-a456-426614174001' ) );
 $busy_hash = hash_hmac( 'sha256', $busy_booking['request_id'], wp_salt( 'nonce' ) );
@@ -168,11 +185,20 @@ ec_expect( count( $GLOBALS['ec_test_options'] ) === 0, 'Failure releases locks s
 $GLOBALS['ec_test_fail_insert'] = false;
 ec_expect( ec_booking_store( $busy_booking ) === 2, 'Retry after storage failure can save once' );
 ec_expect( count( $GLOBALS['ec_test_posts'] ) === 2, 'No partial or duplicate rows on failure path' );
+$opted_id = ec_booking_store( $opted_booking );
+$opted_stored = ec_booking_read( $GLOBALS['ec_test_posts'][2] );
+ec_expect( $opted_id === 3 && $opted_stored['public_share_consent'] === true, 'New request stores public-name opt-in only when explicitly selected' );
+ec_expect( $opted_stored['public_share_consent_text'] === ec_booking_public_share_consent_text() && $opted_stored['public_share_consent_version'] === '2026-10-10-v1', 'Opt-in retains exact displayed wording and its version' );
+ec_expect( (bool) DateTimeImmutable::createFromFormat( DATE_ATOM, $opted_stored['public_share_consented_at'] ) && (bool) DateTimeImmutable::createFromFormat( DATE_ATOM, $opted_stored['public_share_consented_at_utc'] ), 'Opt-in retains local and UTC timestamps' );
+ec_expect( ec_booking_store( $opted_booking ) === $opted_id && count( $GLOBALS['ec_test_posts'] ) === 3, 'Opt-in retry is idempotent' );
+ec_expect_error( ec_booking_store( array_merge( $opted_booking, array( 'public_share_consent' => false ) ) ), 'request_conflict', 'Replay cannot turn previously opted-in consent off' );
 
 $after_slot = new DateTimeImmutable( '2026-09-12 08:00:00', new DateTimeZone( 'Asia/Ho_Chi_Minh' ) );
 ec_expect_error( ec_booking_validate( $valid, $after_slot ), 'date', 'New bookings cannot use past slot' );
 $structural = ec_booking_validate( $valid, $after_slot, null, false );
 ec_expect( ! is_wp_error( $structural ) && ec_booking_replay( $structural ) === 1, 'Already saved exact replay succeeds after appointment time passes' );
+$opted_structural = ec_booking_validate( $opted_input, $after_slot, null, false );
+ec_expect( ! is_wp_error( $opted_structural ) && ec_booking_replay( $opted_structural ) === $opted_id, 'Opted-in retry succeeds after appointment time passes' );
 ec_expect_error( ec_booking_replay( array_merge( $structural, array( 'name' => 'Nguyễn Văn Khác' ) ) ), 'request_conflict', 'Replay compares patient fields, not only ID' );
 $GLOBALS['ec_test_posts'][0]->post_name .= '__trashed';
 ec_expect( ec_booking_replay( $structural ) === 1, 'Trashed request does not create duplicate on retry' );

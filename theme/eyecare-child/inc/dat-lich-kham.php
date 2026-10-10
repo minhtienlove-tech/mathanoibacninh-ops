@@ -15,6 +15,21 @@ function ec_booking_now() {
 	return new DateTimeImmutable( 'now', new DateTimeZone( 'Asia/Ho_Chi_Minh' ) );
 }
 
+/** Bản nội dung đồng ý công khai phải trùng với câu hiển thị trong biểu mẫu. */
+function ec_booking_public_share_consent_text() {
+	return 'Tôi đồng ý để bệnh viện hiển thị tên gọi rút gọn từ họ tên của tôi trong thông báo luân phiên trên website rằng tôi đã đăng ký lịch khám, kể cả sau ngày hẹn, cho đến khi tôi yêu cầu gỡ. Lựa chọn này không bắt buộc và không ảnh hưởng đến việc đặt lịch.';
+}
+
+/** Giữ dấu vân tay của các yêu cầu cũ khi ô tùy chọn không được chọn. */
+function ec_booking_fingerprint_payload( $booking ) {
+	$payload = $booking;
+	unset( $payload['request_id'] );
+	if ( empty( $payload['public_share_consent'] ) ) {
+		unset( $payload['public_share_consent'] );
+	}
+	return $payload;
+}
+
 /** Giờ bắt đầu lịch khám muộn nhất 17:00, luôn trước giờ đóng cửa. */
 function ec_booking_schedule( $now = null, $hours = null ) {
 	$now   = $now ?: ec_booking_now();
@@ -54,6 +69,10 @@ function ec_booking_validate( $input, $now = null, $hours = null, $check_schedul
 			return new WP_Error( 'input', 'Vui lòng kiểm tra và điền đầy đủ thông tin đặt lịch.' );
 		}
 	}
+	if ( array_key_exists( 'public_share_consent', $input ) && ( ! is_string( $input['public_share_consent'] ) || ! in_array( $input['public_share_consent'], array( '0', '1' ), true ) ) ) {
+		return new WP_Error( 'public_share_consent', 'Vui lòng kiểm tra lựa chọn hiển thị tên trên website.' );
+	}
+	$public_share_consent = isset( $input['public_share_consent'] ) && '1' === $input['public_share_consent'];
 	if ( '' !== $input['website'] ) {
 		return new WP_Error( 'input', 'Không thể tiếp nhận yêu cầu này. Vui lòng thử lại.' );
 	}
@@ -95,7 +114,7 @@ function ec_booking_validate( $input, $now = null, $hours = null, $check_schedul
 			return new WP_Error( 'time', 'Vui lòng chọn giờ khám trong khung giờ làm việc của bệnh viện.' );
 		}
 	}
-	return array( 'name' => $name, 'phone' => $phone, 'date' => $input['date'], 'time' => $input['time'], 'request_id' => strtolower( $input['request_id'] ), 'consent' => true );
+	return array( 'name' => $name, 'phone' => $phone, 'date' => $input['date'], 'time' => $input['time'], 'request_id' => strtolower( $input['request_id'] ), 'consent' => true, 'public_share_consent' => $public_share_consent );
 }
 
 /** CPT hoàn toàn riêng tư: chỉ người có manage_options được đọc/quản lý. */
@@ -206,9 +225,7 @@ function ec_booking_replay( $booking ) {
 	if ( ! $existing ) {
 		return false;
 	}
-	$payload = $booking;
-	unset( $payload['request_id'] );
-	$fingerprint = hash_hmac( 'sha256', wp_json_encode( $payload ), wp_salt( 'nonce' ) );
+	$fingerprint = hash_hmac( 'sha256', wp_json_encode( ec_booking_fingerprint_payload( $booking ) ), wp_salt( 'nonce' ) );
 	$data        = ec_booking_read( $existing );
 	if ( isset( $data['fingerprint'] ) && is_string( $data['fingerprint'] ) && hash_equals( $data['fingerprint'], $fingerprint ) ) {
 		return (int) $existing->ID;
@@ -222,7 +239,7 @@ function ec_booking_store( $booking ) {
 	$slug         = 'ec-' . $request_hash;
 	$payload      = $booking;
 	unset( $payload['request_id'] );
-	$fingerprint = hash_hmac( 'sha256', wp_json_encode( $payload ), wp_salt( 'nonce' ) );
+	$fingerprint = hash_hmac( 'sha256', wp_json_encode( ec_booking_fingerprint_payload( $booking ) ), wp_salt( 'nonce' ) );
 	$lock        = ec_booking_lock( 'request:' . $request_hash );
 	if ( ! $lock ) {
 		return new WP_Error( 'busy', 'Yêu cầu đang được xử lý. Vui lòng chờ ít giây rồi thử lại.', array( 'status' => 409 ) );
@@ -237,6 +254,14 @@ function ec_booking_store( $booking ) {
 		}
 		$payload['fingerprint'] = $fingerprint;
 		$payload['received_at'] = ec_booking_now()->format( DATE_ATOM );
+		$payload['public_share_consent'] = ! empty( $booking['public_share_consent'] );
+		if ( $payload['public_share_consent'] ) {
+			$consented_at = ec_booking_now();
+			$payload['public_share_consented_at'] = $consented_at->format( DATE_ATOM );
+			$payload['public_share_consented_at_utc'] = $consented_at->setTimezone( new DateTimeZone( 'UTC' ) )->format( DATE_ATOM );
+			$payload['public_share_consent_version'] = '2026-10-10-v1';
+			$payload['public_share_consent_text'] = ec_booking_public_share_consent_text();
+		}
 		$post_id = wp_insert_post( wp_slash( array(
 			'post_type'    => 'ec_appointment',
 			'post_status'  => 'private',
@@ -349,7 +374,9 @@ function ec_booking_admin_details( $post ) {
 		if ( 'received_at' === $key && $value ) { $value = wp_date( 'H:i · d/m/Y', strtotime( $value ), new DateTimeZone( 'Asia/Ho_Chi_Minh' ) ); }
 		echo '<tr><th scope="row">' . esc_html( $label ) . '</th><td>' . esc_html( $value ) . '</td></tr>';
 	}
-	echo '<tr><th scope="row">Đồng ý liên hệ</th><td>' . ( ! empty( $data['consent'] ) ? 'Đã đồng ý' : 'Chưa ghi nhận' ) . '</td></tr></tbody></table>';
+	echo '<tr><th scope="row">Đồng ý liên hệ</th><td>' . ( ! empty( $data['consent'] ) ? 'Đã đồng ý' : 'Chưa ghi nhận' ) . '</td></tr>';
+	$public_consent_at = ! empty( $data['public_share_consented_at'] ) ? wp_date( 'H:i · d/m/Y', strtotime( $data['public_share_consented_at'] ), new DateTimeZone( 'Asia/Ho_Chi_Minh' ) ) : '';
+	echo '<tr><th scope="row">Đồng ý hiển thị tên trên website</th><td>' . ( ! empty( $data['public_share_consent'] ) ? 'Đã đồng ý' . ( $public_consent_at ? ' lúc ' . esc_html( $public_consent_at ) : '' ) : 'Chưa ghi nhận' ) . '</td></tr></tbody></table>';
 	wp_nonce_field( 'ec_booking_admin_status', 'ec_booking_admin_nonce' );
 	$status = get_post_meta( $post->ID, '_ec_booking_status', true ) ?: 'pending';
 	echo '<p><label for="ec-booking-status"><strong>Trạng thái xử lý</strong></label></p><select id="ec-booking-status" name="ec_booking_status">';
