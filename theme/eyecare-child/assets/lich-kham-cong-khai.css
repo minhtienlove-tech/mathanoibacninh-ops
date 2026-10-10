@@ -64,7 +64,7 @@
 }
 @media (max-width: 767px) {
   .ec-public-proof {
-    top: calc(82px + env(safe-area-inset-top));
+    top: calc(126px + env(safe-area-inset-top));
     right: max(12px, env(safe-area-inset-right));
     width: min(310px, calc(100vw - 24px));
     padding: 14px 40px 14px 13px;
