@@ -22,8 +22,10 @@ function sanitize_text_field( $value ) { return trim( strip_tags( (string) $valu
 function sanitize_key( $value ) { return preg_replace( '/[^a-z0-9_-]/', '', strtolower( $value ) ); }
 function wp_unslash( $value ) { return is_string( $value ) ? stripslashes( $value ) : $value; }
 function wp_verify_nonce( $nonce, $action ) { return 'valid' === $nonce; }
-function wp_nonce_url( $url, $action ) { return $url . '&_wpnonce=valid'; }
 function admin_url( $path ) { return 'https://example.test/wp-admin/' . $path; }
+function home_url( $path ) { return 'https://example.test' . $path; }
+function is_admin() { return false; }
+function is_feed() { return false; }
 function esc_url( $value ) { return htmlspecialchars( $value, ENT_QUOTES, 'UTF-8' ); }
 function esc_attr( $value ) { return htmlspecialchars( (string) $value, ENT_QUOTES, 'UTF-8' ); }
 function settings_fields( $group ) {}
@@ -50,34 +52,16 @@ function ec_booking_statuses() { return array( 'pending' => 'Chờ', 'confirmed'
 
 require dirname( __DIR__ ) . '/inc/lich-kham-cong-khai.php';
 
-$samples = ec_public_proof_demo_labels();
-expect_proof( count( $samples ) === 100 && count( array_unique( $samples ) ) === 100, 'Admin demo contains 100 unique synthetic labels' );
-expect_proof( 'Anh Tú (mẫu)' === $samples[0] && 'Chị Ninh (mẫu)' === $samples[1] && 'Chị Thủy (mẫu)' === $samples[99], 'Demo labels resemble short Vietnamese names and remain marked as samples' );
-foreach ( $samples as $sample ) {
-	expect_proof( 1 === preg_match( '/^(?:Anh|Chị) [\p{L}\p{M}]+ \(mẫu\)$/uD', $sample ), 'Every sample has a realistic short-name format and explicit sample suffix' );
-	expect_proof( '' === ec_public_proof_clean_label( $sample ), 'No demo label can pass the public booking label validator' );
-}
-$_GET = array( 'post_type' => 'ec_appointment', 'page' => 'ec-public-proof', 'preview' => '1', '_wpnonce' => 'valid' );
-$GLOBALS['proof_allowed'] = false;
-expect_proof( ! ec_public_proof_admin_preview_authorized(), 'Non-admin cannot see demo even with a valid nonce' );
-$GLOBALS['proof_allowed'] = true;
-$_GET['_wpnonce'] = 'invalid';
-expect_proof( ! ec_public_proof_admin_preview_authorized(), 'Preview rejects an invalid nonce' );
-ec_public_proof_admin_preview_assets();
-expect_proof( array() === $GLOBALS['proof_admin_assets'], 'Demo assets are not enqueued without valid preview authorization' );
 ob_start();
 ec_public_proof_settings_page();
 $plain_settings = ob_get_clean();
-expect_proof( false === strpos( $plain_settings, 'id="ec-public-proof-demo-card"' ), 'Settings page does not render a demo card without valid nonce' );
-$_GET['_wpnonce'] = 'valid';
-expect_proof( ec_public_proof_admin_preview_authorized(), 'Admin can open nonce-protected preview' );
-ec_public_proof_admin_preview_assets();
-expect_proof( count( $GLOBALS['proof_admin_assets'] ) === 4 && count( $GLOBALS['proof_admin_assets'][3][2]['labels'] ) === 100, 'Only authorized admin receives demo assets and synthetic labels' );
+expect_proof( false === strpos( $plain_settings, 'ec-public-proof-demo' ) && false === strpos( $plain_settings, 'Xem thử popup' ), 'Settings page contains no synthetic preview' );
+expect_proof( false !== strpos( $plain_settings, 'lời mời đặt lịch' ), 'Settings page explains the truthful fallback' );
 ob_start();
-ec_public_proof_settings_page();
-$preview_settings = ob_get_clean();
-expect_proof( false !== strpos( $preview_settings, 'id="ec-public-proof-demo-card"' ) && false !== strpos( $preview_settings, 'DỮ LIỆU MẪU' ), 'Admin preview permanently identifies the card as sample data' );
-$_GET = array();
+ec_public_proof_markup();
+$public_markup = ob_get_clean();
+expect_proof( false !== strpos( $public_markup, 'https://example.test/dat-lich-kham/' ), 'Public fallback links to booking page' );
+expect_proof( false === strpos( $public_markup, 'ec-public-proof-demo' ) && false === strpos( $public_markup, '(mẫu)' ), 'Public markup contains no synthetic booking labels' );
 
 ec_public_proof_purge_page_cache();
 expect_proof( 1 === $GLOBALS['proof_cache_flushes'] && 1 === $GLOBALS['proof_litespeed_purges'], 'Settings change purges WordPress and LiteSpeed caches' );

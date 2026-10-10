@@ -1,6 +1,7 @@
 <?php
 /**
- * Thông báo đặt lịch công khai: chỉ dùng nhãn đã được đồng ý và duyệt riêng.
+ * Thông báo đặt lịch công khai: tên chỉ hiện khi đã được đồng ý và duyệt riêng.
+ * Khi chưa có tên đủ điều kiện, hiện lời mời đặt lịch không nêu người bệnh.
  * Hồ sơ lịch hẹn, số điện thoại và ngày khám luôn ở CPT riêng tư.
  */
 
@@ -51,77 +52,14 @@ function ec_public_proof_settings_menu() {
 }
 add_action( 'admin_menu', 'ec_public_proof_settings_menu' );
 
-/** Bản xem thử là dữ liệu giả lập trong admin, không truy vấn hay sửa hồ sơ lịch khám. */
-function ec_public_proof_demo_labels() {
-	$male_names = array(
-		'Tú', 'Minh', 'Hùng', 'Hải', 'Nam', 'Dũng', 'Long', 'Đức', 'Hoàng', 'Thành',
-		'Cường', 'Phúc', 'Quang', 'Huy', 'Khánh', 'Khang', 'Tùng', 'Sơn', 'Đạt', 'Tuấn',
-		'Thắng', 'Bình', 'Lâm', 'Hiếu', 'Hòa', 'Kiên', 'Vinh', 'Trường', 'Phong', 'Nghĩa',
-		'Tiến', 'Trung', 'Tài', 'Luân', 'Mạnh', 'Toàn', 'Thịnh', 'Bách', 'Duy', 'An',
-		'Việt', 'Bắc', 'Quốc', 'Nhật', 'Thiện', 'Hưng', 'Vũ', 'Tâm', 'Lộc', 'Đăng',
-	);
-	$female_names = array(
-		'Ninh', 'Lan', 'Hoa', 'Hương', 'Trang', 'Linh', 'Thảo', 'Mai', 'Ngọc', 'Thu',
-		'Hà', 'Hạnh', 'Oanh', 'Yến', 'Nga', 'Nhung', 'Loan', 'Hồng', 'Huệ', 'Phương',
-		'Quỳnh', 'My', 'Ly', 'Trâm', 'Diệp', 'Vân', 'Anh', 'Hiền', 'Duyên', 'Ngân',
-		'Nhi', 'Uyên', 'Chi', 'Như', 'Nguyệt', 'Huyền', 'Thúy', 'Cúc', 'Tuyết', 'Phượng',
-		'Xuân', 'Lệ', 'Ánh', 'Hảo', 'Khanh', 'Vi', 'Giang', 'Trinh', 'Nhàn', 'Thủy',
-	);
-	$labels = array();
-	foreach ( $male_names as $index => $name ) {
-		// Hậu tố giữ từng nhãn giả lập ngoài định dạng tên được phép công khai.
-		$labels[] = 'Anh ' . $name . ' (mẫu)';
-		$labels[] = 'Chị ' . $female_names[ $index ] . ' (mẫu)';
-	}
-	return $labels;
-}
-
-function ec_public_proof_admin_preview_authorized() {
-	return current_user_can( 'manage_options' )
-		&& isset( $_GET['post_type'], $_GET['page'], $_GET['preview'], $_GET['_wpnonce'] )
-		&& is_string( $_GET['post_type'] ) && 'ec_appointment' === wp_unslash( $_GET['post_type'] )
-		&& is_string( $_GET['page'] ) && 'ec-public-proof' === wp_unslash( $_GET['page'] )
-		&& is_string( $_GET['preview'] ) && '1' === wp_unslash( $_GET['preview'] )
-		&& is_string( $_GET['_wpnonce'] )
-		&& (bool) wp_verify_nonce( sanitize_text_field( wp_unslash( $_GET['_wpnonce'] ) ), 'ec_public_proof_admin_preview' );
-}
-
-function ec_public_proof_admin_preview_assets() {
-	if ( ! ec_public_proof_admin_preview_authorized() ) {
-		return;
-	}
-	$root = get_stylesheet_directory();
-	$uri = get_stylesheet_directory_uri();
-	wp_enqueue_style( 'ec-public-proof-admin-base', $uri . '/assets/lich-kham-cong-khai.css', array(), filemtime( $root . '/assets/lich-kham-cong-khai.css' ) );
-	wp_enqueue_style( 'ec-public-proof-admin-demo', $uri . '/assets/lich-kham-cong-khai-demo.css', array( 'ec-public-proof-admin-base' ), filemtime( $root . '/assets/lich-kham-cong-khai-demo.css' ) );
-	wp_enqueue_script( 'ec-public-proof-admin-demo', $uri . '/assets/lich-kham-cong-khai-demo.js', array(), filemtime( $root . '/assets/lich-kham-cong-khai-demo.js' ), true );
-	wp_localize_script( 'ec-public-proof-admin-demo', 'ecPublicProofDemo', array( 'labels' => ec_public_proof_demo_labels() ) );
-}
-add_action( 'admin_enqueue_scripts', 'ec_public_proof_admin_preview_assets' );
-
 function ec_public_proof_settings_page() {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
 	}
 	$settings = ec_public_proof_settings();
-	$preview_url = wp_nonce_url( admin_url( 'edit.php?post_type=ec_appointment&page=ec-public-proof&preview=1' ), 'ec_public_proof_admin_preview' );
 	?>
 	<div class="wrap"><h1>Thông báo đăng ký công khai</h1>
 	<p>Chỉ hồ sơ đã xác nhận hoặc đã khám, có sự đồng ý công khai riêng và được quản trị viên duyệt mới có thể hiện tên gọi ngắn. Không dùng hồ sơ cũ chỉ có đồng ý liên hệ.</p>
-	<p><a class="button button-secondary" href="<?php echo esc_url( $preview_url ); ?>">Xem thử popup với 100 dữ liệu mẫu</a> <span class="description">Chỉ quản trị viên xem được. Dữ liệu mẫu không xuất hiện trên website công khai.</span></p>
-	<?php if ( ec_public_proof_admin_preview_authorized() ) : ?>
-	<section class="ec-public-proof-demo" aria-label="Xem thử thông báo với dữ liệu giả lập">
-		<h2>Bản xem thử trong quản trị</h2>
-		<p><strong>DỮ LIỆU MẪU:</strong> 100 nhãn được tạo giả lập để kiểm tra giao diện. Không phải người bệnh hoặc lịch hẹn thật; không ghi dữ liệu vào hệ thống đặt lịch.</p>
-		<p class="ec-public-proof-demo__controls"><button class="button" type="button" id="ec-public-proof-demo-toggle">Tạm dừng</button> <button class="button" type="button" id="ec-public-proof-demo-next">Mẫu tiếp theo</button> <span id="ec-public-proof-demo-counter" aria-live="polite"></span></p>
-		<div class="ec-public-proof-demo__canvas">
-			<aside class="ec-public-proof ec-public-proof--demo" id="ec-public-proof-demo-card" aria-label="Thông báo mô phỏng">
-				<span class="ec-public-proof__icon" aria-hidden="true">✓</span>
-				<p><span class="ec-public-proof-demo__badge">DỮ LIỆU MẪU</span><br><strong class="ec-public-proof__name"></strong> đã từng đăng ký lịch khám tại Bệnh viện Mắt Hà Nội – Bắc Ninh <em>(mô phỏng).</em></p>
-			</aside>
-		</div>
-	</section>
-	<?php endif; ?>
 	<form action="options.php" method="post">
 		<?php settings_fields( 'ec_public_proof' ); ?>
 		<table class="form-table" role="presentation"><tbody>
@@ -130,7 +68,7 @@ function ec_public_proof_settings_page() {
 		</tbody></table>
 		<?php submit_button( 'Lưu cài đặt' ); ?>
 	</form>
-	<p>Mỗi phiên chỉ hiện tối đa 2 lần, mỗi lần 5 giây. Người xem có thể đóng để ẩn cả phiên. Không hiển thị thời điểm đăng ký giả.</p>
+	<p>Khi có hồ sơ đủ điều kiện, mỗi phiên hiện tối đa 2 thông báo tên gọi ngắn (5 giây mỗi lần). Nếu chưa có hồ sơ đủ điều kiện, chỉ hiện một lời mời đặt lịch trong 10 giây. Người xem có thể đóng để ẩn cả phiên.</p>
 	</div>
 	<?php
 }
@@ -299,16 +237,17 @@ function ec_public_proof_ajax_next() {
 	nocache_headers();
 	header( 'Cache-Control: private, no-store, no-cache, must-revalidate, max-age=0' );
 	if ( ! ec_public_proof_settings()['enabled'] ) {
-		wp_send_json_success( array( 'label' => '', 'next_cursor' => 0, 'has_multiple' => false ) );
+		wp_send_json_success( array( 'mode' => 'disabled', 'label' => '', 'next_cursor' => 0, 'has_multiple' => false ) );
 	}
 	$labels = ec_public_proof_eligible_labels();
 	$count = count( $labels );
 	if ( ! $count ) {
-		wp_send_json_success( array( 'label' => '', 'next_cursor' => 0, 'has_multiple' => false ) );
+		wp_send_json_success( array( 'mode' => 'booking_prompt', 'label' => '', 'next_cursor' => 0, 'has_multiple' => false ) );
 	}
 	$cursor = isset( $_GET['cursor'] ) && is_scalar( $_GET['cursor'] ) ? absint( wp_unslash( $_GET['cursor'] ) ) : 0;
 	$index = $cursor % $count;
 	wp_send_json_success( array(
+		'mode' => 'real_booking',
 		'label' => $labels[ $index ],
 		'next_cursor' => ( $index + 1 ) % $count,
 		'has_multiple' => $count > 1,
@@ -339,7 +278,7 @@ function ec_public_proof_markup() {
 	if ( ! ec_public_proof_settings()['enabled'] || is_admin() || is_feed() ) {
 		return;
 	}
-	echo '<aside class="ec-public-proof" id="ec-public-proof" hidden aria-label="Thông tin đăng ký lịch khám"><button class="ec-public-proof__close" type="button" aria-label="Đóng thông báo đăng ký">×</button><span class="ec-public-proof__icon" aria-hidden="true">✓</span><p><strong class="ec-public-proof__name"></strong> đã từng đăng ký lịch khám tại Bệnh viện Mắt Hà Nội – Bắc Ninh.</p></aside>';
+	echo '<aside class="ec-public-proof" id="ec-public-proof" hidden role="status" aria-live="polite" aria-label="Thông tin đặt lịch khám"><button class="ec-public-proof__close" type="button" aria-label="Đóng thông báo">×</button><span class="ec-public-proof__icon" aria-hidden="true">✓</span><p class="ec-public-proof__real"><strong class="ec-public-proof__name"></strong> đã từng đăng ký lịch khám tại Bệnh viện Mắt Hà Nội – Bắc Ninh.</p><div class="ec-public-proof__prompt" hidden><strong>Đặt lịch khám mắt</strong><p>Gửi yêu cầu trực tuyến, bệnh viện sẽ liên hệ xác nhận thời gian.</p><a href="' . esc_url( home_url( '/dat-lich-kham/' ) ) . '">Đặt lịch khám <span aria-hidden="true">→</span></a></div></aside>';
 }
 // WordPress in footer in script ở priority 20; markup phải có trước khi JS chạy.
 add_action( 'wp_footer', 'ec_public_proof_markup', 10 );

@@ -15,15 +15,25 @@ function page(localBacking, random) {
   const requests = [];
   const name = { textContent: '' };
   const close = { addEventListener() {} };
+  const realText = { hidden: false };
+  const prompt = { hidden: true };
+  const icon = { textContent: '✓' };
+  const elements = {
+    '.ec-public-proof__name': name,
+    '.ec-public-proof__close': close,
+    '.ec-public-proof__real': realText,
+    '.ec-public-proof__prompt': prompt,
+    '.ec-public-proof__icon': icon,
+  };
   const card = {
     hidden: true,
-    querySelector(selector) { return selector.includes('name') ? name : close; },
+    querySelector(selector) { return elements[selector]; },
   };
   const fakeMath = Object.create(Math);
   fakeMath.random = () => random;
   const fetch = async url => {
     requests.push(url);
-    return { ok: true, json: async () => ({ success: true, data: { label: 'Anh Tú', next_cursor: 1, has_multiple: true } }) };
+    return { ok: true, json: async () => ({ success: true, data: { mode: 'real_booking', label: 'Anh Tú', next_cursor: 1, has_multiple: true } }) };
   };
   const window = {
     ecPublicProof: { endpoint: 'https://example.test/wp-admin/admin-ajax.php', delayMs: 20000, durationMs: 5000, maxPerSession: 2 },

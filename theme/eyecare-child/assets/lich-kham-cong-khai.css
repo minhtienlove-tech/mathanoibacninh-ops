@@ -2,6 +2,8 @@
 .ec-public-proof,
 .ec-public-proof * { box-sizing: border-box; }
 .ec-public-proof[hidden] { display: none !important; }
+.ec-public-proof__real[hidden],
+.ec-public-proof__prompt[hidden] { display: none !important; }
 .ec-public-proof {
   position: fixed;
   z-index: 99970;
@@ -38,6 +40,11 @@
 }
 .ec-public-proof p { margin: 0; padding: 2px 0 0; }
 .ec-public-proof__name { color: #0b6437; font-weight: 750; }
+.ec-public-proof__prompt > strong { display: block; color: #0b6437; font-size: 15px; line-height: 1.35; }
+.ec-public-proof__prompt p { padding-top: 4px; }
+.ec-public-proof__prompt a { display: inline-block; margin-top: 8px; color: #0b6437; font-weight: 700; text-decoration: underline; text-underline-offset: 3px; }
+.ec-public-proof__prompt a:hover { color: #064727; }
+.ec-public-proof__prompt a:focus-visible { outline: 3px solid #dba92e; outline-offset: 3px; }
 .ec-public-proof__close {
   position: absolute;
   top: 6px;

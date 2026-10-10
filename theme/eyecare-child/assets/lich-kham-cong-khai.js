@@ -7,7 +7,10 @@
 
   const name = card.querySelector('.ec-public-proof__name');
   const close = card.querySelector('.ec-public-proof__close');
-  if (!name || !close) return;
+  const realText = card.querySelector('.ec-public-proof__real');
+  const prompt = card.querySelector('.ec-public-proof__prompt');
+  const icon = card.querySelector('.ec-public-proof__icon');
+  if (!name || !close || !realText || !prompt || !icon) return;
 
   const prefix = 'ec_public_proof_';
   let memory = { shown: 0, dismissed: false };
@@ -70,18 +73,25 @@
       if (!response.ok) throw new Error('Unavailable');
       const payload = await response.json();
       const result = payload && payload.success && payload.data;
-      if (!result || typeof result.label !== 'string' || !result.label) return;
+      const isPrompt = result && result.mode === 'booking_prompt';
+      const isReal = result && result.mode === 'real_booking' && typeof result.label === 'string' && !!result.label;
+      if ((!isPrompt && !isReal) || (isPrompt && shown() > 0)) return;
       if (document.visibilityState === 'hidden' || bookingOpen() || dismissed()) { schedule(10000); return; }
-      name.textContent = result.label;
-      writeCursor(Math.max(0, parseInt(result.next_cursor, 10) || 0));
-      hasMultiple = result.has_multiple === true;
+      realText.hidden = isPrompt;
+      prompt.hidden = !isPrompt;
+      icon.textContent = isPrompt ? '+' : '✓';
+      if (isReal) {
+        name.textContent = result.label;
+        writeCursor(Math.max(0, parseInt(result.next_cursor, 10) || 0));
+      }
+      hasMultiple = isReal && result.has_multiple === true;
       write('shown', shown() + 1);
       card.hidden = false;
       window.clearTimeout(hideTimer);
       hideTimer = window.setTimeout(function () {
         card.hidden = true;
         if (hasMultiple) schedule(45000);
-      }, config.durationMs);
+      }, isPrompt ? 10000 : config.durationMs);
     } catch (_) {
       schedule(60000);
     } finally {

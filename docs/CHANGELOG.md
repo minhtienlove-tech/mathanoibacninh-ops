@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-10 — thay bản xem thử 100 tên bằng lời mời đặt lịch công khai
+
+- Gỡ toàn bộ 100 tên giả và màn xem thử trong quản trị khỏi child theme; xóa hai asset demo và bài kiểm tra demo. Không có 100 lịch hẹn mẫu trong database để xóa. Mục duyệt tên thật theo từng lịch vẫn giữ nguyên, chỉ nhận hồ sơ đã xác nhận/đã khám, có đồng ý công khai riêng và nhãn ngắn khớp.
+- Nếu API không có hồ sơ đủ điều kiện, popup sẽ hiện lời mời “Đặt lịch khám mắt” cùng liên kết đến `/dat-lich-kham/`; không nêu tên người giả hoặc nói có người vừa đặt. Lời mời hiện một lần trong phiên, tối đa 10 giây; tên thật nếu có vẫn xoay vòng như trước. Thêm thông báo lịch sự cho trình đọc màn hình.
+- Kiểm tra trước triển khai: `node scripts/test-public-proof-popup.mjs` và `node theme/eyecare-child/tests/public-proof-js-test.js` đạt; PHP lint và 24 kiểm tra quyền riêng tư trên staging máy chủ đạt. Triển khai, sao lưu, kiểm tra HTML/API công khai và cách rollback sẽ ghi tiếp sau khi áp production.
+
 ## 2026-10-10 — xem thử thông báo với 100 dữ liệu mẫu trong quản trị
 
 - Thêm nút “Xem thử popup với 100 dữ liệu mẫu” tại Đặt lịch khám → Thông báo công khai. Bản xem thử yêu cầu quyền quản trị và nonce, tự xoay 100 nhãn “Khách mẫu 001–100”, có tạm dừng/chuyển mẫu và luôn ghi “DỮ LIỆU MẪU”. Không tạo lịch hẹn giả, không đưa mẫu vào API hoặc HTML công khai.
