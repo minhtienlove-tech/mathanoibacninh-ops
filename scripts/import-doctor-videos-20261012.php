@@ -36,24 +36,28 @@ $items = array(
 	array(
 		'id'      => 'wyri86ODYrA',
 		'article' => 144,
+		'home'    => 1,
 		'title'   => 'Những khuyến nghị của bác sĩ về cận thị học đường',
 		'sha256'  => '38ab51322938f69b427cbcb8edd1bb8bf742bac64bd39c689736c81823ba1236',
 	),
 	array(
 		'id'      => 'SlToWMv-_4E',
 		'article' => 1445,
+		'home'    => 1,
 		'title'   => 'Cận thị không được phát hiện và kiểm soát kịp thời',
 		'sha256'  => '8fa14a0ac80fba7e18ad99df364190f957538757d13d0316c2686945a134b50d',
 	),
 	array(
 		'id'      => 'LqxNF7hxLhU',
 		'article' => 140,
+		'home'    => 0,
 		'title'   => 'Những thói quen hằng ngày có thể ảnh hưởng đến mắt',
 		'sha256'  => '19add1fdd6d86d44688a210fde3463321bba40ca7a70cd44a8344e2fc78d30d9',
 	),
 	array(
 		'id'      => '3qVuG1DgNmk',
 		'article' => 116,
+		'home'    => 0,
 		'title'   => 'Vì sao học sinh ngày càng dễ bị cận thị?',
 		'sha256'  => '4a423b8522e8918c6ecb5f5d2cc8fe3f4a7c13eb9a42cc620f02d93d5154c7af',
 	),
@@ -104,7 +108,7 @@ foreach ( $items as $item ) {
 			|| $url !== $fields['url']
 			|| $doctor_id !== (int) $fields['doctor']
 			|| $article_id !== (int) $fields['article']
-			|| 1 !== (int) $fields['home']
+			|| ! in_array( (int) $fields['home'], array( 0, 1 ), true )
 			|| 1 !== (int) $fields['approved']
 			|| $item['id'] !== get_post_meta( $existing_id, '_eyecare_video_bs_youtube_id', true )
 			|| ! eyecare_video_bs_publishable( $item['title'], $fields ) ) {
@@ -112,7 +116,7 @@ foreach ( $items as $item ) {
 		}
 	}
 	$planned[] = array_merge( $item, compact( 'url', 'poster', 'slug', 'existing_id' ) );
-	WP_CLI::log( sprintf( '%s: article #%d; %s', $item['id'], $article_id, $existing_id ? "already published #{$existing_id}" : 'ready to create' ) );
+	WP_CLI::log( sprintf( '%s: article #%d; %s; homepage %d', $item['id'], $article_id, $existing_id ? "already published #{$existing_id}" : 'ready to create', $item['home'] ) );
 }
 
 if ( ! $apply ) {
@@ -126,6 +130,10 @@ require_once ABSPATH . 'wp-admin/includes/image.php';
 
 foreach ( $planned as $index => $item ) {
 	if ( $item['existing_id'] ) {
+		if ( (int) get_post_meta( $item['existing_id'], EYECARE_VIDEO_BS_HOME, true ) !== (int) $item['home'] ) {
+			update_post_meta( $item['existing_id'], EYECARE_VIDEO_BS_HOME, (int) $item['home'] );
+			WP_CLI::log( "Updated homepage selection for video #{$item['existing_id']}." );
+		}
 		continue;
 	}
 	// The display query sorts by post_date DESC; distinct minutes keep this
@@ -163,7 +171,7 @@ foreach ( $planned as $index => $item ) {
 	update_post_meta( $post_id, EYECARE_VIDEO_BS_URL, $item['url'] );
 	update_post_meta( $post_id, EYECARE_VIDEO_BS_DOCTOR, $doctor_id );
 	update_post_meta( $post_id, EYECARE_VIDEO_BS_ARTICLE, $item['article'] );
-	update_post_meta( $post_id, EYECARE_VIDEO_BS_HOME, 1 );
+	update_post_meta( $post_id, EYECARE_VIDEO_BS_HOME, (int) $item['home'] );
 	update_post_meta( $post_id, EYECARE_VIDEO_BS_APPROVED, 1 );
 	$fields = eyecare_video_bs_fields( $post_id );
 	if ( ! eyecare_video_bs_publishable( $item['title'], $fields ) ) {

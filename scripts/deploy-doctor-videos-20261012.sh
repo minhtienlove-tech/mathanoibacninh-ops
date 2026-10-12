@@ -114,8 +114,10 @@ home_url=$(wp option get home)
 doctor_url=$(wp eval 'echo get_permalink(674);')
 curl -fsSL --max-time 30 "$home_url" -o "$backup/home-after.html"
 curl -fsSL --max-time 30 "$doctor_url" -o "$backup/doctor-after.html"
-for video_id in wyri86ODYrA SlToWMv-_4E LqxNF7hxLhU 3qVuG1DgNmk; do
+for video_id in wyri86ODYrA SlToWMv-_4E; do
   grep -Fq "$video_id" "$backup/home-after.html"
+done
+for video_id in wyri86ODYrA SlToWMv-_4E LqxNF7hxLhU 3qVuG1DgNmk; do
   grep -Fq "$video_id" "$backup/doctor-after.html"
 done
 for pair in 144:wyri86ODYrA 1445:SlToWMv-_4E 140:LqxNF7hxLhU 116:3qVuG1DgNmk; do

@@ -1,8 +1,8 @@
 # Production changelog
 
-## 2026-10-12 — video chuyên môn của BSCKI. Trần Khánh Thắng
+## 2026-10-12 — video chuyên môn của bác sĩ Trần Khánh Thắng
 
-- Thêm mục quản trị Video bác sĩ trong child theme: URL YouTube/Vimeo/MP4 được kiểm tra, gắn bác sĩ và một bài viết liên quan, chọn hiện ở trang chủ, ảnh poster và xác nhận quyền đăng. Trình phát chỉ tải khi người xem bấm; video Shorts giữ tỷ lệ dọc. Bốn video do bệnh viện cung cấp được liên kết với hồ sơ bác sĩ Trần Khánh Thắng và bốn bài về cận thị học đường, chăm sóc mắt trẻ.
+- Thêm mục quản trị Video bác sĩ trong child theme: URL YouTube/Vimeo/MP4 được kiểm tra, gắn bác sĩ và một bài viết liên quan, chọn hiện ở trang chủ, ảnh poster và xác nhận quyền đăng. Trình phát chỉ tải khi người xem bấm; video Shorts giữ tỷ lệ dọc. Bốn video do bệnh viện cung cấp được liên kết với hồ sơ bác sĩ Trần Khánh Thắng và bốn bài về cận thị học đường, chăm sóc mắt trẻ; chọn hai video tiêu biểu cho trang chủ để tránh kéo dài trang trên điện thoại.
 - Ba nhận xét bệnh nhân hiện công khai trùng nội dung mẫu trong mã nguồn; phản hồi mới của người phụ trách cho biết nhận xét được nói miệng. Giữ nguyên bản ghi trong quản trị nhưng chỉ hiển thị công khai khi người phụ trách điền tham chiếu nguồn gốc, tham chiếu đồng ý công khai và duyệt lại từng bản ghi. Không tự đặt các câu chữ mẫu vào lời người bệnh; bài viết chỉ nhận liên kết tới nhận xét đã xác thực và được chọn thủ công.
 - Kiểm tra và triển khai production: cập nhật sau khi backup, chạy lint, nhập bốn poster/video và smoke test.
 
