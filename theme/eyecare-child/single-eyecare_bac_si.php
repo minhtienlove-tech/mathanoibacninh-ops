@@ -87,6 +87,7 @@ while ( have_posts() ) :
 					</div>
 				</div>
 			</header>
+			<?php echo eyecare_video_bs_profile_html( $bs_id, 4 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML nội bộ đã escape. ?>
 
 			<div class="eyecare-news__container eyecare-bac-si-page__body">
 				<div class="eyecare-bac-si-page__main">

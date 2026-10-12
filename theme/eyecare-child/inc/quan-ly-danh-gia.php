@@ -95,6 +95,11 @@ function eyecare_in_hop_danh_gia( $post ) {
 	$loai_media = get_post_meta( $post->ID, '_eyecare_review_media_type', true );
 	$video_url = get_post_meta( $post->ID, '_eyecare_review_video_url', true );
 	$thu_tu    = get_post_meta( $post->ID, '_eyecare_review_order', true );
+	$nguon_goc = get_post_meta( $post->ID, '_eyecare_review_source_ref', true );
+	$dong_y    = get_post_meta( $post->ID, '_eyecare_review_consent_ref', true );
+	$duyet     = '1' === (string) get_post_meta( $post->ID, '_eyecare_review_public_approved', true );
+	$bai_lien_quan = (int) get_post_meta( $post->ID, '_eyecare_review_related_post_id', true );
+	$bai_viet = get_posts( array( 'post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => 300, 'orderby' => 'title', 'order' => 'ASC' ) );
 
 	$so_sao     = max( 1, min( 5, (int) ( $so_sao ?: 5 ) ) );
 	$loai_media = in_array( $loai_media, array( 'none', 'image', 'video' ), true ) ? $loai_media : 'image';
@@ -119,7 +124,7 @@ function eyecare_in_hop_danh_gia( $post ) {
 		.eyecare-admin-review-video-row input { flex:1; }
 		@media (max-width:782px) { .eyecare-admin-review-grid { grid-template-columns:1fr; } .eyecare-admin-review-field--wide { grid-column:auto; } }
 	</style>
-	<p><strong>Tiêu đề bản ghi:</strong> nhập tên bệnh nhân, ví dụ “Nguyễn Văn Hùng”. Nội dung chỉ hiển thị sau khi bản ghi được đăng.</p>
+	<p><strong>Tiêu đề bản ghi:</strong> nhập tên hoặc tên rút gọn đúng phạm vi người bệnh đã cho phép. Bản ghi chỉ hiện công khai khi đã đăng và có đủ nguồn gốc, hồ sơ đồng ý, dấu duyệt dưới đây.</p>
 	<div class="eyecare-admin-review-grid">
 		<div class="eyecare-admin-review-field eyecare-admin-review-field--wide">
 			<label for="eyecare-review-text">Nội dung đánh giá</label>
@@ -157,6 +162,28 @@ function eyecare_in_hop_danh_gia( $post ) {
 		<div class="eyecare-admin-review-field">
 			<label for="eyecare-review-order">Thứ tự hiển thị</label>
 			<input id="eyecare-review-order" name="eyecare_review_order" type="number" min="0" step="1" value="<?php echo esc_attr( (string) $thu_tu ); ?>">
+		</div>
+		<div class="eyecare-admin-review-field">
+			<label for="eyecare-review-related-post">Bài viết liên quan (tùy chọn)</label>
+			<select id="eyecare-review-related-post" name="eyecare_review_related_post_id">
+				<option value="0">Chỉ hiện trên trang chủ</option>
+				<?php foreach ( $bai_viet as $bai ) : ?>
+					<option value="<?php echo esc_attr( (string) $bai->ID ); ?>" <?php selected( $bai_lien_quan, $bai->ID ); ?>><?php echo esc_html( get_the_title( $bai ) ); ?></option>
+				<?php endforeach; ?>
+			</select>
+			<p class="eyecare-admin-review-help">Chỉ chọn bài nói đúng dịch vụ hoặc trải nghiệm trong nhận xét.</p>
+		</div>
+		<div class="eyecare-admin-review-field">
+			<label for="eyecare-review-source-ref">Mã nguồn nhận xét gốc (nội bộ)</label>
+			<input id="eyecare-review-source-ref" name="eyecare_review_source_ref" type="text" value="<?php echo esc_attr( $nguon_goc ); ?>" placeholder="Ví dụ: mã phiếu phản hồi hoặc URL video gốc">
+		</div>
+		<div class="eyecare-admin-review-field">
+			<label for="eyecare-review-consent-ref">Mã hồ sơ đồng ý công khai (nội bộ)</label>
+			<input id="eyecare-review-consent-ref" name="eyecare_review_consent_ref" type="text" value="<?php echo esc_attr( $dong_y ); ?>" placeholder="Ví dụ: mã giấy đồng ý có chữ ký">
+		</div>
+		<div class="eyecare-admin-review-field eyecare-admin-review-field--wide">
+			<label><input name="eyecare_review_public_approved" type="checkbox" value="1" <?php checked( $duyet ); ?> style="width:auto"> Đã đối chiếu đúng lời nhận xét, tên/ảnh/video được phép công khai và duyệt hiển thị</label>
+			<p class="eyecare-admin-review-help">Không ghi số điện thoại, chẩn đoán hoặc tài liệu đồng ý vào các ô công khai. Ba bản ghi từng được tạo làm mẫu cần đối chiếu lại trước khi duyệt.</p>
 		</div>
 	</div>
 	<script>
@@ -197,6 +224,12 @@ function eyecare_luu_danh_gia( $post_id, $post ) {
 	$type     = in_array( $type, array( 'none', 'image', 'video' ), true ) ? $type : 'none';
 	$video    = isset( $_POST['eyecare_review_video_url'] ) ? esc_url_raw( wp_unslash( $_POST['eyecare_review_video_url'] ) ) : '';
 	$order    = isset( $_POST['eyecare_review_order'] ) ? absint( wp_unslash( $_POST['eyecare_review_order'] ) ) : 0;
+	$source_ref = isset( $_POST['eyecare_review_source_ref'] ) ? sanitize_text_field( wp_unslash( $_POST['eyecare_review_source_ref'] ) ) : '';
+	$consent_ref = isset( $_POST['eyecare_review_consent_ref'] ) ? sanitize_text_field( wp_unslash( $_POST['eyecare_review_consent_ref'] ) ) : '';
+	$approved = isset( $_POST['eyecare_review_public_approved'] ) && '1' === (string) wp_unslash( $_POST['eyecare_review_public_approved'] );
+	$approved = $approved && '' !== $source_ref && '' !== $consent_ref && '' !== $noi_dung;
+	$related_id = isset( $_POST['eyecare_review_related_post_id'] ) ? absint( wp_unslash( $_POST['eyecare_review_related_post_id'] ) ) : 0;
+	$related_id = $related_id && 'post' === get_post_type( $related_id ) && 'publish' === get_post_status( $related_id ) ? $related_id : 0;
 
 	// Có ảnh đại diện nhưng không có URL video thì không giữ trạng thái video
 	// rỗng. Chuyển về ảnh để lần lưu sau và phần hiển thị luôn nhất quán.
@@ -210,6 +243,10 @@ function eyecare_luu_danh_gia( $post_id, $post ) {
 	update_post_meta( $post_id, '_eyecare_review_media_type', $type );
 	update_post_meta( $post_id, '_eyecare_review_video_url', $video );
 	update_post_meta( $post_id, '_eyecare_review_order', $order );
+	update_post_meta( $post_id, '_eyecare_review_source_ref', $source_ref );
+	update_post_meta( $post_id, '_eyecare_review_consent_ref', $consent_ref );
+	update_post_meta( $post_id, '_eyecare_review_public_approved', $approved ? '1' : '0' );
+	update_post_meta( $post_id, '_eyecare_review_related_post_id', $related_id );
 
 	if ( (int) $post->menu_order !== $order ) {
 		remove_action( 'save_post_' . EYECARE_POST_TYPE_DANH_GIA, 'eyecare_luu_danh_gia', 10 );
@@ -219,33 +256,30 @@ function eyecare_luu_danh_gia( $post_id, $post ) {
 }
 add_action( 'save_post_' . EYECARE_POST_TYPE_DANH_GIA, 'eyecare_luu_danh_gia', 10, 2 );
 
-/** Dữ liệu mẫu lấy từ bản nội dung người dùng cung cấp, dùng đến khi quản trị nhập dữ liệu riêng. */
-function eyecare_du_lieu_danh_gia_mac_dinh() {
-	return array(
-		array( 'ten' => 'Nguyễn Văn Hùng', 'vai_tro' => 'Đã phẫu thuật đục thủy tinh thể', 'rating' => 5, 'noi_dung' => 'Tôi đã phẫu thuật đục thủy tinh thể tại Bệnh viện Mắt Bắc Ninh - Hà Nội và rất hài lòng. Bác sĩ tư vấn tận tình, quy trình nhanh gọn, sau mổ mắt sáng rõ hơn hẳn. Nhân viên hỗ trợ chu đáo, không phải chờ đợi lâu.', 'media_type' => 'none', 'video_url' => '' ),
-		array( 'ten' => 'Trần Thị Mai', 'vai_tro' => 'Theo dõi kiểm soát cận thị cho trẻ', 'rating' => 5, 'noi_dung' => 'Không gian bệnh viện sạch sẽ, thiết bị hiện đại. Tôi đã đưa con đến kiểm soát cận thị, bác sĩ khám rất kỹ và hướng dẫn cụ thể cách chăm sóc mắt tại nhà. Sau thời gian theo dõi, độ cận của cháu ổn định hơn nhiều.', 'media_type' => 'none', 'video_url' => '' ),
-		array( 'ten' => 'Lê Thu Thủy', 'vai_tro' => 'Đã phẫu thuật khúc xạ', 'rating' => 5, 'noi_dung' => 'Tôi làm phẫu thuật khúc xạ tại đây và cảm thấy rất yên tâm. Bác sĩ tay nghề cao, giải thích rõ ràng trước khi làm. Sau phẫu thuật hồi phục nhanh, thị lực tốt. Rất đáng để tin tưởng.', 'media_type' => 'none', 'video_url' => '' ),
-	);
-}
-
-/** Đọc đánh giá đang publish; xóa hết trong admin thì khối ngoài trang chủ tự ẩn. */
+/** Chỉ đọc nhận xét đã có nguồn gốc và hồ sơ đồng ý công khai. */
 function eyecare_du_lieu_danh_gia() {
 	$posts = get_posts(
 		array(
 			'post_type'      => EYECARE_POST_TYPE_DANH_GIA,
 			'post_status'    => 'publish',
 			'posts_per_page' => -1,
+			'meta_query'     => array( array( 'key' => '_eyecare_review_public_approved', 'value' => '1' ) ),
 			'orderby'        => array( 'menu_order' => 'ASC', 'date' => 'DESC' ),
 			'order'          => 'ASC',
 		)
 	);
 
 	if ( ! $posts ) {
-		return get_option( 'eyecare_danh_gia_da_tao_mau' ) ? array() : eyecare_du_lieu_danh_gia_mac_dinh();
+		return array();
 	}
 
 	$items = array();
 	foreach ( $posts as $post ) {
+		if ( '' === trim( (string) get_post_meta( $post->ID, '_eyecare_review_source_ref', true ) )
+			|| '' === trim( (string) get_post_meta( $post->ID, '_eyecare_review_consent_ref', true ) )
+			|| '' === trim( (string) get_post_meta( $post->ID, '_eyecare_review_text', true ) ) ) {
+			continue;
+		}
 		$image_id   = (int) get_post_thumbnail_id( $post->ID );
 		$media_type = (string) get_post_meta( $post->ID, '_eyecare_review_media_type', true );
 		$video_url  = (string) get_post_meta( $post->ID, '_eyecare_review_video_url', true );
@@ -253,6 +287,7 @@ function eyecare_du_lieu_danh_gia() {
 			$media_type = 'image';
 		}
 		$items[]  = array(
+			'post_id'    => $post->ID,
 			'ten'        => get_the_title( $post ),
 			'vai_tro'    => (string) get_post_meta( $post->ID, '_eyecare_review_role', true ),
 			'rating'     => max( 1, min( 5, (int) get_post_meta( $post->ID, '_eyecare_review_rating', true ) ?: 5 ) ),
@@ -260,6 +295,7 @@ function eyecare_du_lieu_danh_gia() {
 			'media_type' => $media_type,
 			'video_url'  => $video_url,
 			'image_id'   => $image_id,
+			'related_post_id' => (int) get_post_meta( $post->ID, '_eyecare_review_related_post_id', true ),
 		);
 	}
 
@@ -340,33 +376,30 @@ function eyecare_danh_gia_benh_nhan_in() {
 	echo '</div></div></div></section>';
 }
 
-/** Tạo ba bản ghi mẫu một lần để khối mới không bị trống sau khi cập nhật theme. */
-function eyecare_tao_danh_gia_mau() {
-	if ( get_option( 'eyecare_danh_gia_da_tao_mau' ) ) {
+/** Một nhận xét đã duyệt chỉ xuất hiện trong bài được biên tập viên chọn. */
+function eyecare_danh_gia_lien_quan_bai_viet_in( $article_id ) {
+	$article_id = absint( $article_id );
+	if ( ! $article_id || 'post' !== get_post_type( $article_id ) ) {
 		return;
 	}
-
-	$posts = get_posts( array( 'post_type' => EYECARE_POST_TYPE_DANH_GIA, 'post_status' => 'any', 'posts_per_page' => 1, 'fields' => 'ids' ) );
-	if ( $posts ) {
-		update_option( 'eyecare_danh_gia_da_tao_mau', 1, false );
+	$items = array_values( array_filter( eyecare_du_lieu_danh_gia(), static function ( $item ) use ( $article_id ) {
+		return $article_id === (int) ( $item['related_post_id'] ?? 0 );
+	} ) );
+	if ( ! $items ) {
 		return;
 	}
-
-	$created = 0;
-	foreach ( eyecare_du_lieu_danh_gia_mac_dinh() as $index => $review ) {
-		$post_id = wp_insert_post( array( 'post_type' => EYECARE_POST_TYPE_DANH_GIA, 'post_status' => 'publish', 'post_title' => $review['ten'], 'menu_order' => $index + 1 ), true );
-		if ( is_wp_error( $post_id ) ) continue;
-		update_post_meta( $post_id, '_eyecare_review_text', $review['noi_dung'] );
-		update_post_meta( $post_id, '_eyecare_review_role', $review['vai_tro'] );
-		update_post_meta( $post_id, '_eyecare_review_rating', $review['rating'] );
-		update_post_meta( $post_id, '_eyecare_review_media_type', $review['media_type'] );
-		update_post_meta( $post_id, '_eyecare_review_video_url', $review['video_url'] );
-		update_post_meta( $post_id, '_eyecare_review_order', $index + 1 );
-		$created++;
+	$heading_id = wp_unique_id( 'eyecare-review-related-' );
+	echo '<aside class="eyecare-review-related" aria-labelledby="' . esc_attr( $heading_id ) . '">';
+	echo '<h2 id="' . esc_attr( $heading_id ) . '">Trải nghiệm người bệnh liên quan</h2>';
+	foreach ( array_slice( $items, 0, 2 ) as $item ) {
+		echo '<blockquote><p>“' . esc_html( $item['noi_dung'] ) . '”</p><footer><strong>' . esc_html( $item['ten'] ) . '</strong>';
+		if ( $item['vai_tro'] ) {
+			echo ' · ' . esc_html( $item['vai_tro'] );
+		}
+		echo '</footer></blockquote>';
 	}
-	if ( $created > 0 ) update_option( 'eyecare_danh_gia_da_tao_mau', 1, false );
+	echo '<p class="eyecare-review-related__note">Đây là trải nghiệm cá nhân; kết quả thăm khám hoặc điều trị có thể khác nhau.</p></aside>';
 }
-add_action( 'init', 'eyecare_tao_danh_gia_mau', 20 );
 
 /** Các cột gọn trên màn hình danh sách đánh giá. */
 function eyecare_cot_danh_sach_danh_gia( $columns ) {

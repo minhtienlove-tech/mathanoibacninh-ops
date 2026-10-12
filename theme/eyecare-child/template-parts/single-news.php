@@ -103,6 +103,8 @@ while ( have_posts() ) :
 				<?php endif; ?>
 
 				<div class="eyecare-news__article-content"><?php the_content(); ?></div>
+				<?php echo eyecare_video_bs_article_html( get_the_ID() ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML nội bộ đã escape. ?>
+				<?php eyecare_danh_gia_lien_quan_bai_viet_in( get_the_ID() ); ?>
 
 				<p class="eyecare-news__back"><a href="<?php echo esc_url( $news_category_url ? $news_category_url : $news_home ); ?>">← Xem thêm tin trong <?php echo esc_html( $news_category ? $news_category->name : 'Tin bệnh viện' ); ?></a></p>
 			</div>

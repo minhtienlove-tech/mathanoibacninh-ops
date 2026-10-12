@@ -11494,3 +11494,11 @@ h6 {
 .eyecare-tra-cuu__them > summary { font-size: .9rem; }
 .eyecare-tra-cuu__them > ul { padding: .8rem 0 0 1rem; }
 
+/* Một nhận xét được duyệt và gắn thủ công vào bài viết có cùng chủ đề. */
+.eyecare-review-related { margin: 2rem 0; padding: clamp(1rem, 3vw, 1.5rem); border: 1px solid #cce6dc; border-radius: 1rem; background: #f6fbf8; box-shadow: 0 8px 24px rgb(15 75 52 / 6%); color: #173b32; }
+.eyecare-review-related h2 { margin: 0 0 1rem; color: #075a42; font-size: clamp(1.2rem, 2vw, 1.5rem); line-height: 1.35; }
+.eyecare-review-related blockquote { margin: 0 0 .85rem; padding: 1rem 1.15rem; border: 1px solid #deede6; border-radius: .75rem; background: #fff; font-style: normal; }
+.eyecare-review-related blockquote p { margin: 0 0 .7rem; line-height: 1.7; }
+.eyecare-review-related blockquote footer { color: #3c5d53; font-size: .9rem; }
+.eyecare-review-related__note { margin: .8rem 0 0; color: #52675e; font-size: .85rem; line-height: 1.5; }
+

@@ -472,6 +472,7 @@ require_once get_stylesheet_directory() . '/inc/quan-ly-linh-vuc.php';
  * Mỗi đánh giá là một bản ghi riêng, hỗ trợ ảnh đại diện/ảnh bìa hoặc video.
  * ========================================================================== */
 require_once get_stylesheet_directory() . '/inc/quan-ly-danh-gia.php';
+require_once get_stylesheet_directory() . '/inc/video-bac-si.php';
 
 
 /* ========================================================================== 

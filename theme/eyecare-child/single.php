@@ -146,6 +146,8 @@ while ( have_posts() ) :
 	<div class="eyecare-bai__than">
 		<?php the_content(); ?>
 	</div>
+	<?php echo eyecare_video_bs_article_html( $bai_hien_tai ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML nội bộ đã escape. ?>
+	<?php eyecare_danh_gia_lien_quan_bai_viet_in( $bai_hien_tai ); ?>
 	<?php eyecare_tra_cuu_bai_viet_in( $bai_hien_tai ); ?>
 		</div>
 

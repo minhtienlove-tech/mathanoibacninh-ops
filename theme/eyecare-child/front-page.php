@@ -345,6 +345,7 @@ $tt = eyecare_du_lieu_thuc_the();
 		eyecare_doi_ngu_trang_chu_in();
 	}
 	?>
+	<?php echo eyecare_video_bs_home_html( 4 ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML do child theme dựng và escape từng trường. ?>
 
 	<?php
 	/* ==================================================================
