@@ -1,4 +1,10 @@
 # Production changelog
+## 2026-10-13 — khôi phục ba lời chia sẻ bệnh nhân trên trang chủ
+
+- Người phụ trách bệnh viện xác nhận ba câu đang lưu là lời người bệnh đã nói và báo đã có đồng ý bằng lời. WordPress không có mã phiếu gốc hoặc phạm vi cho phép công khai tên/ảnh; ảnh đính kèm không có nguồn xác định, còn 5 sao là giá trị cũ chưa đối chiếu. Vì vậy chỉ khôi phục nguyên văn lời chia sẻ ở dạng “Người bệnh”, không hiện vai trò điều trị, tên, ảnh/video hoặc sao. Tham chiếu nội bộ ghi rõ đây là xác nhận của bệnh viện qua hội thoại ngày 13/10, chưa thấy hồ sơ gốc.
+- Child theme tách duyệt nội dung khỏi quyền hiện tên và ảnh/video; số sao có tùy chọn không hiển thị. Thêm lưu ý trải nghiệm cá nhân trên trang chủ và kiểm thử ranh giới công khai. Đã triển khai commit `9c3fad3` dưới khóa deploy, sao lưu file liên quan, metadata cũ và database tại `/home/jwhxtzru/backups/reviews-home-20261013-113730/` trước khi bật ba bản ghi #339–341. Không đổi lời nhận xét hoặc tiêu đề lưu trong quản trị.
+- QA: PHP lint file sửa và hai tệp bắt buộc, kiểm thử quyền hiện tên/ảnh/sao, `verify-live.ps1 -CheckSsh` sáu URL đạt. Trang chủ công khai có ba thẻ và ba nhãn “Người bệnh”, không có ảnh hoặc sao trong khối đánh giá; slider chuyển được trên màn hình 573 px, không tràn ngang. Rollback chọn lọc: đặt `_eyecare_review_public_approved=0` cho ba bản ghi trước, sau đó khôi phục PHP từ backup và xóa cache; database export giữ để đối chiếu.
+
 ## 2026-10-13 — slider video bác sĩ trên trang chủ
 
 - Chuyển hai video bác sĩ ở trang chủ thành một slider, tự chuyển sau 11 giây khi đang hiển thị. Có nút trước/sau, chấm chọn, tạm dừng/tiếp tục và vuốt trên điện thoại; dừng tự chuyển khi rê chuột, đặt tiêu điểm, giảm chuyển động hoặc mở trình phát. Chuyển thủ công sẽ dừng video đang phát. Trang hồ sơ bác sĩ và bài viết liên quan vẫn dùng lưới cũ.
