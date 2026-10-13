@@ -98,10 +98,12 @@ function eyecare_in_hop_danh_gia( $post ) {
 	$nguon_goc = get_post_meta( $post->ID, '_eyecare_review_source_ref', true );
 	$dong_y    = get_post_meta( $post->ID, '_eyecare_review_consent_ref', true );
 	$duyet     = '1' === (string) get_post_meta( $post->ID, '_eyecare_review_public_approved', true );
+	$hien_ten  = '1' === (string) get_post_meta( $post->ID, '_eyecare_review_show_name', true );
+	$hien_media = '1' === (string) get_post_meta( $post->ID, '_eyecare_review_show_media', true );
 	$bai_lien_quan = (int) get_post_meta( $post->ID, '_eyecare_review_related_post_id', true );
 	$bai_viet = get_posts( array( 'post_type' => 'post', 'post_status' => 'publish', 'posts_per_page' => 300, 'orderby' => 'title', 'order' => 'ASC' ) );
 
-	$so_sao     = max( 1, min( 5, (int) ( $so_sao ?: 5 ) ) );
+	$so_sao     = max( 0, min( 5, (int) $so_sao ) );
 	$loai_media = in_array( $loai_media, array( 'none', 'image', 'video' ), true ) ? $loai_media : 'image';
 	// Nếu đã chọn ảnh nhưng chế độ cũ vẫn là video và URL video trống, ưu tiên
 	// ảnh. Trước đây trường hợp này làm giao diện rơi về ô chữ cái dù ảnh đã lưu.
@@ -124,7 +126,7 @@ function eyecare_in_hop_danh_gia( $post ) {
 		.eyecare-admin-review-video-row input { flex:1; }
 		@media (max-width:782px) { .eyecare-admin-review-grid { grid-template-columns:1fr; } .eyecare-admin-review-field--wide { grid-column:auto; } }
 	</style>
-	<p><strong>Tiêu đề bản ghi:</strong> nhập tên hoặc tên rút gọn đúng phạm vi người bệnh đã cho phép. Bản ghi chỉ hiện công khai khi đã đăng và có đủ nguồn gốc, hồ sơ đồng ý, dấu duyệt dưới đây.</p>
+	<p><strong>Tiêu đề bản ghi:</strong> lưu tên để quản lý nội bộ. Tên và ảnh/video chỉ hiện khi được cho phép riêng ở bên dưới. Bản ghi chỉ hiện công khai khi đã đăng và có đủ nguồn gốc, xác nhận đồng ý, dấu duyệt.</p>
 	<div class="eyecare-admin-review-grid">
 		<div class="eyecare-admin-review-field eyecare-admin-review-field--wide">
 			<label for="eyecare-review-text">Nội dung đánh giá</label>
@@ -137,6 +139,7 @@ function eyecare_in_hop_danh_gia( $post ) {
 		<div class="eyecare-admin-review-field">
 			<label for="eyecare-review-rating">Số sao</label>
 			<select id="eyecare-review-rating" name="eyecare_review_rating">
+				<option value="0" <?php selected( $so_sao, 0 ); ?>>Không hiển thị số sao</option>
 				<?php for ( $i = 1; $i <= 5; $i++ ) : ?>
 					<option value="<?php echo esc_attr( (string) $i ); ?>" <?php selected( $so_sao, $i ); ?>><?php echo esc_html( (string) $i ); ?> sao</option>
 				<?php endfor; ?>
@@ -182,8 +185,10 @@ function eyecare_in_hop_danh_gia( $post ) {
 			<input id="eyecare-review-consent-ref" name="eyecare_review_consent_ref" type="text" value="<?php echo esc_attr( $dong_y ); ?>" placeholder="Ví dụ: mã giấy đồng ý có chữ ký">
 		</div>
 		<div class="eyecare-admin-review-field eyecare-admin-review-field--wide">
-			<label><input name="eyecare_review_public_approved" type="checkbox" value="1" <?php checked( $duyet ); ?> style="width:auto"> Đã đối chiếu đúng lời nhận xét, tên/ảnh/video được phép công khai và duyệt hiển thị</label>
-			<p class="eyecare-admin-review-help">Không ghi số điện thoại, chẩn đoán hoặc tài liệu đồng ý vào các ô công khai. Ba bản ghi từng được tạo làm mẫu cần đối chiếu lại trước khi duyệt.</p>
+			<label><input name="eyecare_review_public_approved" type="checkbox" value="1" <?php checked( $duyet ); ?> style="width:auto"> Đã đối chiếu đúng lời nhận xét, được phép công khai nội dung và duyệt hiển thị</label>
+			<label><input name="eyecare_review_show_name" type="checkbox" value="1" <?php checked( $hien_ten ); ?> style="width:auto"> Người bệnh đồng ý công khai tên ghi ở tiêu đề</label>
+			<label><input name="eyecare_review_show_media" type="checkbox" value="1" <?php checked( $hien_media ); ?> style="width:auto"> Người bệnh đồng ý công khai đúng ảnh/video đã chọn</label>
+			<p class="eyecare-admin-review-help">Khi không chọn, trang công khai dùng “Người bệnh” và không hiện ảnh/video. Chỉ chọn số sao nếu người bệnh đã chấm điểm. Không ghi số điện thoại hoặc tài liệu đồng ý vào các ô công khai.</p>
 		</div>
 	</div>
 	<script>
@@ -219,7 +224,7 @@ function eyecare_luu_danh_gia( $post_id, $post ) {
 
 	$noi_dung = isset( $_POST['eyecare_review_text'] ) ? sanitize_textarea_field( wp_unslash( $_POST['eyecare_review_text'] ) ) : '';
 	$vai_tro  = isset( $_POST['eyecare_review_role'] ) ? sanitize_text_field( wp_unslash( $_POST['eyecare_review_role'] ) ) : '';
-	$rating   = isset( $_POST['eyecare_review_rating'] ) ? max( 1, min( 5, absint( wp_unslash( $_POST['eyecare_review_rating'] ) ) ) ) : 5;
+	$rating   = isset( $_POST['eyecare_review_rating'] ) ? max( 0, min( 5, absint( wp_unslash( $_POST['eyecare_review_rating'] ) ) ) ) : 0;
 	$type     = isset( $_POST['eyecare_review_media_type'] ) ? sanitize_key( wp_unslash( $_POST['eyecare_review_media_type'] ) ) : 'none';
 	$type     = in_array( $type, array( 'none', 'image', 'video' ), true ) ? $type : 'none';
 	$video    = isset( $_POST['eyecare_review_video_url'] ) ? esc_url_raw( wp_unslash( $_POST['eyecare_review_video_url'] ) ) : '';
@@ -228,6 +233,8 @@ function eyecare_luu_danh_gia( $post_id, $post ) {
 	$consent_ref = isset( $_POST['eyecare_review_consent_ref'] ) ? sanitize_text_field( wp_unslash( $_POST['eyecare_review_consent_ref'] ) ) : '';
 	$approved = isset( $_POST['eyecare_review_public_approved'] ) && '1' === (string) wp_unslash( $_POST['eyecare_review_public_approved'] );
 	$approved = $approved && '' !== $source_ref && '' !== $consent_ref && '' !== $noi_dung;
+	$show_name = isset( $_POST['eyecare_review_show_name'] ) && '1' === (string) wp_unslash( $_POST['eyecare_review_show_name'] );
+	$show_media = isset( $_POST['eyecare_review_show_media'] ) && '1' === (string) wp_unslash( $_POST['eyecare_review_show_media'] );
 	$related_id = isset( $_POST['eyecare_review_related_post_id'] ) ? absint( wp_unslash( $_POST['eyecare_review_related_post_id'] ) ) : 0;
 	$related_id = $related_id && 'post' === get_post_type( $related_id ) && 'publish' === get_post_status( $related_id ) ? $related_id : 0;
 
@@ -246,6 +253,8 @@ function eyecare_luu_danh_gia( $post_id, $post ) {
 	update_post_meta( $post_id, '_eyecare_review_source_ref', $source_ref );
 	update_post_meta( $post_id, '_eyecare_review_consent_ref', $consent_ref );
 	update_post_meta( $post_id, '_eyecare_review_public_approved', $approved ? '1' : '0' );
+	update_post_meta( $post_id, '_eyecare_review_show_name', $show_name ? '1' : '0' );
+	update_post_meta( $post_id, '_eyecare_review_show_media', $show_media ? '1' : '0' );
 	update_post_meta( $post_id, '_eyecare_review_related_post_id', $related_id );
 
 	if ( (int) $post->menu_order !== $order ) {
@@ -280,17 +289,19 @@ function eyecare_du_lieu_danh_gia() {
 			|| '' === trim( (string) get_post_meta( $post->ID, '_eyecare_review_text', true ) ) ) {
 			continue;
 		}
-		$image_id   = (int) get_post_thumbnail_id( $post->ID );
-		$media_type = (string) get_post_meta( $post->ID, '_eyecare_review_media_type', true );
-		$video_url  = (string) get_post_meta( $post->ID, '_eyecare_review_video_url', true );
+		$show_name  = '1' === (string) get_post_meta( $post->ID, '_eyecare_review_show_name', true );
+		$show_media = '1' === (string) get_post_meta( $post->ID, '_eyecare_review_show_media', true );
+		$image_id   = $show_media ? (int) get_post_thumbnail_id( $post->ID ) : 0;
+		$media_type = $show_media ? (string) get_post_meta( $post->ID, '_eyecare_review_media_type', true ) : 'none';
+		$video_url  = $show_media ? (string) get_post_meta( $post->ID, '_eyecare_review_video_url', true ) : '';
 		if ( $image_id && ( 'video' !== $media_type || '' === trim( $video_url ) ) ) {
 			$media_type = 'image';
 		}
 		$items[]  = array(
 			'post_id'    => $post->ID,
-			'ten'        => get_the_title( $post ),
-			'vai_tro'    => (string) get_post_meta( $post->ID, '_eyecare_review_role', true ),
-			'rating'     => max( 1, min( 5, (int) get_post_meta( $post->ID, '_eyecare_review_rating', true ) ?: 5 ) ),
+			'ten'        => $show_name ? get_the_title( $post ) : 'Người bệnh',
+			'vai_tro'    => $show_name ? (string) get_post_meta( $post->ID, '_eyecare_review_role', true ) : '',
+			'rating'     => max( 0, min( 5, (int) get_post_meta( $post->ID, '_eyecare_review_rating', true ) ) ),
 			'noi_dung'   => (string) get_post_meta( $post->ID, '_eyecare_review_text', true ),
 			'media_type' => $media_type,
 			'video_url'  => $video_url,
@@ -312,7 +323,7 @@ function eyecare_danh_gia_benh_nhan_in() {
 	$slider_id = wp_unique_id( 'eyecare-review-slider-' );
 	echo '<section class="eyecare-chu__danh-gia" aria-label="Đánh giá từ bệnh nhân">';
 	echo '<div class="eyecare-chu__khung">';
-	echo '<header class="eyecare-review__head"><p class="eyecare-review__eyebrow"><span aria-hidden="true">✦</span> Trải nghiệm thực tế</p><h2 class="eyecare-review__title">Đánh giá từ <span>bệnh nhân</span></h2><p class="eyecare-review__intro">Những chia sẻ được bệnh viện đăng tải với sự đồng ý của người bệnh.</p></header>';
+	echo '<header class="eyecare-review__head"><p class="eyecare-review__eyebrow"><span aria-hidden="true">✦</span> Trải nghiệm thực tế</p><h2 class="eyecare-review__title">Đánh giá từ <span>bệnh nhân</span></h2><p class="eyecare-review__intro">Những chia sẻ được bệnh viện đăng tải với sự đồng ý của người bệnh. Đây là trải nghiệm cá nhân; kết quả thăm khám hoặc điều trị có thể khác nhau.</p></header>';
 	echo '<div class="eyecare-review__slider" data-review-slider="true">';
 	echo '<div class="eyecare-review__track" id="' . esc_attr( $slider_id ) . '" data-review-track="true" tabindex="0" aria-label="Danh sách đánh giá bệnh nhân">';
 
@@ -320,11 +331,11 @@ function eyecare_danh_gia_benh_nhan_in() {
 		$name       = isset( $item['ten'] ) ? $item['ten'] : '';
 		$role       = isset( $item['vai_tro'] ) ? $item['vai_tro'] : '';
 		$quote      = isset( $item['noi_dung'] ) ? $item['noi_dung'] : '';
-		$rating     = max( 1, min( 5, (int) ( $item['rating'] ?? 5 ) ) );
+		$rating     = max( 0, min( 5, (int) ( $item['rating'] ?? 0 ) ) );
 		$media_type = isset( $item['media_type'] ) ? $item['media_type'] : 'none';
 		$video_url  = isset( $item['video_url'] ) ? $item['video_url'] : '';
 		$image_id   = ! empty( $item['image_id'] ) ? (int) $item['image_id'] : 0;
-		$initial    = function_exists( 'mb_substr' ) ? mb_substr( trim( $name ), 0, 1, 'UTF-8' ) : substr( trim( $name ), 0, 1 );
+		$initial    = 'Người bệnh' === $name ? '“' : ( function_exists( 'mb_substr' ) ? mb_substr( trim( $name ), 0, 1, 'UTF-8' ) : substr( trim( $name ), 0, 1 ) );
 		$video_rendered = false;
 
 		echo '<article class="eyecare-review__card" data-review-card="true">';
@@ -359,9 +370,11 @@ function eyecare_danh_gia_benh_nhan_in() {
 		if ( $video_rendered ) echo '<span class="eyecare-review__play" aria-hidden="true">▶</span>';
 		echo '</div>';
 		echo '<div class="eyecare-review__body">';
-		echo '<div class="eyecare-review__stars" role="img" aria-label="' . esc_attr( $rating . ' trên 5 sao' ) . '">';
-		for ( $star = 1; $star <= 5; $star++ ) echo '<span class="' . ( $star <= $rating ? 'is-on' : '' ) . '" aria-hidden="true">★</span>';
-		echo '</div>';
+		if ( $rating > 0 ) {
+			echo '<div class="eyecare-review__stars" role="img" aria-label="' . esc_attr( $rating . ' trên 5 sao' ) . '">';
+			for ( $star = 1; $star <= 5; $star++ ) echo '<span class="' . ( $star <= $rating ? 'is-on' : '' ) . '" aria-hidden="true">★</span>';
+			echo '</div>';
+		}
 		echo '<blockquote>“' . esc_html( $quote ) . '”</blockquote>';
 		echo '<footer><strong>' . esc_html( $name ) . '</strong>';
 		if ( $role ) echo '<span>' . esc_html( $role ) . '</span>';
