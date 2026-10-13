@@ -147,3 +147,136 @@
 	text-decoration: underline;
 	text-underline-offset: 2px;
 }
+
+/* Only the homepage placement becomes a carousel; doctor and article grids stay intact. */
+.eyecare-video-bs--carousel.is-ready {
+	background: linear-gradient(145deg, #eff8f3, #e7f3f0);
+}
+
+.eyecare-video-bs--carousel.is-ready .eyecare-video-bs__inner {
+	max-width: 900px;
+}
+
+.eyecare-video-bs--carousel.is-ready .eyecare-video-bs__viewport {
+	overflow: hidden;
+	border-radius: 18px;
+}
+
+.eyecare-video-bs--carousel.is-ready .eyecare-video-bs__grid {
+	display: flex;
+	gap: 0;
+	transition: transform .55s cubic-bezier(.22, 1, .36, 1);
+	will-change: transform;
+}
+
+.eyecare-video-bs--carousel.is-ready .eyecare-video-bs__card {
+	display: grid;
+	flex: 0 0 100%;
+	grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+	align-items: center;
+	max-width: none;
+	border-radius: 18px;
+	box-shadow: 0 18px 45px rgb(15 56 42 / 13%);
+}
+
+.eyecare-video-bs--carousel.is-ready .eyecare-video-bs__stage.is-portrait {
+	width: 100%;
+}
+
+.eyecare-video-bs--carousel.is-ready .eyecare-video-bs__copy {
+	padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+.eyecare-video-bs--carousel.is-ready .eyecare-video-bs__copy h3 {
+	font-size: clamp(1.4rem, 2.4vw, 2rem);
+}
+
+.eyecare-video-bs__controls {
+	display: none;
+}
+
+.eyecare-video-bs--carousel.is-ready .eyecare-video-bs__controls {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: .75rem;
+	margin-top: 1.25rem;
+}
+
+.eyecare-video-bs__controls button {
+	min-width: 42px;
+	min-height: 42px;
+	border: 1px solid #b8d5c9;
+	border-radius: 999px;
+	background: #fff;
+	color: #075e51;
+	font: inherit;
+	font-weight: 700;
+	cursor: pointer;
+}
+
+.eyecare-video-bs__controls button:hover {
+	background: #e0f0e8;
+}
+
+.eyecare-video-bs__controls button:focus-visible {
+	outline: 3px solid #e9ae15;
+	outline-offset: 3px;
+}
+
+.eyecare-video-bs__dots {
+	display: flex;
+	align-items: center;
+	gap: .45rem;
+}
+
+.eyecare-video-bs__dots .eyecare-video-bs__dot {
+	min-width: 14px;
+	min-height: 14px;
+	padding: 0;
+	border: 0;
+	background: #9bbbae;
+}
+
+.eyecare-video-bs__dots .eyecare-video-bs__dot[aria-current="true"] {
+	width: 26px;
+	background: #087463;
+}
+
+.eyecare-video-bs__controls .eyecare-video-bs__pause {
+	min-width: 100px;
+	padding: .55rem .9rem;
+}
+
+.eyecare-video-bs__announcement {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+	clip-path: inset(50%);
+	white-space: nowrap;
+}
+
+@media (max-width: 640px) {
+	.eyecare-video-bs--carousel.is-ready .eyecare-video-bs__inner {
+		max-width: 360px;
+	}
+
+	.eyecare-video-bs--carousel.is-ready .eyecare-video-bs__card {
+		display: block;
+	}
+
+	.eyecare-video-bs--carousel.is-ready .eyecare-video-bs__copy {
+		padding: 1.15rem 1.25rem 1.4rem;
+	}
+
+	.eyecare-video-bs--carousel.is-ready .eyecare-video-bs__copy h3 {
+		font-size: 1.25rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.eyecare-video-bs--carousel.is-ready .eyecare-video-bs__grid {
+		transition: none;
+	}
+}

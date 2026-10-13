@@ -331,14 +331,19 @@ function eyecare_video_bs_items( $placement, $related_id = 0, $limit = 3 ) {
 }
 
 /** Build compact cards. The poster link is a real URL without JavaScript. */
-function eyecare_video_bs_markup( $items, $heading ) {
+function eyecare_video_bs_markup( $items, $heading, $carousel = false ) {
 	if ( ! $items ) {
 		return '';
 	}
+	$carousel = $carousel && count( $items ) > 1;
 	$heading_id = wp_unique_id( 'eyecare-video-bs-' );
-	$html = '<section class="eyecare-video-bs" aria-labelledby="' . esc_attr( $heading_id ) . '">';
-	$html .= '<div class="eyecare-video-bs__inner"><h2 id="' . esc_attr( $heading_id ) . '">' . esc_html( $heading ) . '</h2><div class="eyecare-video-bs__grid">';
-	foreach ( $items as $item ) {
+	$html = '<section class="eyecare-video-bs' . ( $carousel ? ' eyecare-video-bs--carousel' : '' ) . '" aria-labelledby="' . esc_attr( $heading_id ) . '"' . ( $carousel ? ' aria-roledescription="carousel"' : '' ) . '>';
+	$html .= '<div class="eyecare-video-bs__inner"><h2 id="' . esc_attr( $heading_id ) . '">' . esc_html( $heading ) . '</h2>';
+	if ( $carousel ) {
+		$html .= '<div class="eyecare-video-bs__viewport">';
+	}
+	$html .= '<div class="eyecare-video-bs__grid">';
+	foreach ( $items as $position => $item ) {
 		$id = $item['id'];
 		$title = get_the_title( $id );
 		$doctor_id = $item['fields']['doctor'];
@@ -346,7 +351,7 @@ function eyecare_video_bs_markup( $items, $heading ) {
 		$doctor_url = get_permalink( $doctor_id );
 		$article_id = (int) $item['fields']['article'];
 		$source = $item['source'];
-		$html .= '<article class="eyecare-video-bs__card">';
+		$html .= '<article class="eyecare-video-bs__card"' . ( $carousel ? ' role="group" aria-roledescription="slide" aria-label="Video ' . esc_attr( (string) ( $position + 1 ) ) . ' / ' . esc_attr( (string) count( $items ) ) . '"' : '' ) . '>';
 		$html .= '<div class="eyecare-video-bs__stage' . ( ! empty( $source['portrait'] ) ? ' is-portrait' : '' ) . '">';
 		$html .= '<a class="eyecare-video-bs__load" href="' . esc_url( $source['source_url'] ) . '" target="_blank" rel="noopener noreferrer" data-eyecare-video-kind="' . esc_attr( $source['kind'] ) . '" data-eyecare-video-portrait="' . ( ! empty( $source['portrait'] ) ? '1' : '0' ) . '" data-eyecare-video-src="' . esc_url( $source['player_url'] ) . '" data-eyecare-video-title="' . esc_attr( $title ) . '" aria-label="Mở trình phát video: ' . esc_attr( $title ) . '">';
 		$html .= get_the_post_thumbnail( $id, 'medium_large', array( 'alt' => '', 'loading' => 'lazy', 'decoding' => 'async' ) );
@@ -358,11 +363,23 @@ function eyecare_video_bs_markup( $items, $heading ) {
 		}
 		$html .= '</div></article>';
 	}
-	return $html . '</div></div></section>';
+	$html .= '</div>';
+	if ( $carousel ) {
+		$html .= '</div><div class="eyecare-video-bs__controls" aria-label="Điều khiển video bác sĩ">';
+		$html .= '<button class="eyecare-video-bs__previous" type="button" aria-label="Video trước">←</button>';
+		$html .= '<div class="eyecare-video-bs__dots">';
+		foreach ( $items as $position => $item ) {
+			$html .= '<button type="button" class="eyecare-video-bs__dot" data-eyecare-slide="' . esc_attr( (string) $position ) . '" aria-label="Xem video ' . esc_attr( (string) ( $position + 1 ) ) . ' / ' . esc_attr( (string) count( $items ) ) . '"></button>';
+		}
+		$html .= '</div><button class="eyecare-video-bs__next" type="button" aria-label="Video tiếp theo">→</button>';
+		$html .= '<button class="eyecare-video-bs__pause" type="button" aria-label="Tạm dừng tự chuyển video">Tạm dừng</button>';
+		$html .= '<span class="eyecare-video-bs__announcement" aria-live="polite" aria-atomic="true"></span></div>';
+	}
+	return $html . '</div></section>';
 }
 
 function eyecare_video_bs_home_html( $limit = 3 ) {
-	return eyecare_video_bs_markup( eyecare_video_bs_items( 'home', 0, $limit ), 'Video bác sĩ' );
+	return eyecare_video_bs_markup( eyecare_video_bs_items( 'home', 0, $limit ), 'Video bác sĩ', true );
 }
 
 function eyecare_video_bs_profile_html( $doctor_id, $limit = 3 ) {
