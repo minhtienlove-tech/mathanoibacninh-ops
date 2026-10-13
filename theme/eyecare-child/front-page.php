@@ -390,7 +390,7 @@ $tt = eyecare_du_lieu_thuc_the();
 							<span class="eyecare-khoa__so" aria-hidden="true"><?php echo esc_html( str_pad( (string) ( $thu_tu + 1 ), 2, '0', STR_PAD_LEFT ) ); ?></span>
 							<span class="eyecare-khoa__icon" aria-hidden="true"><?php echo eyecare_bieu_tuong( $khoa_bieu_tuong ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- SVG noi bo co dinh. ?></span>
 							<span class="eyecare-khoa__noi-dung">
-								<span class="eyecare-chu__the-ten"><?php echo esc_html( get_the_title( $trang->ID ) ); ?></span>
+								<span class="eyecare-chu__the-ten"><?php echo esc_html( 'glocom' === $slug_chuyen_khoa ? 'Glôcôm' : get_the_title( $trang->ID ) ); ?></span>
 								<span class="eyecare-khoa__xem">Xem thông tin <span aria-hidden="true">&#8594;</span></span>
 							</span>
 						</a>
