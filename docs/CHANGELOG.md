@@ -1,4 +1,10 @@
 # Production changelog
+## 2026-10-13 — slider video bác sĩ trên trang chủ
+
+- Chuyển hai video bác sĩ ở trang chủ thành một slider, tự chuyển sau 11 giây khi đang hiển thị. Có nút trước/sau, chấm chọn, tạm dừng/tiếp tục và vuốt trên điện thoại; dừng tự chuyển khi rê chuột, đặt tiêu điểm, giảm chuyển động hoặc mở trình phát. Chuyển thủ công sẽ dừng video đang phát. Trang hồ sơ bác sĩ và bài viết liên quan vẫn dùng lưới cũ.
+- Triển khai commit `528a781` từ child theme dưới khóa deploy. Backup ba file liên quan và database: `/home/jwhxtzru/backups/video-carousel-20261013-084105/`. Không sửa dữ liệu video hoặc cơ sở dữ liệu.
+- QA: PHP lint ba file PHP liên quan, `node --check`, bài thử bảo vệ video và `verify-live.ps1 -CheckSsh` đạt. Kiểm tra trực tiếp desktop/điện thoại: hai slide, nút chuyển, nhúng video, dừng phát khi chuyển và không tràn ngang; không có lỗi JavaScript trong console. Rollback: khôi phục ba file từ backup rồi xóa cache.
+
 
 ## 2026-10-12 — video chuyên môn của bác sĩ Trần Khánh Thắng
 
