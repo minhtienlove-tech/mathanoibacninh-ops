@@ -1,4 +1,10 @@
 # Production changelog
+## 2026-10-14 — thay ảnh thẻ Điều trị tăng nhãn áp trên trang chủ
+
+- Thay ảnh đại diện của thẻ `eyecare_linh_vuc` #671 bằng ảnh thực tế người phụ trách cung cấp (`DSCF4256.JPG`). Ảnh được cắt 16:10, chuyển WebP 1200 × 750 (42 KB), bỏ EXIF và đưa vào Media #1837 với alt mô tả cảnh khám bằng đèn khe; giữ nguyên liên kết tới `/chuyen-khoa/glocom/` và các thẻ khác.
+- Trước khi cập nhật, sao lưu database và file ảnh cũ tại `/home/jwhxtzru/backups/glaucoma-card-20261014-075024/`; giữ attachment cũ #1228 để khôi phục. Cập nhật ảnh dưới khóa deploy, xóa cache WordPress và LiteSpeed.
+- QA: ảnh mới hiển thị đúng trên trang chủ ở màn hình rộng và điện thoại; `php -l` ba tệp chính đạt, `verify-live.ps1 -CheckSsh` đạt sáu URL. Rollback chọn lọc: `wp post meta update 671 _thumbnail_id 1228` rồi xóa cache.
+
 ## 2026-10-13 — khôi phục ba lời chia sẻ bệnh nhân trên trang chủ
 
 - Người phụ trách bệnh viện xác nhận ba câu đang lưu là lời người bệnh đã nói và báo đã có đồng ý bằng lời. WordPress không có mã phiếu gốc hoặc phạm vi cho phép công khai tên/ảnh; ảnh đính kèm không có nguồn xác định, còn 5 sao là giá trị cũ chưa đối chiếu. Vì vậy chỉ khôi phục nguyên văn lời chia sẻ ở dạng “Người bệnh”, không hiện vai trò điều trị, tên, ảnh/video hoặc sao. Tham chiếu nội bộ ghi rõ đây là xác nhận của bệnh viện qua hội thoại ngày 13/10, chưa thấy hồ sơ gốc.
