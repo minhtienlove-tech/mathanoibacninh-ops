@@ -1,0 +1,49 @@
+{
+  "title": "Khám mắt học đường tại Trường PTDTNT tỉnh Bắc Ninh",
+  "seo_title": "Khám mắt học đường tại Trường DTNT Bắc Ninh",
+  "slug": "kham-mat-hoc-duong-truong-dtnt-bac-ninh",
+  "description": "Bệnh viện Mắt Hà Nội – Bắc Ninh khám mắt tại Trường DTNT ngày 23/09/2026. Xem hình ảnh, số liệu tổng hợp và hướng dẫn phụ huynh sau buổi kiểm tra.",
+  "primary_keyword": "khám mắt học đường tại Trường DTNT Bắc Ninh",
+  "semantic_keywords": [
+    "Trường Phổ thông Dân tộc Nội trú tỉnh Bắc Ninh",
+    "Trường PTDTNT",
+    "khám tuyến",
+    "kiểm tra thị lực học sinh",
+    "đo khúc xạ",
+    "thị lực không kính",
+    "thị lực có kính",
+    "chăm sóc mắt học đường",
+    "học sinh nội trú",
+    "y tế học đường",
+    "Bệnh viện Mắt Hà Nội – Bắc Ninh",
+    "phường Bắc Giang",
+    "phố Thân Cảnh Vân",
+    "kiểm tra sức khỏe đầu năm học 2026–2027"
+  ],
+  "category_id": 26,
+  "event_date": "2026-09-23",
+  "publication_date": "2026-10-15",
+  "attribution": "Biên tập và hình ảnh hoạt động: Bệnh viện Mắt Hà Nội – Bắc Ninh. Không gán tác giả/người duyệt y khoa cá nhân chưa được xác nhận.",
+  "source_event": "https://dtnt.bacninh.edu.vn/tin-tuc/truong-ptdtnt-bac-ninh-kiem-tra-suc-khoe-hoc-sinh-dau-nam-hoc-2026-2027.html",
+  "source_event_published": "2026-10-13",
+  "source_workbook": {
+    "filename": "Data Trường tháng 9.xlsx",
+    "sheet": "THPT DTNT",
+    "range": "A1:K417"
+  },
+  "statistics": {
+    "records": 416,
+    "classes": 12,
+    "grade_10": 139,
+    "grade_11": 138,
+    "grade_12": 139,
+    "any_result": 356,
+    "unaided_any": 275,
+    "aided_any": 82,
+    "refraction_any": 194,
+    "blank_clinical": 60,
+    "acuity_cells_formatted_as_dates": 695
+  },
+  "source_boundaries": "School-reported 194/416 (46.63%) refractive-error statistic is explicitly attributed; workbook field-presence counts do not independently establish diagnoses. No raw student data included or uploaded. Event date from school report, not file metadata. Facebook supplied by user was not readable and is not cited as verified evidence.",
+  "seo_aio_geo_eeat": "Concise factual opening, current school name and locality, dated primary source, original hospital imagery with descriptive alt, two aggregate tables, automatic table of contents, seven visible FAQs, contextual internal links and reciprocal community link, organization attribution. Existing theme supplies canonical, Article, breadcrumb and FAQPage schema. No guarantee of search rank, AI citation or rich-result eligibility."
+}

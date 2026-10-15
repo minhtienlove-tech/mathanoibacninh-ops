@@ -5,6 +5,9 @@ quản lý website Bệnh viện Mắt Hà Nội - Bắc Ninh.
 
 ## Bắt đầu trên máy mới
 
+Hướng dẫn clone đúng repository, chọn nhánh và bàn giao giữa hai máy:
+[Làm việc trên hai máy](docs/TWO-COMPUTERS.md).
+
 1. Clone repository private này.
 2. Tạo SSH key riêng cho máy đó; không sao chép private key từ máy khác.
 3. Authorize public key trong AZDIGI/cPanel.

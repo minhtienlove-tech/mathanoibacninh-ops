@@ -1,4 +1,34 @@
 # Production changelog
+## 2026-10-15 — đồng bộ công việc giữa hai máy
+
+- Pull nhánh `codex/chuyen-muc-bac-si`; bổ sung hướng dẫn clone đúng repository `minhtienlove-tech/mathanoibacninh-ops`, chọn cùng nhánh và Commit/Push trước khi chuyển máy.
+- Lưu lại bản thảo, metadata và script của ba bài đã xuất bản cùng nhật ký còn ở máy này để bàn giao qua Git. Không đưa workbook, ảnh gốc, database hoặc khóa SSH vào repository.
+- Chỉ đồng bộ Git và tài liệu; không triển khai hoặc thay đổi production trong lượt này.
+
+## 2026-10-15 — khám mắt học đường Trường PTDTNT tỉnh Bắc Ninh
+
+- Xuất bản bài #1861 tại `/tin-tuc/hoat-dong-cong-dong/kham-mat-hoc-duong-truong-dtnt-bac-ninh/`, chuyên mục Hoạt động cộng đồng #26, khoảng 2.600 từ tiếng Việt theo khoảng trắng. Dùng bản tin chính thức của trường ngày 13/10 để xác nhận sự kiện chiều 23/09/2026, quy mô 416 học sinh/12 lớp và tên trường hiện công bố. Không nêu cơ sở khám khác, không gán bác sĩ làm tác giả/người duyệt chưa xác nhận.
+- Đối chiếu riêng sheet THPT DTNT (A1:K417): 416 hồ sơ; khối 10/11/12 lần lượt 139/138/139; 356 hồ sơ có ít nhất một mục kết quả, 275 có mục thị lực không kính, 82 có mục thị lực có kính, 194 có mục khúc xạ, 60 chưa có dữ liệu kết quả. Kiểm tra độc lập bằng XML workbook đạt. Số 194/416 (46,63%) về tật khúc xạ được dẫn riêng theo báo cáo trường; không suy ra chẩn đoán từ việc có dữ liệu. Không đưa danh sách học sinh hoặc file Excel lên website/Git.
+- Dùng đúng năm ảnh người dùng gửi: DSCF1580 làm ảnh đại diện; DSCF1563/1267/1343/1638 trong nội dung. Chuyển WebP giữ tỷ lệ, cạnh dài 1600 px, khoảng 79–190 KB/ảnh; alt và chú thích riêng. Ảnh staging nằm ngoài repository. Nguồn biên tập, metadata, manifest và script ở `docs/drafts/dtnt-school-20261015/`.
+- Dùng mục lục tự động có sẵn, bảy FAQ, meta description, canonical, Article/FAQPage/BreadcrumbList; ghi nguồn biên tập của bệnh viện và tài liệu AAPOS. Liên kết đến các bài/trang liên quan, thêm liên kết ngược từ #1686 và #1853. Không sửa mã theme/core/plugin. Chỉnh riêng HTML bảng để dễ đọc.
+- Sao lưu trước mỗi lần ghi, dưới khóa deploy: `/home/jwhxtzru/backups/dtnt-school-20261015-143058/` (database, child theme, dữ liệu xuất bản và nội dung backlink trước sửa); `/home/jwhxtzru/backups/dtnt-toc-20261015-143246/` (bỏ mục lục thủ công trùng mục lục tự động); `/home/jwhxtzru/backups/dtnt-tables-20261015-143444/` (định dạng bảng). Mỗi lần tinh chỉnh có database và nội dung trước/sau riêng.
+- QA: lint ba script PHP và hai file bắt buộc đạt; smoke sáu URL chính và SSH đạt. Bài, bảy URL liên kết và năm ảnh trả HTTP 200; liên kết ngược có thật. Một H1, một description, canonical tự trỏ, một Article với tác giả tổ chức và FAQPage đủ bảy câu; không có shortcode/placeholder hoặc anchor thiếu. Trình duyệt xác nhận mục lục chỉ còn một bản, ảnh đại diện và bảng hiển thị đúng; trang không tràn ngang ở viewport 1265 px. Không chạy kiểm tra breakpoint di động riêng.
+- Rollback chọn lọc: đưa #1861 về draft, khôi phục nội dung #1686/#1853 từ backup xuất bản rồi purge cache; giữ media. Nếu chỉ hoàn tác định dạng, dùng content-before.html của backup tương ứng. Không phục hồi toàn database hoặc xóa dữ liệu.
+
+## 2026-10-15 — bổ sung thống kê hồ sơ FPT vào bài #1853
+
+- Theo xác nhận người dùng, cập nhật bài FPT hiện có bằng bảng số lượng tổng hợp: 1.074 hồ sơ, 668 có ít nhất một mục kết quả, 498 có thị lực không kính, 171 có thị lực có kính, 343 có mục khúc xạ và 406 chưa có kết quả. Nêu rõ nhóm giao nhau, dữ liệu trống không đồng nghĩa vắng mặt và chưa dùng dữ liệu lỗi định dạng để tính tỷ lệ bệnh. Không upload file Excel hay dữ liệu cá nhân.
+- Thêm mục lục tới bảng và một FAQ giải thích số danh sách khác số thực tế đã khám; ghi nguồn thống kê. Giữ nguyên ảnh, URL và SEO hiện có. Backup dưới khóa deploy tại `/home/jwhxtzru/backups/fpt-statistics-20261015-110853/`, có database, nội dung trước/sau và script. Không đổi mã production.
+- QA: lint PHP script và hai file bắt buộc đạt; HTML bài trả 200, đủ bảng số liệu và đích mục lục; smoke test website/SSH đạt. Rollback: cập nhật riêng nội dung #1853 từ content-before.html trong backup rồi purge cache.
+
+## 2026-10-15 — khám mắt học đường FPT Bắc Giang
+
+- Xuất bản bài #1853 tại `/tin-tuc/hoat-dong-cong-dong/kham-mat-hoc-duong-fpt-bac-giang/`, chuyên mục Hoạt động cộng đồng #26. Bản thảo khoảng 2.553 từ theo khoảng trắng, gồm mục lục 7 phần, 6 FAQ, nguồn chính thức và liên kết nội bộ. Dẫn bài FPT Schools xác nhận ngày sự kiện 08/09/2026; không nhầm với ngày xuất bản 15/10 và không suy ra số học sinh mắc bệnh. Không gán cá nhân làm tác giả/người duyệt khi chưa được xác nhận; nguồn nội dung/ảnh của bệnh viện hiển thị trong bài.
+- Dùng bốn ảnh người dùng chỉ định, chuyển WebP 1600×1200, khoảng 167–307 KB/ảnh, alt và caption riêng. Ảnh toàn cảnh IMG_5332 làm ảnh đại diện, ba ảnh còn lại đặt trong nội dung. Media gốc và bản chuyển nằm ngoài Git; repository chỉ lưu nguồn biên tập, metadata, manifest/hash và script trong `docs/drafts/fpt-school-20261015/`.
+- Gắn liên kết ngược từ bài giới thiệu chuyên mục #1686. Dùng template/CSS/schema có sẵn, không sửa theme, plugin hoặc WordPress core. Backup dưới khóa deploy tại `/home/jwhxtzru/backups/fpt-school-20261015-110238/`, gồm database, child theme, đầu vào, bản nội dung #1686 trước sửa và ID media mới.
+- QA: PHP lint script cùng footer.php/page-lien-he.php đạt; bài, bốn ảnh và sáu URL liên kết nội bộ trả HTTP 200. HTML có một H1, một meta description, canonical tự trỏ, Article/FAQPage JSON hợp lệ; không sót placeholder/shortcode, bảy đích mục lục tồn tại. Trình duyệt xác nhận tiêu đề, ảnh đại diện, chú thích và mở bài hiển thị đúng ở viewport mặc định; không thực hiện kiểm tra breakpoint mobile riêng. `verify-live.ps1 -CheckSsh` đạt sáu URL và SSH.
+- Rollback chọn lọc: chuyển bài #1853 về draft, khôi phục nội dung #1686 từ `community-intro-before.html`, xóa cache WordPress/LiteSpeed. Giữ media và backup, không xóa database hay phục hồi toàn bộ database.
+
 ## 2026-10-14 — thay ảnh thẻ Điều trị tăng nhãn áp trên trang chủ
 
 - Thay ảnh đại diện của thẻ `eyecare_linh_vuc` #671 bằng ảnh thực tế người phụ trách cung cấp (`DSCF4256.JPG`). Ảnh được cắt 16:10, chuyển WebP 1200 × 750 (42 KB), bỏ EXIF và đưa vào Media #1837 với alt mô tả cảnh khám bằng đèn khe; giữ nguyên liên kết tới `/chuyen-khoa/glocom/` và các thẻ khác.
@@ -17,6 +47,20 @@
 - Triển khai commit `528a781` từ child theme dưới khóa deploy. Backup ba file liên quan và database: `/home/jwhxtzru/backups/video-carousel-20261013-084105/`. Không sửa dữ liệu video hoặc cơ sở dữ liệu.
 - QA: PHP lint ba file PHP liên quan, `node --check`, bài thử bảo vệ video và `verify-live.ps1 -CheckSsh` đạt. Kiểm tra trực tiếp desktop/điện thoại: hai slide, nút chuyển, nhúng video, dừng phát khi chuyển và không tràn ngang; không có lỗi JavaScript trong console. Rollback: khôi phục ba file từ backup rồi xóa cache.
 
+## 2026-10-13 — rút gọn nhãn Glôcôm trên trang chủ
+
+- Theo vùng đánh dấu trong ảnh người dùng gửi, bỏ “(cườm nước)” khỏi thẻ chuyên khoa Glôcôm trong khối “Tìm hiểu về bệnh mắt”. Chỉ đổi nhãn trang chủ trong child theme, giữ nguyên liên kết và nội dung trang bệnh học.
+- Triển khai commit `1d42895` dưới khóa deploy, kiểm tra hash file production trước khi thay. Backup file và database: `/home/jwhxtzru/backups/home-glocom-label-20261013-081126/`.
+- PHP lint front-page.php, footer.php, page-lien-he.php đạt; HTML live xác nhận đủ năm thẻ và nhãn “Glôcôm”; giữ nguyên CSS. Smoke test sáu URL và SSH đạt. Rollback: khôi phục front-page.php từ backup rồi xóa cache.
+
+
+## 2026-10-13 — bài giới thiệu BSCKI. Bùi Văn Cảnh
+
+- Xuất bản bài #1787 tại `/tin-tuc/goc-bac-si/gioi-thieu-bscki-bui-van-canh/`, chuyên mục Góc bác sĩ, theo nội dung người phụ trách cung cấp ngày 13/10. Nguồn biên tập và script lưu trong `docs/drafts/doctor-canh-20261013/`. Giữ thông tin gần 15 năm kinh nghiệm, đào tạo và hội viên theo nguồn cung cấp; không nhắc cơ sở khác, không lặp số ca “thành công” thiếu dữ liệu đối chiếu. Không gán bác sĩ là tác giả/người duyệt của bài giới thiệu nhân sự.
+- Dùng ảnh có sẵn #1697, sửa alt mẫu thành mô tả ảnh giới thiệu bác sĩ. Gắn meta bác sĩ liên quan #338 để có liên kết ngược từ hồ sơ; thêm mục lục, 5 FAQ, mô tả SEO và các liên kết hồ sơ, kiến thức, bảng giá, đặt lịch, liên hệ. Không đổi mã theme/plugin hoặc tạo chuyên mục trùng.
+- Backup dưới khóa deploy: `/home/jwhxtzru/backups/doctor-canh-20261013-20261013-080733/` (database và child theme); lần sửa alt: `/home/jwhxtzru/backups/doctor-canh-alt-20261013-080812/` (database, ảnh và alt cũ).
+- QA: PHP lint script xuất bản và hai file bắt buộc đạt; `verify-live.ps1 -CheckSsh` đạt. HTML công khai trả 200, một H1 và meta description, canonical tự trỏ, Article/FAQPage, không sót shortcode/token, đủ năm đích mục lục và có backlink trên hồ sơ bác sĩ. Dùng nguyên CSS/template tin tức hiện có; không thực hiện kiểm tra ảnh chụp giao diện trong lượt này.
+- Rollback chọn lọc: chuyển bài #1787 về draft, khôi phục alt #1697 từ backup nếu cần, xóa cache WordPress/LiteSpeed. Không xóa bài/ảnh hoặc khôi phục toàn database.
 
 ## 2026-10-12 — video chuyên môn của bác sĩ Trần Khánh Thắng
 
