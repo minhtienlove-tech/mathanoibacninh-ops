@@ -305,3 +305,31 @@
 	.eyecare-news__topic { transition: none; }
 	.eyecare-news__article-content .eyecare-school-gallery .eyecare-school-photo { transition: none; }
 }
+
+/* News hub topics: one highlighted category and six compact cards. */
+.eyecare-news--hub .eyecare-news__topics { scroll-margin-top: 130px; }
+.eyecare-news--hub .eyecare-news__section-heading h2 { text-transform: none; letter-spacing: -.025em; }
+.eyecare-news--hub .eyecare-news__topic-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+.eyecare-news--hub .eyecare-news__topic { padding: 24px; min-height: 232px; border-radius: 20px; }
+.eyecare-news--hub .eyecare-news__topic--featured {
+	grid-column: span 2;
+	background: linear-gradient(125deg, #074b50, #087c72);
+	border-color: #087369;
+	color: #fff;
+}
+.eyecare-news--hub .eyecare-news__topic--featured strong { color: #fff; font-size: 1.45rem; }
+.eyecare-news--hub .eyecare-news__topic--featured > span:not(.eyecare-news__topic-mark) { color: #e0f4ef; max-width: 44ch; }
+.eyecare-news--hub .eyecare-news__topic--featured small { color: #fff; }
+.eyecare-news--hub .eyecare-news__topic--featured .eyecare-news__topic-mark { background: #ffffff24; color: #fff; }
+.eyecare-news--hub .eyecare-news__topic-mark { width: 46px; height: 46px; border-radius: 14px; }
+.eyecare-news--hub .eyecare-news__topic small { display: flex; align-items: center; gap: 10px; }
+.eyecare-news--hub .eyecare-news__topic:focus-visible { outline: 3px solid #138b76; outline-offset: 4px; }
+@media (max-width: 1000px) {
+	.eyecare-news--hub .eyecare-news__topic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 600px) {
+	.eyecare-news--hub .eyecare-news__topic-grid { grid-template-columns: minmax(0, 1fr); gap: 12px; }
+	.eyecare-news--hub .eyecare-news__topic { min-height: 0; padding: 22px; }
+	.eyecare-news--hub .eyecare-news__topic--featured { grid-column: auto; }
+	.eyecare-news--hub .eyecare-news__topic--featured strong { font-size: 1.2rem; }
+}

@@ -48,6 +48,21 @@ while ( have_posts() ) :
 			)
 		);
 	}
+	$topic_design = array(
+		'hoat-dong-cong-dong' => array( 'Các chương trình khám mắt và hoạt động chăm sóc sức khỏe cùng cộng đồng.', 'M12 21s-8-5-8-11a4 4 0 0 1 8-2 4 4 0 0 1 8 2c0 6-8 11-8 11Z' ),
+		'goc-bac-si' => array( 'Gặp gỡ đội ngũ bác sĩ và tìm hiểu những chia sẻ về sức khỏe đôi mắt.', 'M6 3v6a6 6 0 0 0 12 0V3M4 3h4m8 0h4M12 15v2a4 4 0 0 0 8 0v-3M20 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Z' ),
+		'cau-chuyen-nguoi-benh' => array( 'Những câu chuyện và trải nghiệm được người bệnh đồng ý chia sẻ.', 'M4 4h16v12H9l-5 4V4Zm4 5h8m-8 4h5' ),
+		'doi-song-benh-vien' => array( 'Con người, công việc và những khoảnh khắc trong đời sống bệnh viện.', 'M4 21V5h16v16M9 21v-5h6v5M9 9h6m-3-3v6' ),
+		'thong-bao-benh-vien' => array( 'Cập nhật lịch hoạt động và các thông tin chính thức từ bệnh viện.', 'M5 17h14l-2-3V9a5 5 0 0 0-10 0v5l-2 3Zm5 3h4M12 2v2' ),
+		'tuyen-dung' => array( 'Tìm hiểu vị trí tuyển dụng và cơ hội đồng hành cùng bệnh viện.', 'M3 7h18v13H3V7Zm5 0V4h8v3M3 12h18m-11 0v3h4v-3' ),
+		'uu-dai-va-ho-tro-nguoi-benh' => array( 'Thông tin chương trình hỗ trợ, điều kiện và thời gian áp dụng.', 'M3 8h18v4H3V8Zm2 4v9h14v-9M12 8v13M12 8C4 8 5 1 9 3l3 5Zm0 0c8 0 7-7 3-5l-3 5Z' ),
+	);
+	$topic_order = array_keys( $topic_design );
+	usort( $news_terms, static function ( $a, $b ) use ( $topic_order ) {
+		$left = array_search( $a->slug, $topic_order, true );
+		$right = array_search( $b->slug, $topic_order, true );
+		return ( false === $left ? 99 : $left ) <=> ( false === $right ? 99 : $right );
+	} );
 	?>
 	<main id="tin-benh-vien" class="eyecare-news eyecare-news--hub">
 		<section class="eyecare-news__hero" aria-labelledby="eyecare-news-title">
@@ -74,8 +89,8 @@ while ( have_posts() ) :
 				<div class="eyecare-news__container">
 					<div class="eyecare-news__section-heading">
 						<p>Khám phá theo chủ đề</p>
-						<h2 id="eyecare-news-topics-heading">Thông tin bạn muốn theo dõi</h2>
-						<span>Chọn một chuyên mục để xem các bài đã được công bố.</span>
+						<h2 id="eyecare-news-topics-heading">Bạn muốn khám phá điều gì?</h2>
+						<span>Câu chuyện, con người và những hoạt động mới từ bệnh viện.</span>
 					</div>
 					<div class="eyecare-news__topic-grid">
 						<?php foreach ( $news_terms as $news_term ) :
@@ -84,13 +99,13 @@ while ( have_posts() ) :
 								continue;
 							}
 							$term_description = trim( wp_strip_all_tags( term_description( $news_term->term_id, 'category' ) ) );
-							$term_mark        = preg_match( '/^./us', $news_term->name, $mark_match ) ? $mark_match[0] : '•';
+							$topic = isset( $topic_design[ $news_term->slug ] ) ? $topic_design[ $news_term->slug ] : array( $term_description, 'M4 4h16v16H4V4Zm4 5h8m-8 4h8m-8 4h5' );
 							?>
-							<a class="eyecare-news__topic" href="<?php echo esc_url( $term_url ); ?>">
-								<span class="eyecare-news__topic-mark" aria-hidden="true"><?php echo esc_html( $term_mark ); ?></span>
+							<a class="eyecare-news__topic<?php echo 'hoat-dong-cong-dong' === $news_term->slug ? ' eyecare-news__topic--featured' : ''; ?>" href="<?php echo esc_url( $term_url ); ?>">
+								<span class="eyecare-news__topic-mark" aria-hidden="true"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="<?php echo esc_attr( $topic[1] ); ?>" /></svg></span>
 								<strong><?php echo esc_html( $news_term->name ); ?></strong>
-								<?php if ( $term_description ) : ?><span><?php echo esc_html( wp_trim_words( $term_description, 18, '…' ) ); ?></span><?php endif; ?>
-								<small>Xem chuyên mục <span aria-hidden="true">↗</span></small>
+								<span><?php echo esc_html( $topic[0] ); ?></span>
+								<small>Khám phá <span aria-hidden="true">→</span></small>
 							</a>
 						<?php endforeach; ?>
 					</div>
