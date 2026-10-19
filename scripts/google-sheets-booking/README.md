@@ -1,6 +1,6 @@
 # Google Sheets booking bridge
 
-This source is prepared for a Google Apps Script project. It is not a deployment. It only writes bookings to columns A:I of spreadsheet `1kgKcmxpD1twMcFR_mdiGlmTmoAlFhHV3bESOicDkXmk`, tab ID `0`. Its change monitor covers **every populated column and every tab in that file**, including tab insertion, deletion and renaming. It only calls `https://mathanoibacninh.com/wp-json/ec-booking/v1/sheet-change`.
+This source implements the Google Apps Script bridge deployed on 19 October 2026; deployment and verification are recorded in `docs/CHANGELOG.md`. Source edits require updating the existing web-app deployment. It only writes bookings to columns A:I of spreadsheet `1kgKcmxpD1twMcFR_mdiGlmTmoAlFhHV3bESOicDkXmk`, tab ID `0`. Its change monitor covers **every populated column and every tab in that file**, including tab insertion, deletion and renaming. It only calls `https://mathanoibacninh.com/wp-json/ec-booking/v1/sheet-change`.
 
 The nine existing columns A:I must be:
 
@@ -77,5 +77,7 @@ node scripts/google-sheets-booking/test.mjs
 ```
 
 Tests mock Apps Script, properties, Sheet cells, triggers, locks and all HTTP calls in memory. They do not read Google or production data and do not send real staff notifications.
+
+For an Apps Script `state` error, run the read-only `diagnoseBookingBridge()` manually. Its log/return contains only stage flags, counts and numeric state version. It compares decoding a default binary blob against an explicitly named `application/x-gzip` blob, which avoids an Apps Script MIME-dependent `ungzip` failure after restoring compressed bytes from Script Properties. The diagnostic never writes state, appends rows, calls the callback, or prints property values, hashes, patient data, secrets or raw exception messages. Existing compressed state can be read without resetting the baseline/outbox.
 
 Primary references: [Sheets RAW values](https://developers.google.com/workspace/sheets/api/guides/values), [advanced Sheets service](https://developers.google.com/apps-script/advanced/sheets), [installable triggers and API-write limitations](https://developers.google.com/apps-script/guides/triggers/installable), [Apps Script property quotas](https://developers.google.com/apps-script/guides/services/quotas), [ContentService redirect behavior](https://developers.google.com/apps-script/guides/content).
