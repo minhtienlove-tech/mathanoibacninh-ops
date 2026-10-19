@@ -1,0 +1,11 @@
+[
+  "fixture:42",
+  "Tiếng Việt / slash \\ backslash",
+  "Đặng Văn Kiểm Thử 😀",
+  "00123456789",
+  "2026-10-20",
+  "16:00",
+  "Dòng\nTab\tCR\r\b\f\u0000\u001f",
+  "<tag>&\"quote\"' and \u2028 separator \u2029",
+  "https://example.test/a/b?x=1&y=2"
+]

@@ -1,4 +1,11 @@
 # Production changelog
+## 2026-10-19 — chuẩn bị Google Sheet trước thông báo Zalo/Gmail
+
+- Theo yêu cầu: form → ghi đúng bảng Đặt lịch khám BVMHNBN, tab 0, chín cột A:I → xác nhận mã/nội dung/dòng → mới mở hàng đợi Zalo/Gmail hiện có. Gắn yêu cầu Sheet vào hồ sơ ngay khi lưu; chặn cả queue, worker và gửi lại thủ công trước xác nhận. Outbox có retry cùng mã, phục hồi gián đoạn và trạng thái admin; không tự gửi lại kết quả thông báo chưa rõ, không đồng bộ lịch cũ hàng loạt.
+- Apps Script dùng HMAC, timestamp, khóa và ghi RAW/readback để giữ số điện thoại và tránh công thức; trigger edit/change cộng kiểm tra 5 phút theo dõi thay đổi dữ liệu toàn bộ file. Baseline im lặng, bỏ thông báo thay đổi chung cho chính dòng form mới để tránh trùng. Callback chỉ có metadata, website dùng ba người nhận Zalo đã chọn. Thêm thông tin đồng ý lưu Sheet riêng tư/gửi Zalo-email vào form và hồ sơ mới. Secret chỉ ở cấu hình riêng tư, không trong Git.
+- Git pull trước sửa; kiểm tra nguồn production khớp HEAD sau chuẩn hóa xuống dòng. QA độc lập: 113 kiểm tra Apps Script, 93 kiểm tra tích hợp Sheet, 179 kết hợp booking/Zalo/Gmail, 124 booking/admin đạt trên PHP 8.2, không gửi thật hoặc dùng dữ liệu khách. Chỉnh hai assertion số hồ sơ cũ sang snapshot vì fixture đã có ba hồ sơ.
+- Nguồn Apps Script, manifest, test và hướng dẫn ở `scripts/google-sheets-booking/`; dự án Google đã lưu mã và manifest nhưng chưa cấp quyền, chưa triển khai web app hoặc cài trigger. Mã website chuẩn bị triển khai dưới khóa với backup database/file; kết nối giữ tắt cho tới khi Google cấp quyền, cấu hình secret/endpoint và probe thành công. Không coi việc lưu mã là kích hoạt tích hợp.
+
 ## 2026-10-19 — chốt đặt lịch khám đến 16:00
 
 - Theo yêu cầu người dùng, đổi giới hạn bắt đầu lịch hẹn sang 16:00 (bao gồm 16:00), mỗi 30 phút; giữ giờ mở cửa 07:30–18:00. Sửa chung máy chủ và thông báo form trong child theme, chặn 16:30/17:00 qua kiểm tra máy chủ. Nội dung trang #57 được cập nhật chọn lọc đúng một cụm giờ trong đoạn đặt lịch.

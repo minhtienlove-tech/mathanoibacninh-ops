@@ -1,6 +1,7 @@
 <?php
 /** In-memory tests: no real credentials, network calls or Zalo messages. */
 require __DIR__ . '/booking-validation-test.php';
+$ec_zalo_appointment_count_before_notifications = count( $GLOBALS['ec_test_posts'] );
 if ( ! function_exists( 'openssl_encrypt' ) ) {
 	if ( ! defined( 'OPENSSL_RAW_DATA' ) ) { define( 'OPENSSL_RAW_DATA', 1 ); }
 	function openssl_encrypt( $data, $cipher, $key, $options, $iv, &$tag ) {
@@ -167,7 +168,7 @@ ec_expect( get_post_meta(2,'_ec_zalo_state')==='unknown' && count($GLOBALS['zalo
 ec_expect( strpos(get_post_meta(2,'_ec_zalo_error'),$token)===false, 'Saved delivery error is token-free' );
 $GLOBALS['zalo_events']=array();$GLOBALS['zalo_schedule_fail']=true;update_post_meta(2,'_ec_zalo_state','retry');ec_zalo_queue(2);
 ec_expect( get_post_meta(2,'_ec_zalo_state')==='failed', 'Queue failure visible without losing saved appointment' );
-ec_expect( count($GLOBALS['ec_test_posts'])===2, 'Notification failures do not remove appointments' );
+ec_expect( count($GLOBALS['ec_test_posts'])===$ec_zalo_appointment_count_before_notifications && get_post(1) && get_post(2), 'Notification failures do not remove appointments' );
 $multi_settings=$multi_candidates;
 $multi_settings['enabled']=true;
 $multi_settings['cipher']=$cipher;

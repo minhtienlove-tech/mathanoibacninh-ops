@@ -125,7 +125,12 @@ function ec_gmail_page() {
 function ec_gmail_queue( $id ) {
 	$s = ec_gmail_settings();
 	$post = get_post( $id );
-	if ( ! $post || 'ec_appointment' !== $post->post_type || 'private' !== $post->post_status || ! $s['enabled'] || ! ec_gmail_ready( $s ) ) { return; }
+	if ( ! $post || 'ec_appointment' !== $post->post_type || 'private' !== $post->post_status ) { return; }
+	if ( function_exists( 'ec_booking_notifications_ready' ) && ! ec_booking_notifications_ready( $id ) ) {
+		if ( in_array( get_post_meta( $id, '_ec_gmail_state', true ), array( '', 'waiting_sheet', 'retry', 'pending' ), true ) ) { update_post_meta( $id, '_ec_gmail_state', 'waiting_sheet' ); }
+		return;
+	}
+	if ( ! $s['enabled'] || ! ec_gmail_ready( $s ) ) { return; }
 	if ( in_array( get_post_meta( $id, '_ec_gmail_state', true ), array( 'pending', 'sending', 'sent' ), true ) ) { return; }
 	update_post_meta( $id, '_ec_gmail_config', $s['version'] );
 	update_post_meta( $id, '_ec_gmail_state', 'pending' );
@@ -145,6 +150,7 @@ function ec_gmail_deliver( $id ) {
 	try {
 		$post = get_post( $id );
 		if ( ! $post || 'ec_appointment' !== $post->post_type || 'private' !== $post->post_status || 'pending' !== get_post_meta( $id, '_ec_gmail_state', true ) ) { return; }
+		if ( function_exists( 'ec_booking_notifications_ready' ) && ! ec_booking_notifications_ready( $id ) ) { update_post_meta( $id, '_ec_gmail_state', 'waiting_sheet' ); return; }
 		$s = ec_gmail_settings();
 		if ( ! $s['enabled'] || $s['version'] !== get_post_meta( $id, '_ec_gmail_config', true ) ) { update_post_meta( $id, '_ec_gmail_state', 'skipped' ); return; }
 		update_post_meta( $id, '_ec_gmail_started', time() );
@@ -168,9 +174,10 @@ function ec_gmail_delivery_box( $post ) {
 	if ( ! current_user_can( 'manage_options' ) ) { return; }
 	$state = get_post_meta( $post->ID, '_ec_gmail_state', true );
 	$labels = array( 'pending' => 'Đang chờ gửi', 'sending' => 'Đang gửi — kiểm tra Gmail trước khi gửi lại', 'sent' => 'Gmail đã chấp nhận thư', 'failed' => 'Chưa gửi được', 'unknown' => 'Chưa xác định kết quả — kiểm tra trên Gmail trước khi gửi lại', 'skipped' => 'Bỏ qua do đã tắt hoặc thay đổi cấu hình' );
+	$labels['waiting_sheet'] = 'Chờ ghi Google Sheet thành công trước khi gửi Gmail.';
 	echo '<p>' . esc_html( $labels[ $state ] ?? 'Chưa có thông báo cho lịch này.' ) . '</p>';
 	if ( in_array( $state, array( 'failed', 'unknown' ), true ) ) { echo '<p>' . esc_html( get_post_meta( $post->ID, '_ec_gmail_error', true ) ) . '</p>'; }
-	if ( ! in_array( $state, array( 'pending', 'sent' ), true ) && ec_gmail_settings()['enabled'] && ( 'sending' !== $state || (int) get_post_meta( $post->ID, '_ec_gmail_started', true ) < time() - 120 ) ) {
+	if ( ! in_array( $state, array( 'waiting_sheet', 'pending', 'sent' ), true ) && ec_gmail_settings()['enabled'] && ( ! function_exists( 'ec_booking_notifications_ready' ) || ec_booking_notifications_ready( $post->ID ) ) && ( 'sending' !== $state || (int) get_post_meta( $post->ID, '_ec_gmail_started', true ) < time() - 120 ) ) {
 		$url = wp_nonce_url( admin_url( 'admin-post.php?action=ec_gmail_retry&appointment=' . (int) $post->ID ), 'ec_gmail_retry_' . $post->ID );
 		echo '<p><a class="button" href="' . esc_url( $url ) . '">Gửi thông báo Gmail</a></p>';
 	}
@@ -183,6 +190,7 @@ function ec_gmail_retry() {
 	check_admin_referer( 'ec_gmail_retry_' . $id );
 	$post = get_post( $id );
 	if ( ! $post || 'ec_appointment' !== $post->post_type || 'private' !== $post->post_status ) { wp_die( 'Không tìm thấy lịch hẹn.' ); }
+	if ( function_exists( 'ec_booking_notifications_ready' ) && ! ec_booking_notifications_ready( $id ) ) { wp_die( 'Chờ ghi Google Sheet thành công trước khi gửi thông báo Gmail.', '', array( 'response' => 409 ) ); }
 	$lock = ec_booking_lock( 'gmail:' . $id );
 	if ( $lock ) {
 		try {

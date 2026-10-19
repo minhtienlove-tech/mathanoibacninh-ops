@@ -522,7 +522,12 @@ function ec_zalo_page() {
 function ec_zalo_queue( $id ) {
 	$s = ec_zalo_settings();
 	$post = get_post( $id );
-	if ( ! $post || 'ec_appointment' !== $post->post_type || 'private' !== $post->post_status || ! $s['enabled'] || ! ec_zalo_token( $s ) || ! ec_zalo_selected_recipient_ids( $s ) ) { return; }
+	if ( ! $post || 'ec_appointment' !== $post->post_type || 'private' !== $post->post_status ) { return; }
+	if ( function_exists( 'ec_booking_notifications_ready' ) && ! ec_booking_notifications_ready( $id ) ) {
+		if ( in_array( get_post_meta( $id, '_ec_zalo_state', true ), array( '', 'waiting_sheet', 'retry', 'pending' ), true ) ) { update_post_meta( $id, '_ec_zalo_state', 'waiting_sheet' ); }
+		return;
+	}
+	if ( ! $s['enabled'] || ! ec_zalo_token( $s ) || ! ec_zalo_selected_recipient_ids( $s ) ) { return; }
 	if ( in_array( get_post_meta( $id, '_ec_zalo_state', true ), array( 'pending', 'sending', 'sent' ), true ) ) { return; }
 	if ( $s['version'] !== get_post_meta( $id, '_ec_zalo_config', true ) ) { update_post_meta( $id, '_ec_zalo_sent_recipient_hashes', array() ); }
 	update_post_meta( $id, '_ec_zalo_config', $s['version'] );
@@ -567,6 +572,7 @@ function ec_zalo_deliver( $id ) {
 	try {
 		$post = get_post( $id );
 		if ( ! $post || 'ec_appointment' !== $post->post_type || 'private' !== $post->post_status || 'pending' !== get_post_meta( $id, '_ec_zalo_state', true ) ) { return; }
+		if ( function_exists( 'ec_booking_notifications_ready' ) && ! ec_booking_notifications_ready( $id ) ) { update_post_meta( $id, '_ec_zalo_state', 'waiting_sheet' ); return; }
 		$s = ec_zalo_settings();
 		if ( ! $s['enabled'] || $s['version'] !== get_post_meta( $id, '_ec_zalo_config', true ) ) { update_post_meta( $id, '_ec_zalo_state', 'skipped' ); return; }
 		update_post_meta( $id, '_ec_zalo_started', time() );
@@ -617,9 +623,10 @@ function ec_zalo_delivery_box( $post ) {
 	if ( ! current_user_can( 'manage_options' ) ) { return; }
 	$state = get_post_meta( $post->ID, '_ec_zalo_state', true );
 	$labels = array( 'pending' => 'Đang chờ gửi', 'sending' => 'Đang gửi — kiểm tra Zalo trước khi gửi lại', 'sent' => 'Đã gửi tới tất cả tài khoản Zalo đã chọn', 'partial' => 'Đã gửi đến một phần tài khoản Zalo', 'failed' => 'Chưa gửi được', 'unknown' => 'Chưa xác định kết quả — kiểm tra trên Zalo trước khi gửi lại', 'skipped' => 'Bỏ qua do đã tắt hoặc thay đổi cấu hình' );
+	$labels['waiting_sheet'] = 'Chờ ghi Google Sheet thành công trước khi gửi Zalo.';
 	echo '<p>' . esc_html( $labels[ $state ] ?? 'Chưa có thông báo cho lịch này.' ) . '</p>';
 	if ( in_array( $state, array( 'partial', 'failed', 'unknown', 'skipped' ), true ) ) { echo '<p>' . esc_html( get_post_meta( $post->ID, '_ec_zalo_error', true ) ) . '</p>'; }
-	if ( ! in_array( $state, array( 'pending', 'sent' ), true ) && ec_zalo_settings()['enabled'] && ( 'sending' !== $state || (int) get_post_meta( $post->ID, '_ec_zalo_started', true ) < time() - 120 ) ) {
+	if ( ! in_array( $state, array( 'waiting_sheet', 'pending', 'sent' ), true ) && ec_zalo_settings()['enabled'] && ( ! function_exists( 'ec_booking_notifications_ready' ) || ec_booking_notifications_ready( $post->ID ) ) && ( 'sending' !== $state || (int) get_post_meta( $post->ID, '_ec_zalo_started', true ) < time() - 120 ) ) {
 		$url = wp_nonce_url( admin_url( 'admin-post.php?action=ec_zalo_retry&appointment=' . (int) $post->ID ), 'ec_zalo_retry_' . $post->ID );
 		echo '<p><a class="button" href="' . esc_url( $url ) . '">Gửi thông báo Zalo</a></p>';
 	}
@@ -632,6 +639,7 @@ function ec_zalo_retry() {
 	check_admin_referer( 'ec_zalo_retry_' . $id );
 	$post = get_post( $id );
 	if ( ! $post || 'ec_appointment' !== $post->post_type || 'private' !== $post->post_status ) { wp_die( 'Không tìm thấy lịch hẹn.' ); }
+	if ( function_exists( 'ec_booking_notifications_ready' ) && ! ec_booking_notifications_ready( $id ) ) { wp_die( 'Chờ ghi Google Sheet thành công trước khi gửi thông báo Zalo.', '', array( 'response' => 409 ) ); }
 	$lock = ec_booking_lock( 'zalo:' . $id );
 	if ( $lock ) {
 		try {

@@ -24,6 +24,7 @@ namespace PHPMailer\PHPMailer {
 namespace {
 require __DIR__ . '/booking-zalo-test.php';
 require dirname( __DIR__ ) . '/inc/gmail-dat-lich.php';
+$ec_gmail_appointment_count_before_notifications = count( $GLOBALS['ec_test_posts'] );
 function is_email( $email ) { return is_string( $email ) && filter_var( $email, FILTER_VALIDATE_EMAIL ); }
 function current_user_can( $cap ) { return false; }
 function wp_die( ...$args ) { throw new RuntimeException( 'denied' ); }
@@ -72,6 +73,6 @@ ec_gmail_deliver(2);$before=count(PHPMailer::$sent);ec_gmail_deliver(2);
 ec_expect(get_post_meta(2,'_ec_gmail_state')==='unknown' && count(PHPMailer::$sent)===$before,'Uncertain SMTP failure does not auto resend');
 ec_expect(strpos(get_post_meta(2,'_ec_gmail_error'),'abcdefghijklmnop')===false && PHPMailer::$last->Password==='', 'SMTP exceptions do not disclose stored password');
 $GLOBALS['zalo_events']=array();$GLOBALS['zalo_schedule_fail']=true;update_post_meta(2,'_ec_gmail_state','retry');ec_gmail_queue(2);
-ec_expect(get_post_meta(2,'_ec_gmail_state')==='failed' && count($GLOBALS['ec_test_posts'])===2,'Queue failure visible; appointments retained');
+ec_expect(get_post_meta(2,'_ec_gmail_state')==='failed' && count($GLOBALS['ec_test_posts'])===$ec_gmail_appointment_count_before_notifications && get_post(1) && get_post(2),'Queue failure visible; appointments retained');
 echo 'PASS: '.$assertions." combined booking/Zalo/Gmail checks; no real email sent.\n";
 }

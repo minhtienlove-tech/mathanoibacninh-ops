@@ -20,6 +20,11 @@ function ec_booking_public_share_consent_text() {
 	return 'Tôi đồng ý để bệnh viện hiển thị tên gọi rút gọn từ họ tên của tôi trong thông báo luân phiên trên website rằng tôi đã đăng ký lịch khám, kể cả sau ngày hẹn, cho đến khi tôi yêu cầu gỡ. Lựa chọn này không bắt buộc và không ảnh hưởng đến việc đặt lịch.';
 }
 
+/** Wording stored with new requests must match the required checkbox. */
+function ec_booking_contact_consent_text() {
+	return 'Tôi đồng ý để bệnh viện lưu thông tin đặt lịch, gồm họ tên và số điện thoại, trong Google Sheet riêng tư và gửi thông báo qua Zalo, email cho nhân viên được ủy quyền để liên hệ xác nhận lịch hẹn.';
+}
+
 /** Giữ dấu vân tay của các yêu cầu cũ khi ô tùy chọn không được chọn. */
 function ec_booking_fingerprint_payload( $booking ) {
 	$payload = $booking;
@@ -228,6 +233,8 @@ function ec_booking_replay( $booking ) {
 	$fingerprint = hash_hmac( 'sha256', wp_json_encode( ec_booking_fingerprint_payload( $booking ) ), wp_salt( 'nonce' ) );
 	$data        = ec_booking_read( $existing );
 	if ( isset( $data['fingerprint'] ) && is_string( $data['fingerprint'] ) && hash_equals( $data['fingerprint'], $fingerprint ) ) {
+		// Recover the outbox if an earlier process stopped after saving the appointment.
+		if ( function_exists( 'ec_sheets_queue' ) ) { ec_sheets_queue( (int) $existing->ID ); }
 		return (int) $existing->ID;
 	}
 	return new WP_Error( 'request_conflict', 'Yêu cầu này đã được gửi với thông tin khác. Vui lòng mở lại biểu mẫu.', array( 'status' => 409 ) );
@@ -254,6 +261,10 @@ function ec_booking_store( $booking ) {
 		}
 		$payload['fingerprint'] = $fingerprint;
 		$payload['received_at'] = ec_booking_now()->format( DATE_ATOM );
+		$payload['consent_text'] = ec_booking_contact_consent_text();
+		$payload['consent_version'] = '2026-10-19-sheet-v1';
+		// Persist this requirement in the same appointment row, before any notification hook.
+		if ( function_exists( 'ec_sheets_enabled' ) && ec_sheets_enabled() ) { $payload['sheet_required'] = true; }
 		$payload['public_share_consent'] = ! empty( $booking['public_share_consent'] );
 		if ( $payload['public_share_consent'] ) {
 			$consented_at = ec_booking_now();
@@ -262,14 +273,16 @@ function ec_booking_store( $booking ) {
 			$payload['public_share_consent_version'] = '2026-10-10-v1';
 			$payload['public_share_consent_text'] = ec_booking_public_share_consent_text();
 		}
-		$post_id = wp_insert_post( wp_slash( array(
+		$post_data = array(
 			'post_type'    => 'ec_appointment',
 			'post_status'  => 'private',
 			'post_name'    => $slug,
 			'post_title'   => 'Yêu cầu khám ' . $booking['date'] . ' ' . $booking['time'],
 			'post_content' => wp_json_encode( $payload, JSON_UNESCAPED_UNICODE ),
 			'post_author'  => 0,
-		) ), true );
+		);
+		if ( ! empty( $payload['sheet_required'] ) ) { $post_data['meta_input'] = array( '_ec_sheet_recovery' => '1' ); }
+		$post_id = wp_insert_post( wp_slash( $post_data ), true );
 		if ( is_wp_error( $post_id ) || ! $post_id ) {
 			return new WP_Error( 'storage', 'Chưa lưu được yêu cầu. Vui lòng thử lại hoặc gọi bệnh viện.', array( 'status' => 503 ) );
 		}
