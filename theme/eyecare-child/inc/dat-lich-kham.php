@@ -30,7 +30,7 @@ function ec_booking_fingerprint_payload( $booking ) {
 	return $payload;
 }
 
-/** Giờ bắt đầu lịch khám muộn nhất 17:00, luôn trước giờ đóng cửa. */
+/** Giờ bắt đầu lịch khám muộn nhất 16:00, luôn trước giờ đóng cửa. */
 function ec_booking_schedule( $now = null, $hours = null ) {
 	$now   = $now ?: ec_booking_now();
 	$now   = $now->setTimezone( new DateTimeZone( 'Asia/Ho_Chi_Minh' ) );
@@ -44,7 +44,7 @@ function ec_booking_schedule( $now = null, $hours = null ) {
 	$start = (int) substr( $open, 0, 2 ) * 60 + (int) substr( $open, 3, 2 );
 	$end   = (int) substr( $close, 0, 2 ) * 60 + (int) substr( $close, 3, 2 );
 	$slots = array();
-	for ( $minute = $start; $minute < $end && $minute <= 17 * 60; $minute += 30 ) {
+	for ( $minute = $start; $minute < $end && $minute <= 16 * 60; $minute += 30 ) {
 		$slots[] = sprintf( '%02d:%02d', intdiv( $minute, 60 ), $minute % 60 );
 	}
 	return array(

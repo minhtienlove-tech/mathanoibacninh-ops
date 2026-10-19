@@ -100,7 +100,7 @@ function ec_expect_error( $value, $code, $message ) { ec_expect( is_wp_error( $v
 $now = new DateTimeImmutable( '2026-09-10 10:15:00', new DateTimeZone( 'Asia/Ho_Chi_Minh' ) );
 $valid = array( 'name' => 'Nguyễn Thị Ánh', 'phone' => '+84 912 345 678', 'date' => '2026-09-11', 'time' => '07:30', 'consent' => '1', 'website' => '', 'request_id' => '123e4567-e89b-42d3-a456-426614174000' );
 $schedule = ec_booking_schedule( $now );
-ec_expect( $schedule['slots'][0] === '07:30' && end( $schedule['slots'] ) === '17:00' && count( $schedule['slots'] ) === 20, 'Opening included; last booking 17:00; 30-minute slots' );
+ec_expect( $schedule['slots'][0] === '07:30' && end( $schedule['slots'] ) === '16:00' && count( $schedule['slots'] ) === 18, 'Opening included; last booking 16:00 inclusive; 30-minute slots' );
 ec_expect( $schedule['close'] === '18:00', 'Booking cutoff does not change hospital closing hours' );
 $early = ec_booking_schedule( $now, array( 'gio_mo' => '07:30', 'gio_dong' => '16:00' ) );
 ec_expect( end( $early['slots'] ) === '15:30', 'Earlier hospital closing still limits available bookings' );
@@ -108,7 +108,7 @@ ec_expect( $schedule['now'] === '2026-09-10T10:15:00+07:00' && $schedule['maxDat
 $utc = ec_booking_schedule( new DateTimeImmutable( '2026-09-10 18:00:00', new DateTimeZone( 'UTC' ) ) );
 ec_expect( $utc['today'] === '2026-09-11', 'UTC rollover uses Vietnamese calendar date' );
 $custom = ec_booking_schedule( $now, array( 'gio_mo' => '08:15', 'gio_dong' => '17:15' ) );
-ec_expect( $custom['slots'][0] === '08:15' && end( $custom['slots'] ) === '16:45', 'Slots follow configured opening, not hardcoded hours' );
+ec_expect( $custom['slots'][0] === '08:15' && end( $custom['slots'] ) === '15:45', 'Slots follow configured opening and do not exceed the 16:00 cutoff' );
 ec_expect_error( ec_booking_schedule( $now, array( 'gio_mo' => '18:00', 'gio_dong' => '07:30' ) ), 'hours', 'Invalid hours fail closed' );
 $booking = ec_booking_validate( $valid, $now );
 ec_expect( ! is_wp_error( $booking ) && $booking['phone'] === '0912345678', 'Accept Vietnamese name and normalize +84 phone' );
@@ -122,7 +122,9 @@ foreach ( array( 'yes', '', array( '1' ), null ) as $invalid_public_consent ) {
 }
 ec_expect( ! is_wp_error( ec_booking_validate( array_merge( $valid, array( 'name' => "Anne O'Connor" ) ), $now ) ), 'Apostrophe in real names accepted' );
 ec_expect( ! is_wp_error( ec_booking_validate( array_merge( $valid, array( 'date' => '2026-09-12' ) ), $now ) ), 'Hospital open weekends' );
-ec_expect( ! is_wp_error( ec_booking_validate( array_merge( $valid, array( 'date' => '2026-12-09', 'time' => '17:00' ) ), $now ) ), 'Last allowed date and 17:00 slot accepted' );
+ec_expect( ! is_wp_error( ec_booking_validate( array_merge( $valid, array( 'date' => '2026-12-09', 'time' => '16:00' ) ), $now ) ), 'Last allowed date and 16:00 slot accepted' );
+ec_expect_error( ec_booking_validate( array_merge( $valid, array( 'time' => '16:30' ) ), $now ), 'time', '16:30 rejected by the server after booking cutoff' );
+ec_expect_error( ec_booking_validate( array_merge( $valid, array( 'time' => '17:00' ) ), $now ), 'time', 'Previous 17:00 slot rejected by the server' );
 ec_expect_error( ec_booking_validate( array_merge( $valid, array( 'time' => '17:30' ) ), $now ), 'time', '17:30 rejected by server even before hospital closes' );
 ec_expect_error( ec_booking_validate( array_merge( $valid, array( 'date' => '2026-12-10' ) ), $now ), 'date', 'Horizon overflow rejected' );
 ec_expect_error( ec_booking_validate( array_merge( $valid, array( 'date' => '2026-09-09' ) ), $now ), 'date', 'Past calendar day rejected' );

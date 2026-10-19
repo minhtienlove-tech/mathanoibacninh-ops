@@ -1,4 +1,11 @@
 # Production changelog
+## 2026-10-19 — chốt đặt lịch khám đến 16:00
+
+- Theo yêu cầu người dùng, đổi giới hạn bắt đầu lịch hẹn sang 16:00 (bao gồm 16:00), mỗi 30 phút; giữ giờ mở cửa 07:30–18:00. Sửa chung máy chủ và thông báo form trong child theme, chặn 16:30/17:00 qua kiểm tra máy chủ. Nội dung trang #57 được cập nhật chọn lọc đúng một cụm giờ trong đoạn đặt lịch.
+- Git pull --ff-only thành công trước sửa; hai file PHP production khớp SHA-256 nguồn trước sửa. Bảo toàn toàn bộ thay đổi chưa commit có sẵn. Mã triển khai được commit trước production; dùng khóa website-ops-deploy.lock và sao lưu file/database/trang #57 trước ghi.
+- QA trước triển khai: PHP lint hai file theme và script cập nhật đạt; 97 kiểm tra validation/privacy/storage/retry/rate-limit độc lập đạt. Script xác minh production chỉ gọi hàm validation thuần, không gửi biểu mẫu hoặc tạo hồ sơ lịch khám.
+- Script triển khai và rollback chọn lọc: scripts/deploy-booking-cutoff-20261019.sh và scripts/booking-cutoff-20261019.php. Khôi phục riêng hai file PHP và nội dung trang #57 từ backup tương ứng, purge cache; không khôi phục toàn database.
+
 ## 2026-10-15 — đồng bộ công việc giữa hai máy
 
 - Pull nhánh `codex/chuyen-muc-bac-si`; bổ sung hướng dẫn clone đúng repository `minhtienlove-tech/mathanoibacninh-ops`, chọn cùng nhánh và Commit/Push trước khi chuyển máy.
