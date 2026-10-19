@@ -157,7 +157,8 @@ function ecReadState_() {
       encoded += chunk;
     }
     const bytes = Utilities.base64Decode(encoded);
-    const state = JSON.parse(Utilities.ungzip(Utilities.newBlob(bytes)).getDataAsString());
+    /* Recreated binary blobs need gzip MIME/name metadata for the Apps Script decoder. */
+    const state = JSON.parse(Utilities.ungzip(Utilities.newBlob(bytes, 'application/x-gzip', 'booking-state.json.gz')).getDataAsString('UTF-8'));
     if (![1, 2].includes(state.version) || !state.snapshot || !state.snapshot.rows || !Array.isArray(state.outbox) || !state.expected) ecFail_('state');
     return state;
   } catch (_) { ecFail_('state'); }
@@ -166,7 +167,7 @@ function ecReadState_() {
 /* New chunks are committed before a one-property pointer swap. Keep old state on failure. */
 function ecSaveState_(state) {
   const properties = PropertiesService.getScriptProperties();
-  const encoded = Utilities.base64Encode(Utilities.gzip(Utilities.newBlob(JSON.stringify(state))).getBytes());
+  const encoded = Utilities.base64Encode(Utilities.gzip(Utilities.newBlob(JSON.stringify(state), 'application/json', 'booking-state.json'), 'booking-state.json.gz').getBytes());
   if (encoded.length > EC_BRIDGE.maxEncodedState) ecFail_('capacity');
   const generation = Utilities.getUuid();
   const chunks = {};
@@ -182,6 +183,61 @@ function ecSaveState_(state) {
 
 function ecInitialState_(snapshot) {
   return {version: 2, snapshot: snapshot, expected: {}, outbox: []};
+}
+
+/* Read-only manual diagnostic. Logs only stage flags, types and aggregate counts. */
+function diagnoseBookingBridge() {
+  const result = {
+    stage: 'properties', index_present: false, index_parse: false,
+    generation_valid: false, chunk_count: null, chunks_present: 0,
+    encoded_characters: 0, base64_success: false, base64_bytes: 0,
+    gzip_magic: false, ungzip_default_success: false, ungzip_mime_success: false,
+    json_parse: false, state_version: null, primary_rows: null, tabs: null, outbox_events: null
+  };
+  const finish = () => { console.log(JSON.stringify(result)); return result; };
+  try {
+    const properties = PropertiesService.getScriptProperties();
+    const raw = properties.getProperty(EC_BRIDGE.stateIndex);
+    result.index_present = typeof raw === 'string' && raw.length > 0;
+    if (!result.index_present) { result.stage = 'no_state'; return finish(); }
+    result.stage = 'index';
+    const index = JSON.parse(raw);
+    result.index_parse = true;
+    result.generation_valid = typeof index.generation === 'string' && /^[a-zA-Z0-9-]{1,80}$/.test(index.generation);
+    result.chunk_count = Number.isInteger(index.count) && index.count >= 1 && index.count <= 30 ? index.count : null;
+    if (!result.generation_valid || result.chunk_count === null) return finish();
+    result.stage = 'chunks';
+    let encoded = '';
+    for (let i = 0; i < result.chunk_count; i++) {
+      const chunk = properties.getProperty(EC_BRIDGE.statePrefix + index.generation + '_' + i);
+      if (typeof chunk !== 'string') continue;
+      result.chunks_present++;
+      encoded += chunk;
+    }
+    result.encoded_characters = encoded.length;
+    if (result.chunks_present !== result.chunk_count) return finish();
+    result.stage = 'base64';
+    const bytes = Utilities.base64Decode(encoded);
+    result.base64_success = true;
+    result.base64_bytes = bytes.length;
+    result.gzip_magic = bytes.length >= 2 && (bytes[0] & 255) === 31 && (bytes[1] & 255) === 139;
+    result.stage = 'ungzip';
+    try { Utilities.ungzip(Utilities.newBlob(bytes)).getDataAsString('UTF-8'); result.ungzip_default_success = true; } catch (_) { /* No raw exception output. */ }
+    let text;
+    try {
+      text = Utilities.ungzip(Utilities.newBlob(bytes, 'application/x-gzip', 'booking-state.json.gz')).getDataAsString('UTF-8');
+      result.ungzip_mime_success = true;
+    } catch (_) { return finish(); }
+    result.stage = 'json';
+    const state = JSON.parse(text);
+    result.json_parse = true;
+    result.state_version = Number.isInteger(state.version) ? state.version : null;
+    result.primary_rows = state.snapshot && state.snapshot.rows && typeof state.snapshot.rows === 'object' ? Object.keys(state.snapshot.rows).length : null;
+    result.tabs = state.snapshot && state.snapshot.tabs && typeof state.snapshot.tabs === 'object' ? Object.keys(state.snapshot.tabs).length : null;
+    result.outbox_events = Array.isArray(state.outbox) ? state.outbox.length : null;
+    result.stage = 'complete';
+    return finish();
+  } catch (_) { return finish(); }
 }
 
 /* Snapshot digests contain no cell values; own append markers suppress only an exact new row. */

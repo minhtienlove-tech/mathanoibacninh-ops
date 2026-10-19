@@ -18,7 +18,7 @@ function harness(initialRows = []) {
     properties: new Map([['WEBHOOK_SECRET', SECRET]]), cells: [HEADERS.slice(), ...initialRows.map(row => row.slice())], formulas: {},
     appendCalls: [], fetchCalls: [], rawReads: [], triggers: [], locked: false, lockUnavailable: false,
     appendFailure: '', callbackMode: 'success', callbackDuringFetch: null, flushes: 0, propertyFailure: false,
-    extraTabs: [], primaryName: "Lịch 'khám'", primaryPresent: true
+    extraTabs: [], primaryName: "Lịch 'khám'", primaryPresent: true, diagnosticLogs: []
   };
   function makeSheet(id, data, name) {
     const sheet = {
@@ -42,20 +42,26 @@ function harness(initialRows = []) {
     getProperties() { return Object.fromEntries(state.properties); },
     deleteProperty(key) { state.properties.delete(key); }
   };
-  const blob = value => {
+  const blob = (value, contentType = null, name = null) => {
     const bytes = typeof value === 'string' ? Buffer.from(value) : Buffer.from(value);
-    return {getBytes: () => [...bytes], getDataAsString: () => bytes.toString('utf8')};
+    return {getBytes: () => [...bytes], getDataAsString: () => bytes.toString('utf8'), getContentType: () => contentType, getName: () => name};
   };
   const makeTrigger = (handler, type, sourceId) => ({getHandlerFunction: () => handler, getEventType: () => type, getTriggerSourceId: () => sourceId});
   const context = vm.createContext({
-    Date, console: {log() { throw Error('Logging is forbidden in receiver tests'); }},
+    Date, console: {log(value) { state.diagnosticLogs.push(value); }},
     PropertiesService: {getScriptProperties: () => properties},
     Utilities: {
       DigestAlgorithm: {SHA_256: 'sha256'}, Charset: {UTF_8: 'utf8'},
       computeDigest: (algorithm, value) => [...createHash(algorithm).update(value).digest()],
       computeHmacSha256Signature: (value, secret) => [...createHmac('sha256', secret).update(value).digest()],
       base64Encode: value => Buffer.from(value).toString('base64'), base64Decode: value => [...Buffer.from(value, 'base64')],
-      newBlob: blob, gzip: value => blob(gzipSync(Buffer.from(value.getBytes()))), ungzip: value => blob(gunzipSync(Buffer.from(value.getBytes()))), getUuid: randomUUID
+      newBlob: blob,
+      gzip: (value, name) => blob(gzipSync(Buffer.from(value.getBytes())), 'application/x-gzip', name || 'blob.gz'),
+      ungzip(value) {
+        if (value.getContentType() !== 'application/x-gzip') throw Error('Invalid argument: gzip MIME metadata required');
+        return blob(gunzipSync(Buffer.from(value.getBytes())), 'application/json', 'booking-state.json');
+      },
+      getUuid: randomUUID
     },
     SpreadsheetApp: {
       openById(id) { assert.equal(id, ID); return {getSheets: () => allTabs().map(tab => tab.sheet)}; },
@@ -342,4 +348,21 @@ const fingerprint = harness(); fingerprint.setup();
 const phpReferenceFingerprint = 'ef5ed10e8166dd49351d0631c83eaa1efcfd69fd2c2605053b1a2d9a86205482';
 equal(createHash('sha256').update(JSON.stringify(fingerprintFixture)).digest('hex'), phpReferenceFingerprint, 'JSON.stringify fixture matches the independently verified PHP serialization');
 equal(fingerprint.post({action: 'append', key: fingerprintFixture[0], values: fingerprintFixture}).fingerprint, phpReferenceFingerprint, 'Fingerprint covers Unicode, slashes, controls, apostrophes and Unicode line separators');
+equal(h.state.diagnosticLogs.length, 0, 'Normal receiver and worker execution do not log anything');
+const diagnostics = JSON.parse(JSON.stringify(h.context.diagnoseBookingBridge()));
+equal(diagnostics.stage, 'complete', 'Read-only state diagnostic reaches the parsed state');
+check(diagnostics.index_present && diagnostics.index_parse && diagnostics.generation_valid && diagnostics.chunks_present === diagnostics.chunk_count, 'Diagnostic confirms state index and generation chunks without exposing them');
+check(diagnostics.base64_success && diagnostics.base64_bytes > 0 && diagnostics.gzip_magic, 'Diagnostic reports valid gzip bytes as counts and flags only');
+equal(diagnostics.ungzip_default_success, false, 'Strict Apps Script mock reproduces missing-MIME ungzip failure');
+equal(diagnostics.ungzip_mime_success, true, 'Explicit application/x-gzip blob metadata fixes state decompression');
+equal(diagnostics.state_version, 2, 'Diagnostic reports only numeric state version');
+equal(diagnostics.primary_rows, 3, 'Diagnostic reports aggregate primary row count');
+const diagnosticText = h.state.diagnosticLogs.at(-1);
+check(!diagnosticText.includes(SECRET) && !diagnosticText.includes('Nguyễn') && !diagnosticText.includes('0912345678') && !diagnosticText.includes('generation":') && !diagnosticText.includes('fingerprint'), 'Diagnostic output contains no secret, record, hash or property value');
+const noStateDiagnostic = harness();
+equal(noStateDiagnostic.context.diagnoseBookingBridge().stage, 'no_state', 'Missing baseline diagnostic is safe');
+noStateDiagnostic.state.properties.set('EC_BOOKING_STATE_INDEX', '{invalid-' + SECRET);
+const badIndexDiagnostic = noStateDiagnostic.context.diagnoseBookingBridge();
+equal(badIndexDiagnostic.stage, 'index', 'Invalid index diagnostic stops at its safe stage');
+check(!noStateDiagnostic.state.diagnosticLogs.at(-1).includes(SECRET), 'Raw parsing errors/property data never reach diagnostic output');
 console.log(`PASS: ${assertions} Apps Script receiver, RAW values, idempotency, baseline, retry and notification metadata checks; no network or Google access.`);
