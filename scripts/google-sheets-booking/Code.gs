@@ -246,6 +246,7 @@ function ecCapture_(state, snapshot) {
   /* A scope upgrade establishes the all-tab baseline silently, preserving pending callbacks. */
   if (!previous.tabs) { state.version = 2; state.snapshot = snapshot; return; }
   const affected = [];
+  const rowRefs = [];
   const changedIdentities = new Set();
   let globalRange = false;
   let inserted = 0;
@@ -259,6 +260,7 @@ function ecCapture_(state, snapshot) {
     const ownAppend = !old && expected && expected.hash === current[0];
     if (!old && !ownAppend) { inserted++; affected.push(current[1]); changedIdentities.add('0:' + current[1]); }
     if (old && old[0] !== current[0]) { edited++; affected.push(current[1]); changedIdentities.add('0:' + current[1]); }
+    if ((!old && !ownAppend) || (old && old[0] !== current[0])) rowRefs.push([current[1], current[0]]);
     if (expected) delete state.expected[identity];
   });
   Object.keys(previous.rows).forEach(identity => {
@@ -292,17 +294,21 @@ function ecCapture_(state, snapshot) {
     if (state.expected[identity].expires < now) delete state.expected[identity];
   });
   if (changedIdentities.size) {
-    if (state.outbox.length >= EC_BRIDGE.maxOutbox) ecFail_('outbox_full');
+    const batches = [];
+    for (let offset = 0; offset < rowRefs.length; offset += 3) batches.push(rowRefs.slice(offset, offset + 3));
+    if (!batches.length) batches.push([]);
+    if (state.outbox.length + batches.length > EC_BRIDGE.maxOutbox) ecFail_('outbox_full');
     const kinds = [inserted ? 'insert' : '', edited ? 'update' : '', deleted ? 'delete' : ''].filter(Boolean);
-    state.outbox.push({
+    batches.forEach((refs, index) => state.outbox.push({
       event_id: Utilities.getUuid(),
       kind: kinds.length === 1 ? kinds[0] : 'mixed',
-      changed_rows: changedIdentities.size,
-      range: globalRange ? 'DATA' : 'A' + Math.min.apply(null, affected) + ':I' + Math.max.apply(null, affected),
+      changed_rows: index ? refs.length : changedIdentities.size,
+      range: index ? 'A' + refs[0][0] + ':I' + refs[refs.length - 1][0] : (globalRange ? 'DATA' : 'A' + Math.min.apply(null, affected) + ':I' + Math.max.apply(null, affected)),
+      row_refs: refs,
       attempts: 0,
       next_attempt: 0,
       lease_until: 0
-    });
+    }));
   }
   state.snapshot = snapshot;
 }
@@ -415,7 +421,25 @@ function bookingSheetScan() {
   if (selected) ecDeliverChange_(selected);
 }
 
+/* Keep only row numbers/hashes in the outbox. Read matching rows just before the signed callback. */
+function ecChangeRows_(event) {
+  if (!Array.isArray(event.row_refs) || !event.row_refs.length) return [];
+  const sheet = ecSheet_();
+  ecHeaders_(sheet);
+  return event.row_refs.slice(0, 3).flatMap(ref => {
+    const row = ref[0];
+    if (!Number.isInteger(row) || row < 2 || row > EC_BRIDGE.maxRows) return [];
+    const raw = ecRaw_(sheet, 'A' + row + ':I' + row);
+    const values = Array.from({length: 9}, (_, column) => ecCell_(raw[0] && raw[0][column]));
+    const formulas = sheet.getRange(row, 1, 1, 9).getFormulas()[0];
+    if (formulas.some(Boolean) || ecRowHash_(values, formulas) !== ref[1] || values.some(value => value.length > 250)) return [];
+    return [{row: row, values: values}];
+  });
+}
+
 function ecDeliverChange_(event) {
+  let rows = [];
+  try { rows = ecChangeRows_(event); } catch (_) { /* Metadata notification remains available. */ }
   const payload = JSON.stringify({
     event_id: event.event_id,
     spreadsheet_id: EC_BRIDGE.spreadsheetId,
@@ -423,6 +447,7 @@ function ecDeliverChange_(event) {
     kind: event.kind,
     changed_rows: event.changed_rows,
     range: event.range,
+    booking_rows: rows,
     issued_at: Math.floor(Date.now() / 1000)
   });
   let acknowledged = false;

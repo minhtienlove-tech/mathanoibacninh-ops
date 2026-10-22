@@ -238,6 +238,28 @@ $change_message = end( $GLOBALS['sheet_zalo_sent'] )['text'];
 ec_sheet_expect( ! str_contains( $change_message, $booking['name'] ) && ! str_contains( $change_message, $booking['phone'] ) && str_contains( $change_message, ec_sheets_document_id() ), 'Change notification contains metadata and the fixed Sheet link without patient rows' );
 ec_sheet_expect( $mail_count === count( \PHPMailer\PHPMailer\PHPMailer::$sent ), 'Ordinary Sheet changes do not send appointment emails' );
 
+// Booking rows from Zalo carry details while storage remains encrypted and replay stays silent.
+$detail_rows = array( array( 'row' => 4, 'values' => array( 'synthetic-zalo-0001', '2026-10-22 12:00', 'Nguyễn Văn Kiểm Thử', '0912345678', '2026-10-23', '08:00', 'Yêu cầu chờ bệnh viện xác nhận', 'Zalo', '' ) ) );
+$detail_event = array( 'event_id' => 'synthetic-detail-event-0001', 'range' => 'A4:I4', 'booking_rows' => $detail_rows );
+$detail_key = '_ec_sheet_change_' . hash( 'sha256', $detail_event['event_id'] );
+ec_sheet_expect( ! is_wp_error( ec_sheets_change( ec_sheet_event_request( $detail_event ) ) ), 'Signed Zalo booking row is accepted without requiring a website consent timestamp' );
+$stored = get_option( $detail_key );
+ec_sheet_expect( isset( $stored['details_cipher'] ) && ! isset( $stored['booking_rows'] ) && ! str_contains( json_encode( $stored ), '0912345678' ), 'Patient details are encrypted before durable acknowledgement' );
+$detail_count = count( $GLOBALS['sheet_zalo_sent'] ); $detail_mail_count = count( \PHPMailer\PHPMailer\PHPMailer::$sent );
+ec_sheets_change_deliver( $detail_key ); ec_sheets_change_mail( $detail_key );
+$text = end( $GLOBALS['sheet_zalo_sent'] )['text'];
+ec_sheet_expect( str_contains( $text, 'Nguyễn Văn Kiểm Thử' ) && str_contains( $text, '0912345678' ) && str_contains( $text, '23/10/2026' ) && str_contains( $text, '08:00' ) && str_contains( $text, 'Nguồn: Zalo' ), 'Zalo receives the actual booking details from the changed primary row' );
+ec_sheet_expect( 'sent' === get_option( $detail_key )['mail_state'] && count( \PHPMailer\PHPMailer\PHPMailer::$sent ) === $detail_mail_count + 1, 'Sheet booking details use the configured Gmail channel' );
+ec_sheets_change( ec_sheet_event_request( $detail_event ) ); ec_sheets_change_deliver( $detail_key ); ec_sheets_change_mail( $detail_key );
+ec_sheet_expect( count( $GLOBALS['sheet_zalo_sent'] ) === $detail_count + 2 && count( \PHPMailer\PHPMailer\PHPMailer::$sent ) === $detail_mail_count + 1, 'Repeated callbacks/workers duplicate neither staff messages nor email' );
+$invalid_rows = $detail_rows; $invalid_rows[0]['values'] = array( 'wrong shape' );
+ec_sheet_error( ec_sheets_change( ec_sheet_event_request( array( 'event_id' => 'synthetic-detail-invalid', 'booking_rows' => $invalid_rows ) ) ), 'input', 'Malformed booking row fails before queueing' );
+ec_sheet_error( ec_sheets_change_details( array_fill( 0, 4, $detail_rows[0] ) ), 'input', 'Bound the number of detail rows per callback' );
+foreach ( array( array( 2, "Name\nInjected" ), array( 3, 'not-a-phone' ), array( 4, '2026-02-30' ), array( 5, '16:30' ), array( 7, 'Other tab' ) ) as $invalid ) {
+	$rows = $detail_rows; $rows[0]['values'][ $invalid[0] ] = $invalid[1];
+	ec_sheet_expect( '' === ec_sheets_change_details( $rows ), 'Unvalidated cell contents never enter staff notification text' );
+}
+
 // A queued change must not silently switch to newly configured Zalo recipients.
 $changed_event_id = 'synthetic-event-config-changed';
 ec_sheet_expect( ! is_wp_error( ec_sheets_change( ec_sheet_event_request( array( 'event_id' => $changed_event_id, 'kind' => 'update' ) ) ) ), 'Queue a change event with the current notification configuration' );

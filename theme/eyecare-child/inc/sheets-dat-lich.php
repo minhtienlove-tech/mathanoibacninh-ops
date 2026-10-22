@@ -124,12 +124,29 @@ function ec_sheets_bootstrap() {
 }
 add_action( 'init', 'ec_sheets_bootstrap' );
 
-/** Signed change events contain only metadata, never patient rows. */
+/** Only the nine booking columns in the fixed primary tab may contribute notification details. */
+function ec_sheets_change_details( $rows ) {
+	if ( ! is_array( $rows ) || count( $rows ) > 3 ) { return new WP_Error( 'input', 'Dữ liệu lịch không hợp lệ.' ); }
+	$parts = array(); $seen = array();
+	foreach ( $rows as $row ) {
+		if ( ! is_array( $row ) || ! is_int( $row['row'] ?? null ) || $row['row'] < 2 || $row['row'] > 20000 || ! is_array( $row['values'] ?? null ) || count( $row['values'] ) !== 9 || array_keys( $row['values'] ) !== range( 0, 8 ) ) { return new WP_Error( 'input', 'Dữ liệu lịch không hợp lệ.' ); }
+		$v = $row['values'];
+		foreach ( $v as $cell ) { if ( ! is_string( $cell ) || strlen( $cell ) > 1000 ) { return new WP_Error( 'input', 'Dữ liệu lịch không hợp lệ.' ); } }
+		// Non-booking rows/partial edits stay metadata-only. Never copy arbitrary cell contents.
+		if ( ! preg_match( '/^[A-Za-z0-9:._-]{1,160}$/D', $v[0] ) || isset( $seen[ $v[0] ] ) || ! preg_match( '/^[\p{L}\p{M}][\p{L}\p{M} .\x{2019}\x{0027}-]{1,99}$/uD', $v[2] ) || ! preg_match( '/^[0-9]{9,15}$/D', $v[3] ) || ! preg_match( '/^(\d{4})-(\d{2})-(\d{2})$/D', $v[4], $date ) || ! checkdate( (int) $date[2], (int) $date[3], (int) $date[1] ) || ! preg_match( '/^(?:0[7-9]|1[0-6]):(?:00|30)$/D', $v[5] ) || $v[5] < '07:30' || $v[5] > '16:00' || ! in_array( $v[7], array( 'Website', 'Zalo' ), true ) ) { continue; }
+		$seen[ $v[0] ] = true;
+		$status = in_array( $v[6], array( 'Yêu cầu chờ bệnh viện xác nhận', 'Chờ xác nhận', 'Đã xác nhận', 'Đã liên hệ', 'Đã khám', 'Đã hủy' ), true ) ? $v[6] : 'Đã cập nhật trên Sheet';
+		$parts[] = 'Dòng ' . $row['row'] . "\nHọ tên: " . $v[2] . "\nĐiện thoại: " . $v[3] . "\nNgày khám: " . $date[3] . '/' . $date[2] . '/' . $date[1] . "\nGiờ khám: " . $v[5] . "\nTrạng thái: " . $status . "\nNguồn: " . $v[7];
+	}
+	return implode( "\n\n", $parts );
+}
+
+/** HMAC authenticates row details; encrypt them at rest before acknowledging the event. */
 function ec_sheets_change( $request ) {
 	$s = ec_sheets_settings();
 	if ( empty( $s['changes_enabled'] ) || ! ec_sheets_ready( $s ) ) { return new WP_Error( 'disabled', 'Chưa bật theo dõi Sheet.', array( 'status' => 503 ) ); }
 	$raw = $request->get_body();
-	if ( strlen( $raw ) > 4096 ) { return new WP_Error( 'input', 'Yêu cầu không hợp lệ.', array( 'status' => 400 ) ); }
+	if ( strlen( $raw ) > 16384 ) { return new WP_Error( 'input', 'Yêu cầu không hợp lệ.', array( 'status' => 400 ) ); }
 	$envelope = json_decode( $raw, true );
 	$payload = $envelope['payload'] ?? null;
 	$signature = $envelope['signature'] ?? null;
@@ -142,6 +159,15 @@ function ec_sheets_change( $request ) {
 	try {
 		$existing = get_option( $event_key, false );
 		if ( false === $existing ) {
+			$details = ec_sheets_change_details( $d['booking_rows'] ?? array() );
+			if ( is_wp_error( $details ) ) { return $details; }
+			unset( $d['booking_rows'] );
+			if ( '' !== $details ) {
+				$d['details_cipher'] = ec_zalo_encrypt( $details );
+				if ( is_wp_error( $d['details_cipher'] ) ) { return new WP_Error( 'storage', 'Chưa lưu được thông báo.', array( 'status' => 503 ) ); }
+				$gmail = ec_gmail_settings(); $d['mail_version'] = $gmail['version'];
+				$d['mail_state'] = ! empty( $gmail['enabled'] ) && ec_gmail_ready( $gmail ) ? 'pending' : 'skipped';
+			}
 			$d['state'] = 'pending'; $d['sent'] = array(); $d['created_at'] = time(); $d['version'] = ec_zalo_settings()['version'];
 			if ( ! add_option( $event_key, $d, '', false ) ) { return new WP_Error( 'storage', 'Chưa lưu được sự kiện.', array( 'status' => 503 ) ); }
 			$recent = get_option( 'ec_sheets_recent_changes', array() );
@@ -151,6 +177,9 @@ function ec_sheets_change( $request ) {
 		if ( ! wp_next_scheduled( 'ec_sheets_change_deliver', array( $event_key ) ) && 'pending' === ( get_option( $event_key )['state'] ?? '' ) ) {
 			$queued = wp_schedule_single_event( time() + 3, 'ec_sheets_change_deliver', array( $event_key ), true );
 			if ( ! $queued || is_wp_error( $queued ) ) { return new WP_Error( 'queue', 'Chưa xếp được thông báo.', array( 'status' => 503 ) ); }
+		}
+		if ( 'pending' === ( get_option( $event_key )['mail_state'] ?? '' ) && ! wp_next_scheduled( 'ec_sheets_change_mail', array( $event_key ) ) ) {
+			if ( ! wp_schedule_single_event( time() + 3, 'ec_sheets_change_mail', array( $event_key ), true ) ) { return new WP_Error( 'queue', 'Chưa xếp được email.', array( 'status' => 503 ) ); }
 		}
 		return array( 'ok' => true, 'event_id' => $d['event_id'] );
 	} finally { ec_booking_unlock( $lock ); }
@@ -167,7 +196,8 @@ function ec_sheets_change_deliver( $key ) {
 		if ( isset( $d['version'] ) && $d['version'] !== $s['version'] ) { $d['state'] = 'skipped'; update_option( $key, $d, false ); return; }
 		$d['version'] = $s['version']; $d['state'] = 'sending'; $d['started_at'] = time();
 		if ( ! update_option( $key, $d, false ) ) { return; }
-		$text = "GOOGLE SHEET ĐẶT LỊCH ĐÃ THAY ĐỔI\nBảng: Đặt lịch khám BVMHNBN\nVùng dữ liệu: " . $d['range'] . "\nSố dòng thay đổi: " . $d['changed_rows'] . "\nXem bảng: https://docs.google.com/spreadsheets/d/" . ec_sheets_document_id() . '/edit#gid=0';
+		$text = ec_sheets_change_message( $d );
+		if ( is_wp_error( $text ) ) { $d['state'] = 'failed'; update_option( $key, $d, false ); return; }
 		$recipients = ec_zalo_selected_recipient_ids( $s );
 		if ( ! $recipients ) { $d['state'] = 'failed'; update_option( $key, $d, false ); return; }
 		foreach ( $recipients as $chat ) {
@@ -181,6 +211,29 @@ function ec_sheets_change_deliver( $key ) {
 	} finally { ec_booking_unlock( $lock ); }
 }
 add_action( 'ec_sheets_change_deliver', 'ec_sheets_change_deliver' );
+
+function ec_sheets_change_message( $d ) {
+	$details = isset( $d['details_cipher'] ) ? ec_zalo_token( array( 'cipher' => $d['details_cipher'] ) ) : '';
+	if ( isset( $d['details_cipher'] ) && '' === $details ) { return new WP_Error( 'crypto', 'Không đọc được thông báo bảo mật.' ); }
+	return "GOOGLE SHEET ĐẶT LỊCH ĐÃ THAY ĐỔI\nBảng: Đặt lịch khám BVMHNBN\nVùng dữ liệu: " . $d['range'] . "\nSố dòng thay đổi: " . $d['changed_rows'] . ( $details ? "\n\n" . $details : '' ) . "\nXem bảng: https://docs.google.com/spreadsheets/d/" . ec_sheets_document_id() . '/edit#gid=0';
+}
+
+/** SMTP has its own delivery state so a Zalo retry never duplicates an accepted email. */
+function ec_sheets_change_mail( $key ) {
+	if ( ! is_string( $key ) || ! preg_match( '/^_ec_sheet_change_[a-f0-9]{64}$/D', $key ) ) { return; }
+	$lock = ec_booking_lock( $key ); if ( ! $lock ) { return; }
+	try {
+		$d = get_option( $key ); $s = ec_gmail_settings();
+		if ( ! is_array( $d ) || 'pending' !== ( $d['mail_state'] ?? '' ) ) { return; }
+		if ( empty( ec_sheets_settings()['changes_enabled'] ) || empty( $s['enabled'] ) || ( $d['mail_version'] ?? '' ) !== $s['version'] ) { $d['mail_state'] = 'skipped'; update_option( $key, $d, false ); return; }
+		$text = ec_sheets_change_message( $d );
+		if ( is_wp_error( $text ) ) { $d['mail_state'] = 'failed'; update_option( $key, $d, false ); return; }
+		$d['mail_state'] = 'sending'; if ( ! update_option( $key, $d, false ) ) { return; }
+		$r = ec_gmail_send( 'Thông tin lịch khám từ Google Sheet – BVMHNBN', $text );
+		$d['mail_state'] = is_wp_error( $r ) ? 'unknown' : 'sent'; update_option( $key, $d, false );
+	} finally { ec_booking_unlock( $lock ); }
+}
+add_action( 'ec_sheets_change_mail', 'ec_sheets_change_mail' );
 
 function ec_sheets_change_retry() {
 	if ( ! current_user_can( 'manage_options' ) ) { wp_die( 'Không có quyền gửi thông báo.' ); }
@@ -218,7 +271,7 @@ function ec_sheets_page() {
 	echo '<p><label><input type="checkbox" name="changes_enabled" value="1" ' . checked( $s['changes_enabled'], true, false ) . '> Bật tiếp nhận thay đổi Sheet từ trigger để gửi Zalo</label></p>';
 	echo '<p>Giữ bảng riêng tư. Cấu hình và cấp quyền Apps Script trước khi bật. Các lịch cũ không tự đồng bộ hoặc gửi lại.</p>';
 	submit_button( 'Lưu và kiểm tra kết nối' ); echo '</form>';
-	echo '<h2>Thông báo thay đổi Sheet gần đây</h2><p>Theo dõi dữ liệu trên toàn bộ các trang tính; thay đổi chỉ định dạng không gửi tin. Các chỉnh sửa qua API được kiểm tra mỗi 5 phút.</p>';
+	echo '<h2>Thông báo thay đổi Sheet gần đây</h2><p>Lịch thêm hoặc sửa trong A:I kèm họ tên, điện thoại, ngày giờ khám đến nhân viên Zalo và Gmail đã cấu hình. Các vùng khác chỉ báo thay đổi; định dạng không gửi tin. Chỉnh sửa qua API được kiểm tra mỗi 5 phút. Nhiều dòng được chia thành các tin, tối đa 3 lịch mỗi tin.</p>';
 	$labels = array( 'pending' => 'Chờ gửi Zalo', 'sending' => 'Đang gửi; kiểm tra Zalo nếu kéo dài', 'sent' => 'Đã gửi Zalo', 'failed' => 'Zalo chưa chấp nhận thông báo', 'unknown' => 'Chưa rõ kết quả; kiểm tra tin trên Zalo trước khi gửi lại', 'skipped' => 'Bỏ qua do đã tắt hoặc thay đổi cấu hình' );
 	$recent = get_option( 'ec_sheets_recent_changes', array() );
 	foreach ( is_array( $recent ) ? $recent : array() as $key ) {
@@ -226,6 +279,7 @@ function ec_sheets_page() {
 		$d = get_option( $key );
 		if ( ! is_array( $d ) ) { continue; }
 		echo '<p><strong>' . esc_html( wp_date( 'd/m/Y H:i', (int) $d['created_at'] ) ) . '</strong> · ' . esc_html( $d['range'] ) . ' · ' . (int) $d['changed_rows'] . ' dòng · ' . esc_html( $labels[ $d['state'] ] ?? 'Chưa xác định' );
+		if ( isset( $d['details_cipher'] ) ) { echo ' · Có thông tin lịch khám · Gmail: ' . esc_html( array( 'pending' => 'Chờ gửi', 'sending' => 'Đang gửi', 'sent' => 'SMTP đã nhận', 'skipped' => 'Không gửi do cấu hình', 'unknown' => 'Cần kiểm tra hộp thư', 'failed' => 'Chưa gửi được' )[ $d['mail_state'] ?? '' ] ?? 'Chưa xác định' ); }
 		$stale = 'sending' === $d['state'] && (int) ( $d['started_at'] ?? 0 ) < time() - 120;
 		if ( ( $stale || in_array( $d['state'], array( 'failed', 'unknown' ), true ) ) && ec_zalo_settings()['enabled'] && ( $d['version'] ?? '' ) === ec_zalo_settings()['version'] ) {
 			$url = wp_nonce_url( admin_url( 'admin-post.php?action=ec_sheets_change_retry&event=' . rawurlencode( $key ) ), 'ec_sheets_change_retry_' . $key );

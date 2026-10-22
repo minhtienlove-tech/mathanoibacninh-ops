@@ -1,4 +1,10 @@
 # Production changelog
+## 2026-10-22 — thông tin lịch Zalo ghi vào Google Sheet
+
+- Chẩn đoán: dòng Tiên ghi từ Zalo được trigger nhận và Zalo API chấp nhận thông báo chung đủ 3 người, nhưng callback cũ chỉ có metadata nên không có thông tin lịch. Không tự gửi lại lịch cũ đã thành công.
+- Bổ sung chi tiết cho thay đổi A:I chính: trigger giữ số dòng/hash, đọc lại chỉ khi hash khớp, bỏ công thức; chia tối đa 3 dòng mỗi sự kiện, giữ toàn bộ phần còn lại trong outbox. PHP kiểm tra tên/điện thoại/ngày/giờ/nguồn, mã hóa nội dung trước ACK, gửi Zalo/Gmail hiện có với trạng thái riêng và dedupe. Các vùng khác vẫn chỉ thông báo chung. Không nhập hồ sơ Sheet vào danh sách lịch WordPress.
+- Git pull trước sửa. Kiểm tra mock: 133 Apps Script và 105 tích hợp PHP đạt, không dùng dữ liệu khách/gửi thật. Chuẩn bị backup dưới khóa deploy tại `~/backups/booking-sheet-details-20261022/`, gồm database, PHP và nguồn trigger trước sửa. Cần xác minh production và gửi bù có mục tiêu dòng Tiên sau triển khai.
+
 ## 2026-10-19 — chuẩn bị Google Sheet trước thông báo Zalo/Gmail
 
 - Theo yêu cầu: form → ghi đúng bảng Đặt lịch khám BVMHNBN, tab 0, chín cột A:I → xác nhận mã/nội dung/dòng → mới mở hàng đợi Zalo/Gmail hiện có. Gắn yêu cầu Sheet vào hồ sơ ngay khi lưu; chặn cả queue, worker và gửi lại thủ công trước xác nhận. Outbox có retry cùng mã, phục hồi gián đoạn và trạng thái admin; không tự gửi lại kết quả thông báo chưa rõ, không đồng bộ lịch cũ hàng loạt.
