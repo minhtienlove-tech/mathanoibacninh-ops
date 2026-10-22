@@ -10,7 +10,7 @@ foreach (file($base.'/expected.sha256',FILE_IGNORE_NEW_LINES|FILE_SKIP_EMPTY_LIN
 $keys=['optical-space','glasses-questions','women-day'];
 $expected=[
  'optical-space'=>home_url('/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/'),
- 'glasses-questions'=>home_url('/kien-thuc/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/'),
+ 'glasses-questions'=>home_url('/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/'),
  'women-day'=>home_url('/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/')
 ];
 $assets=json_decode(file_get_contents($base.'/media-manifest.json'),true);
