@@ -1,0 +1,11 @@
+# Three WordPress.com articles reworked for the hospital website
+
+User supplied all three public source articles on 22 October 2026 and requested cloning to the hospital website with the requirements used for prior articles: at least 2,500 whitespace-delimited Vietnamese words, SEO metadata, natural semantic/local terms, concise answers and six visible FAQs, actual source evidence, photographs/captions, and reciprocal internal links.
+
+Sources and intended destinations are recorded per article in post.json. Drafts are substantially expanded and edited rather than reproducing a short syndicated body. Medical context uses limited, cited primary NEI/MedlinePlus explanations. No individual medical reviewer, event date inferred from publication, attendee total, diagnosis, stock, price or warranty is invented. Source photographs are from the hospital's supplied WordPress.com pages; faces are not identified and check-in props do not establish diagnoses. Image04 of the women-day set was inspected: envelopes carry a 20/10 greeting, not recipient names or gift amounts.
+
+Nine derived WebP files remain outside Git until media import, under the local task's temporary staging directory and remote backup. Their source URLs, exact digests, sizes, alt text and captions are in media-manifest.json. Long edge is at most1600px; aspect ratios preserved. WordPress attachment HTML supplies width/height and responsive sizes. Reuse existing theme image styles and FAQ/schema handling; no theme/plugin/core edits needed.
+
+Run publish.php with WP-CLI only after database/source backup, under the shared deployment flock, with EYECARE_BACKUP set to the private backup directory containing these sources and images. It hashes the drafts, verifies six FAQs/length and category, stages three drafts, imports nine photos, publishes and adds contextual backlinks to four specified old posts. publication.json supports resumable operation and records IDs. Source content of each old post is saved before edits.
+
+Rollback selectively: set the three recorded post IDs to draft and restore the four old post bodies from post-ID-before.html, then purge cache. Keep media and backups. Do not restore the whole database or delete attachments. This should run under the same deployment lock.

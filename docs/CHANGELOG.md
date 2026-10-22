@@ -1,4 +1,10 @@
 # Production changelog
+## 2026-10-22 — ba bài kính mắt và tri ân 20/10 từ WordPress.com
+
+- Theo yêu cầu người dùng, biên tập ba nguồn WordPress.com thành bài website bệnh viện: không gian kính mắt, câu hỏi trước khi đặt kính mới và tri ân nữ nhân viên y tế 20/10. Mỗi bài trên 2.500 từ theo khoảng trắng, có sáu FAQ, mô tả/từ khóa, địa chỉ và liên kết có ngữ cảnh. Nguồn/ảnh gốc do kênh bệnh viện công bố; không tự thêm ngày sự kiện, người tham gia, chẩn đoán, giá/bảo hành hoặc bác sĩ duyệt. Phần kính đối chiếu NEI/MedlinePlus và điều kiện chương trình #1765.
+- Soạn chín ảnh WebP cạnh dài tối đa 1600px, giữ tỷ lệ, khoảng 180–412KB/ảnh; alt/chú thích riêng. Kiểm tra bộ ảnh gốc và ảnh phong bì 20/10 không có tên người nhận/giá trị quà. Media giữ ngoài Git; nguồn, manifest và script trong `docs/drafts/wordpress-clone-20261022/`.
+- Git pull trước sửa; PHP lint publish.php và footer.php/page-lien-he.php đạt. Chuẩn bị xuất bản dưới khóa deploy sau backup database/child theme tại `~/backups/wordpress-clone-20261022/`. Script tạo ba bài nháp rồi xuất bản, thêm liên kết ngược từ bốn bài #1447/#1575/#1685/#1847 và lưu nội dung cũ để hoàn tác chọn lọc. Không sửa mã theme/core/plugin.
+
 ## 2026-10-22 — tự động xác nhận lịch mới trên website
 
 - Theo yêu cầu tiếp theo, lịch website mới có initial_status và meta trạng thái confirmed ngay khi lưu, trước hooks thông báo. Trạng thái khởi tạo bất biến được ghi cột G Sheet để retry không xung đột nếu nhân viên cập nhật trạng thái sau đó. Zalo, Gmail và phản hồi thành công hiển thị đúng trạng thái; replay lịch cũ không tự xác nhận lại hồ sơ đã hủy. Cập nhật giải thích ở form/trang đặt lịch và admin, giữ mốc 16:00. Không đổi hàng loạt lịch cũ hoặc trạng thái dòng Zalo.
