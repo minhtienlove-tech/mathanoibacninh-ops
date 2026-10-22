@@ -79,6 +79,8 @@ foreach ($articles as $key=>$a) {
     update_post_meta($id,'_bvmat_tu_khoa_chinh',$m['focus_keyword']);
     update_post_meta($id,'_bvmat_tu_khoa_semantic',implode(', ',$m['semantic_keywords']));
     update_post_meta($id,'_eyecare_semantic_keywords',$m['semantic_keywords']);
+    // Existing theme gate suppresses plugin-inferred doctor credit and duplicate Article output.
+    if ((int)$m['category_id']===7) update_post_meta($id,'_eyecare_content_review_status','pending-author-and-medical-review');
     update_post_meta($id,'_eyecare_editorial_source',$m['source_url'].' | Hospital-owned source article and photos, reworked with user authorization; no invented event date, participant count, diagnosis, price, warranty or medical reviewer. Medical context references NEI/MedlinePlus where applicable.');
     file_put_contents($base.'/'.$key.'/content-published.html',$content);
 }
