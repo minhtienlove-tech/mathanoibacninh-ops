@@ -1277,6 +1277,7 @@ function eyecare_an_ghi_cong_ban_nhap_chua_duyet() {
 	$breadcrumb = OBS_Loader::get( 'breadcrumb' );
 	if ( $breadcrumb ) {
 		remove_filter( 'the_content', array( $breadcrumb, 'auto_insert' ), 5 );
+		remove_action( 'wp_head', array( $breadcrumb, 'render_schema' ), 15 );
 	}
 	$reading_time = OBS_Loader::get( 'reading_time' );
 	if ( $reading_time ) {
