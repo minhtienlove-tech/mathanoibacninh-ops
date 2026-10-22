@@ -1,0 +1,465 @@
+{
+  "checked_at": "2026-10-22T16:59:05.048155+07:00",
+  "articles": {
+    "optical-space": {
+      "url": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/",
+      "http_status": 200,
+      "final_url": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/",
+      "h1_count": 1,
+      "meta_description_count": 1,
+      "meta_description": "Khám phá không gian kính mắt tại Bệnh viện Mắt Hà Nội – Bắc Ninh qua ảnh thực tế; chuẩn bị xem gọng, thử kính và trao đổi trước khi lựa chọn.",
+      "canonical_count": 1,
+      "canonical": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/",
+      "article_schema_count": 1,
+      "article_types": [
+        "Article"
+      ],
+      "author": [
+        {
+          "@id": "https://mathanoibacninh.com/#to-chuc"
+        }
+      ],
+      "reviewedBy_present": false,
+      "faq_schema_count": 1,
+      "faq_question_counts": [
+        6
+      ],
+      "json_errors": [],
+      "body_words": 3549,
+      "images": [
+        {
+          "src": "https://mathanoibacninh.com/wp-content/uploads/2026/10/khong-gian-kinh-mat-benh-vien-tu-trung-bay-1024x768.webp",
+          "alt": "Dãy tủ trưng bày gọng kính tại Bệnh viện Mắt Hà Nội – Bắc Ninh",
+          "caption": "Khu vực trưng bày gọng kính trong bộ ảnh do bệnh viện công bố.",
+          "width": "1024",
+          "height": "768"
+        },
+        {
+          "src": "https://mathanoibacninh.com/wp-content/uploads/2026/10/khong-gian-kinh-mat-cac-mau-gong-1024x768.webp",
+          "alt": "Nhiều mẫu gọng kính được đặt trên giá trưng bày tại bệnh viện",
+          "caption": "Các mẫu gọng trong bộ ảnh; sản phẩm và giá cần được xác nhận khi tư vấn.",
+          "width": "1024",
+          "height": "768"
+        },
+        {
+          "src": "https://mathanoibacninh.com/wp-content/uploads/2026/10/khong-gian-kinh-mat-trao-doi-tu-van-1024x768.webp",
+          "alt": "Cuộc trao đổi bên tủ trưng bày gọng kính của bệnh viện",
+          "caption": "Trao đổi tại khu vực xem gọng kính, giúp làm rõ nhu cầu trước khi lựa chọn.",
+          "width": "1024",
+          "height": "768"
+        },
+        {
+          "src": "https://mathanoibacninh.com/wp-content/uploads/2026/10/khong-gian-kinh-mat-goc-check-in-768x1024.webp",
+          "alt": "Người đeo kính tại góc check-in có nhận diện Bệnh viện Mắt Hà Nội – Bắc Ninh",
+          "caption": "Khoảnh khắc tại góc check-in trong bộ ảnh giới thiệu không gian kính mắt.",
+          "width": "768",
+          "height": "1024"
+        }
+      ],
+      "internal_body_links": [
+        "https://mathanoibacninh.com/dat-lich-kham/",
+        "https://mathanoibacninh.com/kien-thuc/do-mat-cat-kinh-tai-benh-vien/",
+        "https://mathanoibacninh.com/kien-thuc/do-mat-lam-kinh-va-kham-mat-khac-nhau/",
+        "https://mathanoibacninh.com/kien-thuc/kinh-moi-dung-don-nhung-deo-kho-chiu/",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/",
+        "https://mathanoibacninh.com/lien-he/",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#anh-tren-bai-co-cho-biet-gong-nao-con-hang-hom-nay-khong",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#can-mang-gi-khi-muon-xem-va-thay-kinh",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#cau-hoi-thuong-gap",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#chi-phi",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#chua-chon-duoc-gong-co-the-den-tu-van-khong",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#chuan-bi-truoc-khi-den",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#co-the-biet-tong-gia-kinh-chi-qua-nhan-trong-anh-khong",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#dia-chi-lien-he",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#goc-check-in",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#gong-va-trong",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#kham-va-chon-kinh",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#khong-gian-kinh-mat",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#lam-sao-hoi-truoc-ve-mau-kinh-hoac-lich-tu-van",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#nguon-thong-tin",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#nhan-kinh",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#thu-gong",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#thu-gong-vua-mat-da-du-de-quyet-dinh-kinh-hoan-chinh-chua",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#trao-doi-nhu-cau",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/#tu-trung-bay"
+      ],
+      "missing_anchor_targets": [],
+      "raw_placeholders": false,
+      "old_booking_promise": false,
+      "breadcrumb_schema_count": 1,
+      "body_words_without_toc_nav_asides": 3329,
+      "body_word_count_method": "Visible article content; remove .obs-toc, nav, aside, scripts and styles; include captions and FAQ",
+      "rendered_faq_count": 6,
+      "toc_count": 1
+    },
+    "glasses-questions": {
+      "url": "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/",
+      "http_status": 200,
+      "final_url": "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/",
+      "h1_count": 1,
+      "meta_description_count": 1,
+      "meta_description": "Tư vấn kính mắt tại Bệnh viện Mắt Hà Nội – Bắc Ninh: làm rõ đơn kính, gọng, tròng, chi phí, ưu đãi và hỗ trợ trước khi đặt kính mới.",
+      "canonical_count": 1,
+      "canonical": "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/",
+      "article_schema_count": 1,
+      "article_types": [
+        [
+          "MedicalWebPage",
+          "Article"
+        ]
+      ],
+      "author": [
+        null
+      ],
+      "reviewedBy_present": false,
+      "faq_schema_count": 1,
+      "faq_question_counts": [
+        6
+      ],
+      "json_errors": [],
+      "body_words": 3567,
+      "images": [
+        {
+          "src": "https://mathanoibacninh.com/wp-content/uploads/2026/10/tu-van-kinh-mat-uu-dai-tang-gong-819x1024.webp",
+          "alt": "Ấn phẩm mua mắt kính tặng gọng kính của Bệnh viện Mắt Hà Nội – Bắc Ninh",
+          "caption": "Ấn phẩm do bệnh viện công bố; sản phẩm đủ điều kiện và phạm vi ưu đãi cần được xác nhận trước khi đặt kính.",
+          "width": "819",
+          "height": "1024"
+        }
+      ],
+      "internal_body_links": [
+        "https://mathanoibacninh.com/",
+        "https://mathanoibacninh.com/bac-si/dang-cong-hai/",
+        "https://mathanoibacninh.com/dat-lich-kham/",
+        "https://mathanoibacninh.com/kien-thuc/",
+        "https://mathanoibacninh.com/kien-thuc/do-mat-cat-kinh-tai-benh-vien/",
+        "https://mathanoibacninh.com/kien-thuc/do-mat-lam-kinh-va-kham-mat-khac-nhau/",
+        "https://mathanoibacninh.com/kien-thuc/kinh-da-trong-sau-tuoi-40/",
+        "https://mathanoibacninh.com/kien-thuc/kinh-moi-dung-don-nhung-deo-kho-chiu/",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#1-toi-can-chiec-kinh-moi-cho-nhung-hoat-dong-nao",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#10-toi-can-kiem-tra-dieu-gi-khi-nhan-chiec-kinh-moi",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#11-ho-tro-sau-khi-nhan-kinh-duoc-ap-dung-nhu-the-nao",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#2-toi-can-do-khuc-xa-kham-mat-hay-ca-hai",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#3-ket-qua-kiem-tra-va-don-kinh-duoc-giai-thich-the-nao",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#4-vi-sao-loai-trong-nay-phu-hop-voi-nhu-cau-cua-toi",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#5-nhung-tinh-nang-bo-sung-co-that-su-can-voi-toi-khong",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#6-gong-kinh-nay-co-vua-va-phu-hop-voi-cach-su-dung-khong",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#7-tong-chi-phi-lam-kinh-bao-gom-nhung-khoan-nao",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#8-uu-dai-tang-gong-co-ap-dung-cho-kinh-toi-dinh-dat-khong",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#9-khi-nao-toi-co-the-nhan-kinh-va-ai-la-dau-moi-lien-he",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#ai-cung-can-kinh-da-trong-khi-lon-tuoi-khong",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#cau-hoi-thuong-gap-truoc-khi-dat-kinh-moi",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#chua-chon-duoc-gong-co-den-tu-van-duoc-khong",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#chuan-bi-ngan-gon-truoc-buoi-tu-van-kinh-mat",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#co-ket-qua-do-tu-dong-roi-co-the-chot-kinh-ngay-khong",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#gia-gong-tren-anh-co-phai-tong-tien-chiec-kinh-khong",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#mua-mat-kinh-co-chac-chan-duoc-tang-moi-mau-gong-khong",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#nguon-doi-chieu-va-pham-vi-bai-viet",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#nhan-kinh-xong-thay-kho-chiu-thi-nen-lam-gi",
+        "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/#tim-hieu-tu-van-kinh-mat-tai-benh-vien-mat-ha-noi-bac-ninh",
+        "https://mathanoibacninh.com/lien-he/",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/",
+        "https://mathanoibacninh.com/tin-tuc/uu-dai-va-ho-tro-nguoi-benh/ba-chuong-trinh-tri-an-12-10-2026/"
+      ],
+      "missing_anchor_targets": [],
+      "raw_placeholders": false,
+      "old_booking_promise": false,
+      "breadcrumb_schema_count": 1,
+      "body_words_without_toc_nav_asides": 3219,
+      "body_word_count_method": "Visible article content; remove .obs-toc, nav, aside, scripts and styles; include captions and FAQ",
+      "rendered_faq_count": 6,
+      "toc_count": 1
+    },
+    "women-day": {
+      "url": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/",
+      "http_status": 200,
+      "final_url": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/",
+      "h1_count": 1,
+      "meta_description_count": 1,
+      "meta_description": "Bệnh viện Mắt Hà Nội – Bắc Ninh tri ân nữ cán bộ, nhân viên y tế dịp 20/10 qua bộ ảnh gặp gỡ, hoa, lời chúc và sự kết nối giữa đồng nghiệp.",
+      "canonical_count": 1,
+      "canonical": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/",
+      "article_schema_count": 1,
+      "article_types": [
+        "Article"
+      ],
+      "author": [
+        {
+          "@id": "https://mathanoibacninh.com/#to-chuc"
+        }
+      ],
+      "reviewedBy_present": false,
+      "faq_schema_count": 1,
+      "faq_question_counts": [
+        6
+      ],
+      "json_errors": [],
+      "body_words": 3218,
+      "images": [
+        {
+          "src": "https://mathanoibacninh.com/wp-content/uploads/2026/10/tri-an-nu-nhan-vien-y-te-20-10-tap-the-1024x768.webp",
+          "alt": "Cán bộ, nhân viên bên bàn có hoa và nhận diện Bệnh viện Mắt Hà Nội – Bắc Ninh trong bộ ảnh 20/10",
+          "caption": "Khoảnh khắc tập thể trong bộ ảnh tri ân nhân dịp Ngày Phụ nữ Việt Nam 20/10.",
+          "width": "1024",
+          "height": "768"
+        },
+        {
+          "src": "https://mathanoibacninh.com/wp-content/uploads/2026/10/tri-an-nu-nhan-vien-y-te-20-10-gap-go-1024x768.webp",
+          "alt": "Tập thể cán bộ nhân viên bên màn hình chúc mừng Ngày Phụ nữ Việt Nam 20/10 tại bệnh viện",
+          "caption": "Không gian gặp gỡ có thông điệp chúc mừng Ngày Phụ nữ Việt Nam.",
+          "width": "1024",
+          "height": "768"
+        },
+        {
+          "src": "https://mathanoibacninh.com/wp-content/uploads/2026/10/tri-an-nu-nhan-vien-y-te-20-10-hoa-loi-chuc-1024x768.webp",
+          "alt": "Hoa và thiệp chúc mừng trong bộ ảnh tri ân nữ cán bộ nhân viên y tế dịp 20/10",
+          "caption": "Hoa và thiệp là những chi tiết được ghi lại trong bộ ảnh chúc mừng 20/10.",
+          "width": "1024",
+          "height": "768"
+        },
+        {
+          "src": "https://mathanoibacninh.com/wp-content/uploads/2026/10/tri-an-nu-nhan-vien-y-te-20-10-giao-luu-1024x768.webp",
+          "alt": "Cán bộ nhân viên vỗ tay trong phần giao lưu được ghi lại tại Bệnh viện Mắt Hà Nội – Bắc Ninh",
+          "caption": "Niềm vui được chia sẻ giữa đồng nghiệp trong phần giao lưu của bộ ảnh.",
+          "width": "1024",
+          "height": "768"
+        }
+      ],
+      "internal_body_links": [
+        "https://mathanoibacninh.com/doi-ngu-bac-si/",
+        "https://mathanoibacninh.com/gioi-thieu/",
+        "https://mathanoibacninh.com/lien-he/",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/gioi-thieu-doi-song-benh-vien/",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/hoat-dong-ngay-15-10-2026-benh-vien-mat-ha-noi-bac-ninh/",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#bai-viet-tri-an-nu-can-bo-nhan-vien-y-te-2010-noi-ve-hoat-dong-nao",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#bo-anh-tri-an-20-10",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#cau-hoi-thuong-gap",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#co-the-xem-them-loi-chuc-va-hinh-anh-o-dau",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#con-nguoi-va-doi-song-benh-vien",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#hoa-thiep-va-loi-chuc",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#ket-noi-dong-nghiep",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#lam-gi-de-tiep-noi-tinh-than-tri-an-sau-ngay-2010",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#lien-he-benh-vien-mat-ha-noi-bac-ninh-bang-cach-nao",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#lien-he-va-nguon-tu-lieu",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#loi-cam-on-nu-nhan-vien-y-te",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#loi-chuc-ngay-phu-nu-viet-nam",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#loi-chuc-tiep-noi-ngay-thuong",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#ngay-dang-bai-co-phai-ngay-dien-ra-cuoc-gap-trong-anh-khong",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#nguoi-cham-soc-cung-can-duoc-quan-tam",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#thong-diep-chinh-benh-vien-gui-toi-nu-can-bo-nhan-vien-la-gi",
+        "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/#tran-trong-khac-biet"
+      ],
+      "missing_anchor_targets": [],
+      "raw_placeholders": false,
+      "old_booking_promise": false,
+      "breadcrumb_schema_count": 1,
+      "body_words_without_toc_nav_asides": 3013,
+      "body_word_count_method": "Visible article content; remove .obs-toc, nav, aside, scripts and styles; include captions and FAQ",
+      "rendered_faq_count": 6,
+      "toc_count": 1
+    }
+  },
+  "backlinks": {
+    "1447": {
+      "url": "https://mathanoibacninh.com/kien-thuc/do-mat-cat-kinh-tai-benh-vien/",
+      "http_status": 200,
+      "target": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/",
+      "link_texts": [
+        "không gian kính mắt tại Bệnh viện Mắt Hà Nội – Bắc Ninh"
+      ]
+    },
+    "1575": {
+      "url": "https://mathanoibacninh.com/kien-thuc/kinh-moi-dung-don-nhung-deo-kho-chiu/",
+      "http_status": 200,
+      "target": "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/",
+      "link_texts": [
+        "những câu hỏi cần làm rõ khi tư vấn kính mới"
+      ]
+    },
+    "1685": {
+      "url": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/gioi-thieu-doi-song-benh-vien/",
+      "http_status": 200,
+      "target": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/",
+      "link_texts": [
+        "hoạt động tri ân nữ cán bộ, nhân viên y tế nhân dịp 20/10"
+      ]
+    },
+    "1847": {
+      "url": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/hoat-dong-ngay-15-10-2026-benh-vien-mat-ha-noi-bac-ninh/",
+      "http_status": 200,
+      "target": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/",
+      "link_texts": [
+        "những khoảnh khắc chúc mừng Ngày Phụ nữ Việt Nam 20/10"
+      ]
+    }
+  },
+  "issues": [],
+  "url_checks": [
+    {
+      "url": "https://mathanoibacninh.com/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/bac-si/dang-cong-hai/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/bac-si/dang-cong-hai/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/dat-lich-kham/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/dat-lich-kham/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/doi-ngu-bac-si/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/doi-ngu-bac-si/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/gioi-thieu/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/gioi-thieu/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/kien-thuc/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/kien-thuc/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/kien-thuc/do-mat-cat-kinh-tai-benh-vien/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/kien-thuc/do-mat-cat-kinh-tai-benh-vien/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/kien-thuc/do-mat-lam-kinh-va-kham-mat-khac-nhau/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/kien-thuc/do-mat-lam-kinh-va-kham-mat-khac-nhau/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/kien-thuc/kinh-da-trong-sau-tuoi-40/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/kien-thuc/kinh-da-trong-sau-tuoi-40/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/kien-thuc/kinh-moi-dung-don-nhung-deo-kho-chiu/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/kien-thuc/kinh-moi-dung-don-nhung-deo-kho-chiu/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/kien-thuc/tat-khuc-xa-nguoi-lon/tu-van-kinh-mat-cau-hoi-truoc-khi-dat-kinh-moi/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/lien-he/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/lien-he/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/gioi-thieu-doi-song-benh-vien/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/gioi-thieu-doi-song-benh-vien/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/hoat-dong-ngay-15-10-2026-benh-vien-mat-ha-noi-bac-ninh/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/hoat-dong-ngay-15-10-2026-benh-vien-mat-ha-noi-bac-ninh/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/khong-gian-kinh-mat-benh-vien-mat-ha-noi-bac-ninh/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/tin-tuc/doi-song-benh-vien/tri-an-nu-can-bo-nhan-vien-y-te-nhan-dip-20-10/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/tin-tuc/uu-dai-va-ho-tro-nguoi-benh/ba-chuong-trinh-tri-an-12-10-2026/",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/tin-tuc/uu-dai-va-ho-tro-nguoi-benh/ba-chuong-trinh-tri-an-12-10-2026/",
+      "content_type": "text/html; charset=UTF-8"
+    },
+    {
+      "url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/khong-gian-kinh-mat-benh-vien-tu-trung-bay-1024x768.webp",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/khong-gian-kinh-mat-benh-vien-tu-trung-bay-1024x768.webp",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/khong-gian-kinh-mat-cac-mau-gong-1024x768.webp",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/khong-gian-kinh-mat-cac-mau-gong-1024x768.webp",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/khong-gian-kinh-mat-goc-check-in-768x1024.webp",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/khong-gian-kinh-mat-goc-check-in-768x1024.webp",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/khong-gian-kinh-mat-trao-doi-tu-van-1024x768.webp",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/khong-gian-kinh-mat-trao-doi-tu-van-1024x768.webp",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/tri-an-nu-nhan-vien-y-te-20-10-gap-go-1024x768.webp",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/tri-an-nu-nhan-vien-y-te-20-10-gap-go-1024x768.webp",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/tri-an-nu-nhan-vien-y-te-20-10-giao-luu-1024x768.webp",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/tri-an-nu-nhan-vien-y-te-20-10-giao-luu-1024x768.webp",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/tri-an-nu-nhan-vien-y-te-20-10-hoa-loi-chuc-1024x768.webp",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/tri-an-nu-nhan-vien-y-te-20-10-hoa-loi-chuc-1024x768.webp",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/tri-an-nu-nhan-vien-y-te-20-10-tap-the-1024x768.webp",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/tri-an-nu-nhan-vien-y-te-20-10-tap-the-1024x768.webp",
+      "content_type": "image/webp"
+    },
+    {
+      "url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/tu-van-kinh-mat-uu-dai-tang-gong-819x1024.webp",
+      "status": 200,
+      "final_url": "https://mathanoibacninh.com/wp-content/uploads/2026/10/tu-van-kinh-mat-uu-dai-tang-gong-819x1024.webp",
+      "content_type": "image/webp"
+    }
+  ],
+  "initial_observations": [
+    "Initial glasses-questions response had a duplicate OBS Article (empty Person author). Root applied the existing pending-author-and-medical-review gate for #1920 only. A remaining OBS BreadcrumbList was then suppressed by child-theme commit 6cec139 in that same gate. Post-fix live recheck confirms singular Article, BreadcrumbList and FAQPage with six visible questions; no individual author or medical reviewer is asserted."
+  ]
+}
