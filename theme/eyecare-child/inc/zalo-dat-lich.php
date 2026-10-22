@@ -551,7 +551,7 @@ function ec_zalo_booking_contact( $data ) {
 function ec_zalo_message( $post ) {
 	$data = ec_booking_read( $post );
 	$contact = ec_zalo_booking_contact( $data );
-	return "CÓ YÊU CẦU ĐẶT LỊCH MỚI\nBệnh viện Mắt Hà Nội – Bắc Ninh\nMã lịch: #" . $post->ID . "\nHọ tên: " . $contact['name'] . "\nĐiện thoại: " . $contact['phone'] . "\nNgày khám: " . ec_booking_admin_date_label( $data['date'] ?? '' ) . "\nGiờ khám: " . ( $data['time'] ?? '' ) . "\nTrạng thái: Chờ xác nhận\nXem chi tiết: " . admin_url( 'post.php?post=' . (int) $post->ID . '&action=edit' );
+	return "CÓ YÊU CẦU ĐẶT LỊCH MỚI\nBệnh viện Mắt Hà Nội – Bắc Ninh\nMã lịch: #" . $post->ID . "\nHọ tên: " . $contact['name'] . "\nĐiện thoại: " . $contact['phone'] . "\nNgày khám: " . ec_booking_admin_date_label( $data['date'] ?? '' ) . "\nGiờ khám: " . ( $data['time'] ?? '' ) . "\nTrạng thái: " . ec_booking_status_label( $post ) . "\nXem chi tiết: " . admin_url( 'post.php?post=' . (int) $post->ID . '&action=edit' );
 }
 
 /** Recipient identifiers are not retained in appointment metadata. */

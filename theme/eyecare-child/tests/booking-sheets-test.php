@@ -151,6 +151,11 @@ $booking = array( 'name' => 'Nguyễn Văn Kiểm Thử', 'phone' => '0912345678
 $_SERVER['REMOTE_ADDR'] = '192.0.2.20';
 $id = ec_booking_store( $booking );
 ec_sheet_expect( 1 === $id && true === $GLOBALS['sheet_insert_hook_snapshot'][$id]['sheet_required'], 'Sheet requirement is immutable in the inserted appointment before notification hooks' );
+ec_sheet_expect( 'confirmed' === $GLOBALS['sheet_insert_hook_snapshot'][$id]['initial_status'] && 'confirmed' === get_post_meta( $id, '_ec_booking_status', true ), 'New website booking is confirmed in its durable payload and admin status before notification hooks' );
+ec_sheet_expect( 'Đã xác nhận' === ec_booking_status_label( get_post( $id ) ) && str_contains( ec_zalo_message( get_post( $id ) ), 'Trạng thái: Đã xác nhận' ) && str_contains( ec_gmail_message( get_post( $id ) ), 'Trạng thái: Đã xác nhận' ), 'Admin status and both staff message formats agree on automatic confirmation' );
+update_post_meta( $id, '_ec_booking_status', 'cancelled' );
+ec_sheet_expect( 'Đã hủy' === ec_booking_status_label( get_post( $id ) ), 'Later staff status changes override the immutable initial status' );
+update_post_meta( $id, '_ec_booking_status', 'confirmed' );
 ec_sheet_expect( '1' === get_post_meta( $id, '_ec_sheet_recovery', true ), 'Durable recovery marker is part of the same insert' );
 ec_sheet_expect( ec_booking_contact_consent_text() === ec_booking_read( get_post( $id ) )['consent_text'], 'Stored consent text matches the displayed checkbox' );
 ec_sheet_expect( 'waiting_sheet' === get_post_meta( $id, '_ec_gmail_state', true ) && 'waiting_sheet' === get_post_meta( $id, '_ec_zalo_state', true ), 'Both channels wait for a successful Sheet acknowledgement' );
@@ -177,6 +182,8 @@ ec_sheet_expect( $id === ec_booking_replay( $booking ) && count( $GLOBALS['sheet
 $GLOBALS['sheet_reply_mode'] = 'valid';
 ec_sheets_deliver( $id );
 ec_sheet_expect( ec_booking_notifications_ready( $id ) && 'saved' === get_post_meta( $id, '_ec_sheet_state', true ), 'Matching document, tab, key, row and payload fingerprint release the gate' );
+$last_sheet_request = json_decode( json_decode( end( $GLOBALS['sheet_http'] )['args']['body'], true )['payload'], true );
+ec_sheet_expect( 'Đã xác nhận' === $last_sheet_request['values'][6], 'Sheet stores the automatically confirmed initial status in column G' );
 ec_sheet_expect( 'pending' === get_post_meta( $id, '_ec_gmail_state', true ) && 'pending' === get_post_meta( $id, '_ec_zalo_state', true ), 'ACK queues both previously waiting channels' );
 ec_gmail_deliver( $id ); ec_zalo_deliver( $id );
 $mail_count = count( \PHPMailer\PHPMailer\PHPMailer::$sent ); $zalo_count = count( $GLOBALS['sheet_zalo_sent'] ); $http_count = count( $GLOBALS['sheet_http'] );

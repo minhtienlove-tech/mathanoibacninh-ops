@@ -141,7 +141,7 @@ add_action( 'ec_booking_created', 'ec_gmail_queue' );
 
 function ec_gmail_message( $post ) {
 	$data = ec_booking_read( $post );
-	return "CÓ YÊU CẦU ĐẶT LỊCH MỚI\nBệnh viện Mắt Hà Nội – Bắc Ninh\nMã lịch: #" . $post->ID . "\nNgày khám: " . ec_booking_admin_date_label( $data['date'] ?? '' ) . "\nGiờ khám: " . ( $data['time'] ?? '' ) . "\nXem chi tiết: " . admin_url( 'post.php?post=' . (int) $post->ID . '&action=edit' );
+	return "CÓ YÊU CẦU ĐẶT LỊCH MỚI\nBệnh viện Mắt Hà Nội – Bắc Ninh\nMã lịch: #" . $post->ID . "\nNgày khám: " . ec_booking_admin_date_label( $data['date'] ?? '' ) . "\nGiờ khám: " . ( $data['time'] ?? '' ) . "\nTrạng thái: " . ec_booking_status_label( $post ) . "\nXem chi tiết: " . admin_url( 'post.php?post=' . (int) $post->ID . '&action=edit' );
 }
 
 function ec_gmail_deliver( $id ) {

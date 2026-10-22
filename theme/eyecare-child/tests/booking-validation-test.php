@@ -86,6 +86,12 @@ function wp_insert_post( $data, $wp_error = false ) {
 	$GLOBALS['ec_test_posts'][] = (object) $data;
 	return $data['ID'];
 }
+if ( ! function_exists( 'get_post' ) ) {
+	function get_post( $id ) { foreach ( $GLOBALS['ec_test_posts'] as $post ) { if ( $post->ID === $id ) { return $post; } } return null; }
+}
+if ( ! function_exists( 'get_post_meta' ) ) {
+	function get_post_meta( $id, $key, $single = true ) { $post = get_post( $id ); return $post->meta_input[ $key ] ?? ''; }
+}
 
 require dirname( __DIR__ ) . '/inc/dat-lich-kham.php';
 

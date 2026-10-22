@@ -1,9 +1,15 @@
 # Production changelog
+## 2026-10-22 — tự động xác nhận lịch mới trên website
+
+- Theo yêu cầu tiếp theo, lịch website mới có initial_status và meta trạng thái confirmed ngay khi lưu, trước hooks thông báo. Trạng thái khởi tạo bất biến được ghi cột G Sheet để retry không xung đột nếu nhân viên cập nhật trạng thái sau đó. Zalo, Gmail và phản hồi thành công hiển thị đúng trạng thái; replay lịch cũ không tự xác nhận lại hồ sơ đã hủy. Cập nhật giải thích ở form/trang đặt lịch và admin, giữ mốc 16:00. Không đổi hàng loạt lịch cũ hoặc trạng thái dòng Zalo.
+- Kiểm tra 109 tích hợp Sheet, 179 booking/Zalo/Gmail, 124 booking/admin và 97 validation đạt. Chuẩn bị backup database/sáu file dưới khóa deploy tại `~/backups/booking-auto-confirm-20261022/` trước triển khai; cần kiểm tra HTML công khai và smoke sau thay đổi.
+
 ## 2026-10-22 — thông tin lịch Zalo ghi vào Google Sheet
 
 - Chẩn đoán: dòng Tiên ghi từ Zalo được trigger nhận và Zalo API chấp nhận thông báo chung đủ 3 người, nhưng callback cũ chỉ có metadata nên không có thông tin lịch. Không tự gửi lại lịch cũ đã thành công.
 - Bổ sung chi tiết cho thay đổi A:I chính: trigger giữ số dòng/hash, đọc lại chỉ khi hash khớp, bỏ công thức; chia tối đa 3 dòng mỗi sự kiện, giữ toàn bộ phần còn lại trong outbox. PHP kiểm tra tên/điện thoại/ngày/giờ/nguồn, mã hóa nội dung trước ACK, gửi Zalo/Gmail hiện có với trạng thái riêng và dedupe. Các vùng khác vẫn chỉ thông báo chung. Không nhập hồ sơ Sheet vào danh sách lịch WordPress.
-- Git pull trước sửa. Kiểm tra mock: 133 Apps Script và 105 tích hợp PHP đạt, không dùng dữ liệu khách/gửi thật. Chuẩn bị backup dưới khóa deploy tại `~/backups/booking-sheet-details-20261022/`, gồm database, PHP và nguồn trigger trước sửa. Cần xác minh production và gửi bù có mục tiêu dòng Tiên sau triển khai.
+- Git pull trước sửa. Kiểm tra mock: 133 Apps Script và 105 tích hợp PHP đạt, không dùng dữ liệu khách/gửi thật. Đã triển khai commit `63be023`, backup dưới khóa deploy tại `~/backups/booking-sheet-details-20261022/` đủ database, PHP và nguồn trigger trước sửa. Lưu nguồn trigger, đối chiếu clipboard khớp nguồn Git; bookingSheetScan chạy hoàn tất. PHP lint ba file liên quan/bắt buộc và smoke sáu URL/SSH đạt.
+- Đối chiếu lại riêng A4:I4 bằng connector; gửi bù đúng lịch Tiên qua sự kiện có mã ổn định, không sửa hồ sơ/Sheet hoặc gửi lại lịch khác. Kết quả: Zalo sent đủ 3 hash người nhận, Gmail sent (SMTP chấp nhận), chi tiết được mã hóa trong event. Dữ liệu một lần ở backup riêng tư, không trong Git. Giữ ba trigger/quyền Google/endpoint hiện có.
 
 ## 2026-10-19 — chuẩn bị Google Sheet trước thông báo Zalo/Gmail
 

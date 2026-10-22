@@ -7,7 +7,7 @@ get_header();
 	<div class="ec-booking-page__card">
 		<p class="ec-booking-dialog__eyebrow">Bệnh viện Mắt Hà Nội – Bắc Ninh</p>
 		<h1 class="ec-booking-dialog__title" id="ec-booking-page-title">Đặt lịch khám</h1>
-		<p class="ec-booking-dialog__intro">Chọn ngày, giờ khám và để lại số điện thoại. Bệnh viện sẽ liên hệ xác nhận lịch hẹn với bạn.</p>
+		<p class="ec-booking-dialog__intro">Chọn ngày, giờ khám và để lại số điện thoại. Lịch khám được tự động xác nhận sau khi gửi thành công.</p>
 		<?php eyecare_booking_form( 'page' ); ?>
 	</div>
 	<?php while ( have_posts() ) : the_post(); ?>

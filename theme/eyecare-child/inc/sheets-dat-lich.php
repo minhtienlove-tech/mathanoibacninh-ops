@@ -83,7 +83,8 @@ function ec_sheets_deliver( $id ) {
 		update_post_meta( $id, '_ec_sheet_attempts', $attempt );
 		$key = (string) $post->post_name;
 		$contact = ec_zalo_booking_contact( $d );
-		$values = array( $key, (string) ( $d['received_at'] ?? '' ), $contact['name'], $contact['phone'], (string) ( $d['date'] ?? '' ), (string) ( $d['time'] ?? '' ), 'Yêu cầu chờ bệnh viện xác nhận', 'Website', (string) ( $d['received_at'] ?? '' ) );
+		$status = 'confirmed' === ( $d['initial_status'] ?? '' ) ? 'Đã xác nhận' : 'Yêu cầu chờ bệnh viện xác nhận';
+		$values = array( $key, (string) ( $d['received_at'] ?? '' ), $contact['name'], $contact['phone'], (string) ( $d['date'] ?? '' ), (string) ( $d['time'] ?? '' ), $status, 'Website', (string) ( $d['received_at'] ?? '' ) );
 		$result = ec_sheets_request( array( 'action' => 'append', 'key' => $key, 'values' => $values ) );
 		$fingerprint = hash( 'sha256', wp_json_encode( $values, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS ) );
 		if ( ! is_wp_error( $result ) && ( $key !== ( $result['key'] ?? '' ) || ! is_int( $result['row'] ?? null ) || $result['row'] < 2 || $result['row'] > 20000 || ! is_string( $result['fingerprint'] ?? null ) || ! hash_equals( $fingerprint, $result['fingerprint'] ) ) ) { $result = new WP_Error( 'ack', 'Xác nhận Sheet không khớp mã yêu cầu và nội dung.' ); }

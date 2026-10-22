@@ -22,7 +22,7 @@ function ec_booking_public_share_consent_text() {
 
 /** Wording stored with new requests must match the required checkbox. */
 function ec_booking_contact_consent_text() {
-	return 'Tôi đồng ý để bệnh viện lưu thông tin đặt lịch, gồm họ tên và số điện thoại, trong Google Sheet riêng tư và gửi thông báo qua Zalo, email cho nhân viên được ủy quyền để liên hệ xác nhận lịch hẹn.';
+	return 'Tôi đồng ý để bệnh viện lưu thông tin đặt lịch, gồm họ tên và số điện thoại, trong Google Sheet riêng tư và gửi thông báo qua Zalo, email cho nhân viên được ủy quyền để tiếp nhận và hỗ trợ lịch hẹn.';
 }
 
 /** Giữ dấu vân tay của các yêu cầu cũ khi ô tùy chọn không được chọn. */
@@ -82,7 +82,7 @@ function ec_booking_validate( $input, $now = null, $hours = null, $check_schedul
 		return new WP_Error( 'input', 'Không thể tiếp nhận yêu cầu này. Vui lòng thử lại.' );
 	}
 	if ( '1' !== $input['consent'] ) {
-		return new WP_Error( 'consent', 'Vui lòng đồng ý để bệnh viện liên hệ xác nhận lịch khám.' );
+		return new WP_Error( 'consent', 'Vui lòng đồng ý để bệnh viện tiếp nhận và hỗ trợ lịch khám.' );
 	}
 	$name = trim( preg_replace( '/\s+/u', ' ', $input['name'] ) ?? '' );
 	if ( ! preg_match( '/^[\p{L}\p{M}][\p{L}\p{M} .\x{2019}\x{0027}-]{1,99}$/uD', $name ) ) {
@@ -262,7 +262,9 @@ function ec_booking_store( $booking ) {
 		$payload['fingerprint'] = $fingerprint;
 		$payload['received_at'] = ec_booking_now()->format( DATE_ATOM );
 		$payload['consent_text'] = ec_booking_contact_consent_text();
-		$payload['consent_version'] = '2026-10-19-sheet-v1';
+		$payload['consent_version'] = '2026-10-22-auto-confirm-v1';
+		// Immutable initial status keeps retries to Sheet identical even after staff edits.
+		$payload['initial_status'] = 'confirmed';
 		// Persist this requirement in the same appointment row, before any notification hook.
 		if ( function_exists( 'ec_sheets_enabled' ) && ec_sheets_enabled() ) { $payload['sheet_required'] = true; }
 		$payload['public_share_consent'] = ! empty( $booking['public_share_consent'] );
@@ -280,8 +282,9 @@ function ec_booking_store( $booking ) {
 			'post_title'   => 'Yêu cầu khám ' . $booking['date'] . ' ' . $booking['time'],
 			'post_content' => wp_json_encode( $payload, JSON_UNESCAPED_UNICODE ),
 			'post_author'  => 0,
+			'meta_input'   => array( '_ec_booking_status' => 'confirmed' ),
 		);
-		if ( ! empty( $payload['sheet_required'] ) ) { $post_data['meta_input'] = array( '_ec_sheet_recovery' => '1' ); }
+		if ( ! empty( $payload['sheet_required'] ) ) { $post_data['meta_input']['_ec_sheet_recovery'] = '1'; }
 		$post_id = wp_insert_post( wp_slash( $post_data ), true );
 		if ( is_wp_error( $post_id ) || ! $post_id ) {
 			return new WP_Error( 'storage', 'Chưa lưu được yêu cầu. Vui lòng thử lại hoặc gọi bệnh viện.', array( 'status' => 503 ) );
@@ -331,7 +334,8 @@ function ec_booking_ajax_submit() {
 		$error_data = $result->get_error_data();
 		wp_send_json_error( array( 'code' => $result->get_error_code(), 'message' => $result->get_error_message() ), isset( $error_data['status'] ) ? $error_data['status'] : 503 );
 	}
-	wp_send_json_success( array( 'message' => 'Đã nhận yêu cầu. Bệnh viện sẽ liên hệ xác nhận lịch khám.' ) );
+	$status = ec_booking_status_label( get_post( $result ) );
+	wp_send_json_success( array( 'message' => 'Đã xác nhận' === $status ? 'Lịch khám của bạn đã được xác nhận. Vui lòng đến bệnh viện theo ngày, giờ đã chọn.' : 'Đã nhận thông tin lịch khám. Trạng thái hiện tại: ' . $status . '.' ) );
 }
 add_action( 'wp_ajax_ec_booking_submit', 'ec_booking_ajax_submit' );
 add_action( 'wp_ajax_nopriv_ec_booking_submit', 'ec_booking_ajax_submit' );
@@ -343,6 +347,13 @@ add_filter( 'manage_ec_appointment_posts_columns', 'ec_booking_admin_columns' );
 
 function ec_booking_statuses() {
 	return array( 'pending' => 'Chờ xác nhận', 'confirmed' => 'Đã xác nhận', 'contacted' => 'Đã liên hệ', 'completed' => 'Đã khám', 'cancelled' => 'Đã hủy' );
+}
+
+function ec_booking_status_label( $post ) {
+	$statuses = ec_booking_statuses();
+	$status = $post ? get_post_meta( $post->ID, '_ec_booking_status', true ) : '';
+	if ( ! isset( $statuses[ $status ] ) ) { $status = $post ? ( ec_booking_read( $post )['initial_status'] ?? 'pending' ) : 'pending'; }
+	return $statuses[ $status ] ?? $statuses['pending'];
 }
 
 function ec_booking_admin_column( $column, $post_id ) {
@@ -396,7 +407,7 @@ function ec_booking_admin_details( $post ) {
 	foreach ( ec_booking_statuses() as $key => $label ) {
 		echo '<option value="' . esc_attr( $key ) . '" ' . selected( $status, $key, false ) . '>' . esc_html( $label ) . '</option>';
 	}
-	echo '</select><p>Lịch khám chỉ được xác nhận sau khi nhân viên bệnh viện liên hệ với người đăng ký.</p>';
+	echo '</select><p>Lịch mới từ website được tự động xác nhận. Nhân viên có thể cập nhật trạng thái khi hỗ trợ người đăng ký.</p>';
 	echo '<p><label for="ec-booking-note"><strong>Ghi chú xử lý nội bộ</strong></label></p><textarea class="large-text" id="ec-booking-note" name="ec_booking_note" rows="4" maxlength="2000" placeholder="Ví dụ: Đã gọi xác nhận, người đăng ký sẽ đến đúng giờ…">' . esc_textarea( get_post_meta( $post->ID, '_ec_booking_note', true ) ) . '</textarea>';
 	echo '<p class="description">Ghi chú chỉ hiển thị trong trang quản trị.</p>';
 	$handled_at = get_post_meta( $post->ID, '_ec_booking_handled_at', true );
