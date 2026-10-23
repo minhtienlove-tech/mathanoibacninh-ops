@@ -1,0 +1,50 @@
+[
+  {
+    "article": "canh-thuy",
+    "token": "MEDIA_CANH_01",
+    "filename": "kham-mat-tieu-hoc-canh-thuy-ban-kham.webp",
+    "source_url": "https://www.facebook.com/photo/?fbid=122153983599137484&set=pcb.122153983671137484",
+    "alt": "Học sinh Trường Tiểu học Cảnh Thụy trước khu vực khám mắt của bệnh viện",
+    "caption": "Khu vực khám mắt tại Trường Tiểu học Cảnh Thụy trong bộ ảnh do bệnh viện công bố.",
+    "width": 1112,
+    "height": 836,
+    "bytes": 100976,
+    "sha256": "61ac49a84151990d6abf4dadd201fa62b9f2da894822a01580b0a1160f9e3962"
+  },
+  {
+    "article": "canh-thuy",
+    "token": "MEDIA_CANH_02",
+    "filename": "kham-mat-tieu-hoc-canh-thuy-hoc-sinh-xep-hang.webp",
+    "source_url": "https://www.facebook.com/photo/?fbid=122153983605137484&set=pcb.122153983671137484",
+    "alt": "Học sinh xếp hàng trong khuôn viên Trường Tiểu học Cảnh Thụy",
+    "caption": "Học sinh chờ đến lượt trong khuôn viên trường, với sự hướng dẫn của người lớn.",
+    "width": 1103,
+    "height": 824,
+    "bytes": 182484,
+    "sha256": "0cd07b45e78c97ff09a04edbe0412a078e92bb67856e8bac816836603385ee6a"
+  },
+  {
+    "article": "canh-thuy",
+    "token": "MEDIA_CANH_03",
+    "filename": "kham-mat-tieu-hoc-canh-thuy-khuon-vien.webp",
+    "source_url": "https://www.facebook.com/photo/?fbid=122153983617137484&set=pcb.122153983671137484",
+    "alt": "Học sinh Trường Tiểu học Cảnh Thụy tập trung tại khu vực có mái che",
+    "caption": "Không gian sinh hoạt của học sinh trong bộ ảnh hoạt động khám mắt học đường tại Cảnh Thụy.",
+    "width": 1276,
+    "height": 956,
+    "bytes": 230084,
+    "sha256": "398f020685a5ae388384a008dff5bb4aad87bea140456d7f6b80ab987720d3af"
+  },
+  {
+    "article": "canh-thuy",
+    "token": "MEDIA_CANH_04",
+    "filename": "kham-mat-tieu-hoc-canh-thuy-do-khuc-xa.webp",
+    "source_url": "https://www.facebook.com/benhvienmathanoibacninh/posts/pfbid08Eu1wnfh73ks4EoruXSiEeGrq5DxhxuyekGRmWR6V84vHxjZCc7JpqjeqsXiuTpRl",
+    "alt": "Nhân viên y tế sử dụng máy đo khúc xạ cho học sinh tại Trường Tiểu học Cảnh Thụy",
+    "caption": "Học sinh được kiểm tra bằng máy đo khúc xạ tại khu vực khám mắt của Trường Tiểu học Cảnh Thụy.",
+    "width": 1276,
+    "height": 956,
+    "bytes": 139572,
+    "sha256": "0525ac396372440429491f31952c64502463c1608dddf2ba73aa9bf9911f0e76"
+  }
+]

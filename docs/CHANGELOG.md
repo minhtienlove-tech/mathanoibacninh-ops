@@ -1,4 +1,11 @@
 # Production changelog
+
+## 2026-10-23 — Tiểu học Cảnh Thụy: chuyển bài Facebook sang website
+
+- Đã đọc bài Facebook do người dùng chỉ định và kiểm tra bốn ảnh đúng hoạt động; biên tập hơn 2.500 từ với sáu FAQ, metadata và từ khóa theo ngữ cảnh. Không suy diễn ngày khám, số học sinh, kết quả, miễn phí hay người duyệt y khoa.
+- Nguồn và bộ xuất bản tại `docs/drafts/facebook-canh-thuy-20261023/`; bốn WebP ngoài Git có hash, alt/caption và nguồn. Dùng template/schema sẵn có, không sửa theme, plugin hoặc core.
+- Chuẩn bị liên kết hai chiều từ bài Lá Phong Xanh #1872 và hướng dẫn khám cận trẻ em #1445; publisher kiểm tra trùng slug, nội dung, ảnh, marker và lưu trước nội dung cũ. Triển khai sau backup database/theme dưới khóa deploy chung; kết quả và QA sẽ được ghi sau khi hoàn tất.
+
 ## 2026-10-22 — ba bài kính mắt và tri ân 20/10 từ WordPress.com
 
 - Theo yêu cầu người dùng, biên tập ba nguồn WordPress.com thành bài website bệnh viện: không gian kính mắt, câu hỏi trước khi đặt kính mới và tri ân nữ nhân viên y tế 20/10. Mỗi bài trên 2.500 từ theo khoảng trắng, có sáu FAQ, mô tả/từ khóa, địa chỉ và liên kết có ngữ cảnh. Nguồn/ảnh gốc do kênh bệnh viện công bố; không tự thêm ngày sự kiện, người tham gia, chẩn đoán, giá/bảo hành hoặc bác sĩ duyệt. Phần kính đối chiếu NEI/MedlinePlus và điều kiện chương trình #1765.
