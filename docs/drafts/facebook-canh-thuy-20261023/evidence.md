@@ -5,7 +5,7 @@ https://www.facebook.com/benhvienmathanoibacninh/posts/pfbid08Eu1wnfh73ks4EoruXS
 
 The post confirms school eye screening at Trường Tiểu học Cảnh Thụy by Bệnh viện Mắt Hà Nội – Bắc Ninh, an emphasis on listening to pupils, family/school coordination, and thanks to the school leadership, teachers and pupils. It does not establish the event date, pupil count, diagnostic findings, individual clinician identity, free-service terms or outcomes. None were invented in the article.
 
-Root inspected four original event images showing pupils, tables with eye-checking equipment/vision chart and pupils waiting in the school grounds. The placeholders MEDIA_CANH_01 through MEDIA_CANH_04 must be replaced only with these source images. Exact alt text and captions remain the publishing agent's responsibility after visual inspection. Do not infer diagnoses from photographed pupils.
+Root inspected four original event images showing pupils, tables with eye-checking equipment/vision chart and pupils waiting in the school grounds. MEDIA_CANH_01 is the featured photograph displayed by the news template. The body placeholders MEDIA_CANH_02 through MEDIA_CANH_04 must be replaced only with the other three source images, avoiding a repeated photograph at the start of the article. Exact alt text and captions remain the publishing agent's responsibility after visual inspection. Do not infer diagnoses from photographed pupils.
 
 Primary medical sources checked by the sources agent:
 

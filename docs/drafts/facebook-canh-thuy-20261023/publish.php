@@ -32,10 +32,11 @@ foreach ($backlinks as $id=>[$marker,$paragraph]) {
     if (get_post_status($id)!=='publish' || substr_count($before,$marker)!==1) WP_CLI::error('Backlink preflight failed: '.$id);
     if (!is_file($base.'/post-'.$id.'-before.html')) file_put_contents($base.'/post-'.$id.'-before.html',$before);
 }
-foreach ($assets as $asset) {
+foreach ($assets as $asset_index=>$asset) {
     $path=$base.'/images/'.$asset['filename'];
     if (!is_file($path) || hash_file('sha256',$path)!==$asset['sha256'] || getimagesize($path)[2]!==IMAGETYPE_WEBP) WP_CLI::error('Media mismatch');
-    if (substr_count($template,'{{'.$asset['token'].'}}')!==1) WP_CLI::error('Media token mismatch');
+    $token_count=substr_count($template,'{{'.$asset['token'].'}}');
+    if (($asset_index===0 && $token_count!==0) || ($asset_index>0 && $token_count!==1)) WP_CLI::error('Media token mismatch');
 }
 require_once ABSPATH.'wp-admin/includes/file.php';
 require_once ABSPATH.'wp-admin/includes/media.php';
