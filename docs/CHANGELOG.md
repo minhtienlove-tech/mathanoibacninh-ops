@@ -4,7 +4,10 @@
 
 - Đã đọc bài Facebook do người dùng chỉ định và kiểm tra bốn ảnh đúng hoạt động; biên tập hơn 2.500 từ với sáu FAQ, metadata và từ khóa theo ngữ cảnh. Không suy diễn ngày khám, số học sinh, kết quả, miễn phí hay người duyệt y khoa.
 - Nguồn và bộ xuất bản tại `docs/drafts/facebook-canh-thuy-20261023/`; bốn WebP ngoài Git có hash, alt/caption và nguồn. Dùng template/schema sẵn có, không sửa theme, plugin hoặc core.
-- Chuẩn bị liên kết hai chiều từ bài Lá Phong Xanh #1872 và hướng dẫn khám cận trẻ em #1445; publisher kiểm tra trùng slug, nội dung, ảnh, marker và lưu trước nội dung cũ. Triển khai sau backup database/theme dưới khóa deploy chung; kết quả và QA sẽ được ghi sau khi hoàn tất.
+- Đã xuất bản #1934 tại `/tin-tuc/hoat-dong-cong-dong/kham-mat-hoc-duong-tieu-hoc-canh-thuy/`, chuyên mục #26. Bốn media #1935–1938: ảnh đầu làm ảnh đại diện, ba ảnh còn lại trong nội dung, mỗi ảnh xuất hiện một lần. Liên kết hai chiều từ bài Lá Phong Xanh #1872 và hướng dẫn khám cận trẻ em #1445 đã kiểm tra trong HTML công khai.
+- Nguồn commit `9afee02`, cập nhật bố cục `60b222a`; xuất bản/sửa giới hạn dưới khóa deploy chung. Backup database, child theme, nguồn/ảnh, hai nội dung cũ và trạng thái xuất bản tại `~/backups/facebook-canh-thuy-20261023/`; `layout-before.sql` và `post-1934-before-layout.html` giữ trạng thái trước khi bỏ ảnh đại diện lặp. Không sửa theme/plugin/core, không xóa dữ liệu.
+- QA cuối: 3.155 từ nội dung không tính TOC/aside, bốn ảnh riêng biệt có alt/caption, một H1/description/canonical tự trỏ; một Article (tác giả tổ chức), một BreadcrumbList, một FAQPage với sáu câu hỏi; sitemap chứa bài. 16 URL nội bộ/ảnh/srcset đã kiểm tra HTTP 200, hai liên kết ngược đạt, không placeholder hay đích neo thiếu. `qa-independent.json` lưu kết quả.
+- PHP lint publisher/footer.php/page-lien-he.php và smoke sáu URL chính/SSH đạt. Giao diện điện thoại 390px có document width 375px, không tràn ngang; ảnh đại diện tải được, mục lục điều hướng đến nội dung. Ảnh kiểm tra ngoài Git tại `C:/Users/htc/AppData/Local/Temp/canh-thuy-20261023/published-mobile.png`.
 
 ## 2026-10-22 — ba bài kính mắt và tri ân 20/10 từ WordPress.com
 

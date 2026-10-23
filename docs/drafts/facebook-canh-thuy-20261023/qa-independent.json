@@ -1,5 +1,5 @@
 {
-  "checked_at": "2026-10-23T11:34:08.953547+07:00",
+  "checked_at": "2026-10-23T11:37:49.244156+07:00",
   "url": "https://mathanoibacninh.com/tin-tuc/hoat-dong-cong-dong/kham-mat-hoc-duong-tieu-hoc-canh-thuy/",
   "http_status": 200,
   "final_url": "https://mathanoibacninh.com/tin-tuc/hoat-dong-cong-dong/kham-mat-hoc-duong-tieu-hoc-canh-thuy/",
@@ -29,17 +29,10 @@
     6
   ],
   "json_errors": [],
-  "body_words_without_toc_nav_asides": 3173,
+  "body_words_without_toc_nav_asides": 3155,
   "body_word_count_method": "Visible article content; remove .obs-toc, nav, aside, scripts and styles; include captions and FAQ",
   "toc_count": 1,
   "images": [
-    {
-      "src": "https://mathanoibacninh.com/wp-content/uploads/2026/10/kham-mat-tieu-hoc-canh-thuy-ban-kham-1024x770.webp",
-      "alt": "Học sinh Trường Tiểu học Cảnh Thụy trước khu vực khám mắt của bệnh viện",
-      "width": "1024",
-      "height": "770",
-      "caption": "Khu vực khám mắt tại Trường Tiểu học Cảnh Thụy trong bộ ảnh do bệnh viện công bố."
-    },
     {
       "src": "https://mathanoibacninh.com/wp-content/uploads/2026/10/kham-mat-tieu-hoc-canh-thuy-ban-kham-1024x770.webp",
       "alt": "Học sinh Trường Tiểu học Cảnh Thụy trước khu vực khám mắt của bệnh viện",
@@ -69,7 +62,7 @@
       "caption": "Học sinh được kiểm tra bằng máy đo khúc xạ tại khu vực khám mắt của Trường Tiểu học Cảnh Thụy."
     }
   ],
-  "body_figure_count": 4,
+  "body_figure_count": 3,
   "internal_body_links": [
     "https://mathanoibacninh.com/dat-lich-kham/",
     "https://mathanoibacninh.com/kien-thuc/dau-hieu-tre-bi-can-thi-som/",
@@ -208,5 +201,9 @@
   },
   "raw_placeholders": false,
   "findings": [],
-  "result": "pass"
+  "result": "pass",
+  "article_figure_count": 4,
+  "article_image_count": 4,
+  "unique_article_image_sources": 4,
+  "layout_note": "Featured photo 01 appears once in hero; remaining three photos appear once each in body. The set of 16 checked internal/image/srcset URLs is unchanged from earlier HTTP 200 verification."
 }
