@@ -2,9 +2,10 @@
 
 ## 2026-10-26 — xác minh quyền sở hữu tên miền với Zalo
 
-- Chuẩn bị phục vụ tệp HTML người dùng cung cấp tại `/zalo_verifierVywq9BdPEIXugxygYOrl3ac4n1cbyXz3DZOu.html` qua child theme. Tệp giữ nguyên trong `verification/`, chỉ URL chính xác nhận GET/HEAD; phản hồi HTML không có giao diện WordPress và không lập chỉ mục.
-- Nạp từ `inc/seo-trang-giu-cho.php` đã có trên production, không sửa `functions.php` vì production đang có bổ sung SEO ngoài bản checkout. Chỉ triển khai hai file thuộc child theme sau commit, kiểm tra hash, khóa deploy và backup database/file tại `~/backups/`.
-- Script: `scripts/deploy-zalo-verification-20261026.sh`. Đang chuẩn bị kiểm tra và triển khai; chưa bấm nút Xác thực trong tài khoản Zalo.
+- Đã triển khai từ commit `6cd9c37`, phục vụ tệp HTML người dùng cung cấp tại `/zalo_verifierVywq9BdPEIXugxygYOrl3ac4n1cbyXz3DZOu.html` qua child theme. Tệp giữ nguyên trong `verification/`, chỉ URL chính xác nhận GET/HEAD; phản hồi HTML không có giao diện WordPress và không lập chỉ mục.
+- Chỉ cập nhật `inc/seo-trang-giu-cho.php` và tệp HTML. Không sửa `functions.php` vì production đang có bổ sung SEO ngoài bản checkout; không sửa core/plugin/database. Khóa chung, đối chiếu hash và backup database/file tại `/home/jwhxtzru/backups/zalo-verification-20261026-105433/`. Script: `scripts/deploy-zalo-verification-20261026.sh`.
+- QA: PHP lint file thay đổi/footer.php/page-lien-he.php và smoke sáu URL chính/SSH đạt. URL verifier GET/HEAD HTTP 200, không redirect, `text/html; charset=UTF-8`, đúng 233 byte với SHA256 `fdb94308a32503e34ec57456434bdf7e359f88b29e7dc484fb458e5e4eaf742d` khớp tệp người dùng; verifier không được cấu hình trả 404, không lộ mã. Đã purge WordPress/LiteSpeed; chưa bấm nút Xác thực trong tài khoản Zalo.
+- Rollback: khôi phục riêng `inc/seo-trang-giu-cho.php` từ backup dưới cùng khóa rồi purge cache; giữ HTML và backup, không khôi phục toàn database.
 
 ## 2026-10-26 — khám mắt cộng đồng tại Cảnh Thụy ngày 25/10/2026
 
