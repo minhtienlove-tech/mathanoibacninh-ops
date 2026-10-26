@@ -1,5 +1,12 @@
 # Production changelog
 
+## 2026-10-26 — xác nhận và nhắc lịch khám qua ZBS cho người bệnh
+
+- Triển khai child theme từ commit `17d1676`: biểu mẫu có lựa chọn đồng ý riêng để nhận tin Zalo khi kênh được bật; chỉ lịch mới đã chọn mới được đưa vào hàng đợi. Lịch cũ không được gửi bù. Gửi lại biểu mẫu không thể đổi lựa chọn đã lưu. Mã và nội dung tin lấy từ hai mẫu ZBS đã duyệt; App ID, Secret Key và token được cấu hình trong quản trị, khóa bí mật lưu mã hóa, không đưa vào Git.
+- Tin xác nhận được xếp hàng sau khi lưu lịch; tin nhắc đặt trước giờ khám 1 giờ theo giờ Việt Nam. Trước khi gửi luôn đọc trạng thái và giờ hiện tại trong WordPress: bỏ qua lịch hủy/đã khám, điều chỉnh tin nhắc còn chờ khi nhân viên đổi giờ; quá hạn hơn 5 phút thì không gửi tin nhắc muộn. Giao diện admin có trạng thái nhận yêu cầu của ZBS và hướng dẫn liên hệ trực tiếp nếu đổi lịch. Google Sheet có thể còn giờ hẹn ban đầu, đã ghi rõ trong admin.
+- Sao lưu database và hai tệp đang chạy trước deploy dưới khóa chung tại `/home/jwhxtzru/backups/zbs-patient-20261026-153826/`. Tác vụ WP-Cron mỗi phút dùng khóa riêng và `wp cron event run --due-now`; đã sửa lệnh ban đầu vì WP-CLI trả lỗi khi chưa có sự kiện ZBS. Bản crontab trước và sau lần sửa được giữ trong backup. Không sửa WordPress core, plugin hay theme khác.
+- QA: 109 kiểm tra validation/riêng tư/retry, 27 kiểm tra luồng ZBS, 17 kiểm tra admin ZBS, 109 kiểm tra Sheet và kiểm tra đổi giờ đạt trên PHP máy chủ; `php -l` các file sửa, `footer.php`, `page-lien-he.php` đạt. Hash bốn file production khớp bản commit; smoke sáu URL/SSH đạt, trang đặt lịch HTTP 200. Vì chưa có hai mẫu ZBS được duyệt, gửi tin vẫn **tắt**, ô đồng ý Zalo chưa hiện công khai và chưa có tin thật hoặc lịch ZBS nào được tạo để kiểm thử đầu cuối.
+
 ## 2026-10-26 — xác minh quyền sở hữu tên miền với Zalo
 
 - Đã triển khai từ commit `6cd9c37`, phục vụ tệp HTML người dùng cung cấp tại `/zalo_verifierVywq9BdPEIXugxygYOrl3ac4n1cbyXz3DZOu.html` qua child theme. Tệp giữ nguyên trong `verification/`, chỉ URL chính xác nhận GET/HEAD; phản hồi HTML không có giao diện WordPress và không lập chỉ mục.
