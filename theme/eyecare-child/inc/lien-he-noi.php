@@ -4,6 +4,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Nạp sau luồng đặt lịch và Zalo Bot nội bộ; ZBS gửi bệnh nhân dùng cấu hình riêng.
+require_once get_stylesheet_directory() . '/inc/zbs-benh-nhan.php';
+require_once get_stylesheet_directory() . '/inc/zbs-admin.php';
+
 function eyecare_contact_assets() {
 	foreach ( array( 'css', 'js' ) as $extension ) {
 		$file = '/assets/lien-he-noi.' . $extension;
@@ -50,6 +54,9 @@ function eyecare_booking_form( $context = 'modal' ) {
 			<label for="<?php echo esc_attr( $id ); ?>-time">Giờ khám <span aria-hidden="true">*</span><select id="<?php echo esc_attr( $id ); ?>-time" name="time" required disabled><option value="">Đang tải khung giờ…</option></select></label>
 			<p class="ec-booking-form__wide ec-booking-form__hint">Nhận đặt lịch đến 16:00, theo từng khung 30 phút. Lịch khám được tự động xác nhận sau khi gửi thành công.</p>
 			<label class="ec-booking-form__wide ec-booking-form__consent" for="<?php echo esc_attr( $id ); ?>-consent"><input id="<?php echo esc_attr( $id ); ?>-consent" name="consent" type="checkbox" value="1" required><span><?php echo esc_html( ec_booking_contact_consent_text() ); ?> <a href="<?php echo esc_url( get_privacy_policy_url() ?: home_url( '/quyen-rieng-tu/' ) ); ?>" target="_blank" rel="noopener">Chính sách bảo mật</a>.</span></label>
+			<?php if ( ! empty( ec_zbs_settings()['enabled'] ) ) : ?>
+			<label class="ec-booking-form__wide ec-booking-form__consent" for="<?php echo esc_attr( $id ); ?>-patient-zalo-consent"><input id="<?php echo esc_attr( $id ); ?>-patient-zalo-consent" name="patient_zalo_consent" type="checkbox" value="1"><span><strong>Tùy chọn:</strong> <?php echo esc_html( ec_booking_patient_zalo_consent_text() ); ?></span></label>
+			<?php endif; ?>
 			<label class="ec-booking-form__wide ec-booking-form__consent" for="<?php echo esc_attr( $id ); ?>-public-share-consent"><input id="<?php echo esc_attr( $id ); ?>-public-share-consent" name="public_share_consent" type="checkbox" value="1"><span><strong>Tùy chọn:</strong> <?php echo esc_html( ec_booking_public_share_consent_text() ); ?></span></label>
 		</div>
 		<div class="ec-booking-form__honeypot" aria-hidden="true"><label>Để trống trường này<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>

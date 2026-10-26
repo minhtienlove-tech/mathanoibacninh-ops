@@ -25,7 +25,12 @@ function ec_booking_contact_consent_text() {
 	return 'Tôi đồng ý để bệnh viện lưu thông tin đặt lịch, gồm họ tên và số điện thoại, trong Google Sheet riêng tư và gửi thông báo qua Zalo, email cho nhân viên được ủy quyền để tiếp nhận và hỗ trợ lịch hẹn.';
 }
 
-/** Giữ dấu vân tay của các yêu cầu cũ khi ô tùy chọn không được chọn. */
+/** Separate affirmative choice for transactional patient messages, including cached older forms. */
+function ec_booking_patient_zalo_consent_text() {
+	return 'Tôi đồng ý nhận tin xác nhận lịch khám và tin nhắc trước giờ khám khoảng 1 giờ qua Zalo OA/ZBS đến số di động đã nhập. Tin chỉ liên quan đến lịch hẹn, không chứa quảng cáo; việc đặt lịch không phụ thuộc lựa chọn này.';
+}
+
+/** Dấu vân tay của lịch mới bao gồm lựa chọn nhận tin để retry không đổi được đồng ý. */
 function ec_booking_fingerprint_payload( $booking ) {
 	$payload = $booking;
 	unset( $payload['request_id'] );
@@ -62,6 +67,27 @@ function ec_booking_schedule( $now = null, $hours = null ) {
 	);
 }
 
+/** Kiểm tra lịch mới do nhân viên chọn bằng cùng khung giờ với biểu mẫu công khai. */
+function ec_booking_admin_validate_slot( $date, $time, $now = null, $hours = null ) {
+	if ( ! is_string( $date ) || ! is_string( $time ) || ! preg_match( '/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/D', $date ) || ! preg_match( '/^(?:[01][0-9]|2[0-3]):[0-5][0-9]$/D', $time ) ) {
+		return new WP_Error( 'date', 'Ngày hoặc giờ khám không hợp lệ.' );
+	}
+	$moment = DateTimeImmutable::createFromFormat( '!Y-m-d H:i', $date . ' ' . $time, new DateTimeZone( 'Asia/Ho_Chi_Minh' ) );
+	if ( ! $moment || $moment->format( 'Y-m-d H:i' ) !== $date . ' ' . $time ) {
+		return new WP_Error( 'date', 'Ngày hoặc giờ khám không hợp lệ.' );
+	}
+	$now = $now ?: ec_booking_now();
+	$schedule = ec_booking_schedule( $now, $hours );
+	if ( is_wp_error( $schedule ) ) { return $schedule; }
+	if ( $date < $schedule['today'] || $date > $schedule['maxDate'] || $moment <= $now ) {
+		return new WP_Error( 'date', 'Vui lòng chọn thời điểm sắp tới trong vòng 90 ngày.' );
+	}
+	if ( ! in_array( $time, $schedule['slots'], true ) ) {
+		return new WP_Error( 'time', 'Vui lòng chọn giờ khám trong khung giờ làm việc của bệnh viện.' );
+	}
+	return true;
+}
+
 /** Kiểm tra dữ liệu trước mọi thao tác ghi; có thể kiểm thử ngoài WordPress. */
 function ec_booking_validate( $input, $now = null, $hours = null, $check_schedule = true ) {
 	$now = $now ?: ec_booking_now();
@@ -78,6 +104,10 @@ function ec_booking_validate( $input, $now = null, $hours = null, $check_schedul
 		return new WP_Error( 'public_share_consent', 'Vui lòng kiểm tra lựa chọn hiển thị tên trên website.' );
 	}
 	$public_share_consent = isset( $input['public_share_consent'] ) && '1' === $input['public_share_consent'];
+	if ( array_key_exists( 'patient_zalo_consent', $input ) && ( ! is_string( $input['patient_zalo_consent'] ) || ! in_array( $input['patient_zalo_consent'], array( '0', '1' ), true ) ) ) {
+		return new WP_Error( 'patient_zalo_consent', 'Vui lòng kiểm tra lựa chọn nhận tin nhắn lịch khám qua Zalo.' );
+	}
+	$patient_zalo_consent = isset( $input['patient_zalo_consent'] ) && '1' === $input['patient_zalo_consent'];
 	if ( '' !== $input['website'] ) {
 		return new WP_Error( 'input', 'Không thể tiếp nhận yêu cầu này. Vui lòng thử lại.' );
 	}
@@ -95,6 +125,9 @@ function ec_booking_validate( $input, $now = null, $hours = null, $check_schedul
 	// Cùng một số Việt Nam không thể vượt giới hạn bằng cách đổi +84/0.
 	if ( 0 === strpos( $phone, '+84' ) ) {
 		$phone = '0' . substr( $phone, 3 );
+	}
+	if ( $patient_zalo_consent && ! preg_match( '/^0[35789][0-9]{8}$/D', $phone ) ) {
+		return new WP_Error( 'phone', 'Để nhận tin lịch khám qua Zalo, vui lòng nhập số di động Việt Nam hợp lệ hoặc bỏ chọn mục nhận tin Zalo.' );
 	}
 	if ( ! preg_match( '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/iD', $input['request_id'] ) ) {
 		return new WP_Error( 'request_id', 'Phiên đặt lịch không hợp lệ. Vui lòng mở lại biểu mẫu.' );
@@ -119,7 +152,7 @@ function ec_booking_validate( $input, $now = null, $hours = null, $check_schedul
 			return new WP_Error( 'time', 'Vui lòng chọn giờ khám trong khung giờ làm việc của bệnh viện.' );
 		}
 	}
-	return array( 'name' => $name, 'phone' => $phone, 'date' => $input['date'], 'time' => $input['time'], 'request_id' => strtolower( $input['request_id'] ), 'consent' => true, 'public_share_consent' => $public_share_consent );
+	return array( 'name' => $name, 'phone' => $phone, 'date' => $input['date'], 'time' => $input['time'], 'request_id' => strtolower( $input['request_id'] ), 'consent' => true, 'public_share_consent' => $public_share_consent, 'patient_zalo_consent' => $patient_zalo_consent );
 }
 
 /** CPT hoàn toàn riêng tư: chỉ người có manage_options được đọc/quản lý. */
@@ -230,11 +263,20 @@ function ec_booking_replay( $booking ) {
 	if ( ! $existing ) {
 		return false;
 	}
-	$fingerprint = hash_hmac( 'sha256', wp_json_encode( ec_booking_fingerprint_payload( $booking ) ), wp_salt( 'nonce' ) );
 	$data        = ec_booking_read( $existing );
+	$fingerprint_payload = ec_booking_fingerprint_payload( $booking );
+	// Lịch cũ không có lựa chọn Zalo riêng và đã lưu dấu vân tay theo định dạng cũ.
+	if ( ! array_key_exists( 'patient_zalo_consent', $data ) ) {
+		if ( ! empty( $booking['patient_zalo_consent'] ) ) {
+			return new WP_Error( 'request_conflict', 'Yêu cầu này đã được gửi trước đó khi chưa chọn nhận tin Zalo. Vui lòng mở lại biểu mẫu.', array( 'status' => 409 ) );
+		}
+		unset( $fingerprint_payload['patient_zalo_consent'] );
+	}
+	$fingerprint = hash_hmac( 'sha256', wp_json_encode( $fingerprint_payload ), wp_salt( 'nonce' ) );
 	if ( isset( $data['fingerprint'] ) && is_string( $data['fingerprint'] ) && hash_equals( $data['fingerprint'], $fingerprint ) ) {
 		// Recover the outbox if an earlier process stopped after saving the appointment.
 		if ( function_exists( 'ec_sheets_queue' ) ) { ec_sheets_queue( (int) $existing->ID ); }
+		if ( function_exists( 'ec_zbs_recover' ) ) { ec_zbs_recover( (int) $existing->ID ); }
 		return (int) $existing->ID;
 	}
 	return new WP_Error( 'request_conflict', 'Yêu cầu này đã được gửi với thông tin khác. Vui lòng mở lại biểu mẫu.', array( 'status' => 409 ) );
@@ -263,6 +305,12 @@ function ec_booking_store( $booking ) {
 		$payload['received_at'] = ec_booking_now()->format( DATE_ATOM );
 		$payload['consent_text'] = ec_booking_contact_consent_text();
 		$payload['consent_version'] = '2026-10-22-auto-confirm-v1';
+		$payload['patient_zalo_consent'] = ! empty( $booking['patient_zalo_consent'] );
+		if ( $payload['patient_zalo_consent'] ) {
+			$payload['patient_zalo_consented_at'] = $payload['received_at'];
+			$payload['patient_zalo_consent_version'] = '2026-10-26-v1';
+			$payload['patient_zalo_consent_text'] = ec_booking_patient_zalo_consent_text();
+		}
 		// Immutable initial status keeps retries to Sheet identical even after staff edits.
 		$payload['initial_status'] = 'confirmed';
 		// Persist this requirement in the same appointment row, before any notification hook.
@@ -390,7 +438,7 @@ function ec_booking_admin_details( $post ) {
 		return;
 	}
 	$data   = ec_booking_read( $post );
-	$fields = array( 'name' => 'Họ tên', 'phone' => 'Số điện thoại', 'date' => 'Ngày mong muốn', 'time' => 'Giờ mong muốn', 'received_at' => 'Tiếp nhận lúc' );
+	$fields = array( 'name' => 'Họ tên', 'phone' => 'Số điện thoại', 'date' => 'Ngày khám hiện tại', 'time' => 'Giờ khám hiện tại', 'received_at' => 'Tiếp nhận lúc' );
 	echo '<table class="form-table"><tbody>';
 	foreach ( $fields as $key => $label ) {
 		$value = $data[ $key ] ?? '';
@@ -399,6 +447,7 @@ function ec_booking_admin_details( $post ) {
 		echo '<tr><th scope="row">' . esc_html( $label ) . '</th><td>' . esc_html( $value ) . '</td></tr>';
 	}
 	echo '<tr><th scope="row">Đồng ý liên hệ</th><td>' . ( ! empty( $data['consent'] ) ? 'Đã đồng ý' : 'Chưa ghi nhận' ) . '</td></tr>';
+		echo '<tr><th scope="row">Đồng ý nhận tin lịch hẹn qua Zalo</th><td>' . ( ! empty( $data['patient_zalo_consent'] ) ? 'Đã đồng ý' : 'Chưa ghi nhận' ) . '</td></tr>';
 	$public_consent_at = ! empty( $data['public_share_consented_at'] ) ? wp_date( 'H:i · d/m/Y', strtotime( $data['public_share_consented_at'] ), new DateTimeZone( 'Asia/Ho_Chi_Minh' ) ) : '';
 	echo '<tr><th scope="row">Đồng ý hiển thị tên trên website</th><td>' . ( ! empty( $data['public_share_consent'] ) ? 'Đã đồng ý' . ( $public_consent_at ? ' lúc ' . esc_html( $public_consent_at ) : '' ) : 'Chưa ghi nhận' ) . '</td></tr></tbody></table>';
 	wp_nonce_field( 'ec_booking_admin_status', 'ec_booking_admin_nonce' );
@@ -408,17 +457,26 @@ function ec_booking_admin_details( $post ) {
 		echo '<option value="' . esc_attr( $key ) . '" ' . selected( $status, $key, false ) . '>' . esc_html( $label ) . '</option>';
 	}
 	echo '</select><p>Lịch mới từ website được tự động xác nhận. Nhân viên có thể cập nhật trạng thái khi hỗ trợ người đăng ký.</p>';
+	echo '<p><label for="ec-booking-date"><strong>Đổi ngày khám</strong></label><br><input type="date" id="ec-booking-date" name="ec_booking_date" value="' . esc_attr( $data['date'] ?? '' ) . '"></p>';
+	echo '<p><label for="ec-booking-time"><strong>Đổi giờ khám</strong></label><br><input type="time" id="ec-booking-time" name="ec_booking_time" value="' . esc_attr( $data['time'] ?? '' ) . '"></p>';
+	echo '<p class="description">Chỉ lưu giờ khám trong tương lai, trong vòng 90 ngày và đúng khung giờ tiếp nhận. Khi đổi lịch, vui lòng báo trực tiếp cho người bệnh; tin nhắc đang chờ sẽ dùng giờ mới. WordPress là nguồn giờ khám hiện tại; Google Sheet có thể vẫn ghi giờ đăng ký ban đầu.</p>';
+	$rescheduled_at = get_post_meta( $post->ID, '_ec_booking_rescheduled_at', true );
+	if ( $rescheduled_at ) {
+		echo '<p class="description">Đổi lịch gần nhất: ' . esc_html( wp_date( 'H:i · d/m/Y', (int) $rescheduled_at, new DateTimeZone( 'Asia/Ho_Chi_Minh' ) ) ) . '</p>';
+	}
 	echo '<p><label for="ec-booking-note"><strong>Ghi chú xử lý nội bộ</strong></label></p><textarea class="large-text" id="ec-booking-note" name="ec_booking_note" rows="4" maxlength="2000" placeholder="Ví dụ: Đã gọi xác nhận, người đăng ký sẽ đến đúng giờ…">' . esc_textarea( get_post_meta( $post->ID, '_ec_booking_note', true ) ) . '</textarea>';
 	echo '<p class="description">Ghi chú chỉ hiển thị trong trang quản trị.</p>';
 	$handled_at = get_post_meta( $post->ID, '_ec_booking_handled_at', true );
 	if ( $handled_at ) {
 		echo '<p class="description">Cập nhật gần nhất: ' . esc_html( wp_date( 'H:i · d/m/Y', (int) $handled_at, new DateTimeZone( 'Asia/Ho_Chi_Minh' ) ) ) . '</p>';
 	}
-	submit_button( 'Lưu trạng thái', 'primary', 'save', false );
+	submit_button( 'Lưu thay đổi', 'primary', 'save', false );
 	echo ' <a class="button" href="' . esc_url( admin_url( 'edit.php?post_type=ec_appointment' ) ) . '">Về danh sách</a>';
 }
 
 function ec_booking_admin_save( $post_id ) {
+	static $saving_slot = false;
+	if ( $saving_slot ) { return; }
 	if ( ! current_user_can( 'manage_options' ) || 'ec_appointment' !== get_post_type( $post_id ) || wp_is_post_autosave( $post_id ) || wp_is_post_revision( $post_id ) ) {
 		return;
 	}
@@ -430,7 +488,46 @@ function ec_booking_admin_save( $post_id ) {
 		if ( isset( $_POST['ec_booking_note'] ) && ( ! is_string( $_POST['ec_booking_note'] ) || strlen( wp_unslash( $_POST['ec_booking_note'] ) ) > 8000 ) ) {
 			wp_die( 'Ghi chú không hợp lệ hoặc quá dài. Vui lòng quay lại kiểm tra.', '', array( 'response' => 400 ) );
 		}
+		$slot_changed = false;
+		$data = ec_booking_read( get_post( $post_id ) );
+		if ( isset( $_POST['ec_booking_date'] ) || isset( $_POST['ec_booking_time'] ) ) {
+			if ( ! isset( $_POST['ec_booking_date'], $_POST['ec_booking_time'] ) || ! is_string( $_POST['ec_booking_date'] ) || ! is_string( $_POST['ec_booking_time'] ) || strlen( $_POST['ec_booking_date'] ) > 10 || strlen( $_POST['ec_booking_time'] ) > 5 ) {
+				wp_die( 'Ngày hoặc giờ khám không hợp lệ. Vui lòng quay lại kiểm tra.', '', array( 'response' => 400, 'back_link' => true ) );
+			}
+			$date = sanitize_text_field( wp_unslash( $_POST['ec_booking_date'] ) );
+			$time = sanitize_text_field( wp_unslash( $_POST['ec_booking_time'] ) );
+			$slot_changed = $date !== ( $data['date'] ?? '' ) || $time !== ( $data['time'] ?? '' );
+			if ( $slot_changed ) {
+				$slot_valid = ec_booking_admin_validate_slot( $date, $time );
+				if ( is_wp_error( $slot_valid ) ) {
+					wp_die( esc_html( $slot_valid->get_error_message() ), '', array( 'response' => 400, 'back_link' => true ) );
+				}
+			}
+		}
+		if ( $slot_changed ) {
+			$previous_slot = ( $data['date'] ?? '' ) . ' ' . ( $data['time'] ?? '' );
+			$data['date'] = $date;
+			$data['time'] = $time;
+			$saving_slot = true;
+			try {
+				$update = wp_update_post( wp_slash( array(
+					'ID' => $post_id,
+					'post_status' => 'private',
+					'post_title' => 'Yêu cầu khám ' . $date . ' ' . $time,
+					'post_content' => wp_json_encode( $data, JSON_UNESCAPED_UNICODE ),
+				) ), true );
+			} finally {
+				$saving_slot = false;
+			}
+			if ( is_wp_error( $update ) || ! $update ) {
+				wp_die( 'Chưa lưu được ngày giờ khám. Vui lòng thử lại.', '', array( 'response' => 500, 'back_link' => true ) );
+			}
+			update_post_meta( $post_id, '_ec_booking_previous_slot', trim( $previous_slot ) );
+			update_post_meta( $post_id, '_ec_booking_rescheduled_at', time() );
+			update_post_meta( $post_id, '_ec_booking_rescheduled_by', get_current_user_id() );
+		}
 		update_post_meta( $post_id, '_ec_booking_status', $status );
+		if ( function_exists( 'ec_zbs_status_changed' ) ) { ec_zbs_status_changed( (int) $post_id ); }
 		if ( isset( $_POST['ec_booking_note'] ) ) {
 			update_post_meta( $post_id, '_ec_booking_note', wp_slash( sanitize_textarea_field( wp_unslash( $_POST['ec_booking_note'] ) ) ) );
 		}
