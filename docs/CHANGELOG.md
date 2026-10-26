@@ -1,5 +1,14 @@
 # Production changelog
 
+## 2026-10-26 — khám mắt cộng đồng tại Cảnh Thụy ngày 25/10/2026
+
+- Theo yêu cầu người dùng, xuất bản bài #1946 tại `/tin-tuc/hoat-dong-cong-dong/kham-mat-cong-dong-tai-canh-thuy-25-10-2026/`, chuyên mục Hoạt động cộng đồng #26. Ngày hoạt động tại Trạm Y tế Cảnh Thụy là 25/10/2026 do người dùng xác nhận; ngày xuất bản là 26/10/2026. Đây là hoạt động dành cho người dân, tách biệt bài Tiểu học Cảnh Thụy #1934.
+- Nguồn và bộ xuất bản ở `docs/drafts/canh-thuy-community-20261026/`, commit chuẩn bị `46fec8d`. Đã tạo nháp và kiểm tra preview trước khi xuất bản. Nội dung hơn 2.500 từ, sáu FAQ và các nguồn NEI; không tự thêm số lượt, chẩn đoán, miễn phí, đối tác hoặc bác sĩ duyệt.
+- Dùng đủ năm ảnh do người dùng cung cấp: một ảnh đại diện và bốn ảnh trong nội dung, mỗi ảnh xuất hiện một lần với alt/chú thích riêng. Năm WebP 1280×720 giữ đầy đủ tỷ lệ, không crop; tệp gốc và media staging giữ riêng ngoài Git.
+- Xuất bản dưới khóa chung `website-ops-deploy.lock` sau backup database, child theme, đầu vào/ảnh và nội dung hai bài trước cập nhật tại `~/backups/canh-thuy-community-20261026/`. Publisher có trạng thái để tiếp tục an toàn, chống tạo lại bài/media khi kết quả chưa rõ. Liên kết ngược có ngữ cảnh từ #1686 và #1901 đã được đọc lại trên HTML công khai.
+- QA độc lập: HTTP 200, 3.137 từ không tính mục lục/aside, đủ năm ảnh riêng có alt/chú thích; một H1/description/canonical tự trỏ, một Article (tác giả tổ chức), một BreadcrumbList và một FAQPage đủ sáu câu. Mục lục có đủ đích, không placeholder hoặc shortcode thô, không noindex; sitemap chứa bài. 15 URL nội bộ/ảnh và ba nguồn NEI trả HTTP 200. Báo cáo đầy đủ giữ trong staging riêng trên máy; excerpt và meta description là hai trường riêng dù dùng cùng phần mô tả.
+- PHP lint publisher/footer.php/page-lien-he.php và smoke sáu URL chính/SSH đạt. Không sửa mã theme, WordPress core hoặc plugin; không xóa dữ liệu. Khi cần hoàn tác, đưa riêng #1946 về nháp và khôi phục nội dung #1686/#1901 từ backup dưới cùng khóa, giữ media và lịch sử.
+
 ## 2026-10-23 — Tiểu học Cảnh Thụy: chuyển bài Facebook sang website
 
 - Đã đọc bài Facebook do người dùng chỉ định và kiểm tra bốn ảnh đúng hoạt động; biên tập hơn 2.500 từ với sáu FAQ, metadata và từ khóa theo ngữ cảnh. Không suy diễn ngày khám, số học sinh, kết quả, miễn phí hay người duyệt y khoa.
