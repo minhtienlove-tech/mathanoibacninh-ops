@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-26 — xác minh quyền sở hữu tên miền với Zalo
+
+- Chuẩn bị phục vụ tệp HTML người dùng cung cấp tại `/zalo_verifierVywq9BdPEIXugxygYOrl3ac4n1cbyXz3DZOu.html` qua child theme. Tệp giữ nguyên trong `verification/`, chỉ URL chính xác nhận GET/HEAD; phản hồi HTML không có giao diện WordPress và không lập chỉ mục.
+- Nạp từ `inc/seo-trang-giu-cho.php` đã có trên production, không sửa `functions.php` vì production đang có bổ sung SEO ngoài bản checkout. Chỉ triển khai hai file thuộc child theme sau commit, kiểm tra hash, khóa deploy và backup database/file tại `~/backups/`.
+- Script: `scripts/deploy-zalo-verification-20261026.sh`. Đang chuẩn bị kiểm tra và triển khai; chưa bấm nút Xác thực trong tài khoản Zalo.
+
 ## 2026-10-26 — khám mắt cộng đồng tại Cảnh Thụy ngày 25/10/2026
 
 - Theo yêu cầu người dùng, xuất bản bài #1946 tại `/tin-tuc/hoat-dong-cong-dong/kham-mat-cong-dong-tai-canh-thuy-25-10-2026/`, chuyên mục Hoạt động cộng đồng #26. Ngày hoạt động tại Trạm Y tế Cảnh Thụy là 25/10/2026 do người dùng xác nhận; ngày xuất bản là 26/10/2026. Đây là hoạt động dành cho người dân, tách biệt bài Tiểu học Cảnh Thụy #1934.
