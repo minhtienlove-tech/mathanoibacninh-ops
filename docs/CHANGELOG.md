@@ -5,6 +5,7 @@
 - Theo yêu cầu mới, bỏ tin nhắc trước 1 giờ. Lịch mới chỉ xếp một tin xác nhận khi người đặt lịch chọn đồng ý Zalo riêng; lịch cũ không gửi bù. Mọi tác vụ nhắc từ bản cũ bị chặn gửi. Khi nhân viên đổi giờ sau xác nhận phải liên hệ trực tiếp.
 - Mẫu đã duyệt #657033 dùng đúng `schedule_time` (HH:mm:ss dd/mm/yyyy), `address`, `customer_name`, `booking_code` (ID lịch WordPress). Kiểm tra tên tối đa 30 ký tự theo giới hạn mẫu; trường hợp vượt sẽ báo lỗi trong quản trị và không gửi bản tên bị cắt.
 - Giao diện quản trị chỉ còn cấu hình mẫu xác nhận; phiên bản câu đồng ý được tăng. Kiểm thử trên PHP 8.2 máy chủ: 29 luồng gửi/không gửi, 21 cấu hình admin và 109 validation/riêng tư/tiếp nhận đạt; PHP lint các tệp sửa đạt. Chưa gửi tin thật; trạng thái vẫn tắt vì kết nối OA/ZBS chưa được nhập vào WordPress.
+- Đã triển khai commit `7600cc1` với bản sao ba tệp và database tại `/home/jwhxtzru/backups/zbs-confirm-20261027-115234/`. WP-CLI xác nhận mẫu và bốn biến đã lưu, tin nhắc rỗng, gửi tự động đang tắt; `verify-live.ps1 -CheckSsh` đạt trên sáu URL chính.
 
 ## 2026-10-27 — cập nhật tiếp theo theo BẢNG GIÁ DỊCH VỤ MỚI
 
