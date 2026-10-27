@@ -9,5 +9,21 @@
   "new_count": 201,
   "old_to_draft_count": 170,
   "plan_sha256": "5a677ee353bf8987de357a73b81660c7154b81032307ab9f019407864bb8c275",
-  "template_before_sha256": "68d73ec15b0318ca1e52641bdfd791b750617f2248a21e3d5cf0c8fdce29472c"
+  "template_before_sha256": "68d73ec15b0318ca1e52641bdfd791b750617f2248a21e3d5cf0c8fdce29472c",
+  "status": "published",
+  "production_url": "https://mathanoibacninh.com/bang-gia/",
+  "backup_directory": "/home/jwhxtzru/backups/price-list-20261027/",
+  "source_commit": "453c57e",
+  "verification": {
+    "all_215_prices_units_groups_order_match": true,
+    "raw_titles_match_source": true,
+    "active_rows": 215,
+    "active_groups": 10,
+    "superseded_rows_draft": 170,
+    "search_without_accents": "2 matching exam services; 100000 and 200000 VND",
+    "mobile_width": 390,
+    "mobile_document_width": 375,
+    "php_lint": "passed",
+    "smoke_six_urls_and_ssh": "passed"
+  }
 }

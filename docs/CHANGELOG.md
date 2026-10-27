@@ -4,7 +4,9 @@
 
 - Theo file `bảng giá cuối.xlsx`, chọn tab mang tên bệnh viện `DMDV-BH (2)`, vùng A7:D231: 215 dòng/10 nhóm, tên–đơn vị–giá khớp đối chiếu ZIP/XML độc lập. Các tab bệnh viện khác, kê khai 2023 và phép tính gói không trộn vào danh mục công khai.
 - Giữ 14 ID khớp tên/đơn vị, thêm 201 dòng và chuyển riêng 170 dòng cũ về draft; không xóa dữ liệu. Importer kiểm tra dữ liệu/ID ban đầu, snapshot toàn bộ meta/options, dùng transaction InnoDB và lưu trace nguồn hàng/sheet/hash. Giá/snapshot/plan ngoài Git, manifest phạm vi và hướng dẫn ở `docs/price-list-20261027.*`.
-- Chỉnh một câu ở `page-bang-gia.php` thành thông tin đơn vị tiền tệ dành cho người đọc. Chuẩn bị triển khai dưới khóa deploy sau backup database/template; kết quả kiểm tra production sẽ được ghi khi hoàn tất.
+- Đã triển khai commit `453c57e` dưới khóa deploy chung; backup database, template, toàn bộ dữ liệu trước cập nhật, plan và kết quả tại `/home/jwhxtzru/backups/price-list-20261027/`. Chỉnh một câu ở `page-bang-gia.php` thành thông tin đơn vị tiền tệ; không sửa core/plugin. Sau cập nhật purge WordPress cache và riêng URL `/bang-gia/` của LiteSpeed.
+- QA công khai và database: đủ 215/215 tên gốc–đơn vị–giá–nhóm–thứ tự; 215 publish và 170 dòng cũ draft. WordPress chỉ thay kiểu dấu gạch/ngắt câu ở 12 tên hiển thị, không thay nội dung; một H1/canonical/mô tả và ghi chú 27/10/2026 đạt. Tìm `kham mat` có hai dòng 100.000đ/200.000đ; xóa tìm kiếm trả đủ 215/10. PHP lint importer/template/footer/contact, smoke sáu URL và SSH đạt.
+- Điện thoại 390px có document width 375px, bảng chuyển thẻ với tên/đơn vị/giá đọc được, không tràn ngang. Ảnh kiểm tra ngoài Git: `C:/Users/htc/AppData/Local/Temp/pricing-20261027/published-mobile.png`; báo cáo đối chiếu chi tiết `qa-data.json` cùng thư mục. Không đưa dữ liệu giá/snapshot production vào Git.
 
 ## 2026-10-26 — xác nhận và nhắc lịch khám qua ZBS cho người bệnh
 
