@@ -18,10 +18,13 @@ function ec_zbs_settings() {
 function ec_zbs_template_values( $post, $data ) {
 	$date = (string) ( $data['date'] ?? '' );
 	$formatted_date = preg_match( '/^\d{4}-\d{2}-\d{2}$/D', $date ) ? substr( $date, 8, 2 ) . '/' . substr( $date, 5, 2 ) . '/' . substr( $date, 0, 4 ) : '';
+	$time = (string) ( $data['time'] ?? '' );
+	$schedule_time = ec_zbs_slot( $data ) ? $time . ':00 ' . $formatted_date : '';
 	return array(
 		'name' => (string) ( $data['name'] ?? '' ),
 		'date' => $formatted_date,
-		'time' => (string) ( $data['time'] ?? '' ),
+		'time' => $time,
+		'schedule_time' => $schedule_time,
 		'appointment_id' => (string) $post->ID,
 		'hospital_name' => 'Bệnh viện Mắt Hà Nội - Bắc Ninh',
 		'address' => function_exists( 'eyecare_dia_chi_day_du' ) ? eyecare_dia_chi_day_du() : '',
@@ -32,11 +35,21 @@ function ec_zbs_template_values( $post, $data ) {
 function ec_zbs_template_payload( $kind, $post, $data, $settings ) {
 	$map = $settings[ $kind . '_map' ] ?? null;
 	if ( ! is_array( $map ) || ! $map || count( $map ) > 20 ) { return new WP_Error( 'config', 'Chưa cấu hình biến mẫu ZBS.' ); }
+	$approved_confirmation = '657033' === ec_zbs_template_id( $kind, $settings );
+	if ( $approved_confirmation && $map != array( 'schedule_time' => 'schedule_time', 'address' => 'address', 'customer_name' => 'name', 'booking_code' => 'appointment_id' ) ) {
+		return new WP_Error( 'config', 'Tham số không khớp mẫu xác nhận ZBS đã duyệt.' );
+	}
 	$allowed = ec_zbs_template_values( $post, $data );
 	$output = array();
 	foreach ( $map as $variable => $token ) {
 		if ( ! is_string( $variable ) || ! preg_match( '/^[A-Za-z][A-Za-z0-9_]{0,63}$/D', $variable ) || ! is_string( $token ) || ! array_key_exists( $token, $allowed ) || '' === $allowed[ $token ] ) {
 			return new WP_Error( 'config', 'Biến mẫu ZBS không hợp lệ hoặc thiếu dữ liệu.' );
+		}
+		if ( $approved_confirmation ) {
+			$max = array( 'schedule_time' => 20, 'address' => 200, 'customer_name' => 30, 'booking_code' => 30 )[ $variable ] ?? 0;
+			if ( $max && ( function_exists( 'mb_strlen' ) ? mb_strlen( $allowed[ $token ], 'UTF-8' ) : preg_match_all( '/./us', $allowed[ $token ] ) ) > $max ) {
+				return new WP_Error( 'template_limit', 'Dữ liệu lịch khám vượt giới hạn ký tự của mẫu ZBS đã duyệt.' );
+			}
 		}
 		$output[ $variable ] = $allowed[ $token ];
 	}
@@ -90,13 +103,13 @@ function ec_zbs_enqueue( $id ) {
 	$data = ec_booking_read( $post );
 	if ( ! ec_zbs_consent( $data ) || get_post_meta( $id, '_ec_zbs_enrolled', true ) ) { return; }
 	$settings = ec_zbs_settings();
-	$ready = ! empty( $settings['enabled'] ) && ec_zbs_template_id( 'confirm', $settings ) && ec_zbs_template_id( 'reminder', $settings );
-	$ready = $ready && ! is_wp_error( ec_zbs_template_payload( 'confirm', $post, $data, $settings ) ) && ! is_wp_error( ec_zbs_template_payload( 'reminder', $post, $data, $settings ) );
+	$variables = ec_zbs_template_payload( 'confirm', $post, $data, $settings );
+	$ready = ! empty( $settings['enabled'] ) && ec_zbs_template_id( 'confirm', $settings ) && ! is_wp_error( $variables );
 	$ready = $ready && ec_zbs_phone( $data['phone'] ?? '' ) && ec_zbs_credentials_configured( $settings );
 	// Configuration must already be complete when the booking is made; enabling later never backfills old rows.
 	if ( ! $ready ) {
-		update_post_meta( $id, ec_zbs_meta( 'confirm', 'state' ), 'disabled' );
-		update_post_meta( $id, ec_zbs_meta( 'reminder', 'state' ), 'disabled' );
+		update_post_meta( $id, ec_zbs_meta( 'confirm', 'state' ), ! empty( $settings['enabled'] ) && is_wp_error( $variables ) ? 'failed' : 'disabled' );
+		if ( is_wp_error( $variables ) ) { update_post_meta( $id, ec_zbs_meta( 'confirm', 'error' ), $variables->get_error_message() ); }
 		update_post_meta( $id, '_ec_zbs_enrolled', 'disabled' );
 		return;
 	}
@@ -104,16 +117,6 @@ function ec_zbs_enqueue( $id ) {
 	update_post_meta( $id, ec_zbs_meta( 'confirm', 'state' ), 'pending' );
 	$queued = wp_schedule_single_event( ec_zbs_now() + 2, ec_zbs_hook( 'confirm' ), array( (int) $id ), true );
 	if ( ! $queued || is_wp_error( $queued ) ) { update_post_meta( $id, ec_zbs_meta( 'confirm', 'state' ), 'failed' ); }
-	$slot = ec_zbs_slot( $data );
-	$due = $slot ? $slot - HOUR_IN_SECONDS : 0;
-	if ( ! $due || $due <= ec_zbs_now() ) {
-		update_post_meta( $id, ec_zbs_meta( 'reminder', 'state' ), 'late' );
-		return;
-	}
-	update_post_meta( $id, ec_zbs_meta( 'reminder', 'state' ), 'pending' );
-	update_post_meta( $id, ec_zbs_meta( 'reminder', 'due' ), $due );
-	$queued = wp_schedule_single_event( $due, ec_zbs_hook( 'reminder' ), array( (int) $id ), true );
-	if ( ! $queued || is_wp_error( $queued ) ) { update_post_meta( $id, ec_zbs_meta( 'reminder', 'state' ), 'failed' ); }
 }
 add_action( 'ec_booking_created', 'ec_zbs_enqueue', 20 );
 
@@ -122,33 +125,12 @@ function ec_zbs_recover( $id ) {
 	if ( '1' !== get_post_meta( $id, '_ec_zbs_enrolled', true ) ) { return; }
 	$post = get_post( $id );
 	if ( ! ec_zbs_active_appointment( $post ) || ! ec_zbs_consent( ec_booking_read( $post ) ) ) { return; }
-	foreach ( array( 'confirm', 'reminder' ) as $kind ) {
-		if ( 'reminder' === $kind && 'late' === get_post_meta( $id, ec_zbs_meta( $kind, 'state' ), true ) ) {
-			// A new future slot may make a previously impossible reminder possible.
-			$new_due = ( ec_zbs_slot( ec_booking_read( $post ) ) ?: 0 ) - HOUR_IN_SECONDS;
-			if ( $new_due > ec_zbs_now() && ! get_post_meta( $id, ec_zbs_meta( $kind, 'msg_id' ), true ) ) {
-				update_post_meta( $id, ec_zbs_meta( $kind, 'state' ), 'pending' );
-			}
-		}
+	foreach ( array( 'confirm' ) as $kind ) {
 		if ( 'pending' !== get_post_meta( $id, ec_zbs_meta( $kind, 'state' ), true ) ) { continue; }
 		$args = array( (int) $id );
 		$scheduled = wp_next_scheduled( ec_zbs_hook( $kind ), $args );
-		$when = 'confirm' === $kind ? ec_zbs_now() + 2 : ( ec_zbs_slot( ec_booking_read( $post ) ) ?: 0 ) - HOUR_IN_SECONDS;
-		if ( 'reminder' === $kind ) {
-			$when = max( 0, $when );
-			update_post_meta( $id, ec_zbs_meta( 'reminder', 'due' ), $when );
-			// Date/time may have changed in WordPress; the old one-shot event is no longer valid.
-			if ( $scheduled && (int) $scheduled !== $when ) {
-				wp_unschedule_event( $scheduled, ec_zbs_hook( $kind ), $args );
-				$scheduled = false;
-			}
-		}
-		if ( 'reminder' === $kind && $when + 300 < ec_zbs_now() ) {
-			update_post_meta( $id, ec_zbs_meta( $kind, 'state' ), 'late' );
-			continue;
-		}
 		if ( $scheduled ) { continue; }
-		$queued = wp_schedule_single_event( max( ec_zbs_now() + 1, $when ), ec_zbs_hook( $kind ), $args, true );
+		$queued = wp_schedule_single_event( ec_zbs_now() + 2, ec_zbs_hook( $kind ), $args, true );
 		if ( ! $queued || is_wp_error( $queued ) ) { update_post_meta( $id, ec_zbs_meta( $kind, 'state' ), 'failed' ); }
 	}
 }
@@ -165,7 +147,7 @@ function ec_zbs_status_changed( $id ) {
 	}
 }
 
-/** Keep the reminder aligned if another authorized WordPress workflow edits the slot. */
+/** Recover a pending confirmation if another authorized WordPress workflow edits the slot. */
 function ec_zbs_post_updated( $id, $after, $before ) {
 	if ( 'ec_appointment' === $after->post_type && $after->post_content !== $before->post_content ) {
 		ec_zbs_recover( (int) $id );
@@ -276,7 +258,11 @@ function ec_zbs_send_template( $body ) {
 }
 
 function ec_zbs_deliver( $id, $kind ) {
-	if ( ! in_array( $kind, array( 'confirm', 'reminder' ), true ) ) { return; }
+	if ( 'confirm' !== $kind ) {
+		// Retired reminder events from older deployments must never send a message.
+		if ( 'reminder' === $kind && 'pending' === get_post_meta( $id, ec_zbs_meta( $kind, 'state' ), true ) ) { update_post_meta( $id, ec_zbs_meta( $kind, 'state' ), 'skipped' ); }
+		return;
+	}
 	$lock = ec_booking_lock( 'zbs:' . $kind . ':' . (int) $id );
 	if ( ! $lock ) { return; }
 	try {
@@ -287,19 +273,19 @@ function ec_zbs_deliver( $id, $kind ) {
 		$slot = ec_zbs_slot( $data );
 		$now = ec_zbs_now();
 		if ( ! $slot || $slot <= $now ) { update_post_meta( $id, ec_zbs_meta( $kind, 'state' ), 'late' ); return; }
-		if ( 'reminder' === $kind ) {
-			$due = $slot - HOUR_IN_SECONDS;
-			if ( $now < $due ) { ec_zbs_recover( $id ); return; }
-			if ( $now > $due + 300 ) { update_post_meta( $id, ec_zbs_meta( $kind, 'state' ), 'late' ); return; }
-		}
 		$settings = ec_zbs_settings();
 		$template_id = ec_zbs_template_id( $kind, $settings );
 		$variables = ec_zbs_template_payload( $kind, $post, $data, $settings );
 		$phone = ec_zbs_phone( $data['phone'] ?? '' );
-		if ( empty( $settings['enabled'] ) || ! $template_id || is_wp_error( $variables ) || ! $phone ) { update_post_meta( $id, ec_zbs_meta( $kind, 'state' ), 'disabled' ); return; }
+		if ( is_wp_error( $variables ) ) {
+			update_post_meta( $id, ec_zbs_meta( $kind, 'state' ), 'failed' );
+			update_post_meta( $id, ec_zbs_meta( $kind, 'error' ), $variables->get_error_message() );
+			return;
+		}
+		if ( empty( $settings['enabled'] ) || ! $template_id || ! $phone ) { update_post_meta( $id, ec_zbs_meta( $kind, 'state' ), 'disabled' ); return; }
 		update_post_meta( $id, ec_zbs_meta( $kind, 'state' ), 'sending' );
 		update_post_meta( $id, ec_zbs_meta( $kind, 'started_at' ), $now );
-		$tracking = 'ec' . (int) $id . ( 'confirm' === $kind ? 'c' : 'r' );
+		$tracking = 'ec' . (int) $id . 'c';
 		$result = ec_zbs_send_template( array( 'phone' => $phone, 'template_id' => $template_id, 'template_data' => $variables, 'tracking_id' => $tracking ) );
 		if ( is_wp_error( $result ) ) {
 			if ( 'busy' === $result->get_error_code() ) {

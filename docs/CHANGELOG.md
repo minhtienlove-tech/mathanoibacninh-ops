@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-27 — ZBS chỉ gửi xác nhận lịch khám theo mẫu #657033
+
+- Theo yêu cầu mới, bỏ tin nhắc trước 1 giờ. Lịch mới chỉ xếp một tin xác nhận khi người đặt lịch chọn đồng ý Zalo riêng; lịch cũ không gửi bù. Mọi tác vụ nhắc từ bản cũ bị chặn gửi. Khi nhân viên đổi giờ sau xác nhận phải liên hệ trực tiếp.
+- Mẫu đã duyệt #657033 dùng đúng `schedule_time` (HH:mm:ss dd/mm/yyyy), `address`, `customer_name`, `booking_code` (ID lịch WordPress). Kiểm tra tên tối đa 30 ký tự theo giới hạn mẫu; trường hợp vượt sẽ báo lỗi trong quản trị và không gửi bản tên bị cắt.
+- Giao diện quản trị chỉ còn cấu hình mẫu xác nhận; phiên bản câu đồng ý được tăng. Kiểm thử trên PHP 8.2 máy chủ: 29 luồng gửi/không gửi, 21 cấu hình admin và 109 validation/riêng tư/tiếp nhận đạt; PHP lint các tệp sửa đạt. Chưa gửi tin thật; trạng thái vẫn tắt vì kết nối OA/ZBS chưa được nhập vào WordPress.
+
 ## 2026-10-27 — cập nhật tiếp theo theo BẢNG GIÁ DỊCH VỤ MỚI
 
 - File mới chỉ có tab `DMDV-BH (2)` mang tên bệnh viện, vùng A7:D236: đầy đủ 220 dòng giá/10 nhóm. Hai dòng 76–77 trống tên/STT tiếp diễn dịch vụ mở rộng điểm lệ ở B75 (2 lỗ, 4 lỗ); ghi rõ căn cứ kế thừa tên, không bỏ sót hoặc gọi sai là ô gộp.

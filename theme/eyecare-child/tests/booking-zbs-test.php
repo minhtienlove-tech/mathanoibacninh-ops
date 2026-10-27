@@ -56,9 +56,8 @@ function zbs_post( $id, $hour, $consent = true ) {
 	$GLOBALS['zbs_posts'][ $id ] = (object) array( 'ID' => $id, 'post_type' => 'ec_appointment', 'post_status' => 'private', 'post_content' => json_encode( array( 'name' => 'Người bệnh thử', 'phone' => '0987654321', 'date' => '2026-10-26', 'time' => $hour, 'patient_zalo_consent' => $consent ) ) );
 	$GLOBALS['zbs_meta'][ $id ]['_ec_booking_status'] = 'confirmed';
 }
-$settings = array( 'enabled' => true, 'template_confirm_id' => '7895417a7d3f9461cd2e', 'template_reminder_id' => '67890',
-	'confirm_map' => array( 'patient_name' => 'name', 'visit_date' => 'date', 'visit_time' => 'time' ),
-	'reminder_map' => array( 'patient_name' => 'name', 'visit_date' => 'date', 'visit_time' => 'time' ) );
+$settings = array( 'enabled' => true, 'template_confirm_id' => '657033',
+	'confirm_map' => array( 'schedule_time' => 'schedule_time', 'address' => 'address', 'customer_name' => 'name', 'booking_code' => 'appointment_id' ) );
 zbs_post( 1, '10:00' );
 ec_zbs_enqueue( 1 );
 zbs_expect( 'disabled' === get_post_meta( 1, '_ec_zbs_enrolled' ) && 0 === count( $GLOBALS['zbs_events'] ), 'Default disabled never queues patient messages' );
@@ -69,29 +68,29 @@ zbs_expect( '' === get_post_meta( 2, '_ec_zbs_enrolled' ) && 0 === count( $GLOBA
 zbs_post( 3, '10:00' );
 ec_zbs_enqueue( 3 );
 $due = ( new DateTimeImmutable( '2026-10-26 09:00', new DateTimeZone( 'Asia/Ho_Chi_Minh' ) ) )->getTimestamp();
-zbs_expect( '1' === get_post_meta( 3, '_ec_zbs_enrolled' ) && wp_next_scheduled( 'ec_zbs_confirm_deliver', array( 3 ) ) && $due === wp_next_scheduled( 'ec_zbs_reminder_deliver', array( 3 ) ), 'New consented booking queues confirmation and T-minus-one-hour reminder once' );
+zbs_expect( '1' === get_post_meta( 3, '_ec_zbs_enrolled' ) && wp_next_scheduled( 'ec_zbs_confirm_deliver', array( 3 ) ) && ! wp_next_scheduled( 'ec_zbs_reminder_deliver', array( 3 ) ), 'New consented booking queues only confirmation' );
 ec_zbs_enqueue( 3 ); ec_zbs_recover( 3 );
-zbs_expect( 2 === count( $GLOBALS['zbs_events'] ), 'Repeated requests do not queue duplicates' );
+zbs_expect( 1 === count( $GLOBALS['zbs_events'] ), 'Repeated requests do not queue duplicates' );
 $GLOBALS['zbs_http_queue'][] = zbs_response( 200, array( 'error' => 0, 'data' => array( 'msg_id' => 'confirm-3' ) ) );
 ec_zbs_deliver( 3, 'confirm' );
 $call = end( $GLOBALS['zbs_http'] );
 $body = json_decode( $call[1]['body'], true );
 zbs_expect( 'accepted' === get_post_meta( 3, '_ec_zbs_confirm_state' ) && 'confirm-3' === get_post_meta( 3, '_ec_zbs_confirm_msg_id' ), 'Provider acceptance saved with message ID' );
-zbs_expect( 'https://business.openapi.zalo.me/message/template' === $call[0] && '84987654321' === $body['phone'] && 'ec3c' === $body['tracking_id'] && 'Người bệnh thử' === $body['template_data']['patient_name'], 'Official endpoint, international phone and approved mapped variables used' );
+zbs_expect( 'https://business.openapi.zalo.me/message/template' === $call[0] && '84987654321' === $body['phone'] && 'ec3c' === $body['tracking_id'] && '657033' === $body['template_id'] && array( 'schedule_time' => '10:00:00 26/10/2026', 'address' => 'Địa chỉ thử nghiệm', 'customer_name' => 'Người bệnh thử', 'booking_code' => '3' ) === $body['template_data'], 'Official endpoint, international phone and exact approved template variables used' );
 $sent = count( $GLOBALS['zbs_http'] ); ec_zbs_deliver( 3, 'confirm' );
 zbs_expect( $sent === count( $GLOBALS['zbs_http'] ), 'Accepted confirmation is not sent twice' );
-$GLOBALS['zbs_now'] = $due;
-$GLOBALS['zbs_http_queue'][] = zbs_response( 200, array( 'error' => 0, 'data' => array( 'msg_id' => 'reminder-3' ) ) );
+$sent = count( $GLOBALS['zbs_http'] );
+update_post_meta( 3, '_ec_zbs_reminder_state', 'pending' );
 ec_zbs_deliver( 3, 'reminder' );
-zbs_expect( 'accepted' === get_post_meta( 3, '_ec_zbs_reminder_state' ) && 'reminder-3' === get_post_meta( 3, '_ec_zbs_reminder_msg_id' ), 'Reminder accepted at T-minus-one-hour' );
+zbs_expect( 'skipped' === get_post_meta( 3, '_ec_zbs_reminder_state' ) && $sent === count( $GLOBALS['zbs_http'] ), 'Retired reminder event cannot send' );
 $GLOBALS['zbs_now'] = ( new DateTimeImmutable( '2026-10-26 08:00', new DateTimeZone( 'Asia/Ho_Chi_Minh' ) ) )->getTimestamp();
 zbs_post( 4, '11:00' ); ec_zbs_enqueue( 4 );
 update_post_meta( 4, '_ec_booking_status', 'cancelled' ); ec_zbs_status_changed( 4 );
-zbs_expect( 'skipped' === get_post_meta( 4, '_ec_zbs_reminder_state' ) && ! wp_next_scheduled( 'ec_zbs_reminder_deliver', array( 4 ) ), 'Cancellation removes queued reminder' );
-$sent = count( $GLOBALS['zbs_http'] ); ec_zbs_deliver( 4, 'reminder' );
-zbs_expect( $sent === count( $GLOBALS['zbs_http'] ), 'Cancelled appointment cannot send reminder' );
+zbs_expect( 'skipped' === get_post_meta( 4, '_ec_zbs_confirm_state' ) && ! wp_next_scheduled( 'ec_zbs_confirm_deliver', array( 4 ) ), 'Cancellation removes queued confirmation' );
+$sent = count( $GLOBALS['zbs_http'] ); ec_zbs_deliver( 4, 'confirm' );
+zbs_expect( $sent === count( $GLOBALS['zbs_http'] ), 'Cancelled appointment cannot send confirmation' );
 zbs_post( 5, '08:30' ); ec_zbs_enqueue( 5 );
-zbs_expect( 'late' === get_post_meta( 5, '_ec_zbs_reminder_state' ) && ! wp_next_scheduled( 'ec_zbs_reminder_deliver', array( 5 ) ), 'Booking within one hour skips impossible reminder' );
+zbs_expect( 'pending' === get_post_meta( 5, '_ec_zbs_confirm_state' ) && ! wp_next_scheduled( 'ec_zbs_reminder_deliver', array( 5 ) ), 'Near-term booking still queues confirmation only' );
 zbs_post( 6, '11:00' ); ec_zbs_enqueue( 6 );
 $GLOBALS['zbs_http_queue'][] = new WP_Error( 'timeout', 'simulated private detail' );
 ec_zbs_deliver( 6, 'confirm' );
@@ -103,7 +102,15 @@ ec_zbs_deliver( 7, 'confirm' );
 zbs_expect( 'failed' === get_post_meta( 7, '_ec_zbs_confirm_state' ) && ! str_contains( get_post_meta( 7, '_ec_zbs_confirm_error' ), 'private' ), 'Explicit refusal is safe to inspect and does not expose provider detail' );
 $bad = $settings; $bad['confirm_map'] = array( 'patient_name' => 'unapproved_data' );
 zbs_expect( is_wp_error( ec_zbs_template_payload( 'confirm', get_post( 7 ), ec_booking_read( get_post( 7 ) ), $bad ) ), 'Unapproved template value cannot escape whitelist' );
-zbs_expect( '7895417a7d3f9461cd2e' === ec_zbs_template_id( 'confirm', $settings ) && '' === ec_zbs_template_id( 'confirm', array( 'template_confirm_id' => 'bad/id' ) ), 'Official alphanumeric template IDs accepted but unsafe IDs rejected' );
+zbs_expect( '657033' === ec_zbs_template_id( 'confirm', $settings ) && '' === ec_zbs_template_id( 'confirm', array( 'template_confirm_id' => 'bad/id' ) ), 'Approved template ID accepted but unsafe IDs rejected' );
+$long_name = ec_booking_read( get_post( 7 ) ); $long_name['name'] = str_repeat( 'A', 31 );
+zbs_expect( is_wp_error( ec_zbs_template_payload( 'confirm', get_post( 7 ), $long_name, $settings ) ), 'Name exceeding approved 30-character limit is rejected before sending' );
+zbs_post( 12, '15:00' );
+$GLOBALS['zbs_posts'][12]->post_content = json_encode( $long_name );
+ec_zbs_enqueue( 12 );
+zbs_expect( 'failed' === get_post_meta( 12, '_ec_zbs_confirm_state' ) && ! wp_next_scheduled( 'ec_zbs_confirm_deliver', array( 12 ) ), 'Oversized patient name is flagged for staff and never queued' );
+$invalid_slot = ec_booking_read( get_post( 7 ) ); $invalid_slot['date'] = '2026-02-31';
+zbs_expect( is_wp_error( ec_zbs_template_payload( 'confirm', get_post( 7 ), $invalid_slot, $settings ) ), 'Invalid appointment date cannot enter approved schedule_time field' );
 
 // OAuth refresh stores the new access and one-use refresh token together.
 $GLOBALS['zbs_provider'] = null;
@@ -144,17 +151,12 @@ zbs_expect( 'failed' === get_post_meta( 8, '_ec_zbs_confirm_state' ), 'Recovery 
 $GLOBALS['zbs_schedule_fail'] = false;
 $GLOBALS['zbs_now'] = ( new DateTimeImmutable( '2026-10-26 11:02', new DateTimeZone( 'Asia/Ho_Chi_Minh' ) ) )->getTimestamp();
 $GLOBALS['zbs_provider']['expires_at'] = $GLOBALS['zbs_now'] + 7200;
-wp_unschedule_event( wp_next_scheduled( 'ec_zbs_reminder_deliver', array( 8 ) ), 'ec_zbs_reminder_deliver', array( 8 ) );
-ec_zbs_recover( 8 );
-zbs_expect( 'pending' === get_post_meta( 8, '_ec_zbs_reminder_state' ) && wp_next_scheduled( 'ec_zbs_reminder_deliver', array( 8 ) ) > $GLOBALS['zbs_now'], 'Lost reminder can be recovered within five-minute send tolerance' );
-
 zbs_post( 9, '13:00' ); ec_zbs_enqueue( 9 );
-$old_due = wp_next_scheduled( 'ec_zbs_reminder_deliver', array( 9 ) );
 $before_post = clone get_post( 9 );
 $changed = ec_booking_read( get_post( 9 ) ); $changed['time'] = '14:00';
 $GLOBALS['zbs_posts'][9]->post_content = json_encode( $changed );
 ec_zbs_post_updated( 9, get_post( 9 ), $before_post );
-zbs_expect( wp_next_scheduled( 'ec_zbs_reminder_deliver', array( 9 ) ) === $old_due + 3600, 'WordPress slot change cancels old reminder and schedules one hour before new slot' );
+zbs_expect( ! wp_next_scheduled( 'ec_zbs_reminder_deliver', array( 9 ) ) && wp_next_scheduled( 'ec_zbs_confirm_deliver', array( 9 ) ), 'WordPress reschedule cannot create a reminder' );
 
 // A busy OAuth refresh happens before the send request and can be retried safely.
 $GLOBALS['zbs_provider'] = null;
@@ -175,12 +177,11 @@ zbs_expect( 'pending' === get_post_meta( 10, '_ec_zbs_confirm_state' ) && wp_nex
 ec_booking_unlock( $token_lock );
 
 zbs_post( 11, '11:30' ); ec_zbs_enqueue( 11 );
-zbs_expect( 'late' === get_post_meta( 11, '_ec_zbs_reminder_state' ), 'Near-term booking cannot receive T-minus-one-hour reminder' );
+zbs_expect( 'pending' === get_post_meta( 11, '_ec_zbs_confirm_state' ) && ! wp_next_scheduled( 'ec_zbs_reminder_deliver', array( 11 ) ), 'Near-term booking has confirmation without reminder' );
 $before_post = clone get_post( 11 );
 $changed = ec_booking_read( get_post( 11 ) ); $changed['time'] = '14:30';
 $GLOBALS['zbs_posts'][11]->post_content = json_encode( $changed );
 ec_zbs_post_updated( 11, get_post( 11 ), $before_post );
-$new_due = ( new DateTimeImmutable( '2026-10-26 13:30', new DateTimeZone( 'Asia/Ho_Chi_Minh' ) ) )->getTimestamp();
-zbs_expect( 'pending' === get_post_meta( 11, '_ec_zbs_reminder_state' ) && $new_due === wp_next_scheduled( 'ec_zbs_reminder_deliver', array( 11 ) ), 'Future reschedule can queue reminder that was initially too late' );
+zbs_expect( ! wp_next_scheduled( 'ec_zbs_reminder_deliver', array( 11 ) ), 'Future reschedule cannot queue a retired reminder' );
 
 echo 'ZBS patient booking checks: ' . $GLOBALS['zbs_checks'] . " passed\n";

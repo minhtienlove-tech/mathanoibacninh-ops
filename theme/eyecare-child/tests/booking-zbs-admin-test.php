@@ -57,8 +57,7 @@ function zbs_admin_post( $values ) {
 	$_SERVER['REQUEST_METHOD'] = 'POST';
 	$_POST = array_merge( array(
 		'app_id' => '', 'secret_key' => '', 'refresh_token' => '', 'access_token' => '',
-		'access_token_expires' => '', 'template_confirm_id' => '', 'template_reminder_id' => '',
-		'confirm_map' => '', 'reminder_map' => '',
+		'access_token_expires' => '', 'template_confirm_id' => '', 'confirm_map' => '',
 	), $values );
 	try { ec_zbs_admin_save(); }
 	catch ( ZbsAdminRedirect $redirect ) {}
@@ -67,6 +66,7 @@ function zbs_admin_post( $values ) {
 
 zbs_admin_expect( array() === ec_zbs_admin_parse_map( '' ), 'Empty mapping is allowed while disabled' );
 zbs_admin_expect( array( 'patient_name' => 'name', 'visit_date' => 'date' ) === ec_zbs_admin_parse_map( "patient_name=name\nvisit_date=date" ), 'Approved tokens parse' );
+zbs_admin_expect( array( 'schedule_time' => 'schedule_time', 'address' => 'address', 'customer_name' => 'name', 'booking_code' => 'appointment_id' ) === ec_zbs_admin_parse_map( "schedule_time=schedule_time\naddress=address\ncustomer_name=name\nbooking_code=appointment_id" ), 'Approved template 657033 variables parse' );
 zbs_admin_expect( is_wp_error( ec_zbs_admin_parse_map( 'patient_name=clinical_note' ) ), 'Unapproved value refused' );
 zbs_admin_expect( is_wp_error( ec_zbs_admin_parse_map( "patient_name=name\npatient_name=date" ) ), 'Duplicate parameter refused' );
 zbs_admin_expect( is_wp_error( ec_zbs_admin_parse_map( 'a=b=c' ) ), 'Ambiguous line refused' );
@@ -76,18 +76,25 @@ zbs_admin_expect( ! empty( $notice['error'] ) && false === get_option( 'ec_booki
 $notice = zbs_admin_post( array() );
 zbs_admin_expect( empty( $notice['error'] ) && false === get_option( 'ec_booking_zbs' )['enabled'], 'Disabled blank configuration can save safely' );
 $notice = zbs_admin_post( array( 'enabled' => '1' ) );
-zbs_admin_expect( ! empty( $notice['error'] ) && false === get_option( 'ec_booking_zbs' )['enabled'], 'Cannot enable without templates and credentials' );
+zbs_admin_expect( ! empty( $notice['error'] ) && false === get_option( 'ec_booking_zbs' )['enabled'], 'Cannot enable without confirmation template and credentials' );
 
 $valid = array(
 	'app_id' => '123456', 'secret_key' => 'mock-secret-key-123', 'refresh_token' => 'mock-refresh-token-123',
-	'template_confirm_id' => '12345', 'template_reminder_id' => '67890',
-	'confirm_map' => "patient_name=name\nvisit_date=date", 'reminder_map' => 'patient_name=name', 'enabled' => '1',
+	'template_confirm_id' => '657033',
+	'confirm_map' => "schedule_time=schedule_time\naddress=address\ncustomer_name=name\nbooking_code=appointment_id", 'enabled' => '1',
 );
 $notice = zbs_admin_post( $valid );
 $saved = get_option( 'ec_booking_zbs' );
-zbs_admin_expect( empty( $notice['error'] ) && true === $saved['enabled'], 'Complete settings can be enabled' );
+zbs_admin_expect( empty( $notice['error'] ) && true === $saved['enabled'] && '657033' === $saved['template_confirm_id'] && empty( $saved['template_reminder_id'] ), 'Confirmation-only settings can be enabled without a reminder template' );
+$mismatched = $valid; $mismatched['confirm_map'] = 'customer_name=name';
+$notice = zbs_admin_post( $mismatched );
+zbs_admin_expect( ! empty( $notice['error'] ) && $saved === get_option( 'ec_booking_zbs' ), 'Approved template cannot be enabled with missing variables' );
 zbs_admin_expect( 1 === $GLOBALS['zbs_admin_cache_flushes'] && in_array( 'litespeed_purge_all', $GLOBALS['zbs_admin_purge_actions'], true ), 'Enabling ZBS purges cached booking forms' );
 zbs_admin_expect( 'mock-refresh-token-123' === ec_zalo_token( array( 'cipher' => $saved['refresh_token_cipher'] ) ) && ! isset( $saved['access_token_cipher'] ), 'Credentials are encrypted and access may be initially absent' );
+$legacy = $saved; $legacy['template_reminder_id'] = '67890'; $legacy['reminder_map'] = array( 'customer_name' => 'name' );
+update_option( 'ec_booking_zbs', $legacy );
+$notice = zbs_admin_post( $valid ); $saved = get_option( 'ec_booking_zbs' );
+zbs_admin_expect( empty( $notice['error'] ) && '' === $saved['template_reminder_id'] && array() === $saved['reminder_map'], 'Saving confirmation-only settings retires old reminder configuration' );
 
 $saved['access_token_cipher'] = ec_zalo_encrypt( 'old-access-token-123' );
 $saved['access_token_expires_at'] = time() + 7200;
@@ -119,5 +126,6 @@ ob_start();
 ec_zbs_admin_page();
 $html = ob_get_clean();
 zbs_admin_expect( str_contains( $html, 'Tin ZBS cho người đặt lịch' ) && ! str_contains( $html, 'new-refresh-token-123' ) && ! str_contains( $html, 'mock-secret-key-123' ), 'Admin page renders status but never discloses credentials' );
+zbs_admin_expect( ! str_contains( $html, 'name="template_reminder_id"' ) && ! str_contains( $html, 'name="reminder_map"' ), 'Admin page contains no reminder configuration' );
 
 echo 'ZBS admin checks: ' . $checks . " passed\n";

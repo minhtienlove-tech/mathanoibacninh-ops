@@ -27,7 +27,7 @@ function ec_booking_contact_consent_text() {
 
 /** Separate affirmative choice for transactional patient messages, including cached older forms. */
 function ec_booking_patient_zalo_consent_text() {
-	return 'Tôi đồng ý nhận tin xác nhận lịch khám và tin nhắc trước giờ khám khoảng 1 giờ qua Zalo OA/ZBS đến số di động đã nhập. Tin chỉ liên quan đến lịch hẹn, không chứa quảng cáo; việc đặt lịch không phụ thuộc lựa chọn này.';
+	return 'Tôi đồng ý nhận một tin xác nhận lịch khám qua Zalo OA/ZBS đến số di động đã nhập. Tin chỉ liên quan đến lịch hẹn, không chứa quảng cáo; việc đặt lịch không phụ thuộc lựa chọn này.';
 }
 
 /** Dấu vân tay của lịch mới bao gồm lựa chọn nhận tin để retry không đổi được đồng ý. */
@@ -308,7 +308,7 @@ function ec_booking_store( $booking ) {
 		$payload['patient_zalo_consent'] = ! empty( $booking['patient_zalo_consent'] );
 		if ( $payload['patient_zalo_consent'] ) {
 			$payload['patient_zalo_consented_at'] = $payload['received_at'];
-			$payload['patient_zalo_consent_version'] = '2026-10-26-v1';
+			$payload['patient_zalo_consent_version'] = '2026-10-27-confirm-only-v2';
 			$payload['patient_zalo_consent_text'] = ec_booking_patient_zalo_consent_text();
 		}
 		// Immutable initial status keeps retries to Sheet identical even after staff edits.
@@ -440,6 +440,7 @@ function ec_booking_admin_details( $post ) {
 	$data   = ec_booking_read( $post );
 	$fields = array( 'name' => 'Họ tên', 'phone' => 'Số điện thoại', 'date' => 'Ngày khám hiện tại', 'time' => 'Giờ khám hiện tại', 'received_at' => 'Tiếp nhận lúc' );
 	echo '<table class="form-table"><tbody>';
+	echo '<tr><th scope="row">Mã lịch hẹn gửi qua Zalo</th><td>' . esc_html( (string) $post->ID ) . '</td></tr>';
 	foreach ( $fields as $key => $label ) {
 		$value = $data[ $key ] ?? '';
 		if ( 'date' === $key ) { $value = ec_booking_admin_date_label( $value ); }
@@ -459,7 +460,7 @@ function ec_booking_admin_details( $post ) {
 	echo '</select><p>Lịch mới từ website được tự động xác nhận. Nhân viên có thể cập nhật trạng thái khi hỗ trợ người đăng ký.</p>';
 	echo '<p><label for="ec-booking-date"><strong>Đổi ngày khám</strong></label><br><input type="date" id="ec-booking-date" name="ec_booking_date" value="' . esc_attr( $data['date'] ?? '' ) . '"></p>';
 	echo '<p><label for="ec-booking-time"><strong>Đổi giờ khám</strong></label><br><input type="time" id="ec-booking-time" name="ec_booking_time" value="' . esc_attr( $data['time'] ?? '' ) . '"></p>';
-	echo '<p class="description">Chỉ lưu giờ khám trong tương lai, trong vòng 90 ngày và đúng khung giờ tiếp nhận. Khi đổi lịch, vui lòng báo trực tiếp cho người bệnh; tin nhắc đang chờ sẽ dùng giờ mới. WordPress là nguồn giờ khám hiện tại; Google Sheet có thể vẫn ghi giờ đăng ký ban đầu.</p>';
+	echo '<p class="description">Chỉ lưu giờ khám trong tương lai, trong vòng 90 ngày và đúng khung giờ tiếp nhận. Khi đổi lịch sau tin xác nhận, vui lòng báo trực tiếp cho người bệnh. WordPress là nguồn giờ khám hiện tại; Google Sheet có thể vẫn ghi giờ đăng ký ban đầu.</p>';
 	$rescheduled_at = get_post_meta( $post->ID, '_ec_booking_rescheduled_at', true );
 	if ( $rescheduled_at ) {
 		echo '<p class="description">Đổi lịch gần nhất: ' . esc_html( wp_date( 'H:i · d/m/Y', (int) $rescheduled_at, new DateTimeZone( 'Asia/Ho_Chi_Minh' ) ) ) . '</p>';

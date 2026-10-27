@@ -15,6 +15,7 @@ function ec_zbs_admin_tokens() {
 		'name'           => 'Họ tên người đặt lịch',
 		'date'           => 'Ngày khám (dd/mm/yyyy)',
 		'time'           => 'Giờ khám (HH:mm)',
+		'schedule_time'  => 'Giờ và ngày khám (HH:mm:ss dd/mm/yyyy)',
 		'appointment_id' => 'Mã lịch hẹn',
 		'hospital_name'  => 'Tên bệnh viện',
 		'address'        => 'Địa chỉ bệnh viện',
@@ -76,7 +77,7 @@ function ec_zbs_admin_save() {
 		wp_die( 'Phương thức không hợp lệ.', '', array( 'response' => 405 ) );
 	}
 	check_admin_referer( 'ec_zbs_settings', 'ec_zbs_nonce' );
-	$fields = array( 'app_id', 'secret_key', 'refresh_token', 'access_token', 'access_token_expires', 'template_confirm_id', 'template_reminder_id', 'confirm_map', 'reminder_map' );
+	$fields = array( 'app_id', 'secret_key', 'refresh_token', 'access_token', 'access_token_expires', 'template_confirm_id', 'confirm_map' );
 	$input  = array();
 	foreach ( $fields as $field ) {
 		if ( ! isset( $_POST[ $field ] ) || ! is_string( $_POST[ $field ] ) ) {
@@ -87,7 +88,7 @@ function ec_zbs_admin_save() {
 	if ( '' !== $input['app_id'] && ! preg_match( '/^[0-9]{1,32}$/D', $input['app_id'] ) ) {
 		ec_zbs_admin_notice( 'App ID phải là chuỗi số do Zalo cấp.', true );
 	}
-	foreach ( array( 'template_confirm_id', 'template_reminder_id' ) as $field ) {
+	foreach ( array( 'template_confirm_id' ) as $field ) {
 		if ( '' !== $input[ $field ] && ! preg_match( '/^[A-Za-z0-9]{1,64}$/D', $input[ $field ] ) ) {
 			ec_zbs_admin_notice( 'Mã mẫu tin chỉ gồm chữ và số, tối đa 64 ký tự.', true );
 		}
@@ -98,9 +99,8 @@ function ec_zbs_admin_save() {
 		}
 	}
 	$confirm_map  = ec_zbs_admin_parse_map( $input['confirm_map'] );
-	$reminder_map = ec_zbs_admin_parse_map( $input['reminder_map'] );
-	if ( is_wp_error( $confirm_map ) || is_wp_error( $reminder_map ) ) {
-		ec_zbs_admin_notice( is_wp_error( $confirm_map ) ? $confirm_map->get_error_message() : $reminder_map->get_error_message(), true );
+	if ( is_wp_error( $confirm_map ) ) {
+		ec_zbs_admin_notice( $confirm_map->get_error_message(), true );
 	}
 	$expires_at = null;
 	if ( '' !== $input['access_token'] ) {
@@ -146,9 +146,9 @@ function ec_zbs_admin_save() {
 		}
 		$next['app_id']               = $input['app_id'];
 		$next['template_confirm_id']  = $input['template_confirm_id'];
-		$next['template_reminder_id'] = $input['template_reminder_id'];
 		$next['confirm_map']          = $confirm_map;
-		$next['reminder_map']         = $reminder_map;
+		$next['template_reminder_id'] = '';
+		$next['reminder_map']         = array();
 		foreach ( $ciphers as $key => $cipher ) {
 			$next[ $key ] = $cipher;
 		}
@@ -163,9 +163,12 @@ function ec_zbs_admin_save() {
 		$has_credentials   = ! empty( $next['app_id'] ) &&
 			! empty( $next['secret_key_cipher'] ) && ec_zbs_safe_secret( ec_zalo_token( array( 'cipher' => $next['secret_key_cipher'] ) ) ) &&
 			! empty( $next['refresh_token_cipher'] ) && ec_zbs_safe_secret( ec_zalo_token( array( 'cipher' => $next['refresh_token_cipher'] ) ) );
-		$has_templates     = '' !== $next['template_confirm_id'] && '' !== $next['template_reminder_id'] && $confirm_map && $reminder_map;
+		$has_templates     = '' !== $next['template_confirm_id'] && $confirm_map;
 		if ( $requested_enabled && ( ! $has_credentials || ! $has_templates ) ) {
-			throw new RuntimeException( 'Chưa bật gửi tự động: cần App ID, Secret Key, Refresh Token, hai mã mẫu tin và tham số mẫu.' );
+			throw new RuntimeException( 'Chưa bật gửi tự động: cần App ID, Secret Key, Refresh Token, mã mẫu xác nhận và tham số mẫu.' );
+		}
+		if ( $requested_enabled && '657033' === $next['template_confirm_id'] && $confirm_map != array( 'schedule_time' => 'schedule_time', 'address' => 'address', 'customer_name' => 'name', 'booking_code' => 'appointment_id' ) ) {
+			throw new RuntimeException( 'Bốn tham số của mẫu xác nhận #657033 chưa khớp nội dung đã duyệt.' );
 		}
 		if ( $requested_enabled && in_array( $next['token_state'] ?? '', array( 'unknown', 'failed' ), true ) ) {
 			throw new RuntimeException( 'Kết nối token ZBS đang lỗi hoặc chưa rõ kết quả. Hãy đối soát và nhập Refresh Token mới trước khi bật.' );
@@ -213,7 +216,7 @@ function ec_zbs_admin_page() {
 	?>
 	<div class="wrap" style="max-width:1000px">
 		<h1>Tin ZBS cho người đặt lịch</h1>
-		<p>Gửi tin xác nhận sau khi lịch được lưu và tin nhắc trước giờ khám 1 tiếng. Đây là kênh gửi cho số điện thoại của người đặt lịch; thông báo Zalo Bot cho nhân viên được cấu hình ở trang riêng.</p>
+		<p>Gửi một tin xác nhận sau khi lịch được lưu. Đây là kênh gửi cho số điện thoại của người đặt lịch; thông báo Zalo Bot cho nhân viên được cấu hình ở trang riêng.</p>
 		<?php if ( is_array( $notice ) ) : ?>
 			<div class="notice <?php echo ! empty( $notice['error'] ) ? 'notice-error' : 'notice-success'; ?>"><p><?php echo esc_html( $notice['message'] ?? '' ); ?></p></div>
 		<?php endif; ?>
@@ -245,19 +248,17 @@ function ec_zbs_admin_page() {
 			</div>
 			<div class="card" style="max-width:none;padding:20px 28px">
 				<h2>2. Mẫu tin đã được ZBS duyệt</h2>
-				<p class="description">Nếu chưa có mẫu, có thể gửi ZBS duyệt hai nội dung tham khảo: “Bệnh viện Mắt Hà Nội – Bắc Ninh xác nhận lịch khám của {name}, mã {appointment_id}, lúc {time} ngày {date} tại {address}. Hỗ trợ: {hotline}.” và “Bệnh viện Mắt Hà Nội – Bắc Ninh nhắc lịch khám mã {appointment_id} của {name} lúc {time} ngày {date} tại {address}. Vui lòng đến đúng giờ. Hỗ trợ: {hotline}.” Chỉ điền mã và tên biến theo đúng mẫu được duyệt.</p>
+				<p class="description">Mẫu xác nhận đã duyệt #657033 dùng đúng bốn dòng: <code>schedule_time=schedule_time</code>, <code>address=address</code>, <code>customer_name=name</code>, <code>booking_code=appointment_id</code>. Mã lịch hẹn là ID lịch trong WordPress. Tên người đặt lịch quá 30 ký tự sẽ không được gửi tự động; nhân viên cần liên hệ trực tiếp.</p>
 				<table class="form-table" role="presentation">
 					<tr><th scope="row"><label for="ec-zbs-confirm-id">Mã mẫu xác nhận</label></th><td><input id="ec-zbs-confirm-id" name="template_confirm_id" type="text" pattern="[A-Za-z0-9]+" class="regular-text" maxlength="64" value="<?php echo esc_attr( $s['template_confirm_id'] ?? '' ); ?>"></td></tr>
-					<tr><th scope="row"><label for="ec-zbs-confirm-map">Tham số mẫu xác nhận</label></th><td><textarea id="ec-zbs-confirm-map" name="confirm_map" class="large-text code" rows="7" maxlength="6000" spellcheck="false" placeholder="customer_name=name&#10;appointment_date=date&#10;appointment_time=time"><?php echo esc_textarea( ec_zbs_admin_map_text( $s['confirm_map'] ?? array() ) ); ?></textarea><p class="description">Mỗi dòng: <code>ten_tham_so_trong_mau=ma_du_lieu</code>. Tên tham số phải trùng mẫu tin đã duyệt.</p></td></tr>
-					<tr><th scope="row"><label for="ec-zbs-reminder-id">Mã mẫu nhắc lịch</label></th><td><input id="ec-zbs-reminder-id" name="template_reminder_id" type="text" pattern="[A-Za-z0-9]+" class="regular-text" maxlength="64" value="<?php echo esc_attr( $s['template_reminder_id'] ?? '' ); ?>"></td></tr>
-					<tr><th scope="row"><label for="ec-zbs-reminder-map">Tham số mẫu nhắc lịch</label></th><td><textarea id="ec-zbs-reminder-map" name="reminder_map" class="large-text code" rows="7" maxlength="6000" spellcheck="false" placeholder="customer_name=name&#10;appointment_date=date&#10;appointment_time=time"><?php echo esc_textarea( ec_zbs_admin_map_text( $s['reminder_map'] ?? array() ) ); ?></textarea></td></tr>
+					<tr><th scope="row"><label for="ec-zbs-confirm-map">Tham số mẫu xác nhận</label></th><td><textarea id="ec-zbs-confirm-map" name="confirm_map" class="large-text code" rows="7" maxlength="6000" spellcheck="false" placeholder="schedule_time=schedule_time&#10;address=address&#10;customer_name=name&#10;booking_code=appointment_id"><?php echo esc_textarea( ec_zbs_admin_map_text( $s['confirm_map'] ?? array() ) ); ?></textarea><p class="description">Mỗi dòng: <code>ten_tham_so_trong_mau=ma_du_lieu</code>. Tên tham số phải trùng mẫu tin đã duyệt.</p></td></tr>
 				</table>
 				<p>Chỉ dùng các mã dữ liệu sau:</p>
 				<ul><?php foreach ( ec_zbs_admin_tokens() as $token => $label ) : ?><li><code><?php echo esc_html( $token ); ?></code> — <?php echo esc_html( $label ); ?></li><?php endforeach; ?></ul>
 			</div>
 			<div class="card" style="max-width:none;padding:20px 28px">
 				<h2>3. Bật gửi tự động</h2>
-				<p><label><input type="checkbox" name="enabled" value="1" <?php checked( ! empty( $s['enabled'] ) ); ?>> Gửi tin xác nhận cho lịch mới và nhắc trước giờ khám theo cấu hình.</label></p>
+				<p><label><input type="checkbox" name="enabled" value="1" <?php checked( ! empty( $s['enabled'] ) ); ?>> Gửi tin xác nhận cho lịch mới theo cấu hình.</label></p>
 				<p class="description">Chỉ bật sau khi mẫu tin và kết nối OA/App đã được kiểm tra. Lịch cũ không được gửi hàng loạt khi bấm lưu.</p>
 				<?php submit_button( 'Lưu cấu hình ZBS' ); ?>
 			</div>
@@ -281,13 +282,17 @@ function ec_zbs_admin_status_box( $post ) {
 		'late'      => 'Quá muộn để gửi nhắc lịch',
 		'disabled'  => 'Đã tắt tại thời điểm xử lý',
 	);
-	foreach ( array( 'confirm' => 'Tin xác nhận', 'reminder' => 'Tin nhắc trước giờ khám' ) as $kind => $heading ) {
+	foreach ( array( 'confirm' => 'Tin xác nhận' ) as $kind => $heading ) {
 		$state = get_post_meta( $post->ID, '_ec_zbs_' . $kind . '_state', true );
 		$state = is_string( $state ) ? $state : '';
 		$sent  = (int) get_post_meta( $post->ID, '_ec_zbs_' . $kind . '_sent_at', true );
 		echo '<p><strong>' . esc_html( $heading ) . ':</strong> ' . esc_html( $labels[ $state ] ?? 'Chưa có thông tin gửi' ) . '</p>';
 		if ( $sent > 0 ) {
 			echo '<p class="description">ZBS chấp nhận lúc ' . esc_html( wp_date( 'H:i · d/m/Y', $sent, new DateTimeZone( 'Asia/Ho_Chi_Minh' ) ) ) . '.</p>';
+		}
+		if ( 'failed' === $state ) {
+			$error = get_post_meta( $post->ID, '_ec_zbs_confirm_error', true );
+			if ( is_string( $error ) && '' !== $error ) { echo '<p class="description">' . esc_html( $error ) . '</p>'; }
 		}
 	}
 	echo '<p><a href="' . esc_url( admin_url( 'edit.php?post_type=ec_appointment&page=ec-zbs-settings' ) ) . '">Cài đặt ZBS</a></p>';

@@ -174,7 +174,7 @@ $first = ec_booking_store( $booking );
 ec_expect( $first === 1 && count( $GLOBALS['ec_test_posts'] ) === 1, 'First valid request saved' );
 $stored = ec_booking_read( $GLOBALS['ec_test_posts'][0] );
 ec_expect( $stored['name'] === $booking['name'] && $stored['phone'] === $booking['phone'] && $stored['consent'] === true, 'Complete data persisted in same row' );
-ec_expect( $stored['patient_zalo_consent'] === true && $stored['patient_zalo_consent_text'] === ec_booking_patient_zalo_consent_text() && $stored['patient_zalo_consent_version'] === '2026-10-26-v1', 'Patient ZBS consent evidence matches displayed wording and version' );
+ec_expect( $stored['patient_zalo_consent'] === true && $stored['patient_zalo_consent_text'] === ec_booking_patient_zalo_consent_text() && $stored['patient_zalo_consent_version'] === '2026-10-27-confirm-only-v2', 'Patient ZBS consent evidence matches displayed wording and version' );
 ec_expect( (bool) DateTimeImmutable::createFromFormat( DATE_ATOM, $stored['patient_zalo_consented_at'] ), 'Patient ZBS consent timestamp persisted' );
 ec_expect( $stored['public_share_consent'] === false && ! isset( $stored['public_share_consented_at'], $stored['public_share_consent_text'] ), 'Unchecked request stores no public display consent or consent evidence' );
 $new_payload = $booking;
