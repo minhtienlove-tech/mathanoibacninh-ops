@@ -14,5 +14,22 @@
     76,
     77
   ],
-  "plan_sha256": "0eed1e7fd6cc003e63924e8dfd13e511203d6ffe401fa17006ad08caa7864183"
+  "plan_sha256": "0eed1e7fd6cc003e63924e8dfd13e511203d6ffe401fa17006ad08caa7864183",
+  "status": "published_verified",
+  "published_url": "https://mathanoibacninh.com/bang-gia/",
+  "source_commit": "c0b9e38",
+  "server_backup": "/home/jwhxtzru/backups/price-list-20261027-v2/",
+  "verified": {
+    "raw_database_rows": 220,
+    "public_price_rows": 220,
+    "public_groups": 10,
+    "all_source_tuples_match": true,
+    "price_changes_match": 11,
+    "search_without_diacritics": true,
+    "cleared_search_rows": 220,
+    "mobile_viewport": "390x844",
+    "mobile_horizontal_overflow": false,
+    "php_lint": "pass",
+    "six_url_ssh_smoke": "pass"
+  }
 }

@@ -4,7 +4,8 @@
 
 - File mới chỉ có tab `DMDV-BH (2)` mang tên bệnh viện, vùng A7:D236: đầy đủ 220 dòng giá/10 nhóm. Hai dòng 76–77 trống tên/STT tiếp diễn dịch vụ mở rộng điểm lệ ở B75 (2 lỗ, 4 lỗ); ghi rõ căn cứ kế thừa tên, không bỏ sót hoặc gọi sai là ô gộp.
 - Đối chiếu nguồn mới: 11 mức giá thay đổi, giữ 214 ID, thêm sáu biến thể/dịch vụ và chuyển riêng mục cũ #2008 về draft. Nguồn và dữ liệu/plan ngoài Git; metadata phạm vi ở `docs/price-list-20261027-v2.*`. Importer vẫn kiểm tra hash, toàn bộ trạng thái ban đầu, transaction và backup; thêm scope 220/215 cùng provenance tên kế thừa.
-- Chuẩn bị cập nhật dưới khóa deploy sau backup database/template vào `~/backups/price-list-20261027-v2/`; không cần sửa giao diện. Kết quả đối chiếu production sẽ ghi sau khi hoàn tất.
+- Đã triển khai commit `c0b9e38` dưới khóa deploy chung; backup database, template, dữ liệu trước cập nhật, plan và kết quả tại `/home/jwhxtzru/backups/price-list-20261027-v2/`. Không sửa giao diện; flush object cache và purge riêng `/bang-gia/` qua LiteSpeed.
+- QA độc lập khớp toàn bộ 220 tên gốc–đơn vị–giá–nhóm–thứ tự; 11 mức thay đổi và ba mức mở rộng điểm lệ đúng. Đủ 220 publish/10 nhóm, #2008 draft; H1/canonical/mô tả/ghi chú cập nhật 27/10/2026 đạt. Tìm không dấu `mo rong diem le` trả ba dòng 1 lỗ/2 lỗ/4 lỗ; xóa tìm kiếm trả đủ 220. Mobile 390×844 không tràn ngang, đã lưu ảnh xác minh ngoài Git. PHP lint importer/template/footer/contact và smoke sáu URL/SSH đều đạt. Báo cáo ở thư mục tạm `pricing-20261027-v2/`, không đưa dữ liệu giá production vào Git.
 
 ## 2026-10-27 — cập nhật đầy đủ bảng giá dịch vụ
 
