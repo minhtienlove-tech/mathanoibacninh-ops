@@ -70,7 +70,7 @@ while ( have_posts() ) :
 		<div class="eyecare-bang-gia__khung">
 			<?php if ( function_exists( 'eyecare_duong_dan_in' ) ) : ?><div class="eyecare-bang-gia__duong-dan"><?php eyecare_duong_dan_in(); ?></div><?php endif; ?>
 			<div class="eyecare-bang-gia__hero-grid">
-				<div><p class="eyecare-bang-gia__nhan"><span aria-hidden="true"></span> Tra cứu minh bạch</p><h1 id="bang-gia-tieu-de"><?php the_title(); ?></h1><p>Tìm nhanh dịch vụ theo tên hoặc xem theo từng nhóm. Dữ liệu được quản lý trực tiếp trong WordPress Admin.</p></div>
+				<div><p class="eyecare-bang-gia__nhan"><span aria-hidden="true"></span> Tra cứu minh bạch</p><h1 id="bang-gia-tieu-de"><?php the_title(); ?></h1><p>Tìm nhanh dịch vụ theo tên hoặc xem theo từng nhóm. Mức giá tính bằng đồng Việt Nam, theo đơn vị niêm yết tại từng dịch vụ.</p></div>
 				<div class="eyecare-bang-gia__tong"><strong><?php echo esc_html( number_format_i18n( count( $posts_gia ) ) ); ?></strong><span>dịch vụ đang niêm yết</span><small><?php echo esc_html( number_format_i18n( count( $nhom ) ) ); ?> nhóm danh mục</small></div>
 			</div>
 		</div>

@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-27 — cập nhật đầy đủ bảng giá dịch vụ
+
+- Theo file `bảng giá cuối.xlsx`, chọn tab mang tên bệnh viện `DMDV-BH (2)`, vùng A7:D231: 215 dòng/10 nhóm, tên–đơn vị–giá khớp đối chiếu ZIP/XML độc lập. Các tab bệnh viện khác, kê khai 2023 và phép tính gói không trộn vào danh mục công khai.
+- Giữ 14 ID khớp tên/đơn vị, thêm 201 dòng và chuyển riêng 170 dòng cũ về draft; không xóa dữ liệu. Importer kiểm tra dữ liệu/ID ban đầu, snapshot toàn bộ meta/options, dùng transaction InnoDB và lưu trace nguồn hàng/sheet/hash. Giá/snapshot/plan ngoài Git, manifest phạm vi và hướng dẫn ở `docs/price-list-20261027.*`.
+- Chỉnh một câu ở `page-bang-gia.php` thành thông tin đơn vị tiền tệ dành cho người đọc. Chuẩn bị triển khai dưới khóa deploy sau backup database/template; kết quả kiểm tra production sẽ được ghi khi hoàn tất.
+
 ## 2026-10-26 — xác nhận và nhắc lịch khám qua ZBS cho người bệnh
 
 - Triển khai child theme từ commit `17d1676`: biểu mẫu có lựa chọn đồng ý riêng để nhận tin Zalo khi kênh được bật; chỉ lịch mới đã chọn mới được đưa vào hàng đợi. Lịch cũ không được gửi bù. Gửi lại biểu mẫu không thể đổi lựa chọn đã lưu. Mã và nội dung tin lấy từ hai mẫu ZBS đã duyệt; App ID, Secret Key và token được cấu hình trong quản trị, khóa bí mật lưu mã hóa, không đưa vào Git.

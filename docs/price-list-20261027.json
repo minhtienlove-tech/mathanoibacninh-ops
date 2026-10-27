@@ -1,0 +1,13 @@
+{
+  "source_file": "bảng giá cuối.xlsx",
+  "source_file_sha256": "a2f66cbf52b44b63c99c98e07ffbc5a8315d909919e950242c089f4176422698",
+  "source_sheet": "DMDV-BH (2)",
+  "range": "A7:D231",
+  "row_count": 215,
+  "group_count": 10,
+  "matched_update_count": 14,
+  "new_count": 201,
+  "old_to_draft_count": 170,
+  "plan_sha256": "5a677ee353bf8987de357a73b81660c7154b81032307ab9f019407864bb8c275",
+  "template_before_sha256": "68d73ec15b0318ca1e52641bdfd791b750617f2248a21e3d5cf0c8fdce29472c"
+}
