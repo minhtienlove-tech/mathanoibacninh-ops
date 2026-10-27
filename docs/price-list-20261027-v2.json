@@ -1,0 +1,18 @@
+{
+  "source_file": "BẢNG GIÁ DỊCH VỤ MỚI.xlsx",
+  "source_file_sha256": "16294944cf31c7a3d877669826859b4466cbfac1c7ced0ab019c104b45e6e3af",
+  "source_sheet": "DMDV-BH (2)",
+  "range": "A7:D236",
+  "row_count": 220,
+  "group_count": 10,
+  "matched_update_count": 214,
+  "new_count": 6,
+  "old_to_draft_count": 1,
+  "price_change_count": 11,
+  "continuation_title_from": "B75",
+  "continuation_rows": [
+    76,
+    77
+  ],
+  "plan_sha256": "0eed1e7fd6cc003e63924e8dfd13e511203d6ffe401fa17006ad08caa7864183"
+}

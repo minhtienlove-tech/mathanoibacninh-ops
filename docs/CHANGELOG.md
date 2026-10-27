@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-27 — cập nhật tiếp theo theo BẢNG GIÁ DỊCH VỤ MỚI
+
+- File mới chỉ có tab `DMDV-BH (2)` mang tên bệnh viện, vùng A7:D236: đầy đủ 220 dòng giá/10 nhóm. Hai dòng 76–77 trống tên/STT tiếp diễn dịch vụ mở rộng điểm lệ ở B75 (2 lỗ, 4 lỗ); ghi rõ căn cứ kế thừa tên, không bỏ sót hoặc gọi sai là ô gộp.
+- Đối chiếu nguồn mới: 11 mức giá thay đổi, giữ 214 ID, thêm sáu biến thể/dịch vụ và chuyển riêng mục cũ #2008 về draft. Nguồn và dữ liệu/plan ngoài Git; metadata phạm vi ở `docs/price-list-20261027-v2.*`. Importer vẫn kiểm tra hash, toàn bộ trạng thái ban đầu, transaction và backup; thêm scope 220/215 cùng provenance tên kế thừa.
+- Chuẩn bị cập nhật dưới khóa deploy sau backup database/template vào `~/backups/price-list-20261027-v2/`; không cần sửa giao diện. Kết quả đối chiếu production sẽ ghi sau khi hoàn tất.
+
 ## 2026-10-27 — cập nhật đầy đủ bảng giá dịch vụ
 
 - Theo file `bảng giá cuối.xlsx`, chọn tab mang tên bệnh viện `DMDV-BH (2)`, vùng A7:D231: 215 dòng/10 nhóm, tên–đơn vị–giá khớp đối chiếu ZIP/XML độc lập. Các tab bệnh viện khác, kê khai 2023 và phép tính gói không trộn vào danh mục công khai.

@@ -1,0 +1,13 @@
+# Bảng giá dịch vụ mới — lần cập nhật tiếp theo ngày 27/10/2026
+
+The user supplied `BẢNG GIÁ DỊCH VỤ MỚI.xlsx` and explicitly requested updating the hospital website again. Its only visible worksheet, `DMDV-BH (2)`, has the correct hospital heading. Use A7:D236, with 220 priced service/unit combinations in ten groups. Independent ZIP/XML extraction confirms every row, no hidden rows/formulas/extra data and the source group order. The source has no completed decision/effective-date fields; retain an update date, not a claim of legal effectiveness.
+
+Rows 76 and 77 are continuation rows with blank service/sequence cells, not merged cells. Their units and prices are 2 lỗ / 3,000,000 VND and 4 lỗ / 5,000,000 VND. They continue row 75, `Phẫu thuật Mở rộng điểm lệ` (1 lỗ / 1,600,000 VND), before the next numbered service at row 78. Carry the B75 title into those two public entries and record that provenance explicitly; do not omit either amount or label them as merged cells.
+
+The current 215 published records were freshly snapshotted. Retain 214 exact normalized service/unit IDs, create six new variants/services and return the superseded one-eye point-dilation entry #2008 to draft. Eleven existing service prices change. Do not delete posts, alter unrelated content or restore the previous version's 170 drafted services. The source, exact private plan, original snapshot and all price data stay outside Git. The companion JSON records hashes/scope only.
+
+The already reviewed importer now permits the additional exact scope 220 new rows / 215 expected old rows, still constrained by the exact supplied plan SHA-256 and all existing row/meta checks. It keeps the InnoDB transaction, complete backup, duplicate/run guards and post-write checks. Add protected metadata for the continuation-title provenance. No theme markup/CSS change is needed.
+
+Before production: commit, hold `/home/jwhxtzru/website-ops-deploy.lock`, back up database plus the related template/price-manager files at `~/backups/price-list-20261027-v2/`, verify staged hashes and lint importer/price template/footer/contact page. Run the importer with `EYECARE_PRICE_BACKUP` and `EYECARE_PRICE_PLAN_SHA256`, then flush object cache and purge only `/bang-gia/` through LiteSpeed.
+
+Verify all 220 raw names/units/prices/groups/order and rendered amounts against the new source, including all three point-dilation variants and the eleven changed fees. Check ten groups, search, responsive layout and the standard six URL/SSH smoke test. Selective rollback restores only the backed-up 215 records/meta/options and returns only the six newly created IDs to draft; keep all records and backups.

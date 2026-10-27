@@ -5,7 +5,9 @@ $base=(string)getenv('EYECARE_PRICE_BACKUP');
 $plan_hash=(string)getenv('EYECARE_PRICE_PLAN_SHA256');
 if (!$base || !is_file($base.'/database.sql') || filesize($base.'/database.sql')===0 || !preg_match('/^[a-f0-9]{64}$/D',$plan_hash) || hash_file('sha256',$base.'/import-plan.json')!==$plan_hash) WP_CLI::error('Backup or input hash missing/mismatched');
 $plan=json_decode(file_get_contents($base.'/import-plan.json'),true);
-if ($plan['source_sheet']!=='DMDV-BH (2)' || count($plan['rows'])!==215 || count($plan['expected_rows'])!==184) WP_CLI::error('Unexpected source scope');
+$scope=[count($plan['rows']),count($plan['expected_rows'])];
+if ($plan['source_sheet']!=='DMDV-BH (2)' || !in_array($scope,[[215,184],[220,215]],true)) WP_CLI::error('Unexpected source scope');
+$expected_count=count($plan['rows']);
 $type='eyecare_bang_gia';
 if (!post_type_exists($type)) WP_CLI::error('Price post type missing');
 $state_file=$base.'/import-result.json';
@@ -65,6 +67,7 @@ try {
         update_post_meta($id,'_eyecare_gia_nguon_sheet',$plan['source_sheet']);
         update_post_meta($id,'_eyecare_gia_nguon_hang',(int)$r['row']);
         update_post_meta($id,'_eyecare_gia_nguon_sha256',$plan['source_file_sha256']);
+        update_post_meta($id,'_eyecare_gia_nguon_ten_tu',wp_slash((string)($r['title_from']??'')));
         $actual=$snapshot($id);
         foreach ($values as $key=>$value) if ($actual[$key] !== (string)$value) throw new RuntimeException('Value write mismatch: '.$id.'/'.$key);
         if ($actual['title']!==$r['title']) throw new RuntimeException('Title write mismatch: '.$id);
@@ -79,7 +82,7 @@ try {
     update_option('eyecare_bang_gia_ghi_chu',$note,false);
     if (get_option('eyecare_bang_gia_hien_gia')!=='1' || get_option('eyecare_bang_gia_ghi_chu')!==$note) throw new RuntimeException('Display option write mismatch');
     $final=get_posts(['post_type'=>$type,'post_status'=>'publish','numberposts'=>-1,'fields'=>'ids']);
-    if (count($final)!==215) throw new RuntimeException('Final row count mismatch');
+    if (count($final)!==$expected_count) throw new RuntimeException('Final row count mismatch');
     if ($wpdb->query('COMMIT')===false) throw new RuntimeException('Commit failed');
 } catch (Throwable $e) {
     $rolled_back=$wpdb->query('ROLLBACK')!==false;wp_cache_flush();
@@ -88,4 +91,4 @@ try {
 }
 $result['complete']=true;
 if (file_put_contents($state_file,wp_json_encode($result,JSON_UNESCAPED_UNICODE|JSON_PRETTY_PRINT))===false) WP_CLI::error('Database committed, but result log could not be saved. Inspect production; do not rerun.');
-WP_CLI::success(wp_json_encode(['updated'=>count($result['updated_ids']),'created'=>count($result['created_ids']),'retired_to_draft'=>count($retire),'published'=>215,'groups'=>count($groups)],JSON_UNESCAPED_SLASHES));
+WP_CLI::success(wp_json_encode(['updated'=>count($result['updated_ids']),'created'=>count($result['created_ids']),'retired_to_draft'=>count($retire),'published'=>$expected_count,'groups'=>count($groups)],JSON_UNESCAPED_SLASHES));
