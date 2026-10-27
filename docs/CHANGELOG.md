@@ -1,5 +1,12 @@
 # Production changelog
 
+## 2026-10-27 — kích hoạt xác nhận lịch khám qua ZBS
+
+- Nhập App ID và Secret Key đúng ứng dụng BVMHNBN, Access/Refresh Token từ tệp người quản trị cung cấp; ba giá trị bí mật chỉ lưu mã hóa trong option `ec_booking_zbs`, không đưa vào Git hoặc bản ghi triển khai. Người quản trị xác nhận chuỗi token chỉ dùng cho website này. Bản sao file liên quan và database trước khi nhập tại `/home/jwhxtzru/backups/zbs-credentials-20261027-154827/`.
+- Kiểm tra OAuth OA v4 thành công, cặp token mới được lưu lại (`token_state=ok`, thời hạn Access Token khoảng 25 giờ). Gửi đúng một tin thử mẫu #657033 đến số quản trị viên ở chế độ development: Zalo trả HTTP 200, `error=0` và có `msg_id`; không gửi thử cho bệnh nhân.
+- Bật gửi tự động cho lịch mới có đồng ý Zalo riêng. Mẫu và bốn biến đúng bản duyệt, cấu hình nhắc lịch rỗng; máy chủ chạy WP-Cron mỗi phút. Backup trước khi bật tại `/home/jwhxtzru/backups/zbs-enable-20261027-155235/`. Trang chủ HTTP 200 hiện câu đồng ý xác nhận, không còn câu nhắc lịch; smoke sáu URL và SSH đạt. Chưa tạo lịch thử trong production.
+- Rollback vận hành: đặt `ec_booking_zbs.enabled=false` và purge cache; giữ các bản sao database để đối chiếu, không phục hồi toàn database khi đã có lịch mới.
+
 ## 2026-10-27 — ZBS chỉ gửi xác nhận lịch khám theo mẫu #657033
 
 - Theo yêu cầu mới, bỏ tin nhắc trước 1 giờ. Lịch mới chỉ xếp một tin xác nhận khi người đặt lịch chọn đồng ý Zalo riêng; lịch cũ không gửi bù. Mọi tác vụ nhắc từ bản cũ bị chặn gửi. Khi nhân viên đổi giờ sau xác nhận phải liên hệ trực tiếp.
