@@ -1,0 +1,11 @@
+# Mắt Sáng Học Đường 2026–2027
+
+The user supplied the completed hospital-policy Google Doc on 28 October 2026 and requested preparing the website article. The ongoing publishing workflow and this request authorize publication on the hospital website. The raw source and its revision snapshot remain in local temporary storage, outside Git.
+
+Verified policy facts: students who took part in the hospital school programme; eligibility checked against school examination records and the school-provided list; free machine measurement of myopia, physician examination fee and fundus examination; 20 percent reduction on the entire glasses order including lenses and frames; both benefits have no time limit. The school-year implementation period is not the expiry date of these benefits. Do not invent a stacking rule, use limit, fixed expiry or blanket free treatment.
+
+The completed source adds the official OA URL `https://zalo.me/2368653938911696310` and the business/communications support teams. The public article needs the teams, not staff personal names. The source is headed 20 August 2026 but has no signed/sealed object and retains a signing instruction. Do not claim a signed notice or backdate publication. Publish with the actual 28 October 2026 website date. Do not imply that the school ZBS template has been approved or is actively sending.
+
+Reuse existing hospital-owned attachment #1889 from the THPT Thái Thuận report, with its existing descriptive alt and caption, without changing shared media metadata. Add six FAQ pairs through the existing shortcode, SEO metadata and contextual internal links. Preserve all existing school-report content and add one precise link paragraph to each of #1888, #1878 and #1872, after saving their originals and checking expected hashes. No theme, plugin, core, credentials, appointment or messaging changes.
+
+Before publication: commit the content and scoped publisher, hold the shared deploy lock, back up the database and child theme in `~/backups/`, check source hashes and PHP syntax. On failure, retain the new article as draft and restore only the three backlink paragraphs to the backed-up content when the expected after hash still matches. Never restore the whole database for this publication.

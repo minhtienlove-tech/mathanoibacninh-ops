@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-28 — công bố chính sách Mắt Sáng Học Đường
+
+- Theo Google Doc người dùng đã hoàn thiện, chuẩn bị bài chính sách năm học 2026–2027: đối chiếu hồ sơ khám tại trường và danh sách trường; ba hạng mục miễn phí; giảm 20% toàn đơn kính gồm kính và gọng; hai quyền lợi không giới hạn thời gian. Không gán ngày hết hạn, giới hạn lượt, điều kiện cộng dồn hoặc trạng thái đã duyệt ZBS; không nhận là văn bản đã ký đóng dấu.
+- Nội dung, SEO metadata, sáu FAQ và publisher chọn lọc tại `docs/drafts/mat-sang-hoc-duong-20261028/`. Dùng lại media #1889 với alt/caption đang có; link OA chính thức theo nguồn và liên kết hai chiều với #1888/#1878/#1872. Bản nguồn đầy đủ và snapshot riêng nằm ngoài Git, không đăng dữ liệu sức khỏe cá nhân hoặc tên nhân sự đầu mối không cần thiết.
+- Git pull trước sửa; chuẩn bị backup database/child theme dưới khóa deploy chung. Publisher kiểm tra hash nguồn, trạng thái trước của ba bài, đọc lại nội dung sau ghi và có rollback chọn lọc giữ bài mới ở draft khi lỗi. Kết quả production và QA sẽ ghi sau triển khai.
+
 ## 2026-10-27 — kích hoạt xác nhận lịch khám qua ZBS
 
 - Nhập App ID và Secret Key đúng ứng dụng BVMHNBN, Access/Refresh Token từ tệp người quản trị cung cấp; ba giá trị bí mật chỉ lưu mã hóa trong option `ec_booking_zbs`, không đưa vào Git hoặc bản ghi triển khai. Người quản trị xác nhận chuỗi token chỉ dùng cho website này. Bản sao file liên quan và database trước khi nhập tại `/home/jwhxtzru/backups/zbs-credentials-20261027-154827/`.
