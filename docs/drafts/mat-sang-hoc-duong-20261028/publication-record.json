@@ -1,0 +1,27 @@
+{
+  "status": "published_verified",
+  "post_id": 2163,
+  "url": "https://mathanoibacninh.com/tin-tuc/hoat-dong-cong-dong/mat-sang-hoc-duong-2026-2027-quyen-loi-hoc-sinh/",
+  "source_commit": "93bfb3d",
+  "backup": "/home/jwhxtzru/backups/mat-sang-hoc-duong-20261028-163858/",
+  "published_date": "2026-10-28",
+  "featured_media_id": 1889,
+  "backlink_post_ids": [1888, 1878, 1872],
+  "verification": {
+    "http_status": 200,
+    "source_policy_facts": "match",
+    "oa_url": "match",
+    "h1_count": 1,
+    "description_count": 1,
+    "canonical": "self",
+    "article_author": "hospital organization",
+    "faq_count": 6,
+    "outbound_and_reverse_links": "3 of 3 each",
+    "image_http_alt_caption": "pass",
+    "php_lint": "pass",
+    "six_url_ssh_smoke": "pass",
+    "mobile_viewport": "390x844",
+    "mobile_horizontal_overflow": false,
+    "viewport_reset": true
+  }
+}
