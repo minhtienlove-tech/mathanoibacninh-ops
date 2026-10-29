@@ -1,5 +1,11 @@
 # Production changelog
 
+## 2026-10-29 — thêm Zalo OA ở thanh liên hệ và chân trang
+
+- Thêm nút Zalo OA riêng với nhãn OA rõ ràng vào thanh mạng xã hội nổi và chân trang; hai nơi dùng chung URL `https://zalo.me/2368653938911696310`. Giữ liên kết Zalo theo hotline, đổi tên trợ năng/tooltip thành Zalo tư vấn để phân biệt. Không thay đổi luồng đặt lịch hoặc thông báo.
+- Giữ kích thước nút 44px, trạng thái focus và liên kết mở tab mới với `noopener noreferrer`; footer tự xuống dòng. Tiếp tục ẩn thanh nổi trên mobile theo thiết kế hiện tại, OA vẫn hiện ở chân trang.
+- Đã git pull và so hash production trước sửa. Footer production có breakpoint menu 1439px khác bản Git; mang nguyên thay đổi đó vào nguồn để tránh hồi quy. Không ghi đè `style.css` production đang có các sửa riêng. Script deploy chọn ba file child theme, có khóa chung, backup file/database, guard hash và rollback chọn lọc; kết quả triển khai sẽ ghi sau kiểm tra.
+
 ## 2026-10-29 — làm rõ bảng quyền lợi Mắt Sáng Học Đường
 
 - Theo vùng người dùng chụp, bổ sung CSS chỉ cho bảng trong bài #2163: cột nhãn rộng 27%, căn trái/trên, header tương phản, đường phân hàng, nền xen kẽ và khoảng đệm. Ở màn hình tối đa 640px, nhãn nằm trên nội dung theo từng mục; giữ nguyên HTML `scope`, header cho trình đọc màn hình và toàn bộ chính sách/liên kết.

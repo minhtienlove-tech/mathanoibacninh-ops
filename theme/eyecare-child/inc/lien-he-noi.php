@@ -40,6 +40,16 @@ function eyecare_contact_icon( $name ) {
 	return '<svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' . ( $paths[ $name ] ?? '' ) . '</svg>';
 }
 
+/** Public OA destination shared by the floating rail and footer. */
+function eyecare_zalo_oa_url() {
+	return 'https://zalo.me/2368653938911696310';
+}
+
+/** Fixed wordmark with an OA badge, distinct from the phone-based Zalo link. */
+function eyecare_zalo_oa_icon() {
+	return '<span class="eyecare-zalo-oa-icon" aria-hidden="true"><span>Zalo</span><small>OA</small></span>';
+}
+
 /** Shared markup for the modal and the existing appointment page. */
 function eyecare_booking_form( $context = 'modal' ) {
 	$id = 'ec-booking-' . sanitize_html_class( $context );
@@ -76,7 +86,8 @@ function eyecare_floating_contact() {
 	}
 	$info = eyecare_du_lieu_thuc_the();
 	$socials = array(
-		'zalo' => array( 'Zalo', 'https://zalo.me/0868899396' ),
+		'zalo-oa' => array( 'Zalo OA', eyecare_zalo_oa_url() ),
+		'zalo' => array( 'Zalo tư vấn', 'https://zalo.me/0868899396' ),
 		'facebook' => array( 'Facebook', $info['same_as'][0] ?? 'https://www.facebook.com/benhvienmathanoibacninh' ),
 		'tiktok' => array( 'TikTok', 'https://www.tiktok.com/@bnh.vin.mt.h.ni.b' ),
 		'youtube' => array( 'YouTube', 'https://www.youtube.com/@BenhVienMatHNBN' ),
@@ -88,7 +99,13 @@ function eyecare_floating_contact() {
 		<nav class="ec-contact__socials" id="ec-contact-socials" aria-label="Mạng xã hội bệnh viện">
 			<?php foreach ( $socials as $key => $social ) : ?>
 				<a class="ec-contact__social ec-contact__social--<?php echo esc_attr( $key ); ?>" href="<?php echo esc_url( $social[1] ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr( $social[0] . ' bệnh viện (mở tab mới)' ); ?>">
-					<?php echo 'zalo' === $key ? '<span class="ec-contact__zalo" aria-hidden="true">Zalo</span>' : eyecare_contact_icon( $key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+					<?php
+					if ( 'zalo-oa' === $key ) {
+						echo eyecare_zalo_oa_icon(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					} else {
+						echo 'zalo' === $key ? '<span class="ec-contact__zalo" aria-hidden="true">Zalo</span>' : eyecare_contact_icon( $key ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+					}
+					?>
 					<span class="ec-contact__label"><?php echo esc_html( $social[0] ); ?></span>
 				</a>
 			<?php endforeach; ?>

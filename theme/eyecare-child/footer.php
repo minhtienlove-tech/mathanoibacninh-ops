@@ -25,6 +25,12 @@ $eyecare_la_trang_khu_vuc  = is_page() && function_exists( 'eyecare_khu_vuc_nguo
 $eyecare_facebook_url      = ! empty( $eyecare_tt['same_as'][0] ) ? $eyecare_tt['same_as'][0] : '';
 $eyecare_mang_xa_hoi       = array(
 	array(
+		'ten'    => 'Zalo OA',
+		'url'    => eyecare_zalo_oa_url(),
+		'icon'   => 'zalo-oa',
+		'lop'    => 'zalo-oa',
+	),
+	array(
 		'ten'    => 'Facebook',
 		'url'    => $eyecare_facebook_url,
 		'icon'   => 'facebook',
@@ -171,7 +177,11 @@ $eyecare_footer_doctor_image = $eyecare_footer_byline ? get_the_post_thumbnail_u
 						<?php foreach ( $eyecare_mang_xa_hoi as $eyecare_mang ) : ?>
 							<?php if ( empty( $eyecare_mang['url'] ) ) : continue; endif; ?>
 							<a class="eyecare-chan__mang-xa-hoi eyecare-chan__mang-xa-hoi--<?php echo esc_attr( $eyecare_mang['lop'] ); ?>" href="<?php echo esc_url( $eyecare_mang['url'] ); ?>" target="_blank" rel="noopener noreferrer" aria-label="<?php echo esc_attr( $eyecare_mang['ten'] . ' của bệnh viện' ); ?>" title="<?php echo esc_attr( $eyecare_mang['ten'] ); ?>">
+								<?php if ( 'zalo-oa' === $eyecare_mang['icon'] ) : ?>
+									<?php echo eyecare_zalo_oa_icon(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								<?php else : ?>
 								<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/social-icons/' . $eyecare_mang['icon'] . '.svg' ); ?>" width="22" height="22" alt="" aria-hidden="true" loading="lazy" decoding="async">
+								<?php endif; ?>
 							</a>
 						<?php endforeach; ?>
 					</div>
@@ -242,7 +252,7 @@ $eyecare_footer_doctor_image = $eyecare_footer_byline ? get_the_post_thumbnail_u
 		return;
 	}
 
-	var man_hinh_hep = window.matchMedia( '(max-width: 1110px)' );
+	var man_hinh_hep = window.matchMedia( '(max-width: 1439px)' );
 
 	function dong_theo_be_ngang() {
 		menu.hidden = man_hinh_hep.matches;

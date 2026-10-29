@@ -109,11 +109,39 @@ body.ec-contact-dock { padding-bottom: calc(104px + env(safe-area-inset-bottom))
 }
 .ec-contact .ec-contact__social:hover { color: #fff; transform: translateY(-3px); box-shadow: 0 4px 10px rgb(9 57 32 / 18%); }
 .ec-contact__social svg { width: 22px; height: 22px; }
-.ec-contact .ec-contact__social--zalo { background: #0068ff; }
+.ec-contact .ec-contact__social--zalo,
+.ec-contact .ec-contact__social--zalo-oa { background: #0068ff; }
 .ec-contact .ec-contact__social--facebook { background: #0866ff; }
 .ec-contact .ec-contact__social--tiktok { background: #171c20; }
 .ec-contact .ec-contact__social--youtube { background: #e62117; }
 .ec-contact__zalo { font-family: Arial, sans-serif; font-size: 13px; font-weight: 700; letter-spacing: -.6px; }
+/* OA badge shared with the footer so it stays distinct from Zalo by phone. */
+.eyecare-zalo-oa-icon {
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ gap: 2px;
+ color: #fff;
+ font-family: Arial, sans-serif;
+ font-size: 13px;
+ font-weight: 700;
+ line-height: 1;
+ letter-spacing: -.6px;
+}
+.eyecare-zalo-oa-icon small {
+ padding: 2px 4px;
+ border-radius: 3px;
+ color: #0060e6;
+ background: #fff;
+ font-size: 9px;
+ font-weight: 800;
+ line-height: 1;
+ letter-spacing: .04em;
+}
+.eyecare-chan__mang-xa-hoi--zalo-oa {
+ --social-hover: #0054ce;
+ background: #0068ff;
+}
 .ec-contact__label {
  position: absolute;
  right: 0;
