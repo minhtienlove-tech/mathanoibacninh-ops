@@ -231,6 +231,75 @@
 .eyecare-news__article-content a { color: #087b8d; text-decoration: underline; text-underline-offset: .2em; }
 .eyecare-news__article-content blockquote { margin: 1.5rem 0; padding: 1rem 1.25rem; border-left: 4px solid var(--news-brand); background: #eaf7f7; }
 .eyecare-news__article-content .wp-block-table { overflow-x: auto; }
+/* Give the school-programme summary clear row boundaries and readable labels. */
+#bai-2163 .wp-block-table {
+	margin: 1.4rem 0 2rem;
+	border: 1px solid #c9deda;
+	border-radius: 14px;
+	background: #fff;
+}
+#bai-2163 .wp-block-table table {
+	width: 100%;
+	margin: 0;
+	border-collapse: separate;
+	border-spacing: 0;
+	table-layout: fixed;
+	color: #173c45;
+	font-size: 1rem;
+	line-height: 1.65;
+}
+#bai-2163 .wp-block-table th,
+#bai-2163 .wp-block-table td {
+	padding: 1rem 1.2rem;
+	border: 0;
+	text-align: left;
+	vertical-align: top;
+	font-size: inherit;
+	line-height: inherit;
+	letter-spacing: normal;
+	text-transform: none;
+	white-space: normal;
+	overflow-wrap: break-word;
+}
+#bai-2163 .wp-block-table thead th {
+	background: #0b5d66;
+	color: #fff;
+	font-weight: 700;
+}
+#bai-2163 .wp-block-table thead th:first-child { width: 27%; }
+#bai-2163 .wp-block-table tbody th {
+	background: #edf6f3;
+	color: #0b4f5a;
+	font-weight: 700;
+	border-right: 1px solid #d6e5e1;
+}
+#bai-2163 .wp-block-table tbody tr + tr > * { border-top: 1px solid #d6e5e1; }
+#bai-2163 .wp-block-table tbody tr:nth-child(even) td { background: #f7faf9; }
+@media (max-width: 640px) {
+	#bai-2163 .wp-block-table table,
+	#bai-2163 .wp-block-table tbody,
+	#bai-2163 .wp-block-table tbody tr,
+	#bai-2163 .wp-block-table tbody th,
+	#bai-2163 .wp-block-table tbody td { display: block; width: 100%; }
+	#bai-2163 .wp-block-table thead {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+	#bai-2163 .wp-block-table tbody th {
+		padding: .85rem 1rem .45rem;
+		border-right: 0;
+		background: transparent;
+	}
+	#bai-2163 .wp-block-table tbody td { padding: 0 1rem 1rem; }
+	#bai-2163 .wp-block-table tbody tr:nth-child(even) { background: #f2f8f6; }
+	#bai-2163 .wp-block-table tbody tr:nth-child(even) td { background: transparent; }
+	#bai-2163 .wp-block-table tbody tr + tr > td { border-top: 0; }
+}
 .eyecare-news__article-content .eyecare-school-photo,
 .eyecare-news__article-content .eyecare-promo-photo {
 	max-width: 680px;

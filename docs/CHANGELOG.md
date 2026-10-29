@@ -1,5 +1,10 @@
 # Production changelog
 
+## 2026-10-29 — làm rõ bảng quyền lợi Mắt Sáng Học Đường
+
+- Theo vùng người dùng chụp, bổ sung CSS chỉ cho bảng trong bài #2163: cột nhãn rộng 27%, căn trái/trên, header tương phản, đường phân hàng, nền xen kẽ và khoảng đệm. Ở màn hình tối đa 640px, nhãn nằm trên nội dung theo từng mục; giữ nguyên HTML `scope`, header cho trình đọc màn hình và toàn bộ chính sách/liên kết.
+- Git pull và đối chiếu hash CSS local/production trước sửa. Chỉ sửa child-theme `assets/news.css`; deploy chọn lọc theo `scripts/deploy-school-policy-table-20261029.sh`, có khóa chung, backup CSS/database trước thay và guard hash chống ghi đè phiên bản khác. Kết quả production và kiểm tra trực quan sẽ ghi sau triển khai.
+
 ## 2026-10-28 — công bố chính sách Mắt Sáng Học Đường
 
 - Theo Google Doc người dùng đã hoàn thiện, chuẩn bị bài chính sách năm học 2026–2027: đối chiếu hồ sơ khám tại trường và danh sách trường; ba hạng mục miễn phí; giảm 20% toàn đơn kính gồm kính và gọng; hai quyền lợi không giới hạn thời gian. Không gán ngày hết hạn, giới hạn lượt, điều kiện cộng dồn hoặc trạng thái đã duyệt ZBS; không nhận là văn bản đã ký đóng dấu.
