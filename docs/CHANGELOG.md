@@ -3,7 +3,8 @@
 ## 2026-10-29 — làm rõ bảng quyền lợi Mắt Sáng Học Đường
 
 - Theo vùng người dùng chụp, bổ sung CSS chỉ cho bảng trong bài #2163: cột nhãn rộng 27%, căn trái/trên, header tương phản, đường phân hàng, nền xen kẽ và khoảng đệm. Ở màn hình tối đa 640px, nhãn nằm trên nội dung theo từng mục; giữ nguyên HTML `scope`, header cho trình đọc màn hình và toàn bộ chính sách/liên kết.
-- Git pull và đối chiếu hash CSS local/production trước sửa. Chỉ sửa child-theme `assets/news.css`; deploy chọn lọc theo `scripts/deploy-school-policy-table-20261029.sh`, có khóa chung, backup CSS/database trước thay và guard hash chống ghi đè phiên bản khác. Kết quả production và kiểm tra trực quan sẽ ghi sau triển khai.
+- Git pull và đối chiếu hash CSS local/production trước sửa. Chỉ sửa child-theme `assets/news.css`; deploy chọn lọc theo `scripts/deploy-school-policy-table-20261029.sh`, có khóa chung, backup CSS/database trước thay và guard hash chống ghi đè phiên bản khác. Đã triển khai commit `c65dd84`; backup CSS/database tại `/home/jwhxtzru/backups/school-policy-table-20261029-082017/`, purge riêng bài #2163.
+- QA: PHP lint footer/contact và smoke sáu URL/SSH đạt. CSS production khớp nguồn; hash nội dung bài không đổi. Kiểm tra trình duyệt 1280×900: bảng rộng 788px, cột nhãn 212,75px (27%), đủ sáu hàng. Ở 390×844: nhãn/nội dung xếp dọc, bảng rộng 341px, không tràn ngang; cây trợ năng vẫn có bảng/bảy hàng, `scope="row"` được giữ. Viewport đã trả về mặc định. Ảnh xác minh nằm ngoài Git tại `C:/Users/htc/AppData/Local/Temp/school-table-20261029/after-desktop.png` và `after-mobile.png`.
 
 ## 2026-10-28 — công bố chính sách Mắt Sáng Học Đường
 
