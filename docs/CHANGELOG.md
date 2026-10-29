@@ -4,7 +4,8 @@
 
 - Thêm nút Zalo OA riêng với nhãn OA rõ ràng vào thanh mạng xã hội nổi và chân trang; hai nơi dùng chung URL `https://zalo.me/2368653938911696310`. Giữ liên kết Zalo theo hotline, đổi tên trợ năng/tooltip thành Zalo tư vấn để phân biệt. Không thay đổi luồng đặt lịch hoặc thông báo.
 - Giữ kích thước nút 44px, trạng thái focus và liên kết mở tab mới với `noopener noreferrer`; footer tự xuống dòng. Tiếp tục ẩn thanh nổi trên mobile theo thiết kế hiện tại, OA vẫn hiện ở chân trang.
-- Đã git pull và so hash production trước sửa. Footer production có breakpoint menu 1439px khác bản Git; mang nguyên thay đổi đó vào nguồn để tránh hồi quy. Không ghi đè `style.css` production đang có các sửa riêng. Script deploy chọn ba file child theme, có khóa chung, backup file/database, guard hash và rollback chọn lọc; kết quả triển khai sẽ ghi sau kiểm tra.
+- Đã git pull và so hash production trước sửa. Footer production có breakpoint menu 1439px khác bản Git; mang nguyên thay đổi đó vào nguồn để tránh hồi quy. Không ghi đè `style.css` production đang có các sửa riêng. Script deploy chọn ba file child theme, có khóa chung, backup file/database, guard hash và rollback chọn lọc; đã triển khai commit `1c5f047`, backup tại `/home/jwhxtzru/backups/zalo-oa-links-20261029-092126/`, purge cache toàn site vì footer dùng chung.
+- QA độc lập đạt; PHP lint ba file và smoke sáu URL/SSH đạt. Năm URL công khai có đúng OA ở footer/thanh nổi (trang đặt lịch chỉ có footer), giữ Zalo tư vấn, đúng target/rel/tên trợ năng. Hash ba file production khớp nguồn và `style.css` không đổi. Trình duyệt 1440×900 và 390×844 xác nhận nút 44×44px, badge không bị cắt, footer xuống dòng và không tràn ngang; viewport đã reset. Ảnh xác minh ngoài Git: `C:/Users/htc/AppData/Local/Temp/zalo-oa-links-20261029/oa-desktop.png` và `oa-mobile.png`.
 
 ## 2026-10-29 — làm rõ bảng quyền lợi Mắt Sáng Học Đường
 
