@@ -461,6 +461,38 @@ body.ec-contact-dock { padding-bottom: calc(104px + env(safe-area-inset-bottom))
 	cursor: pointer;
 }
 
+.ec-booking-form .ec-booking-form__field-hint {
+	display: block;
+	min-height: 0;
+	margin-top: 4px;
+	color: var(--ec-green-dark);
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 1.5;
+}
+
+.ec-booking-form .ec-booking-form__field-hint:empty {
+	display: none;
+}
+
+.ec-booking-form .ec-booking-form__more {
+	margin: 0;
+	color: var(--ec-muted);
+	font-size: 12px;
+	line-height: 1.6;
+}
+
+.ec-booking-form .ec-booking-form__more summary {
+	width: fit-content;
+	color: var(--ec-green-dark);
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.ec-booking-form .ec-booking-form__more[open] summary {
+	margin-bottom: 8px;
+}
+
 .ec-booking-form a {
 	color: var(--ec-green-dark);
 	text-decoration: underline;

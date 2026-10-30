@@ -51,24 +51,28 @@ function eyecare_zalo_oa_icon() {
 }
 
 /** Shared markup for the modal and the existing appointment page. */
-function eyecare_booking_form( $context = 'modal' ) {
+function eyecare_booking_form( $context = 'modal', $embed_key = '' ) {
 	$id = 'ec-booking-' . sanitize_html_class( $context );
 	$info = eyecare_du_lieu_thuc_the();
 	?>
 	<form class="ec-booking-form" data-ec-booking-form data-endpoint="<?php echo esc_url( admin_url( 'admin-ajax.php' ) ); ?>" method="post" action="<?php echo esc_url( home_url( '/dat-lich-kham/' ) ); ?>">
 		<p class="ec-booking-form__hours">Giờ làm việc: <strong><?php echo esc_html( $info['gio_mo'] . '–' . $info['gio_dong'] ); ?></strong> · Tất cả các ngày trong tuần</p>
 		<div class="ec-booking-form__grid" data-booking-fields>
-			<label for="<?php echo esc_attr( $id ); ?>-name">Họ và tên <span aria-hidden="true">*</span><input id="<?php echo esc_attr( $id ); ?>-name" name="name" type="text" autocomplete="name" maxlength="100" minlength="2" required placeholder="Nhập họ và tên"></label>
-			<label for="<?php echo esc_attr( $id ); ?>-phone">Số điện thoại <span aria-hidden="true">*</span><input id="<?php echo esc_attr( $id ); ?>-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" required placeholder="Số điện thoại liên hệ"></label>
+			<label for="<?php echo esc_attr( $id ); ?>-name">Họ và tên <span aria-hidden="true">*</span><input id="<?php echo esc_attr( $id ); ?>-name" name="name" type="text" autocomplete="name" autocapitalize="words" maxlength="100" minlength="2" required placeholder="Nhập họ và tên"></label>
+			<label for="<?php echo esc_attr( $id ); ?>-phone">Số điện thoại <span aria-hidden="true">*</span><input id="<?php echo esc_attr( $id ); ?>-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" maxlength="20" required placeholder="Ví dụ: 0912 345 678" aria-describedby="<?php echo esc_attr( $id ); ?>-phone-hint"><small class="ec-booking-form__field-hint" id="<?php echo esc_attr( $id ); ?>-phone-hint" data-booking-phone-hint></small></label>
 			<label for="<?php echo esc_attr( $id ); ?>-date">Ngày khám <span aria-hidden="true">*</span><input id="<?php echo esc_attr( $id ); ?>-date" name="date" type="date" required disabled></label>
 			<label for="<?php echo esc_attr( $id ); ?>-time">Giờ khám <span aria-hidden="true">*</span><select id="<?php echo esc_attr( $id ); ?>-time" name="time" required disabled><option value="">Đang tải khung giờ…</option></select></label>
-			<p class="ec-booking-form__wide ec-booking-form__hint">Nhận đặt lịch đến 16:00, theo từng khung 30 phút. Lịch khám được tự động xác nhận sau khi gửi thành công.</p>
+			<p class="ec-booking-form__wide ec-booking-form__hint">Nhận lịch đến 16:00, mỗi khung 30 phút. Lịch được xác nhận ngay khi gửi thành công.</p>
 			<label class="ec-booking-form__wide ec-booking-form__consent" for="<?php echo esc_attr( $id ); ?>-consent"><input id="<?php echo esc_attr( $id ); ?>-consent" name="consent" type="checkbox" value="1" required><span><?php echo esc_html( ec_booking_contact_consent_text() ); ?> <a href="<?php echo esc_url( get_privacy_policy_url() ?: home_url( '/quyen-rieng-tu/' ) ); ?>" target="_blank" rel="noopener">Chính sách bảo mật</a>.</span></label>
 			<?php if ( ! empty( ec_zbs_settings()['enabled'] ) ) : ?>
-			<label class="ec-booking-form__wide ec-booking-form__consent" for="<?php echo esc_attr( $id ); ?>-patient-zalo-consent"><input id="<?php echo esc_attr( $id ); ?>-patient-zalo-consent" name="patient_zalo_consent" type="checkbox" value="1"><span><strong>Tùy chọn:</strong> <?php echo esc_html( ec_booking_patient_zalo_consent_text() ); ?></span></label>
+			<label class="ec-booking-form__wide ec-booking-form__consent" for="<?php echo esc_attr( $id ); ?>-patient-zalo-consent" data-booking-zalo hidden><input id="<?php echo esc_attr( $id ); ?>-patient-zalo-consent" name="patient_zalo_consent" type="checkbox" value="1"><span><?php echo esc_html( ec_booking_patient_zalo_consent_text() ); ?></span></label>
 			<?php endif; ?>
-			<label class="ec-booking-form__wide ec-booking-form__consent" for="<?php echo esc_attr( $id ); ?>-public-share-consent"><input id="<?php echo esc_attr( $id ); ?>-public-share-consent" name="public_share_consent" type="checkbox" value="1"><span><strong>Tùy chọn:</strong> <?php echo esc_html( ec_booking_public_share_consent_text() ); ?></span></label>
+			<details class="ec-booking-form__wide ec-booking-form__more">
+				<summary>Tùy chọn khác (không bắt buộc)</summary>
+				<label class="ec-booking-form__consent" for="<?php echo esc_attr( $id ); ?>-public-share-consent"><input id="<?php echo esc_attr( $id ); ?>-public-share-consent" name="public_share_consent" type="checkbox" value="1"><span><?php echo esc_html( ec_booking_public_share_consent_text() ); ?></span></label>
+			</details>
 		</div>
+		<?php if ( '' !== $embed_key ) : ?><input type="hidden" name="embed_key" value="<?php echo esc_attr( $embed_key ); ?>"><?php endif; ?>
 		<div class="ec-booking-form__honeypot" aria-hidden="true"><label>Để trống trường này<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>
 		<p class="ec-booking-form__status" data-booking-status role="status" aria-live="polite" tabindex="-1"></p>
 		<button class="ec-booking-form__submit" type="submit" data-booking-submit disabled>Gửi yêu cầu đặt lịch</button>

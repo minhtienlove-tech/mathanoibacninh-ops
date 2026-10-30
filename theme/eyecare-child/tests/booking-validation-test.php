@@ -74,9 +74,14 @@ class EcBookingTestDb {
 }
 $wpdb = new EcBookingTestDb();
 function get_posts( $query ) {
-	return array_values( array_filter( $GLOBALS['ec_test_posts'], function ( $post ) use ( $query ) {
-		return in_array( $post->post_name, $query['post_name__in'], true ) && $post->post_type === $query['post_type'];
+	$posts = array_values( array_filter( $GLOBALS['ec_test_posts'], function ( $post ) use ( $query ) {
+		if ( $post->post_type !== $query['post_type'] ) { return false; }
+		if ( isset( $query['post_name__in'] ) ) { return in_array( $post->post_name, $query['post_name__in'], true ); }
+		$statuses = (array) ( $query['post_status'] ?? 'private' );
+		if ( ! in_array( $post->post_status ?? 'private', $statuses, true ) ) { return false; }
+		return ! isset( $query['meta_key'] ) || ( $post->meta_input[ $query['meta_key'] ] ?? null ) === $query['meta_value'];
 	} ) );
+	return 'ids' === ( $query['fields'] ?? '' ) ? array_map( function ( $post ) { return $post->ID; }, $posts ) : $posts;
 }
 function wp_insert_post( $data, $wp_error = false ) {
 	++$GLOBALS['ec_test_insert_count'];
@@ -124,7 +129,7 @@ foreach ( array( 'yes', '', array( '1' ), null ) as $invalid_zalo_consent ) {
 	ec_expect_error( ec_booking_validate( array_merge( $valid, array( 'patient_zalo_consent' => $invalid_zalo_consent ) ), $now ), 'patient_zalo_consent', 'Malformed patient Zalo choice rejected' );
 }
 ec_expect( $booking['public_share_consent'] === false, 'Missing optional public-name consent defaults to false' );
-$opted_input = array_merge( $valid, array( 'public_share_consent' => '1', 'request_id' => '123e4567-e89b-42d3-a456-426614174002' ) );
+$opted_input = array_merge( $valid, array( 'date' => '2026-09-13', 'public_share_consent' => '1', 'request_id' => '123e4567-e89b-42d3-a456-426614174002' ) );
 $opted_booking = ec_booking_validate( $opted_input, $now );
 ec_expect( ! is_wp_error( $opted_booking ) && $opted_booking['public_share_consent'] === true, 'Separate public-name consent accepted only when selected' );
 ec_expect( ec_booking_validate( array_merge( $valid, array( 'public_share_consent' => '0' ) ), $now )['public_share_consent'] === false, 'Explicit unchecked consent remains false' );
@@ -174,7 +179,7 @@ $first = ec_booking_store( $booking );
 ec_expect( $first === 1 && count( $GLOBALS['ec_test_posts'] ) === 1, 'First valid request saved' );
 $stored = ec_booking_read( $GLOBALS['ec_test_posts'][0] );
 ec_expect( $stored['name'] === $booking['name'] && $stored['phone'] === $booking['phone'] && $stored['consent'] === true, 'Complete data persisted in same row' );
-ec_expect( $stored['patient_zalo_consent'] === true && $stored['patient_zalo_consent_text'] === ec_booking_patient_zalo_consent_text() && $stored['patient_zalo_consent_version'] === '2026-10-27-confirm-only-v2', 'Patient ZBS consent evidence matches displayed wording and version' );
+ec_expect( $stored['patient_zalo_consent'] === true && $stored['patient_zalo_consent_text'] === ec_booking_patient_zalo_consent_text() && $stored['patient_zalo_consent_version'] === '2026-10-29-confirm-only-v3', 'Patient ZBS consent evidence matches displayed wording and version' );
 ec_expect( (bool) DateTimeImmutable::createFromFormat( DATE_ATOM, $stored['patient_zalo_consented_at'] ), 'Patient ZBS consent timestamp persisted' );
 ec_expect( $stored['public_share_consent'] === false && ! isset( $stored['public_share_consented_at'], $stored['public_share_consent_text'] ), 'Unchecked request stores no public display consent or consent evidence' );
 $new_payload = $booking;
@@ -195,7 +200,7 @@ $retry = ec_booking_store( $legacy_retry );
 ec_expect( $retry === $first && $GLOBALS['ec_test_insert_count'] === 1, 'Same request retry never inserts a duplicate' );
 ec_expect_error( ec_booking_store( array_merge( $legacy_retry, array( 'public_share_consent' => true ) ) ), 'request_conflict', 'Replay cannot turn previously unchecked consent on' );
 ec_expect_error( ec_booking_store( array_merge( $legacy_retry, array( 'time' => '08:00' ) ) ), 'request_conflict', 'Reused request ID cannot mutate existing details' );
-$busy_booking = array_merge( $booking, array( 'request_id' => '123e4567-e89b-42d3-a456-426614174001', 'patient_zalo_consent' => false ) );
+$busy_booking = array_merge( $booking, array( 'date' => '2026-09-12', 'request_id' => '123e4567-e89b-42d3-a456-426614174001', 'patient_zalo_consent' => false ) );
 $busy_hash = hash_hmac( 'sha256', $busy_booking['request_id'], wp_salt( 'nonce' ) );
 $busy_lock = ec_booking_lock( 'request:' . $busy_hash );
 ec_expect_error( ec_booking_store( $busy_booking ), 'busy', 'Concurrent same-request submit rejected before any success' );

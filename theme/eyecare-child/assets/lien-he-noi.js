@@ -13,6 +13,41 @@
 			return (c === 'x' ? r : (r & 3) | 8).toString(16);
 		});
 	}
+	// Mã thiết bị ngẫu nhiên lưu trong trình duyệt; máy chủ chỉ lưu HMAC để chống spam.
+	function deviceId() {
+		try {
+			let value = localStorage.getItem('ec_booking_device');
+			if (!/^[a-f0-9-]{36}$/.test(value || '')) {
+				value = requestId();
+				localStorage.setItem('ec_booking_device', value);
+			}
+			return value;
+		} catch (error) {
+			return '';
+		}
+	}
+	async function sha256(text) {
+		if (!window.crypto || !crypto.subtle || !window.TextEncoder) return '';
+		const digest = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
+		return Array.from(new Uint8Array(digest), b => b.toString(16).padStart(2, '0')).join('');
+	}
+	// Dấu vân tay phần cứng: màn hình, số nhân CPU, bộ nhớ, múi giờ, GPU. Không chứa dữ liệu cá nhân.
+	async function deviceHash() {
+		const parts = [screen.width + 'x' + screen.height + 'x' + screen.colorDepth, window.devicePixelRatio || 1, navigator.hardwareConcurrency || 0, navigator.deviceMemory || 0, navigator.maxTouchPoints || 0, navigator.platform || '', navigator.language || '', Intl.DateTimeFormat().resolvedOptions().timeZone || ''];
+		try {
+			const gl = document.createElement('canvas').getContext('webgl');
+			const info = gl && gl.getExtension('WEBGL_debug_renderer_info');
+			if (info) parts.push(gl.getParameter(info.UNMASKED_RENDERER_WEBGL));
+		} catch (error) { /* GPU không đọc được thì bỏ qua. */ }
+		try { return await sha256(parts.join('|')); } catch (error) { return ''; }
+	}
+	function normalizePhone(raw) {
+		let value = String(raw || '').replace(/[０-９]/g, d => String.fromCharCode(d.charCodeAt(0) - 0xFEE0)).replace(/[\s().\/-]+/g, '').replace(/^00/, '+');
+		if (/^[35789][0-9]{8}$/.test(value)) value = '0' + value;
+		const vn = value.match(/^\+?840?([1-9][0-9]{8,9})$/);
+		return vn ? '0' + vn[1] : value;
+	}
+	function isVnMobile(value) { return /^0[35789][0-9]{8}$/.test(value); }
 	async function callApi(endpoint, options) {
 		const abort = new AbortController();
 		const timeout = setTimeout(() => abort.abort(), 20000);
@@ -50,6 +85,27 @@
 		let complete = false;
 		let id = '';
 		let pendingBody = null;
+		const phone = form.elements.phone;
+		const phoneHint = form.querySelector('[data-booking-phone-hint]');
+		const zaloRow = form.querySelector('[data-booking-zalo]');
+		const zaloBox = form.elements.patient_zalo_consent;
+		// Ô nhận tin Zalo chỉ hiện với số di động Việt Nam; số khác thì ẩn và bỏ chọn.
+		function syncPhone() {
+			const value = normalizePhone(phone.value);
+			const mobile = isVnMobile(value);
+			if (zaloRow) zaloRow.hidden = !mobile;
+			if (zaloBox && !mobile) zaloBox.checked = false;
+			phone.setCustomValidity('');
+			if (phoneHint) phoneHint.textContent = '';
+			if (!phone.value.trim()) return;
+			if (!/^(0[1-9][0-9]{8,9}|\+[1-9][0-9]{7,14})$/.test(value)) {
+				phone.setCustomValidity('Số điện thoại chưa đúng. Ví dụ: 0912 345 678.');
+			} else if (phoneHint && value !== phone.value.replace(/\s+/g, '')) {
+				phoneHint.textContent = 'Bệnh viện sẽ gọi số ' + value + '.';
+			}
+		}
+		phone.addEventListener('input', syncPhone);
+		syncPhone();
 		function freezeFields(frozen) {
 			form.querySelectorAll('[data-booking-fields] input, [data-booking-fields] select').forEach(field => { field.disabled = frozen; });
 		}
@@ -87,6 +143,7 @@
 				const url = new URL(form.dataset.endpoint);
 				url.searchParams.set('action', 'ec_booking_config');
 				config = await callApi(url);
+				form.dataset.formToken = config.formToken || '';
 				receivedAt = performance.now();
 				date.min = config.today;
 				date.max = config.maxDate;
@@ -111,6 +168,7 @@
 		retry.addEventListener('click', () => load(true));
 		reset.addEventListener('click', () => {
 			form.reset();
+			syncPhone();
 			complete = false;
 			id = '';
 			pendingBody = null;
@@ -139,6 +197,12 @@
 			body.set('action', 'ec_booking_submit');
 			body.set('nonce', config.nonce);
 			body.set('request_id', id);
+			if (!pendingBody) {
+				body.set('phone', normalizePhone(phone.value));
+				body.set('form_token', form.dataset.formToken || '');
+				body.set('device_id', deviceId());
+				body.set('device_hash', await deviceHash());
+			}
 			pendingBody = body;
 			freezeFields(true);
 			try {
@@ -159,6 +223,16 @@
 					retry.hidden = false;
 				}
 				if (error.code === 'nonce') config = null;
+				if (error.code === 'duplicate') {
+					// Số này đã có lịch cùng ngày: hiển thị lịch cũ, không gửi lại.
+					pendingBody = null;
+					complete = true;
+					message(error.message, 'success');
+					form.querySelector('[data-booking-fields]').hidden = true;
+					submit.hidden = true;
+					reset.textContent = 'Đặt lịch cho người khác';
+					reset.hidden = false;
+				}
 				if (error.code === 'request_conflict') {
 					reset.textContent = 'Bắt đầu yêu cầu mới';
 					reset.hidden = false;

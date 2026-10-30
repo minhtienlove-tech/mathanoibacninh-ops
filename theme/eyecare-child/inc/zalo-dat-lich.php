@@ -544,7 +544,7 @@ function ec_zalo_booking_contact( $data ) {
 	$phone = is_string( $data['phone'] ?? null ) ? $data['phone'] : '';
 	return array(
 		'name'  => preg_match( '/^[\p{L}\p{M}][\p{L}\p{M} .\x{2019}\x{0027}-]{1,99}$/uD', $name ) ? $name : 'Chưa cung cấp',
-		'phone' => preg_match( '/^[0-9]{9,15}$/D', $phone ) ? $phone : 'Chưa cung cấp',
+		'phone' => preg_match( '/^\+?[0-9]{9,15}$/D', $phone ) ? $phone : 'Chưa cung cấp',
 	);
 }
 

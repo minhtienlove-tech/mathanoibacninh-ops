@@ -22,12 +22,66 @@ function ec_booking_public_share_consent_text() {
 
 /** Wording stored with new requests must match the required checkbox. */
 function ec_booking_contact_consent_text() {
-	return 'Tôi đồng ý để bệnh viện lưu thông tin đặt lịch, gồm họ tên và số điện thoại, trong Google Sheet riêng tư và gửi thông báo qua Zalo, email cho nhân viên được ủy quyền để tiếp nhận và hỗ trợ lịch hẹn.';
+	return 'Tôi đồng ý để bệnh viện lưu họ tên, số điện thoại và chuyển cho nhân viên được ủy quyền (qua Google Sheet riêng tư, Zalo, email) để hỗ trợ lịch khám.';
 }
 
 /** Separate affirmative choice for transactional patient messages, including cached older forms. */
 function ec_booking_patient_zalo_consent_text() {
-	return 'Tôi đồng ý nhận một tin xác nhận lịch khám qua Zalo OA/ZBS đến số di động đã nhập. Tin chỉ liên quan đến lịch hẹn, không chứa quảng cáo; việc đặt lịch không phụ thuộc lựa chọn này.';
+	return 'Tôi muốn nhận một tin xác nhận lịch khám qua Zalo OA của bệnh viện đến số di động đã nhập. Tin không chứa quảng cáo.';
+}
+
+/** Số Việt Nam về dạng 0xxxxxxxxx; số nước ngoài giữ dạng +E.164. Trả WP_Error kèm hướng dẫn sửa. */
+function ec_booking_normalize_phone( $raw ) {
+	$invalid = 'Vui lòng nhập số điện thoại hợp lệ.';
+	if ( ! is_string( $raw ) ) {
+		return new WP_Error( 'phone', $invalid );
+	}
+	// Bàn phím tiếng Nhật/Trung có thể gửi chữ số toàn chiều rộng (０-９).
+	$raw   = strtr( $raw, array( '０' => '0', '１' => '1', '２' => '2', '３' => '3', '４' => '4', '５' => '5', '６' => '6', '７' => '7', '８' => '8', '９' => '9', '＋' => '+' ) );
+	$phone = preg_replace( '/[\s().\/-]+/u', '', $raw ) ?? '';
+	$phone = preg_replace( '/^00/', '+', $phone );
+	// Người dùng hay bỏ số 0 đầu: 912345678 → 0912345678.
+	if ( preg_match( '/^[35789][0-9]{8}$/D', $phone ) ) {
+		$phone = '0' . $phone;
+	}
+	// +84 912…, 84912…, +84 0912… đều là cùng một số trong nước.
+	if ( preg_match( '/^\+?840?([1-9][0-9]{8,9})$/D', $phone, $match ) ) {
+		$phone = '0' . $match[1];
+	}
+	if ( '' !== $phone && '0' === $phone[0] ) {
+		if ( preg_match( '/^01[0-9]{9}$/D', $phone ) ) {
+			return new WP_Error( 'phone', 'Đầu số di động 11 số đã chuyển sang 10 số. Vui lòng nhập số mới.' );
+		}
+		if ( ! preg_match( '/^0[35789][0-9]{8}$/D', $phone ) && ! preg_match( '/^02[0-9]{9}$/D', $phone ) ) {
+			return new WP_Error( 'phone', 'Số di động Việt Nam gồm 10 chữ số (03, 05, 07, 08, 09); số cố định gồm 11 chữ số bắt đầu bằng 02.' );
+		}
+		if ( preg_match( '/([0-9])\1{7}$/D', $phone ) ) {
+			return new WP_Error( 'phone', $invalid );
+		}
+		return $phone;
+	}
+	if ( preg_match( '/^\+[1-9][0-9]{7,14}$/D', $phone ) && ! preg_match( '/^\+([0-9])\1+$/D', $phone ) ) {
+		return $phone;
+	}
+	return new WP_Error( 'phone', 'Vui lòng nhập số điện thoại hợp lệ. Số nước ngoài cần có mã quốc gia, ví dụ +1 202 555 0123.' );
+}
+
+/** Gộp khoảng trắng, chuẩn hóa Unicode NFC (bàn phím iOS/Telex có thể gửi dạng tổ hợp) và viết hoa đầu từ. */
+function ec_booking_clean_name( $raw ) {
+	$name = trim( preg_replace( '/[\s\x{00A0}\x{200B}-\x{200D}\x{FEFF}]+/u', ' ', (string) $raw ) ?? '' );
+	if ( class_exists( 'Normalizer' ) ) {
+		$normalized = Normalizer::normalize( $name, Normalizer::FORM_C );
+		$name = is_string( $normalized ) ? $normalized : $name;
+	}
+	if ( '' !== $name && function_exists( 'mb_convert_case' ) && preg_match( '//u', $name ) && ( mb_strtoupper( $name, 'UTF-8' ) === $name || mb_strtolower( $name, 'UTF-8' ) === $name ) ) {
+		$name = mb_convert_case( $name, MB_CASE_TITLE, 'UTF-8' );
+	}
+	return $name;
+}
+
+/** Số di động Việt Nam nhận được tin Zalo. */
+function ec_booking_is_vn_mobile( $phone ) {
+	return is_string( $phone ) && (bool) preg_match( '/^0[35789][0-9]{8}$/D', $phone );
 }
 
 /** Dấu vân tay của lịch mới bao gồm lựa chọn nhận tin để retry không đổi được đồng ý. */
@@ -114,19 +168,16 @@ function ec_booking_validate( $input, $now = null, $hours = null, $check_schedul
 	if ( '1' !== $input['consent'] ) {
 		return new WP_Error( 'consent', 'Vui lòng đồng ý để bệnh viện tiếp nhận và hỗ trợ lịch khám.' );
 	}
-	$name = trim( preg_replace( '/\s+/u', ' ', $input['name'] ) ?? '' );
-	if ( ! preg_match( '/^[\p{L}\p{M}][\p{L}\p{M} .\x{2019}\x{0027}-]{1,99}$/uD', $name ) ) {
-		return new WP_Error( 'name', 'Vui lòng nhập họ tên hợp lệ (từ 2 đến 100 ký tự).' );
+	$name = ec_booking_clean_name( $input['name'] );
+	if ( ! preg_match( '/^[\p{L}\p{M}][\p{L}\p{M} .\x{2019}\x{0027}-]{1,99}$/uD', $name ) || ! preg_match( '/\p{L}.*\p{L}/uD', $name ) ) {
+		return new WP_Error( 'name', 'Vui lòng nhập họ tên bằng chữ (từ 2 đến 100 ký tự, không chứa số hoặc ký hiệu).' );
 	}
-	$phone = preg_replace( '/[\s().-]/', '', $input['phone'] );
-	if ( ! preg_match( '/^\+?[0-9]{9,15}$/D', $phone ) || preg_match( '/^\+?([0-9])\1+$/D', $phone ) ) {
-		return new WP_Error( 'phone', 'Vui lòng nhập số điện thoại hợp lệ.' );
+	// Một dạng duy nhất cho mỗi số để giới hạn gửi và chống trùng không bị lách bằng +84/0/khoảng trắng.
+	$phone = ec_booking_normalize_phone( $input['phone'] );
+	if ( is_wp_error( $phone ) ) {
+		return $phone;
 	}
-	// Cùng một số Việt Nam không thể vượt giới hạn bằng cách đổi +84/0.
-	if ( 0 === strpos( $phone, '+84' ) ) {
-		$phone = '0' . substr( $phone, 3 );
-	}
-	if ( $patient_zalo_consent && ! preg_match( '/^0[35789][0-9]{8}$/D', $phone ) ) {
+	if ( $patient_zalo_consent && ! ec_booking_is_vn_mobile( $phone ) ) {
 		return new WP_Error( 'phone', 'Để nhận tin lịch khám qua Zalo, vui lòng nhập số di động Việt Nam hợp lệ hoặc bỏ chọn mục nhận tin Zalo.' );
 	}
 	if ( ! preg_match( '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/iD', $input['request_id'] ) ) {
@@ -211,29 +262,94 @@ function ec_booking_unlock( $lock ) {
 	}
 }
 
-/** Giới hạn 5 yêu cầu/giờ cho từng IP và số điện thoại; chỉ lưu khóa HMAC. */
-function ec_booking_rate_limit( $phone ) {
-	$ip   = isset( $_SERVER['REMOTE_ADDR'] ) && is_string( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : 'unknown';
-	$hour = (string) intdiv( time(), 3600 );
-	$keys = array(
-		'ec_booking_rate_' . hash_hmac( 'sha256', 'ip:' . $ip . ':' . $hour, wp_salt( 'nonce' ) ),
-		'ec_booking_rate_' . hash_hmac( 'sha256', 'phone:' . $phone . ':' . $hour, wp_salt( 'nonce' ) ),
+/** IP người gửi; IPv6 gộp theo /64 vì một thiết bị có thể đổi địa chỉ trong cùng dải. */
+function ec_booking_client_ip() {
+	$ip = isset( $_SERVER['REMOTE_ADDR'] ) && is_string( $_SERVER['REMOTE_ADDR'] ) ? $_SERVER['REMOTE_ADDR'] : '';
+	$packed = '' !== $ip ? @inet_pton( $ip ) : false;
+	if ( false === $packed ) {
+		return 'unknown';
+	}
+	if ( 16 === strlen( $packed ) ) {
+		return bin2hex( substr( $packed, 0, 8 ) ) . '::/64';
+	}
+	return inet_ntop( $packed );
+}
+
+/** Bối cảnh gửi từ trình duyệt: IP, mã thiết bị ngẫu nhiên và dấu vân tay phần cứng do JS gửi (nếu có). */
+function ec_booking_request_context( $input ) {
+	$context = array( 'ip' => ec_booking_client_ip(), 'source' => 'website', 'channel' => 'Website' );
+	$patterns = array(
+		'device_id'   => '/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/D',
+		'device_hash' => '/^[a-f0-9]{64}$/D',
 	);
-	sort( $keys );
+	foreach ( $patterns as $field => $pattern ) {
+		if ( isset( $input[ $field ] ) && is_string( $input[ $field ] ) && preg_match( $pattern, strtolower( $input[ $field ] ) ) ) {
+			$context[ $field ] = strtolower( $input[ $field ] );
+		}
+	}
+	if ( isset( $input['embed_key'] ) && is_string( $input['embed_key'] ) && function_exists( 'ec_booking_api_client' ) ) {
+		$client = ec_booking_api_client( $input['embed_key'] );
+		if ( $client ) {
+			$context['source']  = 'widget:' . $client['id'];
+			$context['channel'] = $client['channel'];
+		}
+	}
+	return $context;
+}
+
+/**
+ * Ngưỡng theo giờ và theo ngày cho từng định danh. Thiết bị dùng cả mã ngẫu nhiên lưu trong trình duyệt
+ * và dấu vân tay phần cứng (màn hình, CPU, bộ nhớ, múi giờ) để đổi IP hoặc xóa dữ liệu trình duyệt vẫn bị giới hạn.
+ */
+function ec_booking_rate_rules( $phone, $context ) {
+	$rules = array(
+		array( 'phone:' . $phone, 5, HOUR_IN_SECONDS ),
+		array( 'phone:' . $phone, 8, DAY_IN_SECONDS ),
+	);
+	if ( ! empty( $context['client'] ) ) {
+		// API máy chủ: IP là máy chủ đối tác nên giới hạn theo khóa API thay cho IP/thiết bị.
+		$rules[] = array( 'client:' . $context['client'], max( 1, (int) ( $context['client_limit'] ?? 120 ) ), HOUR_IN_SECONDS );
+		return $rules;
+	}
+	$ip = isset( $context['ip'] ) ? $context['ip'] : 'unknown';
+	$rules[] = array( 'ip:' . $ip, 5, HOUR_IN_SECONDS );
+	$rules[] = array( 'ip:' . $ip, 20, DAY_IN_SECONDS );
+	if ( ! empty( $context['device_id'] ) ) {
+		$rules[] = array( 'device:' . $context['device_id'], 5, HOUR_IN_SECONDS );
+		$rules[] = array( 'device:' . $context['device_id'], 10, DAY_IN_SECONDS );
+	}
+	if ( ! empty( $context['device_hash'] ) ) {
+		// Nhiều máy cùng đời có thể trùng dấu vân tay, nên ngưỡng rộng hơn mã thiết bị.
+		$rules[] = array( 'hw:' . $context['device_hash'], 8, HOUR_IN_SECONDS );
+	}
+	return $rules;
+}
+
+/** Giới hạn theo IP, thiết bị, số điện thoại hoặc khóa API; chỉ lưu khóa HMAC, không lưu IP/số thật. */
+function ec_booking_rate_limit( $phone, $context = null ) {
+	$context = null === $context ? array( 'ip' => ec_booking_client_ip() ) : $context;
+	$keys    = array();
+	foreach ( ec_booking_rate_rules( $phone, $context ) as $rule ) {
+		list( $identity, $limit, $window ) = $rule;
+		$bucket = (string) intdiv( time(), $window );
+		$key    = 'ec_booking_rate_' . hash_hmac( 'sha256', $identity . ':' . $window . ':' . $bucket, wp_salt( 'nonce' ) );
+		$keys[ $key ] = array( $limit, $window );
+	}
+	ksort( $keys );
 	$locks = array();
 	try {
-		foreach ( $keys as $key ) {
+		foreach ( $keys as $key => $rule ) {
 			$lock = ec_booking_lock( $key );
 			if ( ! $lock ) {
 				return false;
 			}
 			$locks[] = $lock;
-			if ( (int) get_transient( $key ) >= 5 ) {
+			if ( (int) get_transient( $key ) >= $rule[0] ) {
 				return false;
 			}
 		}
-		foreach ( $keys as $key ) {
-			if ( ! set_transient( $key, (int) get_transient( $key ) + 1, HOUR_IN_SECONDS ) ) {
+		foreach ( $keys as $key => $rule ) {
+			if ( ! set_transient( $key, (int) get_transient( $key ) + 1, $rule[1] ) ) {
 				return false;
 			}
 		}
@@ -243,6 +359,71 @@ function ec_booking_rate_limit( $phone ) {
 			ec_booking_unlock( $lock );
 		}
 	}
+}
+
+/** Chỉ mục chống trùng: một số điện thoại, một ngày khám. Lưu HMAC để không lộ số trong meta. */
+function ec_booking_dedupe_key( $phone, $date ) {
+	return hash_hmac( 'sha256', 'dedupe:' . $phone . ':' . $date, wp_salt( 'nonce' ) );
+}
+
+/** Lịch chưa hủy cùng số điện thoại và ngày khám, nếu có. */
+function ec_booking_find_duplicate( $phone, $date ) {
+	$posts = get_posts( array(
+		'post_type'        => 'ec_appointment',
+		'post_status'      => 'private',
+		'meta_key'         => '_ec_booking_dedupe',
+		'meta_value'       => ec_booking_dedupe_key( $phone, $date ),
+		'numberposts'      => 10,
+		'orderby'          => 'ID',
+		'order'            => 'ASC',
+		'suppress_filters' => true,
+	) );
+	foreach ( $posts as $post ) {
+		if ( 'cancelled' === get_post_meta( $post->ID, '_ec_booking_status', true ) ) {
+			continue;
+		}
+		$data = ec_booking_read( $post );
+		if ( ( $data['phone'] ?? '' ) === $phone && ( $data['date'] ?? '' ) === $date ) {
+			return $post;
+		}
+	}
+	return null;
+}
+
+/** Thông báo khi đã có lịch cùng ngày. Chỉ nêu giờ hẹn khi họ tên cũng khớp, tránh lộ lịch của người khác. */
+function ec_booking_duplicate_message( $existing, $booking ) {
+	$data    = ec_booking_read( $existing );
+	$hotline = function_exists( 'eyecare_du_lieu_thuc_the' ) ? ( eyecare_du_lieu_thuc_the()['dien_thoai_hien'] ?? '' ) : '';
+	$call    = '' !== $hotline ? ' gọi ' . $hotline : ' gọi bệnh viện';
+	$lower   = function ( $value ) {
+		return function_exists( 'mb_strtolower' ) ? mb_strtolower( (string) $value, 'UTF-8' ) : strtolower( (string) $value );
+	};
+	if ( $lower( $data['name'] ?? '' ) === $lower( $booking['name'] ) ) {
+		$day = DateTimeImmutable::createFromFormat( '!Y-m-d', (string) ( $data['date'] ?? '' ) );
+		return 'Bạn đã có lịch khám lúc ' . ( $data['time'] ?? '' ) . ' ngày ' . ( $day ? $day->format( 'd/m/Y' ) : '' ) . ' với số điện thoại này. Bệnh viện giữ nguyên lịch cũ, không tạo lịch trùng. Muốn đổi giờ, vui lòng' . $call . '.';
+	}
+	return 'Số điện thoại này đã có lịch khám trong ngày đã chọn nên bệnh viện không tạo thêm lịch. Muốn đổi giờ hoặc đặt cho người khác, vui lòng' . $call . '.';
+}
+
+/** Mã thời gian ký kèm cấu hình form: gửi trong vài giây sau khi mở form thường là bot. */
+function ec_booking_form_token( $time = null ) {
+	$time = null === $time ? time() : (int) $time;
+	return $time . '.' . substr( hash_hmac( 'sha256', 'form:' . $time, wp_salt( 'nonce' ) ), 0, 32 );
+}
+
+/** true nếu hợp lệ hoặc không có mã (trang cũ còn trong bộ nhớ đệm); WP_Error nếu gửi quá nhanh. */
+function ec_booking_check_form_token( $token, $now = null ) {
+	$now = null === $now ? time() : (int) $now;
+	if ( ! is_string( $token ) || ! preg_match( '/^([0-9]{9,11})\.([a-f0-9]{32})$/D', $token, $match ) ) {
+		return true;
+	}
+	if ( ! hash_equals( ec_booking_form_token( (int) $match[1] ), $token ) ) {
+		return true;
+	}
+	if ( $now - (int) $match[1] < 2 ) {
+		return new WP_Error( 'too_fast', 'Vui lòng kiểm tra lại thông tin rồi bấm gửi.', array( 'status' => 429 ) );
+	}
+	return true;
 }
 
 /** Dữ liệu chính cùng một hàng post: lưu thành công trước khi trả xác nhận. */
@@ -282,8 +463,12 @@ function ec_booking_replay( $booking ) {
 	return new WP_Error( 'request_conflict', 'Yêu cầu này đã được gửi với thông tin khác. Vui lòng mở lại biểu mẫu.', array( 'status' => 409 ) );
 }
 
-/** Lưu yêu cầu mới hoặc xác nhận lại đúng yêu cầu đã lưu (retry). */
-function ec_booking_store( $booking ) {
+/**
+ * Lưu yêu cầu mới hoặc xác nhận lại đúng yêu cầu đã lưu (retry).
+ * Nếu số điện thoại đã có lịch chưa hủy cùng ngày, trả WP_Error 'duplicate' kèm appointment_id của lịch cũ.
+ */
+function ec_booking_store( $booking, $context = null ) {
+	$context      = is_array( $context ) ? $context : array( 'ip' => ec_booking_client_ip(), 'source' => 'website', 'channel' => 'Website' );
 	$request_hash = hash_hmac( 'sha256', $booking['request_id'], wp_salt( 'nonce' ) );
 	$slug         = 'ec-' . $request_hash;
 	$payload      = $booking;
@@ -293,22 +478,36 @@ function ec_booking_store( $booking ) {
 	if ( ! $lock ) {
 		return new WP_Error( 'busy', 'Yêu cầu đang được xử lý. Vui lòng chờ ít giây rồi thử lại.', array( 'status' => 409 ) );
 	}
+	$dedupe_key  = ec_booking_dedupe_key( $booking['phone'], $booking['date'] );
+	$dedupe_lock = null;
 	try {
 		$replay = ec_booking_replay( $booking );
 		if ( false !== $replay ) {
 			return $replay;
 		}
-		if ( ! ec_booking_rate_limit( $booking['phone'] ) ) {
+		// Khóa theo số + ngày để hai lần bấm gửi song song với request_id khác nhau không tạo hai lịch.
+		$dedupe_lock = ec_booking_lock( 'dedupe:' . $dedupe_key );
+		if ( ! $dedupe_lock ) {
+			return new WP_Error( 'busy', 'Yêu cầu đang được xử lý. Vui lòng chờ ít giây rồi thử lại.', array( 'status' => 409 ) );
+		}
+		$duplicate = ec_booking_find_duplicate( $booking['phone'], $booking['date'] );
+		if ( $duplicate ) {
+			$same = function_exists( 'mb_strtolower' ) ? mb_strtolower( (string) ( ec_booking_read( $duplicate )['name'] ?? '' ), 'UTF-8' ) === mb_strtolower( $booking['name'], 'UTF-8' ) : false;
+			return new WP_Error( 'duplicate', ec_booking_duplicate_message( $duplicate, $booking ), array( 'status' => 409, 'appointment_id' => (int) $duplicate->ID, 'same_person' => $same ) );
+		}
+		if ( ! ec_booking_rate_limit( $booking['phone'], $context ) ) {
 			return new WP_Error( 'rate_limit', 'Bạn đã gửi nhiều yêu cầu. Vui lòng thử lại sau hoặc gọi bệnh viện.', array( 'status' => 429 ) );
 		}
+		$payload['channel'] = in_array( $context['channel'] ?? '', array( 'Website', 'Zalo' ), true ) ? $context['channel'] : 'Website';
+		$payload['source']  = isset( $context['source'] ) && is_string( $context['source'] ) && preg_match( '/^[a-z0-9:_-]{1,80}$/D', $context['source'] ) ? $context['source'] : 'website';
 		$payload['fingerprint'] = $fingerprint;
 		$payload['received_at'] = ec_booking_now()->format( DATE_ATOM );
 		$payload['consent_text'] = ec_booking_contact_consent_text();
-		$payload['consent_version'] = '2026-10-22-auto-confirm-v1';
+		$payload['consent_version'] = '2026-10-29-short-v2';
 		$payload['patient_zalo_consent'] = ! empty( $booking['patient_zalo_consent'] );
 		if ( $payload['patient_zalo_consent'] ) {
 			$payload['patient_zalo_consented_at'] = $payload['received_at'];
-			$payload['patient_zalo_consent_version'] = '2026-10-27-confirm-only-v2';
+			$payload['patient_zalo_consent_version'] = '2026-10-29-confirm-only-v3';
 			$payload['patient_zalo_consent_text'] = ec_booking_patient_zalo_consent_text();
 		}
 		// Immutable initial status keeps retries to Sheet identical even after staff edits.
@@ -330,8 +529,14 @@ function ec_booking_store( $booking ) {
 			'post_title'   => 'Yêu cầu khám ' . $booking['date'] . ' ' . $booking['time'],
 			'post_content' => wp_json_encode( $payload, JSON_UNESCAPED_UNICODE ),
 			'post_author'  => 0,
-			'meta_input'   => array( '_ec_booking_status' => 'confirmed' ),
+			'meta_input'   => array( '_ec_booking_status' => 'confirmed', '_ec_booking_dedupe' => $dedupe_key, '_ec_booking_source' => $payload['source'] ),
 		);
+		// Chỉ lưu HMAC của IP/thiết bị để nhân viên nhận ra cùng một máy gửi nhiều lịch, không lưu giá trị thật.
+		foreach ( array( 'ip' => '_ec_booking_ip_hash', 'device_id' => '_ec_booking_device_hash', 'device_hash' => '_ec_booking_hw_hash' ) as $field => $meta ) {
+			if ( ! empty( $context[ $field ] ) && 'unknown' !== $context[ $field ] ) {
+				$post_data['meta_input'][ $meta ] = hash_hmac( 'sha256', $field . ':' . $context[ $field ], wp_salt( 'nonce' ) );
+			}
+		}
 		if ( ! empty( $payload['sheet_required'] ) ) { $post_data['meta_input']['_ec_sheet_recovery'] = '1'; }
 		$post_id = wp_insert_post( wp_slash( $post_data ), true );
 		if ( is_wp_error( $post_id ) || ! $post_id ) {
@@ -340,6 +545,7 @@ function ec_booking_store( $booking ) {
 		do_action( 'ec_booking_created', (int) $post_id );
 		return (int) $post_id;
 	} finally {
+		ec_booking_unlock( $dedupe_lock );
 		ec_booking_unlock( $lock );
 	}
 }
@@ -351,6 +557,7 @@ function ec_booking_ajax_config() {
 		wp_send_json_error( array( 'code' => $schedule->get_error_code(), 'message' => $schedule->get_error_message() ), 503 );
 	}
 	$schedule['nonce'] = wp_create_nonce( 'ec_booking_submit' );
+	$schedule['formToken'] = ec_booking_form_token( time() );
 	wp_send_json_success( $schedule );
 }
 add_action( 'wp_ajax_ec_booking_config', 'ec_booking_ajax_config' );
@@ -376,7 +583,11 @@ function ec_booking_ajax_submit() {
 		if ( is_wp_error( $booking ) ) {
 			wp_send_json_error( array( 'code' => $booking->get_error_code(), 'message' => $booking->get_error_message() ), 400 );
 		}
-		$result = ec_booking_store( $booking );
+		$timing = ec_booking_check_form_token( $input['form_token'] ?? null );
+		if ( is_wp_error( $timing ) ) {
+			wp_send_json_error( array( 'code' => $timing->get_error_code(), 'message' => $timing->get_error_message() ), 429 );
+		}
+		$result = ec_booking_store( $booking, ec_booking_request_context( $input ) );
 	}
 	if ( is_wp_error( $result ) ) {
 		$error_data = $result->get_error_data();
@@ -433,6 +644,32 @@ function ec_booking_admin_boxes() {
 }
 add_action( 'add_meta_boxes_ec_appointment', 'ec_booking_admin_boxes' );
 
+/** Nhãn nguồn: website, widget nhúng của đối tác hoặc API máy chủ. */
+function ec_booking_source_label( $source ) {
+	$source = is_string( $source ) ? $source : 'website';
+	if ( 0 === strpos( $source, 'widget:' ) || 0 === strpos( $source, 'api:' ) ) {
+		list( $kind, $id ) = explode( ':', $source, 2 );
+		$client = function_exists( 'ec_booking_api_clients' ) ? ( ec_booking_api_clients()[ $id ] ?? null ) : null;
+		$name   = $client ? $client['name'] : $id;
+		return ( 'widget' === $kind ? 'Form nhúng: ' : 'API: ' ) . $name;
+	}
+	return 'Website bệnh viện';
+}
+
+/** Số lịch khác trong 30 ngày có cùng HMAC IP hoặc thiết bị; giúp nhân viên phát hiện gửi hàng loạt. */
+function ec_booking_same_device_count( $post ) {
+	$total = 0;
+	foreach ( array( '_ec_booking_device_hash', '_ec_booking_hw_hash', '_ec_booking_ip_hash' ) as $meta ) {
+		$hash = get_post_meta( $post->ID, $meta, true );
+		if ( ! $hash ) {
+			continue;
+		}
+		$ids = get_posts( array( 'post_type' => 'ec_appointment', 'post_status' => 'private', 'meta_key' => $meta, 'meta_value' => $hash, 'fields' => 'ids', 'numberposts' => 50, 'date_query' => array( array( 'after' => '30 days ago' ) ), 'suppress_filters' => true ) );
+		$total = max( $total, count( array_diff( $ids, array( $post->ID ) ) ) );
+	}
+	return $total;
+}
+
 function ec_booking_admin_details( $post ) {
 	if ( ! current_user_can( 'manage_options' ) ) {
 		return;
@@ -446,6 +683,12 @@ function ec_booking_admin_details( $post ) {
 		if ( 'date' === $key ) { $value = ec_booking_admin_date_label( $value ); }
 		if ( 'received_at' === $key && $value ) { $value = wp_date( 'H:i · d/m/Y', strtotime( $value ), new DateTimeZone( 'Asia/Ho_Chi_Minh' ) ); }
 		echo '<tr><th scope="row">' . esc_html( $label ) . '</th><td>' . esc_html( $value ) . '</td></tr>';
+	}
+	$source = get_post_meta( $post->ID, '_ec_booking_source', true );
+	echo '<tr><th scope="row">Nguồn đặt lịch</th><td>' . esc_html( ec_booking_source_label( $source ? $source : ( $data['source'] ?? 'website' ) ) ) . '</td></tr>';
+	$same_device = ec_booking_same_device_count( $post );
+	if ( $same_device > 0 ) {
+		echo '<tr><th scope="row">Cùng thiết bị/IP</th><td>' . esc_html( $same_device . ' lịch khác trong 30 ngày gửi từ cùng thiết bị hoặc IP' ) . '</td></tr>';
 	}
 	echo '<tr><th scope="row">Đồng ý liên hệ</th><td>' . ( ! empty( $data['consent'] ) ? 'Đã đồng ý' : 'Chưa ghi nhận' ) . '</td></tr>';
 		echo '<tr><th scope="row">Đồng ý nhận tin lịch hẹn qua Zalo</th><td>' . ( ! empty( $data['patient_zalo_consent'] ) ? 'Đã đồng ý' : 'Chưa ghi nhận' ) . '</td></tr>';

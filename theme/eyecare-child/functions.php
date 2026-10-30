@@ -637,6 +637,10 @@ require_once get_stylesheet_directory() . '/inc/zalo-dat-lich.php';
 require_once get_stylesheet_directory() . '/inc/gmail-dat-lich.php';
 require_once get_stylesheet_directory() . '/inc/sheets-dat-lich.php';
 require_once get_stylesheet_directory() . '/inc/lien-he-noi.php';
+/* API cho máy chủ đối tác và form nhúng trên website đối tác. */
+require_once get_stylesheet_directory() . '/inc/api-dat-lich.php';
+require_once get_stylesheet_directory() . '/inc/api-dat-lich-admin.php';
+require_once get_stylesheet_directory() . '/inc/dat-lich-nhung.php';
 
 /* Mô hình mắt 3D giáo dục — chỉ nạp asset khi trang kiến thức gọi tới. */
 require_once get_stylesheet_directory() . '/inc/mo-hinh-mat.php';
@@ -649,3 +653,6 @@ require_once get_stylesheet_directory() . '/inc/toi-uu-anh.php';
 
 /* Trang giữ chỗ và trang xác nhận không nên được lập chỉ mục tìm kiếm. */
 require_once get_stylesheet_directory() . '/inc/seo-trang-giu-cho.php';
+
+/* SEO cho các trang tổng hợp chưa có bộ xuất mô tả riêng. */
+require_once get_stylesheet_directory() . '/inc/seo-hubs.php';

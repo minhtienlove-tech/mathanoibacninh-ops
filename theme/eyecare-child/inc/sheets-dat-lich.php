@@ -84,7 +84,7 @@ function ec_sheets_deliver( $id ) {
 		$key = (string) $post->post_name;
 		$contact = ec_zalo_booking_contact( $d );
 		$status = 'confirmed' === ( $d['initial_status'] ?? '' ) ? 'Đã xác nhận' : 'Yêu cầu chờ bệnh viện xác nhận';
-		$values = array( $key, (string) ( $d['received_at'] ?? '' ), $contact['name'], $contact['phone'], (string) ( $d['date'] ?? '' ), (string) ( $d['time'] ?? '' ), $status, 'Website', (string) ( $d['received_at'] ?? '' ) );
+		$values = array( $key, (string) ( $d['received_at'] ?? '' ), $contact['name'], $contact['phone'], (string) ( $d['date'] ?? '' ), (string) ( $d['time'] ?? '' ), $status, in_array( $d['channel'] ?? '', array( 'Website', 'Zalo' ), true ) ? $d['channel'] : 'Website', (string) ( $d['received_at'] ?? '' ) );
 		$result = ec_sheets_request( array( 'action' => 'append', 'key' => $key, 'values' => $values ) );
 		$fingerprint = hash( 'sha256', wp_json_encode( $values, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_LINE_TERMINATORS ) );
 		if ( ! is_wp_error( $result ) && ( $key !== ( $result['key'] ?? '' ) || ! is_int( $result['row'] ?? null ) || $result['row'] < 2 || $result['row'] > 20000 || ! is_string( $result['fingerprint'] ?? null ) || ! hash_equals( $fingerprint, $result['fingerprint'] ) ) ) { $result = new WP_Error( 'ack', 'Xác nhận Sheet không khớp mã yêu cầu và nội dung.' ); }
@@ -134,7 +134,7 @@ function ec_sheets_change_details( $rows ) {
 		$v = $row['values'];
 		foreach ( $v as $cell ) { if ( ! is_string( $cell ) || strlen( $cell ) > 1000 ) { return new WP_Error( 'input', 'Dữ liệu lịch không hợp lệ.' ); } }
 		// Non-booking rows/partial edits stay metadata-only. Never copy arbitrary cell contents.
-		if ( ! preg_match( '/^[A-Za-z0-9:._-]{1,160}$/D', $v[0] ) || isset( $seen[ $v[0] ] ) || ! preg_match( '/^[\p{L}\p{M}][\p{L}\p{M} .\x{2019}\x{0027}-]{1,99}$/uD', $v[2] ) || ! preg_match( '/^[0-9]{9,15}$/D', $v[3] ) || ! preg_match( '/^(\d{4})-(\d{2})-(\d{2})$/D', $v[4], $date ) || ! checkdate( (int) $date[2], (int) $date[3], (int) $date[1] ) || ! preg_match( '/^(?:0[7-9]|1[0-6]):(?:00|30)$/D', $v[5] ) || $v[5] < '07:30' || $v[5] > '16:00' || ! in_array( $v[7], array( 'Website', 'Zalo' ), true ) ) { continue; }
+		if ( ! preg_match( '/^[A-Za-z0-9:._-]{1,160}$/D', $v[0] ) || isset( $seen[ $v[0] ] ) || ! preg_match( '/^[\p{L}\p{M}][\p{L}\p{M} .\x{2019}\x{0027}-]{1,99}$/uD', $v[2] ) || ! preg_match( '/^\+?[0-9]{9,15}$/D', $v[3] ) || ! preg_match( '/^(\d{4})-(\d{2})-(\d{2})$/D', $v[4], $date ) || ! checkdate( (int) $date[2], (int) $date[3], (int) $date[1] ) || ! preg_match( '/^(?:0[7-9]|1[0-6]):(?:00|30)$/D', $v[5] ) || $v[5] < '07:30' || $v[5] > '16:00' || ! in_array( $v[7], array( 'Website', 'Zalo' ), true ) ) { continue; }
 		$seen[ $v[0] ] = true;
 		$status = in_array( $v[6], array( 'Yêu cầu chờ bệnh viện xác nhận', 'Chờ xác nhận', 'Đã xác nhận', 'Đã liên hệ', 'Đã khám', 'Đã hủy' ), true ) ? $v[6] : 'Đã cập nhật trên Sheet';
 		$parts[] = 'Dòng ' . $row['row'] . "\nHọ tên: " . $v[2] . "\nĐiện thoại: " . $v[3] . "\nNgày khám: " . $date[3] . '/' . $date[2] . '/' . $date[1] . "\nGiờ khám: " . $v[5] . "\nTrạng thái: " . $status . "\nNguồn: " . $v[7];

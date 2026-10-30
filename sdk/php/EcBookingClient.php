@@ -1,0 +1,74 @@
+<?php
+/**
+ * SDK PHP (7.4+, cần ext-curl) cho API đặt lịch Bệnh viện Mắt Hà Nội – Bắc Ninh.
+ * Tài liệu: docs/API-DAT-LICH.md
+ */
+
+class EcBookingException extends RuntimeException {
+	public $status;
+	public $error_code;
+	public $appointment;
+	public function __construct( $status, $body ) {
+		parent::__construct( is_array( $body ) && isset( $body['message'] ) ? $body['message'] : 'HTTP ' . $status );
+		$this->status      = $status;
+		$this->error_code  = is_array( $body ) ? ( $body['code'] ?? null ) : null;
+		$this->appointment = is_array( $body ) ? ( $body['appointment'] ?? null ) : null;
+	}
+}
+
+class EcBookingClient {
+	private $client_id;
+	private $secret;
+	private $base_url;
+
+	public function __construct( $client_id, $secret, $base_url = 'https://mathanoibacninh.com/wp-json' ) {
+		$this->client_id = $client_id;
+		$this->secret    = $secret;
+		$this->base_url  = rtrim( $base_url, '/' );
+	}
+
+	public function request( $method, $path, $payload = null ) {
+		$route     = '/ec-booking/v1' . $path;
+		$body      = null === $payload ? '' : json_encode( $payload, JSON_UNESCAPED_UNICODE );
+		$timestamp = (string) time();
+		$signature = hash_hmac( 'sha256', $timestamp . "\n" . $method . "\n" . $route . "\n" . $body, $this->secret );
+		$curl      = curl_init( $this->base_url . $route );
+		curl_setopt_array( $curl, array(
+			CURLOPT_CUSTOMREQUEST  => $method,
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_TIMEOUT        => 20,
+			CURLOPT_HTTPHEADER     => array( 'Content-Type: application/json', 'X-EC-Key: ' . $this->client_id, 'X-EC-Timestamp: ' . $timestamp, 'X-EC-Signature: ' . $signature ),
+			CURLOPT_POSTFIELDS     => '' === $body ? null : $body,
+		) );
+		$raw    = curl_exec( $curl );
+		$status = (int) curl_getinfo( $curl, CURLINFO_RESPONSE_CODE );
+		curl_close( $curl );
+		$result = is_string( $raw ) ? json_decode( $raw, true ) : null;
+		if ( $status < 200 || $status >= 300 || ! is_array( $result ) || empty( $result['ok'] ) ) {
+			throw new EcBookingException( $status, $result );
+		}
+		return $result;
+	}
+
+	public function slots() {
+		return $this->request( 'GET', '/slots' );
+	}
+
+	/** Giữ nguyên $request_id khi thử lại để không tạo lịch trùng. */
+	public function create_appointment( $name, $phone, $date, $time, $request_id, $patient_zalo_consent = false ) {
+		$result = $this->request( 'POST', '/appointments', array(
+			'name'                 => $name,
+			'phone'                => $phone,
+			'date'                 => $date,
+			'time'                 => $time,
+			'consent'              => true,
+			'patient_zalo_consent' => (bool) $patient_zalo_consent,
+			'request_id'           => $request_id,
+		) );
+		return $result['appointment'];
+	}
+
+	public function appointment( $id ) {
+		return $this->request( 'GET', '/appointments/' . (int) $id )['appointment'];
+	}
+}
