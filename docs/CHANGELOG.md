@@ -6,6 +6,7 @@
 - Thông báo trùng nay mở đầu bằng "Không tạo lịch mới:", kèm giờ lịch đã có (chỉ khi cùng họ tên), và hiển thị khung vàng `data-state="warning"`. Tài liệu API cập nhật câu ví dụ. Không đổi logic chống trùng.
 - QA local: 10 bộ test đặt lịch đạt, thêm kiểm tra câu mở đầu. Hash ba file production khớp commit `4b49e53` trước triển khai.
 - Triển khai: `scripts/stage-booking-duplicate-notice-20261030.sh` → `scripts/deploy-booking-duplicate-notice-20261030.sh`; khóa deploy, kiểm hash trước/sau, test trên server, backup file và database, purge cache, kiểm tra CSS/JS live có trạng thái cảnh báo; lỗi thì tự khôi phục.
+- Kết quả production: triển khai commit `68d0b4f`, hash trước sửa khớp `4b49e53`, test trên server đạt; backup tại `/home/jwhxtzru/backups/booking-duplicate-notice-20261030-100237/`. CSS/JS live có trạng thái cảnh báo; `verify-live.ps1 -CheckSsh` đạt. Chưa kiểm tra trực quan trên trình duyệt.
 - Rollback chọn lọc: chép lại `inc/dat-lich-kham.php`, `assets/lien-he-noi.js`, `assets/lien-he-noi.css` từ backup rồi purge WordPress/LiteSpeed.
 
 ## 2026-10-30 — gộp đồng ý nhận tin Zalo vào ô đồng ý bắt buộc
