@@ -71,6 +71,23 @@
 		}
 	}
 
+	// Cloudflare Turnstile chỉ nạp khi form có ô xác minh (bệnh viện đã bật trong quản trị).
+	let turnstileReady = null;
+	function loadTurnstile() {
+		if (!turnstileReady) {
+			turnstileReady = new Promise((resolve, reject) => {
+				if (window.turnstile) return resolve(window.turnstile);
+				const script = document.createElement('script');
+				script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+				script.async = true;
+				script.onload = () => (window.turnstile ? resolve(window.turnstile) : reject(new Error('turnstile')));
+				script.onerror = () => { turnstileReady = null; reject(new Error('turnstile')); };
+				document.head.appendChild(script);
+			});
+		}
+		return turnstileReady;
+	}
+
 	document.querySelectorAll('[data-ec-booking-form]').forEach(form => {
 		const date = form.elements.date;
 		const time = form.elements.time;
@@ -106,6 +123,40 @@
 		}
 		phone.addEventListener('input', syncPhone);
 		syncPhone();
+		const captchaBox = form.querySelector('[data-booking-captcha]');
+		let captchaWidget = null;
+		let captchaToken = '';
+		function setupCaptcha() {
+			if (!captchaBox || captchaWidget !== null) return;
+			captchaWidget = false;
+			loadTurnstile().then(turnstile => {
+				captchaWidget = turnstile.render(captchaBox, {
+					sitekey: captchaBox.dataset.bookingCaptcha,
+					action: 'booking',
+					appearance: 'interaction-only',
+					size: 'flexible',
+					callback: token => { captchaToken = token; },
+					'expired-callback': () => { captchaToken = ''; },
+					'error-callback': () => { captchaToken = ''; }
+				}) || null;
+			}).catch(() => { captchaWidget = null; });
+		}
+		// Token chỉ dùng một lần và hết hạn sau 5 phút, nên mỗi lần gửi chờ token mới.
+		async function captchaResponse() {
+			setupCaptcha();
+			for (let waited = 0; waited < 15000; waited += 250) {
+				if (window.turnstile && captchaWidget) {
+					const token = captchaToken || window.turnstile.getResponse(captchaWidget) || '';
+					if (token && !window.turnstile.isExpired(captchaWidget)) return token;
+				}
+				await new Promise(resolve => setTimeout(resolve, 250));
+			}
+			return '';
+		}
+		function resetCaptcha() {
+			captchaToken = '';
+			if (window.turnstile && captchaWidget) window.turnstile.reset(captchaWidget);
+		}
 		function freezeFields(frozen) {
 			form.querySelectorAll('[data-booking-fields] input, [data-booking-fields] select').forEach(field => { field.disabled = frozen; });
 		}
@@ -129,6 +180,7 @@
 		}
 		async function load(force) {
 			if (loading || sending || complete || pendingBody) return;
+			setupCaptcha();
 			if (config && !force && performance.now() - receivedAt < 60000) {
 				refreshTimes();
 				return;
@@ -206,6 +258,16 @@
 			pendingBody = body;
 			freezeFields(true);
 			try {
+				if (captchaBox) {
+					const token = await captchaResponse();
+					if (!token) {
+						const error = new Error('Chưa xác minh xong chống bot. Vui lòng hoàn tất ô xác minh phía trên nút gửi (nếu có) rồi bấm gửi lại, hoặc gọi tổng đài.');
+						error.status = 403;
+						error.code = 'captcha';
+						throw error;
+					}
+					body.set('cf_turnstile', token);
+				}
 				const result = await callApi(form.dataset.endpoint, {method: 'POST', body});
 				complete = true;
 				pendingBody = null;
@@ -223,6 +285,8 @@
 					retry.hidden = false;
 				}
 				if (error.code === 'nonce') config = null;
+				// Xác minh chưa đạt: giữ nguyên dữ liệu đã nhập, chỉ cần bấm gửi lại.
+				if (error.code === 'captcha') retry.hidden = true;
 				if (error.code === 'duplicate') {
 					// Số này đã có lịch cùng ngày: hiển thị lịch cũ, không gửi lại.
 					pendingBody = null;
@@ -240,6 +304,7 @@
 				status.focus();
 			} finally {
 				sending = false;
+				if (captchaBox) resetCaptcha();
 				submit.textContent = pendingBody ? 'Thử gửi lại yêu cầu này' : 'Gửi yêu cầu đặt lịch';
 				if (pendingBody) submit.disabled = false;
 				form.removeAttribute('aria-busy');

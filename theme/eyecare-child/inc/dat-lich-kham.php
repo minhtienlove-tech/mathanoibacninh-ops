@@ -603,6 +603,11 @@ function ec_booking_ajax_submit() {
 		if ( is_wp_error( $timing ) ) {
 			wp_send_json_error( array( 'code' => $timing->get_error_code(), 'message' => $timing->get_error_message() ), 429 );
 		}
+		// Chỉ yêu cầu mới phải qua Turnstile; gửi lại đúng yêu cầu đã lưu thì đã thoát ở bước replay.
+		$captcha = function_exists( 'ec_turnstile_check' ) ? ec_turnstile_check( $input['cf_turnstile'] ?? null ) : true;
+		if ( is_wp_error( $captcha ) ) {
+			wp_send_json_error( array( 'code' => $captcha->get_error_code(), 'message' => $captcha->get_error_message() ), 403 );
+		}
 		$result = ec_booking_store( $booking, ec_booking_request_context( $input ) );
 	}
 	if ( is_wp_error( $result ) ) {

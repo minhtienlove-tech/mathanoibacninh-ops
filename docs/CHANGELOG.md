@@ -1,5 +1,15 @@
 # Production changelog
 
+## 2026-10-30 — chống bot bằng Cloudflare Turnstile (đã cài, đang tắt)
+
+- Theo yêu cầu người dùng, thêm Cloudflare Turnstile cho form đặt lịch trên website và form nhúng; API đối tác không đổi (đã ký HMAC). Mặc định tắt: khi tắt, form không có ô xác minh, không nạp script Cloudflare và không gọi mạng. Bật tại Lịch hẹn → Chống bot sau khi nhập Site Key và Secret Key; Secret Key lưu mã hóa AES-256-GCM như khóa Zalo.
+- Khi bật: widget chế độ `interaction-only` (đa số người dùng không phải làm gì), script chỉ nạp khi mở form. Máy chủ kiểm tra token với siteverify (gửi token, secret, IP; không gửi họ tên/số điện thoại), yêu cầu đúng hostname và action `booking`. Token thiếu, sai, hết hạn hoặc dùng lại trả 403 `captcha`, không lưu lịch; mỗi lần gửi lấy token mới. Gửi lại đúng yêu cầu đã lưu thoát ở bước replay nên không cần token mới. Lỗi kết nối, HTTP lỗi, `invalid-input-secret` hoặc `internal-error` thì vẫn nhận lịch (các lớp chống spam khác vẫn áp dụng) và hiện cảnh báo trong trang quản trị; trang cũng hiện số lượt bị chặn trong ngày.
+- Trang Chính sách bảo mật chỉ thêm đoạn nói về Cloudflare Turnstile khi tính năng đang bật.
+- QA local: 11 bộ test đặt lịch đạt, `tests/booking-turnstile-test.php` 148 kiểm tra không có HTTP thật; đã thử gỡ bước chặn token thiếu và test báo lỗi đúng chỗ. Chưa chạy với khóa Cloudflare thật hoặc trên trình duyệt.
+- Production trước sửa: ba file khớp Git; `page-quyen-rieng-tu.php` chỉ khác CRLF. Guard dùng `scripts/booking-turnstile-20261030-prod-before.sha256`.
+- Triển khai: `scripts/stage-booking-turnstile-20261030.sh` → `scripts/deploy-booking-turnstile-20261030.sh`; khóa deploy, kiểm hash trước/sau, test trên server, backup file và database, xác nhận Turnstile đang tắt, trang đặt lịch không có ô xác minh, trang chính sách không có đoạn Turnstile, handler gửi form trả lỗi nonce đúng; lỗi thì tự khôi phục.
+- Rollback chọn lọc: chép lại bốn file từ backup, xóa `inc/chong-bot-dat-lich.php`, purge WordPress/LiteSpeed. Option `ec_booking_turnstile` giữ nguyên.
+
 ## 2026-10-30 — thông báo đặt trùng hiện dạng cảnh báo
 
 - Người dùng thử đặt 5 lần cùng thông tin và thấy như đều được nhận. Kiểm tra production: chỉ có một lịch (#2173) cho số và ngày đó, bốn lần sau bị chặn trùng đúng thiết kế. Nguyên nhân hiểu nhầm là thông báo chặn trùng dùng cùng khung xanh với đặt thành công.
