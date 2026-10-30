@@ -156,7 +156,7 @@ function ec_booking_api_admin_page() {
 	?>
 	<div class="wrap" style="max-width:1000px">
 		<h1>API đặt lịch và form nhúng</h1>
-		<p>Cấp khóa cho hệ thống bên ngoài (Zalo bot, phần mềm đối tác) gửi lịch qua API, hoặc cho website đối tác nhúng form đặt lịch. Mọi lịch đi qua cùng kiểm tra, chống trùng và thông báo như form trên website. Tài liệu kỹ thuật: <code>docs/API-DAT-LICH.md</code>.</p>
+		<p>Cấp khóa cho hệ thống bên ngoài (Zalo bot, phần mềm đối tác) gửi lịch qua API, hoặc cho website đối tác nhúng form đặt lịch. Mọi lịch đi qua cùng kiểm tra, chống trùng và thông báo như form trên website. Tài liệu kỹ thuật (nội bộ, không lập chỉ mục): <a href="<?php echo esc_url( home_url( '/api-dat-lich/' ) ); ?>" target="_blank" rel="noopener">bản đọc</a> · <a href="<?php echo esc_url( home_url( '/api-dat-lich.md' ) ); ?>" target="_blank" rel="noopener">bản Markdown cho AI</a>.</p>
 		<?php if ( is_array( $notice ) ) : ?>
 			<div class="notice <?php echo ! empty( $notice['error'] ) ? 'notice-error' : 'notice-success'; ?>"><p><?php echo esc_html( $notice['message'] ?? '' ); ?></p>
 			<?php if ( '' !== $shown ) : ?>

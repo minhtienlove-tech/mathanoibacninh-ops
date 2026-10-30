@@ -642,6 +642,8 @@ require_once get_stylesheet_directory() . '/inc/lien-he-noi.php';
 /* API cho máy chủ đối tác và form nhúng trên website đối tác. */
 require_once get_stylesheet_directory() . '/inc/api-dat-lich.php';
 require_once get_stylesheet_directory() . '/inc/api-dat-lich-admin.php';
+/* Tài liệu API nội bộ tại /api-dat-lich/ và /api-dat-lich.md (noindex). */
+require_once get_stylesheet_directory() . '/inc/tai-lieu-api.php';
 require_once get_stylesheet_directory() . '/inc/dat-lich-nhung.php';
 
 /* Mô hình mắt 3D giáo dục — chỉ nạp asset khi trang kiến thức gọi tới. */

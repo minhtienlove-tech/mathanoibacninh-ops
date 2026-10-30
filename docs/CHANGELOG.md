@@ -1,5 +1,14 @@
 # Production changelog
 
+## 2026-10-30 — tài liệu API đặt lịch nội bộ trên website
+
+- Theo yêu cầu người dùng, đưa tài liệu API lên website để dùng nội bộ và gửi link cho trợ lý AI (Codex, Claude): bản đọc `/api-dat-lich/`, bản Markdown thô `/api-dat-lich.md`, SDK `/api-dat-lich/sdk/ec-booking.mjs` và `/api-dat-lich/sdk/EcBookingClient.php.txt` (đuôi `.txt` để máy chủ không chạy file). Không lập chỉ mục: header `X-Robots-Tag: noindex, nofollow` ở mọi đường dẫn và thẻ meta robots ở bản HTML; không phải trang WordPress nên không có trong menu/sitemap; không chặn bằng robots.txt để công cụ đọc của AI vẫn thấy noindex. Không cần đăng nhập; tài liệu không chứa khóa bí mật.
+- `inc/tai-lieu-api.php` chỉ phục vụ bốn đường dẫn cố định, chỉ GET/HEAD, không cache. Bản HTML dựng từ `content/api-dat-lich.md` bằng bộ đọc Markdown nhỏ, thoát mọi HTML trong nguồn, chỉ nhận liên kết http(s). Nguồn tài liệu và SDK chuyển từ `docs/` và `sdk/` vào `theme/eyecare-child/content/`; `docs/API-DAT-LICH.md` thành file trỏ đường.
+- Tài liệu thêm mục dùng với AI (đặt khóa vào biến môi trường, không dán vào chat; không có môi trường thử nên mỗi lần tạo lịch là lịch thật), ví dụ chữ ký mẫu đã đối chiếu khớp openssl, Node và hàm ký của máy chủ, ví dụ `curl`. Trang quản trị API và form nhúng có link tới hai bản.
+- QA local: `tests/api-docs-test.php` 37 kiểm tra (đường dẫn ngoài danh sách bị từ chối, noindex, không còn ký hiệu Markdown thô, HTML trong nguồn bị thoát, chữ ký mẫu khớp máy chủ, endpoint trong tài liệu đều có thật); đã thử gỡ bước thoát HTML và test báo lỗi đúng chỗ. 13 bộ test đạt; lint PHP/JS đạt.
+- Triển khai: `scripts/stage-api-docs-20261030.sh` → `scripts/deploy-api-docs-20261030.sh`; khóa deploy, kiểm hash trước/sau theo commit `923a1da`, test trên server, backup file và database, purge cache, kiểm tra noindex/nội dung bốn đường dẫn, `EcBookingClient.php` không có đuôi `.txt` trả 404, trang đặt lịch và trang quản trị; lỗi thì tự khôi phục.
+- Rollback chọn lọc: chép lại `functions.php`, `inc/api-dat-lich-admin.php` từ backup, xóa `inc/tai-lieu-api.php`, `content/api-dat-lich.md`, thư mục `content/sdk/`, purge WordPress/LiteSpeed.
+
 ## 2026-10-30 — nhắc lịch hẹn ZBS theo mẫu #659483
 
 - Theo mẫu nhắc lịch đã duyệt người dùng cung cấp, thêm một tin nhắc trước giờ khám, mặc định 2 giờ; Dashboard → Đặt lịch khám → Tin ZBS bệnh nhân có công tắc riêng và ô số giờ 1–72. Dùng đúng bốn biến `schedule_time`, `address`, `customer_name`, `booking_code` cùng giới hạn ký tự bản duyệt; giữ xác nhận #657033 và cấu hình OAuth hiện có.

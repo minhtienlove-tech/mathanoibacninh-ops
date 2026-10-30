@@ -1,5 +1,5 @@
 // SDK Node.js (18+) cho API đặt lịch Bệnh viện Mắt Hà Nội – Bắc Ninh. Không cần thư viện ngoài.
-// Tài liệu: docs/API-DAT-LICH.md
+// Tài liệu: https://mathanoibacninh.com/api-dat-lich/ (Markdown: https://mathanoibacninh.com/api-dat-lich.md)
 import { createHmac, randomUUID } from 'node:crypto';
 
 export class EcBookingError extends Error {

@@ -1,7 +1,7 @@
 <?php
 /**
  * SDK PHP (7.4+, cần ext-curl) cho API đặt lịch Bệnh viện Mắt Hà Nội – Bắc Ninh.
- * Tài liệu: docs/API-DAT-LICH.md
+ * Tài liệu: https://mathanoibacninh.com/api-dat-lich/ (Markdown: https://mathanoibacninh.com/api-dat-lich.md)
  */
 
 class EcBookingException extends RuntimeException {
