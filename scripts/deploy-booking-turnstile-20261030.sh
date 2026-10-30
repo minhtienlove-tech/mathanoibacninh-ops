@@ -51,7 +51,10 @@ grep -Fq 'data-ec-booking-form' "$backup/public-booking.html"
 if grep -Fq 'data-booking-captcha' "$backup/public-booking.html"; then false; fi
 js=$(grep -o 'https://mathanoibacninh.com/wp-content/themes/eyecare-child/assets/lien-he-noi.js?ver=[0-9]*' "$backup/public-booking.html" | head -1)
 curl --fail --silent --show-error --max-time 30 "$js" | grep -Fq 'function loadTurnstile'
-curl --fail --silent --show-error --location --max-time 30 "https://mathanoibacninh.com/quyen-rieng-tu/?qa=$stamp" > "$backup/privacy.html"
+# Trang chính sách nằm dưới /chinh-sach/; lấy URL từ WordPress thay vì đoán.
+privacy_url=$(wp eval 'echo get_privacy_policy_url();')
+[[ "$privacy_url" == https://mathanoibacninh.com/* ]]
+curl --fail --silent --show-error --location --max-time 30 "${privacy_url}?qa=$stamp" > "$backup/privacy.html"
 grep -Fq 'Cookie, nhật ký truy cập và dịch vụ bên ngoài' "$backup/privacy.html"
 if grep -Fq 'Cloudflare Turnstile' "$backup/privacy.html"; then false; fi
 # Nonce sai: chứng minh handler gửi form chạy không lỗi PHP, không tạo lịch.

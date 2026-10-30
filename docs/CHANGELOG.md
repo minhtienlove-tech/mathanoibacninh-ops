@@ -8,6 +8,7 @@
 - QA local: 11 bộ test đặt lịch đạt, `tests/booking-turnstile-test.php` 148 kiểm tra không có HTTP thật; đã thử gỡ bước chặn token thiếu và test báo lỗi đúng chỗ. Chưa chạy với khóa Cloudflare thật hoặc trên trình duyệt.
 - Production trước sửa: ba file khớp Git; `page-quyen-rieng-tu.php` chỉ khác CRLF. Guard dùng `scripts/booking-turnstile-20261030-prod-before.sha256`.
 - Triển khai: `scripts/stage-booking-turnstile-20261030.sh` → `scripts/deploy-booking-turnstile-20261030.sh`; khóa deploy, kiểm hash trước/sau, test trên server, backup file và database, xác nhận Turnstile đang tắt, trang đặt lịch không có ô xác minh, trang chính sách không có đoạn Turnstile, handler gửi form trả lỗi nonce đúng; lỗi thì tự khôi phục.
+- Lần chạy đầu (10:09) dừng ở bước kiểm tra sau triển khai vì script đoán sai URL trang chính sách (`/quyen-rieng-tu/` trả 404; URL thật `/chinh-sach/quyen-rieng-tu/`). Script đã tự khôi phục: hash bốn file khớp trước sửa, file mới đã xóa, smoke test đạt; backup `/home/jwhxtzru/backups/booking-turnstile-20261030-100959/`. Sửa script lấy URL bằng `get_privacy_policy_url()` rồi chạy lại.
 - Rollback chọn lọc: chép lại bốn file từ backup, xóa `inc/chong-bot-dat-lich.php`, purge WordPress/LiteSpeed. Option `ec_booking_turnstile` giữ nguyên.
 
 ## 2026-10-30 — thông báo đặt trùng hiện dạng cảnh báo
