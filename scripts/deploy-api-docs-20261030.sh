@@ -58,10 +58,14 @@ curl --fail --silent --show-error --max-time 30 -D "$backup/md-headers.txt" "$si
 grep -Eiq '^content-type: text/markdown' "$backup/md-headers.txt"
 grep -Eiq '^x-robots-tag: noindex, nofollow' "$backup/md-headers.txt"
 cmp -s "$backup/docs.md" "$theme/content/api-dat-lich.md"
-curl --fail --silent --show-error --max-time 30 "$site/api-dat-lich/sdk/ec-booking.mjs?qa=$stamp" | grep -Fq 'export class EcBookingClient'
-curl --fail --silent --show-error --max-time 30 "$site/api-dat-lich/sdk/EcBookingClient.php.txt?qa=$stamp" | grep -Fq 'class EcBookingClient'
+# Ghi ra file rồi mới grep: grep -q thoát sớm làm curl lỗi "Failed writing body" dưới pipefail.
+curl --fail --silent --show-error --max-time 30 "$site/api-dat-lich/sdk/ec-booking.mjs?qa=$stamp" > "$backup/sdk.mjs"
+grep -Fq 'export class EcBookingClient' "$backup/sdk.mjs"
+curl --fail --silent --show-error --max-time 30 "$site/api-dat-lich/sdk/EcBookingClient.php.txt?qa=$stamp" > "$backup/sdk.php.txt"
+grep -Fq 'class EcBookingClient' "$backup/sdk.php.txt"
 [[ "$(curl --silent --max-time 30 -o /dev/null -w '%{http_code}' "$site/api-dat-lich/sdk/EcBookingClient.php?qa=$stamp")" == 404 ]]
-curl --fail --silent --show-error --location --max-time 30 "$site/dat-lich-kham/?qa=$stamp" | grep -Fq 'data-ec-booking-form'
+curl --fail --silent --show-error --location --max-time 30 "$site/dat-lich-kham/?qa=$stamp" > "$backup/public-booking.html"
+grep -Fq 'data-ec-booking-form' "$backup/public-booking.html"
 wp eval --user=1 'ob_start(); ec_booking_api_admin_page(); $h = ob_get_clean(); if ( false === strpos( $h, "/api-dat-lich.md" ) ) { fwrite( STDERR, "admin link missing\n" ); exit( 1 ); }'
 trap - ERR
 printf 'BACKUP=%s\n' "$backup"
