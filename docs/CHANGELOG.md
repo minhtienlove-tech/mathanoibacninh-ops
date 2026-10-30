@@ -1,5 +1,12 @@
 # Production changelog
 
+## 2026-10-30 — nhắc lịch hẹn ZBS theo mẫu #659483
+
+- Theo mẫu nhắc lịch đã duyệt người dùng cung cấp, thêm một tin nhắc trước giờ khám, mặc định 2 giờ; Dashboard → Đặt lịch khám → Tin ZBS bệnh nhân có công tắc riêng và ô số giờ 1–72. Dùng đúng bốn biến `schedule_time`, `address`, `customer_name`, `booking_code` cùng giới hạn ký tự bản duyệt; giữ xác nhận #657033 và cấu hình OAuth hiện có.
+- Biểu mẫu mới hiển thị câu đồng ý xác nhận + nhắc lịch, gửi cờ phiên bản riêng và lưu bằng chứng đồng ý tương ứng. Form cache/API cũ giữ xác nhận một tin; lịch lịch sử không được tự đăng ký nhắc. Marker/hook v2 tách biệt tác vụ nhắc đã ngừng trước đây; một tin mỗi lịch, không tự gửi lại khi đã được ZBS nhận hoặc chưa rõ kết quả.
+- Mốc nhắc tính theo giờ Việt Nam, đổi giờ hoặc số giờ Dashboard thì tính lại tin còn chờ. Hủy/đã khám/thu hồi đồng ý/tắt kênh thì bỏ qua; lịch sát hơn mốc nhắc chỉ nhận xác nhận, quá mốc 5 phút không gửi bù. Có phục hồi tác vụ còn chờ bị mất khi retry và trạng thái nhắc/mốc dự kiến trong hồ sơ quản trị. Không thay luồng Sheet/Zalo Bot nhân viên hoặc tạo lịch thật để thử.
+- Git pull, hash bốn tệp production khớp trước sửa; triển khai chọn năm tệp child theme, khóa deploy, backup file/database và riêng khóa cấu hình nhắc; giữ token đang xoay và có rollback chọn lọc. Kết quả triển khai sẽ ghi sau kiểm tra.
+
 ## 2026-10-30 — chống dò mật khẩu đăng nhập, Turnstile trang đăng nhập, nút hiện/ẩn ô xác minh
 
 - Theo yêu cầu người dùng, thêm `inc/chong-bot-dang-nhap.php` (nạp từ `functions.php`, tách khỏi phần giao diện `inc/trang-dang-nhap.php`). Chống dò mật khẩu luôn bật: một địa chỉ mạng (IPv6 gộp /64) sai 8 lần trong 15 phút bị khóa 15 phút, sai 30 lần trong 24 giờ bị khóa 24 giờ; khi đang khóa, mật khẩu đúng cũng bị từ chối. Áp dụng cả mật khẩu ứng dụng REST. Sai tên đăng nhập và sai mật khẩu dùng cùng một thông báo, không lộ tài khoản tồn tại. Chỉ lưu HMAC của địa chỉ mạng. Đăng nhập đúng xóa bộ đếm 15 phút.

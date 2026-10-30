@@ -24,9 +24,10 @@ function ec_booking_public_share_consent_text() {
  * Wording stored with new requests must match the required checkbox.
  * Khi ZBS bật, câu bắt buộc gồm cả việc gửi một tin xác nhận qua Zalo OA thay cho ô Zalo riêng.
  */
-function ec_booking_contact_consent_text( $with_zalo = false ) {
+function ec_booking_contact_consent_text( $with_zalo = false, $with_reminder = false ) {
 	$base = 'Tôi đồng ý để bệnh viện lưu họ tên, số điện thoại và chuyển cho nhân viên được ủy quyền (qua Google Sheet riêng tư, Zalo, email) để hỗ trợ lịch khám';
-	return $base . ( $with_zalo ? ', và gửi một tin xác nhận lịch khám qua Zalo OA đến số di động đã nhập (không quảng cáo).' : '.' );
+	$messages = $with_reminder ? 'một tin xác nhận và một tin nhắc lịch khám' : 'một tin xác nhận lịch khám';
+	return $base . ( $with_zalo ? ', và gửi ' . $messages . ' qua Zalo OA đến số di động đã nhập (không quảng cáo).' : '.' );
 }
 
 /** Ô Zalo riêng của form cũ (trang còn trong bộ nhớ đệm) và đồng ý do đối tác API gửi. */
@@ -92,7 +93,7 @@ function ec_booking_is_vn_mobile( $phone ) {
 function ec_booking_fingerprint_payload( $booking ) {
 	$payload = $booking;
 	// Câu đồng ý nào được hiển thị không đổi kết quả đồng ý; dấu vân tay chỉ ràng buộc patient_zalo_consent.
-	unset( $payload['request_id'], $payload['zalo_in_consent'] );
+	unset( $payload['request_id'], $payload['zalo_in_consent'], $payload['reminder_in_consent'] );
 	if ( empty( $payload['public_share_consent'] ) ) {
 		unset( $payload['public_share_consent'] );
 	}
@@ -172,6 +173,10 @@ function ec_booking_validate( $input, $now = null, $hours = null, $check_schedul
 	}
 	// Form mới: câu đồng ý bắt buộc đã gồm tin xác nhận Zalo (form gửi consent_zalo=1 khi hiển thị câu đó).
 	$zalo_in_consent = isset( $input['consent_zalo'] ) && '1' === $input['consent_zalo'];
+	if ( array_key_exists( 'consent_zalo_reminder', $input ) && ( ! is_string( $input['consent_zalo_reminder'] ) || ! in_array( $input['consent_zalo_reminder'], array( '0', '1' ), true ) ) ) {
+		return new WP_Error( 'input', 'Thông tin đồng ý nhắc lịch không hợp lệ.' );
+	}
+	$reminder_in_consent = $zalo_in_consent && isset( $input['consent_zalo_reminder'] ) && '1' === $input['consent_zalo_reminder'];
 	if ( '' !== $input['website'] ) {
 		return new WP_Error( 'input', 'Không thể tiếp nhận yêu cầu này. Vui lòng thử lại.' );
 	}
@@ -217,7 +222,12 @@ function ec_booking_validate( $input, $now = null, $hours = null, $check_schedul
 			return new WP_Error( 'time', 'Vui lòng chọn giờ khám trong khung giờ làm việc của bệnh viện.' );
 		}
 	}
-	return array( 'name' => $name, 'phone' => $phone, 'date' => $input['date'], 'time' => $input['time'], 'request_id' => strtolower( $input['request_id'] ), 'consent' => true, 'public_share_consent' => $public_share_consent, 'patient_zalo_consent' => $patient_zalo_consent, 'zalo_in_consent' => $zalo_in_consent );
+	$result = array( 'name' => $name, 'phone' => $phone, 'date' => $input['date'], 'time' => $input['time'], 'request_id' => strtolower( $input['request_id'] ), 'consent' => true, 'public_share_consent' => $public_share_consent, 'patient_zalo_consent' => $patient_zalo_consent, 'zalo_in_consent' => $zalo_in_consent );
+	if ( $reminder_in_consent ) {
+		$result['reminder_in_consent'] = true;
+		if ( $patient_zalo_consent ) { $result['patient_zalo_reminder_consent'] = true; }
+	}
+	return $result;
 }
 
 /** CPT hoàn toàn riêng tư: chỉ người có manage_options được đọc/quản lý. */
@@ -518,12 +528,13 @@ function ec_booking_store( $booking, $context = null ) {
 		$payload['received_at'] = ec_booking_now()->format( DATE_ATOM );
 		// Lưu đúng câu người bệnh đã thấy và tích.
 		$zalo_in_consent = ! empty( $booking['zalo_in_consent'] );
-		$payload['consent_text'] = ec_booking_contact_consent_text( $zalo_in_consent );
-		$payload['consent_version'] = $zalo_in_consent ? '2026-10-30-short-zalo-v3' : '2026-10-29-short-v2';
+		$reminder_in_consent = ! empty( $booking['reminder_in_consent'] );
+		$payload['consent_text'] = ec_booking_contact_consent_text( $zalo_in_consent, $reminder_in_consent );
+		$payload['consent_version'] = $reminder_in_consent ? '2026-10-30-confirm-reminder-v1' : ( $zalo_in_consent ? '2026-10-30-short-zalo-v3' : '2026-10-29-short-v2' );
 		$payload['patient_zalo_consent'] = ! empty( $booking['patient_zalo_consent'] );
 		if ( $payload['patient_zalo_consent'] ) {
 			$payload['patient_zalo_consented_at'] = $payload['received_at'];
-			$payload['patient_zalo_consent_version'] = $zalo_in_consent ? '2026-10-30-in-required-consent-v4' : '2026-10-29-confirm-only-v3';
+			$payload['patient_zalo_consent_version'] = $reminder_in_consent ? '2026-10-30-confirm-reminder-v1' : ( $zalo_in_consent ? '2026-10-30-in-required-consent-v4' : '2026-10-29-confirm-only-v3' );
 			$payload['patient_zalo_consent_text'] = $zalo_in_consent ? $payload['consent_text'] : ec_booking_patient_zalo_consent_text();
 		}
 		// Immutable initial status keeps retries to Sheet identical even after staff edits.

@@ -57,7 +57,7 @@ function zbs_admin_post( $values ) {
 	$_SERVER['REQUEST_METHOD'] = 'POST';
 	$_POST = array_merge( array(
 		'app_id' => '', 'secret_key' => '', 'refresh_token' => '', 'access_token' => '',
-		'access_token_expires' => '', 'template_confirm_id' => '', 'confirm_map' => '',
+		'access_token_expires' => '', 'template_confirm_id' => '', 'confirm_map' => '', 'template_reminder_id' => '', 'reminder_map' => '', 'reminder_hours' => '2',
 	), $values );
 	try { ec_zbs_admin_save(); }
 	catch ( ZbsAdminRedirect $redirect ) {}
@@ -126,6 +126,23 @@ ob_start();
 ec_zbs_admin_page();
 $html = ob_get_clean();
 zbs_admin_expect( str_contains( $html, 'Tin ZBS cho người đặt lịch' ) && ! str_contains( $html, 'new-refresh-token-123' ) && ! str_contains( $html, 'mock-secret-key-123' ), 'Admin page renders status but never discloses credentials' );
-zbs_admin_expect( ! str_contains( $html, 'name="template_reminder_id"' ) && ! str_contains( $html, 'name="reminder_map"' ), 'Admin page contains no reminder configuration' );
+zbs_admin_expect( str_contains( $html, 'name="template_reminder_id"' ) && str_contains( $html, 'name="reminder_map"' ) && str_contains( $html, 'name="reminder_hours"' ), 'Admin page exposes reminder configuration and editable lead hours' );
+
+// Reminder settings have an independent switch, exact approved mapping, and bounded lead hours.
+$valid['access_token'] = ''; $valid['access_token_expires'] = '';
+$valid['template_reminder_id'] = '659483'; $valid['reminder_map'] = $valid['confirm_map'];
+$valid['reminder_hours'] = '2'; $valid['reminder_enabled'] = '1';
+$notice = zbs_admin_post( $valid ); $saved = get_option( 'ec_booking_zbs' );
+zbs_admin_expect( empty( $notice['error'] ) && true === $saved['reminder_enabled'] && 2 === $saved['reminder_hours'] && '659483' === $saved['template_reminder_id'], 'Approved reminder can be enabled for two hours before the slot' );
+$valid['reminder_hours'] = '24'; $notice = zbs_admin_post( $valid );
+zbs_admin_expect( empty( $notice['error'] ) && 24 === get_option( 'ec_booking_zbs' )['reminder_hours'] && in_array( 'ec_zbs_reminder_settings_changed', $GLOBALS['zbs_admin_purge_actions'], true ), 'Dashboard lead change persists and triggers pending-only replanning' );
+foreach ( array( '0', '73', '1.5', 'abc' ) as $bad_hours ) {
+	$bad = $valid; $bad['reminder_hours'] = $bad_hours; $notice = zbs_admin_post( $bad );
+	zbs_admin_expect( ! empty( $notice['error'] ) && 24 === get_option( 'ec_booking_zbs' )['reminder_hours'], 'Invalid lead hours cannot overwrite settings: ' . $bad_hours );
+}
+$bad = $valid; $bad['template_reminder_id'] = '657033'; $notice = zbs_admin_post( $bad );
+zbs_admin_expect( ! empty( $notice['error'] ), 'Confirmation template cannot be used for reminders' );
+$bad = $valid; $bad['reminder_map'] = 'customer_name=name'; $notice = zbs_admin_post( $bad );
+zbs_admin_expect( ! empty( $notice['error'] ), 'Incomplete reminder variables cannot be enabled' );
 
 echo 'ZBS admin checks: ' . $checks . " passed\n";

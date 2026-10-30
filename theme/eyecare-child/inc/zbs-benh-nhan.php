@@ -8,7 +8,7 @@ function ec_zbs_settings() {
 	$raw = get_option( 'ec_booking_zbs', array() );
 	return wp_parse_args( is_array( $raw ) ? $raw : array(), array(
 		'enabled' => false, 'template_confirm_id' => '', 'template_reminder_id' => '',
-		'confirm_map' => array(), 'reminder_map' => array(),
+		'confirm_map' => array(), 'reminder_map' => array(), 'reminder_enabled' => false, 'reminder_hours' => 2,
 		'app_id' => '', 'secret_key_cipher' => '', 'refresh_token_cipher' => '',
 		'access_token_cipher' => '', 'access_token_expires_at' => 0, 'token_state' => '',
 	) );
@@ -35,9 +35,9 @@ function ec_zbs_template_values( $post, $data ) {
 function ec_zbs_template_payload( $kind, $post, $data, $settings ) {
 	$map = $settings[ $kind . '_map' ] ?? null;
 	if ( ! is_array( $map ) || ! $map || count( $map ) > 20 ) { return new WP_Error( 'config', 'Chưa cấu hình biến mẫu ZBS.' ); }
-	$approved_confirmation = '657033' === ec_zbs_template_id( $kind, $settings );
+	$approved_confirmation = in_array( ec_zbs_template_id( $kind, $settings ), array( '657033', '659483' ), true );
 	if ( $approved_confirmation && $map != array( 'schedule_time' => 'schedule_time', 'address' => 'address', 'customer_name' => 'name', 'booking_code' => 'appointment_id' ) ) {
-		return new WP_Error( 'config', 'Tham số không khớp mẫu xác nhận ZBS đã duyệt.' );
+		return new WP_Error( 'config', 'Tham số không khớp mẫu ZBS đã duyệt.' );
 	}
 	$allowed = ec_zbs_template_values( $post, $data );
 	$output = array();
@@ -133,6 +133,7 @@ function ec_zbs_recover( $id ) {
 		$queued = wp_schedule_single_event( ec_zbs_now() + 2, ec_zbs_hook( $kind ), $args, true );
 		if ( ! $queued || is_wp_error( $queued ) ) { update_post_meta( $id, ec_zbs_meta( $kind, 'state' ), 'failed' ); }
 	}
+	if ( function_exists( 'ec_zbs_reminder_reconcile' ) ) { ec_zbs_reminder_reconcile( $id ); }
 }
 
 /** Called after the administrator changes booking status. Never reactivates a cancelled outbox. */

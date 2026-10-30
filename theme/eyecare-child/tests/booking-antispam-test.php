@@ -106,4 +106,21 @@ $legacy_box = ec_booking_validate( array_merge( $valid, array( 'patient_zalo_con
 ec_expect( ! is_wp_error( $legacy_box ) && true === $legacy_box['patient_zalo_consent'] && false === $legacy_box['zalo_in_consent'], 'Cached old form with the separate Zalo box still works' );
 ec_expect( ec_booking_fingerprint_payload( $combined ) === ec_booking_fingerprint_payload( array_merge( $combined, array( 'zalo_in_consent' => false ) ) ), 'Fingerprint binds the Zalo outcome, not which wording was shown' );
 
+// Fresh reminder wording is distinct from cached confirmation-only forms and API consent.
+$GLOBALS['ec_test_posts'] = array(); $GLOBALS['ec_test_transients'] = array();
+$reminder = ec_booking_validate( array_merge( $valid, array( 'consent_zalo' => '1', 'consent_zalo_reminder' => '1', 'request_id' => '423e4567-e89b-42d3-a456-426614174000' ) ), $now );
+ec_expect( ! is_wp_error( $reminder ) && true === $reminder['patient_zalo_reminder_consent'], 'Explicit new form flag enables reminder consent for VN mobile' );
+$reminder_id = ec_booking_store( $reminder ); $reminder_row = ec_booking_read( get_post( $reminder_id ) );
+ec_expect( $reminder_row['consent_text'] === ec_booking_contact_consent_text( true, true ) && false !== strpos( $reminder_row['consent_text'], 'một tin nhắc' ), 'Stored consent matches visible confirmation and reminder sentence' );
+ec_expect( '2026-10-30-confirm-reminder-v1' === $reminder_row['patient_zalo_consent_version'] && true === $reminder_row['patient_zalo_reminder_consent'], 'Reminder evidence uses a new consent version and separate flag' );
+ec_expect( ec_booking_store( $reminder ) === $reminder_id, 'Reminder consent remains idempotent on browser retry' );
+$changed_consent = $reminder; unset( $changed_consent['patient_zalo_reminder_consent'] );
+ec_expect_error( ec_booking_store( $changed_consent ), 'request_conflict', 'Retry cannot silently change the stored reminder consent' );
+ec_expect( empty( $combined['patient_zalo_reminder_consent'] ) && empty( $legacy_box['patient_zalo_reminder_consent'] ), 'Old cached forms and separate Zalo checkbox stay confirmation-only' );
+$reminder_landline = ec_booking_validate( array_merge( $valid, array( 'phone' => '02438251234', 'consent_zalo' => '1', 'consent_zalo_reminder' => '1' ) ), $now );
+ec_expect( ! is_wp_error( $reminder_landline ) && empty( $reminder_landline['patient_zalo_reminder_consent'] ), 'Landline does not become a reminder recipient' );
+$orphan_reminder = ec_booking_validate( array_merge( $valid, array( 'consent_zalo_reminder' => '1' ) ), $now );
+ec_expect( empty( $orphan_reminder['patient_zalo_reminder_consent'] ), 'Reminder flag without combined Zalo consent does not opt in' );
+ec_expect_error( ec_booking_validate( array_merge( $valid, array( 'consent_zalo_reminder' => 'yes' ) ), $now ), 'input', 'Malformed reminder consent flag is rejected' );
+
 echo 'PASS: ' . $assertions . " anti-spam, duplicate and phone/name normalization checks.\n";
