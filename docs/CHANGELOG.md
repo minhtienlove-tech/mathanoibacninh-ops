@@ -1,5 +1,13 @@
 # Production changelog
 
+## 2026-10-30 — thông báo đặt trùng hiện dạng cảnh báo
+
+- Người dùng thử đặt 5 lần cùng thông tin và thấy như đều được nhận. Kiểm tra production: chỉ có một lịch (#2173) cho số và ngày đó, bốn lần sau bị chặn trùng đúng thiết kế. Nguyên nhân hiểu nhầm là thông báo chặn trùng dùng cùng khung xanh với đặt thành công.
+- Thông báo trùng nay mở đầu bằng "Không tạo lịch mới:", kèm giờ lịch đã có (chỉ khi cùng họ tên), và hiển thị khung vàng `data-state="warning"`. Tài liệu API cập nhật câu ví dụ. Không đổi logic chống trùng.
+- QA local: 10 bộ test đặt lịch đạt, thêm kiểm tra câu mở đầu. Hash ba file production khớp commit `4b49e53` trước triển khai.
+- Triển khai: `scripts/stage-booking-duplicate-notice-20261030.sh` → `scripts/deploy-booking-duplicate-notice-20261030.sh`; khóa deploy, kiểm hash trước/sau, test trên server, backup file và database, purge cache, kiểm tra CSS/JS live có trạng thái cảnh báo; lỗi thì tự khôi phục.
+- Rollback chọn lọc: chép lại `inc/dat-lich-kham.php`, `assets/lien-he-noi.js`, `assets/lien-he-noi.css` từ backup rồi purge WordPress/LiteSpeed.
+
 ## 2026-10-30 — gộp đồng ý nhận tin Zalo vào ô đồng ý bắt buộc
 
 - Theo yêu cầu người dùng, bỏ ô "nhận tin xác nhận qua Zalo" riêng. Khi ZBS bật, câu của ô đồng ý bắt buộc duy nhất thêm vế "và gửi một tin xác nhận lịch khám qua Zalo OA đến số di động đã nhập (không quảng cáo)"; form gửi kèm `consent_zalo=1`. Số di động Việt Nam nhận tin ZBS; số cố định/nước ngoài vẫn đặt lịch bình thường, không gửi Zalo. Không dùng ô ẩn tích sẵn vì hồ sơ sẽ ghi đồng ý với câu người bệnh không thấy.

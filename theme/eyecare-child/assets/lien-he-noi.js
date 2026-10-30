@@ -227,7 +227,7 @@
 					// Số này đã có lịch cùng ngày: hiển thị lịch cũ, không gửi lại.
 					pendingBody = null;
 					complete = true;
-					message(error.message, 'success');
+					message(error.message, 'warning');
 					form.querySelector('[data-booking-fields]').hidden = true;
 					submit.hidden = true;
 					reset.textContent = 'Đặt lịch cho người khác';

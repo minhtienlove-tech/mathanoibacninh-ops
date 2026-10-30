@@ -82,7 +82,7 @@ Trạng thái mới nhất của lịch do chính đối tác đó tạo (`pendi
 ### Lỗi
 
 ```json
-{"ok": false, "code": "duplicate", "message": "Bạn đã có lịch khám lúc 08:00 ngày 31/10/2026 ...", "appointment": {"...": "..."}}
+{"ok": false, "code": "duplicate", "message": "Không tạo lịch mới: số điện thoại này đã có lịch khám lúc 08:00 ngày 31/10/2026 ...", "appointment": {"...": "..."}}
 ```
 
 | HTTP | `code` | Ý nghĩa và cách xử lý |

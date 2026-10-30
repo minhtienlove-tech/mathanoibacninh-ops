@@ -414,9 +414,9 @@ function ec_booking_duplicate_message( $existing, $booking ) {
 	};
 	if ( $lower( $data['name'] ?? '' ) === $lower( $booking['name'] ) ) {
 		$day = DateTimeImmutable::createFromFormat( '!Y-m-d', (string) ( $data['date'] ?? '' ) );
-		return 'Bạn đã có lịch khám lúc ' . ( $data['time'] ?? '' ) . ' ngày ' . ( $day ? $day->format( 'd/m/Y' ) : '' ) . ' với số điện thoại này. Bệnh viện giữ nguyên lịch cũ, không tạo lịch trùng. Muốn đổi giờ, vui lòng' . $call . '.';
+		return 'Không tạo lịch mới: số điện thoại này đã có lịch khám lúc ' . ( $data['time'] ?? '' ) . ' ngày ' . ( $day ? $day->format( 'd/m/Y' ) : '' ) . '. Bệnh viện giữ nguyên lịch đó. Muốn đổi giờ, vui lòng' . $call . '.';
 	}
-	return 'Số điện thoại này đã có lịch khám trong ngày đã chọn nên bệnh viện không tạo thêm lịch. Muốn đổi giờ hoặc đặt cho người khác, vui lòng' . $call . '.';
+	return 'Không tạo lịch mới: số điện thoại này đã có lịch khám trong ngày đã chọn. Muốn đổi giờ hoặc đặt cho người khác, vui lòng' . $call . '.';
 }
 
 /** Mã thời gian ký kèm cấu hình form: gửi trong vài giây sau khi mở form thường là bot. */

@@ -40,6 +40,7 @@ ec_expect( is_wp_error( $again ) && 'duplicate' === $again->get_error_code(), 'S
 ec_expect( $GLOBALS['ec_test_insert_count'] === $inserted, 'Duplicate creates no new record' );
 ec_expect( (int) ( $again->get_error_data()['appointment_id'] ?? 0 ) === $first_id, 'Duplicate points to the existing appointment' );
 ec_expect( false !== strpos( $again->get_error_message(), '07:30' ), 'Same person sees the time already booked' );
+ec_expect( 0 === strpos( $again->get_error_message(), 'Không tạo lịch mới' ), 'Duplicate message says first that no new booking was made' );
 $other_person = ec_booking_store( array_merge( $base, array( 'name' => 'Lê Văn Khác', 'request_id' => '223e4567-e89b-42d3-a456-426614174002' ) ) );
 ec_expect( is_wp_error( $other_person ) && false === strpos( $other_person->get_error_message(), '07:30' ), 'Different name is not shown the existing time' );
 $next_day = ec_booking_store( array_merge( $base, array( 'date' => '2026-09-15', 'request_id' => '223e4567-e89b-42d3-a456-426614174003' ) ) );

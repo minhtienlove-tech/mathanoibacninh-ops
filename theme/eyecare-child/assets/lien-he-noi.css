@@ -589,6 +589,13 @@ body.ec-contact-dock { padding-bottom: calc(104px + env(safe-area-inset-bottom))
 	background: #ecf8f0;
 }
 
+/* Đã có lịch cùng ngày: không tạo lịch mới, khác màu với đặt thành công. */
+.ec-booking-form .ec-booking-form__status[data-state="warning"] {
+	border-color: #ecd49a;
+	color: #6b4500;
+	background: #fff8e6;
+}
+
 .ec-booking-form .ec-booking-form__honeypot {
 	position: absolute !important;
 	left: -10000px !important;
