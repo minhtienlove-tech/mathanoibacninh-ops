@@ -183,7 +183,7 @@ ec_expect( $stored['patient_zalo_consent'] === true && $stored['patient_zalo_con
 ec_expect( (bool) DateTimeImmutable::createFromFormat( DATE_ATOM, $stored['patient_zalo_consented_at'] ), 'Patient ZBS consent timestamp persisted' );
 ec_expect( $stored['public_share_consent'] === false && ! isset( $stored['public_share_consented_at'], $stored['public_share_consent_text'] ), 'Unchecked request stores no public display consent or consent evidence' );
 $new_payload = $booking;
-unset( $new_payload['request_id'], $new_payload['public_share_consent'] );
+unset( $new_payload['request_id'], $new_payload['public_share_consent'], $new_payload['zalo_in_consent'] );
 ec_expect( $stored['fingerprint'] === hash_hmac( 'sha256', wp_json_encode( $new_payload ), wp_salt( 'nonce' ) ), 'New request fingerprint binds the patient Zalo choice' );
 ec_expect_error( ec_booking_store( array_merge( $booking, array( 'patient_zalo_consent' => false ) ) ), 'request_conflict', 'Replay cannot withdraw patient Zalo opt-in from an already saved request' );
 $legacy_payload = $new_payload;

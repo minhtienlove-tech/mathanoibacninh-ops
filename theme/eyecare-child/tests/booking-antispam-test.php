@@ -83,4 +83,26 @@ ec_expect_error( ec_booking_check_form_token( ec_booking_form_token( $token_time
 ec_expect( true === ec_booking_check_form_token( ec_booking_form_token( $token_time ), $token_time + 3 ), 'Normal human timing accepted' );
 ec_expect( true === ec_booking_check_form_token( '', $token_time ) && true === ec_booking_check_form_token( '1800000000.' . str_repeat( '0', 32 ), $token_time ), 'Missing or forged token does not block cached pages' );
 
+// Một ô đồng ý duy nhất gồm cả tin xác nhận Zalo: số di động nhận tin, số khác vẫn đặt được; lưu đúng câu đã hiển thị.
+ec_expect( false !== strpos( ec_booking_contact_consent_text( true ), 'Zalo OA' ) && false === strpos( ec_booking_contact_consent_text(), 'Zalo OA' ), 'Combined wording mentions Zalo OA only when ZBS is shown' );
+$GLOBALS['ec_test_posts'] = array();
+$GLOBALS['ec_test_transients'] = array();
+$combined = ec_booking_validate( array_merge( $valid, array( 'consent_zalo' => '1', 'request_id' => '323e4567-e89b-42d3-a456-426614174000' ) ), $now );
+ec_expect( ! is_wp_error( $combined ) && true === $combined['patient_zalo_consent'], 'Required consent with Zalo clause enables ZBS for a VN mobile' );
+$combined_id = ec_booking_store( $combined );
+$combined_row = ec_booking_read( get_post( $combined_id ) );
+ec_expect( $combined_row['consent_text'] === ec_booking_contact_consent_text( true ) && '2026-10-30-short-zalo-v3' === $combined_row['consent_version'], 'Stored consent is the combined sentence the patient ticked' );
+ec_expect( $combined_row['patient_zalo_consent_text'] === $combined_row['consent_text'] && '2026-10-30-in-required-consent-v4' === $combined_row['patient_zalo_consent_version'] && ! empty( $combined_row['patient_zalo_consented_at'] ), 'Zalo consent evidence points to the same combined sentence' );
+ec_expect( ec_booking_store( $combined ) === $combined_id, 'Retry of a combined-consent request replays' );
+$landline = ec_booking_validate( array_merge( $valid, array( 'phone' => '024 3825 1234', 'consent_zalo' => '1', 'request_id' => '323e4567-e89b-42d3-a456-426614174001' ) ), $now );
+ec_expect( ! is_wp_error( $landline ) && false === $landline['patient_zalo_consent'], 'Landline with combined consent books without a Zalo message' );
+$plain = ec_booking_validate( array_merge( $valid, array( 'request_id' => '323e4567-e89b-42d3-a456-426614174002' ) ), $now );
+ec_expect( ! is_wp_error( $plain ) && false === $plain['patient_zalo_consent'], 'Without the Zalo clause no Zalo consent is implied' );
+$plain_row = ec_booking_read( get_post( ec_booking_store( array_merge( $plain, array( 'date' => '2026-09-12' ) ) ) ) );
+ec_expect( $plain_row['consent_text'] === ec_booking_contact_consent_text() && '2026-10-29-short-v2' === $plain_row['consent_version'] && ! isset( $plain_row['patient_zalo_consent_text'] ), 'Form without ZBS stores the plain sentence and no Zalo evidence' );
+ec_expect_error( ec_booking_validate( array_merge( $valid, array( 'consent_zalo' => 'yes' ) ), $now ), 'input', 'Malformed consent_zalo rejected' );
+$legacy_box = ec_booking_validate( array_merge( $valid, array( 'patient_zalo_consent' => '1', 'request_id' => '323e4567-e89b-42d3-a456-426614174003' ) ), $now );
+ec_expect( ! is_wp_error( $legacy_box ) && true === $legacy_box['patient_zalo_consent'] && false === $legacy_box['zalo_in_consent'], 'Cached old form with the separate Zalo box still works' );
+ec_expect( ec_booking_fingerprint_payload( $combined ) === ec_booking_fingerprint_payload( array_merge( $combined, array( 'zalo_in_consent' => false ) ) ), 'Fingerprint binds the Zalo outcome, not which wording was shown' );
+
 echo 'PASS: ' . $assertions . " anti-spam, duplicate and phone/name normalization checks.\n";

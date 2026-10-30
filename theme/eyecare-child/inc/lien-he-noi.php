@@ -63,10 +63,9 @@ function eyecare_booking_form( $context = 'modal', $embed_key = '' ) {
 			<label for="<?php echo esc_attr( $id ); ?>-date">Ngày khám <span aria-hidden="true">*</span><input id="<?php echo esc_attr( $id ); ?>-date" name="date" type="date" required disabled></label>
 			<label for="<?php echo esc_attr( $id ); ?>-time">Giờ khám <span aria-hidden="true">*</span><select id="<?php echo esc_attr( $id ); ?>-time" name="time" required disabled><option value="">Đang tải khung giờ…</option></select></label>
 			<p class="ec-booking-form__wide ec-booking-form__hint">Nhận lịch đến 16:00, mỗi khung 30 phút. Lịch được xác nhận ngay khi gửi thành công.</p>
-			<label class="ec-booking-form__wide ec-booking-form__consent" for="<?php echo esc_attr( $id ); ?>-consent"><input id="<?php echo esc_attr( $id ); ?>-consent" name="consent" type="checkbox" value="1" required><span><?php echo esc_html( ec_booking_contact_consent_text() ); ?> <a href="<?php echo esc_url( get_privacy_policy_url() ?: home_url( '/quyen-rieng-tu/' ) ); ?>" target="_blank" rel="noopener">Chính sách bảo mật</a>.</span></label>
-			<?php if ( ! empty( ec_zbs_settings()['enabled'] ) ) : ?>
-			<label class="ec-booking-form__wide ec-booking-form__consent" for="<?php echo esc_attr( $id ); ?>-patient-zalo-consent" data-booking-zalo hidden><input id="<?php echo esc_attr( $id ); ?>-patient-zalo-consent" name="patient_zalo_consent" type="checkbox" value="1"><span><?php echo esc_html( ec_booking_patient_zalo_consent_text() ); ?></span></label>
-			<?php endif; ?>
+			<?php $zalo = ! empty( ec_zbs_settings()['enabled'] ); ?>
+			<label class="ec-booking-form__wide ec-booking-form__consent" for="<?php echo esc_attr( $id ); ?>-consent"><input id="<?php echo esc_attr( $id ); ?>-consent" name="consent" type="checkbox" value="1" required><span><?php echo esc_html( ec_booking_contact_consent_text( $zalo ) ); ?> <a href="<?php echo esc_url( get_privacy_policy_url() ?: home_url( '/quyen-rieng-tu/' ) ); ?>" target="_blank" rel="noopener">Chính sách bảo mật</a>.</span></label>
+			<?php if ( $zalo ) : ?><input type="hidden" name="consent_zalo" value="1"><?php endif; ?>
 			<details class="ec-booking-form__wide ec-booking-form__more">
 				<summary>Tùy chọn khác (không bắt buộc)</summary>
 				<label class="ec-booking-form__consent" for="<?php echo esc_attr( $id ); ?>-public-share-consent"><input id="<?php echo esc_attr( $id ); ?>-public-share-consent" name="public_share_consent" type="checkbox" value="1"><span><?php echo esc_html( ec_booking_public_share_consent_text() ); ?></span></label>

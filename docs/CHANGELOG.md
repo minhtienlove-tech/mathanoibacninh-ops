@@ -1,5 +1,13 @@
 # Production changelog
 
+## 2026-10-30 — gộp đồng ý nhận tin Zalo vào ô đồng ý bắt buộc
+
+- Theo yêu cầu người dùng, bỏ ô "nhận tin xác nhận qua Zalo" riêng. Khi ZBS bật, câu của ô đồng ý bắt buộc duy nhất thêm vế "và gửi một tin xác nhận lịch khám qua Zalo OA đến số di động đã nhập (không quảng cáo)"; form gửi kèm `consent_zalo=1`. Số di động Việt Nam nhận tin ZBS; số cố định/nước ngoài vẫn đặt lịch bình thường, không gửi Zalo. Không dùng ô ẩn tích sẵn vì hồ sơ sẽ ghi đồng ý với câu người bệnh không thấy.
+- Lưu đúng câu đã hiển thị: `consent_text` = câu gộp, `consent_version` `2026-10-30-short-zalo-v3`; bằng chứng Zalo trỏ cùng câu đó, phiên bản `2026-10-30-in-required-consent-v4`. Form cũ còn trong bộ đệm (ô Zalo riêng) và trường `patient_zalo_consent` của API đối tác vẫn được nhận như trước. Dấu vân tay lịch chỉ ràng buộc kết quả đồng ý Zalo, không phụ thuộc câu nào được hiển thị, nên lịch cũ vẫn gửi lại được.
+- QA local: 10 bộ test đặt lịch đạt, `booking-antispam-test.php` thêm 11 kiểm tra cho câu gộp, số cố định, form không ZBS, form cũ và dấu vân tay. Hash `inc/dat-lich-kham.php` và `inc/lien-he-noi.php` trên production khớp commit `f79b9b5` trước triển khai.
+- Triển khai: `scripts/stage-booking-consent-20261030.sh` → `scripts/deploy-booking-consent-20261030.sh`, khóa deploy, kiểm hash trước/sau, test trên server, backup file và database, purge cache, kiểm tra trang đặt lịch còn một ô đồng ý, có câu Zalo và không còn ô Zalo riêng; lỗi thì tự khôi phục.
+- Rollback chọn lọc: chép lại hai file từ thư mục backup rồi purge WordPress/LiteSpeed; không khôi phục database.
+
 ## 2026-10-30 — gọn form đặt lịch, chống trùng/spam, API đối tác và form nhúng
 
 - Form đặt lịch chỉ còn một ô đồng ý bắt buộc với câu ngắn. Ô nhận tin Zalo chỉ hiện khi nhập số di động Việt Nam; ô hiển thị tên công khai chuyển vào mục "Tùy chọn khác". Số điện thoại được chuẩn hóa từ mọi cách viết (+84, 84, khoảng trắng, dấu chấm, chữ số toàn chiều); số nước ngoài giữ dạng E.164. Họ tên được gộp khoảng trắng, viết hoa đầu từ khi người dùng gõ toàn hoa hoặc toàn thường, và từ chối chữ số/ký hiệu.
