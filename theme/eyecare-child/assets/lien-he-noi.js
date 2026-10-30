@@ -133,7 +133,7 @@
 				captchaWidget = turnstile.render(captchaBox, {
 					sitekey: captchaBox.dataset.bookingCaptcha,
 					action: 'booking',
-					appearance: 'interaction-only',
+					appearance: captchaBox.dataset.appearance === 'always' ? 'always' : 'interaction-only',
 					size: 'flexible',
 					callback: token => { captchaToken = token; },
 					'expired-callback': () => { captchaToken = ''; },

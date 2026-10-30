@@ -73,7 +73,7 @@ function eyecare_booking_form( $context = 'modal', $embed_key = '' ) {
 				<label class="ec-booking-form__consent" for="<?php echo esc_attr( $id ); ?>-public-share-consent"><input id="<?php echo esc_attr( $id ); ?>-public-share-consent" name="public_share_consent" type="checkbox" value="1"><span><?php echo esc_html( ec_booking_public_share_consent_text() ); ?></span></label>
 			</details>
 			<?php $captcha_key = function_exists( 'ec_turnstile_site_key' ) ? ec_turnstile_site_key() : ''; ?>
-			<?php if ( '' !== $captcha_key ) : ?><div class="ec-booking-form__wide ec-booking-form__captcha" data-booking-captcha="<?php echo esc_attr( $captcha_key ); ?>"></div><?php endif; ?>
+			<?php if ( '' !== $captcha_key ) : ?><div class="ec-booking-form__wide ec-booking-form__captcha" data-booking-captcha="<?php echo esc_attr( $captcha_key ); ?>" data-appearance="<?php echo esc_attr( ec_turnstile_appearance( 'booking' ) ); ?>"></div><?php endif; ?>
 		</div>
 		<?php if ( '' !== $embed_key ) : ?><input type="hidden" name="embed_key" value="<?php echo esc_attr( $embed_key ); ?>"><?php endif; ?>
 		<div class="ec-booking-form__honeypot" aria-hidden="true"><label>Để trống trường này<input name="website" type="text" tabindex="-1" autocomplete="off"></label></div>

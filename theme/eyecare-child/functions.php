@@ -424,6 +424,8 @@ require_once get_stylesheet_directory() . '/inc/don-trang-quan-tri.php';
  * này vẫn là wp-login.php.
  * ========================================================================== */
 require_once get_stylesheet_directory() . '/inc/trang-dang-nhap.php';
+/* Chống dò mật khẩu và Turnstile cho đăng nhập; tách riêng khỏi phần giao diện ở trên. */
+require_once get_stylesheet_directory() . '/inc/chong-bot-dang-nhap.php';
 
 
 /* ==========================================================================

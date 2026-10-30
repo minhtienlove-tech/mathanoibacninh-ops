@@ -1,5 +1,16 @@
 # Production changelog
 
+## 2026-10-30 — chống dò mật khẩu đăng nhập, Turnstile trang đăng nhập, nút hiện/ẩn ô xác minh
+
+- Theo yêu cầu người dùng, thêm `inc/chong-bot-dang-nhap.php` (nạp từ `functions.php`, tách khỏi phần giao diện `inc/trang-dang-nhap.php`). Chống dò mật khẩu luôn bật: một địa chỉ mạng (IPv6 gộp /64) sai 8 lần trong 15 phút bị khóa 15 phút, sai 30 lần trong 24 giờ bị khóa 24 giờ; khi đang khóa, mật khẩu đúng cũng bị từ chối. Áp dụng cả mật khẩu ứng dụng REST. Sai tên đăng nhập và sai mật khẩu dùng cùng một thông báo, không lộ tài khoản tồn tại. Chỉ lưu HMAC của địa chỉ mạng. Đăng nhập đúng xóa bộ đếm 15 phút.
+- Trước triển khai: production không có plugin bảo mật; `xmlrpc.php` đã bị chặn 403 sẵn; log truy cập ghi IP thật của khách (không qua proxy) nên khóa theo IP không khóa nhầm mọi người. Log có 26 lượt POST `wp-login.php` gần đây.
+- Turnstile trang đăng nhập: nút bật riêng tại Lịch hẹn → Chống bot, dùng chung khóa với form đặt lịch, token phải có action `login` (token form đặt lịch không dùng được). Chỉ kiểm tra form `wp-login.php`, không áp cho REST/XML-RPC. Cloudflare lỗi thì vẫn cho đăng nhập. Triển khai ở trạng thái tắt để người dùng thử trong cửa sổ ẩn danh trước; có lệnh WP-CLI tắt khẩn cấp trong trang quản trị.
+- Nút hiện/ẩn ô xác minh riêng cho form đặt lịch và trang đăng nhập: Ẩn (`interaction-only`, mặc định) hoặc Hiện (`always`). Đổi chế độ form đặt lịch thì purge cache.
+- Trang Chống bot thêm thẻ thống kê đăng nhập sai hôm nay, số địa chỉ đang bị khóa và nút Mở khóa tất cả; khi bị kẹt chạy `wp eval 'ec_login_guard_unlock_all();'`.
+- QA local: 12 bộ test đạt, `tests/login-guard-test.php` 183 kiểm tra không có HTTP thật; đã thử gỡ bước chặn khi đang khóa và test báo lỗi đúng chỗ. Chưa kiểm tra trên trình duyệt, chưa đăng nhập thật với Turnstile.
+- Triển khai: `scripts/stage-login-guard-20261030.sh` → `scripts/deploy-login-guard-20261030.sh`; khóa deploy, kiểm hash trước/sau theo commit `ce80fd3`, test trên server, backup file và database, xác nhận trạng thái Turnstile form đặt lịch không đổi và Turnstile đăng nhập tắt, trang đăng nhập không có widget, một lần đăng nhập sai với tên giả cho thông báo chung rồi xóa bộ đếm, trang quản trị render đủ; lỗi thì tự khôi phục.
+- Rollback chọn lọc: chép lại bốn file từ backup, xóa `inc/chong-bot-dang-nhap.php`, purge WordPress/LiteSpeed. Transient khóa tự hết hạn; option `ec_booking_turnstile` giữ nguyên.
+
 ## 2026-10-30 — chống bot bằng Cloudflare Turnstile (đã cài, đang tắt)
 
 - Theo yêu cầu người dùng, thêm Cloudflare Turnstile cho form đặt lịch trên website và form nhúng; API đối tác không đổi (đã ký HMAC). Mặc định tắt: khi tắt, form không có ô xác minh, không nạp script Cloudflare và không gọi mạng. Bật tại Lịch hẹn → Chống bot sau khi nhập Site Key và Secret Key; Secret Key lưu mã hóa AES-256-GCM như khóa Zalo.
