@@ -5,6 +5,8 @@
 - Theo yêu cầu người dùng: menu quản trị của lịch hẹn trên WordPress tên là "Đặt lịch khám" (nhãn của CPT `ec_appointment`), không phải "Lịch hẹn". Sửa đường dẫn menu trong tài liệu API (`content/api-dat-lich.md`, mục Cấp khóa) và ghi chú đầu `inc/chong-bot-dat-lich.php`, `inc/chong-bot-dang-nhap.php`. Chữ hiển thị trong các trang quản trị không có chỗ nào ghi sai. Các chữ "lịch hẹn" mang nghĩa cuộc hẹn khám giữ nguyên. Các mục CHANGELOG cũ giữ nguyên như đã ghi.
 - QA local: 13 bộ test đạt; lint hai file PHP đạt. Hash ba file production khớp commit `4398717` trước triển khai.
 - Triển khai: `scripts/stage-menu-label-20261031.sh` → `scripts/deploy-menu-label-20261031.sh`; khóa deploy, kiểm hash trước/sau, test trên server, backup file và database, purge cache, kiểm tra bản Markdown live trùng Git và có tên menu đúng, bản HTML, trang đăng nhập, trang đặt lịch và trang Chống bot; lỗi thì tự khôi phục.
+- Lần chạy đầu dừng ở bước test trên server, trước khi backup hay chép file: danh sách file hỗ trợ test viết tay thiếu `inc/zbs-nhac-lich.php` mà test nhắc lịch ZBS (commit `9c7383b` của phiên khác) cần. Production không đổi (hash ba file vẫn khớp `4398717`). Sửa script stage lấy mọi `inc/*.php` và SDK ở commit làm file hỗ trợ test (commit `2576cc3`).
+- Kết quả production: lần chạy lại triển khai commit `2576cc3` (nội dung từ `a752cbc`), 14 bộ test chạy lại trên server đạt; backup file và database tại `/home/jwhxtzru/backups/menu-label-20261031-095746/`. Bản Markdown live trùng byte với Git, có "Đặt lịch khám → API và form nhúng", không còn "Lịch hẹn →"; bản HTML cũng đúng. `verify-live.ps1 -CheckSsh` đạt.
 - Rollback chọn lọc: chép lại ba file từ backup rồi purge WordPress/LiteSpeed.
 
 ## 2026-10-30 — tài liệu API đặt lịch nội bộ trên website
