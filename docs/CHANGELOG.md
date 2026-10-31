@@ -1,5 +1,12 @@
 # Production changelog
 
+## 2026-10-31 — sửa tên menu "Lịch hẹn" thành "Đặt lịch khám"
+
+- Theo yêu cầu người dùng: menu quản trị của lịch hẹn trên WordPress tên là "Đặt lịch khám" (nhãn của CPT `ec_appointment`), không phải "Lịch hẹn". Sửa đường dẫn menu trong tài liệu API (`content/api-dat-lich.md`, mục Cấp khóa) và ghi chú đầu `inc/chong-bot-dat-lich.php`, `inc/chong-bot-dang-nhap.php`. Chữ hiển thị trong các trang quản trị không có chỗ nào ghi sai. Các chữ "lịch hẹn" mang nghĩa cuộc hẹn khám giữ nguyên. Các mục CHANGELOG cũ giữ nguyên như đã ghi.
+- QA local: 13 bộ test đạt; lint hai file PHP đạt. Hash ba file production khớp commit `4398717` trước triển khai.
+- Triển khai: `scripts/stage-menu-label-20261031.sh` → `scripts/deploy-menu-label-20261031.sh`; khóa deploy, kiểm hash trước/sau, test trên server, backup file và database, purge cache, kiểm tra bản Markdown live trùng Git và có tên menu đúng, bản HTML, trang đăng nhập, trang đặt lịch và trang Chống bot; lỗi thì tự khôi phục.
+- Rollback chọn lọc: chép lại ba file từ backup rồi purge WordPress/LiteSpeed.
+
 ## 2026-10-30 — tài liệu API đặt lịch nội bộ trên website
 
 - Theo yêu cầu người dùng, đưa tài liệu API lên website để dùng nội bộ và gửi link cho trợ lý AI (Codex, Claude): bản đọc `/api-dat-lich/`, bản Markdown thô `/api-dat-lich.md`, SDK `/api-dat-lich/sdk/ec-booking.mjs` và `/api-dat-lich/sdk/EcBookingClient.php.txt` (đuôi `.txt` để máy chủ không chạy file). Không lập chỉ mục: header `X-Robots-Tag: noindex, nofollow` ở mọi đường dẫn và thẻ meta robots ở bản HTML; không phải trang WordPress nên không có trong menu/sitemap; không chặn bằng robots.txt để công cụ đọc của AI vẫn thấy noindex. Không cần đăng nhập; tài liệu không chứa khóa bí mật.

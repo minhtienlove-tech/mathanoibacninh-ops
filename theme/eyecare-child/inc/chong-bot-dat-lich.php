@@ -1,7 +1,7 @@
 <?php
 /**
  * Chống bot bằng Cloudflare Turnstile cho form đặt lịch và trang đăng nhập WordPress. Mặc định tắt;
- * bật tại Lịch hẹn → Chống bot sau khi nhập Site Key và Secret Key. Mỗi nơi có nút bật và chế độ
+ * bật tại Đặt lịch khám → Chống bot sau khi nhập Site Key và Secret Key. Mỗi nơi có nút bật và chế độ
  * hiện ô xác minh riêng. Trang đăng nhập dùng inc/chong-bot-dang-nhap.php.
  *
  * - Chỉ kiểm tra yêu cầu mới từ form website và form nhúng; API đối tác đã ký HMAC riêng.

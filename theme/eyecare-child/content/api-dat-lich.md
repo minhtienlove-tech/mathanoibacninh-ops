@@ -8,7 +8,7 @@ Lịch gửi qua API hoặc form nhúng được kiểm tra giống form trên w
 
 ## Cấp khóa
 
-Quản trị viên vào **WordPress → Lịch hẹn → API và form nhúng** để tạo đối tác. Mỗi đối tác có:
+Quản trị viên vào **WordPress → Đặt lịch khám → API và form nhúng** để tạo đối tác. Mỗi đối tác có:
 
 | Khóa | Dùng cho | Bí mật? |
 |---|---|---|

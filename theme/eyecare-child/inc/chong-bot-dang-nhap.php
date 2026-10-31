@@ -4,7 +4,7 @@
  * - Một địa chỉ mạng (IPv6 gộp /64) sai 8 lần trong 15 phút bị khóa 15 phút; sai 30 lần trong 24 giờ bị khóa 24 giờ.
  *   Khi đang khóa, mật khẩu đúng cũng không vào được. Áp dụng cả mật khẩu ứng dụng (REST API).
  * - Một thông báo chung cho sai tên đăng nhập và sai mật khẩu, không lộ tài khoản nào tồn tại.
- * - Cloudflare Turnstile trên form đăng nhập khi bật ở Lịch hẹn → Chống bot (dùng khóa trong inc/chong-bot-dat-lich.php).
+ * - Cloudflare Turnstile trên form đăng nhập khi bật ở Đặt lịch khám → Chống bot (dùng khóa trong inc/chong-bot-dat-lich.php).
  * Mở khóa: nút trong trang Chống bot, hoặc trên máy chủ chạy `wp eval 'ec_login_guard_unlock_all();'`.
  *
  * @package eyecare-child
@@ -151,7 +151,7 @@ function ec_login_guard_admin_unlock() {
 }
 add_action( 'admin_post_ec_login_guard_unlock', 'ec_login_guard_admin_unlock' );
 
-/** Thẻ thống kê trong trang Lịch hẹn → Chống bot. */
+/** Thẻ thống kê trong trang Đặt lịch khám → Chống bot. */
 function ec_login_guard_admin_card() {
 	$locks  = ec_login_guard_transients( array( 'lock' ) );
 	$active = null;
